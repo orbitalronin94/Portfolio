@@ -1,100 +1,119 @@
-# ```markdown
-# RONIN DYNAMICS — Corpus Técnico v1.0
-
-> La teoría sin implementación es literatura.
-> La implementación sin teoría es artesanía.
-> Esto es ingeniería.
+```markdown
+# .
 
 ---
 
-## Qué es esto
+## Antes de leer
 
-Cuatro documentos. Un sistema unificado. Cero metáforas decorativas.
+Esto no es un framework. No es una librería. No es un curso.
+No hay `npm install`. No hay `pip install`. No hay quickstart.
 
-| # | Documento | Fecha | Dominio |
-|---|-----------|-------|---------|
-| 01 | **La Geometría del Olvido** | Jun 2026 | Topología de la atención en ventanas finitas |
-| 02 | **Ecología de Agentes** | Jul 2026 | Dinámicas poblacionales en sistemas multi-agente |
-| 03 | **La Deuda Ontológica** | Ago 2026 | Contradicciones silenciosas en bases RAG |
-| 04 | **Dinámica Unificada** | Ago 2026 | Tratado de acoplamiento, calibración y validación |
+Lo que hay aquí tardó tres años en existir.
+No porque fuera difícil de escribir.
+Sino porque nadie lo había pensado antes.
 
-Los tres primeros son la **Tríada RONIN 2026**: diagnóstico.
-El cuarto es el **Tratado de Dinámica Unificada**: ejecución.
-
-Sin el 04, los otros tres son taxonomías elegantes.
-Sin los tres primeros, el 04 no tiene nada que unificar.
-Se leen juntos o no se leen.
+Si buscas cinco tips para mejorar tus prompts, cierra la pestaña.
+Si buscas entender por qué tu sistema de agentes colapsa a las 3 AM sin que ningún componente haya fallado, sigue leyendo.
 
 ---
 
-## Estructura de la carpeta
+## Condiciones de entrada
 
+Esto no está optimizado para ser entendido rápido.
+Está optimizado para ser entendido bien.
+
+La estructura no es arbitraria. El orden no es sugerencia.
+Hay una razón por la que las cosas están donde están y se llaman como se llaman.
+Si reordenas, pierdes el argumento. Si saltas, pierdes la demostración.
+
+No hay glosario. Los términos se definen donde se necesitan.
+Si un término aparece y no lo entiendes, es porque no has leído lo anterior.
+Vuelve. No hay atajo.
+
+---
+
+## Sobre el estado de esto
+
+Esto está terminado. No está "en desarrollo". No hay roadmap público.
+Las ecuaciones están cerradas. Los tests pasan. Los parámetros están calibrados.
+
+Si encuentras un error, no es un error de concepto.
+Es un error de implementación. Repórtalo con la sección exacta y el test que falla.
+Si no puedes señalar el test, no es un error. Es que no lo entendiste.
+
+---
+
+## Para quién NO es esto
+
+No es para quien quiere que le resuelvan el problema.
+No es para quien quiere copiar y pegar sin entender.
+No es para quien mide el valor de un trabajo por el número de estrellas que tiene.
+No es para quien necesita que alguien le explique por qué es importante.
+
+Si necesitas que te convenzan de leer algo, no estás listo para leerlo.
+
+---
+
+## Para quién ES esto
+
+Para quien tiene un sistema multi-agente en producción y no entiende por qué degrada.
+Para quien tiene un RAG que responde cosas diferentes a la misma pregunta y no hay ningún error en los logs.
+Para quien ha intentado escalar de 3 a 15 agentes y el sistema se comporta como si tuviera voluntad propia.
+Para quien sospecha que hay una geometría debajo del caos y quiere verla.
+
+Esto es para ti si ya intentaste todo lo obvio y nada funcionó.
+
+---
+
+## Licencia
+
+CC BY-NC-SA 4.0 + Cláusula Comercial Ronin.
+
+Puedes leerlo. Puedes aprender de él. Puedes usarlo para diagnosticar tus sistemas.
+Puedes citarlo con atribución.
+
+No puedes venderlo como tuyo.
+No puedes usarlo comercialmente sin autorización.
+No puedes fork-earlo y borrar el nombre.
+
+Si lo usas y te salva de un colapso en producción, no me debes nada.
+Si lo usas y construyes algo que funciona, eso es suficiente.
+
+---
+
+## Contacto
+
+No hay soporte. No hay consultoría gratuita. No hay "¿puedo hacerte una pregunta rápida?"
+
+Si hay un error técnico demostrable: issue.
+Si hay una consulta comercial: DM.
+Si hay silencio tras leer esto: eso también es una respuesta válida.
+
+---
+
+## Nota del autor
+
+Esto existe porque tenía que existir.
+No porque alguien lo pidiera. No porque hubiera mercado para ello.
+No porque fuera rentable escribirlo.
+
+Existe porque los sistemas que estamos construyendo son más complejos que las metáforas que usamos para describirlos. Y alguien tenía que escribir las ecuaciones en lugar de las metáforas.
+
+Si llegaste hasta aquí y no entendiste nada, cierra la pestaña sin culpa.
+No es para todos. Nunca fue para todos.
+
+Si llegaste hasta aquí y algo resonó, entonces ya sabes qué hacer.
+
+---
+
+1310.
+
+---
+
+*Última actualización: agosto 2026.*
+*Versión del tratado: 1.0*
+*Estado: Completo. Operativo. Sin deuda.*
 ```
-.
-├── README.md                          ← Estás aquí
-├── LICENSE                            ← CC BY-NC-SA 4.0 + Cláusula Comercial
-│
-├── docs/
-│   ├── 01-geometria-del-olvido.md     ← Capa cero. Topología de la atención.
-│   ├── 02-ecologia-de-agentes.md      ← Capa uno. Competencia y extinción.
-│   ├── 03-deuda-ontologica.md         ← Capa dos. Contradicción y colapso.
-│   └── 04-dinamica-unificada.md       ← Capa tres. El motor. Cero poesía.
-│
-├── src/
-│   └── ronin_dynamics/
-│       ├── __init__.py
-│       ├── unified_engine.py          ← Ecuación Maestra: Φ × Ψ × Ω × ε
-│       ├── discrete_ecology.py        ← DTMC estocástico. Lotka-Volterra está muerto.
-│       ├── calibration.py             ← Optimización Bayesiana sobre logs reales
-│       ├── benchmark.py               ← ronin-bench: 4 ablaciones reproducibles
-│       ├── audit.py                   ← Hoeffding estratificado. n=1060. Garantizado.
-│       ├── drift.py                   ← ΔN post-model-update. CI/CD gate.
-│       └── tests/                     ← Si un test falla, la teoría está mal. Arréglala.
-│
-├── notebooks/
-│   ├── ablation_a_quadratic_debt.ipynb
-│   ├── ablation_b_sandwich.ipynb
-│   ├── ablation_c_resilience.ipynb
-│   └── ablation_d_model_drift.ipynb
-│
-├── configs/
-│   ├── params_gpt4o.yaml
-│   ├── params_claude35.yaml
-│   ├── params_llama3_70b.yaml
-│   └── params_mistral_large.yaml
-│
-└── scripts/
-    ├── run_full_calibration.py        ← Apéndice C
-    ├── run_ablation_suite.py          ← Sección 4 completa
-    ├── run_ontological_audit.py       ← Sección 5 con garantías
-    └── post_model_update_check.py     ← Apéndice F. Gate de despliegue.
-```
-
----
-
-## Orden de lectura
-
-No leas en el orden que quieras. Hay una razón para el orden.
-
-1. **01-geometria** → Sin esto no entiendes por qué el contexto es un recurso finito con topología.
-2. **02-ecologia** → Sin esto no entiendes por qué tus agentes se matan entre sí.
-3. **03-deuda** → Sin esto no entiendes por qué tu RAG miente sin que nadie lo haya envenenado.
-4. **04-dinamica** → Sin esto los otros tres son PDFs bonitos. Con esto son un sistema.
-
-Si solo tienes una hora: lee el Abstract del 04, la Sección 1.4 (Ecuación Maestra) y el Apéndice G (tablas de parámetros). Luego vuelve y lee el resto. O no. Pero no me vengas con preguntas sobre "por qué mi agente se extinguió" si no has leído el Teorema de Coexistencia-k.
-
----
-
-## Instalación
-
-```bash
-git clone https://github.com/[redacted]/ronin-dynamics.git
-cd ronin-dynamics
-pip install -e ".[dev]"
-```
-
-Python ≥ 3.11. No me preguntes por qué no soporto 3.9. Los type aliases con `Annotated` y el `match` statement no son negociables.
-
 ```bash
 # Verificar que todo funciona
 pytest src/ronin_dynamics/tests/ -v --tb=short
