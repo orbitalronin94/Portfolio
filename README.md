@@ -194,7 +194,7 @@ Para decirme que las mates están mal: demuestra dónde. Si tienes razón, lo co
 
 ## Nota final
 
-Este repo tiene 14 estrellas. 10 son mías para verificar que el renderizado funciona.
+Este repo tiene 0 estrellas.
 No me importa.
 La geometría del olvido no depende de la atención que reciba.
 
