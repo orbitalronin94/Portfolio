@@ -6,7 +6,7 @@
 
 **DOI Simbólico:** 10.1310/ronin-ontological-debt-2026
 
-**Fecha de publicación:** 16 de agosto de 2026
+**Fecha de publicación:** 10 de agosto de 2026
 
 **Licencia:** CC BY-NC-SA 4.0 + Cláusula Comercial Ronin
 
