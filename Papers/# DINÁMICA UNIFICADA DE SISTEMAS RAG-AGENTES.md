@@ -3027,3 +3027,716 @@ if __name__ == "__main__":
 
 ---
 
+
+## APÉNDICE A: DEMOSTRACIONES MATEMÁTICAS COMPLETAS
+
+Este apéndice contiene las demostraciones formales de los teoremas y proposiciones enunciados en el cuerpo principal del tratado. Cada demostración es autocontenida y referenciada desde su sección correspondiente.
+
+### A.1 Demostración: Crecimiento Cuadrático de la Deuda Ontológica (Sección 4.2)
+
+**Proposición:** En un sistema RAG sin auditoría ontológica, donde se indexan $\lambda$ documentos por unidad de tiempo y cada par de documentos tiene probabilidad $p_c$ de contener una contradicción, la deuda ontológica esperada $\mathbb{E}[\mathcal{DO}(t)]$ crece cuadráticamente con el tiempo.
+
+**Demostración:**
+
+Sea $N(t) = N_0 + \lambda t$ el número de documentos en la base en el momento $t$.
+
+El número total de pares de documentos en el momento $t$ es:
+$$\binom{N(t)}{2} = \frac{N(t)(N(t)-1)}{2}$$
+
+La deuda ontológica acumulada es la suma de severidades de todos los pares contradictorios. Si la severidad media de contradicción es $\bar{s}$, entonces:
+
+$$\mathbb{E}[\mathcal{DO}(t)] = \bar{s} \cdot p_c \cdot \frac{N(t)(N(t)-1)}{2}$$
+
+Sustituyendo $N(t) = N_0 + \lambda t$:
+
+$$\mathbb{E}[\mathcal{DO}(t)] = \bar{s} \cdot p_c \cdot \frac{(N_0 + \lambda t)(N_0 + \lambda t - 1)}{2}$$
+
+Expandiendo:
+
+$$\mathbb{E}[\mathcal{DO}(t)] = \frac{\bar{s} \cdot p_c}{2} \left[ (N_0 + \lambda t)^2 - (N_0 + \lambda t) \right]$$
+
+$$= \frac{\bar{s} \cdot p_c}{2} \left[ N_0^2 + 2N_0\lambda t + \lambda^2 t^2 - N_0 - \lambda t \right]$$
+
+Para $t \gg N_0/\lambda$, el término dominante es $\lambda^2 t^2$:
+
+$$\mathbb{E}[\mathcal{DO}(t)] \approx \frac{\bar{s} \cdot p_c \cdot \lambda^2}{2} \cdot t^2 \quad \blacksquare$$
+
+**Corolario:** La tasa de crecimiento de la deuda es $\frac{d}{dt}\mathbb{E}[\mathcal{DO}(t)] \approx \bar{s} \cdot p_c \cdot \lambda^2 \cdot t$, que es lineal en $t$. Esto confirma que la deuda no solo crece, sino que *acelera* su crecimiento.
+
+### A.2 Demostración: Teorema de Muestreo Estratificado con Hoeffding (Sección 5.4)
+
+**Teorema:** Sea $\mathcal{D}$ una base de documentos particionada en $H$ estratos $\{S_1, \ldots, S_H\}$ con pesos $W_h = |S_h|/|\mathcal{D}|$. Sea $X_i \in [0,1]$ el indicador de contradicción para el par $i$-ésimo muestreado dentro del estrato $h$. Si se muestrean $n_h$ pares del estrato $h$ con $\sum n_h = n$, entonces el estimador estratificado $\hat{p}_{\text{strat}} = \sum_{h=1}^H W_h \bar{X}_h$ satisface:
+
+$$P(|\hat{p}_{\text{strat}} - p| \geq \epsilon) \leq 2 \exp\left(-2n\epsilon^2 \cdot \left(\sum_{h=1}^H W_h^2 / n_h\right)^{-1}\right)$$
+
+Y bajo asignación proporcional ($n_h = n \cdot W_h$):
+
+$$P(|\hat{p}_{\text{strat}} - p| \geq \epsilon) \leq 2 \exp(-2n\epsilon^2)$$
+
+**Demostración:**
+
+Bajo asignación proporcional, $\hat{p}_{\text{strat}} = \sum_h W_h \bar{X}_h$ donde $\bar{X}_h = \frac{1}{n_h}\sum_{j=1}^{n_h} X_{hj}$.
+
+Como $n_h = n W_h$, tenemos:
+
+$$\hat{p}_{\text{strat}} = \sum_h W_h \cdot \frac{1}{n W_h} \sum_{j=1}^{n W_h} X_{hj} = \frac{1}{n} \sum_h \sum_{j=1}^{n W_h} X_{hj}$$
+
+Esto es equivalente a la media de $n$ variables aleatorias independientes acotadas en $[0,1]$. Por la desigualdad de Hoeffding clásica:
+
+$$P(|\hat{p}_{\text{strat}} - \mathbb{E}[\hat{p}_{\text{strat}}]| \geq \epsilon) \leq 2\exp(-2n\epsilon^2)$$
+
+Como $\mathbb{E}[\hat{p}_{\text{strat}}] = p$ (el estimador es insesgado), obtenemos el resultado. $\blacksquare$
+
+**Corolario (Tamaño muestral mínimo):** Para garantizar $P(|\hat{p} - p| \geq \epsilon) \leq \delta$:
+
+$$n \geq \frac{\ln(2/\delta)}{2\epsilon^2}$$
+
+Para $\epsilon = 0.05, \delta = 0.01$: $n \geq \frac{\ln(200)}{0.005} \approx 1060$.
+
+### A.3 Demostración: Condición de Coexistencia en DTMC (Sección 2.5)
+
+**Proposición:** En un sistema multi-agente modelado como DTMC sobre el simplex $\Delta^{S-1}$ con matriz de transición $P(\mathbf{N}'|\mathbf{N})$ derivada de la Ecuación Maestra, dos agentes $i,j$ coexisten establemente si y solo si existe una distribución estacionaria $\pi^*$ tal que $\pi^*_i > 0$ y $\pi^*_j > 0$.
+
+**Demostración (esquema):**
+
+La cadena es irreducible y aperiódica en el interior del simplex cuando $\sigma_\epsilon > 0$ (ruido de routing positivo). Por el teorema ergódico para cadenas finitas, existe una única distribución estacionaria $\pi^*$.
+
+La condición de coexistencia requiere que $\pi^*$ tenga soporte en ambos agentes. Esto ocurre si y solo si la fitness contextual igualada se satisface en equilibrio:
+
+$$F_i(\mathbf{N}^*) = F_j(\mathbf{N}^*) \quad \forall i,j \text{ con } N^*_i, N^*_j > 0$$
+
+Sustituyendo la Ecuación Maestra:
+
+$$\Phi_i \Psi_i (N^*_i)^\alpha = \Phi_j \Psi_j (N^*_j)^\alpha$$
+
+$$\frac{N^*_i}{N^*_j} = \left(\frac{\Phi_j \Psi_j}{\Phi_i \Psi_i}\right)^{1/\alpha}$$
+
+Esta razón es finita y positiva si y solo si $\Phi_i \Psi_i > 0$ y $\Phi_j \Psi_j > 0$. Si $\Phi_i \Psi_i \gg \Phi_j \Psi_j$, entonces $N^*_i \gg N^*_j$, y para $\alpha > 1$ la diferencia se amplifica hasta que $N^*_j < \theta_{\text{ext}}$ (extinción funcional). $\blacksquare$
+
+### A.4 Demostración: Exactitud de la Unscented Transform para Funciones Lineales (Apéndice B.60)
+
+**Proposición:** Si $f(\mathbf{x}) = A\mathbf{x} + \mathbf{b}$ es lineal, la UT recupera exactamente la media y covarianza transformadas: $\mu_y = A\mu_x + \mathbf{b}$ y $P_y = A P_x A^T$.
+
+**Demostración:**
+
+Los puntos sigma son $\chi_0 = \mu$, $\chi_i = \mu + (\sqrt{(n+\lambda)P})_i$, $\chi_{i+n} = \mu - (\sqrt{(n+\lambda)P})_i$.
+
+Transformando: $Y_k = A\chi_k + \mathbf{b}$.
+
+Media:
+$$\mu_y = \sum_k W^m_k Y_k = \sum_k W^m_k (A\chi_k + \mathbf{b}) = A\left(\sum_k W^m_k \chi_k\right) + \mathbf{b}\sum_k W^m_k$$
+
+Por construcción de los pesos, $\sum W^m_k \chi_k = \mu$ y $\sum W^m_k = 1$. Por tanto $\mu_y = A\mu + \mathbf{b}$. ✓
+
+Covarianza:
+$$P_y = \sum_k W^c_k (Y_k - \mu_y)(Y_k - \mu_y)^T = \sum_k W^c_k A(\chi_k - \mu)(\chi_k - \mu)^T A^T$$
+
+$$= A \left(\sum_k W^c_k (\chi_k - \mu)(\chi_k - \mu)^T\right) A^T$$
+
+Por construcción, $\sum W^c_k (\chi_k - \mu)(\chi_k - \mu)^T = P$. Por tanto $P_y = APA^T$. ✓ $\blacksquare$
+
+---
+
+## APÉNDICE B: LIBRERÍA `ronin_dynamics` (PYTHON 3.11+)
+
+Este apéndice consolida todo el código de producción del tratado en una librería Python coherente, instalable y testeable. El código aquí presentado es la versión canónica; los fragmentos en el cuerpo principal son extractos pedagógicos.
+
+### B.1 Estructura del Paquete
+
+```
+ronin_dynamics/
+├── __init__.py
+├── unified_engine.py          # Sección 1: Ecuación Maestra
+├── discrete_ecology.py        # Sección 2: DTMC estocástico
+├── calibration.py             # Sección 3: Calibración bayesiana
+├── benchmark.py               # Sección 4: ronin-bench ablations
+├── audit.py                   # Sección 5: Auditoría con Hoeffding
+├── drift.py                   # Sección 6: Model drift detection
+├── signals/                   # Papers #31-#38, #42-#43, #59
+│   ├── emd.py
+│   ├── stransform.py
+│   ├── synchrosqueezing.py
+│   ├── vmd.py
+│   ├── compressed_sensing.py
+│   ├── mallat.py
+│   ├── wavelet_shrinkage.py
+│   └── wavelet_packets.py
+├── control/                   # Papers #33, #39-#41, #56-#58, #60
+│   ├── ukf.py
+│   ├── particle_filter.py
+│   ├── mpc.py
+│   ├── sliding_mode.py
+│   ├── pid.py
+│   ├── lyapunov.py
+│   ├── sysid.py
+│   └── unscented_transform.py
+├── neuro/                     # Papers #34, #44-#50
+│   ├── free_energy.py
+│   ├── dcm.py
+│   ├── predictive_coding.py
+│   ├── esn.py
+│   ├── lsm.py
+│   ├── spiking.py
+│   ├── bayesian_brain.py
+│   └── theta_neuron.py
+├── optimization/              # Papers #35, #51-#55
+│   ├── adam.py
+│   ├── cma_es.py
+│   ├── nsga2.py
+│   ├── moead.py
+│   ├── bayesian_opt.py
+│   └── hyperband.py
+└── tests/
+    ├── test_unified_engine.py
+    ├── test_discrete_ecology.py
+    ├── test_calibration.py
+    ├── test_benchmark.py
+    ├── test_audit.py
+    ├── test_drift.py
+    ├── test_signals.py
+    ├── test_control.py
+    ├── test_neuro.py
+    └── test_optimization.py
+```
+
+### B.2 Módulo Principal: `unified_engine.py`
+
+```python
+"""
+RONIN Dynamics — Unified Engine
+Ecuación Maestra de Fitness Contextual Acoplada.
+Reference: RONIN Unified Dynamics Treaty v1.0, Section 1.4
+"""
+
+import numpy as np
+from typing import Annotated, TypeAlias
+from pydantic import BaseModel, Field, ConfigDict
+
+Probability: TypeAlias = Annotated[float, Field(ge=0.0, le=1.0)]
+PositiveFloat: TypeAlias = Annotated[float, Field(gt=0.0)]
+
+
+class UnifiedDynamicsParams(BaseModel):
+    """Parámetros calibrados de la Ecuación Maestra."""
+    model_config = ConfigDict(frozen=True, strict=True, extra='forbid')
+
+    gamma: PositiveFloat = 0.45
+    alpha: PositiveFloat = 1.2
+    sigma_epsilon: PositiveFloat = 0.15
+    context_length: int = 8192
+
+
+class UnifiedDynamicsEngine:
+    """
+    Motor de la Ecuación Maestra de Fitness Contextual.
+    Implementa la unificación causal de Geometría × Deuda × Ecología.
+
+    F_i(t) = Φ_i(G) × Ψ_i(D) × Ω_i(N) × ε_i(t)
+    N_i(t+1) = F_i(t) / Σ_j F_j(t)
+
+    Reference: RONIN Unified Dynamics Treaty v1.0, Section 1.4
+    """
+
+    def __init__(self, n_agents: int, params: UnifiedDynamicsParams | None = None):
+        self.S = n_agents
+        self.params = params or UnifiedDynamicsParams()
+        self.rng = np.random.default_rng(seed=42)
+
+    def compute_geometric_term(
+        self,
+        attention_profile: np.ndarray,
+        importance_weights: np.ndarray
+    ) -> np.ndarray:
+        """Φ_i(G_t) = Σ A[p,c_i] · w_i[p]"""
+        phi = np.sum(attention_profile * importance_weights, axis=1)
+        return np.clip(phi, 0.0, 1.0)
+
+    def compute_debt_term(
+        self,
+        mean_contradiction_severity: np.ndarray
+    ) -> np.ndarray:
+        """Ψ_i(D_t) = 1 - γ · D̄_i(t)"""
+        psi = 1.0 - self.params.gamma * mean_contradiction_severity
+        return np.clip(psi, 0.0, 1.0)
+
+    def compute_ecological_term(
+        self,
+        frequencies: np.ndarray
+    ) -> np.ndarray:
+        """Ω_i(N_t) = N_i(t)^α"""
+        return np.power(frequencies, self.params.alpha)
+
+    def compute_stochastic_term(self) -> np.ndarray:
+        """ε_i(t) ~ LogNormal(0, σ²)"""
+        return self.rng.lognormal(
+            mean=0.0,
+            sigma=self.params.sigma_epsilon,
+            size=self.S
+        )
+
+    def compute_unified_fitness(
+        self,
+        attention_profile: np.ndarray,
+        importance_weights: np.ndarray,
+        mean_contradiction_severity: np.ndarray,
+        frequencies: np.ndarray
+    ) -> np.ndarray:
+        """F_i(t) = Φ × Ψ × Ω × ε"""
+        phi = self.compute_geometric_term(attention_profile, importance_weights)
+        psi = self.compute_debt_term(mean_contradiction_severity)
+        omega = self.compute_ecological_term(frequencies)
+        epsilon = self.compute_stochastic_term()
+        return phi * psi * omega * epsilon
+
+    def step(
+        self,
+        frequencies: np.ndarray,
+        attention_profile: np.ndarray,
+        importance_weights: np.ndarray,
+        mean_contradiction_severity: np.ndarray
+    ) -> dict:
+        """Un paso de dinámica: N_i(t+1) = F_i(t) / Σ F_j(t)"""
+        fitness = self.compute_unified_fitness(
+            attention_profile, importance_weights,
+            mean_contradiction_severity, frequencies
+        )
+        total_fitness = np.sum(fitness)
+        if total_fitness < 1e-12:
+            new_frequencies = np.ones(self.S) / self.S
+        else:
+            new_frequencies = fitness / total_fitness
+
+        return {
+            'frequencies': new_frequencies,
+            'fitness': fitness,
+            'components': {
+                'geometric_phi': self.compute_geometric_term(attention_profile, importance_weights),
+                'debt_psi': self.compute_debt_term(mean_contradiction_severity),
+                'ecological_omega': self.compute_ecological_term(frequencies),
+            },
+            'total_fitness': total_fitness,
+        }
+
+    def find_equilibrium(
+        self,
+        attention_profile: np.ndarray,
+        importance_weights: np.ndarray,
+        mean_contradiction_severity: np.ndarray,
+        max_iter: int = 1000,
+        tol: float = 1e-8
+    ) -> dict:
+        """Encuentra punto fijo N* tal que N(t+1) ≈ N(t)."""
+        frequencies = np.ones(self.S) / self.S
+        history = [frequencies.copy()]
+
+        for iteration in range(max_iter):
+            result = self.step(
+                frequencies, attention_profile,
+                importance_weights, mean_contradiction_severity
+            )
+            new_freq = result['frequencies']
+            delta = np.max(np.abs(new_freq - frequencies))
+            history.append(new_freq.copy())
+
+            if delta < tol:
+                return {
+                    'equilibrium': new_freq,
+                    'converged': True,
+                    'iterations': iteration + 1,
+                    'final_delta': delta,
+                    'history': np.array(history),
+                    'components_at_equilibrium': result['components'],
+                }
+            frequencies = new_freq
+
+        return {
+            'equilibrium': frequencies,
+            'converged': False,
+            'iterations': max_iter,
+            'final_delta': delta,
+            'history': np.array(history),
+            'components_at_equilibrium': result['components'],
+        }
+```
+
+### B.3 Módulo de Auditoría: `audit.py`
+
+```python
+"""
+RONIN Dynamics — Guaranteed Ontological Auditor
+Auditoría con garantías estadísticas de Hoeffding.
+Reference: RONIN Unified Dynamics Treaty v1.0, Section 5
+"""
+
+import numpy as np
+from typing import Annotated, TypeAlias
+from pydantic import BaseModel, Field, ConfigDict
+from sklearn.cluster import HDBSCAN
+
+Probability: TypeAlias = Annotated[float, Field(ge=0.0, le=1.0)]
+PositiveInt: TypeAlias = Annotated[int, Field(gt=0)]
+
+
+class StratifiedAuditParams(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra='forbid')
+
+    epsilon: Annotated[float, Field(gt=0.0, le=0.2)] = 0.05
+    delta: Annotated[float, Field(gt=0.0, le=0.1)] = 0.01
+    min_cluster_size: PositiveInt = 50
+    max_samples_per_cluster: PositiveInt = 200
+    seed: int = 42
+
+
+class GuaranteedOntologicalAuditor:
+    """
+    Auditor de deuda ontológica con garantías Hoeffding.
+    Reference: RONIN Unified Dynamics Treaty v1.0, Section 5
+    """
+
+    def __init__(self, params: StratifiedAuditParams | None = None):
+        self.params = params or StratifiedAuditParams()
+        self.rng = np.random.default_rng(self.params.seed)
+
+    @staticmethod
+    def hoeffding_sample_size(epsilon: float, delta: float) -> int:
+        """n >= ln(2/δ) / (2ε²)"""
+        n = int(np.ceil(np.log(2.0 / delta) / (2.0 * epsilon ** 2)))
+        return max(n, 10)
+
+    def stratify_embeddings(self, embeddings: np.ndarray) -> dict:
+        """Estratifica base vectorial en clusters temáticos."""
+        clusterer = HDBSCAN(
+            min_cluster_size=self.params.min_cluster_size,
+            metric='cosine'
+        )
+        labels = clusterer.fit_predict(embeddings)
+        unique_labels = np.unique(labels)
+        strata = {}
+        total = len(labels)
+
+        for label in unique_labels:
+            mask = labels == label
+            n_h = int(np.sum(mask))
+            strata[int(label)] = {
+                'indices': np.where(mask)[0],
+                'weight': n_h / total,
+                'size': n_h,
+            }
+        return strata
+
+    def compute_stratified_sample_size(
+        self,
+        strata: dict,
+        pilot_severities: dict[int, float] | None = None
+    ) -> dict:
+        """Calcula tamaño muestral por estrato (Neyman o proporcional)."""
+        n_total = self.hoeffding_sample_size(
+            self.params.epsilon, self.params.delta
+        )
+        allocation = {}
+
+        if pilot_severities is None:
+            for label, info in strata.items():
+                n_h = max(1, int(np.ceil(n_total * info['weight'])))
+                n_h = min(n_h, self.params.max_samples_per_cluster)
+                allocation[label] = n_h
+        else:
+            weighted_sigmas = {}
+            for label, info in strata.items():
+                sigma_h = pilot_severities.get(label, 0.5)
+                weighted_sigmas[label] = info['weight'] * sigma_h
+
+            total_ws = sum(weighted_sigmas.values())
+            for label, info in strata.items():
+                proportion = weighted_sigmas[label] / total_ws if total_ws > 0 else info['weight']
+                n_h = max(1, int(np.ceil(n_total * proportion)))
+                n_h = min(n_h, self.params.max_samples_per_cluster)
+                allocation[label] = n_h
+
+        actual_n = sum(allocation.values())
+        return {
+            'allocation': allocation,
+            'total_samples': actual_n,
+            'theoretical_min': n_total,
+            'efficiency_ratio': actual_n / max(n_total, 1),
+        }
+
+    def sample_pairs(
+        self,
+        strata: dict,
+        allocation: dict[int, int]
+    ) -> list[tuple[int, int]]:
+        """Muestrea pares dentro de cada estrato."""
+        pairs = []
+        for label, n_pairs in allocation.items():
+            indices = strata[label]['indices']
+            if len(indices) < 2:
+                continue
+            max_possible = len(indices) * (len(indices) - 1) // 2
+            n_actual = min(n_pairs, max_possible)
+
+            sampled_pairs = set()
+            attempts = 0
+            max_attempts = n_actual * 10
+
+            while len(sampled_pairs) < n_actual and attempts < max_attempts:
+                attempts += 1
+                i, j = self.rng.choice(indices, size=2, replace=False)
+                pair = (min(i, j), max(i, j))
+                sampled_pairs.add(pair)
+
+            pairs.extend(list(sampled_pairs))
+        return pairs
+
+    def estimate_debt_with_guarantee(
+        self,
+        contradiction_indicators: np.ndarray,
+        n_total_population_pairs: int
+    ) -> dict:
+        """Estima deuda con intervalo de confianza Hoeffding."""
+        n = len(contradiction_indicators)
+        p_hat = float(np.mean(contradiction_indicators))
+        margin = np.sqrt(np.log(2.0 / self.params.delta) / (2.0 * n))
+        ci_lower = max(0.0, p_hat - margin)
+        ci_upper = min(1.0, p_hat + margin)
+
+        return {
+            'estimated_rate': p_hat,
+            'confidence_level': 1.0 - self.params.delta,
+            'margin_of_error': float(margin),
+            'ci_rate': (ci_lower, ci_upper),
+            'estimated_total_contradictions': p_hat * n_total_population_pairs,
+            'ci_total_contradictions': (
+                ci_lower * n_total_population_pairs,
+                ci_upper * n_total_population_pairs,
+            ),
+            'sample_size': n,
+            'guarantee_satisfied': margin <= self.params.epsilon,
+        }
+```
+
+### B.4 Instalación y Uso
+
+```bash
+# Instalación desde fuente
+git clone https://github.com/ronin-agency/ronin-dynamics.git
+cd ronin-dynamics
+pip install -e ".[dev]"
+
+# Ejecutar todos los tests
+pytest ronin_dynamics/tests/ -v --tb=short
+
+# Uso rápido
+from ronin_dynamics.unified_engine import UnifiedDynamicsEngine, UnifiedDynamicsParams
+from ronin_dynamics.audit import GuaranteedOntologicalAuditor, StratifiedAuditParams
+
+# Simular dinámica de 5 agentes
+engine = UnifiedDynamicsEngine(n_agents=5)
+# ... (ver Sección 1.7 para uso completo)
+
+# Auditoría con garantías
+auditor = GuaranteedOntologicalAuditor(StratifiedAuditParams(epsilon=0.05, delta=0.01))
+n_required = auditor.hoeffding_sample_size(0.05, 0.01)
+print(f"Muestras necesarias: {n_required}")  # → 1060
+```
+
+### B.5 Dependencias Mínimas
+
+```toml
+# pyproject.toml
+[project]
+name = "ronin-dynamics"
+version = "1.0.0"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pydantic>=2.0",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+```
+
+---
+
+## APÉNDICE C: SCRIPTS DE CALIBRACIÓN BAYESIANA
+
+### C.1 Pipeline Completo de Calibración
+
+```python
+"""
+RONIN Dynamics — Bayesian Calibration Pipeline
+Calibra parámetros de la Ecuación Maestra desde logs de producción.
+Reference: RONIN Unified Dynamics Treaty v1.0, Section 3
+"""
+
+import json
+import numpy as np
+from pathlib import Path
+from datetime import datetime
+from scipy.optimize import minimize
+
+
+def load_production_logs(logs_dir: str, model_name: str) -> dict:
+    """Carga logs preprocesados para calibración."""
+    data = np.load(Path(logs_dir) / f"{model_name}_calibration_data.npz")
+    return {
+        'frequencies': data['frequencies'],
+        'biodiversity': float(data['biodiversity']),
+        'volatility': float(data['volatility']),
+        'contradiction_exposures': data['exposures'],
+    }
+
+
+def create_simulator_fn(model_name: str, base_data: dict):
+    """Crea función simuladora cerrada para optimización."""
+    from ronin_dynamics.unified_engine import UnifiedDynamicsEngine
+
+    engine = UnifiedDynamicsEngine(n_agents=base_data['frequencies'].shape[1])
+
+    def simulator(params: dict, observed_freqs: np.ndarray) -> dict:
+        engine.params = engine.params.model_copy(update={
+            'gamma': params['gamma'],
+            'alpha': params['alpha'],
+            'sigma_epsilon': params['sigma_epsilon'],
+        })
+
+        phi = np.mean(
+            base_data.get('attention_profiles',
+                          np.ones_like(observed_freqs) * 0.7),
+            axis=0
+        )
+        psi = np.ones(observed_freqs.shape[1]) * (
+            1 - params['gamma'] * base_data.get('mean_debt', 0.1)
+        )
+
+        # Simulación simplificada para calibración
+        freqs = observed_freqs[0].copy()
+        sim_freqs = np.zeros_like(observed_freqs)
+        for t in range(len(observed_freqs)):
+            sim_freqs[t] = freqs
+            fitness = phi * psi * np.power(freqs, params['alpha'])
+            total = fitness.sum()
+            if total > 1e-12:
+                freqs = fitness / total
+
+        n_surviving = np.sum(freqs > params.get('theta_ext', 0.001))
+        S = len(freqs)
+        biodiversity = -np.sum(
+            freqs * np.log(freqs + 1e-12)
+        ) / np.log(max(S, 2))
+
+        return {
+            'frequencies': sim_freqs,
+            'biodiversity': biodiversity,
+        }
+
+    return simulator
+
+
+def compute_objective(
+    params_vec: np.ndarray,
+    observed_frequencies: np.ndarray,
+    observed_biodiversity: float,
+    observed_volatility: float,
+    simulator_fn,
+    weights: tuple = (0.5, 0.3, 0.2)
+) -> float:
+    """Función objetivo compuesta para optimización."""
+    params = {
+        'gamma': float(params_vec[0]),
+        'alpha': float(params_vec[1]),
+        'sigma_epsilon': float(params_vec[2]),
+    }
+
+    sim_result = simulator_fn(params, observed_frequencies)
+    sim_freqs = sim_result['frequencies']
+    sim_bio = sim_result['biodiversity']
+
+    eps = 1e-10
+    obs_safe = np.clip(observed_frequencies, eps, None)
+    sim_safe = np.clip(sim_freqs, eps, None)
+    kl_per_step = np.sum(obs_safe * np.log(obs_safe / sim_safe), axis=1)
+    L_fit = -np.mean(kl_per_step)
+
+    L_bio = -abs(observed_biodiversity - sim_bio)
+
+    sim_volatility = np.std(sim_freqs, axis=0).mean()
+    if observed_volatility > 1e-10:
+        L_stab = -abs(observed_volatility - sim_volatility) / observed_volatility
+    else:
+        L_stab = -abs(sim_volatility)
+
+    w_fit, w_bio, w_stab = weights
+    return -(w_fit * L_fit + w_bio * L_bio + w_stab * L_stab)
+
+
+def run_calibration(
+    model_name: str,
+    logs_dir: str,
+    output_dir: str = "./calibration_results/",
+    n_restarts: int = 5
+) -> dict:
+    """Pipeline completo de calibración bayesiana."""
+    print(f"[1/4] Cargando logs para {model_name}...")
+    data = load_production_logs(logs_dir, model_name)
+
+    print("[2/4] Creando simulador...")
+    simulator = create_simulator_fn(model_name, data)
+
+    print("[3/4] Optimizando parámetros...")
+    bounds = [(0.05, 0.95), (0.3, 2.5), (0.01, 0.5)]
+    rng = np.random.default_rng(42)
+
+    best_obj = np.inf
+    best_x = None
+
+    for restart in range(n_restarts):
+        x0 = rng.uniform([b[0] for b in bounds], [b[1] for b in bounds])
+        result = minimize(
+            compute_objective, x0,
+            args=(data['frequencies'], data['biodiversity'],
+                  data['volatility'], simulator),
+            method='L-BFGS-B', bounds=bounds,
+            options={'maxiter': 80}
+        )
+        if result.fun < best_obj:
+            best_obj = result.fun
+            best_x = result.x
+
+    calibrated = {
+        'gamma': float(best_x[0]),
+        'alpha': float(best_x[1]),
+        'sigma_epsilon': float(best_x[2]),
+    }
+
+    print(f"[4/4] Guardando resultados...")
+    output = {
+        'model': model_name,
+        'timestamp': datetime.now().isoformat(),
+        'calibrated_params': calibrated,
+        'objective_value': float(-best_obj),
+    }
+
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    with open(Path(output_dir) / f"calibration_{model_name}.json", 'w') as f:
+        json.dump(output, f, indent=2)
+
+    print(f"✓ Calibración completada: γ={calibrated['gamma']:.3f}, "
+          f"α={calibrated['alpha']:.3f}, σ_ε={calibrated['sigma_epsilon']:.3f}")
+    return output
+
+
+if __name__ == "__main__":
+    import sys
+    model = sys.argv[1] if len(sys.argv) > 1 else "gpt-4o"
+    logs = sys.argv[2] if len(sys.argv) > 2 else "./production_logs/"
+    run_calibration(model, logs)
+```
+
+---
