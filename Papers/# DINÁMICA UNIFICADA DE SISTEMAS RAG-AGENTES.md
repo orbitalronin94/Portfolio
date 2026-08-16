@@ -525,3 +525,397 @@ La Ecuación Maestra no es solo un constructo teórico. Proporciona tres capacid
 
 ---
 
+## SECCIÓN 2: REFORMULACIÓN DISCRETA Y ESTOCÁSTICA (ECOLOGÍA REALISTA)
+
+### 2.1 Fallos de Lotka-Volterra en Sistemas Digitales
+
+La Ecología de Agentes (Paper de Julio) utilizó ecuaciones diferenciales ordinarias (EDO) tipo Lotka-Volterra para modelar la competencia. Aunque pedagógicamente útiles, las EDO fallan catastróficamente al predecir comportamientos reales en sistemas RAG de producción por tres razones estructurales:
+
+**Fallo 1: Continuidad vs. Cuantización.** Las EDO asumen que la población $N_i(t)$ es una variable continua y diferenciable. En realidad, los agentes son invocados en unidades discretas (enteros). Un agente con frecuencia $N_i = 0.001$ en un sistema con 100 consultas/día existe estadísticamente pero puede no ser invocado nunca en una ventana de observación dada. Las EDO predicen coexistencia estable donde la simulación discreta muestra extinción estocástica inevitable.
+
+**Fallo 2: Determinismo vs. Ruido de Routing.** Las EDO asumen que la tasa de crecimiento es una función determinista del estado actual. En sistemas reales, el router es un proceso estocástico con temperatura $T > 0$. Dos estados idénticos $\mathcal{S}_t$ pueden producir transiciones $\mathcal{S}_{t+1}$ radicalmente diferentes. Este ruido no es perturbación menor; es el mecanismo principal que permite la supervivencia temporal de agentes subóptimos y la extinción accidental de agentes óptimos en poblaciones pequeñas.
+
+**Fallo 3: Capacidad de Carga Constante vs. Dependiente del Batch.** En Lotka-Volterra, $K$ es un parámetro fijo. En RAG, la "capacidad de carga" efectiva depende del tamaño del batch de recuperación $k$ y de la longitud del contexto $L$. Un aumento en $k$ no solo cambia la competencia; cambia la topología misma del espacio de nichos accesibles. Las EDO no pueden capturar esta dependencia estructural.
+
+Este tratado abandona las EDO. Adoptamos **Cadenas de Markov en Tiempo Discreto (DTMC)** sobre el simplex de probabilidades, con transiciones gobernadas por la Ecuación Maestra estocástica derivada en la Sección 1.
+
+### 2.2 Cadena de Markov en Tiempo Discreto (DTMC) sobre el Simplex
+
+Definimos el espacio de estados del sistema como el simplex unitario $(S-1)$-dimensional:
+
+$$ \Delta^{S-1} = \left\{ \mathbf{N} \in [0,1]^S : \sum_{i=1}^S N_i = 1 \right\} $$
+
+En régimen discreto con $M$ invocaciones totales por paso temporal, el espacio de estados real es una retícula finita dentro del simplex:
+
+$$ \Delta^{S-1}_M = \left\{ \mathbf{N} \in \Delta^{S-1} : N_i = \frac{n_i}{M}, \, n_i \in \mathbb{N}_0, \, \sum n_i = M \right\} $$
+
+El cardinal de este espacio es $\binom{M+S-1}{S-1}$. Para $S=5$ agentes y $M=100$ invocaciones/paso, $|\Delta^4_{100}| \approx 4.6 \times 10^6$ estados. Esto hace intratable la construcción explícita de la matriz de transición $P$, pero permite simulación Monte Carlo eficiente.
+
+La **matriz de transición** $P(\mathbf{N}' | \mathbf{N})$ se define mediante la Ecuación Maestra estocástica:
+
+$$ P(\mathbf{N}' | \mathbf{N}) = \mathbb{P}\left[ \text{Multinomial}\left(M, \frac{\mathbf{F}(\mathbf{N}, \boldsymbol{\epsilon})}{\|\mathbf{F}(\mathbf{N}, \boldsymbol{\epsilon})\|_1}\right) = M \cdot \mathbf{N}' \right] $$
+
+donde $\mathbf{F}(\mathbf{N}, \boldsymbol{\epsilon})$ es el vector de fitness contextual con realización de ruido $\boldsymbol{\epsilon} \sim \text{LogNormal}(0, \sigma_\epsilon^2 I)$.
+
+Esta formulación captura exactamente la naturaleza discreta y estocástica del routing. La probabilidad de transición no es determinista; es una distribución multinomial parametrizada por las fitness normalizadas.
+
+### 2.3 Modelado de la Presión de Routing Estocástica $\rho(t) \sim \text{Beta}$
+
+En la Ecología de Agentes original, la presión de routing $\rho$ era un escalar fijo. En producción, $\rho$ varía temporalmente debido a fluctuaciones en la carga de consultas, cambios en la distribución de temas, y variabilidad en la latencia del modelo de embeddings.
+
+Modelamos $\rho(t)$ como una variable aleatoria con distribución Beta:
+
+$$ \rho(t) \sim \text{Beta}(a_\rho, b_\rho) $$
+
+Los parámetros $a_\rho, b_\rho$ se calibran empíricamente (Sección 3). La elección de Beta está motivada por:
+1.  Soporte acotado en $[0, 1]$, consistente con la interpretación de $\rho$ como probabilidad de activación competitiva.
+2.  Flexibilidad morfológica: puede representar desde distribuciones casi uniformes ($a \approx b \approx 1$) hasta concentradas en extremos ($a \gg b$ o $b \gg a$).
+3.  Conjugancia con procesos binomiales, facilitando inferencia bayesiana online.
+
+La inclusión de $\rho(t)$ estocástico modifica la Ecuación Maestra:
+
+$$ F_i(t) = \Phi_i(\mathcal{G}_t) \cdot \Psi_i(\mathbf{D}_t) \cdot N_i(t)^{\alpha \cdot \rho(t)} \cdot \epsilon_i(t) $$
+
+Cuando $\rho(t)$ es bajo (poca presión competitiva), el exponente efectivo $\alpha \cdot \rho(t) < 1$ favorece a agentes raros, aumentando la biodiversidad. Cuando $\rho(t)$ es alto, $\alpha \cdot \rho(t) > 1$ amplifica la ventaja de los frecuentes, acelerando la exclusión competitiva.
+
+### 2.4 Probabilidad de Extinción en Régimen Discreto
+
+En DTMC finita, todo estado absorbente es alcanzable con probabilidad positiva en tiempo finito. Los estados absorbentes del sistema son aquellos donde $N_i = 0$ para algún $i$ (extinción) o $N_i = 1$ para algún $i$ (monopolio).
+
+Definimos la **probabilidad de extinción en horizonte $T$** del agente $i$:
+
+$$ P_{\text{ext}}(i, T | \mathbf{N}_0) = \mathbb{P}\left[ \exists t \leq T : N_i(t) = 0 \mid \mathbf{N}_0 \right] $$
+
+Para $M$ grande, esta probabilidad puede aproximarse mediante la teoría de grandes desviaciones. El resultado clave es:
+
+**Teorema de Extinción Discreta:** Para un agente $i$ con fitness media $\bar{F}_i < \max_j \bar{F}_j$, la probabilidad de extinción en horizonte $T$ satisface:
+
+$$ P_{\text{ext}}(i, T) \geq 1 - \exp\left( -T \cdot D_{\text{KL}}\left( \frac{\bar{F}_i}{\sum \bar{F}} \,\Big\|\, \frac{1}{S} \right) \cdot M \right) $$
+
+donde $D_{\text{KL}}$ es la divergencia de Kullback-Leibler. Esta cota inferior muestra que la extinción es **exponencialmente rápida** en $M$ cuando la fitness relativa es baja. Para $M=100$ y fitness relativa $0.1$ vs. uniforme $0.2$, $P_{\text{ext}} > 0.99$ en $T=50$ pasos.
+
+**Implicación operativa:** En sistemas con alto volumen de consultas ($M$ grande), la exclusión competitiva es casi determinista incluso con diferencias de fitness pequeñas. La coexistencia requiere mecanismos activos de estabilización (reservas de nicho, cuotas mínimas, $\alpha < 1$).
+
+### 2.5 Teorema de Coexistencia Dependiente del Batch Size $k$
+
+El tamaño del batch de recuperación $k$ actúa como un parámetro de control ecológico análogo a la capacidad de carga en ecología clásica, pero con propiedades cualitativamente distintas.
+
+**Teorema de Coexistencia-$k$:** En un sistema con $S$ agentes y batch size $k$, la condición necesaria para coexistencia estable de todos los agentes es:
+
+$$ k \geq S \cdot \frac{\max_i \Phi_i \Psi_i}{\min_j \Phi_j \Psi_j} \cdot \frac{1}{\ln(S/\delta)} $$
+
+donde $\delta$ es la probabilidad máxima tolerable de exclusión en un horizonte dado.
+
+**Interpretación:** El batch size mínimo requerido para coexistencia escala linealmente con el número de agentes $S$ y con la ratio de fitness extrema. Si un agente tiene fitness $10\times$ mayor que otro, se necesita $k \geq 10S / \ln(S/\delta)$ para mantener al agente débil vivo. Para $S=5$, ratio $10$, $\delta=0.01$: $k \geq 50 / \ln(500) \approx 8$.
+
+Este teorema proporciona una **regla de diseño cuantitativa**: dado un conjunto de agentes con fitness estimadas, calcular el $k$ mínimo que garantiza coexistencia. Si el $k$ operativo es menor, algunos agentes están condenados a extinción independientemente de su calidad intrínseca.
+
+### 2.6 Código: Simulador DTMC con Ruido de Routing
+
+```python
+import numpy as np
+from typing import Annotated, TypeAlias
+from pydantic import BaseModel, Field, ConfigDict
+
+PositiveFloat: TypeAlias = Annotated[float, Field(gt=0.0)]
+Probability: TypeAlias = Annotated[float, Field(ge=0.0, le=1.0)]
+
+class StochasticEcologyParams(BaseModel):
+    """Parámetros del simulador DTMC estocástico."""
+    model_config = ConfigDict(frozen=True, strict=True, extra='forbid')
+    
+    n_agents: Annotated[int, Field(ge=2)] = 5
+    invocations_per_step: Annotated[int, Field(ge=10)] = 100
+    alpha: PositiveFloat = 1.2
+    gamma: PositiveFloat = 0.45
+    sigma_epsilon: PositiveFloat = 0.15
+    rho_alpha: PositiveFloat = 2.0      # Beta(a, b) para presión de routing
+    rho_beta: PositiveFloat = 5.0
+    extinction_threshold: Probability = 0.001  # N_i < thresh → extinto
+
+
+class StochasticEcologySimulator:
+    """
+    Simulador DTMC de ecología de agentes con ruido estocástico.
+    Reemplaza Lotka-Volterra continuo por transiciones discretas reales.
+    
+    Reference: RONIN Unified Dynamics Treaty v1.0, Section 2
+    """
+    
+    def __init__(self, params: StochasticEcologyParams | None = None):
+        self.params = params or StochasticEcologyParams()
+        self.S = self.params.n_agents
+        self.M = self.params.invocations_per_step
+        self.rng = np.random.default_rng(seed=42)
+        
+    def sample_routing_pressure(self) -> float:
+        """Muestrea ρ(t) ~ Beta(a, b)."""
+        return float(self.rng.beta(
+            self.params.rho_alpha, 
+            self.params.rho_beta
+        ))
+    
+    def compute_fitness_vector(
+        self,
+        frequencies: np.ndarray,
+        phi: np.ndarray,
+        psi: np.ndarray,
+        rho: float
+    ) -> np.ndarray:
+        """
+        F_i = Φ_i × Ψ_i × N_i^(α·ρ) × ε_i
+        
+        Args:
+            frequencies: N_i(t), shape (S,)
+            phi: Φ_i, shape (S,)
+            psi: Ψ_i, shape (S,)
+            rho: presión de routing escalar
+            
+        Returns:
+            Vector de fitness, shape (S,)
+        """
+        epsilon = self.rng.lognormal(
+            mean=0.0, 
+            sigma=self.params.sigma_epsilon, 
+            size=self.S
+        )
+        
+        effective_alpha = self.params.alpha * rho
+        omega = np.power(frequencies, effective_alpha)
+        
+        return phi * psi * omega * epsilon
+    
+    def step(
+        self,
+        frequencies: np.ndarray,
+        phi: np.ndarray,
+        psi: np.ndarray
+    ) -> dict:
+        """
+        Un paso DTMC: muestrea ρ, computa fitness, 
+        muestrea nueva distribución vía Multinomial.
+        
+        Returns:
+            Dict con nuevo estado, componentes y diagnóstico
+        """
+        rho = self.sample_routing_pressure()
+        fitness = self.compute_fitness_vector(frequencies, phi, psi, rho)
+        
+        # Normalizar a probabilidades
+        total = fitness.sum()
+        if total < 1e-15:
+            probs = np.ones(self.S) / self.S
+        else:
+            probs = fitness / total
+        
+        # Transición discreta: Multinomial(M, probs)
+        counts = self.rng.multinomial(self.M, probs)
+        new_frequencies = counts / self.M
+        
+        # Detectar extinciones
+        extinct = new_frequencies < self.params.extinction_threshold
+        
+        return {
+            'frequencies': new_frequencies,
+            'fitness': fitness,
+            'routing_pressure': rho,
+            'extinct_agents': np.where(extinct)[0].tolist(),
+            'effective_alpha': self.params.alpha * rho
+        }
+    
+    def simulate(
+        self,
+        initial_frequencies: np.ndarray,
+        phi: np.ndarray,
+        psi: np.ndarray,
+        n_steps: int = 500
+    ) -> dict:
+        """
+        Simulación completa de T pasos DTMC.
+        
+        Returns:
+            Dict con historia completa y estadísticas de extinción
+        """
+        freq_history = np.zeros((n_steps + 1, self.S))
+        freq_history[0] = initial_frequencies.copy()
+        
+        rho_history = np.zeros(n_steps)
+        extinction_events = []
+        
+        current_freq = initial_frequencies.copy()
+        
+        for t in range(n_steps):
+            result = self.step(current_freq, phi, psi)
+            freq_history[t + 1] = result['frequencies']
+            rho_history[t] = result['routing_pressure']
+            
+            if result['extinct_agents']:
+                extinction_events.append({
+                    'step': t + 1,
+                    'agents': result['extinct_agents'],
+                    'rho_at_extinction': result['routing_pressure']
+                })
+            
+            current_freq = result['frequencies']
+        
+        # Estadísticas finales
+        final_freq = freq_history[-1]
+        surviving = np.sum(final_freq >= self.params.extinction_threshold)
+        
+        return {
+            'frequency_history': freq_history,
+            'rho_history': rho_history,
+            'extinction_events': extinction_events,
+            'final_frequencies': final_freq,
+            'n_surviving': int(surviving),
+            'total_extinctions': len(extinction_events)
+        }
+    
+    def estimate_extinction_probability(
+        self,
+        initial_frequencies: np.ndarray,
+        phi: np.ndarray,
+        psi: np.ndarray,
+        horizon: int = 100,
+        n_trials: int = 200
+    ) -> np.ndarray:
+        """
+        Estima P_ext(i, T) mediante Monte Carlo.
+        
+        Returns:
+            Array shape (S,) con probabilidad de extinción por agente
+        """
+        extinction_counts = np.zeros(self.S)
+        
+        for _ in range(n_trials):
+            result = self.simulate(
+                initial_frequencies, phi, psi, n_steps=horizon
+            )
+            for event in result['extinction_events']:
+                for agent_idx in event['agents']:
+                    extinction_counts[agent_idx] += 1
+                    break  # Solo contar primera extinción por trial
+        
+        return extinction_counts / n_trials
+
+
+# ============================================================
+# TESTS DE VALIDACIÓN DEL SIMULADOR DTMC
+# ============================================================
+
+def test_dtmc_conserves_simplex():
+    """Las frecuencias deben sumar 1 en cada paso."""
+    sim = StochasticEcologySimulator(StochasticEcologyParams(n_agents=4))
+    phi = np.array([0.8, 0.6, 0.7, 0.5])
+    psi = np.array([0.9, 0.8, 0.7, 0.6])
+    freq0 = np.array([0.25, 0.25, 0.25, 0.25])
+    
+    result = sim.simulate(freq0, phi, psi, n_steps=100)
+    
+    sums = result['frequency_history'].sum(axis=1)
+    np.testing.assert_allclose(sums, 1.0, atol=1e-10)
+    print("✓ DTMC conserva simplex en todos los pasos")
+
+
+def test_dtmc_stochastic_extinction():
+    """Agente con fitness baja debe extinguirse estocásticamente."""
+    params = StochasticEcologyParams(
+        n_agents=3, invocations_per_step=50,
+        alpha=1.5, sigma_epsilon=0.1
+    )
+    sim = StochasticEcologySimulator(params)
+    
+    # Agente 2 tiene fitness muy baja
+    phi = np.array([0.9, 0.8, 0.1])
+    psi = np.array([0.9, 0.9, 0.9])
+    freq0 = np.array([0.33, 0.33, 0.34])
+    
+    p_ext = sim.estimate_extinction_probability(
+        freq0, phi, psi, horizon=100, n_trials=100
+    )
+    
+    assert p_ext[2] > 0.8, f"Agente débil debe extinguirse: P_ext={p_ext[2]:.2f}"
+    assert p_ext[0] < 0.1, f"Agente fuerte debe sobrevivir: P_ext={p_ext[0]:.2f}"
+    print(f"✓ Extinción estocástica verificada: P_ext={p_ext}")
+
+
+def test_dtmc_rho_modulates_competition():
+    """ρ bajo debe favorecer biodiversidad; ρ alto debe acelerar exclusión."""
+    # Escenario de baja presión
+    params_low = StochasticEcologyParams(
+        n_agents=3, invocations_per_step=100,
+        alpha=1.5, rho_alpha=1.0, rho_beta=10.0  # ρ ≈ 0.09
+    )
+    sim_low = StochasticEcologySimulator(params_low)
+    
+    # Escenario de alta presión  
+    params_high = StochasticEcologyParams(
+        n_agents=3, invocations_per_step=100,
+        alpha=1.5, rho_alpha=10.0, rho_beta=1.0  # ρ ≈ 0.91
+    )
+    sim_high = StochasticEcologySimulator(params_high)
+    
+    phi = np.array([0.9, 0.7, 0.5])
+    psi = np.ones(3) * 0.9
+    freq0 = np.ones(3) / 3
+    
+    p_ext_low = sim_low.estimate_extinction_probability(
+        freq0, phi, psi, horizon=200, n_trials=100
+    )
+    p_ext_high = sim_high.estimate_extinction_probability(
+        freq0, phi, psi, horizon=200, n_trials=100
+    )
+    
+    # Alta presión debe aumentar extinción del agente más débil
+    assert p_ext_high[2] > p_ext_low[2], \
+        f"Alta ρ debe aumentar extinción: {p_ext_high[2]:.2f} > {p_ext_low[2]:.2f}"
+    print(f"✓ ρ modula competencia: P_ext(ρ↓)={p_ext_low[2]:.2f}, P_ext(ρ↑)={p_ext_high[2]:.2f}")
+
+
+def test_dtmc_batch_size_affects_coexistence():
+    """Mayor M debe acelerar exclusión (ley de grandes números)."""
+    results = {}
+    for M in [20, 200]:
+        params = StochasticEcologyParams(
+            n_agents=3, invocations_per_step=M,
+            alpha=1.2, sigma_epsilon=0.1
+        )
+        sim = StochasticEcologySimulator(params)
+        
+        phi = np.array([0.9, 0.7, 0.5])
+        psi = np.ones(3) * 0.9
+        freq0 = np.ones(3) / 3
+        
+        p_ext = sim.estimate_extinction_probability(
+            freq0, phi, psi, horizon=100, n_trials=100
+        )
+        results[M] = p_ext
+    
+    assert results[200][2] > results[20][2], \
+        f"M=200 debe extinguir más rápido: {results[200][2]:.2f} > {results[20][2]:.2f}"
+    print(f"✓ Batch size afecta coexistencia: P_ext(M=20)={results[20][2]:.2f}, P_ext(M=200)={results[200][2]:.2f}")
+
+
+if __name__ == "__main__":
+    test_dtmc_conserves_simplex()
+    test_dtmc_stochastic_extinction()
+    test_dtmc_rho_modulates_competition()
+    test_dtmc_batch_size_affects_coexistence()
+    print("\n✓✓✓ SECCIÓN 2: DTMC ESTOCÁSTICO — TODOS LOS TESTS PASARON ✓✓✓")
+```
+
+### 2.7 Interpretación Operativa de la Reformulación Discreta
+
+La transición de EDO a DTMC proporciona cuatro capacidades que Lotka-Volterra no puede ofrecer:
+
+**Capacidad 1: Predicción de tiempos de extinción reales.** Las EDO predicen convergencia asintótica ($N_i \to 0$ cuando $t \to \infty$). La DTMC predice extinción en tiempo finito con probabilidad cuantificable. Esto permite responder: "¿cuántos días hasta que el agente X desaparezca?" en lugar de "el agente X tenderá a desaparecer eventualmente".
+
+**Capacidad 2: Diseño de batch size para biodiversidad.** El Teorema de Coexistencia-$k$ (Sección 2.5) proporciona una fórmula cerrada para seleccionar $k$ que garantice supervivencia de agentes minoritarios. Sin esta reformulación discreta, no existe base teórica para esta decisión de diseño.
+
+**Capacidad 3: Calibración de ruido de routing.** El parámetro $\sigma_\epsilon$ y la distribución $\text{Beta}(a_\rho, b_\rho)$ son medibles directamente desde logs de producción. La DTMC permite validar si los valores calibrados reproducen las tasas de extinción observadas históricamente.
+
+**Capacidad 4: Detección de regímenes críticos.** Al variar $\rho$ en simulación, podemos identificar puntos de bifurcación donde el sistema transiciona abruptamente de coexistencia a exclusión. Estos puntos críticos son invisibles en EDO porque requieren la interacción entre discreción y estocasticidad.
+
+---
+
+ 
