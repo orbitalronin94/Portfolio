@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nash vs PUSFRE · Laboratorio Comparativo</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #080c14;
+            --bg-secondary: #0f1824;
+            --border-color: #1f2d40;
+            --text-primary: #e8f0f8;
+            --text-secondary: #8b9db8;
+            --text-muted: #4a5a72;
+            --accent-blue: #4c8bcf;
+            --accent-cyan: #7fc1ff;
+            --accent-red: #c05a4a;
+            --accent-green: #4ab07a;
+            --accent-orange: #d98c4a;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            --radius: 14px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        .app {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-left .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7fc1ff, #4c8bcf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-left .sub {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+
+        .badge {
+            background: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge .num {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: var(--border-color);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: #5f9ee0;
+        }
+
+        .btn-danger {
+            border-color: #6a2a2a;
+            color: #e8b0b0;
+        }
+
+        .btn-danger:hover {
+            background: #3a1a1a;
+        }
+
+        .btn-success {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--bg-primary);
+        }
+
+        .btn-success:hover {
+            background: #5ac88a;
+        }
+
+        /* CONTROLS */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            background: var(--bg-secondary);
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .control-group input[type="range"] {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: var(--border-color);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--bg-secondary);
+        }
+
+        .control-group .val {
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 36px;
+            text-align: center;
+        }
+
+        .controls .divider {
+            width: 1px;
+            height: 28px;
+            background: var(--border-color);
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title .eq {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: none;
+            background: var(--bg-primary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title .vs {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+
+        /* CHART CONTAINERS */
+        .chart-container {
+            width: 100%;
+            height: 160px;
+            border-radius: 10px;
+            background: var(--bg-primary);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .chart-container svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* AGENT BARS */
+        .agent-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 100px;
+            padding-top: 4px;
+            gap: 3px;
+        }
+
+        .agent-bar-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            height: 100%;
+            justify-content: flex-end;
+            cursor: pointer;
+        }
+
+        .agent-bar-wrap .bar {
+            width: 100%;
+            max-width: 32px;
+            min-height: 3px;
+            border-radius: 4px 4px 0 0;
+            transition: height 0.2s ease;
+        }
+
+        .agent-bar-wrap .label {
+            font-size: 9px;
+            font-weight: 500;
+            margin-top: 4px;
+            color: var(--text-secondary);
+        }
+
+        .agent-bar-wrap .pct {
+            font-size: 8px;
+            color: var(--text-muted);
+        }
+
+        /* METRICS */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .metric-item {
+            background: var(--bg-primary);
+            padding: 6px 10px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-item .label {
+            font-size: 8px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .metric-item .value {
+            font-size: 16px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric-item .value.nash-color {
+            color: var(--accent-red);
+        }
+        .metric-item .value.pusfre-color {
+            color: var(--accent-green);
+        }
+        .metric-item .value .sub {
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+            font-size: 11px;
+        }
+
+        .comparison-table .header {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 9px;
+            padding: 4px 8px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .comparison-table .cell {
+            padding: 4px 8px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .comparison-table .cell.good {
+            color: var(--accent-green);
+        }
+        .comparison-table .cell.bad {
+            color: var(--accent-red);
+        }
+        .comparison-table .cell.neutral {
+            color: var(--text-secondary);
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 14px;
+            font-size: 10px;
+            color: var(--text-muted);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+
+        .footer .highlight {
+            color: var(--accent-cyan);
+        }
+
+        /* TOOLTIP */
+        .custom-tooltip {
+            position: fixed;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            max-width: 280px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            line-height: 1.5;
+        }
+
+        .custom-tooltip.visible {
+            opacity: 1;
+        }
+
+        .custom-tooltip strong {
+            color: var(--text-primary);
+        }
+
+        .alert {
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-top: 4px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert.success {
+            background: #0a3a1a;
+            border: 1px solid #1a6a3a;
+            color: #8ae8aa;
+        }
+        .alert.danger {
+            background: #3a0a0a;
+            border: 1px solid #6a1a1a;
+            color: #e88a8a;
+        }
+        .alert.info {
+            background: #0a1a3a;
+            border: 1px solid #1a3a6a;
+            color: #8ab8e8;
+        }
+        .alert.warn {
+            background: #3a2a0a;
+            border: 1px solid #6a4a1a;
+            color: #e8c88a;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge-tag {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flex {
+            display: flex;
+        }
+        .gap-4 {
+            gap: 8px;
+        }
+        .mt-1 {
+            margin-top: 4px;
+        }
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .text-muted {
+            color: var(--text-muted);
+        }
+        .text-small {
+            font-size: 10px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOOLTIP -->
+    <div class="custom-tooltip" id="tooltip"></div>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo">⚡ RONIN</span>
+                <span class="sub">Nash vs PUSFRE · Laboratorio Comparativo</span>
+            </div>
+            <div class="header-right">
+                <span class="badge">paso <span class="num" id="stepCount">0</span></span>
+                <span class="badge">agentes <span class="num" id="agentCount">5</span></span>
+                <button class="btn btn-primary" id="btnStep">▶ paso</button>
+                <button class="btn" id="btnAuto">▶ auto</button>
+                <button class="btn btn-danger" id="btnReset">⟲ reset</button>
+            </div>
+        </header>
+
+        <!-- CONTROLES -->
+        <div class="controls">
+            <div class="control-group">
+                <label>γ (deuda)</label>
+                <input type="range" id="sliderGamma" min="0" max="100" value="42" />
+                <span class="val" id="valGamma">0.42</span>
+            </div>
+            <div class="control-group">
+                <label>α (competencia)</label>
+                <input type="range" id="sliderAlpha" min="50" max="250" value="118" />
+                <span class="val" id="valAlpha">1.18</span>
+            </div>
+            <div class="control-group">
+                <label>σ (ruido)</label>
+                <input type="range" id="sliderSigma" min="0" max="50" value="12" />
+                <span class="val" id="valSigma">0.12</span>
+            </div>
+            <div class="control-group">
+                <label>ρ (presión)</label>
+                <input type="range" id="sliderRho" min="0" max="100" value="31" />
+                <span class="val" id="valRho">0.31</span>
+            </div>
+            <div class="divider"></div>
+            <div class="control-group">
+                <label>⏱</label>
+                <input type="range" id="sliderSpeed" min="50" max="800" value="350" />
+                <span class="val" id="valSpeed">350ms</span>
+            </div>
+            <span class="text-muted text-small" style="margin-left:auto;">F = Φ · Ψ · N<sup>α·ρ</sup> · ε</span>
+        </div>
+
+        <!-- GRID -->
+        <div class="grid">
+
+            <!-- CARD 1: PUSFRE -->
+            <div class="card">
+                <div class="card-title">
+                    <span>🟢 PUSFRE · <span class="badge-tag">coexistencia</span></span>
+                    <span class="eq">N<sub>i</sub>(t+1) = F<sub>i</sub> / ΣF</span>
+                </div>
+                <div class="chart-container" id="pusfreChart">
+                    <div class="chart-overlay" style="position:absolute;bottom:8px;right:12px;font-size:9px;color:var(--text-muted);opacity:0.6;">← tiempo</div>
+                </div>
+                <div class="agent-bars" id="pusfreBars"></div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="label">biodiversidad</div>
+                        <div class="value pusfre-color" id="pusfreBio">0.00</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="label">agentes vivos</div>
+                        <div class="value pusfre-color" id="pusfreAlive">0</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="label">régimen</div>
+                        <div class="value pusfre-color" id="pusfreRegime">⚖️</div>
+                    </div>
+                </div>
+                <div id="pusfreAlerts"></div>
+            </div>
+
+            <!-- CARD 2: NASH -->
+            <div class="card">
+                <div class="card-title">
+                    <span>🔴 NASH · <span class="badge-tag">monopolio</span></span>
+                    <span class="eq">s* = argmax u<sub>i</sub></span>
+                </div>
+                <div class="chart-container" id="nashChart">
+                    <div class="chart-overlay" style="position:absolute;bottom:8px;right:12px;font-size:9px;color:var(--text-muted);opacity:0.6;">← tiempo</div>
+                </div>
+                <div class="agent-bars" id="nashBars"></div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="label">biodiversidad</div>
+                        <div class="value nash-color" id="nashBio">0.00</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="label">agentes vivos</div>
+                        <div class="value nash-color" id="nashAlive">0</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="label">régimen</div>
+                        <div class="value nash-color" id="nashRegime">👑</div>
+                    </div>
+                </div>
+                <div id="nashAlerts"></div>
+            </div>
+
+        </div>
+
+        <!-- COMPARISON ROW -->
+        <div class="card" style="margin-bottom:14px;">
+            <div class="card-title">
+                <span>📊 COMPARATIVA EN DIRECTO</span>
+                <span class="vs">⚔️ NASH vs PUSFRE</span>
+            </div>
+            <div class="comparison-table">
+                <div class="header">Métrica</div>
+                <div class="header" style="color:var(--accent-red);">NASH</div>
+                <div class="header" style="color:var(--accent-green);">PUSFRE</div>
+
+                <div class="cell neutral">Diversidad</div>
+                <div class="cell bad" id="compNashDiv">0.00</div>
+                <div class="cell good" id="compPusfreDiv">0.00</div>
+
+                <div class="cell neutral">Equidad (Gini)</div>
+                <div class="cell bad" id="compNashGini">1.00</div>
+                <div class="cell good" id="compPusfreGini">0.00</div>
+
+                <div class="cell neutral">Agentes vivos</div>
+                <div class="cell bad" id="compNashAlive">0</div>
+                <div class="cell good" id="compPusfreAlive">0</div>
+
+                <div class="cell neutral">Monopolio</div>
+                <div class="cell bad" id="compNashMonopoly">✅</div>
+                <div class="cell good" id="compPusfreMonopoly">❌</div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <span><strong>RONIN Dynamics</strong> · Nash vs PUSFRE · v1.0</span>
+            <span>·</span>
+            <span>F = Φ · Ψ · N<sup>α·ρ</sup> · ε</span>
+            <span>·</span>
+            <span class="highlight">Nash es un caso particular del PUSFRE</span>
+            <span>·</span>
+            <span>1310</span>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT COMPLETO -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // 1. CONFIGURACIÓN
+            // ============================================================
+            const S = 5;
+            const L = 24;
+            const MAX_HISTORY = 100;
+
+            // ============================================================
+            // 2. ESTADO
+            // ============================================================
+            const state = {
+                // PUSFRE
+                pusfre: {
+                    frequencies: new Float32Array(S).fill(1 / S),
+                    phi: new Float32Array(S),
+                    psi: new Float32Array(S),
+                    omega: new Float32Array(S),
+                    fitness: new Float32Array(S),
+                    debt: new Float32Array(S),
+                    history: [],
+                    step: 0,
+                    regime: 'equilibrium',
+                    extinctionCount: 0,
+                    alive: S,
+                },
+                // NASH (estático, solo se recalcula cuando cambian los parámetros)
+                nash: {
+                    frequencies: new Float32Array(S).fill(1 / S),
+                    phi: new Float32Array(S),
+                    psi: new Float32Array(S),
+                    fitness: new Float32Array(S),
+                    history: [],
+                    step: 0,
+                    regime: 'monopoly',
+                    extinctionCount: 0,
+                    alive: 1,
+                },
+                retentionMap: [],
+                alerts: [],
+            };
+
+            // Parámetros
+            const params = {
+                gamma: 0.42,
+                alpha: 1.18,
+                sigma: 0.12,
+                rho: 0.31,
+                speed: 350,
+            };
+
+            // ============================================================
+            // 3. REFERENCIAS DOM
+            // ============================================================
+            const $ = (id) => document.getElementById(id);
+            const tooltip = document.getElementById('tooltip');
+
+            // ============================================================
+            // 4. TOOLTIP
+            // ============================================================
+            function showTooltip(el, e) {
+                const tip = el.getAttribute('data-tip');
+                if (!tip) return;
+                tooltip.innerHTML = tip;
+                tooltip.classList.add('visible');
+                let x = e.clientX + 14,
+                    y = e.clientY - 10;
+                if (x + 290 > window.innerWidth) x = e.clientX - 290;
+                if (y + 80 > window.innerHeight) y = window.innerHeight - 90;
+                tooltip.style.left = x + 'px';
+                tooltip.style.top = y + 'px';
+            }
+
+            function hideTooltip() {
+                tooltip.classList.remove('visible');
+            }
+
+            document.querySelectorAll('[data-tip]').forEach(el => {
+                el.addEventListener('mouseenter', (e) => showTooltip(el, e));
+                el.addEventListener('mousemove', (e) => {
+                    let x = e.clientX + 14,
+                        y = e.clientY - 10;
+                    if (x + 290 > window.innerWidth) x = e.clientX - 290;
+                    if (y + 80 > window.innerHeight) y = window.innerHeight - 90;
+                    tooltip.style.left = x + 'px';
+                    tooltip.style.top = y + 'px';
+                });
+                el.addEventListener('mouseleave', hideTooltip);
+            });
+
+            // ============================================================
+            // 5. UTILIDADES
+            // ============================================================
+            function logNormal(mean, sigma) {
+                let u = 0,
+                    v = 0;
+                while (u === 0) u = Math.random();
+                while (v === 0) v = Math.random();
+                const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+                return Math.exp(mean + sigma * z);
+            }
+
+            function attentionProfile(pos, total) {
+                const p = pos / total;
+                const primacy = 0.4 * Math.exp(-5 * p);
+                const recency = 0.4 * Math.exp(-5 * (1 - p));
+                const valley = 0.2;
+                return Math.min(1, primacy + recency + valley);
+            }
+
+            function initRetentionMap() {
+                const map = [];
+                for (let pos = 0; pos < L; pos++) {
+                    const row = [];
+                    for (let agent = 0; agent < S; agent++) {
+                        const offset = agent / (S - 1) * 0.15 - 0.075;
+                        const attn = attentionProfile(pos, L);
+                        row.push(Math.min(1, Math.max(0.05, attn + offset)));
+                    }
+                    map.push(row);
+                }
+                return map;
+            }
+
+            function computeEntropy(f) {
+                let e = 0;
+                for (let i = 0; i < S; i++) {
+                    if (f[i] > 0.001) e -= f[i] * Math.log2(f[i]);
+                }
+                return e / Math.log2(S);
+            }
+
+            function gini(f) {
+                const sorted = f.slice().sort((a, b) => a - b);
+                const n = sorted.length;
+                const cum = sorted.reduce((acc, v) => { acc.push(acc[acc.length - 1] + v); return acc; }, [0]);
+                return 1 - (2 * cum.reduce((a, b) => a + b, 0) / (n * cum[cum.length - 1]) - (n + 1) / n);
+            }
+
+            function detectRegime(f) {
+                const maxF = Math.max(...f);
+                const entropy = computeEntropy(f);
+                if (maxF > 0.85) return 'monopoly';
+                if (maxF < 0.3 && entropy > 0.7) return 'equilibrium';
+                if (entropy < 0.3) return 'collapse';
+                return 'equilibrium';
+            }
+
+            function getColors() {
+                return ['#4c8bcf', '#5fa8d9', '#7fc1ff', '#a0d0f0', '#b7d9f5'];
+            }
+
+            // ============================================================
+            // 6. MOTOR PUSFRE
+            // ============================================================
+            function pusfreStep() {
+                const p = state.pusfre;
+                const f = p.frequencies;
+                const phi = p.phi;
+                const psi = p.psi;
+                const omega = p.omega;
+                const debt = p.debt;
+                const retMap = state.retentionMap;
+
+                // Geometría (Φ)
+                for (let i = 0; i < S; i++) {
+                    if (p.step === 0) {
+                        const pos = Math.floor((i / S) * L);
+                        phi[i] = retMap[pos][i] + 0.1;
+                    }
+                    phi[i] += (Math.random() - 0.5) * 0.003;
+                    phi[i] = Math.min(1, Math.max(0.05, phi[i]));
+                }
+
+                // Deuda (Ψ)
+                for (let i = 0; i < S; i++) {
+                    if (f[i] > 0.12) {
+                        debt[i] = Math.min(1, debt[i] + 0.003);
+                    } else {
+                        debt[i] = Math.max(0, debt[i] - 0.001);
+                    }
+                    for (let j = 0; j < S; j++) {
+                        if (i !== j && f[j] > 0.1 && debt[i] > 0.3) {
+                            debt[j] = Math.min(1, debt[j] + 0.0005);
+                        }
+                    }
+                    psi[i] = Math.max(0.01, 1 - params.gamma * debt[i]);
+                }
+
+                // Ecología (Ω)
+                const effectiveAlpha = params.alpha * params.rho;
+                for (let i = 0; i < S; i++) {
+                    omega[i] = Math.pow(Math.max(f[i], 0.0001), effectiveAlpha);
+                }
+
+                // Ruido (ε)
+                const eps = new Float32Array(S);
+                for (let i = 0; i < S; i++) {
+                    eps[i] = logNormal(0, params.sigma);
+                }
+
+                // Fitness
+                let totalF = 0;
+                for (let i = 0; i < S; i++) {
+                    const fi = phi[i] * psi[i] * omega[i] * eps[i];
+                    p.fitness[i] = Math.max(0.0001, fi);
+                    totalF += p.fitness[i];
+                }
+
+                // Nuevas frecuencias
+                const newFreq = new Float32Array(S);
+                for (let i = 0; i < S; i++) {
+                    newFreq[i] = p.fitness[i] / totalF;
+                }
+                p.frequencies = newFreq;
+
+                // Detectar extinciones
+                let extinct = 0;
+                for (let i = 0; i < S; i++) {
+                    if (newFreq[i] < 0.005 && f[i] >= 0.005) {
+                        extinct++;
+                    }
+                }
+                if (extinct > 0) {
+                    p.extinctionCount += extinct;
+                    addAlert(`⚠️ PUSFRE: ${extinct} agente${extinct>1?'s':''} extinto${extinct>1?'s':''}`, 'warn');
+                }
+
+                // Registrar
+                p.step++;
+                p.history.push({
+                    freq: new Float32Array(newFreq),
+                    step: p.step,
+                    debt: new Float32Array(debt),
+                });
+                if (p.history.length > MAX_HISTORY) p.history.shift();
+
+                // Régimen
+                p.regime = detectRegime(newFreq);
+                p.alive = newFreq.filter(v => v > 0.005).length;
+            }
+
+            // ============================================================
+            // 7. MOTOR NASH (estático, winner-takes-all)
+            // ============================================================
+            function nashCompute() {
+                const n = state.nash;
+                const p = state.pusfre; // usa los mismos phi/psi que PUSFRE
+
+                // Nash: el agente con mayor fitness captura TODO
+                const fitness = new Float32Array(S);
+                for (let i = 0; i < S; i++) {
+                    fitness[i] = p.phi[i] * p.psi[i];
+                }
+                const best = fitness.indexOf(Math.max(...fitness));
+                const newFreq = new Float32Array(S).fill(0);
+                newFreq[best] = 1.0;
+
+                // Si cambia el ganador, registrar extinción de los demás
+                const oldFreq = n.frequencies;
+                const oldBest = oldFreq.indexOf(1.0);
+                if (oldBest !== -1 && oldBest !== best) {
+                    n.extinctionCount += S - 1;
+                    addAlert(`👑 NASH: nuevo monopolio del agente A${best+1}`, 'info');
+                }
+
+                n.frequencies = newFreq;
+                n.fitness = fitness;
+                n.step++;
+                n.history.push({
+                    freq: new Float32Array(newFreq),
+                    step: n.step,
+                });
+                if (n.history.length > MAX_HISTORY) n.history.shift();
+
+                n.regime = 'monopoly';
+                n.alive = 1;
+                n.phi = p.phi;
+                n.psi = p.psi;
+            }
+
+            // ============================================================
+            // 8. STEP PRINCIPAL
+            // ============================================================
+            function step() {
+                // PUSFRE
+                pusfreStep();
+
+                // NASH (recalcular con los mismos parámetros)
+                nashCompute();
+
+                // Actualizar UI
+                renderAll();
+                updateComparison();
+
+                document.getElementById('stepCount').textContent = state.pusfre.step;
+            }
+
+            // ============================================================
+            // 9. RENDERIZADO
+            // ============================================================
+
+            function renderBars(containerId, data, colors, label, showDebt) {
+                const container = document.getElementById(containerId);
+                const f = data.frequencies;
+                const debt = data.debt || new Float32Array(S);
+                const maxVal = Math.max(...f, 0.001);
+
+                let html = '';
+                for (let i = 0; i < S; i++) {
+                    const pct = f[i] / maxVal;
+                    const height = Math.max(3, pct * 100);
+                    const hasDebt = showDebt && debt[i] > 0.2;
+                    const color = colors[i % colors.length];
+                    const pctDisplay = (f[i] * 100).toFixed(1);
+                    html += `
+                        <div class="agent-bar-wrap" data-tip="A${i+1}<br>Frecuencia: ${pctDisplay}%${showDebt ? '<br>Deuda: '+debt[i].toFixed(3) : ''}">
+                            <div class="bar" style="height:${height}px; background:${color}; position:relative;">
+                                ${hasDebt ? '<div style="position:absolute;top:-4px;right:-4px;width:8px;height:8px;border-radius:50%;background:#c05a4a;border:1px solid #0f1824;"></div>' : ''}
+                            </div>
+                            <div class="label">A${i+1}</div>
+                            <div class="pct">${pctDisplay}%</div>
+                        </div>
+                    `;
+                }
+                container.innerHTML = html;
+
+                // Tooltips
+                container.querySelectorAll('[data-tip]').forEach(el => {
+                    el.addEventListener('mouseenter', (e) => showTooltip(el, e));
+                    el.addEventListener('mousemove', (e) => {
+                        let x = e.clientX + 14,
+                            y = e.clientY - 10;
+                        if (x + 290 > window.innerWidth) x = e.clientX - 290;
+                        if (y + 80 > window.innerHeight) y = window.innerHeight - 90;
+                        tooltip.style.left = x + 'px';
+                        tooltip.style.top = y + 'px';
+                    });
+                    el.addEventListener('mouseleave', hideTooltip);
+                });
+            }
+
+            function renderChart(containerId, data, colors, label) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                const history = data.history;
+                if (history.length < 2) {
+                    container.innerHTML =
+                        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:12px;">⏳ simulando...</div>';
+                    return;
+                }
+
+                const rect = container.getBoundingClientRect();
+                const width = rect.width || 600;
+                const height = rect.height || 160;
+                const margin = { top: 8, right: 8, bottom: 16, left: 28 };
+
+                const svg = d3.select(container)
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('background', 'transparent');
+
+                const innerW = width - margin.left - margin.right;
+                const innerH = height - margin.top - margin.bottom;
+
+                const g = svg.append('g')
+                    .attr('transform', `translate(${margin.left},${margin.top})`);
+
+                const xScale = d3.scaleLinear()
+                    .domain([0, history.length - 1])
+                    .range([0, innerW]);
+
+                const yScale = d3.scaleLinear()
+                    .domain([0, 1])
+                    .range([innerH, 0]);
+
+                // Grid
+                g.selectAll('.grid-line')
+                    .data([0.25, 0.5, 0.75])
+                    .enter()
+                    .append('line')
+                    .attr('x1', 0)
+                    .attr('x2', innerW)
+                    .attr('y1', d => yScale(d))
+                    .attr('y2', d => yScale(d))
+                    .attr('stroke', '#1a2432')
+                    .attr('stroke-width', 0.5)
+                    .attr('stroke-dasharray', '4,4');
+
+                // Líneas
+                for (let agent = 0; agent < S; agent++) {
+                    const line = d3.line()
+                        .x((d, i) => xScale(i))
+                        .y(d => yScale(d.freq[agent]))
+                        .curve(d3.curveMonotoneX);
+
+                    const pathData = history.map((d, i) => ({ freq: d.freq, idx: i }));
+
+                    g.append('path')
+                        .datum(pathData)
+                        .attr('d', line)
+                        .attr('fill', 'none')
+                        .attr('stroke', colors[agent % colors.length])
+                        .attr('stroke-width', 1.5)
+                        .attr('opacity', 0.85);
+
+                    // Último punto
+                    const last = history[history.length - 1];
+                    g.append('circle')
+                        .attr('cx', xScale(history.length - 1))
+                        .attr('cy', yScale(last.freq[agent]))
+                        .attr('r', 3.5)
+                        .attr('fill', colors[agent % colors.length])
+                        .attr('stroke', '#0f1824')
+                        .attr('stroke-width', 1);
+                }
+
+                // Ejes
+                const xAxis = d3.axisBottom(xScale).ticks(4).tickSize(4).tickPadding(4);
+                const yAxis = d3.axisLeft(yScale).ticks(3).tickFormat(d => d.toFixed(1)).tickSize(4).tickPadding(4);
+
+                g.append('g')
+                    .attr('transform', `translate(0,${innerH})`)
+                    .call(xAxis)
+                    .style('color', '#4a5a72')
+                    .style('font-size', '7px')
+                    .style('font-family', 'monospace');
+
+                g.append('g')
+                    .call(yAxis)
+                    .style('color', '#4a5a72')
+                    .style('font-size', '7px')
+                    .style('font-family', 'monospace');
+
+                // Etiqueta
+                g.append('text')
+                    .attr('x', innerW - 4)
+                    .attr('y', 6)
+                    .attr('text-anchor', 'end')
+                    .style('font-size', '8px')
+                    .style('fill', '#4a5a72')
+                    .style('font-family', 'monospace')
+                    .text(label);
+            }
+
+            function updateStats() {
+                const p = state.pusfre;
+                const n = state.nash;
+
+                const bioP = computeEntropy(p.frequencies);
+                const bioN = computeEntropy(n.frequencies);
+
+                document.getElementById('pusfreBio').textContent = bioP.toFixed(3);
+                document.getElementById('pusfreAlive').textContent = p.alive;
+                document.getElementById('pusfreRegime').textContent = p.regime === 'equilibrium' ? '⚖️' :
+                    p.regime === 'monopoly' ? '👑' : '💀';
+
+                document.getElementById('nashBio').textContent = bioN.toFixed(3);
+                document.getElementById('nashAlive').textContent = n.alive;
+                document.getElementById('nashRegime').textContent = '👑';
+
+                // Badges de estado
+                const pHealth = bioP > 0.6 ? '✅ saludable' : bioP > 0.3 ? '⚠️ en riesgo' : '🔴 crítico';
+                const nHealth = '👑 monopolio';
+                document.getElementById('pusfreAlerts').innerHTML =
+                    `<div class="alert ${bioP>0.4?'success':'danger'}">${pHealth}</div>`;
+                document.getElementById('nashAlerts').innerHTML =
+                    `<div class="alert danger">${nHealth}</div>`;
+            }
+
+            function updateComparison() {
+                const p = state.pusfre;
+                const n = state.nash;
+
+                const bioP = computeEntropy(p.frequencies);
+                const bioN = computeEntropy(n.frequencies);
+                const giniP = gini(p.frequencies);
+                const giniN = gini(n.frequencies);
+
+                document.getElementById('compPusfreDiv').textContent = bioP.toFixed(3);
+                document.getElementById('compNashDiv').textContent = bioN.toFixed(3);
+                document.getElementById('compPusfreGini').textContent = giniP.toFixed(3);
+                document.getElementById('compNashGini').textContent = giniN.toFixed(3);
+                document.getElementById('compPusfreAlive').textContent = p.alive;
+                document.getElementById('compNashAlive').textContent = n.alive;
+                document.getElementById('compPusfreMonopoly').textContent = p.regime === 'monopoly' ? '✅' : '❌';
+                document.getElementById('compNashMonopoly').textContent = '✅';
+            }
+
+            function renderAll() {
+                const colors = getColors();
+
+                // PUSFRE
+                renderBars('pusfreBars', state.pusfre, colors, 'PUSFRE', true);
+                renderChart('pusfreChart', state.pusfre, colors, 'PUSFRE');
+
+                // NASH
+                renderBars('nashBars', state.nash, colors, 'NASH', false);
+                renderChart('nashChart', state.nash, colors, 'NASH');
+
+                updateStats();
+                updateComparison();
+
+                // Badge deuda
+                const totalDebt = state.pusfre.debt.reduce((a, b) => a + b, 0);
+                document.getElementById('totalDebtBadge').textContent = totalDebt.toFixed(2);
+            }
+
+            // ============================================================
+            // 10. ALERTAS
+            // ============================================================
+            function addAlert(msg, type = 'info') {
+                state.alerts.unshift({ msg, type, time: Date.now() });
+                if (state.alerts.length > 10) state.alerts.pop();
+                // No mostramos en UI, solo log
+                console.log(`[${type.toUpperCase()}] ${msg}`);
+            }
+
+            // ============================================================
+            // 11. RESET
+            // ============================================================
+            function reset() {
+                const p = state.pusfre;
+                const n = state.nash;
+
+                p.frequencies = new Float32Array(S).fill(1 / S);
+                p.phi = new Float32Array(S);
+                p.psi = new Float32Array(S);
+                p.omega = new Float32Array(S);
+                p.fitness = new Float32Array(S);
+                p.debt = new Float32Array(S);
+                p.history = [];
+                p.step = 0;
+                p.extinctionCount = 0;
+                p.alive = S;
+
+                n.frequencies = new Float32Array(S).fill(1 / S);
+                n.phi = new Float32Array(S);
+                n.psi = new Float32Array(S);
+                n.fitness = new Float32Array(S);
+                n.history = [];
+                n.step = 0;
+                n.extinctionCount = 0;
+                n.alive = 1;
+
+                state.retentionMap = initRetentionMap();
+                state.alerts = [];
+
+                // Inicializar phi/psi
+                for (let i = 0; i < S; i++) {
+                    const pos = Math.floor((i / S) * L);
+                    p.phi[i] = state.retentionMap[pos][i] + 0.1;
+                    p.psi[i] = 0.9;
+                    n.phi[i] = p.phi[i];
+                    n.psi[i] = p.psi[i];
+                }
+
+                // Primer historial
+                p.history.push({ freq: new Float32Array(p.frequencies), step: 0, debt: new Float32Array(p.debt) });
+                n.history.push({ freq: new Float32Array(n.frequencies), step: 0 });
+
+                // Ejecutar un paso para que NASH encuentre su equilibrio
+                nashCompute();
+
+                renderAll();
+                document.getElementById('stepCount').textContent = '0';
+                document.getElementById('agentCount').textContent = S;
+                addAlert('🔄 Sistema reiniciado', 'info');
+            }
+
+            // ============================================================
+            // 12. CONTROLES
+            // ============================================================
+
+            // Sliders
+            document.getElementById('sliderGamma').addEventListener('input', function() {
+                params.gamma = this.value / 100;
+                document.getElementById('valGamma').textContent = params.gamma.toFixed(2);
+                // Recalcular NASH inmediatamente
+                nashCompute();
+                renderAll();
+            });
+
+            document.getElementById('sliderAlpha').addEventListener('input', function() {
+                params.alpha = this.value / 100;
+                document.getElementById('valAlpha').textContent = params.alpha.toFixed(2);
+                nashCompute();
+                renderAll();
+            });
+
+            document.getElementById('sliderSigma').addEventListener('input', function() {
+                params.sigma = this.value / 100;
+                document.getElementById('valSigma').textContent = params.sigma.toFixed(2);
+            });
+
+            document.getElementById('sliderRho').addEventListener('input', function() {
+                params.rho = this.value / 100;
+                document.getElementById('valRho').textContent = params.rho.toFixed(2);
+            });
+
+            document.getElementById('sliderSpeed').addEventListener('input', function() {
+                params.speed = this.value;
+                document.getElementById('valSpeed').textContent = params.speed + 'ms';
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = setInterval(step, params.speed);
+                }
+            });
+
+            // Botones
+            let autoInterval = null;
+
+            document.getElementById('btnStep').addEventListener('click', step);
+
+            document.getElementById('btnAuto').addEventListener('click', function() {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = null;
+                    this.textContent = '▶ auto';
+                } else {
+                    autoInterval = setInterval(step, params.speed);
+                    this.textContent = '⏹ stop';
+                }
+            });
+
+            document.getElementById('btnReset').addEventListener('click', function() {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = null;
+                    document.getElementById('btnAuto').textContent = '▶ auto';
+                }
+                reset();
+            });
+
+            // ============================================================
+            // 13. INICIO
+            // ============================================================
+
+            state.retentionMap = initRetentionMap();
+
+            // Inicializar phi/psi
+            for (let i = 0; i < S; i++) {
+                const pos = Math.floor((i / S) * L);
+                state.pusfre.phi[i] = state.retentionMap[pos][i] + 0.1;
+                state.pusfre.psi[i] = 0.9;
+                state.nash.phi[i] = state.pusfre.phi[i];
+                state.nash.psi[i] = state.pusfre.psi[i];
+            }
+
+            state.pusfre.history.push({ freq: new Float32Array(state.pusfre.frequencies), step: 0,
+                debt: new Float32Array(state.pusfre.debt) });
+            state.nash.history.push({ freq: new Float32Array(state.nash.frequencies), step: 0 });
+
+            // Calcular NASH inicial
+            nashCompute();
+
+            renderAll();
+            document.getElementById('agentCount').textContent = S;
+
+            console.log('⚡ RONIN · Nash vs PUSFRE · Laboratorio Comparativo');
+            console.log('📐 PUSFRE: F = Φ · Ψ · N^(α·ρ) · ε');
+            console.log('👑 NASH:  s* = argmax u_i');
+            console.log('🔬 El PUSFRE generaliza a Nash como caso límite');
+
+            // Auto-start después de 1 segundo
+            setTimeout(() => {
+                document.getElementById('btnAuto').click();
+            }, 1000);
+
+        })();
+    </script>
+
+</body>
+</html>
