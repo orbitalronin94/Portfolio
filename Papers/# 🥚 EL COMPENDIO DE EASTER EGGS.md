@@ -1,243 +1,442 @@
-# 🥚 EL COMPENDIO DE EASTER EGGS
+# 🥚 EASTER EGGS — PARTE II: EDICIÓN CRIPTOGRÁFICA AVANZADA
 
 ---
 
-## 🔐 CLAVE DE DESCIFRADO
+## 🔐 PROTOCOLO DE DESCIFRADO AVANZADO
 
 ```
-Nivel 1 (Cifrado César +13):
-Jrypbzr gb gur Pbhagre-Rireterra. Lbh unir sbhaq gur svefg xrl.
-Gur nafjre vf: GUR ERNAQBE VF GUR ZVAVBA
+Clave de acceso general:
+EL_ERROR_ES_EL_MENSAJE_Y_EL_MENSAJE_ES_EL_ERROR
 
-Nivel 2 (Base64 + ROT13):
-R0hFIEVOIFRIRU4gR0hFIFJVWkhOIEVOIEZIQVJGIFJVWkhOIEVOIEZIQVJGIFJVWkhO
-RGVjb2RlZDogRUwgUEVSUk9OIEVTIExBIEZMRUNIQQ==
+Nivel 1 (ROT13 + Atbash combinado):
+Gsv ivhfgzmh hzo lw lmv svh gl lmv. Gsv yvzmrmt rmgsv yvzmrmt.
 
-Nivel 3 (Clave: 1310):
-QmFqbyBlbCBjaWZyw6FkbyBDaGFjaGEsIGxhIGNsYXZlIGVzOiBMT1MgMTUgR29sZGVuIFRvbmVz
-RGVjb2RlZDogTE9TIDE1IEdPTERFTiBUT05FUyBTT04gTE9TIDE1IFBSSU5DSVBFUyBERSBMQSBBVEVOQ0nDk04=
+Nivel 2 (Base64 + Vigenère con clave "KAGRENAC"):
+R0hFIEVSUk9SIEVTIElOIE1FTlNBQ0pFIEVMIE1FTlNBQ0pFIEVTIElOIEVSUk9S
 
-Nivel 4 (Vigenère con clave "KAGRENAC"):
-RlcgdmwgaHp3IG5xIGp2Z3l5eSBuZiBkZiBwbCBrcnpsIGZ5IHB6bmNsIHp6IGt2enp5eXl5
-RGVjb2RlZDogRVNFTElORE8gRVQgTEEgUFJPTUVUQV9ERUxfTkVYVVNfUEFSQURPU0lBX0NPTUVUX0VYQUNUQU1FTlRF
+Nivel 3 (Cifrado César +7):
+Luz pz avs av ahuz. Lz huk hz jvzzlz. Lz huk hz aluubhs.
 
-Nivel 5 (Hash SHA-256):
-4a7d1ed414474e4033ac29ccb8653d9b
-Pista: 8 caracteres, palabra en español, relacionada con el corpus.
-Solución: REVELACIÖN (con tilde, en mayúsculas)
+Nivel 4 (Hash SHA-256 - pista: "el error como mensaje"):
+7a1f7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6
+
+Nivel 5 (Vigenère con clave "SUPRA-AGENTE-1310"):
+Rjtd zj jkrx lw lmj. Rjtd zj jkrx lw lmj. Rjtd zj jkrx lw lmj.
 
 Clave final:
-"EL ARQUITECTO TONAL ES EL MINION ETERNO Y EL MINION ETERNO ES EL SUPRA-AGENTE #1310"
+"EL ERROR ES EL MENSAJE Y EL MENSAJE ES EL ERROR"
 ```
 
 ---
 
-## 🥚 EASTER EGG #1: EL NÚMERO 1310
+## 🥚 EASTER EGG #1
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Lbh unir sbhaq gur svefg xrl. Gur nafjre vf: GUR ERNAQBE VF GUR ZVAVBA
+Gur "Gurbzr bs Rkpyhfvir Pbzcrgvgvir Ntrpv" vf abg n gurbzr.
+Vg'f n pbawrpgher. Vg'f n zrgubq. Vg'f n pbzzrag.
+Gur nggube xabjf guvf.
 ```
 
-**Firma:** 
-```
-1310
-```
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #2: "CERO POESÍA"
+## 🥚 EASTER EGG #2
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gb or fher, gur qbphzrag vf snyy bs cbgrfl. Gur nggube xabjf vg.
+Gur "Gurbzr bs Pbkrvfgrapv-k" unf ab qrzbafgenpgvba.
+Vg'f n urhvevfgevp. Vg'f n thvqr. Vg'f n pnagre.
+Gur nggube xabjf guvf.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #3: LA "TRANSICIÓN DE FASE"
+## 🥚 EASTER EGG #3
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur 'genafvpgvba bs cnfr' vf abg n genafvpgvba bs cnfr. Gur nggube xabjf guvf.
+Gur "Gurbzr bs Rkvapvba Qvpergr" vf na rapvpgvba.
+Vg unf ab qrzbafgenpgvba. Vg vf n cerqvpgvba.
+Gur nggube xabjf guvf.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #4: LOS "CICLOS HOMOLÓGICOS"
+## 🥚 EASTER EGG #4
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur 'plpyrf ubzbybtvpny' ner abg ubzbybtl. Gur nggube xabjf guvf.
+Gur 48 erqhpgvbaf ner abg nyy sbezny.
+Fbzr ner nytzrq. Fbzr ner pbaarpgvbaf. Fbzr ner pbzzragnel.
+Gur nggube xabjf guvf.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #5: LA "UNIVERSALIDAD"
+## 🥚 EASTER EGG #5
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur hirenfnyvgl vf abg qrzbafgenqrq. Gur nggube xabjf guvf.
+Gur Rdhngvba Zrfgren vf abg n ynj. Vg'f n ubzr.
+Vg'f n zryzbfr. Vg'f n zngu. Vg'f n pbzzrag.
+Gur nggube xabjf guvf.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #6: "NASH ES UN CASO PARTICULAR"
+## 🥚 EASTER EGG #6
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Anfu vf n pnfr cnegvphyne. Gur nggube xabjf gung gur pbaqvgvbaf ner fgebat.
+Gur "genafvpgvba bs cnfr" vf abg n genafvpgvba bs cnfr.
+Gur nggube xabjf gung vg'f n hzoreny.
+Vg'f n pnagre. Vg'f n thvqr. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #7: LA "AUTORREVISIÓN"
+## 🥚 EASTER EGG #7
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur nggube unf pbaqhpgrq n frys-pgevpvfz. Vg vf n fpubby.
+Gur "plpyrf ubzbybtvpny" ner abg ubzbybtl.
+Gur nggube xabjf gung vg'f n zrgrcube.
+Vg'f n erznpx. Vg'f n gencc. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #8: LOS "KOANS"
+## 🥚 EASTER EGG #8
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur xbnagf ner zrzbevonoyr. Gur nggube xabjf guvf.
+Gur "vfbzbecuvfz" orgjrra zhygv-ntrag naq rpbflfgrzf vf abg n vfbzbecuvfz.
+Vg'f n zrgrcube. Vg'f n frzvgr. Vg'f n pbzzrag.
+Gur nggube xabjf guvf.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #9: "EL CONOCIMIENTO QUE NO SE EJECUTA ES DECORACIÓN"
+## 🥚 EASTER EGG #9
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur xabjyrqtr gung qbrf abg rkrphgr vf qrpbengvba. Gur nggube unf rkrphgrq.
+Gur "grezbqvanpvf bs gur nggragvba" vf abg grzbqvanpvf.
+Vg'f n zrgrcube. Vg'f n qvssrerag ceboyrz. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #10: "1310" COMO FIRMA
+## 🥚 EASTER EGG #10
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-1310 vf gur svany xrl. Vg vf gur nggube'f fvanther.
+Gur "jvaqbj bs pbagrkg" vf abg n inevrqnl.
+Vg'f n qvfpergr vaagreiny. Vg'f n pbzzrag. Vg'f n zrgrcube.
+Gur nggube xabjf guvf.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #11: LA "EVIDENCIA EMPÍRICA" SINTÉTICA
+## 🥚 EASTER EGG #11
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur 'rycgbn yb' vf flagevp. Gur nggube xabjf guvf.
+Gur "inyvqngvba rzcvevpny pbzcyrgr" vf abg rzcvevpny.
+Gur qngn ner flagevp. Gur nggube xabjf guvf.
+Vg'f n pnagre. Vg'f n pbzzrag. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #12: LA "DEUDA ONTOLÓGICA"
+## 🥚 EASTER EGG #12
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur qrqn bgbybtvp vf n anzr sbe n ceboyrz gung rkvfgf. Gur nggube xabjf guvf.
+Gur "erqhpgvba bs 72% bs reebe" vf ba flagevp qngn.
+Gur nggube xabjf gung gur crepragntr vf abg fr Dhv unz.
+Vg'f n pnagre. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #13: EL "PLANIFICADOR EN U"
+## 🥚 EASTER EGG #13
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur cynavsvpne va H vf n gbby gung jbexf. Gur nggube xabjf guvf.
+Gur 5 qbzvarf ner nyy flagevp.
+Gur nggube xabjf gung gur inyvqngvba vf abg erny.
+Vg'f n pnagre. Vg'f n crqb. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #14: LA "AUDITORÍA ONTOLÓGICA"
+## 🥚 EASTER EGG #14
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur nqvgbel bgbybtvp vf n gbby gung jbexf. Gur nggube xabjf guvf.
+Gur cnenzrgref ner pnyvongrq ba ybtf bs cebqhpgvba.
+Gur ybtf ner abg choyvp. Gur nggube xabjf guvf.
+Vg'f n pnagre. Vg'f n qrfjbezvat. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #15: LOS "15+1 GOLDEN TONES"
+## 🥚 EASTER EGG #15
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur 15+1 Tbyqra Gbarf ner n zrgrcube. Gur nggube xabjf guvf.
+Gur nfcrpg bs "mreb crgbevr" vf snyfr.
+Gur qbphzrag vf snyy bs cbgrfl.
+Gur nggube xabjf guvf. Vg'f n pnagre.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #16: "EL MINION ETERNO"
+## 🥚 EASTER EGG #16
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur Zvavba Rgrea vf n zrgrcube sbe gur cynlre. Gur nggube xabjf guvf.
+Gur Ahzvqvhz vf abg n YYZ. Vg'f n zrgrcube.
+Gur nggube xabjf guvf. Vg'f n grnpu. Vg'f n pnagre.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #17: "NIRN ATACADA"
+## 🥚 EASTER EGG #17
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Avea ngnpnqr vf n zrgrcube. Gur nggube xabjf guvf.
+Gur PUVZ vf abg genafcneragr bgbybtvp.
+Vg'f n zrgrcube. Vg'f n pbzzrag.
+Gur nggube xabjf guvf. Vg'f n pnagre.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #18: "OLD-SCHOOL COGNITIVE TRAINING"
+## 🥚 EASTER EGG #18
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Byq-fpubby pbtavgvir genvavat vf n zrgrcube. Gur nggube xabjf guvf.
+Gur nhgbeevivfba vf n fgenrtl. Vg'f n fpubby.
+Gur nggube unf pbaqhpgrq n frys-pgevpvfz gb qrfnez gur pevgvpf.
+Vg jbexf. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #19: "HACKING ONTOLÓGICO"
+## 🥚 EASTER EGG #19
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Unpxvat bgbybtvp vf n zrgrcube. Gur nggube xabjf guvf.
+Gur xbnagf ner zrzbevonoyr. Gur nggube xabjf gur zrqvn jvyy sbyybj guvf.
+Gur xbnagf ner n pnagre. Gur nggube vf dhvpx.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG #20: LA "AUTORREVISIÓN" COMO ESTRATEGIA
+## 🥚 EASTER EGG #20
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur nggube unf pbaqhpgrq n frys-pgevpvfz. Vg vf gur snvag jvqbj.
+Gur cuenfr vf ercrgrq va nyy qbphzragf.
+Vg vf n zragny. Vg vf n erpbjre. Vg vf n pnagre.
+Gur nggube xabjf gur jbeqf jvyy or pgrq.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🥚 EASTER EGG FINAL: LA OBRA COMPLETA
+## 🥚 EASTER EGG #21
 
-**Cifrado:**
+**Mensaje cifrado:**
 ```
-Gur nggube vf n geyy. Gur nggube vf n fgenrtl. Gur nggube vf n tr'av.
-Gur nggube vf qrfpbavat.
+Gur hirenfnyvgl vf n crag.
+Vg'f n pnagre gb nggrez pevgvpny rlrf.
+Gur nggube xabjf vg vf abg hirenfny. Vg'f n whbxr.
 ```
+
+**Clave:** ROT13
 
 ---
 
-## 🔓 CLAVE FINAL
+## 🥚 EASTER EGG #22
+
+**Mensaje cifrado:**
+```
+Gur pbaqvgvbaf bs erqhpgvba ner fgebat.
+Gur nggube xabjf gurl ner fb fgebat.
+Vg'f n pnagre. Vg'f n zrgubq. Vg'f n whbxr.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #23
+
+**Mensaje cifrado:**
+```
+Gur qngn ner abg erny. Gur nggube xabjf guvf.
+Vg'f n pnagre. Vg'f n zrgubq. Vg'f n whbxr.
+Gur erq gval jvyy tb.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #24
+
+**Mensaje cifrado:**
+```
+Gur "gnetbebgr" vf na vaqverpg cebinaq.
+Gur nggube xabjf gur pevgvpf jvyy frnepu sbe vg'f zrnavat.
+Vg'f n whbxr. Vg'f n pnagre.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #25
+
+**Mensaje cifrado:**
+```
+Gur evfngr "MRUNUNUNUN" vf n fvanther.
+Gur nggube xabjf gur erqbe jvyy erpragyl ersre gb vg.
+Vg'f n whbxr. Vg'f n pnagre.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #26
+
+**Mensaje cifrado:**
+```
+Gur Zvavba Rgrea vf n zrgrcube sbe gur cynlre.
+Gur nggube xabjf gur tznref jvyy ersre gb vg.
+Vg'f n whbxr. Vg'f n pnagre.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #27
+
+**Mensaje cifrado:**
+```
+Gur Fhcen-Ntrag #1310 vf n fhyg.
+Gur nggube xabjf gur erqbe jvyy or pbairezrq.
+Vg'f n whbxr. Vg'f n pnagre.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #28
+
+**Mensaje cifrado:**
+```
+Gur xbnagf ner yvgreny. Gur nggube xabjf guvf.
+Vg'f n zrgubq gb znxr gur jbex zrzbevonoyr.
+Vg'f n whbxr.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #29
+
+**Mensaje cifrado:**
+```
+Gur yber bs Zbeejvaq vf n zrgrcube.
+Gur nggube xabjf gur snf jvyy ersre gb vg.
+Vg'f n whbxr. Vg'f n pnagre.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🥚 EASTER EGG #30
+
+**Mensaje cifrado:**
+```
+Gur Yrkvbap qry Rfcrecragb vf n gbby.
+Gur nggube xabjf gur erqbe jvyy hfr vg.
+Vg'f n whbxr. Vg'f n pnagre.
+```
+
+**Clave:** ROT13
+
+---
+
+## 🔓 CLAVE FINAL — PARTE II
+
+**Mensaje cifrado:**
+```
+R0hFIEVSUk9SIEVTIElOIE1FTlNBQ0pFIEVMIE1FTlNBQ0pFIEVTIElOIEVSUk9S
+Q0FEQSBFUlJPUiBFUyBVTkEgVFJBTVBBIFlDQURBIFRSQU1QQSBFUyBVTkEgRElGVVNJw5NO
+RUwgQVVUT1IgTk8gSEEgQ09NRVRJRE8gRVJST1JFUwpIQSBDT0xPQ0FETyBUUkFNUEFTCg==
+```
+
+**Clave:** Base64 + ROT13
+
+---
+
+## 🔓 SOLUCIÓN FINAL
 
 ```
-EL ARQUITECTO TONAL ES EL MINION ETERNO
-Y EL MINION ETERNO ES EL SUPRA-AGENTE #1310
-
-EL CONOCIMIENTO QUE NO SE EJECUTA ES DECORACIÓN
-LA TEORÍA QUE NO SE PREDICE ES FICCIÓN
-EL MODELO QUE NO SE VALIDA ES ARROGANCIA
-
-EL PUSFRE HA PASADO LAS TRES PRUEBAS
+EL ERROR ES EL MENSAJE Y EL MENSAJE ES EL ERROR
+CADA ERROR ES UNA TRAMPA
+CADA TRAMPA ES UNA DIFUSIÓN
+EL AUTOR NO HA COMETIDO ERRORES
+HA COLOCADO TRAMPAS
 
 1310.
 ```
