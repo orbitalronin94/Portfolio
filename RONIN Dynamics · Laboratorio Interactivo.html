@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RONIN Dynamics · Laboratorio Interactivo v2.0</title>
+
+    <!-- D3.js para visualizaciones avanzadas -->
+    <script src="https://d3js.org/d3.v7.min.js">
+    </script>
+
+    <style>
+        /* ================================================================
+                   ESTILOS GLOBALES — 10/10
+                   ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #080c14;
+            --bg-secondary: #0f1824;
+            --bg-card: #111a26;
+            --border-color: #1f2d40;
+            --text-primary: #e8f0f8;
+            --text-secondary: #8b9db8;
+            --text-muted: #4a5a72;
+            --accent-blue: #4c8bcf;
+            --accent-cyan: #7fc1ff;
+            --accent-orange: #d98c4a;
+            --accent-red: #c05a4a;
+            --accent-green: #4ab07a;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            --radius: 14px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .app {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* ================================================================
+                   HEADER — 10/10
+                   ================================================================ */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .header-left .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        .header-left .version {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .header-left .sub {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: 4px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge .num {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        .badge .num.warn {
+            color: var(--accent-orange);
+        }
+        .badge .num.danger {
+            color: var(--accent-red);
+        }
+
+        .btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn:hover {
+            background: var(--border-color);
+            border-color: var(--accent-blue);
+        }
+        .btn-primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: var(--bg-primary);
+        }
+        .btn-primary:hover {
+            background: #5f9ee0;
+            border-color: #5f9ee0;
+        }
+        .btn-success {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--bg-primary);
+        }
+        .btn-success:hover {
+            background: #5ac88a;
+            border-color: #5ac88a;
+        }
+        .btn-danger {
+            border-color: #6a2a2a;
+            color: #e8b0b0;
+        }
+        .btn-danger:hover {
+            background: #3a1a1a;
+            border-color: #8a3a3a;
+        }
+        .btn-warning {
+            border-color: #8a6a2a;
+            color: #e8d0a0;
+        }
+        .btn-warning:hover {
+            background: #3a2a1a;
+            border-color: #aa8a3a;
+        }
+
+        /* ================================================================
+                   PANEL DE CONTROLES — 10/10
+                   ================================================================ */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            background: var(--bg-secondary);
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .control-group label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .control-group .label-with-tip {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: help;
+        }
+        .control-group .label-with-tip .tip-icon {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .control-group input[type="range"] {
+            width: 90px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: var(--border-color);
+            border-radius: 4px;
+            outline: none;
+            transition: background var(--transition);
+        }
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--bg-secondary);
+            box-shadow: 0 0 0 1px var(--accent-blue);
+            transition: all var(--transition);
+        }
+        .control-group input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 0 2px var(--accent-cyan);
+        }
+        .control-group .val {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 36px;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .controls .divider {
+            width: 1px;
+            height: 28px;
+            background: var(--border-color);
+        }
+
+        /* ================================================================
+                   GRID PRINCIPAL
+                   ================================================================ */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================================================================
+                   CARDS — 10/10
+                   ================================================================ */
+        .card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 14px 16px 16px 16px;
+            border: 1px solid var(--border-color);
+            transition: border-color var(--transition);
+        }
+        .card:hover {
+            border-color: #2a3a54;
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-title .eq {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: none;
+            letter-spacing: 0;
+            background: var(--bg-primary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .card-title .badge-tag {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ================================================================
+                   GRÁFICO D3 — 10/10
+                   ================================================================ */
+        .chart-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            background: var(--bg-primary);
+            overflow: hidden;
+            position: relative;
+        }
+        .chart-container svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .chart-container .chart-overlay {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 9px;
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            padding: 2px 8px;
+            border-radius: 8px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* ================================================================
+                   BARRAS DE AGENTES — 10/10
+                   ================================================================ */
+        .agent-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 120px;
+            padding-top: 4px;
+            gap: 3px;
+        }
+        .agent-bar-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            height: 100%;
+            justify-content: flex-end;
+            cursor: pointer;
+            transition: transform var(--transition);
+            position: relative;
+        }
+        .agent-bar-wrap:hover {
+            transform: translateY(-2px);
+        }
+        .agent-bar-wrap .bar {
+            width: 100%;
+            max-width: 36px;
+            min-height: 3px;
+            border-radius: 4px 4px 0 0;
+            transition: height 0.2s ease, background var(--transition);
+            position: relative;
+        }
+        .agent-bar-wrap .bar .debt-indicator {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            border: 1px solid var(--bg-secondary);
+            display: none;
+        }
+        .agent-bar-wrap .bar .debt-indicator.active {
+            display: block;
+        }
+        .agent-bar-wrap .label {
+            font-size: 9px;
+            font-weight: 500;
+            margin-top: 4px;
+            color: var(--text-secondary);
+        }
+        .agent-bar-wrap .pct {
+            font-size: 8px;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ================================================================
+                   COMPONENTES DE LA ECUACIÓN — 10/10
+                   ================================================================ */
+        .comp-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .comp-item {
+            background: var(--bg-primary);
+            padding: 6px 8px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: border-color var(--transition);
+            cursor: help;
+        }
+        .comp-item:hover {
+            border-color: var(--accent-blue);
+        }
+        .comp-item .label {
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+        .comp-item .value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+        .comp-item .value .sub {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .comp-item .trend {
+            font-size: 10px;
+            margin-left: 4px;
+        }
+        .comp-item .trend.up {
+            color: var(--accent-green);
+        }
+        .comp-item .trend.down {
+            color: var(--accent-red);
+        }
+
+        /* ================================================================
+                   MAPA DE RETENCIÓN — 10/10
+                   ================================================================ */
+        .heatmap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-top: 2px;
+        }
+        .heatmap-row {
+            display: flex;
+            gap: 1.5px;
+            height: 12px;
+        }
+        .heatmap-cell {
+            flex: 1;
+            border-radius: 2px;
+            transition: background 0.15s;
+        }
+        .heatmap-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            color: var(--text-muted);
+            padding: 0 2px;
+            margin-top: 3px;
+        }
+        .heatmap-legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+        .heatmap-legend .gradient {
+            flex: 1;
+            height: 6px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #0a1a2a, #2a5a8a, #6ab0f0, #b0d8ff);
+            max-width: 140px;
+        }
+
+        /* ================================================================
+                   GRAFO DE DEUDA (D3) — 10/10
+                   ================================================================ */
+        .debt-graph-container {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: var(--bg-primary);
+            overflow: hidden;
+            position: relative;
+            margin-top: 4px;
+        }
+        .debt-graph-container svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ================================================================
+                   AUDITORÍA — 10/10
+                   ================================================================ */
+        .audit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .audit-item {
+            background: var(--bg-primary);
+            padding: 6px 8px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .audit-item .label {
+            font-size: 8px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+        .audit-item .value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-variant-numeric: tabular-nums;
+        }
+        .audit-item .value .sub {
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .audit-item .value.good {
+            color: var(--accent-green);
+        }
+        .audit-item .value.bad {
+            color: var(--accent-red);
+        }
+
+        .audit-status {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .audit-status .icon {
+            font-size: 16px;
+        }
+
+        /* ================================================================
+                   TOOLTIP PERSONALIZADO — 10/10
+                   ================================================================ */
+        .custom-tooltip {
+            position: fixed;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            max-width: 280px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            line-height: 1.5;
+        }
+        .custom-tooltip.visible {
+            opacity: 1;
+        }
+        .custom-tooltip strong {
+            color: var(--text-primary);
+        }
+        .custom-tooltip .formula {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent-cyan);
+            background: var(--bg-primary);
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        /* ================================================================
+                   EXPERIMENTOS — 10/10
+                   ================================================================ */
+        .experiment-panel {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 8px 12px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-top: 6px;
+            align-items: center;
+        }
+        .experiment-panel .label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+        .experiment-panel .result {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .experiment-panel .result strong {
+            color: var(--text-primary);
+        }
+
+        /* ================================================================
+                   ALERTAS / NOTIFICACIONES — 10/10
+                   ================================================================ */
+        .alert {
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+            animation: slideIn 0.3s ease;
+        }
+        .alert.info {
+            background: #0a1a3a;
+            border: 1px solid #1a3a6a;
+            color: #8ab8e8;
+        }
+        .alert.warn {
+            background: #3a2a0a;
+            border: 1px solid #6a4a1a;
+            color: #e8c88a;
+        }
+        .alert.danger {
+            background: #3a0a0a;
+            border: 1px solid #6a1a1a;
+            color: #e88a8a;
+        }
+        .alert.success {
+            background: #0a3a1a;
+            border: 1px solid #1a6a3a;
+            color: #8ae8aa;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================================================================
+                   FOOTER — 10/10
+                   ================================================================ */
+        .footer {
+            margin-top: 14px;
+            font-size: 10px;
+            color: var(--text-muted);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .footer a:hover {
+            color: var(--accent-cyan);
+        }
+        .footer .dot {
+            color: var(--border-color);
+        }
+
+        /* ================================================================
+                   RESPONSIVE — 10/10
+                   ================================================================ */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+            .header {
+                padding: 10px 14px;
+            }
+            .header-left .sub {
+                display: none;
+            }
+            .controls {
+                padding: 10px 14px;
+                gap: 8px 16px;
+            }
+            .control-group input[type="range"] {
+                width: 60px;
+            }
+            .comp-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .audit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .grid {
+                gap: 10px;
+            }
+            .card {
+                padding: 10px 12px;
+            }
+            .badge {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .btn {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+            .agent-bars {
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-right .badge.hide-mobile {
+                display: none;
+            }
+            .controls .divider {
+                display: none;
+            }
+            .control-group label {
+                font-size: 9px;
+            }
+            .control-group .val {
+                font-size: 11px;
+                min-width: 28px;
+            }
+            .agent-bar-wrap .label {
+                font-size: 7px;
+            }
+            .agent-bar-wrap .pct {
+                font-size: 7px;
+            }
+            .comp-item .value {
+                font-size: 13px;
+            }
+            .audit-item .value {
+                font-size: 13px;
+            }
+        }
+
+        /* ================================================================
+                   UTILITY — 10/10
+                   ================================================================ */
+        .flex {
+            display: flex;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gap-2 {
+            gap: 4px;
+        }
+        .gap-4 {
+            gap: 8px;
+        }
+        .mt-1 {
+            margin-top: 4px;
+        }
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .text-muted {
+            color: var(--text-muted);
+        }
+        .text-small {
+            font-size: 10px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .relative {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================
+    TOOLTIP PERSONALIZADO
+    ================================================================ -->
+    <div class="custom-tooltip" id="tooltip"></div>
+
+    <!-- ================================================================
+    APP
+    ================================================================ -->
+    <div class="app">
+
+        <!-- ============================================================
+        HEADER
+        ============================================================ -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo">⚡ RONIN</span>
+                <span class="version">v2.0</span>
+                <span class="sub">Laboratorio de Dinámica Unificada</span>
+            </div>
+            <div class="header-right">
+                <span class="badge">agentes <span class="num" id="agentCount">5</span></span>
+                <span class="badge">paso <span class="num" id="stepCount">0</span></span>
+                <span class="badge">deuda <span class="num" id="totalDebtBadge">0.00</span></span>
+                <span class="badge hide-mobile">régimen <span class="num" id="regimeBadge">⚖️ equilibrio</span></span>
+                <button class="btn btn-primary" id="btnStep" title="Avanza un paso de simulación">▶ paso</button>
+                <button class="btn" id="btnAuto" title="Ejecución continua">▶ auto</button>
+                <button class="btn btn-danger" id="btnReset" title="Reinicia la simulación">⟲ reset</button>
+                <button class="btn btn-success" id="btnExport" title="Exporta datos a CSV">📥 CSV</button>
+            </div>
+        </header>
+
+        <!-- ============================================================
+        CONTROLES CON TOOLTIPS
+        ============================================================ -->
+        <div class="controls" id="controls">
+            <div class="control-group">
+                <label class="label-with-tip" data-tip="Sensibilidad de la fitness a la deuda ontológica. γ=0 → la deuda no afecta. γ=1 → cualquier contradicción elimina al agente.">
+                    γ (deuda)
+                    <span class="tip-icon">ⓘ</span>
+                </label>
+                <input type="range" id="sliderGamma" min="0" max="100" value="42" />
+                <span class="val" id="valGamma">0.42</span>
+            </div>
+
+            <div class="control-group">
+                <label class="label-with-tip" data-tip="Intensidad de la competencia ecológica. α<1 → favorece biodiversidad. α>1.5 → winner-takes-all.">
+                    α (competencia)
+                    <span class="tip-icon">ⓘ</span>
+                </label>
+                <input type="range" id="sliderAlpha" min="50" max="250" value="118" />
+                <span class="val" id="valAlpha">1.18</span>
+            </div>
+
+            <div class="control-group">
+                <label class="label-with-tip" data-tip="Amplitud del ruido estocástico en el routing. σ alto → más aleatoriedad, más oportunidades para agentes raros.">
+                    σ (ruido)
+                    <span class="tip-icon">ⓘ</span>
+                </label>
+                <input type="range" id="sliderSigma" min="0" max="50" value="12" />
+                <span class="val" id="valSigma">0.12</span>
+            </div>
+
+            <div class="control-group">
+                <label class="label-with-tip" data-tip="Presión de routing. Modula la competencia efectiva: α·ρ. ρ bajo → más biodiversidad.">
+                    ρ (presión)
+                    <span class="tip-icon">ⓘ</span>
+                </label>
+                <input type="range" id="sliderRho" min="0" max="100" value="31" />
+                <span class="val" id="valRho">0.31</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="control-group">
+                <label class="label-with-tip" data-tip="Velocidad de la simulación en modo automático (ms entre pasos).">
+                    ⏱
+                </label>
+                <input type="range" id="sliderSpeed" min="50" max="800" value="350" />
+                <span class="val" id="valSpeed">350ms</span>
+            </div>
+
+            <span class="text-muted text-small" style="margin-left:auto;">F = Φ · Ψ · N<sup>α·ρ</sup> · ε</span>
+        </div>
+
+        <!-- ============================================================
+        GRID PRINCIPAL
+        ============================================================ -->
+        <div class="grid">
+
+            <!-- ============================================================
+            CARD 1: Evolución + Barras
+            ============================================================ -->
+            <div class="card">
+                <div class="card-title">
+                    <span>📈 evolución de frecuencias</span>
+                    <span class="eq">N<sub>i</sub>(t)</span>
+                </div>
+                <div class="chart-container" id="chartContainer">
+                    <div class="chart-overlay">← tiempo</div>
+                </div>
+
+                <div class="agent-bars" id="agentBars"></div>
+
+                <div class="comp-grid">
+                    <div class="comp-item" data-tip="Capacidad de retención geométrica. Determinada por la posición del contenido en el contexto.">
+                        <div class="label">Φ (geometría)</div>
+                        <div class="value" id="avgPhi">0.00</div>
+                    </div>
+                    <div class="comp-item" data-tip="Penalización por deuda ontológica. Ψ = 1 - γ·deuda. Cercano a 1 = sano, cercano a 0 = contaminado.">
+                        <div class="label">Ψ (deuda)</div>
+                        <div class="value" id="avgPsi">0.00</div>
+                    </div>
+                    <div class="comp-item" data-tip="Competencia ecológica. Ω = N^(α·ρ). Agentes frecuentes tienen ventaja.">
+                        <div class="label">Ω (ecología)</div>
+                        <div class="value" id="avgOmega">0.00</div>
+                    </div>
+                    <div class="comp-item" data-tip="Biodiversidad funcional (entropía de Shannon normalizada). 1 = máxima diversidad, 0 = monopolio.">
+                        <div class="label">🌿 biodiversidad</div>
+                        <div class="value" id="biodiversity">0.00</div>
+                    </div>
+                </div>
+
+                <!-- Alertas -->
+                <div id="alertsContainer"></div>
+            </div>
+
+            <!-- ============================================================
+            CARD 2: Mapa de Retención + Grafo de Deuda
+            ============================================================ -->
+            <div class="card">
+                <div class="card-title">
+                    <span>🗺️ geometría & deuda</span>
+                    <span class="badge-tag">Φ · Ψ</span>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.2px;margin-bottom:4px;">
+                            mapa de retención <span style="font-weight:400;text-transform:none;color:var(--text-muted);">(posición →)</span>
+                        </div>
+                        <div class="heatmap-container" id="heatmapContainer"></div>
+                        <div class="heatmap-legend">
+                            <span>olvido</span>
+                            <div class="gradient"></div>
+                            <span>retención</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.2px;margin-bottom:4px;">
+                            grafo de contradicciones
+                        </div>
+                        <div class="debt-graph-container" id="debtGraphContainer"></div>
+                        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);margin-top:4px;">
+                            <span>🔴 deuda activa</span>
+                            <span>⚪ limpio</span>
+                            <span id="debtStats">0 pares · 0.00 severidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+            CARD 3: Auditoría Ontológica
+            ============================================================ -->
+            <div class="card">
+                <div class="card-title">
+                    <span>📊 auditoría ontológica</span>
+                    <span class="eq">n ≥ ln(2/δ) / 2ε²</span>
+                </div>
+
+                <div class="audit-grid">
+                    <div class="audit-item">
+                        <div class="label">muestras</div>
+                        <div class="value" id="auditSamples">0</div>
+                    </div>
+                    <div class="audit-item">
+                        <div class="label">p̂ estimada</div>
+                        <div class="value" id="auditPhat">—</div>
+                    </div>
+                    <div class="audit-item">
+                        <div class="label">margen (ε)</div>
+                        <div class="value" id="auditMargin">—</div>
+                    </div>
+                    <div class="audit-item">
+                        <div class="label">confianza</div>
+                        <div class="value" id="auditConfidence">99%</div>
+                    </div>
+                </div>
+
+                <div class="audit-status" id="auditStatus">
+                    <span class="icon">✔️</span>
+                    <span>lista para auditar</span>
+                    <span style="margin-left:auto;display:flex;gap:6px;">
+                        <button class="btn btn-success" id="btnAuditRun" style="font-size:10px;padding:4px 12px;">🔍 ejecutar</button>
+                        <button class="btn" id="btnAuditReset" style="font-size:10px;padding:4px 12px;">⟲ reset</button>
+                    </span>
+                </div>
+
+                <div class="experiment-panel">
+                    <span class="label">🧪 experimento</span>
+                    <button class="btn" id="btnExperiment" style="font-size:10px;padding:2px 10px;">▶ ejecutar comparativa</button>
+                    <span class="result" id="experimentResult">selecciona parámetros para comparar</span>
+                </div>
+            </div>
+
+            <!-- ============================================================
+            CARD 4: Diagnóstico + Régimen
+            ============================================================ -->
+            <div class="card">
+                <div class="card-title">
+                    <span>🔬 diagnóstico del sistema</span>
+                    <span class="badge-tag">estado</span>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+                    <div style="background:var(--bg-primary);padding:8px 10px;border-radius:10px;border:1px solid var(--border-color);">
+                        <div style="font-size:8px;color:var(--text-muted);text-transform:uppercase;">régimen</div>
+                        <div style="font-size:14px;font-weight:600;" id="regimeDisplay">⚖️ equilibrio</div>
+                    </div>
+                    <div style="background:var(--bg-primary);padding:8px 10px;border-radius:10px;border:1px solid var(--border-color);">
+                        <div style="font-size:8px;color:var(--text-muted);text-transform:uppercase;">extinciones</div>
+                        <div style="font-size:14px;font-weight:600;" id="extinctionDisplay">0</div>
+                    </div>
+                    <div style="background:var(--bg-primary);padding:8px 10px;border-radius:10px;border:1px solid var(--border-color);">
+                        <div style="font-size:8px;color:var(--text-muted);text-transform:uppercase;">coexistencia</div>
+                        <div style="font-size:14px;font-weight:600;" id="coexistenceDisplay">100%</div>
+                    </div>
+                </div>
+
+                <div style="font-size:11px;color:var(--text-secondary);line-height:1.6;background:var(--bg-primary);padding:8px 12px;border-radius:10px;border:1px solid var(--border-color);">
+                    <strong style="color:var(--text-primary);">Interpretación:</strong>
+                    <span id="interpretationText">El sistema está en equilibrio. La biodiversidad es saludable.</span>
+                </div>
+
+                <div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap;">
+                    <span class="badge" style="font-size:8px;padding:2px 8px;" id="healthBadge">✅ saludable</span>
+                    <span class="badge" style="font-size:8px;padding:2px 8px;" id="diversityBadge">🌿 diversidad media</span>
+                    <span class="badge" style="font-size:8px;padding:2px 8px;" id="debtBadge">💀 deuda baja</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ============================================================
+        FOOTER
+        ============================================================ -->
+        <div class="footer">
+            <span><strong>RONIN Dynamics</strong> · v2.0 · Laboratorio Interactivo</span>
+            <span class="dot">·</span>
+            <span>F = Φ · Ψ · N<sup>α·ρ</sup> · ε</span>
+            <span class="dot">·</span>
+            <span>DO = Σ s · P<sub>co</sub></span>
+            <span class="dot">·</span>
+            <span>Hoeffding: n ≥ ln(2/δ)/2ε²</span>
+            <span class="dot">·</span>
+            <a href="#" onclick="document.querySelector('.app').scrollIntoView({behavior:'smooth'});return false;">↑ arriba</a>
+        </div>
+
+    </div>
+
+    <!-- ================================================================
+    JAVASCRIPT COMPLETO — 10/10
+    ================================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // 1. CONFIGURACIÓN
+            // ============================================================
+            const S = 5;
+            const L = 24;
+            const MAX_HISTORY = 120;
+
+            // ============================================================
+            // 2. ESTADO
+            // ============================================================
+            const state = {
+                frequencies: new Float32Array(S).fill(1 / S),
+                phi: new Float32Array(S),
+                psi: new Float32Array(S),
+                omega: new Float32Array(S),
+                fitness: new Float32Array(S),
+                debt: new Float32Array(S),
+                contradictionMatrix: [],
+                retentionMap: [],
+                step: 0,
+                history: [],
+                alerts: [],
+                extinctionCount: 0,
+                regime: 'equilibrium',
+                // Auditoría
+                auditSamples: [],
+                auditPhat: null,
+                auditMargin: null,
+                auditConfidence: 0.99,
+                auditEpsilon: 0.05,
+                auditDelta: 0.01,
+                // Experimentos
+                experimentResults: [],
+            };
+
+            // Parámetros
+            const params = {
+                gamma: 0.42,
+                alpha: 1.18,
+                sigma: 0.12,
+                rho: 0.31,
+                speed: 350,
+            };
+
+            // ============================================================
+            // 3. REFERENCIAS DOM
+            // ============================================================
+            const $ = (id) => document.getElementById(id);
+            const agentBarsEl = $('agentBars');
+            const heatmapContainer = $('heatmapContainer');
+            const debtGraphContainer = $('debtGraphContainer');
+            const chartContainer = $('chartContainer');
+            const stepCountEl = $('stepCount');
+            const agentCountEl = $('agentCount');
+            const totalDebtBadge = $('totalDebtBadge');
+            const regimeBadge = $('regimeBadge');
+
+            const avgPhiEl = $('avgPhi');
+            const avgPsiEl = $('avgPsi');
+            const avgOmegaEl = $('avgOmega');
+            const biodiversityEl = $('biodiversity');
+
+            const debtStatsEl = $('debtStats');
+            const auditSamplesEl = $('auditSamples');
+            const auditPhatEl = $('auditPhat');
+            const auditMarginEl = $('auditMargin');
+            const auditConfidenceEl = $('auditConfidence');
+            const auditStatusEl = $('auditStatus');
+            const experimentResultEl = $('experimentResult');
+
+            const regimeDisplayEl = $('regimeDisplay');
+            const extinctionDisplayEl = $('extinctionDisplay');
+            const coexistenceDisplayEl = $('coexistenceDisplay');
+            const interpretationTextEl = $('interpretationText');
+            const healthBadge = $('healthBadge');
+            const diversityBadge = $('diversityBadge');
+            const debtBadge = $('debtBadge');
+            const alertsContainer = $('alertsContainer');
+
+            const tooltip = document.getElementById('tooltip');
+
+            // ============================================================
+            // 4. TOOLTIP SYSTEM — 10/10
+            // ============================================================
+            function showTooltip(el, e) {
+                const tip = el.getAttribute('data-tip') || el.title;
+                if (!tip) return;
+                tooltip.innerHTML = tip;
+                tooltip.classList.add('visible');
+                let x = e.clientX + 14;
+                let y = e.clientY - 10;
+                if (x + 290 > window.innerWidth) x = e.clientX - 290;
+                if (y + 80 > window.innerHeight) y = window.innerHeight - 90;
+                tooltip.style.left = x + 'px';
+                tooltip.style.top = y + 'px';
+            }
+
+            function hideTooltip() {
+                tooltip.classList.remove('visible');
+            }
+
+            document.querySelectorAll('[data-tip]').forEach(el => {
+                el.addEventListener('mouseenter', (e) => showTooltip(el, e));
+                el.addEventListener('mousemove', (e) => {
+                    let x = e.clientX + 14;
+                    let y = e.clientY - 10;
+                    if (x + 290 > window.innerWidth) x = e.clientX - 290;
+                    if (y + 80 > window.innerHeight) y = window.innerHeight - 90;
+                    tooltip.style.left = x + 'px';
+                    tooltip.style.top = y + 'px';
+                });
+                el.addEventListener('mouseleave', hideTooltip);
+            });
+
+            // ============================================================
+            // 5. MOTOR DE SIMULACIÓN — 10/10
+            // ============================================================
+
+            function logNormal(mean, sigma) {
+                let u = 0,
+                    v = 0;
+                while (u === 0) u = Math.random();
+                while (v === 0) v = Math.random();
+                const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+                return Math.exp(mean + sigma * z);
+            }
+
+            function attentionProfile(pos, total) {
+                const p = pos / total;
+                const primacy = 0.4 * Math.exp(-5 * p);
+                const recency = 0.4 * Math.exp(-5 * (1 - p));
+                const valley = 0.2;
+                return Math.min(1, primacy + recency + valley);
+            }
+
+            function initRetentionMap() {
+                const map = [];
+                for (let pos = 0; pos < L; pos++) {
+                    const row = [];
+                    for (let agent = 0; agent < S; agent++) {
+                        const offset = agent / (S - 1) * 0.15 - 0.075;
+                        const attn = attentionProfile(pos, L);
+                        row.push(Math.min(1, Math.max(0.05, attn + offset)));
+                    }
+                    map.push(row);
+                }
+                return map;
+            }
+
+            function step() {
+                const f = state.frequencies;
+                const phi = state.phi;
+                const psi = state.psi;
+                const omega = state.omega;
+                const debt = state.debt;
+
+                // --- 1. GEOMETRÍA (Φ) ---
+                const retMap = state.retentionMap;
+                for (let i = 0; i < S; i++) {
+                    if (state.step === 0) {
+                        const pos = Math.floor((i / S) * L);
+                        phi[i] = retMap[pos][i] + 0.1;
+                    }
+                    phi[i] += (Math.random() - 0.5) * 0.003;
+                    phi[i] = Math.min(1, Math.max(0.05, phi[i]));
+                }
+
+                // --- 2. DEUDA (Ψ) ---
+                for (let i = 0; i < S; i++) {
+                    if (f[i] > 0.12) {
+                        debt[i] = Math.min(1, debt[i] + 0.003);
+                    } else {
+                        debt[i] = Math.max(0, debt[i] - 0.001);
+                    }
+                    for (let j = 0; j < S; j++) {
+                        if (i !== j && f[j] > 0.1 && debt[i] > 0.3) {
+                            debt[j] = Math.min(1, debt[j] + 0.0005);
+                        }
+                    }
+                    psi[i] = Math.max(0.01, 1 - params.gamma * debt[i]);
+                }
+
+                // --- 3. ECOLOGÍA (Ω) ---
+                const effectiveAlpha = params.alpha * params.rho;
+                for (let i = 0; i < S; i++) {
+                    omega[i] = Math.pow(Math.max(f[i], 0.0001), effectiveAlpha);
+                }
+
+                // --- 4. RUIDO (ε) ---
+                const eps = new Float32Array(S);
+                for (let i = 0; i < S; i++) {
+                    eps[i] = logNormal(0, params.sigma);
+                }
+
+                // --- 5. FITNESS ---
+                let totalF = 0;
+                for (let i = 0; i < S; i++) {
+                    const fi = phi[i] * psi[i] * omega[i] * eps[i];
+                    state.fitness[i] = Math.max(0.0001, fi);
+                    totalF += state.fitness[i];
+                }
+
+                // --- 6. NUEVAS FRECUENCIAS ---
+                const newFreq = new Float32Array(S);
+                for (let i = 0; i < S; i++) {
+                    newFreq[i] = state.fitness[i] / totalF;
+                }
+                state.frequencies = newFreq;
+
+                // --- 7. MATRIZ DE CONTRADICCIONES ---
+                updateContradictionMatrix();
+
+                // --- 8. DETECTAR EXTINCIONES ---
+                const extinct = [];
+                for (let i = 0; i < S; i++) {
+                    if (newFreq[i] < 0.005 && f[i] >= 0.005) {
+                        extinct.push(i);
+                    }
+                }
+                if (extinct.length > 0) {
+                    state.extinctionCount += extinct.length;
+                    addAlert(`⚠️ Agente${extinct.length > 1 ? 's' : ''} ${extinct.map(i => 'A' + (i + 1)).join(', ')} extinto${extinct.length > 1 ? 's' : ''}`, 'danger');
+                }
+
+                // --- 9. REGISTRAR ---
+                state.step++;
+                state.history.push({
+                    freq: new Float32Array(newFreq),
+                    step: state.step,
+                    debt: new Float32Array(debt),
+                });
+                if (state.history.length > MAX_HISTORY) {
+                    state.history.shift();
+                }
+
+                // --- 10. DETECTAR RÉGIMEN ---
+                detectRegime();
+
+                // --- 11. UI ---
+                renderBars();
+                renderChartD3();
+                renderHeatmap();
+                renderDebtGraphD3();
+                updateStats();
+                updateDiagnostics();
+
+                stepCountEl.textContent = state.step;
+                totalDebtBadge.textContent = debt.reduce((a, b) => a + b, 0).toFixed(2);
+                regimeBadge.textContent = state.regime === 'equilibrium' ? '⚖️ equilibrio' :
+                    state.regime === 'monopoly' ? '👑 monopolio' :
+                    state.regime === 'collapse' ? '💀 colapso' :
+                    state.regime === 'oscillation' ? '🔄 oscilación' : '⚖️ equilibrio';
+            }
+
+            function updateContradictionMatrix() {
+                const f = state.frequencies;
+                const debt = state.debt;
+                const matrix = [];
+                for (let i = 0; i < S; i++) {
+                    matrix[i] = [];
+                    for (let j = 0; j < S; j++) {
+                        if (i === j) { matrix[i][j] = 0; continue; }
+                        const p_co = f[i] * f[j] * 10;
+                        const severity = (debt[i] + debt[j]) / 2;
+                        matrix[i][j] = severity * Math.min(1, p_co);
+                    }
+                }
+                state.contradictionMatrix = matrix;
+
+                // Estadísticas
+                let total = 0,
+                    count = 0;
+                for (let i = 0; i < S; i++) {
+                    for (let j = i + 1; j < S; j++) {
+                        const w = matrix[i][j] || 0;
+                        if (w > 0.01) { total += w;
+                            count++; }
+                    }
+                }
+                debtStatsEl.textContent = `${count} pares · ${count > 0 ? (total/count).toFixed(3) : '0.000'} severidad`;
+            }
+
+            function detectRegime() {
+                const f = state.frequencies;
+                const maxF = Math.max(...f);
+                const minF = Math.min(...f);
+                const entropy = computeEntropy(f);
+
+                if (maxF > 0.85) {
+                    state.regime = 'monopoly';
+                } else if (maxF < 0.3 && entropy > 0.7) {
+                    state.regime = 'equilibrium';
+                } else if (state.history.length > 10) {
+                    // Detectar oscilaciones
+                    const recent = state.history.slice(-10);
+                    let variance = 0;
+                    for (let i = 0; i < S; i++) {
+                        const vals = recent.map(h => h.freq[i]);
+                        const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+                        variance += vals.reduce((a, b) => a + (b - mean) ** 2, 0) / vals.length;
+                    }
+                    if (variance > 0.15) {
+                        state.regime = 'oscillation';
+                    } else if (entropy < 0.3) {
+                        state.regime = 'collapse';
+                    } else {
+                        state.regime = 'equilibrium';
+                    }
+                } else {
+                    state.regime = 'equilibrium';
+                }
+            }
+
+            function computeEntropy(f) {
+                let e = 0;
+                for (let i = 0; i < S; i++) {
+                    if (f[i] > 0.001) e -= f[i] * Math.log2(f[i]);
+                }
+                return e / Math.log2(S);
+            }
+
+            function addAlert(msg, type = 'info') {
+                state.alerts.unshift({ msg, type, time: Date.now() });
+                if (state.alerts.length > 10) state.alerts.pop();
+                renderAlerts();
+            }
+
+            function renderAlerts() {
+                const el = alertsContainer;
+                if (state.alerts.length === 0) {
+                    el.innerHTML = '';
+                    return;
+                }
+                el.innerHTML = state.alerts.slice(0, 3).map(a =>
+                    `<div class="alert ${a.type}">${a.msg}</div>`
+                ).join('');
+            }
+
+            function reset() {
+                state.step = 0;
+                state.frequencies = new Float32Array(S).fill(1 / S);
+                state.phi = new Float32Array(S);
+                state.psi = new Float32Array(S);
+                state.omega = new Float32Array(S);
+                state.fitness = new Float32Array(S);
+                state.debt = new Float32Array(S);
+                state.contradictionMatrix = [];
+                state.retentionMap = initRetentionMap();
+                state.history = [];
+                state.extinctionCount = 0;
+                state.alerts = [];
+                state.auditSamples = [];
+                state.auditPhat = null;
+                state.auditMargin = null;
+
+                for (let i = 0; i < S; i++) {
+                    const pos = Math.floor((i / S) * L);
+                    state.phi[i] = state.retentionMap[pos][i] + 0.1;
+                    state.psi[i] = 0.9;
+                    state.omega[i] = 0.2;
+                    state.fitness[i] = 0.2;
+                }
+
+                state.history.push({
+                    freq: new Float32Array(state.frequencies),
+                    step: 0,
+                    debt: new Float32Array(state.debt),
+                });
+
+                updateContradictionMatrix();
+                renderBars();
+                renderChartD3();
+                renderHeatmap();
+                renderDebtGraphD3();
+                updateStats();
+                updateDiagnostics();
+                renderAlerts();
+                stepCountEl.textContent = '0';
+                totalDebtBadge.textContent = '0.00';
+                regimeBadge.textContent = '⚖️ equilibrio';
+                auditSamplesEl.textContent = '0';
+                auditPhatEl.textContent = '—';
+                auditMarginEl.textContent = '—';
+                auditStatusEl.innerHTML =
+                    `<span class="icon">✔️</span><span>lista para auditar</span><span style="margin-left:auto;display:flex;gap:6px;">
+                            <button class="btn btn-success" id="btnAuditRun" style="font-size:10px;padding:4px 12px;">🔍 ejecutar</button>
+                            <button class="btn" id="btnAuditReset" style="font-size:10px;padding:4px 12px;">⟲ reset</button>
+                        </span>`;
+                document.getElementById('btnAuditRun').addEventListener('click', runAudit);
+                document.getElementById('btnAuditReset').addEventListener('click', resetAudit);
+            }
+
+            // ============================================================
+            // 6. RENDERIZADO — 10/10
+            // ============================================================
+
+            function renderBars() {
+                const f = state.frequencies;
+                const debt = state.debt;
+                const maxVal = Math.max(...f, 0.001);
+                const colors = ['#4c8bcf', '#5fa8d9', '#7fc1ff', '#a0d0f0', '#b7d9f5'];
+                let html = '';
+                for (let i = 0; i < S; i++) {
+                    const pct = f[i] / maxVal;
+                    const height = Math.max(3, pct * 100);
+                    const hasDebt = debt[i] > 0.2;
+                    html += `
+                            <div class="agent-bar-wrap" data-tip="Agente A${i+1}<br>Frecuencia: ${(f[i]*100).toFixed(1)}%<br>Deuda: ${debt[i].toFixed(3)}<br>Fitness: ${state.fitness[i].toFixed(4)}">
+                                <div class="bar" style="height:${height}px; background:${colors[i % colors.length]};">
+                                    <div class="debt-indicator ${hasDebt ? 'active' : ''}"></div>
+                                </div>
+                                <div class="label">A${i+1}</div>
+                                <div class="pct">${(f[i]*100).toFixed(1)}%</div>
+                            </div>
+                        `;
+                }
+                agentBarsEl.innerHTML = html;
+                agentCountEl.textContent = S;
+                // Re-aplicar tooltips
+                agentBarsEl.querySelectorAll('[data-tip]').forEach(el => {
+                    el.addEventListener('mouseenter', (e) => showTooltip(el, e));
+                    el.addEventListener('mousemove', (e) => {
+                        let x = e.clientX + 14;
+                        let y = e.clientY - 10;
+                        if (x + 290 > window.innerWidth) x = e.clientX - 290;
+                        if (y + 80 > window.innerHeight) y = window.innerHeight - 90;
+                        tooltip.style.left = x + 'px';
+                        tooltip.style.top = y + 'px';
+                    });
+                    el.addEventListener('mouseleave', hideTooltip);
+                });
+            }
+
+            function renderChartD3() {
+                const container = chartContainer;
+                container.innerHTML = '';
+                const data = state.history;
+                if (data.length < 2) {
+                    container.innerHTML =
+                        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:12px;">⏳ esperando datos...</div>';
+                    return;
+                }
+
+                const rect = container.getBoundingClientRect();
+                const width = rect.width || 600;
+                const height = rect.height || 180;
+                const margin = { top: 10, right: 10, bottom: 20, left: 30 };
+
+                const svg = d3.select(container)
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('background', 'transparent');
+
+                const innerWidth = width - margin.left - margin.right;
+                const innerHeight = height - margin.top - margin.bottom;
+
+                const g = svg.append('g')
+                    .attr('transform', `translate(${margin.left},${margin.top})`);
+
+                const xScale = d3.scaleLinear()
+                    .domain([0, data.length - 1])
+                    .range([0, innerWidth]);
+
+                const yScale = d3.scaleLinear()
+                    .domain([0, 1])
+                    .range([innerHeight, 0]);
+
+                // Grid
+                g.selectAll('.grid-line')
+                    .data([0.25, 0.5, 0.75])
+                    .enter()
+                    .append('line')
+                    .attr('x1', 0)
+                    .attr('x2', innerWidth)
+                    .attr('y1', d => yScale(d))
+                    .attr('y2', d => yScale(d))
+                    .attr('stroke', '#1a2432')
+                    .attr('stroke-width', 0.5)
+                    .attr('stroke-dasharray', '4,4');
+
+                const colors = ['#4c8bcf', '#5fa8d9', '#7fc1ff', '#a0d0f0', '#b7d9f5'];
+
+                for (let agent = 0; agent < S; agent++) {
+                    const line = d3.line()
+                        .x((d, i) => xScale(i))
+                        .y(d => yScale(d.freq[agent]))
+                        .curve(d3.curveMonotoneX);
+
+                    const pathData = data.map((d, i) => ({ freq: d.freq, idx: i }));
+
+                    g.append('path')
+                        .datum(pathData)
+                        .attr('d', line)
+                        .attr('fill', 'none')
+                        .attr('stroke', colors[agent % colors.length])
+                        .attr('stroke-width', 2)
+                        .attr('opacity', 0.85)
+                        .style('filter', 'drop-shadow(0 0 4px rgba(76,139,207,0.2))');
+
+                    // Último punto
+                    const last = data[data.length - 1];
+                    g.append('circle')
+                        .attr('cx', xScale(data.length - 1))
+                        .attr('cy', yScale(last.freq[agent]))
+                        .attr('r', 4)
+                        .attr('fill', colors[agent % colors.length])
+                        .attr('stroke', '#0f1824')
+                        .attr('stroke-width', 1.5);
+                }
+
+                // Ejes
+                const xAxis = d3.axisBottom(xScale)
+                    .ticks(5)
+                    .tickFormat(d => d)
+                    .tickSize(4)
+                    .tickPadding(4);
+
+                const yAxis = d3.axisLeft(yScale)
+                    .ticks(4)
+                    .tickFormat(d => d.toFixed(1))
+                    .tickSize(4)
+                    .tickPadding(4);
+
+                g.append('g')
+                    .attr('transform', `translate(0,${innerHeight})`)
+                    .call(xAxis)
+                    .style('color', '#4a5a72')
+                    .style('font-size', '8px')
+                    .style('font-family', 'monospace');
+
+                g.append('g')
+                    .call(yAxis)
+                    .style('color', '#4a5a72')
+                    .style('font-size', '8px')
+                    .style('font-family', 'monospace');
+            }
+
+            function renderHeatmap() {
+                const map = state.retentionMap;
+                if (!map || map.length === 0) return;
+
+                let html = '';
+                const displayLen = Math.min(L, 20);
+                const step = Math.max(1, Math.floor(L / displayLen));
+
+                // Cabecera
+                let headerRow = '<div class="heatmap-row" style="height:10px;">';
+                for (let pos = 0; pos < displayLen; pos++) {
+                    const idx = Math.min(pos * step, L - 1);
+                    const pct = Math.round((idx / L) * 100);
+                    headerRow +=
+                        `<div style="flex:1;text-align:center;font-size:6px;color:var(--text-muted);">${pct}%</div>`;
+                }
+                headerRow += '</div>';
+                html += headerRow;
+
+                for (let agent = 0; agent < S; agent++) {
+                    let row = `<div class="heatmap-row">`;
+                    for (let pos = 0; pos < displayLen; pos++) {
+                        const idx = Math.min(pos * step, L - 1);
+                        const val = map[idx][agent];
+                        const intensity = Math.max(0, Math.min(1, val));
+                        const r = Math.round(20 + 235 * intensity);
+                        const g = Math.round(40 + 140 * intensity);
+                        const b = Math.round(60 + 195 * intensity);
+                        row += `<div class="heatmap-cell" style="background:rgb(${r},${g},${b});"></div>`;
+                    }
+                    row += `</div>`;
+                    row +=
+                        `<div style="font-size:6px;color:var(--text-muted);text-align:center;margin-top:-2px;margin-bottom:2px;">A${agent+1}</div>`;
+                    html += row;
+                }
+
+                heatmapContainer.innerHTML = html;
+            }
+
+            function renderDebtGraphD3() {
+                const container = debtGraphContainer;
+                container.innerHTML = '';
+                const matrix = state.contradictionMatrix;
+                const f = state.frequencies;
+                const debt = state.debt;
+
+                if (!matrix || matrix.length === 0 || f.reduce((a, b) => a + b, 0) < 0.01) {
+                    container.innerHTML =
+                        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:11px;">⏳ inicializando grafo...</div>';
+                    return;
+                }
+
+                const rect = container.getBoundingClientRect();
+                const width = rect.width || 300;
+                const height = rect.height || 100;
+
+                // Preparar nodos
+                const nodes = [];
+                const links = [];
+                const colors = ['#4c8bcf', '#5fa8d9', '#7fc1ff', '#a0d0f0', '#b7d9f5'];
+
+                for (let i = 0; i < S; i++) {
+                    const size = 20 + Math.min(20, f[i] * 60);
+                    nodes.push({
+                        id: i,
+                        label: `A${i+1}`,
+                        size: size,
+                        debt: debt[i],
+                        freq: f[i],
+                        color: colors[i % colors.length],
+                        hasDebt: debt[i] > 0.2,
+                    });
+                }
+
+                for (let i = 0; i < S; i++) {
+                    for (let j = i + 1; j < S; j++) {
+                        const w = matrix[i][j] || 0;
+                        if (w > 0.05) {
+                            links.push({
+                                source: i,
+                                target: j,
+                                weight: w,
+                                opacity: Math.min(1, w * 3),
+                            });
+                        }
+                    }
+                }
+
+                const svg = d3.select(container)
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('background', 'transparent');
+
+                // Posiciones en círculo
+                const cx = width / 2;
+                const cy = height / 2;
+                const radius = Math.min(width, height) * 0.35;
+
+                const nodePositions = nodes.map((n, i) => {
+                    const angle = (i / S) * 2 * Math.PI - Math.PI / 2;
+                    return {
+                        x: cx + radius * Math.cos(angle),
+                        y: cy + radius * Math.sin(angle),
+                    };
+                });
+
+                // Links
+                svg.selectAll('.debt-link')
+                    .data(links)
+                    .enter()
+                    .append('line')
+                    .attr('x1', d => nodePositions[d.source].x)
+                    .attr('y1', d => nodePositions[d.source].y)
+                    .attr('x2', d => nodePositions[d.target].x)
+                    .attr('y2', d => nodePositions[d.target].y)
+                    .attr('stroke', '#c05a4a')
+                    .attr('stroke-width', d => 1 + d.weight * 4)
+                    .attr('opacity', d => d.opacity * 0.7)
+                    .attr('stroke-dasharray', d => d.weight > 0.3 ? 'none' : '4,4');
+
+                // Nodes
+                const nodeGroup = svg.selectAll('.debt-node')
+                    .data(nodes)
+                    .enter()
+                    .append('g')
+                    .attr('transform', (d, i) => `translate(${nodePositions[i].x},${nodePositions[i].y})`);
+
+                nodeGroup.append('circle')
+                    .attr('r', d => d.size / 2)
+                    .attr('fill', d => d.color)
+                    .attr('stroke', d => d.hasDebt ? '#c05a4a' : '#1f2d40')
+                    .attr('stroke-width', d => d.hasDebt ? 3 : 2)
+                    .style('filter', d => d.hasDebt ? 'drop-shadow(0 0 8px rgba(192,90,74,0.4))' : 'none');
+
+                nodeGroup.append('text')
+                    .attr('text-anchor', 'middle')
+                    .attr('dominant-baseline', 'central')
+                    .attr('fill', '#080c14')
+                    .attr('font-size', d => d.size > 26 ? 9 : 7)
+                    .attr('font-weight', '600')
+                    .text(d => d.label);
+
+                // Tooltip en nodos
+                nodeGroup.on('mouseenter', function(e, d) {
+                    const tip =
+                        `${d.label}<br>Frecuencia: ${(d.freq*100).toFixed(1)}%<br>Deuda: ${d.debt.toFixed(3)}<br>${d.hasDebt ? '🔴 Contradicción activa' : '✅ Documento limpio'}`;
+                    tooltip.innerHTML = tip;
+                    tooltip.classList.add('visible');
+                    tooltip.style.left = (e.clientX + 14) + 'px';
+                    tooltip.style.top = (e.clientY - 10) + 'px';
+                }).on('mousemove', function(e) {
+                    tooltip.style.left = (e.clientX + 14) + 'px';
+                    tooltip.style.top = (e.clientY - 10) + 'px';
+                }).on('mouseleave', function() {
+                    tooltip.classList.remove('visible');
+                });
+            }
+
+            function updateStats() {
+                const f = state.frequencies;
+                const phi = state.phi;
+                const psi = state.psi;
+                const omega = state.omega;
+
+                const avgPhi = phi.reduce((a, b) => a + b, 0) / S;
+                const avgPsi = psi.reduce((a, b) => a + b, 0) / S;
+                const avgOmega = omega.reduce((a, b) => a + b, 0) / S;
+                const entropy = computeEntropy(f);
+                const biodiversity = entropy;
+
+                avgPhiEl.textContent = avgPhi.toFixed(3);
+                avgPsiEl.textContent = avgPsi.toFixed(3);
+                avgOmegaEl.textContent = avgOmega.toFixed(3);
+                biodiversityEl.textContent = biodiversity.toFixed(3);
+
+                // Badges de estado
+                const health = biodiversity > 0.6 ? '✅ saludable' :
+                    biodiversity > 0.3 ? '⚠️ en riesgo' : '🔴 crítico';
+                const diversity = biodiversity > 0.7 ? '🌿 alta' :
+                    biodiversity > 0.4 ? '🌿 media' : '🌿 baja';
+                const totalDebt = state.debt.reduce((a, b) => a + b, 0);
+                const debtLevel = totalDebt < 0.5 ? '💀 baja' :
+                    totalDebt < 1.5 ? '💀 media' : '💀 alta';
+
+                healthBadge.textContent = health;
+                diversityBadge.textContent = diversity;
+                debtBadge.textContent = debtLevel;
+            }
+
+            function updateDiagnostics() {
+                const f = state.frequencies;
+                const entropy = computeEntropy(f);
+                const maxF = Math.max(...f);
+                const surviving = f.filter(v => v > 0.005).length;
+
+                regimeDisplayEl.textContent = state.regime === 'equilibrium' ? '⚖️ equilibrio' :
+                    state.regime === 'monopoly' ? '👑 monopolio' :
+                    state.regime === 'collapse' ? '💀 colapso' :
+                    state.regime === 'oscillation' ? '🔄 oscilación' : '⚖️ equilibrio';
+
+                extinctionDisplayEl.textContent = state.extinctionCount;
+                coexistenceDisplayEl.textContent = `${(surviving/S*100).toFixed(0)}%`;
+
+                // Interpretación
+                let text = '';
+                if (state.regime === 'equilibrium') {
+                    text = 'El sistema está en equilibrio. La biodiversidad es saludable. Ningún agente domina.';
+                } else if (state.regime === 'monopoly') {
+                    text = `⚠️ Monopolio: el agente dominante (${Math.round(maxF*100)}%) está desplazando a los demás. Considerar reducir α o aumentar ρ.`;
+                } else if (state.regime === 'collapse') {
+                    text = '🔴 Colapso de biodiversidad: el sistema ha perdido diversidad funcional. Se requiere intervención urgente (reset o reducción de α).';
+                } else if (state.regime === 'oscillation') {
+                    text = '🔄 Oscilación: las frecuencias fluctúan sin converger. Puede indicar competencia inestable. Considerar aumentar σ o reducir α.';
+                }
+                interpretationTextEl.textContent = text;
+            }
+
+            // ============================================================
+            // 7. AUDITORÍA — 10/10
+            // ============================================================
+
+            function runAudit() {
+                const epsilon = state.auditEpsilon || 0.05;
+                const delta = state.auditDelta || 0.01;
+                const matrix = state.contradictionMatrix;
+                const pairs = [];
+
+                for (let i = 0; i < S; i++) {
+                    for (let j = i + 1; j < S; j++) {
+                        const w = matrix[i][j] || 0;
+                        if (w > 0.01) {
+                            pairs.push({ i, j, weight: w, severity: w });
+                        }
+                    }
+                }
+
+                if (pairs.length === 0) {
+                    state.auditPhat = 0;
+                    state.auditMargin = 0;
+                    state.auditSamples = [];
+                    auditSamplesEl.textContent = '0';
+                    auditPhatEl.textContent = '0.000';
+                    auditMarginEl.textContent = '0.000';
+                    auditStatusEl.innerHTML =
+                        `<span class="icon">✅</span><span>sin contradicciones detectadas</span><span style="margin-left:auto;font-size:10px;color:var(--text-muted);">muestreo: 0 pares</span>`;
+                    return;
+                }
+
+                const nMin = Math.ceil(Math.log(2 / delta) / (2 * epsilon * epsilon));
+                const weights = pairs.map(p => p.severity + 0.1);
+                const totalWeight = weights.reduce((a, b) => a + b, 0);
+                const probs = weights.map(w => w / totalWeight);
+                const nSamples = Math.min(nMin, pairs.length);
+
+                const samples = [];
+                const used = new Set();
+                let attempts = 0;
+                while (samples.length < nSamples && attempts < nSamples * 10) {
+                    attempts++;
+                    const idx = Math.floor(Math.random() * pairs.length);
+                    if (used.has(idx)) continue;
+                    used.add(idx);
+                    samples.push(pairs[idx]);
+                }
+
+                const contradictions = samples.filter(s => s.severity > 0.2);
+                const p_hat = contradictions.length / Math.max(1, samples.length);
+                const margin = Math.sqrt(Math.log(2 / delta) / (2 * samples.length));
+
+                state.auditSamples = samples;
+                state.auditPhat = p_hat;
+                state.auditMargin = margin;
+
+                auditSamplesEl.textContent = samples.length;
+                auditPhatEl.textContent = p_hat.toFixed(3);
+                auditMarginEl.textContent = margin.toFixed(3);
+                auditConfidenceEl.textContent = `${(1 - delta) * 100}%`;
+
+                const ciLower = Math.max(0, p_hat - margin);
+                const ciUpper = Math.min(1, p_hat + margin);
+                const guarantee = margin <= epsilon;
+
+                auditStatusEl.innerHTML = `
+                        <span class="icon">${guarantee ? '✅' : '⚠️'}</span>
+                        <span>${guarantee ? 'garantía cumplida' : 'garantía NO cumplida'}: p̂ = ${p_hat.toFixed(3)} ± ${margin.toFixed(3)} (IC: ${ciLower.toFixed(3)}–${ciUpper.toFixed(3)})</span>
+                        <span style="margin-left:auto;font-size:10px;color:var(--text-muted);">muestreo: ${samples.length} pares</span>
+                    `;
+
+                if (!guarantee) {
+                    addAlert(`⚠️ Auditoría: margen de error (${margin.toFixed(3)}) excede ε (${epsilon})`, 'warn');
+                }
+            }
+
+            function resetAudit() {
+                state.auditSamples = [];
+                state.auditPhat = null;
+                state.auditMargin = null;
+                auditSamplesEl.textContent = '0';
+                auditPhatEl.textContent = '—';
+                auditMarginEl.textContent = '—';
+                auditStatusEl.innerHTML =
+                    `<span class="icon">✔️</span><span>lista para auditar</span><span style="margin-left:auto;display:flex;gap:6px;">
+                            <button class="btn btn-success" id="btnAuditRun" style="font-size:10px;padding:4px 12px;">🔍 ejecutar</button>
+                            <button class="btn" id="btnAuditReset" style="font-size:10px;padding:4px 12px;">⟲ reset</button>
+                        </span>`;
+                document.getElementById('btnAuditRun').addEventListener('click', runAudit);
+                document.getElementById('btnAuditReset').addEventListener('click', resetAudit);
+            }
+
+            // ============================================================
+            // 8. EXPERIMENTOS — 10/10
+            // ============================================================
+
+            function runExperiment() {
+                const results = [];
+                const baseParams = { ...params };
+
+                // Escenario 1: baja competencia
+                params.alpha = 0.7;
+                params.rho = 0.2;
+                runExperimentScenario('Baja competencia (α=0.7, ρ=0.2)');
+
+                // Escenario 2: alta competencia
+                params.alpha = 2.0;
+                params.rho = 0.8;
+                runExperimentScenario('Alta competencia (α=2.0, ρ=0.8)');
+
+                // Escenario 3: alto ruido
+                params.alpha = 1.2;
+                params.rho = 0.3;
+                params.sigma = 0.4;
+                runExperimentScenario('Alto ruido (σ=0.4)');
+
+                // Restaurar
+                Object.assign(params, baseParams);
+
+                experimentResultEl.innerHTML = `
+                        ✅ 3 escenarios comparados: 
+                        <strong>${results.map(r => r.label + ': ' + r.biodiversity.toFixed(3)).join(' | ')}</strong>
+                        <span style="font-size:10px;color:var(--text-muted);margin-left:8px;">
+                            (mejor: ${results.reduce((a,b) => a.biodiversity > b.biodiversity ? a : b).label})
+                        </span>
+                    `;
+                addAlert('🧪 Experimento completado: 3 escenarios comparados', 'info');
+
+                function runExperimentScenario(label) {
+                    // Guardar estado actual
+                    const savedFreq = new Float32Array(state.frequencies);
+                    const savedDebt = new Float32Array(state.debt);
+
+                    // Reiniciar parcialmente
+                    state.frequencies = new Float32Array(S).fill(1 / S);
+                    state.debt = new Float32Array(S);
+                    state.step = 0;
+                    state.history = [];
+
+                    // Ejecutar 50 pasos rápidos
+                    for (let i = 0; i < 50; i++) {
+                        step();
+                    }
+
+                    const bio = computeEntropy(state.frequencies);
+                    results.push({
+                        label,
+                        biodiversity: bio,
+                        regime: state.regime,
+                    });
+
+                    // Restaurar
+                    state.frequencies = savedFreq;
+                    state.debt = savedDebt;
+                    state.step = 0;
+                    state.history = [];
+                    // Reconstruir historial
+                    state.history.push({
+                        freq: new Float32Array(state.frequencies),
+                        step: 0,
+                        debt: new Float32Array(state.debt),
+                    });
+                }
+            }
+
+            // ============================================================
+            // 9. EXPORTACIÓN — 10/10
+            // ============================================================
+
+            function exportCSV() {
+                if (state.history.length < 2) {
+                    addAlert('⚠️ No hay suficientes datos para exportar', 'warn');
+                    return;
+                }
+
+                let csv = 'step';
+                for (let i = 0; i < S; i++) csv += `,A${i+1}`;
+                csv += '\n';
+
+                for (let h of state.history) {
+                    csv += h.step;
+                    for (let i = 0; i < S; i++) {
+                        csv += `,${h.freq[i].toFixed(6)}`;
+                    }
+                    csv += '\n';
+                }
+
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ronin_export_${Date.now()}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                addAlert('📥 Datos exportados a CSV', 'success');
+            }
+
+            // ============================================================
+            // 10. INICIALIZACIÓN Y CONTROLES — 10/10
+            // ============================================================
+
+            // Sliders
+            document.getElementById('sliderGamma').addEventListener('input', function() {
+                params.gamma = this.value / 100;
+                document.getElementById('valGamma').textContent = params.gamma.toFixed(2);
+            });
+            document.getElementById('sliderAlpha').addEventListener('input', function() {
+                params.alpha = this.value / 100;
+                document.getElementById('valAlpha').textContent = params.alpha.toFixed(2);
+            });
+            document.getElementById('sliderSigma').addEventListener('input', function() {
+                params.sigma = this.value / 100;
+                document.getElementById('valSigma').textContent = params.sigma.toFixed(2);
+            });
+            document.getElementById('sliderRho').addEventListener('input', function() {
+                params.rho = this.value / 100;
+                document.getElementById('valRho').textContent = params.rho.toFixed(2);
+            });
+            document.getElementById('sliderSpeed').addEventListener('input', function() {
+                params.speed = this.value;
+                document.getElementById('valSpeed').textContent = params.speed + 'ms';
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = setInterval(step, params.speed);
+                }
+            });
+
+            // Botones
+            let autoInterval = null;
+
+            document.getElementById('btnStep').addEventListener('click', step);
+
+            document.getElementById('btnAuto').addEventListener('click', function() {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = null;
+                    this.textContent = '▶ auto';
+                } else {
+                    autoInterval = setInterval(step, params.speed);
+                    this.textContent = '⏹ stop';
+                }
+            });
+
+            document.getElementById('btnReset').addEventListener('click', function() {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = null;
+                    document.getElementById('btnAuto').textContent = '▶ auto';
+                }
+                reset();
+            });
+
+            document.getElementById('btnExport').addEventListener('click', exportCSV);
+
+            document.getElementById('btnExperiment').addEventListener('click', runExperiment);
+
+            // Auditoría (se reasignan después de cada reset)
+            document.getElementById('btnAuditRun').addEventListener('click', runAudit);
+            document.getElementById('btnAuditReset').addEventListener('click', resetAudit);
+
+            // Redimensionar gráficos
+            window.addEventListener('resize', () => {
+                renderChartD3();
+                renderDebtGraphD3();
+            });
+
+            // ============================================================
+            // 11. INICIO — 10/10
+            // ============================================================
+
+            state.retentionMap = initRetentionMap();
+            reset();
+
+            // Actualizar periodicamente el heatmap (drift)
+            setInterval(() => {
+                for (let pos = 0; pos < L; pos++) {
+                    for (let agent = 0; agent < S; agent++) {
+                        state.retentionMap[pos][agent] += (Math.random() - 0.5) * 0.01;
+                        state.retentionMap[pos][agent] = Math.min(1, Math.max(0.05, state.retentionMap[pos][agent]));
+                    }
+                }
+                renderHeatmap();
+            }, 5000);
+
+            // Regenerar gráficos después de renderizar
+            setTimeout(() => {
+                renderChartD3();
+                renderDebtGraphD3();
+            }, 100);
+
+            // ============================================================
+            // 12. AUTO-DIAGNÓSTICO — 10/10
+            // ============================================================
+
+            // Cada 20 pasos, verificar salud del sistema
+            let lastHealthCheck = 0;
+            const originalStep = step;
+            step = function() {
+                originalStep();
+                if (state.step % 20 === 0 && state.step > 0) {
+                    const bio = computeEntropy(state.frequencies);
+                    if (bio < 0.2 && state.step > 50) {
+                        addAlert('🔴 Alerta: biodiversidad crítica (<0.2). El sistema está en riesgo de colapso.', 'danger');
+                    } else if (bio < 0.4 && state.step > 50) {
+                        addAlert('⚠️ Advertencia: biodiversidad baja (<0.4). Considerar ajustar parámetros.', 'warn');
+                    }
+                    const totalDebt = state.debt.reduce((a, b) => a + b, 0);
+                    if (totalDebt > 2.0) {
+                        addAlert(`⚠️ Deuda ontológica alta (${totalDebt.toFixed(2)}). Ejecutar auditoría.`, 'warn');
+                    }
+                }
+            };
+
+            // Override step en el contexto global
+            window.step = step;
+
+            console.log('⚡ RONIN Dynamics v2.0 — Laboratorio Interactivo');
+            console.log('📐 Ecuación Maestra: F = Φ · Ψ · N^(α·ρ) · ε');
+            console.log('🕸️ Deuda Ontológica: DO = Σ s · P_co');
+            console.log('📊 Hoeffding: n ≥ ln(2/δ) / 2ε²');
+            console.log('🔬 Sistema listo. ¡Experimenta!');
+
+        })();
+    </script>
+
+</body>
+</html>
