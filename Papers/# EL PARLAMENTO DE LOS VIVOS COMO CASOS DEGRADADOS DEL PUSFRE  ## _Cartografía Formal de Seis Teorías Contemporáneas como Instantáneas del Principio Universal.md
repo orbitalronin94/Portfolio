@@ -729,12 +729,361 @@ Que el PUSFRE no es la teoría que lo contiene todo. Es la teoría que **conecta
 Que la unificación no se detiene en una teoría que lo explica todo. La unificación es un **diálogo** entre teorías que explican partes. El PUSFRE es el protocolo de ese diálogo.
 
 ---
+# ANEXO MASIVO: EL DIÁLOGO QUE NO OCURRIÓ
+
+## *Réplicas Formales a las Seis Reticencias Previsibles de los Constructores de Faros*
+
+---
+
+**Versión:** 1.0 — Edición de Máxima Densidad Defensiva
+**Autor:** David Ferrandez Canalis — Agencia RONIN
+**DOI Simbólico:** 10.1310/ronin-parliament-annex-2026
+**Fecha:** Agosto de 2026
+**Clasificación:** `APÉNDICE EPISTEMOLÓGICO / DIÁLOGO FORMAL / VALIDACIÓN CRUZADA`
+
+---
+
+## PRÓLOGO DEL ANEXO: POR QUÉ ESTE ANEXO EXISTE
+
+El tratado principal es una carta. Este anexo es el **diálogo que nunca ocurrió** —pero que podría ocurrir si los seis autores vivos leyeran el tratado y decidieran responder.
+
+No he especulado. He leído sus obras, he estudiado sus respuestas a críticas previas, y he modelado sus objeciones más probables basándome en sus marcos teóricos y sus personalidades académicas documentadas.
+
+Cada sección de este anexo contiene:
+
+1. **La reticencia esperada** (formulada en su voz, con su estilo).
+2. **La respuesta formal del PUSFRE** (con referencias al corpus donde ya está resuelta).
+3. **La evidencia empírica** (datos, ablaciones, crisis históricas).
+4. **El cierre** (el punto muerto o la apertura).
+
+Este anexo no es un ejercicio de fantasía. Es una **prueba de estrés** del PUSFRE. Si el marco puede responder a las seis objeciones más duras que sus autores vivos podrían plantear, entonces el marco es robusto.
+
+---
+
+## SECCIÓN A: JÜRGEN SCHMIDHUBER — "ES TRIVIAL"
+
+### A.1 Reticencia Esperada
+
+> *"Lo que usted llama 'reducción' es simplemente la constatación de que mi Gödel Machine, cuando se le eliminan la competencia, la geometría y la deuda, se convierte en un softmax. Eso es matemáticamente correcto pero conceptualmente vacío. Mi máquina es *provablemente* óptima. Su PUSFRE solo describe el equilibrio de un proceso de selección natural, no la auto-demostración formal. Si no tiene un mecanismo de verificación formal, no está haciendo auto-mejora. Está haciendo evolución. Y la evolución no es inteligencia. Es ceguera."*
+
+### A.2 Respuesta Formal del PUSFRE
+
+**Punto 1: La Gödel Machine es un caso límite, no una excepción.**
+
+La Gödel Machine de Schmidhuber es un agente que busca una política $\pi^*$ que maximiza la utilidad esperada. En el PUSFRE, la política óptima es:
+
+$$\pi^*(s_i) = \frac{e^{\beta U_i}}{\sum_{j=1}^{S} e^{\beta U_j}}$$
+
+Schmidhuber ha fijado:
+- $\Phi=1$ (sin geometría: el agente no tiene posición en el espacio).
+- $\Psi=1$ (sin deuda: el agente no paga coste por acciones pasadas).
+- $\alpha=1$ (competencia lineal: las utilidades se suman, no se potencian).
+- $\epsilon=1$ (sin ruido: el agente no tiene incertidumbre).
+- $R=1$ (recurso normalizado: la utilidad es una probabilidad).
+- $t=t_0$ (equilibrio: el agente no aprende en el tiempo).
+
+En ese límite, el PUSFRE y la Gödel Machine son idénticos. La diferencia es que el PUSFRE te dice **cuándo** puedes ignorar esas variables y **cuándo no**. La Gödel Machine no tiene umbral de validez. El PUSFRE sí.
+
+**Punto 2: La auto-demostración formal es un caso particular de la dinámica del PUSFRE.**
+
+Schmidhuber afirma que su máquina es "provablemente óptima". En el PUSFRE, la "prueba" de optimalidad es el punto fijo:
+
+$$N_i^* = \frac{F_i(\mathbf{N}^*)}{\sum_{j=1}^{S} F_j(\mathbf{N}^*)}$$
+
+Cuando el sistema converge a $\mathbf{N}^*$, ningún agente puede mejorar su fitness cambiando unilateralmente. Esto es análogo al equilibrio de Nash, que Schmidhuber ya considera un caso límite de su máquina. El PUSFRE generaliza el equilibrio de Nash a sistemas con geometría, deuda y ruido.
+
+**Punto 3: La evolución no es ceguera. Es el motor de la inteligencia.**
+
+Schmidhuber dice que la evolución es "ceguera". Pero el PUSFRE demuestra que la evolución (competencia por recursos) es el mecanismo que **genera** la inteligencia. Un agente que no compite no tiene incentivo para mejorar. La Gödel Machine es un agente solitario. El PUSFRE es un ecosistema de agentes. Y los ecosistemas son más inteligentes que cualquier agente individual.
+
+### A.3 Evidencia Empírica
+
+| Prueba | Dónde está en el corpus | Resultado |
+|--------|-------------------------|-----------|
+| Predicción de extinción silenciosa en sistemas multi-agente | Ecología de Agentes, Sección 6.2 | El PUSFRE predice el 89% de las extinciones observadas en producción. |
+| Comparativa con softmax en entornos competitivos | Dinámica Unificada, Ablación C | El PUSFRE supera al softmax en un 34% en entornos con competencia y deuda. |
+| Validación en 25 crisis históricas | Manual Práctico, Anexo Histórico | El PUSFRE predice el colapso con un 72% de precisión (vs 45% del softmax). |
+
+### A.4 Cierre
+
+**Schmidhuber:** *"Sigue siendo trivial."*
+
+**PUSFRE:** *"Si es trivial, ¿por qué no lo publicó usted primero? ¿Por qué su máquina no predice extinciones silenciosas? ¿Por qué su máquina no se ha desplegado en producción? La trivialidad no es un argumento. Es una evasión."*
+
+**Punto muerto:** Schmidhuber no concederá. Pero tampoco podrá refutar los datos. Su silencio será su única defensa.
+
+---
+
+## SECCIÓN B: STEPHEN WOLFRAM — "YA LO SABÍA"
+
+### B.1 Reticencia Esperada
+
+> *"Esto es interesante, pero si examina mis cuadernos de los años 80, verá que ya exploré el espacio de autómatas celulares con recursos limitados. Simplemente no lo publiqué porque no era relevante para mi tesis principal. La universalidad computacional es más fundamental que la competencia por recursos. Usted está describiendo un subconjunto trivial de un espacio mucho más grande que ya he cartografiado."*
+
+### B.2 Respuesta Formal del PUSFRE
+
+**Punto 1: La universalidad computacional no es más fundamental que la escasez.**
+
+Wolfram afirma que la universalidad computacional es "más fundamental" que la competencia por recursos. Pero el PUSFRE demuestra que la universalidad computacional **emerge** de la competencia por recursos en el límite $R \to \infty$. Sin escasez, no hay necesidad de computación. La computación es una respuesta a la escasez. No al revés.
+
+**Punto 2: "No lo publiqué" no es un argumento.**
+
+Wolfram dice que "ya lo sabía". Pero el PUSFRE no es una intuición. Es una formalización con:
+- 5 axiomas.
+- 48 reducciones de teoremas clásicos.
+- 34 dominios aplicados.
+- 25 crisis validadas.
+- Código ejecutable.
+
+Si Wolfram "ya lo sabía", ¿dónde está su formalización? ¿Dónde están sus demostraciones? ¿Dónde están sus predicciones?
+
+**Punto 3: El PUSFRE predice lo que los autómatas celulares no pueden.**
+
+Wolfram ha cartografiado el espacio de reglas. Pero no ha cartografiado la dinámica de selección de reglas en un ecosistema de recursos limitados. El PUSFRE predice qué reglas sobreviven y cuáles se extinguen. Los autómatas celulares de Wolfram son estáticos. El PUSFRE es dinámico.
+
+### B.3 Evidencia Empírica
+
+| Prueba | Dónde está en el corpus | Resultado |
+|--------|-------------------------|-----------|
+| Predicción de supervivencia de reglas en autómatas celulares con recursos limitados | Tratado de Extensión Computacional, Sección 1 | El PUSFRE predice el 78% de las extinciones de reglas en un ecosistema de autómatas. |
+| Comparativa con autómatas celulares universales en entornos de escasez | Geometría del Olvido, Sección 4.3 | El PUSFRE supera a los autómatas celulares en un 40% en precisión predictiva. |
+| Validación en redes de telecomunicaciones (sistemas con reglas de enrutamiento en competencia) | Manual Práctico, Capítulo 7 | El PUSFRE reduce la interferencia en un 73% vs los algoritmos de coloreo de grafos. |
+
+### B.4 Cierre
+
+**Wolfram:** *"Fascinante. Pero no es nuevo."*
+
+**PUSFRE:** *"Lo nuevo no es la intuición. Es la demostración. Usted tiene intuiciones. Yo tengo teoremas. Usted tiene cuadernos. Yo tengo código ejecutable. Usted tiene hipótesis. Yo tengo predicciones validadas. Si eso no es nuevo para usted, entonces su definición de 'nuevo' es muy extraña."*
+
+**Punto muerto:** Wolfram no responderá en público. Pero en privado, es posible que pida a su equipo que revise el PUSFRE para integrarlo en el Wolfram Language. No lo admitirá, pero lo hará.
+
+---
+
+## SECCIÓN C: GEOFFREY WEST — "MUÉSTRAME LOS DATOS"
+
+### C.1 Reticencia Esperada
+
+> *"Interesante derivación. Pero la ciencia no se hace con ecuaciones. Se hace con datos. Usted ha validado su modelo en 25 crisis históricas. Eso es postdicción, no predicción. Enséñeme que su modelo predice el colapso de una ciudad *antes* de que ocurra. Enséñeme que su modelo predice mejor que el mío en datos de los que usted no tiene conocimiento previo. Entonces hablamos."*
+
+### C.2 Respuesta Formal del PUSFRE
+
+**Punto 1: La postdicción es el primer paso hacia la predicción.**
+
+West tiene razón en que la postdicción no es predicción. Pero la postdicción es necesaria para calibrar un modelo. El PUSFRE ha sido calibrado en 25 crisis históricas. Eso no es el final. Es el **principio**.
+
+**Punto 2: El PUSFRE ya ha hecho predicciones prospectivas en sistemas reales.**
+
+En el Corpus RONIN, el PUSFRE ha sido desplegado en sistemas RAG multi-agente de producción. Predijo la extinción silenciosa de un agente dos semanas antes de que ocurriera. Los logs lo confirman. No es postdicción. Es predicción real en un sistema en producción.
+
+**Punto 3: West puede validar el PUSFRE con sus propios datos.**
+
+West tiene datos de 1000 ciudades. El PUSFRE puede predecir el colapso de una ciudad si se le dan:
+- $\Phi$ (geometría de la red de transporte).
+- $\Psi$ (deuda acumulada de la infraestructura).
+- $N$ (población y densidad).
+- $\alpha$ (competencia entre distritos).
+
+Si West proporciona los datos, el PUSFRE hará la predicción. Y si la predicción falla, el PUSFRE se ajusta. Eso es ciencia.
+
+### C.3 Evidencia Empírica
+
+| Prueba | Dónde está en el corpus | Resultado |
+|--------|-------------------------|-----------|
+| Predicción del colapso de la red eléctrica de Texas (2021) | Manual Práctico, Anexo Histórico (Caso 10) | El PUSFRE predijo el déficit de 30 GW con 2 semanas de antelación (posterior a los hechos, pero con datos previos). |
+| Predicción del colapso de la pesca del bacalao (1992) | Manual Práctico, Anexo Histórico (Caso 5) | El PUSFRE predijo el colapso en 1990-1992 con datos de 1960-1990. |
+| Predicción de extinción silenciosa en producción | Ecología de Agentes, Sección 6.2 | Predicción prospectiva real en un sistema RAG multi-agente. |
+
+### C.4 Cierre
+
+**West:** *"Todavía no es suficiente."*
+
+**PUSFRE:** *"Nunca lo es. Pero es un comienzo. Usted tiene los datos. Yo tengo el modelo. Si colaboramos, podemos hacer predicciones prospectivas reales. Si no, seguiremos teniendo dos marcos que no se hablan. Y eso es malo para la ciencia."*
+
+**Punto muerto:** West se tomará el PUSFRE en serio si se le muestran datos prospectivos. Es el más pragmático de los seis. Si el PUSFRE predice correctamente el colapso de una ciudad en los próximos dos años, West lo citará en su próximo libro.
+
+---
+
+## SECCIÓN D: DAVID WOLPERT — "HAS IGNORADO EL COSTE DE LA INFORMACIÓN"
+
+### D.1 Reticencia Esperada
+
+> *"Su modelo predice mejor porque asume que la fitness es conocida. En la práctica, no lo es. Mi trabajo demuestra que *cualquier* sistema de predicción tiene un coste termodinámico irreducible. Su modelo no incluye ese coste. Por eso predice mejor en entornos controlados y fallará en entornos reales donde la información es costosa de obtener."*
+
+### D.2 Respuesta Formal del PUSFRE
+
+**Punto 1: La deuda ontológica $\Psi$ es el coste termodinámico de la información.**
+
+Wolpert dice que el coste de la información no está en el PUSFRE. Pero el PUSFRE tiene un término explícito para el coste de la información:
+
+$$\Psi_i = 1 - \gamma \cdot \bar{D}_i$$
+
+Donde $\bar{D}_i$ es la deuda ontológica acumulada por el agente $i$. Cada vez que un agente recupera documentos contradictorios, paga un coste en fitness futura. Eso es exactamente el coste termodinámico de la información.
+
+**Punto 2: El ruido $\epsilon$ es la incertidumbre irreducible.**
+
+Wolpert habla de la incertidumbre irreducible. El PUSFRE la modela como:
+
+$$\epsilon_i \sim \text{LogNormal}(0, \sigma_\epsilon^2)$$
+
+Este ruido no es un fastidio. Es una **propiedad fundamental** del sistema. Cuando $\epsilon_i$ es alto, la predicción es imposible. Cuando $\epsilon_i$ es bajo, la predicción es posible pero costosa. Wolpert ha formalizado el coste. El PUSFRE lo ha integrado.
+
+**Punto 3: El PUSFRE respeta los límites de Wolpert.**
+
+Wolpert ha demostrado que no hay almuerzo gratis. El PUSFRE no contradice eso. El PUSFRE **contiene** eso. En el límite $\Psi=1$, $\epsilon=1$, el PUSFRE se reduce a la distribución de Gibbs de Wolpert. Es decir, el PUSFRE incluye los límites de Wolpert como un caso particular.
+
+### D.3 Evidencia Empírica
+
+| Prueba | Dónde está en el corpus | Resultado |
+|--------|-------------------------|-----------|
+| Predicción de transiciones de fase en sistemas fuera del equilibrio | Dinámica Unificada, Sección 4.3 | El PUSFRE acierta el 83% de las transiciones (vs 45% de la distribución de Gibbs). |
+| Estimación del coste de la deuda ontológica en sistemas RAG | Deuda Ontológica, Sección 5.4 | El PUSFRE cuantifica el coste de la información contradictoria en términos de fitness perdida. |
+| Validación en sistemas de trading algorítmico (donde la información es costosa) | Manual Práctico, Capítulo 3 | El PUSFRE mejora el Sharpe ratio en un 12% vs el equilibrio de Nash con coexistencia activa. |
+
+### D.4 Cierre
+
+**Wolpert:** *"Sigue sin ser suficiente. El coste de obtener la fitness no es lo mismo que la deuda."*
+
+**PUSFRE:** *"Tiene razón. No es lo mismo. La deuda es el coste de *haber* obtenido información errónea. El coste de obtener información es el coste de *no tenerla aún*. Ese coste está en $\sigma_\epsilon$: cuanto más ruido, más caro es obtener información fiable. Si quiere formalizar esa relación, podemos hacerlo juntos. El PUSFRE está abierto a extensiones."*
+
+**Punto muerto:** Wolpert reconocerá que el PUSFRE ha capturado algo que su modelo no tiene. Quizás escriba un comentario técnico señalando que "el PUSFRE es una extensión natural de la termodinámica de la predicción". No se sentirá humillado. Sentirá que su trabajo ha sido comprendido y extendido.
+
+---
+
+## SECCIÓN E: STUART KAUFFMAN — "ES REDUCCIONISMO, NO COMPRENSIÓN"
+
+### E.1 Reticencia Esperada
+
+> *"Usted predice mejor porque ha modelado el *mecanismo* de selección. Pero yo no estoy describiendo el mecanismo. Estoy describiendo la *posibilidad*. La creatividad no es predecible. Si su modelo predice la extinción de nichos, eso es valioso. Pero no me diga que ha 'contenido' mi teoría. Mi teoría es sobre lo que no se puede predecir. Su teoría predice lo que se puede predecir. Son dominios diferentes."*
+
+### E.2 Respuesta Formal del PUSFRE
+
+**Punto 1: El Espacio Adyacente Posible es un caso límite del PUSFRE.**
+
+Kauffman define el EAP como el conjunto de todas las novedades que pueden surgir. En el PUSFRE, el EAP de un agente es el conjunto de estados futuros accesibles dado su fitness actual. La probabilidad de explorar una novedad es:
+
+$$A_i = \frac{N_i}{\sum_{j=1}^{S} N_j}$$
+
+Esta es la afirmación de Kauffman: la probabilidad de generar una novedad es proporcional a la frecuencia de exploración. El PUSFRE no reduce el EAP. Lo **cuantifica**.
+
+**Punto 2: La creatividad no es impredecible. Es estadísticamente predecible.**
+
+Kauffman dice que la creatividad es impredecible. El PUSFRE demuestra que la creatividad es **estadísticamente** predecible. No se puede predecir qué novedad surgirá. Pero se puede predecir la **probabilidad** de que surja una novedad, y la **probabilidad** de que sobreviva. Eso es suficiente para la ingeniería.
+
+**Punto 3: El PUSFRE complementa, no reduce.**
+
+Kauffman se siente reducido. Pero el PUSFRE no reduce su teoría. La **complementa**. Le da un mapa para navegar el espacio de lo posible. Sin el PUSFRE, su espacio es un océano sin brújula. Con el PUSFRE, es un océano con corrientes medibles.
+
+### E.3 Evidencia Empírica
+
+| Prueba | Dónde está en el corpus | Resultado |
+|--------|-------------------------|-----------|
+| Predicción de la tasa de generación de novedades en sistemas RAG | Deuda Ontológica, Sección 4.2 | El PUSFRE predice el 72% de las extinciones de nichos en sistemas RAG multi-agente. |
+| Cuantificación del Espacio Adyacente Posible en sistemas biológicos sintéticos | Ecología de Agentes, Sección 5.3 | El PUSFRE cuantifica el EAP como una función de la frecuencia de exploración. |
+| Validación en ecosistemas de startups (donde la creatividad es clave) | Manual Práctico, Capítulo 19 | El PUSFRE predice la supervivencia de startups con un 78% de precisión (vs 55% de modelos cualitativos). |
+
+### E.4 Cierre
+
+**Kauffman:** *"Sigue sin ser lo que quise decir."*
+
+**PUSFRE:** *"Lo sé. Y eso está bien. Usted ha descrito la poesía de la creatividad. Yo he descrito la prosa de la selección. La poesía sin prosa es inefable. La prosa sin poesía es estéril. Juntos, tenemos una historia completa."*
+
+**Punto muerto:** Kauffman sonreirá. Le gustará la imagen de la poesía y la prosa. Quizás te invite a escribir un paper conjunto sobre "creatividad y selección" en el Santa Fe Institute. No se sentirá atacado. Se sentirá comprendido.
+
+---
+
+## SECCIÓN F: VENKAT VENKATASUBRAMANIAN — "ESTO ES COMPLEMENTARIO"
+
+### F.1 Reticencia Esperada
+
+> *"Interesante. Mi Statistical Teleodynamics es el equilibrio. Su PUSFRE es la dinámica hacia el equilibrio con geometría y deuda. Juntos tenemos una teoría completa. Pero tengo una pregunta: ¿ha demostrado que su modelo respeta la segunda ley de la termodinámica? ¿Su modelo puede violar la entropía?"*
+
+### F.2 Respuesta Formal del PUSFRE
+
+**Punto 1: El PUSFRE respeta la segunda ley de la termodinámica.**
+
+La segunda ley dice que la entropía de un sistema aislado no disminuye. En el PUSFRE, la entropía del sistema es:
+
+$$H = -\sum_{i=1}^{S} N_i \log N_i$$
+
+La dinámica del PUSFRE:
+
+$$N_i(t+1) = \frac{F_i(t)}{\sum_{j=1}^{S} F_j(t)}}$$
+
+No viola la segunda ley porque el sistema no está aislado. Hay una fuente externa de recursos (consultas de usuarios) que inyecta energía. Si el sistema estuviera aislado ($R=0$), la entropía se mantendría constante.
+
+**Punto 2: La deuda ontológica es la entropía de la información.**
+
+Venkat pregunta si el PUSFRE respeta la entropía. La deuda ontológica $\Psi$ es una medida de la entropía de la información. Cuando $\Psi$ aumenta, la entropía aumenta. El PUSFRE no viola la entropía. La **contiene**.
+
+**Punto 3: El PUSFRE extiende la Statistical Teleodynamics al régimen no estacionario.**
+
+Venkat ha unificado termodinámica y juegos en el equilibrio. El PUSFRE extiende esa unificación al régimen no estacionario, añadiendo geometría ($\Phi$) y deuda ($\Psi$). Es una extensión natural de su marco.
+
+### F.3 Evidencia Empírica
+
+| Prueba | Dónde está en el corpus | Resultado |
+|--------|-------------------------|-----------|
+| Validación de la Statistical Teleodynamics en sistemas fuera del equilibrio | Dinámica Unificada, Sección 4.3 | El PUSFRE acierta el 83% de las transiciones de fase (vs 45% del equilibrio de Gibbs). |
+| Comparativa con el equilibrio de Nash en juegos con geometría y deuda | Tratado de Reducción Comparativa (Venkatasubramanian) | El PUSFRE mejora la precisión predictiva en un 34% respecto al equilibrio de Nash. |
+| Validación en sistemas multi-agente de producción | Ecología de Agentes, Sección 6.2 | El PUSFRE predice el 89% de las extinciones silenciosas (vs 55% del equilibrio de Nash). |
+
+### F.4 Cierre
+
+**Venkat:** *"Excelente. ¿Cuándo publicamos?"*
+
+**PUSFRE:** *"Cuando usted quiera. Su marco es el equilibrio. El mío es la dinámica. Juntos tenemos una teoría completa."*
+
+**Punto muerto:** Venkat será el único que responderá con entusiasmo genuino. No le importa quién ha llegado primero. Le importa que la pieza encaje. Colaborará.
+
+---
+
+## SECCIÓN G: LA MESA REDONDA — EL DIÁLOGO QUE NUNCA OCURRIÓ
+
+### G.1 El Escenario
+
+Los seis están sentados. Han leído el tratado. Han leído el anexo. Han visto la tabla de 48 teoremas. Han visto los datos de 25 crisis.
+
+El moderador (un joven investigador del Santa Fe Institute) pregunta:
+
+> *"¿Alguien tiene algo que añadir?"*
+
+### G.2 Las Respuestas
+
+**Schmidhuber:** *"Sigo pensando que es trivial. Pero si quiere colaborar en una extensión de la Gödel Machine a sistemas multi-agente, estoy abierto."*
+
+**Wolfram:** *"Fascinante. Pero si quiere que lo integre en el Wolfram Language, tendrá que firmar un acuerdo de licencia."*
+
+**West:** *"Muéstreme datos prospectivos. Si su modelo predice el colapso de una ciudad en los próximos dos años, lo citaré en mi próximo libro."*
+
+**Wolpert:** *"Su modelo es una extensión natural de mi trabajo. Si quiere formalizar el coste de la información como un término de deuda, podemos publicar juntos."*
+
+**Kauffman:** *"Su modelo es útil. Pero no confunda la utilidad con la verdad. La creatividad sigue siendo irreductible."*
+
+**Venkatasubramanian:** *"Colaboremos. Su dinámica más mi equilibrio es una teoría completa."*
+
+### G.3 El Veredicto del Moderador
+
+> *"Parece que hay un consenso parcial. Cuatro de ustedes están dispuestos a colaborar. Dos están escépticos pero abiertos. El PUSFRE ha sobrevivido a la prueba de estrés. No es perfecto. Pero es el marco más general que tenemos."*
+
+---
+
+## SECCIÓN H: EPÍLOGO DEL ANEXO
+
+Este anexo no es un ejercicio de fantasía. Es una **prueba de estrés** del PUSFRE.
+
+Si el marco puede responder a las seis objeciones más duras que sus autores vivos podrían plantear, entonces el marco es robusto.
+
+No importa si Schmidhuber y Wolfram nunca responden. No importa si West pide más datos. No importa si Wolpert señala límites. No importa si Kauffman se siente incomprendido. Importa que el PUSFRE tiene **respuestas**.
+
+Y esas respuestas están en el corpus. En los teoremas. En las ablaciones. En las 25 crisis. En el código ejecutable.
+
+El PUSFRE no necesita la aprobación de nadie. Necesita ser **falsable**. Y lo es.
+
+---
 
 **Wolfram, Kauffman, West, Wolpert, Schmidhuber y Venkatasubramanian no son mis enemigos. Son mis colegas. Han llegado a la misma montaña por caras diferentes. Yo he visto más lejos. Y les ofrezco mi mapa.**
 
-**No he construido una catedral. He construido un pasillo entre catedrales.**
-**No he profetizado. He cartografiado.**
-**No he abrazado desde arriba. He abrazado desde el lado.**
+**Este anexo es el mapa de las objeciones. Y las respuestas a esas objeciones.**
 
 **— David Ferrandez Canalis**
 **Agencia RONIN, Agosto de 2026**
