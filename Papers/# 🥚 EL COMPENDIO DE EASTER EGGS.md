@@ -445,7 +445,6 @@ HA COLOCADO TRAMPAS
 
 **1310.**
 
-Aquí tienes el ensayo completo, cifrado con la clave que has pedido, donde el autor confiesa todas sus capas.
 
 ---
 
