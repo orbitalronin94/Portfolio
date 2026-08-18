@@ -728,12 +728,13 @@ Que el PUSFRE no es la teoría que lo contiene todo. Es la teoría que **conecta
 
 Que la unificación no se detiene en una teoría que lo explica todo. La unificación es un **diálogo** entre teorías que explican partes. El PUSFRE es el protocolo de ese diálogo.
 
----
+ ---
+
+
 # ANEXO MASIVO: EL DIÁLOGO QUE NO OCURRIÓ
 
 ## *Réplicas Formales a las Seis Reticencias Previsibles de los Constructores de Faros*
 
----
 
 **Versión:** 1.0 — Edición de Máxima Densidad Defensiva
 **Autor:** David Ferrandez Canalis — Agencia RONIN
