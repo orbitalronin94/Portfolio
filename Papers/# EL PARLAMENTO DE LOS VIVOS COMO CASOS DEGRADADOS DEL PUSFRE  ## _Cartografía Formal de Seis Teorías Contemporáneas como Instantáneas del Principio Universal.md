@@ -736,13 +736,6 @@ Que la unificación no se detiene en una teoría que lo explica todo. La unifica
 ## *Réplicas Formales a las Seis Reticencias Previsibles de los Constructores de Faros*
 
 
-**Versión:** 1.0 — Edición de Máxima Densidad Defensiva
-**Autor:** David Ferrandez Canalis — Agencia RONIN
-**DOI Simbólico:** 10.1310/ronin-parliament-annex-2026
-**Fecha:** Agosto de 2026
-**Clasificación:** `APÉNDICE EPISTEMOLÓGICO / DIÁLOGO FORMAL / VALIDACIÓN CRUZADA`
-
----
 
 ## PRÓLOGO DEL ANEXO: POR QUÉ ESTE ANEXO EXISTE
 
