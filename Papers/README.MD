@@ -417,11 +417,10 @@ Las respuestas no son evasivas. Son técnicas. Están respaldadas por los docume
 ### 9.7 Sobre el Autor y el Contexto de la Obra
 
 #### 61. ¿El autor tiene formación académica en matemáticas o IA?
-**No revela títulos, pero la obra demuestra un dominio profundo de álgebra, topología, probabilidad, estadística, física, economía, finanzas, ingeniería de prompts y sistemas multi‑agente.**
-Si es autodidacta, ha devorado bibliotecas enteras. *(Ver: README, Epílogo.)*
+**No revela títulos. *(Ver: README, Epílogo.)*
 
 #### 62. ¿Por qué el autor escribió esto en dos meses?
-**Porque no tenía nada mejor que hacer.** Estaba en el paro. Tenía tiempo y tabaco. Eso es una explicación, no una excusa. *(Ver: Epílogo del README.)*
+**Porque no tenía nada mejor que hacer.**  Tenía tiempo y tabaco. Eso es una explicación, no una excusa. *(Ver: Epílogo del README.)*
 
 #### 63. ¿El autor tiene conflictos de intereses?
 **No.** La obra es autopublicada y sin financiación externa. La Agencia RONIN es un sello ficticio (o una empresa unipersonal). No hay intereses comerciales detrás. *(Ver: README, Sección 8.)*
