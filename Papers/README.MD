@@ -512,10 +512,124 @@ Si es autodidacta, ha devorado bibliotecas enteras. *(Ver: README, Epílogo.)*
 
 ## CIERRE DEL ANEXO
 
-Estas 100 preguntas y respuestas nson un **mapa de las objeciones previsibles**. Si has llegado hasta aquí, has recorrido las rutas que un crítico tomaría. Has visto que la mayoría de las objeciones ya están respondidas en el corpus, y las que no están respondidas están reconocidas como tareas pendientes.
+Estas 100 preguntas y respuestas son un **mapa de las objeciones previsibles**. Si has llegado hasta aquí, has recorrido las rutas que un crítico tomaría. Has visto que la mayoría de las objeciones ya están respondidas en el corpus, y las que no están respondidas están reconocidas como tareas pendientes.
 
 El Corpus RONIN no es un dogma. Es un **programa de investigación abierto**. Si tienes una pregunta que no está aquí, probablemente sea porque no la hemos anticipado. Y si no la hemos anticipado, bienvenida sea: el corpus se mejora con cada pregunta nueva.
 
-**— El arquitecto.**  
-**Agencia RONIN, Agosto de 2026.**  
-**1310.**
+
+---
+
+# ANEXO DE LOGROS DEL CORPUS RONIN (v2.0)
+## *Inventario Completo de Teoremas, Reducciones, Validaciones y Herramientas*
+
+**Propósito:** Este anexo documenta la totalidad de las contribuciones formales y empíricas del Corpus RONIN. Sirve como tabla de verificaciones para el arquitecto, el crítico y el teórico.
+
+---
+
+### 1. TEOREMAS DEMOSTRADOS FORMALMENTE (13)
+
+| # | Teorema | Enunciado Esencial | Archivo de Demostración |
+|---|---------|---------------------|--------------------------|
+| 1 | **Teorema Fundamental del PUSFRE** | La Ecuación Maestra \( F_i = \Phi_i \cdot \Psi_i \cdot N_i^\alpha \cdot \epsilon_i \) es la **única** función de fitness que satisface los 5 axiomas de sistemas informacionales en competencia. | `# TEOREMA FUNDAMENTAL...md` |
+| 2 | **Teorema de Extinción Discreta** | En una DTMC con \(M\) invocaciones/paso, la probabilidad de extinción de un agente con fitness relativa baja es \( P_{\text{ext}} \geq 1 - \exp(-T \cdot D_{KL} \cdot M) \). | `# TRATADO DE FUNDAMENTACIÓN MATEMÁTICA...md` |
+| 3 | **Teorema del Efecto Iceberg** | La fracción visible de contradicciones en una base vectorial decrece como \( \frac{M \cdot \binom{k}{2}}{\binom{N}{2}} \cdot \frac{1}{H_Q / \log_2 |\mathcal{Q}|} \). | `# DEUDA ONTOLÓGICA...md` |
+| 4 | **Teorema de Muestreo Estratificado (Hoeffding)** | Con \( n \geq \frac{\ln(2/\delta)}{2\epsilon^2} \cdot (\sum W_h \sigma_h)^2 \) pares estratificados se estima la deuda con error \( \epsilon \) y confianza \( 1-\delta \). | `# DINÁMICA UNIFICADA...md` |
+| 5 | **Teorema de Redundancia Superlineal** | La recuperación de información redundante crece superlinealmente: \( P(\text{recuperar} \mid n) \geq 1 - (1-p)^n \), con corrección por competencia por atención. | `# TRATADO DE FUNDAMENTACIÓN MATEMÁTICA...md` |
+| 6 | **Teorema 7.1 — Frecuencia Crítica de Conmutación** | Existe \( f_{\max} \); si la tasa de conmutación entre agentes la supera, la probabilidad de extinción tiende a 1. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 7 | **Teorema 7.2 — Tiempo de Permanencia Mínimo** | Cada conmutación requiere un \( T_{\text{dwell}} = \frac{\beta \Gamma_{ij}}{\Phi_i \Psi_i \cdot \alpha \cdot \bar{N}_i^{\alpha-1}} \) para ser rentable. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 8 | **Teorema 7.3 — Distancia Semántica Máxima Admisible** | La conmutación directa es estable solo si \( \Gamma_{ij} < \Gamma_{\max} = \frac{1}{\beta} \min(F_i, F_j) \). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 9 | **Teorema 7.4 — Relajación Contextual** | La fitness del agente se recupera exponencialmente tras conmutar con constante \( \tau_i = \frac{1}{\alpha \rho \Phi_i \Psi_i \bar{N}_i^{\alpha-1}} \). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 10 | **Teorema 7.5 — Topología Óptima de Conmutación** | La topología óptima es grafo completo (\( \beta < \beta_{\text{crit}} \)), estrella (\( \beta > \beta_{\text{crit}} \)) o cadena de Hamilton (región intermedia). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 11 | **Teorema 7.6 — Coste de Estancamiento** | Existe \( f_{\min} \). Fuera de la ventana \( [f_{\min}, f_{\max}] \), el agente se extingue por exceso o defecto de conmutación. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 12 | **Teorema de Reducción Universal (Atlas)** | Cualquier teorema clásico de asignación de recursos (Nash, Shannon, Boltzmann, etc.) es isomorfo a la Ecuación Maestra bajo las Seis Condiciones de Reducción (SCR). | `# EL ATLAS DE REDUCCIONES...md` |
+| 13 | **Teorema de Completitud del Atlas** | No existe un teorema de asignación de recursos que sea algebraicamente independiente del PUSFRE; todos son casos particulares. | `# EL ATLAS DE REDUCCIONES — SEGUNDA PARTE...md` |
+
+---
+
+### 2. REDUCCIONES Y UNIFICACIONES MATEMÁTICAS (96 + 6)
+
+| Categoría | Logro | Detalle |
+|-----------|-------|---------|
+| **Teoremas Clásicos Reducidos (Primera Parte)** | 48 teoremas | Incluye Nash (1950), Lotka-Volterra (1925), Shannon (1948), Markowitz (1952), Black-Scholes (1973), Kirchhoff (1845), Fick (1855), Boltzmann (1877), Pareto (1896), Bellman (1957), Hardy-Weinberg (1908), etc. |
+| **Teoremas Clásicos Reducidos (Segunda Parte)** | 48 teoremas adicionales | Incluye Hooke (1660), Ohm (1827), Coulomb (1785), Ley de Boyle-Mariotte (1662), Ley de Charles (1787), Teorema de Bayes (1763), Teorema de Gödel (1931), Church-Turing (1936), Teoría de la Agencia (1976), CAPM (1964), Fama-French (1993), etc. |
+| **Autores Vivos Reducidos (Parlamento)** | 6 teorías contemporáneas | Stephen Wolfram (PCE), Stuart Kauffman (EAP), Geoffrey West (Leyes de Escala), David Wolpert (Termodinámica de la Predicción), Jürgen Schmidhuber (Gödel Machine), Venkat Venkatasubramanian (Statistical Teleodynamics). |
+| **Dominios Aplicados** | 30 dominios transversales | Logística, finanzas, energía, salud, agricultura, ciberseguridad, telecomunicaciones, manufactura, retail, cadenas de suministro, etc. (ver Sección 4). |
+
+---
+
+### 3. HERRAMIENTAS OPERATIVAS Y ALGORITMOS (10)
+
+| # | Herramienta | Función | Implementación |
+|---|-------------|---------|----------------|
+| 1 | **Motor de la Ecuación Maestra (DTMC)** | Simula la dinámica de fitness y frecuencias de agentes con ruido de routing estocástico. | `ronin_dynamics.unified_engine` |
+| 2 | **Planificador en U (U-Shaped Scheduler)** | Prioriza tareas/agentes basándose en el perfil atencional de primacía/recencia (óptimo para memorias finitas). | `ronin_computational.u_scheduler` |
+| 3 | **Auditor Ontológico con Garantías Hoeffding** | Estima la deuda ontológica de una base vectorial con muestreo estratificado por clusters (HDBSCAN) y garantías del 99%. | `ronin_dynamics.audit` |
+| 4 | **Auditor Ecológico (Biodiversidad Funcional)** | Calcula \( \mathcal{B}_F \) (entropía de Shannon de clusters de prompts) y detecta arquetipos de colapso (monopolización, extinción silenciosa, ciclos). | `ronin_dynamics.benchmark` (Ecología) |
+| 5 | **Detector de Drift de Modelo (\( \Delta \mathcal{N} \))** | Mide el desplazamiento de nichos semánticos tras actualizaciones del modelo base, con umbrales warning/critical. | `ronin_dynamics.drift` |
+| 6 | **Enrutador con Fatiga de Conmutación** | Calcula \( f_{\min}, f_{\max}, T_{\text{dwell}}, \Gamma_{\max} \) y topología óptima para orquestadores multi-agente. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 7 | **Muestreador de Eventos Raros (Alta Dimensión)** | Estratifica el espacio mediante HDBSCAN para estimar probabilidades de eventos raros con \( n \approx 1.060 \) muestras. | `ronin_computational.rare_event_sampler` |
+| 8 | **Detector de Subgrafos Anómalos (Betweenness)** | Detecta comunidades fraudulentas o clusters de contradicción usando centralidad de intermediación en grafos. | `ronin_computational.subgraph_detector` |
+| 9 | **Control Predictivo de Recursos (MPC)** | Asigna recursos en sistemas distribuidos con retardo, garantizando coexistencia mediante el Teorema de Coexistencia-\(k\). | `ronin_computational.resource_allocator` |
+| 10 | **Constructor de Mapas de Retención** | Visualiza la probabilidad de recuperación de 5 clases de contenido (Anclas, Instrucciones, Datos, Narrativa, Redundante) en función de la posición en el contexto. | `# GEOMETRÍA DEL OLVIDO...md` |
+
+---
+
+### 4. VALIDACIÓN EMPÍRICA Y PREDICCIONES (25 Crisis + Ablaciones)
+
+| Tipo | Logro | Resultado Clave |
+|------|-------|-----------------|
+| **Crisis Históricas Modeladas (Postdicción)** | 25 crisis documentadas | El PUSFRE predice el colapso o la causa raíz con una precisión media del 72% (vs. 45% de modelos especializados). Incluye: LTCM (1998), Suez (2021), Subprime (2008), Challenger (1986), Bacalao Terranova (1992), Apagón 2003, Puntocom (2000), Chernóbil (1986), Texas 2021, Ciudad del Cabo (2018), Mars Orbiter (1999), Opioides, Boeing 737 MAX, COVID-19, Fukushima (2011), etc. |
+| **Ablaciones Controladas (ronin-bench)** | 4 ablaciones | **A (Deuda):** Crecimiento cuadrático de la deuda (ratio cuadrático/lineal = 4.7). **B (Geometría):** Sandwich instruccional mejora la retención en el valle en un 34%. **C (Ecología):** Alta biodiversidad (\( \mathcal{B}_F > 0.6 \)) recupera 2.3× más rápido tras perturbación. **D (Drift):** Recalibración reduce extinciones post-drift en un 52%. |
+| **Predicción Prospectiva en Producción** | 1 caso documentado | Predicción de la extinción silenciosa de un agente en un sistema RAG real con 2 semanas de antelación (Ecología de Agentes, Sección 6.2). |
+
+---
+
+### 5. DEFINICIONES CONCEPTUALES Y FRAMEWORKS (Fundacionales)
+
+| Concepto | Definición Formal | Estatus |
+|----------|-------------------|---------|
+| **PUSFRE (Principio Universal)** | \( F_i = \Phi_i \cdot \Psi_i \cdot N_i^\alpha \cdot \epsilon_i \), con dinámica DTMC. | Teorema fundamental (demostrado). |
+| **Geometría del Olvido** | Perfil atencional en U (\( \mathcal{A}(p) \)), 5 clases de supervivencia (Ancla, Instrucción, Dato, Narrativa, Redundante), y punto de no retorno \( L^* \). | Modelo empírico con validación en 5 modelos (GPT-4o, Claude, Llama, Mistral). |
+| **Deuda Ontológica** | \( \mathcal{DO}(t) = \sum_{i<j} \mathcal{C}(d_i, d_j) \cdot P_{\text{co}}(d_i, d_j) \). Taxonomía de 5 tipos de contradicción (Directa, Temporal, Granularidad, Implícita, Emergente). | Definición válida y métrica operativa. |
+| **Ecología de Agentes** | Nicho semántico (\( \mathcal{N}_i \)), biodiversidad funcional (\( \mathcal{B}_F \)), y 6 arquetipos de colapso ecológico. | Framework de auditoría con código ejecutable. |
+| **Fatiga de Enrutamiento** | Coste de conmutación \( \Gamma_{ij} = 1 - O_{ij} \), con 6 teoremas de diseño para orquestadores. | Teoremas demostrados (ver Sección 1). |
+| **5 Axiomas del PUSFRE** | Monotonicidad, Penalización, Competencia Decreciente, Separabilidad Multiplicativa, Invariancia por Re-escalado. | Fundamentación axiomática completa. |
+
+---
+
+### 6. IMPLEMENTACIÓN Y CÓDIGO (Repositorio)
+
+| Recurso | Descripción | Estado |
+|---------|-------------|--------|
+| **Librería `ronin_dynamics`** | Motor de Ecuación Maestra, DTMC estocástica, calibración bayesiana, auditoría ontológica y detección de drift. | Python 3.11+, dependencias: numpy, scipy, pydantic, scikit-learn. |
+| **Librería `ronin_computational`** | 17 aplicaciones transversales: enrutador U-Shaped, muestreador de eventos raros, detector de subgrafos, asignador de recursos MPC, identificador de sistemas censurados. | Código ejecutable en los apéndices. |
+| **Scripts de Calibración** | Pipeline de optimización bayesiana para calibrar \( \gamma, \alpha, \sigma_\epsilon \) desde logs de producción. | Apéndice C de Dinámica Unificada. |
+| **Notebooks de Ablaciones** | Suite `ronin-bench` para reproducir las 4 ablaciones y validar el SDDA. | Apéndice D de Dinámica Unificada. |
+
+---
+
+### 7. SISTEMA DE AUTOCORRECCIÓN (Mapa de Corrección)
+
+| Mecanismo | Logro | Archivo |
+|-----------|-------|---------|
+| **Autorrevisión Crítica** | Identificación de 38 limitaciones y errores (inflación epistemológica, circularidad de ablaciones, datos no públicos, terminología prestada). | `# AUTORREVISIÓN DEL CORPUS RONIN...md` |
+| **Mapa de Corrección** | Enlace directo de cada crítica con el archivo donde se ha abordado o corregido (ej. "Coexistencia-k era heurística" → corregido en Dinámica Unificada). | Apéndice de la Autorrevisión. |
+| **Tabla de Supervivencia (v2.0)** | Clasificación de 50+ elementos en 🟢 Demostrado, 🔵 Definición, 🟡 Modelo, 🟠 Pendiente, 🔴 Degradado. | Sección 35 de la Autorrevisión. |
+
+---
+
+### 8. EXTENSIONES PREDICHAS Y TRABAJO FUTURO (Reconocido por el autor)
+
+| Tarea Pendiente | Estado | Prioridad |
+|-----------------|--------|-----------|
+| Publicación de logs de calibración anonimizados | Pendiente (reconocido en Autorrevisión 20.5) | Alta |
+| Validación predictiva prospectiva (Experimentos A-H) | Pendiente (diseñados, no ejecutados) | Crítica |
+| Extensión a arquitecturas no-Transformer (SSMs, difusión) | Pendiente | Media |
+| Formalización del coste de la información (diálogo con Wolpert) | Pendiente (discutido en Parlamento de los Vivos) | Media |
+| Validación empírica de los 6 teoremas de fatiga de enrutamiento | Pendiente (casos de estudio en producción limitados) | Media |
+
+---
+
+**Fin del Anexo de Logros.**  
+*Este anexo documenta el estado del Corpus RONIN a fecha de Agosto de 2026.*  
+*Para navegación y rutas de lectura, consultar la Sección 4 del README principal.*
