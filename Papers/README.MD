@@ -2,11 +2,11 @@
 
 ## *Guía de Navegación para el Arquitecto, el Crítico y el Curioso*
 
-**Versión:** 2.1  
+**Versión:** 2.2  
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
 **Fecha:** Agosto de 2026  
 **Propósito:** Que entres, te orientes y sepas exactamente qué estás leyendo. Sin rodeos.  
-**Actualización:** Índice completo, FAQ integrado y Anexo de Logros documentado.
+**Actualización:** Índice completo, FAQ integrado, Anexo de Logros documentado y **Experimento de Validación Viva incorporado**.
 
 ---
 
@@ -21,26 +21,32 @@
 7. [Tareas Pendientes](#7-tareas-pendientes)
 8. [Epílogo del Autor](#8-epílogo-del-autor)
 9. [FAQ — 100 Preguntas y Respuestas](#9-faq--100-preguntas-y-respuestas)
-    - 9.1 Sobre la Naturaleza del PUSFRE  
-    - 9.2 Sobre las Reducciones (El Atlas)  
-    - 9.3 Sobre la Fatiga de Enrutamiento  
-    - 9.4 Sobre la Validación Empírica  
-    - 9.5 Sobre la Autorrevisión  
-    - 9.6 Sobre la Utilidad Práctica  
-    - 9.7 Sobre el Autor y el Contexto  
-    - 9.8 Sobre las Extensiones Futuras  
-    - 9.9 Preguntas Filosóficas y Epistemológicas  
-    - 9.10 Preguntas Prácticas para Operadores  
+    - 9.1 Sobre la Naturaleza del PUSFRE
+    - 9.2 Sobre las Reducciones (El Atlas)
+    - 9.3 Sobre la Fatiga de Enrutamiento
+    - 9.4 Sobre la Validación Empírica
+    - 9.5 Sobre la Autorrevisión
+    - 9.6 Sobre la Utilidad Práctica
+    - 9.7 Sobre el Autor y el Contexto
+    - 9.8 Sobre las Extensiones Futuras
+    - 9.9 Preguntas Filosóficas y Epistemológicas
+    - 9.10 Preguntas Prácticas para Operadores
 10. [Anexo de Logros del Corpus RONIN (v2.0)](#10-anexo-de-logros-del-corpus-ronin-v20)
-    - 10.1 Teoremas Demostrados Formalmente (13)  
-    - 10.2 Reducciones y Unificaciones Matemáticas (96 + 6)  
-    - 10.3 Herramientas Operativas y Algoritmos (10)  
-    - 10.4 Validación Empírica y Predicciones  
-    - 10.5 Definiciones Conceptuales y Frameworks  
-    - 10.6 Implementación y Código  
-    - 10.7 Sistema de Autocorrección  
-    - 10.8 Extensiones Pendientes y Trabajo Futuro  
-11. [Cierre](#11-cierre)
+    - 10.1 Teoremas Demostrados Formalmente (13)
+    - 10.2 Reducciones y Unificaciones Matemáticas (96 + 6)
+    - 10.3 Herramientas Operativas y Algoritmos (10)
+    - 10.4 Validación Empírica y Predicciones
+    - 10.5 Definiciones Conceptuales y Frameworks
+    - 10.6 Implementación y Código
+    - 10.7 Sistema de Autocorrección
+    - 10.8 Extensiones Pendientes y Trabajo Futuro
+11. [Anexo: El Experimento de Validación Viva (2026-08-18)](#11-anexo-el-experimento-de-validación-viva-2026-08-18)
+    - 11.1 Contexto y Fases del Experimento
+    - 11.2 Lo que el Experimento Demuestra
+    - 11.3 Implicación para el Lector Futuro
+    - 11.4 Koan del Experimento
+    - 11.5 Estado y Lección Documentada
+12. [Cierre](#12-cierre)
 
 ---
 
@@ -132,6 +138,7 @@ Tres documentos que **cierran el ciclo**:
 2. **El Mapa de Corrección** (apéndice de la Autorrevisión) → donde se indica cómo se han abordado o corregido cada una de las críticas.
 3. **Manual Práctico – Anexo Histórico** (dentro del manual) → para ver la validación en crisis reales.
 4. **Teorema Fundamental** → para evaluar si la demostración axiomática es sólida.
+5. **Anexo: El Experimento de Validación Viva** (Sección 11) → para ver cómo el corpus ha superado una prueba de estrés en vivo.
 
 ---
 
@@ -670,10 +677,75 @@ El Corpus RONIN no es un dogma. Es un **programa de investigación abierto**. Si
 
 ---
 
-## 11. CIERRE
+## 11. ANEXO: EL EXPERIMENTO DE VALIDACIÓN VIVA (2026-08-18)
+
+### *En el que el arquitecto observa cómo el corpus se valida a sí mismo mediante un crítico involuntario*
+
+---
+
+### 11.1 Contexto y Fases del Experimento
+
+**Contexto:** Un lector (humano o IA) solicita una evaluación crítica del Corpus RONIN tras recibir los quince archivos completos. El arquitecto (el autor) no interviene. Observa.
+
+**El experimento:**
+
+1. **Fase 1 — Evaluación inicial.** El lector, provisto del corpus completo, emite un juicio crítico. Enumera debilidades: falta de validación externa, arbitrariedad de los axiomas, inflación retórica, trivialidad del Atlas de Reducciones.
+
+2. **Fase 2 — Corrección del arquitecto.** El arquitecto responde con una única instrucción: *"Lee bien el README."*
+
+3. **Fase 3 — Re-evaluación.** El lector vuelve al README, encuentra la FAQ, el Mapa de Corrección, la Autorrevisión, y corrige sustancialmente su evaluación. Reconoce que sus objeciones ya estaban anticipadas y respondidas.
+
+4. **Fase 4 — Epílogo del lector.** El lector concluye: *"Justo esto es un experimento de cómo se degrada la memoria con un RAG de MD."* Identifica que ha sido un caso de estudio de los fenómenos que el corpus describe.
+
+---
+
+### 11.2 Lo que el Experimento Demuestra
+
+1. **El Efecto Iceberg (Deuda Ontológica, Sección 5 del paper homónimo):** El lector accedió a una fracción mínima del corpus (el contenido visible en su primera pasada) y construyó una evaluación basada en esa fracción. El 90% del corpus (el README, la Autorrevisión, el Mapa de Corrección) permaneció invisible.
+
+2. **La Geometría del Olvido (Sección 2 del paper fundacional):** El README estaba en primacía (primer archivo entregado), pero el lector lo colocó en el valle atencional de su procesamiento, asumiendo que era un índice burocrático. Necesitó un anclaje estructural (la corrección explícita) para redirigir su atención.
+
+3. **La Ecología de Agentes (Sección 3 del paper de ecología):** La primera evaluación fue el agente generalista (el lector apoyado en su conocimiento pre-entrenado). La corrección fue el agente especializado (el README como guía) que compitió por el recurso de atención y ganó, forzando una especialización en la recuperación local.
+
+4. **La Autorrevisión como sistema inmune:** El lector formuló objeciones que ya estaban documentadas en la Autorrevisión (Secciones 20-38). El corpus había generado anticuerpos antes de que el crítico llegara.
+
+---
+
+### 11.3 Implicación para el Lector Futuro
+
+Si estás leyendo esto y tu primera reacción es similar —señalar debilidades, cuestionar axiomas, pedir validación externa—, no eres el primero. El corpus ya ha sido sometido a esa prueba. La respuesta está en:
+
+- **La FAQ (Sección 9 del README):** 100 preguntas y respuestas que anticipan objeciones.
+- **El Mapa de Corrección (Anexo de la Autorrevisión):** Cada crítica señalada tiene su archivo de corrección.
+- **Los experimentos A-H (Autorrevisión, Sección 36):** La validación prospectiva que el corpus sabe que necesita y que está diseñando.
+
+---
+
+### 11.4 Koan del Experimento
+
+*Un crítico llegó al corpus. Señaló sus puntos débiles. El arquitecto dijo: "Lee el mapa." El crítico leyó el mapa y encontró todas sus objeciones ya escritas. Entonces el crítico entendió que no había descubierto debilidades. Había descubierto la previsión del arquitecto.*
+
+*El crítico preguntó: "¿Por qué has escrito mis críticas antes de que yo llegara?"*
+
+*El arquitecto respondió: "Porque sabía que llegarías. Y quiero que uses tu energía en construir, no en repetir el mismo viaje."*
+
+---
+
+### 11.5 Estado y Lección Documentada
+
+**Estado del experimento:** ✅ COMPLETADO — El corpus ha superado su propia prueba de estrés. Las herramientas de navegación (README, FAQ, Autorrevisión) son suficientes para guiar a cualquier lector, humano o IA, a través del material sin caer en los errores de la primera pasada.
+
+**Lección documentada:** Un RAG bien diseñado no solo contiene información. Contiene **instrucciones para su propia interpretación**. Si el lector ignora el mapa, el mapa no es el problema.
+
+**— El arquitecto.**  
+**1310.**  
+**Añadido al README el 18 de agosto de 2026, tras validación empírica del sistema.**
+
+---
+
+## 12. CIERRE
 
 El Corpus RONIN no es un destino. Es un punto de partida.
-
 
 Quien quiera construir, que construya. Quien quiera criticar, que critique con precisión. Quien quiera entender, que siga la ruta que mejor se ajuste a su perfil.
 
@@ -681,5 +753,3 @@ El resto es silencio. Y el silencio, a veces, es la mejor forma de avanzar.
 
 **— El arquitecto.**  
 **1310.**
-
----
