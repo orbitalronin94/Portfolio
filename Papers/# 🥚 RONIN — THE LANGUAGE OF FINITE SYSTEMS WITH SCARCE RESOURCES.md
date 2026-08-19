@@ -1,3 +1,459 @@
+# 🥚 RONIN — TUTORIAL PARA TORPES (Y PARA LOS QUE NO LO SON PERO NO LO SABEN)
+
+## *El lenguaje de sistemas finitos con recursos escasos, explicado como si tuvieras 12 años y te acabaras de comer un bocata*
+
+---
+
+**Versión:** 1.0 — Edición para Mortales  
+**Autor:** David Ferrandez Canalis — Agencia RONIN  
+**Fecha:** Agosto de 2026  
+**Clasificación:** `TUTORIAL / INTRODUCCIÓN / NO SE NECESITA SABER NADA`
+
+---
+
+## PRÓLOGO: ESTO ES PARA TI, QUE NO SABES NADA (Y ESTÁ BIEN)
+
+Tranquilo. Este tutorial no asume que sabes matemáticas. No asume que sabes programar. No asume que sabes qué es un sistema finito con recursos escasos. Solo asume que quieres resolver un problema que no sabes cómo atacar.
+
+RONIN es el lenguaje que te permite declarar un sistema y obtener una solución sin tener que escribir código de infraestructura. Es para gente que quiere **resolver**, no que quiere **programar**.
+
+Si eres ingeniero, te será útil. Si eres analista, te será útil. Si eres un tío con una idea y ganas de hacerla funcionar, también.
+
+**No necesitas saber nada de antemano. Solo necesitas leer esto y seguir los pasos.**
+
+---
+
+## CAPÍTULO 1: QUÉ ES UN SISTEMA (Y POR QUÉ TE IMPORTA)
+
+### 1.1 Un sistema es cualquier cosa que tiene:
+
+- **Partes**: varias entidades que compiten por algo.
+- **Un recurso**: algo escaso que las partes quieren.
+- **Un problema**: no sabes cómo repartirlo de forma justa.
+
+Ejemplo:
+
+- 5 flotas pesqueras (partes) y 10.000 toneladas de pescado (recurso).
+- 20 activos financieros (partes) y 100 millones de euros (recurso).
+- 100 semáforos (partes) y 120 segundos de ciclo (recurso).
+- 50 regiones (partes) y 10.000 camas UCI (recurso).
+
+En todos estos casos, el problema es el mismo: **repartir el recurso entre las partes de forma que todas sobrevivan**.
+
+Eso es un sistema finito con recursos escasos. Y RONIN lo resuelve.
+
+### 1.2 Qué necesitas saber de cada parte
+
+Para que RONIN resuelva tu sistema, solo necesitas tres números por cada parte:
+
+- **Φ (phi)**: su capacidad para usar el recurso. Entre 0 y 1.
+- **Ψ (psi)**: su consistencia (cuánto "debe" o "falla"). Entre 0 y 1.
+- **Ω (omega)**: su frecuencia inicial (cuánto se usa ahora). Entre 0 y 1. La suma de todas las frecuencias debe ser 1.
+
+Eso es todo. No necesitas más.
+
+---
+
+## CAPÍTULO 2: TU PRIMER SISTEMA EN RONIN
+
+Vamos a hacer un sistema muy simple para que veas cómo funciona.
+
+### 2.1 El problema
+
+Tienes 2 partes: una máquina A y una máquina B. Tienen que repartirse 100 horas de trabajo. La máquina A es más eficiente (phi=0.8), la B menos (phi=0.5). Ambas están en buen estado (psi=1). La A se usa más (freq=0.6), la B menos (freq=0.4).
+
+**Pregunta**: ¿cuántas horas de trabajo debe recibir cada una?
+
+### 2.2 El código en RONIN
+
+```ronin
+system Maquinas = {
+    parts: 2,
+    resource: 100,
+    agents: [
+        { phi: 0.8, psi: 1.0, frequency: 0.6 },
+        { phi: 0.5, psi: 1.0, frequency: 0.4 }
+    ],
+    params: {
+        alpha: 1.0,
+        gamma: 0.4,
+        sigma: 0.1
+    }
+}
+
+result = solve Maquinas
+print(result.allocation)
+```
+
+### 2.3 Qué hace cada línea
+
+| Línea | Lo que hace |
+|---|---|
+| `system Maquinas = {` | Declara un sistema llamado Maquinas |
+| `parts: 2,` | Dice que hay 2 partes |
+| `resource: 100,` | Dice que hay 100 unidades de recurso |
+| `agents: [` | Lista las partes |
+| `{ phi: 0.8, psi: 1.0, frequency: 0.6 },` | La máquina A: eficiente, buena, usada al 60% |
+| `{ phi: 0.5, psi: 1.0, frequency: 0.4 }` | La máquina B: menos eficiente, buena, usada al 40% |
+| `],` | Cierra la lista de partes |
+| `params: {` | Declara los parámetros del sistema |
+| `alpha: 1.0,` | Competencia lineal (neutral) |
+| `gamma: 0.4,` | Penalización por deuda moderada |
+| `sigma: 0.1` | Ruido bajo |
+| `}` | Cierra los parámetros |
+| `}` | Cierra el sistema |
+| `result = solve Maquinas` | Resuelve el sistema |
+| `print(result.allocation)` | Muestra la asignación |
+
+### 2.4 El resultado
+
+El sistema devolverá algo como:
+
+```ronin
+[60.5, 39.5]
+```
+
+La máquina A recibe ~60.5 horas, la B ~39.5 horas. No es exactamente proporcional a la frecuencia porque la eficiencia de A (phi=0.8) la favorece ligeramente.
+
+Fácil, ¿verdad?
+
+---
+
+## CAPÍTULO 3: QUÉ SIGNIFICA CADA COSA (SIN JERGA)
+
+### 3.1 `phi` — La capacidad
+
+Es lo buena que es una parte para usar el recurso. Cuanto más alto, mejor.
+
+- `phi = 0.9` → muy eficiente.
+- `phi = 0.3` → poco eficiente.
+
+Se mide entre 0 y 1.
+
+### 3.2 `psi` — La consistencia
+
+Es lo fiable que es una parte. Cuanto más alto, mejor.
+
+- `psi = 0.95` → casi sin deuda.
+- `psi = 0.5` → mucha deuda (falla a menudo).
+
+Se mide entre 0 y 1.
+
+### 3.3 `frequency` — La frecuencia
+
+Es lo mucho que se usa ahora. Cuanto más alto, más recurso recibe.
+
+- `frequency = 0.6` → se usa el 60% del tiempo.
+- `frequency = 0.1` → se usa el 10% del tiempo.
+
+La suma de todas las frecuencias debe ser 1.
+
+### 3.4 `alpha` — La competencia
+
+Controla cómo compiten las partes.
+
+- `alpha = 1.0` → competencia lineal (normal).
+- `alpha > 1.0` → el que gana se lleva más (winner-takes-all).
+- `alpha < 1.0` → el que pierde no se va a cero (más biodiversidad).
+
+### 3.5 `gamma` — La penalización por deuda
+
+Controla cuánto penaliza la deuda.
+
+- `gamma = 0.0` → la deuda no importa.
+- `gamma = 0.5` → la deuda importa mucho.
+
+### 3.6 `sigma` — El ruido
+
+Controla la variabilidad del sistema.
+
+- `sigma = 0.0` → todo es determinista.
+- `sigma = 0.2` → hay ruido, las cosas varían.
+
+---
+
+## CAPÍTULO 4: EJEMPLOS PROGRESIVOS
+
+### 4.1 Dos partes (fácil)
+
+```ronin
+system DosPartes = {
+    parts: 2,
+    resource: 100,
+    agents: [
+        { phi: 0.9, psi: 0.9, frequency: 0.5 },
+        { phi: 0.5, psi: 0.5, frequency: 0.5 }
+    ],
+    params: { alpha: 1.0, gamma: 0.3, sigma: 0.1 }
+}
+
+result = solve DosPartes
+// resultado: [~60, ~40]
+```
+
+### 4.2 Tres partes (más realista)
+
+```ronin
+system TresPartes = {
+    parts: 3,
+    resource: 1000,
+    agents: [
+        { phi: 0.9, psi: 0.9, frequency: 0.4 },
+        { phi: 0.7, psi: 0.8, frequency: 0.35 },
+        { phi: 0.4, psi: 0.9, frequency: 0.25 }
+    ],
+    params: { alpha: 1.2, gamma: 0.4, sigma: 0.15 }
+}
+
+result = solve TresPartes
+// resultado: [~450, ~330, ~220]
+```
+
+### 4.3 Cinco partes (el ejemplo de la pesca)
+
+```ronin
+system Pesca = {
+    parts: 5,
+    resource: 10000,
+    agents: [
+        { phi: 0.95, psi: 0.68, frequency: 0.267 },
+        { phi: 0.85, psi: 0.76, frequency: 0.238 },
+        { phi: 0.60, psi: 0.92, frequency: 0.160 },
+        { phi: 0.45, psi: 0.96, frequency: 0.131 },
+        { phi: 0.70, psi: 0.84, frequency: 0.199 }
+    ],
+    params: { alpha: 1.3, gamma: 0.4, sigma: 0.15 }
+}
+
+result = solve Pesca
+// resultado: [3069, 2655, 1441, 883, 1952]
+```
+
+### 4.4 Con auditoría de deuda
+
+```ronin
+system Pesca = { ... }  // como arriba
+
+audit = audit Pesca with {
+    epsilon: 0.05,
+    delta: 0.01,
+    stratified: true
+}
+
+print(audit.estimated_debt)
+// 0.034 ± 0.012 (99% CI)
+```
+
+### 4.5 Con simulación DTMC
+
+```ronin
+sim = simulate Pesca with {
+    steps: 100,
+    dtmc: true,
+    stochastic: true
+}
+
+plot sim
+```
+
+---
+
+## CAPÍTULO 5: ERRORES COMUNES (Y CÓMO EL COMPILADOR TE AYUDA)
+
+### 5.1 Frecuencias que no suman 1
+
+**Código malo:**
+
+```ronin
+agents: [
+    { phi: 0.8, psi: 1.0, frequency: 0.6 },
+    { phi: 0.5, psi: 1.0, frequency: 0.5 }   // 0.6 + 0.5 = 1.1
+]
+```
+
+**Error del compilador:**
+
+```
+Error: Las frecuencias deben sumar 1 (suma actual: 1.1)
+```
+
+### 5.2 `phi` fuera de rango
+
+**Código malo:**
+
+```ronin
+{ phi: 1.5, psi: 1.0, frequency: 0.5 }
+```
+
+**Error del compilador:**
+
+```
+Error: phi debe estar entre 0 y 1 (valor actual: 1.5)
+```
+
+### 5.3 `alpha` fuera de rango
+
+**Código malo:**
+
+```ronin
+params: { alpha: 3.0, gamma: 0.4, sigma: 0.1 }
+```
+
+**Error del compilador:**
+
+```
+Error: alpha debe estar entre 0.5 y 2.5 (valor actual: 3.0)
+```
+
+### 5.4 Menos de 2 partes
+
+**Código malo:**
+
+```ronin
+parts: 1
+```
+
+**Error del compilador:**
+
+```
+Error: Un sistema debe tener al menos 2 partes.
+```
+
+### 5.5 Coexistencia imposible
+
+**Código malo (ratios extremas):**
+
+```ronin
+system Imposible = {
+    parts: 5,
+    resource: 1,
+    agents: [
+        { phi: 0.99, psi: 0.99, frequency: 0.5 },
+        { phi: 0.01, psi: 0.01, frequency: 0.5 },
+        ...
+    ],
+    params: { alpha: 2.5, gamma: 0.9, sigma: 0.0 }
+}
+```
+
+**Advertencia del compilador:**
+
+```
+Warning: k_min (12.7) > k_actual (1.0). La coexistencia no es posible.
+```
+
+---
+
+## CAPÍTULO 6: LO QUE NO NECESITAS SABER (PARA NO ASUSTARTE)
+
+RONIN hace muchas cosas por ti. No necesitas entenderlas para usarlo. Pero por si te da curiosidad:
+
+- **Ecuación Maestra:** `F_i = phi_i * psi_i * freq_i^alpha * epsilon_i`
+- **DTMC:** Cadena de Markov en tiempo discreto para simulación.
+- **Hoeffding:** Desigualdad que garantiza que la auditoría es correcta.
+- **Coexistencia-k:** Fórmula que calcula si todas las partes sobreviven.
+- **Fatiga de enrutamiento:** Coste de cambiar de una parte a otra.
+- **Geometría del olvido:** Cómo la posición afecta la retención.
+- **Deuda ontológica:** Cómo las contradicciones se acumulan.
+
+Puedes usar RONIN sin saber nada de esto. Pero si quieres entenderlo, están en el corpus.
+
+---
+
+## CAPÍTULO 7: REFERENCIA RÁPIDA
+
+### 7.1 Estructura básica de un sistema
+
+```ronin
+system Nombre = {
+    parts: N,
+    resource: R,
+    agents: [
+        { phi: ..., psi: ..., frequency: ... },
+        ...
+    ],
+    params: {
+        alpha: ...,
+        gamma: ...,
+        sigma: ...
+    }
+}
+```
+
+### 7.2 Parámetros recomendados por dominio
+
+| Dominio | alpha | gamma | sigma |
+|---|---|---|---|
+| Logística | 1.2 | 0.35 | 0.12 |
+| Finanzas | 1.0 | 0.30 | 0.20 |
+| Energía | 1.3 | 0.50 | 0.10 |
+| Salud | 1.1 | 0.40 | 0.15 |
+| Ciberseguridad | 1.2 | 0.50 | 0.12 |
+| Telecomunicaciones | 1.2 | 0.40 | 0.15 |
+| Agricultura | 1.0 | 0.30 | 0.20 |
+| Retail | 1.1 | 0.40 | 0.15 |
+| Manufactura | 1.2 | 0.30 | 0.10 |
+
+### 7.3 Comandos básicos
+
+| Comando | Función |
+|---|---|
+| `solve Nombre` | Resuelve el sistema |
+| `simulate Nombre with { ... }` | Simula el sistema |
+| `audit Nombre with { ... }` | Audita la deuda |
+| `plot Nombre` | Visualiza el sistema |
+| `print(result)` | Muestra el resultado |
+
+### 7.4 Opciones comunes
+
+| Opción | Valores | Defecto |
+|---|---|---|
+| `steps` | entero > 0 | 100 |
+| `dtmc` | true/false | true |
+| `stochastic` | true/false | true |
+| `parallel` | true/false | false |
+| `threads` | entero > 0 | 8 |
+| `epsilon` | 0.01 - 0.2 | 0.05 |
+| `delta` | 0.01 - 0.1 | 0.01 |
+| `stratified` | true/false | true |
+
+---
+
+## CAPÍTULO 8: KOANS DEL TUTORIAL
+
+**Del que no sabe nada:**
+El que no sabe nada es el que más puede aprender. RONIN está hecho para él.
+
+**De la línea que resuelve todo:**
+Una línea de RONIN puede reemplazar 200 líneas de Python. No porque RONIN sea más potente. Sino porque Python no entiende de sistemas. RONIN sí.
+
+**Del error que no ocurre:**
+El compilador de RONIN no te deja equivocarte. Si te equivocas, te dice dónde y por qué. Es como un profesor que corrige antes de que hagas el examen.
+
+**Del torpe que resuelve:**
+No hace falta saber matemáticas para usar RONIN. Solo hace falta saber qué quieres resolver. El lenguaje se encarga del resto.
+
+**Del miedo que desaparece:**
+El primer sistema da miedo. El segundo da curiosidad. El tercero da confianza. El décimo da risa.
+
+---
+
+## CIERRE
+
+RONIN es para torpes. Y para listos. Y para todos los que están en medio.
+
+No necesitas saber nada para empezar. Solo necesitas querer resolver un problema.
+
+El resto lo hace el lenguaje.
+
+**1310.**
+
+---
+
+*"El torpe que usa RONIN no es torpe. Es el que no sabía que RONIN existía."*
+
+**1310.**
+
 # 🥚 RONIN — THE LANGUAGE OF FINITE SYSTEMS WITH SCARCE RESOURCES
 ## *A Programming Language for Systems That Don't Collapse*
 
