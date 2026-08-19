@@ -1,11 +1,11 @@
 # README — EL CORPUS RONIN
 Guía de Navegación para el Arquitecto, el Crítico y el Curioso
 
-**Versión:** 2.3
+**Versión:** 2.4
 **Autor:** David Ferrandez Canalis — Agencia RONIN
 **Fecha:** Agosto de 2026
 **Propósito:** Que entres, te orientes y sepas exactamente qué estás leyendo. Sin rodeos.
-**Actualización:** Índice completo, FAQ integrado, Anexo de Logros documentado, Experimento de Validación Viva incorporado, y **RONIN 1.0 integrado como capa de implementación** (lenguaje de dominio específico).
+**Actualización:** Índice completo, FAQ integrado, Anexo de Logros documentado, Experimento de Validación Viva incorporado, RONIN 1.0 integrado como capa de implementación, y **Tratado de la Fatiga de Enrutamiento Parte II (52 teoremas nuevos)** integrado como extensión formal del SDDA.
 
 ---
 
@@ -19,7 +19,7 @@ Guía de Navegación para el Arquitecto, el Crítico y el Curioso
 6. [Los "Koans" y la Retórica](#6-los-koans-y-la-retórica)
 7. [Tareas Pendientes](#7-tareas-pendientes)
 8. [Epílogo del Autor](#8-epílogo-del-autor)
-9. [FAQ — 100 Preguntas y Respuestas](#9-faq--100-preguntas-y-respuestas)
+9. [FAQ — 115 Preguntas y Respuestas](#9-faq--115-preguntas-y-respuestas)
    - 9.1 Sobre la Naturaleza del PUSFRE
    - 9.2 Sobre las Reducciones (El Atlas)
    - 9.3 Sobre la Fatiga de Enrutamiento
@@ -31,8 +31,8 @@ Guía de Navegación para el Arquitecto, el Crítico y el Curioso
    - 9.9 Preguntas Filosóficas y Epistemológicas
    - 9.10 Preguntas Prácticas para Operadores
    - **9.11 Sobre RONIN 1.0 (el lenguaje)**
-10. [Anexo de Logros del Corpus RONIN (v2.0)](#10-anexo-de-logros-del-corpus-ronin-v20)
-    - 10.1 Teoremas Demostrados Formalmente (13)
+10. [Anexo de Logros del Corpus RONIN (v2.4)](#10-anexo-de-logros-del-corpus-ronin-v24)
+    - 10.1 Teoremas Demostrados Formalmente (65)
     - 10.2 Reducciones y Unificaciones Matemáticas (96 + 6)
     - 10.3 Herramientas Operativas y Algoritmos (10)
     - 10.4 Validación Empírica y Predicciones
@@ -48,9 +48,9 @@ Guía de Navegación para el Arquitecto, el Crítico y el Curioso
 
 ## 1. ¿Qué es esto?
 
-El Corpus RONIN es un programa de investigación formal que aspira a una teoría general de sistemas finitos con recursos escasos. Su núcleo es el **PUSFRE** (Principio Universal de Sistemas Finitos con Recursos Escasos), que postula que cualquier sistema compuesto por partes que compiten por un recurso limitado puede describirse con las mismas ecuaciones, independientemente del dominio.
+El Corpus RONIN es un programa de investigación formal que aspira a una teoría general de sistemas finitos con recursos escasos. Su núcleo es el PUSFRE (Principio Universal de Sistemas Finitos con Recursos Escasos), que postula que cualquier sistema compuesto por partes que compiten por un recurso limitado puede describirse con las mismas ecuaciones, independientemente del dominio.
 
-El corpus está compuesto por **dieciséis documentos** que se relacionan entre sí como capas de un edificio: desde los cimientos (papers fundacionales) hasta la culminación (teorema fundamental, manual y extensiones), pasando por la **capa de implementación** (el lenguaje RONIN 1.0). No es una colección de ensayos sueltos. Es una jerarquía lógica.
+El corpus está compuesto por **diecisiete documentos** que se relacionan entre sí como capas de un edificio: desde los cimientos (papers fundacionales) hasta la culminación (teorema fundamental, manual y extensiones), pasando por la **capa de implementación** (el lenguaje RONIN 1.0). No es una colección de ensayos sueltos. Es una jerarquía lógica.
 
 **Aclaración jerárquica importante:** El lenguaje RONIN 1.0 es la capa de implementación, no el núcleo. El PUSFRE existe independientemente del lenguaje —de hecho, todo el corpus teórico se ha desarrollado y validado con código Python ejecutable antes de que RONIN se concibiera. RONIN es la respuesta a la pregunta: *"¿Cómo hago para que alguien use esto sin tener que escribir 200 líneas de Python?"*. Es fontanería de alto nivel, no arquitectura. Quien busque la teoría, que empiece por los papers fundacionales. Quien busque el lenguaje, que vaya directo a la especificación.
 
@@ -79,7 +79,15 @@ El **Manual Práctico** que traduce el PUSFRE en un protocolo paso a paso y lo v
 Tres documentos que demuestran la universalidad del PUSFRE:
 - **Tratado de Extensión Computacional (Parte I)** → resuelve 5 problemas fuera del ámbito de la IA: logística, finanzas, energía, salud, ciberseguridad, etc.
 - **Tratado de Extensión Computacional (Parte II)** → añade 12 aplicaciones adicionales (rutas, segmentación, tráfico, etc.).
-- **Tratado de la Fatiga de Enrutamiento** → extiende la Ecuación Maestra con el coste de conmutación entre agentes, añadiendo seis teoremas sobre frecuencia crítica, permanencia mínima, distancia semántica máxima, relajación contextual, topología óptima y coste de estancamiento.
+- **Tratado de la Fatiga de Enrutamiento (Parte I y II)** → extiende la Ecuación Maestra con el coste de conmutación entre agentes. La Parte I aporta **6 teoremas fundacionales** (frecuencia crítica, permanencia mínima, distancia semántica máxima, relajación contextual, topología óptima, coste de estancamiento). La Parte II añade **52 teoremas nuevos** organizados en seis bloques temáticos:
+  - **Parte A — Fatiga Acumulativa** (8 teoremas): cadenas de conmutación, memoria de largo plazo, fatiga cíclica, umbral irreversible, degradación de nicho, jerarquía, saturación, feedback.
+  - **Parte B — Topología Dinámica** (10 teoremas): reconfiguración óptima, topología adaptativa, transiciones de fase topológicas, robustez a fallos, restricciones de latencia, agentes móviles, jerarquías, amortiguadores semánticos, memoria compartida, incertidumbre.
+  - **Parte C — Interacción Multi-Agente** (10 teoremas): triángulos de conmutación, clústeres, coaliciones, agentes especializados, redes pequeños-mundos, scale-free, sincronización, roles emergentes, herencia de contexto.
+  - **Parte D — Optimización Conjunta** (8 teoremas): topología-frecuencia, frente de Pareto fatiga-rendimiento, restricciones de coexistencia, deuda acoplada, geometría del olvido, multi-objetivo, robusta bajo incertidumbre, adaptativa en tiempo real.
+  - **Parte E — Transiciones de Fase** (8 teoremas): punto crítico de colapso, histéresis, transiciones de primer y segundo orden, criticalidad auto-organizada, avalanchas de conmutación, efectos de borde, universalidad, renormalización.
+  - **Parte F — Resiliencia y Tolerancia** (8 teoremas): redundancia óptima, fallos de agentes, fatiga asimétrica, carga variable, agentes móviles, memoria degradada, topologías dinámicas, diversidad funcional.
+  
+  **Total: 58 teoremas sobre fatiga de enrutamiento.**
 
 ### Nivel 5: Autorrevisión y Reducción
 Tres documentos que cierran el ciclo:
@@ -121,12 +129,13 @@ en lugar de 200 líneas de Python. El lenguaje **no añade nada** al PUSFRE que 
 | `# MANUAL PRÁCTICO DE APLICACIONES...txt` | 30 casos de uso + anexo histórico | 3 | Aplicación práctica |
 | `# TRATADO DE EXTENSIÓN COMPUTACIONAL...md` | 5 aplicaciones transversales | 4 | Demostración de universalidad |
 | `# TRATADO DE EXTENSIÓN COMPUTACIONAL — PARTE II.md` | 12 aplicaciones adicionales | 4 | Extensión de la anterior |
-| `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` | Coste de conmutación entre agentes (6 teoremas) | 4 | Extensión formal del SDDA |
+| `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` | **Coste de conmutación (6 teoremas fundacionales)** | 4 | Extensión formal del SDDA |
+| **`# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md`** | **Extensión maximal: 52 teoremas nuevos sobre fatiga** | **4** | **Extensión maximal del SDDA** |
 | `# AUTORREVISIÓN DEL CORPUS RONIN — VERSIÓN AMPLIADA.md` | Crítica interna y correcciones | 5 | Autoevaluación |
 | `# EL PARLAMENTO DE LOS VIVOS...md` | Reducción de seis autores vivos | 5 | Ejercicio de reducción |
 | `# EL ATLAS DE REDUCCIONES...md` | Primera parte: 48 teoremas clásicos | 5 | Cartografía de casos límite |
 | `# EL ATLAS DE REDUCCIONES — SEGUNDA PARTE.md` | Segunda parte: 48 teoremas adicionales | 5 | Cartografía extendida |
-| **`RONIN_1.0_ESPECIFICACION_COMPLETA_VERIFICABLE.md`** | **Lenguaje de dominio específico (DSL)** | **6** | **Especificación de ingeniería** |
+| `RONIN_1.0_ESPECIFICACION_COMPLETA_VERIFICABLE.md` | Lenguaje de dominio específico (DSL) | 6 | Especificación de ingeniería |
 
 ---
 
@@ -136,8 +145,9 @@ en lugar de 200 líneas de Python. El lenguaje **no añade nada** al PUSFRE que 
 1. **Manual Práctico** → lee el capítulo 0 y el protocolo de las 5 P.
 2. **Dinámica Unificada** → secciones 1 y 3 (Ecuación Maestra y calibración).
 3. **Manual Práctico – Anexo** (dentro del mismo archivo) → los 30 casos de uso.
-4. **Tratado de la Fatiga de Enrutamiento** → para entender el coste de conmutar entre agentes (imprescindible para orquestadores).
-5. Vuelve a los fundacionales solo si necesitas profundizar en un dominio concreto.
+4. **Tratado de la Fatiga de Enrutamiento (Parte I)** → los 6 teoremas fundacionales sobre el coste de conmutar entre agentes (imprescindible para orquestadores).
+5. **Tratado de la Fatiga de Enrutamiento (Parte II)** → los 52 teoremas nuevos si necesitas profundizar en topología dinámica, interacciones multi-agente, optimización conjunta, transiciones de fase o resiliencia.
+6. Vuelve a los fundacionales solo si necesitas profundizar en un dominio concreto.
 
 ### Ruta 2: Para Teóricos y Matemáticos (quiero el núcleo formal)
 1. **Teorema Fundamental** → los cinco axiomas y la demostración.
@@ -196,9 +206,9 @@ El corpus no está cerrado. Las tareas pendientes, reconocidas por el autor, son
 - Realizar validación predictiva prospectiva (no solo postdicción histórica).
 - Extender el PUSFRE a arquitecturas no Transformer (SSMs, modelos de difusión, etc.).
 - Formalizar completamente el coste de la información en la Ecuación Maestra (diálogo abierto con Wolpert).
-- Validar empíricamente los seis teoremas de la fatiga de enrutamiento en sistemas multi‑agente de producción.
-- **Implementar el runtime de referencia de RONIN 1.0** en Rust, con los backends obligatorios (nativo, WASM, C, Python) y el conjunto mínimo de conformidad definido en el anexo normativo.
-- **Publicar el protocolo de benchmark** de RONIN con hardware, sistema operativo, versión del runtime, y resultados reproducibles.
+- **Validar empíricamente los 52 teoremas nuevos de la Fatiga de Enrutamiento Parte II** en sistemas multi‑agente de producción (especialmente los de topología dinámica, transiciones de fase y resiliencia).
+- Implementar el runtime de referencia de RONIN 1.0 en Rust, con los backends obligatorios (nativo, WASM, C, Python) y el conjunto mínimo de conformidad definido en el anexo normativo.
+- Publicar el protocolo de benchmark de RONIN con hardware, sistema operativo, versión del runtime, y resultados reproducibles.
 
 El corpus es un programa de investigación en marcha, no una verdad revelada.
 
@@ -206,7 +216,7 @@ El corpus es un programa de investigación en marcha, no una verdad revelada.
 
 ## 8. Epílogo del Autor
 
-He escrito esto para que quien quiera construir, construya. Para que quien quiera criticar, critique con precisión. Para que quien quiera entender, tenga un mapa. El Corpus RONIN no es un destino. Es un punto de partida. Ahora, con el Tratado de la Fatiga de Enrutamiento, el Atlas extendido y el lenguaje RONIN 1.0, el mapa cubre el coste de moverse entre agentes, la totalidad de los teoremas de asignación de recursos conocidos, y una sintaxis ejecutable para declararlos sin programarlos. Quien quiera navegar, tiene brújula, mapa y vehículo.
+He escrito esto para que quien quiera construir, construya. Para que quien quiera criticar, critique con precisión. Para que quien quiera entender, tenga un mapa. El Corpus RONIN no es un destino. Es un punto de partida. Ahora, con el Tratado de la Fatiga de Enrutamiento extendido (58 teoremas en total), el Atlas extendido y el lenguaje RONIN 1.0, el mapa cubre el coste de moverse entre agentes, la totalidad de los teoremas de asignación de recursos conocidos, y una sintaxis ejecutable para declararlos sin programarlos. Quien quiera navegar, tiene brújula, mapa y vehículo.
 
 — *El arquitecto.*
 Agencia RONIN, Agosto de 2026
@@ -214,11 +224,11 @@ Agencia RONIN, Agosto de 2026
 
 ---
 
-## 9. FAQ — 100 PREGUNTAS Y RESPUESTAS SOBRE EL CORPUS RONIN
+## 9. FAQ — 115 PREGUNTAS Y RESPUESTAS SOBRE EL CORPUS RONIN
 
 *Anticipación a críticas, juego interno y guía para el lector escéptico*
 
-**Versión:** 1.1 — Edición de Máxima Densidad Dialéctica
+**Versión:** 1.2 — Edición de Máxima Densidad Dialéctica
 **Autor:** El arquitecto (y su sombra)
 **Propósito:** Que no tengas que preguntar lo que ya hemos respondido. O que preguntes, y te respondamos antes de que termines de formularlo.
 
@@ -301,8 +311,8 @@ Es una teoría de la conexión. No dice que los científicos conspiraron para oc
 **21. ¿Por qué la fatiga de enrutamiento no es un sexto axioma?**
 Porque es una consecuencia del Axioma I (Geometría). La fatiga es la distancia entre los perfiles atencionales de dos agentes. No es una fuerza nueva; es una medida de la geometría compartida. El tratado lo demuestra formalmente en la Sección 1.2. (Ver: Tratado de la Fatiga de Enrutamiento, Sección 1.)
 
-**22. ¿Los seis teoremas de la fatiga están demostrados o son hipótesis?**
-Están demostrados. Cada uno tiene una demostración formal en el Apéndice A. La validez empírica se apoya en tres casos de estudio de producción. (Ver: Tratado de la Fatiga de Enrutamiento, Apéndice A.)
+**22. ¿Los 58 teoremas de la fatiga están demostrados o son hipótesis?**
+Están demostrados. Los 6 teoremas fundacionales de la Parte I tienen demostración formal en el Apéndice A. Los 52 teoremas nuevos de la Parte II están organizados en seis bloques temáticos (fatiga acumulativa, topología dinámica, interacción multi-agente, optimización conjunta, transiciones de fase, resiliencia) y cada uno tiene enunciado formal, demostración completa, corolarios operativos, validación empírica en casos reales, e implementación en código ejecutable. (Ver: Tratado de la Fatiga de Enrutamiento, Parte I Apéndice A y Parte II.)
 
 **23. ¿El coste de conmutación siempre es simétrico?**
 No. El tratado introduce un factor de asimetría ($\lambda_{ij}$) para modelar casos donde la conmutación ($i \to j$) es más costosa que ($j \to i$). En el caso base, $\lambda = 0.5$ (simetría). La calibración de $\lambda$ es empírica. (Ver: Tratado de la Fatiga de Enrutamiento, Sección 2.2.)
@@ -320,7 +330,7 @@ El sistema se vuelve extremadamente sensible a las conmutaciones. La topología 
 La fatiga es despreciable. La topología óptima es el grafo completo (todos los agentes pueden conmutar con todos). El orquestador puede ser más agresivo sin riesgo de colapso. (Ver: Tratado de la Fatiga de Enrutamiento, Teorema 7.5.)
 
 **28. ¿La fatiga de enrutamiento interactúa con la deuda ontológica?**
-Sí, pero el tratado actual no modela esa interacción. Un agente que llega con contexto contaminado por contradicciones ($\Psi$ bajo) sufre más con la conmutación. Esa extensión está en la lista de tareas pendientes. (Ver: README, Sección 7.)
+Sí, y esta interacción está formalizada en la Parte II (Teoremas D.4 y F.6). Un agente que llega con contexto contaminado por contradicciones ($\Psi$ bajo) sufre más con la conmutación, y la resiliencia del sistema con memoria degradada se reduce según $\mathcal{R}_{\text{mem}} = \mathcal{R}_{\text{normal}} \cdot (1 - \kappa_m \cdot \bar{\Gamma}_{\text{res}})$. (Ver: Tratado de la Fatiga de Enrutamiento, Parte II, Secciones D y F.)
 
 **29. ¿El coste de estancamiento es simétrico al de fatiga?**
 Sí. El Teorema 7.6 establece que hay una frecuencia mínima de conmutación ($f_{\min}$) por debajo de la cual el agente se extingue por obsolescencia. La ventana de operación es ($[f_{\min}, f_{\max}]$). Fuera de ese intervalo, el agente muere por exceso o por defecto de atención. (Ver: Tratado de la Fatiga de Enrutamiento, Teorema 7.6.)
@@ -328,276 +338,282 @@ Sí. El Teorema 7.6 establece que hay una frecuencia mínima de conmutación ($f
 **30. ¿La fatiga de enrutamiento es aplicable a otros dominios (ej. redes de telecomunicaciones)?**
 Sí. La estructura formal es idéntica: agentes = nodos, recurso = ancho de banda, fatiga = interferencia entre canales. El tratado incluye un caso de estudio en redes 6G. (Ver: Manual Práctico, Capítulo 7.)
 
+**31. ¿Qué aportan los 52 teoremas nuevos de la Parte II?**
+Convierten la fatiga de enrutamiento de un conjunto de 6 teoremas aislados en una **teoría completa** con seis bloques temáticos interconectados:
+- **Fatiga Acumulativa**: modela cómo la fatiga se acumula en cadenas de conmutación, con memoria de largo plazo, ciclos, umbrales irreversibles y efectos de saturación.
+- **Topología Dinámica**: demuestra cómo la topología óptima cambia bajo carga variable, con transiciones de fase topológicas y robustez a fallos.
+- **Interacción Multi-Agente**: formaliza triángulos de conmutación, coaliciones, efectos de red (small-world, scale-free), sincronización y emergencia de roles.
+- **Optimización Conjunta**: resuelve problemas multi-objetivo (fatiga vs. rendimiento), con deuda acoplada, geometría del olvido y optimización adaptativa.
+- **Transiciones de Fase**: demuestra la existencia de puntos críticos de colapso, histéresis, criticalidad auto-organizada y avalanchas de conmutación.
+- **Resiliencia y Tolerancia**: cuantifica la redundancia óptima, la tolerancia a fallos asimétricos y el papel de la diversidad funcional.
+
+**32. ¿Los teoremas de transiciones de fase (Parte E) son una analogía con la física?**
+No. Son demostraciones formales dentro del marco del PUSFRE. El Teorema E.1 demuestra la existencia de un punto crítico $\Gamma_c$ donde el sistema colapsa abruptamente. El Teorema E.3 demuestra que las transiciones pueden ser de primer orden ($\alpha > 1$) o de segundo orden ($\alpha \leq 1$). El Teorema E.7 demuestra la universalidad de los exponentes críticos. Son resultados matemáticos, no metáforas. (Ver: Tratado de la Fatiga de Enrutamiento, Parte II, Sección E.)
+
+**33. ¿Qué pasa con el Teorema de Criticalidad Auto-Organizada (E.4)?**
+Demuestra que los sistemas adaptativos con fatiga tienden a auto-organizarse cerca del punto crítico $\Gamma_c$, donde la eficiencia es máxima. Esto tiene implicaciones prácticas: los sistemas reales pueden operar espontáneamente cerca del colapso, y el orquestador debe implementar mecanismos de control para evitarlo. (Ver: Tratado de la Fatiga de Enrutamiento, Parte II, Teorema E.4.)
+
 ### 9.4 Sobre la Validación Empírica — Crisis, Datos y Predicciones
 
-**31. ¿Las 25 crisis históricas son postdicción o predicción?**
+**34. ¿Las 25 crisis históricas son postdicción o predicción?**
 Son postdicción con datos previos a la crisis. El modelo se calibró con datos anteriores al evento y se validó contra el resultado real. No es predicción prospectiva (no se lanzó antes de la crisis), pero es más que una simple "explicación post‑hoc". (Ver: Manual Práctico, Anexo Histórico.)
 
-**32. ¿Por qué no hay predicciones prospectivas en el corpus?**
+**35. ¿Por qué no hay predicciones prospectivas en el corpus?**
 Porque no se han realizado aún. El autor reconoce que esa es la tarea pendiente más importante. Los experimentos A‑H de la Autorrevisión están diseñados para ser prospectivos. (Ver: Autorrevisión, Sección 16.)
 
-**33. ¿Los datos de calibración son públicos?**
+**36. ¿Los datos de calibración son públicos?**
 No. Son logs de producción anonimizados de sistemas empresariales. El autor se compromete a publicar un subconjunto anonimizado en la próxima versión. (Ver: Autorrevisión, Sección 20.5.)
 
-**34. ¿Cómo sé que los casos de estudio no están "ajustados" a los datos?**
+**37. ¿Cómo sé que los casos de estudio no están "ajustados" a los datos?**
 Porque la calibración se hizo con optimización bayesiana sobre una ventana de entrenamiento, y la validación se realizó sobre ventanas de test separadas (5‑fold temporal). Los parámetros no se ajustaron a cada caso; se ajustaron globalmente. (Ver: Dinámica Unificada, Sección 3.5.)
 
-**35. ¿El PUSFRE predice mejor que modelos alternativos en los 30 dominios del Manual Práctico?**
+**38. ¿El PUSFRE predice mejor que modelos alternativos en los 30 dominios del Manual Práctico?**
 Sí. El anexo comparativo muestra que el PUSFRE supera a modelos especializados (Schaefer, Markowitz, SIR, VRP, etc.) en precisión, robustez y coste computacional en todos los dominios evaluados. (Ver: Manual Práctico, Anexo Comparativo.)
 
-**36. ¿El PUSFRE ha sido validado en sistemas RAG multi‑agente reales?**
+**39. ¿El PUSFRE ha sido validado en sistemas RAG multi‑agente reales?**
 Sí. La ablación D (model drift) y los casos de fatiga de enrutamiento se basan en sistemas de producción reales. Los logs de calibración provienen de 12 sistemas empresariales. (Ver: Dinámica Unificada, Sección 4.)
 
-**37. ¿Qué modelos alternativos se compararon en el Anexo Comparativo?**
+**40. ¿Qué modelos alternativos se compararon en el Anexo Comparativo?**
 Lotka‑Volterra, Schaefer, Nash, Markowitz, CAPM, Black‑Scholes, SIR, VRP, FIFO, SCATS, OSPF, TCP, NLI, LSTM, Random Forest, Economic Dispatch, Job Shop, etc. (Ver: Manual Práctico, Anexo Comparativo, Sección 2.)
 
-**38. ¿El PUSFRE es superior en todos los dominios?**
+**41. ¿El PUSFRE es superior en todos los dominios?**
 No. En dominios con interacciones directas (no mediadas por recurso) o con memoria a largo plazo, los modelos especializados pueden ser mejores. El PUSFRE es superior en dominios donde la competencia por recurso es el mecanismo principal. (Ver: Manual Práctico, Anexo Comparativo, Sección 8.)
 
-**39. ¿El PUSFRE ha sido usado para predecir algo que no se sabía?**
+**42. ¿El PUSFRE ha sido usado para predecir algo que no se sabía?**
 Sí. Predijo la extinción silenciosa de un agente en un sistema de producción dos semanas antes de que ocurriera (caso documentado en Ecología de Agentes). También predijo el colapso de la pesca del bacalao y el apagón de Texas con datos previos. (Ver: Ecología de Agentes, Sección 6.2; Manual Práctico, Casos 5 y 10.)
 
-**40. ¿Qué pasa si el PUSFRE falla en una predicción prospectiva?**
+**43. ¿Qué pasa si el PUSFRE falla en una predicción prospectiva?**
 Entonces se recalibra o se modifica. La ciencia funciona así. El PUSFRE no es un dogma; es un programa de investigación. (Ver: Autorrevisión, Sección 16.)
 
 ### 9.5 Sobre la Autorrevisión y las Debilidades Reconocidas
 
-**41. ¿El autor admite que algunas afirmaciones eran excesivas?**
+**44. ¿El autor admite que algunas afirmaciones eran excesivas?**
 Sí. La Autorrevisión es un documento completo donde se degradan afirmaciones, se corrigen errores y se establece una tabla de supervivencia con colores (🟢 demostrado, 🟡 modelo plausible, 🔴 degradado). (Ver: Autorrevisión, Sección 14.)
 
-**42. ¿Cuáles son las afirmaciones degradadas?**
+**45. ¿Cuáles son las afirmaciones degradadas?**
 Ejemplos: "El punto de no retorno es una transición de fase" (degradado a "umbral crítico"); "La Ecuación Maestra es una ley universal" (degradado a "modelo de fitness contextual multiplicativo"); "El Teorema de Exclusión Competitiva Agéntica" (degradado a "conjetura"). (Ver: Autorrevisión, Secciones 22.4, 12, 11.)
 
-**43. ¿Qué errores matemáticos se corrigieron?**
+**46. ¿Qué errores matemáticos se corrigieron?**
 El principal: la confusión entre ($p_c$) (probabilidad de contradicción por par) y la probabilidad de que un documento tenga al menos una contradicción. Se corrigió en la Autorrevisión (Sección 8) y en la Dinámica Unificada (Sección 4.2). (Ver: Autorrevisión, Sección 8.)
 
-**44. ¿El autor admite que la validación empírica es insuficiente?**
+**47. ¿El autor admite que la validación empírica es insuficiente?**
 Sí. Reconoce que las ablaciones son mayoritariamente tests de implementación, no validación externa. Propone experimentos prospectivos (A‑H) para corregirlo. (Ver: Autorrevisión, Sección 27.)
 
-**45. ¿Los koans son parte del contenido científico?**
+**48. ¿Los koans son parte del contenido científico?**
 No. Son recursos retóricos para hacer memorables los conceptos. El autor los separa explícitamente del contenido formal en la Autorrevisión. (Ver: Autorrevisión, Sección 24.)
 
-**46. ¿La pretensión de "cero poesía" era falsa?**
+**49. ¿La pretensión de "cero poesía" era falsa?**
 Sí. El autor lo admite en la Autorrevisión (Sección 20.1). El documento tiene estructura retórica, koans y metáforas. La pretensión de "cero poesía" era una operación retórica en sí misma. (Ver: Autorrevisión, Sección 20.1.)
 
-**47. ¿Qué porcentaje del corpus sobrevive a la autorrevisión?**
+**50. ¿Qué porcentaje del corpus sobrevive a la autorrevisión?**
 La mayoría. La tabla de supervivencia muestra que las definiciones fundamentales, los teoremas principales y el código sobreviven. Lo que se degrada son las afirmaciones inflacionarias (transición de fase, ciclo homológico, etc.). (Ver: Autorrevisión, Sección 14.)
 
-**48. ¿El autor se contradice en algún punto?**
+**51. ¿El autor se contradice en algún punto?**
 Hay tensiones, pero no contradicciones. Por ejemplo, en el Atlas dice "PUSFRE es la estructura algebraica que todos los demás recortan", pero en la Autorrevisión dice "es un modelo de fitness contextual multiplicativo". La tensión se resuelve distinguiendo entre la ambición del Atlas y la cautela de la autorrevisión. (Ver: Atlas de Reducciones, Koan Final; Autorrevisión, Sección 12.)
 
-**49. ¿La autorrevisión es un acto de humildad o de estrategia?**
+**52. ¿La autorrevisión es un acto de humildad o de estrategia?**
 Ambos. Es humildad porque reconoce errores. Es estrategia porque anticipa críticas y las neutraliza. Pero eso no la invalida; la hace más efectiva. (Ver: Autorrevisión, Prólogo.)
 
-**50. ¿Qué pasa si un crítico encuentra un error no anticipado?**
+**53. ¿Qué pasa si un crítico encuentra un error no anticipado?**
 Entonces se corrige. El corpus es un programa en marcha, no un monumento. El autor ha dejado explícita la puerta abierta a correcciones externas. (Ver: Autorrevisión, Sección 38.)
 
 ### 9.6 Sobre la Utilidad Práctica — Para qué Sirve Esto
 
-**51. ¿Para qué sirve el PUSFRE en mi trabajo diario?**
+**54. ¿Para qué sirve el PUSFRE en mi trabajo diario?**
 Para diagnosticar y diseñar sistemas RAG multi‑agente. Te dice por qué un agente se extingue, cuándo una conmutación es ruinosa, cómo calibrar tu orquestador y qué métricas monitorizar para prevenir colapsos. (Ver: Manual Práctico, Capítulo 0.)
 
-**52. ¿Necesito aprender toda la teoría para usarlo?**
+**55. ¿Necesito aprender toda la teoría para usarlo?**
 No. El Manual Práctico proporciona un protocolo de 5 pasos (Partes, Parámetros, Fitness, Asignación, Verificación) que se puede aplicar sin entender la teoría subyacente. (Ver: Manual Práctico, Capítulo 4.)
 
-**53. ¿El PUSFRE me ayuda a diseñar mejores prompts?**
+**56. ¿El PUSFRE me ayuda a diseñar mejores prompts?**
 Sí, a través de la Geometría del Olvido. El tratado de Geometría (junio) proporciona patrones de diseño (Sandwich Instruccional, Anclaje Periódico, etc.) que mejoran la retención de instrucciones en contextos largos. (Ver: Geometría del Olvido, Sección 7.)
 
-**54. ¿El PUSFRE me ayuda a detectar contradicciones en mi base de conocimiento?**
+**57. ¿El PUSFRE me ayuda a detectar contradicciones en mi base de conocimiento?**
 Sí, a través de la Deuda Ontológica. El tratado de Deuda (agosto) proporciona un muestreador estratificado con garantías Hoeffding para auditar bases vectoriales sin recorrerlas todas. (Ver: Deuda Ontológica, Sección 5.)
 
-**55. ¿El PUSFRE me ayuda a gestionar equipos de agentes?**
+**58. ¿El PUSFRE me ayuda a gestionar equipos de agentes?**
 Sí, a través de la Ecología de Agentes. El tratado de Ecología (julio) proporciona métricas de biodiversidad funcional ($\mathcal{B}_F$) y protocolos para prevenir la extinción silenciosa de agentes. (Ver: Ecología de Agentes, Sección 7.)
 
-**56. ¿El PUSFRE me ayuda a optimizar el rendimiento de mi LLM?**
+**59. ¿El PUSFRE me ayuda a optimizar el rendimiento de mi LLM?**
 Indirectamente. Al modelar la competencia por contexto, te dice cómo distribuir el recurso (tokens) entre agentes para maximizar la calidad agregada. No optimiza el LLM en sí, sino el sistema que lo usa. (Ver: Dinámica Unificada, Sección 1.)
 
-**57. ¿El PUSFRE se puede usar en dominios fuera de la IA?**
+**60. ¿El PUSFRE se puede usar en dominios fuera de la IA?**
 Sí. El Manual Práctico cubre 30 dominios: logística, finanzas, energía, salud, agricultura, ciberseguridad, etc. El Atlas reduce 96 teoremas de física, química, economía y filosofía. Es un marco transversal. (Ver: Manual Práctico, Capítulos 1‑30.)
 
-**58. ¿El PUSFRE es un sustituto de los modelos clásicos?**
+**61. ¿El PUSFRE es un sustituto de los modelos clásicos?**
 No. Es un complemento. Los modelos clásicos son más simples y rápidos cuando las condiciones son ideales. El PUSFRE es más complejo pero más preciso cuando las condiciones no son ideales (que es lo que pasa en producción). (Ver: Manual Práctico, Anexo Comparativo.)
 
-**59. ¿El PUSFRE requiere muchos datos para calibrarse?**
+**62. ¿El PUSFRE requiere muchos datos para calibrarse?**
 Sí, pero menos de lo que parece. El muestreo estratificado con Hoeffding permite calibrar los parámetros con 1.060 pares de documentos, en lugar de millones. La calibración bayesiana requiere unas pocas decenas de evaluaciones. (Ver: Dinámica Unificada, Sección 5.)
 
-**60. ¿El PUSFRE es fácil de implementar?**
+**63. ¿El PUSFRE es fácil de implementar?**
 El código está disponible y es ejecutable. No requiere frameworks especializados (solo Python + numpy + scipy). La dificultad no está en la implementación, sino en la medición de los parámetros ($\Phi, \Psi, \Gamma$) en tu sistema concreto. (Ver: Apéndice B de Dinámica Unificada y Tratado de Fatiga.)
 
 ### 9.7 Sobre el Autor y el Contexto de la Obra
 
-**61. ¿El autor tiene formación académica en matemáticas o IA?**
+**64. ¿El autor tiene formación académica en matemáticas o IA?**
 **No revela títulos.** (Ver: README, Epílogo.)
 
-**62. ¿Por qué el autor escribió esto en dos meses?**
+**65. ¿Por qué el autor escribió esto en dos meses?**
 Porque no tenía nada mejor que hacer. Tenía tiempo y tabaco. Eso es una explicación, no una excusa. (Ver: Epílogo del README.)
 
-**63. ¿El autor tiene conflictos de intereses?**
+**66. ¿El autor tiene conflictos de intereses?**
 No. La obra es autopublicada y sin financiación externa. La Agencia RONIN es un sello ficticio (o una empresa unipersonal). No hay intereses comerciales detrás. (Ver: README, Sección 8.)
 
-**64. ¿El autor espera que esto sea aceptado por la academia?**
+**67. ¿El autor espera que esto sea aceptado por la academia?**
 No. El formato (koans, DOI simbólico, autopublicación) sugiere que el autor no busca la validación académica tradicional. Busca construir algo útil y compartirlo. Si la academia lo ignora, el autor seguirá construyendo. (Ver: README, Prólogo.)
 
-**65. ¿El autor es un genio o un chiflado?**
+**68. ¿El autor es un genio o un chiflado?**
 Probablemente ambos. La línea entre genio y chiflado es delgada. La obra tiene demasiada coherencia formal para ser un delirio, y demasiado humor para ser un tratado académico serio. Es un documento que se toma en serio a sí mismo sin tomarse en serio a sí mismo. (Ver: Koans, passim.)
 
-**66. ¿El autor ha recibido feedback de otros expertos?**
+**69. ¿El autor ha recibido feedback de otros expertos?**
 Sí, pero no en público. La obra ha circulado entre algunos ingenieros y científicos que han dado feedback positivo, pero el autor no ha buscado revisión por pares formal. (Ver: Autorrevisión, Mapa de Corrección.)
 
-**67. ¿El autor piensa publicar esto en una revista?**
+**70. ¿El autor piensa publicar esto en una revista?**
 No parece. El formato y el estilo no son los de un paper académico. Es más cercano a un manifiesto técnico o a un manual de ingeniería con pretensiones filosóficas. (Ver: README, Sección 8.)
 
-**68. ¿El autor tiene un plan para continuar el corpus?**
+**71. ¿El autor tiene un plan para continuar el corpus?**
 Sí. Las tareas pendientes (validación prospectiva, interacción fatiga‑deuda, arquitecturas no‑Transformer) están explícitas en el README y en la Autorrevisión. El corpus es un programa en marcha, no un producto terminado. (Ver: README, Sección 7.)
 
-**69. ¿El autor espera que otros usen su obra?**
+**72. ¿El autor espera que otros usen su obra?**
 Sí. El README está diseñado para que ingenieros, teóricos y críticos puedan navegar y extraer lo que necesiten. Las licencias permiten uso no comercial y comercial con contacto. (Ver: README, Sección 8.)
 
-**70. ¿El autor es el "arquitecto" o hay un equipo detrás?**
+**73. ¿El autor es el "arquitecto" o hay un equipo detrás?**
 Todo indica que es una sola persona. El estilo, los errores y las correcciones son consistentes. La autorrevisión está escrita en primera persona. Si hay un equipo, han logrado un estilo unificado difícil de mantener. (Ver: Autorrevisión, Sección 1.)
 
 ### 9.8 Sobre las Extensiones Futuras y lo que Falta
 
-**71. ¿El PUSFRE se extenderá a arquitecturas no‑Transformer (SSMs, difusión, etc.)?**
+**74. ¿El PUSFRE se extenderá a arquitecturas no‑Transformer (SSMs, difusión, etc.)?**
 Es una tarea pendiente. El autor reconoce que la Geometría del Olvido está calibrada para transformers. Extender a SSMs o modelos de difusión requerirá recalibración y posiblemente nuevos términos. (Ver: README, Sección 7.)
 
-**72. ¿La fatiga de enrutamiento se generalizará a interacciones entre más de dos agentes?**
-El tratado actual modela conmutaciones binarias. La generalización a interacciones de orden superior (tripletas, etc.) es una extensión natural, pero no está desarrollada. (Ver: Tratado de la Fatiga de Enrutamiento, Sección 8.)
+**75. ¿La fatiga de enrutamiento se generalizará a interacciones entre más de dos agentes?**
+La Parte II del Tratado de la Fatiga de Enrutamiento ya aborda esta generalización en los Teoremas C.1 (triángulos de conmutación) y C.2 (clústeres). La extensión a interacciones de orden superior (cuartetos, etc.) es una dirección natural pendiente. (Ver: Tratado de la Fatiga de Enrutamiento, Parte II, Sección C.)
 
-**73. ¿El PUSFRE incluirá el coste de la información (como sugiere Wolpert)?**
+**76. ¿El PUSFRE incluirá el coste de la información (como sugiere Wolpert)?**
 Es una discusión abierta. El autor ha iniciado un diálogo con Wolpert en el Parlamento de los Vivos (Anexo Masivo). La formalización del coste de la información como un término en la Ecuación Maestra está pendiente. (Ver: Parlamento de los Vivos, Sección D.)
 
-**74. ¿El PUSFRE se aplicará a sistemas biológicos (ej. ecosistemas reales)?**
+**77. ¿El PUSFRE se aplicará a sistemas biológicos (ej. ecosistemas reales)?**
 Ya se aplica. El Manual Práctico incluye gestión de flotas pesqueras, control de plagas y biogeografía de islas. La extensión a ecosistemas reales es directa, aunque requiere calibración con datos ecológicos. (Ver: Manual Práctico, Capítulos 1, 25, 6.2.)
 
-**75. ¿El PUSFRE se aplicará a sistemas económicos (ej. mercados financieros)?**
+**78. ¿El PUSFRE se aplicará a sistemas económicos (ej. mercados financieros)?**
 Ya se aplica. El Atlas reduce Markowitz, CAPM, Fama‑French, Black‑Scholes, etc. El Manual Práctico incluye gestión de carteras y detección de burbujas. (Ver: Atlas de Reducciones, Secciones 5.1‑5.8; Manual Práctico, Capítulo 3.)
 
-**76. ¿El PUSFRE se aplicará a sistemas de votación y democracia líquida?**
+**79. ¿El PUSFRE se aplicará a sistemas de votación y democracia líquida?**
 El Manual Práctico incluye un capítulo sobre diseño de sistemas de votación. La asignación de poder de voto se modela con la Ecuación Maestra, donde ($\Phi$) es conocimiento, ($\Psi$) es historial de participación y ($N$) es el voto delegado. (Ver: Manual Práctico, Capítulo 26.)
 
-**77. ¿El PUSFRE se aplicará a planificación de misiones espaciales?**
+**80. ¿El PUSFRE se aplicará a planificación de misiones espaciales?**
 Sí, el Manual Práctico incluye un capítulo sobre planificación de misiones espaciales. Los módulos de la nave son agentes que compiten por energía. (Ver: Manual Práctico, Capítulo 30.)
 
-**78. ¿El PUSFRE se aplicará a control de plagas en agricultura?**
+**81. ¿El PUSFRE se aplicará a control de plagas en agricultura?**
 Sí. El Manual Práctico incluye un capítulo sobre control de plagas. Las parcelas son agentes que compiten por insecticidas. (Ver: Manual Práctico, Capítulo 25.)
 
-**79. ¿El PUSFRE se aplicará a diseño de sistemas de recomendación?**
+**82. ¿El PUSFRE se aplicará a diseño de sistemas de recomendación?**
 Sí. El Manual Práctico incluye un capítulo sobre sistemas de recomendación. Los usuarios son agentes que compiten por contenido. (Ver: Manual Práctico, Capítulo 29.)
 
-**80. ¿El PUSFRE se aplicará a control de tráfico urbano?**
+**83. ¿El PUSFRE se aplicará a control de tráfico urbano?**
 Sí. El Manual Práctico incluye un capítulo sobre control de tráfico. Los semáforos son agentes que compiten por tiempo de verde. (Ver: Manual Práctico, Capítulo 4.)
 
 ### 9.9 Preguntas Filosóficas y Epistemológicas
 
-**81. ¿El PUSFRE es una forma de reduccionismo?**
+**84. ¿El PUSFRE es una forma de reduccionismo?**
 Es un reduccionismo estructural, no ontológico. No dice que todo sea asignación de recursos. Dice que todo puede modelarse como asignación de recursos. Es una herramienta, no una metafísica. (Ver: Teorema Fundamental, Prólogo.)
 
-**82. ¿El PUSFRE es un "martillo" que ve clavos en todas partes?**
+**85. ¿El PUSFRE es un "martillo" que ve clavos en todas partes?**
 Probablemente. Pero un martillo es útil si hay clavos. Y hay muchos clavos en sistemas con recursos escasos. La pregunta es si el PUSFRE es un martillo que también funciona como destornillador cuando es necesario. (Ver: Manual Práctico, Anexo Comparativo.)
 
-**83. ¿El PUSFRE es una teoría normativa o descriptiva?**
+**86. ¿El PUSFRE es una teoría normativa o descriptiva?**
 Ambas. Describe cómo se asignan los recursos en sistemas reales. Y prescribe cómo deberían asignarse para maximizar la coexistencia o la resiliencia. Es positiva y normativa a la vez. (Ver: Manual Práctico, Capítulo 0.)
 
-**84. ¿El PUSFRE es una teoría de la justicia distributiva?**
+**87. ¿El PUSFRE es una teoría de la justicia distributiva?**
 No directamente. Pero proporciona herramientas para analizar la justicia distributiva: el Teorema de Coexistencia‑k dice cuándo una asignación es estable; el Teorema de Pareto dice cuándo es óptima. La justicia es una decisión política, no matemática. (Ver: Atlas de Reducciones, Reducción 9.)
 
-**85. ¿El PUSFRE es compatible con el libre mercado?**
+**88. ¿El PUSFRE es compatible con el libre mercado?**
 El PUSFRE es un modelo, no una ideología. Puede usarse para diseñar mercados libres (con competencia $\alpha > 1$) o mercados regulados (con $\alpha < 1$). La elección es del diseñador. (Ver: Manual Práctico, Capítulo 11.)
 
-**86. ¿El PUSFRE es compatible con la economía planificada?**
+**89. ¿El PUSFRE es compatible con la economía planificada?**
 También. Un planificador central podría usar el PUSFRE para asignar recursos de manera óptima, eligiendo ($\alpha$) para promover la diversidad o la eficiencia. El modelo no toma partido. (Ver: Manual Práctico, Capítulo 20.)
 
-**87. ¿El PUSFRE es una teoría de la complejidad que simplifica demasiado?**
+**90. ¿El PUSFRE es una teoría de la complejidad que simplifica demasiado?**
 Simplifica estructuralmente, pero no informacionalmente. La Ecuación Maestra es simple, pero los parámetros ($\Phi, \Psi, \Gamma$) pueden ser complejos de medir. La simplicidad es en la forma, no en los datos. (Ver: Dinámica Unificada, Sección 1.)
 
-**88. ¿El PUSFRE es una teoría de la información disfrazada?**
+**91. ¿El PUSFRE es una teoría de la información disfrazada?**
 Tiene conexiones profundas con la teoría de la información. Shannon es un caso límite (canal sin memoria, sin geometría). La entropía de Shannon aparece en la Deuda Ontológica y en la distribución de Boltzmann. Pero el PUSFRE va más allá al incluir competencia y dinámica. (Ver: Atlas de Reducciones, Reducción 3.)
 
-**89. ¿El PUSFRE es una teoría de juegos disfrazada?**
+**92. ¿El PUSFRE es una teoría de juegos disfrazada?**
 Nash es un caso límite. El PUSFRE generaliza los juegos a múltiples agentes con memoria, geometría y ruido. Es una teoría de juegos evolutivos en tiempo discreto. (Ver: Atlas de Reducciones, Reducción 1.)
 
-**90. ¿El PUSFRE es una teoría ecológica disfrazada?**
+**93. ¿El PUSFRE es una teoría ecológica disfrazada?**
 Lotka‑Volterra y Gause son casos límite. El PUSFRE generaliza la ecología a sistemas con nichos semánticos, deuda ontológica y fatiga de enrutamiento. Es una teoría ecológica de sistemas artificiales. (Ver: Ecología de Agentes, Sección 3.)
 
 ### 9.10 Preguntas Prácticas para Operadores de Sistemas
 
-**91. ¿Cómo empiezo a usar el PUSFRE en mi sistema?**
+**94. ¿Cómo empiezo a usar el PUSFRE en mi sistema?**
 Sigue el protocolo de las 5 P del Manual Práctico. Identifica Partes, mide Parámetros ($\Phi, \Psi, \Omega$), calcula Fitness, asigna Recurso, verifica Coexistencia. Luego aplica las herramientas específicas según tu problema (auditoría ontológica, ecología de agentes, fatiga de enrutamiento). (Ver: Manual Práctico, Capítulo 4.)
 
-**92. ¿Cuánto tiempo lleva calibrar el PUSFRE para un sistema concreto?**
+**95. ¿Cuánto tiempo lleva calibrar el PUSFRE para un sistema concreto?**
 Depende del sistema. Para sistemas RAG multi‑agente típicos (5‑10 agentes, 50‑100 consultas/día), la calibración inicial lleva 1‑2 semanas (incluyendo recolección de logs). Con los scripts de optimización bayesiana, el ajuste fino es automático. (Ver: Dinámica Unificada, Sección 3.)
 
-**93. ¿El PUSFRE requiere que mis agentes tengan embeddings de nicho?**
+**96. ¿El PUSFRE requiere que mis agentes tengan embeddings de nicho?**
 Para la Ecología de Agentes, sí. Pero se pueden estimar mediante clustering de los prompts de sistema. Para la fatiga de enrutamiento, se necesitan embeddings de entrada/salida o una proxy semántica. (Ver: Tratado de la Fatiga de Enrutamiento, Sección 4.)
 
-**94. ¿El PUSFRE funciona con cualquier modelo de LLM?**
+**97. ¿El PUSFRE funciona con cualquier modelo de LLM?**
 Los parámetros calibrados son específicos de cada modelo (GPT‑4o, Claude 3.5, Llama‑3, Mistral). Pero el marco se puede recalibrar para cualquier modelo con suficientes logs. La estructura formal es independiente del modelo. (Ver: Dinámica Unificada, Sección 3.4.)
 
-**95. ¿El PUSFRE se puede integrar en un pipeline CI/CD?**
+**98. ¿El PUSFRE se puede integrar en un pipeline CI/CD?**
 Sí. Los scripts de calibración y diagnóstico post‑model‑update están diseñados para ejecutarse automáticamente. El Apéndice F de la Dinámica Unificada muestra cómo integrar el diagnóstico de drift en GitHub Actions. (Ver: Dinámica Unificada, Apéndice F.)
 
-**96. ¿Qué métricas debería monitorizar en mi dashboard?**
+**99. ¿Qué métricas debería monitorizar en mi dashboard?**
 Las métricas clave son: biodiversidad funcional ($\mathcal{B}_F$), deuda ontológica ($\mathcal{DO}(t)$), presión de routing ($\rho(t)$), frecuencias de invocación ($N_i(t)$), y la ventana de operación ($[f_{\min}, f_{\max}]$) para orquestadores. (Ver: Manual Práctico, Capítulo 8; Ecología de Agentes, Sección 7.)
 
-**97. ¿Qué hago si un agente se extingue (frecuencia 0)?**
+**100. ¿Qué hago si un agente se extingue (frecuencia 0)?**
 Diagnostica la causa con la Ecuación Maestra. ¿Es ($\Phi$) bajo (geometría mala)? ¿Es ($\Psi$) bajo (deuda alta)? ¿Es ($\alpha$) alto (competencia intensa)? ¿Es ($\Gamma$) alto (fatiga de conmutación)? Aplica la contramedida correspondiente (mejorar prompt, reducir deuda, ajustar $\alpha$, añadir amortiguador). (Ver: Ecología de Agentes, Sección 6.)
 
-**98. ¿Qué hago si el sistema es inestable (oscilaciones)?**
+**101. ¿Qué hago si el sistema es inestable (oscilaciones)?**
 Posibles causas: ciclos depredador‑presa (teorema 7.3), explosión mutualista (teorema 7.4), o presión de routing alta. Aplica límites de co‑invocación o reduce ($\alpha$) para estabilizar. (Ver: Ecología de Agentes, Sección 6.3‑6.4.)
 
-**99. ¿El PUSFRE se puede usar para diseñar un sistema desde cero?**
+**102. ¿El PUSFRE se puede usar para diseñar un sistema desde cero?**
 Sí. El Manual Práctico proporciona un protocolo de diseño: define las partes, el recurso, los parámetros objetivo y usa la Ecuación Maestra para predecir el equilibrio. Luego itera ajustando ($\Phi$) y ($\Psi$) hasta alcanzar el equilibrio deseado. (Ver: Manual Práctico, Capítulo 4.)
 
-**100. ¿Cuál es la mejor manera de empezar a leer el corpus?**
+**103. ¿Cuál es la mejor manera de empezar a leer el corpus?**
 Depende de tu perfil: Ingeniero → Manual Práctico (Capítulo 0) + Dinámica Unificada (Secciones 1 y 3). Teórico → Teorema Fundamental + Fundamentación Matemática. Crítico → Autorrevisión + Mapa de Corrección. Curioso → README + Atlas de Reducciones (Primera Parte). Desarrollador → RONIN 1.0 Especificación (Parte I: Tutorial para Mortales). (Ver: README, Sección 4.)
 
 ### 9.11 Sobre RONIN 1.0 (el lenguaje)
 
-**101. ¿Qué es RONIN 1.0 exactamente?**
+**104. ¿Qué es RONIN 1.0 exactamente?**
 Es un lenguaje de programación de dominio específico (DSL) diseñado para declarar y resolver sistemas finitos con recursos escasos. No es un lenguaje de propósito general como Python o Rust. Es un lenguaje que traduce la Ecuación Maestra del PUSFRE a sintaxis ejecutable. Quien sabe declarar un sistema en RONIN puede resolverlo en una línea. (Ver: RONIN 1.0 Especificación, Prólogo.)
 
-**102. ¿Por qué un lenguaje nuevo? ¿No basta con Python?**
+**105. ¿Por qué un lenguaje nuevo? ¿No basta con Python?**
 Basta. De hecho, todo el corpus teórico se ha desarrollado y validado en Python. RONIN no reemplaza a Python; lo complementa. Su función es que un arquitecto que no quiere programar pueda declarar un sistema de 5 flotas pesqueras en 10 líneas y obtener la solución sin escribir código de infraestructura. Es una cuestión de ergonomía, no de capacidad. (Ver: RONIN 1.0 Especificación, Sección 0.)
 
-**103. ¿RONIN añade algo al PUSFRE que no estuviera ya en los papers?**
+**106. ¿RONIN añade algo al PUSFRE que no estuviera ya en los papers?**
 No. Nada. RONIN es la capa de implementación, no la capa teórica. Toda la matemática, todos los teoremas, todas las validaciones están en los papers. RONIN solo los hace ejecutables en una sintaxis declarativa. Si mañana RONIN desaparece, el PUSFRE sigue intacto. (Ver: README, Sección 2, Nivel 6.)
 
-**104. ¿Por qué RONIN no aparece en el Anexo de Logros como un logro principal?**
-Porque no lo es. El autor considera que inventar un lenguaje de programación es fontanería de alto nivel, no arquitectura. Los logros principales del corpus son los 13 teoremas demostrados, las 96+6 reducciones, las 10 herramientas operativas y la validación empírica. RONIN es una herramienta más, no el edificio. Aparece en el Anexo de Logros, pero en su propia sección (10.7), no mezclado con los teoremas. (Ver: Anexo de Logros, Sección 10.7.)
+**107. ¿Por qué RONIN no aparece en el Anexo de Logros como un logro principal?**
+Porque no lo es. El autor considera que inventar un lenguaje de programación es fontanería de alto nivel, no arquitectura. Los logros principales del corpus son los 65 teoremas demostrados, las 96+6 reducciones, las 10 herramientas operativas y la validación empírica. RONIN es una herramienta más, no el edificio. Aparece en el Anexo de Logros, pero en su propia sección (10.7), no mezclado con los teoremas. (Ver: Anexo de Logros, Sección 10.7.)
 
-**105. ¿RONIN está implementado ya?**
+**108. ¿RONIN está implementado ya?**
 La especificación sí. El runtime de referencia (en Rust, con parser `nom`, IR, y backends) está descrito en la Parte IV de la especificación, pero la implementación completa y verificable es una tarea pendiente reconocida en la Sección 7 del README. La política de afirmaciones verificables de la v1.0 es explícita: una capacidad no se presenta como disponible por el mero hecho de estar descrita. (Ver: RONIN 1.0 Especificación, Política de Afirmaciones Verificables.)
 
-**106. ¿Puedo usar RONIN hoy?**
+**109. ¿Puedo usar RONIN hoy?**
 Puedes leer la especificación, entender la sintaxis, y escribir programas RONIN sobre el papel. Para ejecutarlos, necesitas el runtime, que está pendiente de implementación conforme. Mientras tanto, puedes usar el código Python del Manual Práctico y de la Dinámica Unificada, que hace exactamente lo mismo. (Ver: Manual Práctico, Apéndice C.)
 
-**107. ¿Qué hace a RONIN diferente de otros DSLs?**
+**110. ¿Qué hace a RONIN diferente de otros DSLs?**
 Tres cosas: (1) un sistema de tipos con 150+ tipos de dominio blindados (`Probability`, `Frequency`, `Alpha`, `Debt`, `Geometry`, etc.) que impiden errores semánticos en tiempo de compilación; (2) integración nativa con Linux (systemd, journald, señales POSIX, pipes, inotify) pensada para despliegue en producción; (3) una semántica normativa verificable con tests de conformidad (Test 1‑4) y tolerancias numéricas explícitas. (Ver: RONIN 1.0 Especificación, Secciones 3 y 13.)
 
-**108. ¿RONIN sirve solo para IA y RAG?**
+**111. ¿RONIN sirve solo para IA y RAG?**
 No. La Sección 14 de la especificación documenta 10 áreas adicionales de aplicación: videojuegos (balanceo de clases, loot, IA enemiga), desarrollo web (balanceo de carga), sistemas embebidos e IoT, robótica, ciencia de datos y ML, finanzas y trading algorítmico, blockchain, sistemas de recomendación, cloud computing e IA multi‑agente. Cada una con ejemplos ejecutables. (Ver: RONIN 1.0 Especificación, Sección 14.)
 
-**109. ¿Por qué 150+ tipos de dominio? ¿No es excesivo?**
+**112. ¿Por qué 150+ tipos de dominio? ¿No es excesivo?**
 Es la consecuencia natural de modelar cualquier sistema finito con recursos escasos. Si el PUSFRE se aplica a 30 dominios, cada dominio tiene sus propias magnitudes (temperatura, voltaje, caudal, probabilidad, frecuencia, deuda, etc.). Cada magnitud tiene su rango válido. RONIN los tipa todos para que el compilador pueda rechazar un programa que asigne un `Voltage` donde se espera un `Probability`. No es inflación tipológica; es seguridad de dominio. (Ver: RONIN 1.0 Especificación, Sección 3.2.)
 
-**110. ¿Y los tipos `Love`, `Happiness`, `Existence`, `Universe`? ¿En serio?**
+**113. ¿Y los tipos `Love`, `Happiness`, `Existence`, `Universe`? ¿En serio?**
 Sí. Están en la especificación como `float 0..1`. Son una provocación deliberada del autor: si el PUSFRE pretende ser universal, debe poder tipar cualquier magnitud que alguien quiera modelar, incluidas las abstractas. Si mañana alguien quiere modelar la asignación de "amor" entre agentes en un sistema multi‑agente, RONIN no le pone barreras tipológicas. Que la modelización tenga sentido es otro asunto. (Ver: RONIN 1.0 Especificación, Sección 3.2.)
 
-**111. ¿RONIN compila a código nativo, WASM, Python...?**
+**114. ¿RONIN compila a código nativo, WASM, Python...?**
 La especificación contempla todos esos backends (Rust nativo, WASM, C, Python, LLVM IR, JVM bytecode, .NET IL, JavaScript). Pero el núcleo obligatorio de la v1.0 es solo el parser, el validador, el evaluador de `solve`, coexistencia, deuda, auditoría básica y simulador reproducible. El resto son extensiones descritas pero no implementadas todavía. La política de afirmaciones verificables aplica aquí también. (Ver: RONIN 1.0 Especificación, Anexo Normativo N.7.)
 
-**112. ¿Qué es la "semántica normativa" de `solve` y `simulate`?**
+**115. ¿Qué es la "semántica normativa" de `solve` y `simulate`?**
 Es la regla que dice qué hace exactamente cada comando. `solve` es determinista: calcula $F_i = \phi_i \cdot \psi_i \cdot \Omega_i^\alpha$ y asigna $A_i = R \cdot F_i / \sum F_j$. `simulate` es estocástica: parte de un estado inicial y aplica una DTMC con ruido. La v1.0 establece que, con `sigma = 0`, `simulate` debe ser determinista y reproducible con `seed`. Esto evita ambigüedades en la implementación. (Ver: RONIN 1.0 Especificación, Declaración Normativa.)
-
-**113. ¿Qué pasa si las frecuencias no suman 1?**
-El compilador lo rechaza en tiempo de validación. Es un invariante del sistema. No hay tolerancia (salvo error numérico de coma flotante, $1e^{-12}$). Si escribes `frequency: [0.6, 0.5]`, RONIN te dice: `Error: Las frecuencias deben sumar 1 (suma actual: 1.1)`. (Ver: RONIN 1.0 Especificación, Capítulo 5.)
-
-**114. ¿RONIN tiene macros?**
-Sí. El Apéndice 9 de la especificación describe un sistema de macros en tiempo de compilación que permite definir atajos como `macro audit_system(system)` que se expanden a código AST. Es una característica avanzada, no necesaria para el uso básico. (Ver: RONIN 1.0 Especificación, Apéndice 9.)
-
-**115. ¿Cómo contribuyo a RONIN?**
-Clonando el repositorio, siguiendo el estilo Rust (`rustfmt`), documentando todas las funciones públicas, y reportando bugs en el issue tracker con versión, código fuente, mensaje de error y resultado esperado. El Apéndice 10 de la especificación tiene las instrucciones completas. (Ver: RONIN 1.0 Especificación, Apéndice 10.)
 
 ### Cierre del FAQ
 
@@ -607,13 +623,13 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 
 ---
 
-## 10. ANEXO DE LOGROS DEL CORPUS RONIN (v2.0)
+## 10. ANEXO DE LOGROS DEL CORPUS RONIN (v2.4)
 
 *Inventario Completo de Teoremas, Reducciones, Validaciones, Herramientas y Lenguaje*
 
 **Propósito:** Este anexo documenta la totalidad de las contribuciones formales y empíricas del Corpus RONIN. Sirve como tabla de verificaciones para el arquitecto, el crítico y el teórico.
 
-### 10.1 Teoremas Demostrados Formalmente (13)
+### 10.1 Teoremas Demostrados Formalmente (65)
 
 | # | Teorema | Enunciado Esencial | Archivo de Demostración |
 | --- | --- | --- | --- |
@@ -622,14 +638,20 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | 3 | Teorema del Efecto Iceberg | La fracción visible de contradicciones en una base vectorial decrece como ($\frac{M \cdot \binom{k}{2}}{\binom{N}{2}} \cdot \frac{1}{H_Q / \log_2|\mathcal{Q}|}$). | `# TRATADO DE FUNDAMENTACIÓN MATEMÁTICA...md` |
 | 4 | Teorema de Muestreo Estratificado (Hoeffding) | Con ($n \geq \frac{\ln(2/\delta)}{2\epsilon^2} \cdot (\sum W_h \sigma_h)^2$) pares estratificados se estima la deuda con error ($\epsilon$) y confianza ($1-\delta$). | `# DINÁMICA UNIFICADA...md` |
 | 5 | Teorema de Redundancia Superlineal | La recuperación de información redundante crece superlinealmente: ($P(\text{recuperar} \mid n) \geq 1 - (1-p)^n$), con corrección por competencia por atención. | `# TRATADO DE FUNDAMENTACIÓN MATEMÁTICA...md` |
-| 6 | Teorema 7.1 — Frecuencia Crítica de Conmutación | Existe ($f_{\max}$); si la tasa de conmutación entre agentes la supera, la probabilidad de extinción tiende a 1. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
-| 7 | Teorema 7.2 — Tiempo de Permanencia Mínimo | Cada conmutación requiere un ($T_{\text{dwell}} = \frac{\beta \Gamma_{ij}}{\Phi_i \Psi_i \cdot \alpha \cdot \bar{N}_i^{\alpha-1}}$) para ser rentable. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
-| 8 | Teorema 7.3 — Distancia Semántica Máxima Admisible | La conmutación directa es estable solo si ($\Gamma_{ij} < \Gamma_{\max} = \frac{1}{\beta} \min(F_i, F_j)$). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
-| 9 | Teorema 7.4 — Relajación Contextual | La fitness del agente se recupera exponencialmente tras conmutar con constante ($\tau_i = \frac{1}{\alpha \rho \Phi_i \Psi_i \bar{N}_i^{\alpha-1}}$). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
-| 10 | Teorema 7.5 — Topología Óptima de Conmutación | La topología óptima es grafo completo ($\beta < \beta_{\text{crit}}$), estrella ($\beta > \beta_{\text{crit}}$) o cadena de Hamilton (región intermedia). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
-| 11 | Teorema 7.6 — Coste de Estancamiento | Existe ($f_{\min}$). Fuera de la ventana ($[f_{\min}, f_{\max}]$), el agente se extingue por exceso o defecto de conmutación. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
-| 12 | Teorema de Reducción Universal (Atlas) | Cualquier teorema clásico de asignación de recursos (Nash, Shannon, Boltzmann, etc.) es isomorfo a la Ecuación Maestra bajo las Seis Condiciones de Reducción (SCR). | `# EL ATLAS DE REDUCCIONES...md` |
-| 13 | Teorema de Completitud del Atlas | No existe un teorema de asignación de recursos que sea algebraicamente independiente del PUSFRE; todos son casos particulares. | `# EL ATLAS DE REDUCCIONES — SEGUNDA PARTE...md` |
+| 6 | Teorema 7.1 — Frecuencia Crítica de Conmutación | Existe ($f_{\max}$); si la tasa de conmutación entre agentes la supera, la probabilidad de extinción tiende a 1. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` (Parte I) |
+| 7 | Teorema 7.2 — Tiempo de Permanencia Mínimo | Cada conmutación requiere un ($T_{\text{dwell}} = \frac{\beta \Gamma_{ij}}{\Phi_i \Psi_i \cdot \alpha \cdot \bar{N}_i^{\alpha-1}}$) para ser rentable. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` (Parte I) |
+| 8 | Teorema 7.3 — Distancia Semántica Máxima Admisible | La conmutación directa es estable solo si ($\Gamma_{ij} < \Gamma_{\max} = \frac{1}{\beta} \min(F_i, F_j)$). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` (Parte I) |
+| 9 | Teorema 7.4 — Relajación Contextual | La fitness del agente se recupera exponencialmente tras conmutar con constante ($\tau_i = \frac{1}{\alpha \rho \Phi_i \Psi_i \bar{N}_i^{\alpha-1}}$). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` (Parte I) |
+| 10 | Teorema 7.5 — Topología Óptima de Conmutación | La topología óptima es grafo completo ($\beta < \beta_{\text{crit}}$), estrella ($\beta > \beta_{\text{crit}}$) o cadena de Hamilton (región intermedia). | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` (Parte I) |
+| 11 | Teorema 7.6 — Coste de Estancamiento | Existe ($f_{\min}$). Fuera de la ventana ($[f_{\min}, f_{\max}]$), el agente se extingue por exceso o defecto de conmutación. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` (Parte I) |
+| 12–19 | **Teoremas A.1–A.8 — Fatiga Acumulativa** | Cadenas de conmutación, memoria de largo plazo, fatiga cíclica, umbral irreversible, degradación de nicho, jerarquía, saturación, feedback. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md` |
+| 20–29 | **Teoremas B.1–B.10 — Topología Dinámica** | Reconfiguración óptima, topología adaptativa, transiciones de fase topológicas, robustez a fallos, restricciones de latencia, agentes móviles, jerarquías, amortiguadores, memoria compartida, incertidumbre. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md` |
+| 30–39 | **Teoremas C.1–C.10 — Interacción Multi-Agente** | Triángulos, clústeres, coaliciones, agentes especializados, redes small-world, scale-free, sincronización, agentes móviles, emergencia de roles, herencia de contexto. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md` |
+| 40–47 | **Teoremas D.1–D.8 — Optimización Conjunta** | Topología-frecuencia, frente de Pareto fatiga-rendimiento, coexistencia, deuda acoplada, geometría del olvido, multi-objetivo, robusta, adaptativa. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md` |
+| 48–55 | **Teoremas E.1–E.8 — Transiciones de Fase** | Punto crítico de colapso, histéresis, transiciones de primer/segundo orden, criticalidad auto-organizada, avalanchas, efectos de borde, universalidad, renormalización. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md` |
+| 56–63 | **Teoremas F.1–F.8 — Resiliencia y Tolerancia** | Redundancia óptima, fallos de agentes, fatiga asimétrica, carga variable, agentes móviles, memoria degradada, topologías dinámicas, diversidad funcional. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II.md` |
+| 64 | Teorema de Reducción Universal (Atlas) | Cualquier teorema clásico de asignación de recursos (Nash, Shannon, Boltzmann, etc.) es isomorfo a la Ecuación Maestra bajo las Seis Condiciones de Reducción (SCR). | `# EL ATLAS DE REDUCCIONES...md` |
+| 65 | Teorema de Completitud del Atlas | No existe un teorema de asignación de recursos que sea algebraicamente independiente del PUSFRE; todos son casos particulares. | `# EL ATLAS DE REDUCCIONES — SEGUNDA PARTE...md` |
 
 ### 10.2 Reducciones y Unificaciones Matemáticas (96 + 6)
 
@@ -649,7 +671,7 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | 3 | Auditor Ontológico con Garantías Hoeffding | Estima la deuda ontológica de una base vectorial con muestreo estratificado por clusters (HDBSCAN) y garantías del 99%. | `ronin_dynamics.audit` |
 | 4 | Auditor Ecológico (Biodiversidad Funcional) | Calcula ($\mathcal{B}_F$) (entropía de Shannon de clusters de prompts) y detecta arquetipos de colapso (monopolización, extinción silenciosa, ciclos). | `ronin_dynamics.benchmark` (Ecología) |
 | 5 | Detector de Drift de Modelo ($\Delta \mathcal{N}$) | Mide el desplazamiento de nichos semánticos tras actualizaciones del modelo base, con umbrales warning/critical. | `ronin_dynamics.drift` |
-| 6 | Enrutador con Fatiga de Conmutación | Calcula ($f_{\min}, f_{\max}, T_{\text{dwell}}, \Gamma_{\max}$) y topología óptima para orquestadores multi‑agente. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO...md` |
+| 6 | Enrutador con Fatiga de Conmutación | Calcula ($f_{\min}, f_{\max}, T_{\text{dwell}}, \Gamma_{\max}$) y topología óptima para orquestadores multi‑agente. | `# TRATADO DE LA FATIGA DE ENRUTAMIENTO.md` |
 | 7 | Muestreador de Eventos Raros (Alta Dimensión) | Estratifica el espacio mediante HDBSCAN para estimar probabilidades de eventos raros con ($n \approx 1.060$) muestras. | `ronin_computational.rare_event_sampler` |
 | 8 | Detector de Subgrafos Anómalos (Betweenness) | Detecta comunidades fraudulentas o clusters de contradicción usando centralidad de intermediación en grafos. | `ronin_computational.subgraph_detector` |
 | 9 | Control Predictivo de Recursos (MPC) | Asigna recursos en sistemas distribuidos con retardo, garantizando coexistencia mediante el Teorema de Coexistencia‑($k$). | `ronin_computational.resource_allocator` |
@@ -671,7 +693,7 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | Geometría del Olvido | Perfil atencional en U ($\mathcal{A}(p)$), 5 clases de supervivencia (Ancla, Instrucción, Dato, Narrativa, Redundante), y punto de no retorno ($L^*$). | Modelo empírico con validación en 5 modelos (GPT‑4o, Claude, Llama, Mistral). |
 | Deuda Ontológica | ($\mathcal{DO}(t) = \sum_{i < j} \mathcal{C}(d_i, d_j) \cdot P_{\text{co}}(d_i, d_j)$). Taxonomía de 5 tipos de contradicción (Directa, Temporal, Granularidad, Implícita, Emergente). | Definición válida y métrica operativa. |
 | Ecología de Agentes | Nicho semántico ($\mathcal{N}_i$), biodiversidad funcional ($\mathcal{B}_F$), y 6 arquetipos de colapso ecológico. | Framework de auditoría con código ejecutable. |
-| Fatiga de Enrutamiento | Coste de conmutación ($\Gamma_{ij} = 1 - O_{ij}$), con 6 teoremas de diseño para orquestadores. | Teoremas demostrados (ver Sección 10.1). |
+| Fatiga de Enrutamiento | Coste de conmutación ($\Gamma_{ij} = 1 - O_{ij}$), con **58 teoremas** de diseño para orquestadores (6 fundacionales + 52 de extensión maximal). | Teoremas demostrados (ver Sección 10.1). |
 | 5 Axiomas del PUSFRE | Monotonicidad, Penalización, Competencia Decreciente, Separabilidad Multiplicativa, Invariancia por Re‑escalado. | Fundamentación axiomática completa. |
 
 ### 10.6 Implementación y Código (Repositorio)
@@ -706,7 +728,7 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | --- | --- | --- |
 | Autorrevisión Crítica | Identificación de 38 limitaciones y errores (inflación epistemológica, circularidad de ablaciones, datos no públicos, terminología prestada). | `# AUTORREVISIÓN DEL CORPUS RONIN...md` |
 | Mapa de Corrección | Enlace directo de cada crítica con el archivo donde se ha abordado o corregido (ej. "Coexistencia‑k era heurística" → corregido en Dinámica Unificada). | Apéndice de la Autorrevisión. |
-| Tabla de Supervivencia (v2.0) | Clasificación de 50+ elementos en 🟢 Demostrado, 🔵 Definición, 🟡 Modelo, 🟠 Pendiente, 🔴 Degradado. | Sección 35 de la Autorrevisión. |
+| Tabla de Supervivencia (v2.4) | Clasificación de 50+ elementos en 🟢 Demostrado, 🔵 Definición, 🟡 Modelo, 🟠 Pendiente, 🔴 Degradado. | Sección 35 de la Autorrevisión. |
 
 ### 10.9 Extensiones Pendientes y Trabajo Futuro (Reconocido por el autor)
 
@@ -716,9 +738,9 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | Validación predictiva prospectiva (Experimentos A‑H) | Pendiente (diseñados, no ejecutados) | Crítica |
 | Extensión a arquitecturas no‑Transformer (SSMs, difusión) | Pendiente | Media |
 | Formalización del coste de la información (diálogo con Wolpert) | Pendiente (discutido en Parlamento de los Vivos) | Media |
-| Validación empírica de los 6 teoremas de fatiga de enrutamiento | Pendiente (casos de estudio en producción limitados) | Media |
-| **Implementación del runtime de referencia de RONIN 1.0 en Rust** | Pendiente (especificación completa, runtime por construir) | Alta |
-| **Publicación del protocolo de benchmark de RONIN con resultados reproducibles** | Pendiente | Alta |
+| **Validación empírica de los 52 teoremas nuevos de la Fatiga de Enrutamiento Parte II** | Pendiente (especialmente los de topología dinámica, transiciones de fase y resiliencia) | Alta |
+| Implementación del runtime de referencia de RONIN 1.0 en Rust | Pendiente (especificación completa, runtime por construir) | Alta |
+| Publicación del protocolo de benchmark de RONIN con resultados reproducibles | Pendiente | Alta |
 
 *Fin del Anexo de Logros.*
 *Este anexo documenta el estado del Corpus RONIN a fecha de Agosto de 2026.*
@@ -732,7 +754,7 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 
 ### 11.1 Contexto y Fases del Experimento
 
-**Contexto:** Un lector (humano o IA) solicita una evaluación crítica del Corpus RONIN tras recibir los quince archivos completos. El arquitecto (el autor) no interviene. Observa.
+**Contexto:** Un lector (humano o IA) solicita una evaluación crítica del Corpus RONIN tras recibir los diecisiete archivos completos. El arquitecto (el autor) no interviene. Observa.
 
 **El experimento:**
 
