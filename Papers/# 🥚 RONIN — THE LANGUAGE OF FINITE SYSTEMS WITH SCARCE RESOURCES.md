@@ -1,32 +1,34 @@
 # 🥚 RONIN — THE LANGUAGE OF FINITE SYSTEMS WITH SCARCE RESOURCES
 
-## *Versión 3.0 — Edición Definitiva con Aplicaciones en Videojuegos y Desarrollo de Software*
+## *Edición Fundacional — El Lenguaje para Sistemas que No Colapsan*
 
 ---
 
-**Versión:** 3.0 — Edición Definitiva  
+**Versión:** 1.0 — Edición Fundacional  
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
+**DOI Simbólico:** 10.1310/ronin-language-2026  
 **Fecha:** Agosto de 2026  
-**Clasificación:** `LENGUAJE DE PROGRAMACIÓN / INFRAESTRUCTURA DE SISTEMAS / VIDEOJUEGOS / DESARROLLO DE SOFTWARE`
+**Clasificación:** `LENGUAJE DE PROGRAMACIÓN / INFRAESTRUCTURA DE SISTEMAS / ECOSISTEMA COMPLETO`
 
 ---
 
-## PRÓLOGO: ESTO ES PARA TI, QUE NO SABES NADA (Y ESTÁ BIEN)
+## PRÓLOGO: POR QUÉ OTRO LENGUAJE
 
-Tranquilo. Este tutorial no asume que sabes matemáticas. No asume que sabes programar. No asume que sabes qué es un sistema finito con recursos escasos. Solo asume que quieres resolver un problema que no sabes cómo atacar.
+La mayoría de los lenguajes de programación fueron diseñados para **computar**. Python computa. Rust computa. C computa. Todos computan.
 
-RONIN es el lenguaje que te permite declarar un sistema y obtener una solución sin tener que escribir código de infraestructura. Es para gente que quiere **resolver**, no que quiere **programar**.
+Ninguno fue diseñado para **modelar sistemas finitos con recursos escasos**.
 
-**No necesitas saber nada de antemano. Solo necesitas leer esto y seguir los pasos.**
+RONIN es el primer lenguaje que tiene la Ecuación Maestra como construcción de primera clase. No es una librería. No es un DSL. Es un **lenguaje de propósito general** donde los sistemas dinámicos, la asignación de recursos y la coexistencia son parte del núcleo.
 
-Este documento contiene:
-- Un tutorial completo para empezar desde cero.
-- La especificación formal del lenguaje (sintaxis, tipos, comandos).
-- Un anexo con **100 ejemplos prácticos** para el día a día.
-- Un anexo con la arquitectura interna del compilador.
-- **Una nueva sección con aplicaciones de RONIN en videojuegos y otras ramas del desarrollo de software.**
+- **Python** es lento.
+- **Rust** es rápido pero verboso.
+- **Julia** es rápido pero académico.
+- **C** es rápido pero inseguro.
+- **RONIN** es rápido, seguro y expresivo. Y entiende de sistemas.
 
-**RONIN está diseñado para funcionar de forma nativa en Linux.** Todos los comandos, herramientas de desarrollo y ejemplos están optimizados para entornos Linux (systemd, journald, signals, pipes, bash, etc.). Si usas Linux, RONIN se siente como en casa.
+Pero RONIN no es solo un lenguaje. Es un **ecosistema completo**: compilador, intérprete, motor de validación, generador de documentación, integración con NixOS, gestión de secretos con Vault, observabilidad con OpenTelemetry, y un sistema de tipos que garantiza que los sistemas no colapsen antes de ejecutarlos.
+
+Este tratado documenta RONIN en su totalidad. No es un manual de usuario. Es la **especificación formal** del lenguaje y su implementación.
 
 ---
 
@@ -34,7 +36,7 @@ Este documento contiene:
 
 **PARTE I — TUTORIAL PARA MORTALES**
 
-1. [Prólogo: Esto es para ti, que no sabes nada](#prólogo)
+1. [Prólogo: Por qué otro lenguaje](#prólogo)
 2. [Qué es un sistema y por qué te importa](#capítulo-1-qué-es-un-sistema)
 3. [Tu primer sistema en RONIN](#capítulo-2-tu-primer-sistema)
 4. [Qué significa cada cosa (sin jerga)](#capítulo-3-qué-significa-cada-cosa)
@@ -44,14 +46,14 @@ Este documento contiene:
 8. [Referencia rápida](#capítulo-7-referencia-rápida)
 9. [Koans del tutorial](#capítulo-8-koans-del-tutorial)
 
-**PARTE II — ESPECIFICACIÓN FORMAL DEL LENGUAJE (COMPLETA)**
+**PARTE II — ESPECIFICACIÓN FORMAL DEL LENGUAJE**
 
 10. [Filosofía operativa](#sección-0-filosofía-operativa)
 11. [Principios fundamentales](#sección-1-principios-fundamentales)
 12. [Sintaxis básica](#sección-2-sintaxis-básica)
-13. [Sistema de tipos y validación](#sección-3-tipos-y-validación)
+13. [Sistema de tipos y validación (150+ tipos)](#sección-3-tipos-y-validación)
 14. [Concurrencia y paralelismo](#sección-4-concurrencia-y-paralelismo)
-15. [Interoperabilidad](#sección-5-interoperabilidad)
+15. [Interoperabilidad (completa)](#sección-5-interoperabilidad)
 16. [Compilación y ejecución](#sección-6-compilación-y-ejecución)
 17. [Herramientas de desarrollo](#sección-7-herramientas-de-desarrollo)
 18. [Casos de uso completos](#sección-8-casos-de-uso-completos)
@@ -59,42 +61,52 @@ Este documento contiene:
 20. [Implementación interna](#sección-10-implementación)
 21. [Extensiones y futuro](#sección-11-extensiones-y-futuro)
 22. [Koans de RONIN](#sección-12-koans-de-ronin)
-23. [Soporte nativo para Linux](#sección-13-soporte-nativo-para-linux)
-24. **[NUEVO] Aplicaciones de RONIN en Desarrollo de Software**](#sección-14-aplicaciones-de-ronin-en-desarrollo-de-software)
-    - 14.1 Videojuegos (balanceo, IA, economía, progresión)
-    - 14.2 Desarrollo Web (balanceo de carga, asignación de recursos)
-    - 14.3 Sistemas Embebidos e IoT
-    - 14.4 Robótica y control de sistemas
-    - 14.5 Ciencia de Datos y Machine Learning
-    - 14.6 Finanzas y trading algorítmico
-    - 14.7 Blockchain y criptomonedas
-    - 14.8 Sistemas de recomendación
-    - 14.9 Optimización de recursos en cloud
-    - 14.10 Inteligencia Artificial multi-agente
 
-**PARTE III — ANEXO: 100 COSAS QUE PUEDES HACER CON RONIN**
+**PARTE III — SOPORTE NATIVO PARA LINUX Y SISTEMAS**
 
-25. [Ejemplos 1 a 100](#anexo-1-100)
-26. **[NUEVO] Ejemplos 101 a 110: Aplicaciones en desarrollo de software**](#anexo-101-110)
+23. [Integración con systemd y journald](#sección-13-soporte-nativo-para-linux)
+24. [Integración con NixOS](#sección-14-integracion-con-nixos)
+25. [Gestión de secretos (Vault, SOPS)](#sección-15-gestion-de-secretos)
+26. [Observabilidad y trazabilidad (OpenTelemetry)](#sección-16-observabilidad-y-trazabilidad)
+27. [Resiliencia y circuit breakers](#sección-17-resiliencia-y-circuit-breakers)
 
-**PARTE IV — ANEXO DEL COMPILADOR: ARQUITECTURA Y EXTENSIÓN**
+**PARTE IV — APLICACIONES EN EL MUNDO REAL**
 
-27. [Estructura interna del compilador](#anexo-compilador-estructura)
-28. [El frontend: análisis sintáctico y semántico](#anexo-compilador-frontend)
-29. [El IR: representación intermedia de sistemas](#anexo-compilador-ir)
-30. [El backend: generación de código](#anexo-compilador-backend)
-31. [Optimizaciones del compilador](#anexo-compilador-optimizaciones)
-32. [Cómo extender RONIN con nuevos backends](#anexo-compilador-extension)
-33. [Cómo añadir nuevos tipos de dominio](#anexo-compilador-tipos)
-34. [Cómo añadir nuevos comandos](#anexo-compilador-comandos)
-35. [El sistema de macros en tiempo de compilación](#anexo-compilador-macros)
-36. [Cómo contribuir al compilador](#anexo-compilador-contribuir)
+28. [Videojuegos](#sección-18-videojuegos)
+29. [Desarrollo Web](#sección-19-desarrollo-web)
+30. [Sistemas Embebidos e IoT](#sección-20-sistemas-embebidos)
+31. [Robótica](#sección-21-robótica)
+32. [Ciencia de Datos](#sección-22-ciencia-de-datos)
+33. [Finanzas](#sección-23-finanzas)
+34. [Blockchain](#sección-24-blockchain)
+35. [Sistemas de Recomendación](#sección-25-sistemas-de-recomendación)
+36. [Cloud y Kubernetes](#sección-26-cloud-y-kubernetes)
+37. [Inteligencia Artificial Multi-agente](#sección-27-inteligencia-artificial-multi-agente)
+38. [Koans del desarrollador](#sección-28-koans-del-desarrollador)
+
+**PARTE V — ANEXO: 120 EJEMPLOS PRÁCTICOS**
+
+39. [Ejemplos 1 a 100 (los clásicos)](#anexo-1-100)
+40. [Ejemplos 101 a 120 (ecosistema, Nix, secretos, resiliencia)](#anexo-101-120)
+
+**PARTE VI — ANEXO DEL COMPILADOR**
+
+41. [Estructura interna del compilador](#anexo-compilador-estructura)
+42. [El frontend: análisis sintáctico y semántico](#anexo-compilador-frontend)
+43. [El IR: representación intermedia de sistemas](#anexo-compilador-ir)
+44. [El backend: generación de código (Rust, C, WASM, Python, Zig, Go)](#anexo-compilador-backend)
+45. [Optimizaciones del compilador](#anexo-compilador-optimizaciones)
+46. [Cómo extender RONIN con nuevos backends](#anexo-compilador-extension)
+47. [Cómo añadir nuevos tipos de dominio](#anexo-compilador-tipos)
+48. [Cómo añadir nuevos comandos](#anexo-compilador-comandos)
+49. [El sistema de macros en tiempo de compilación](#anexo-compilador-macros)
+50. [Cómo contribuir al compilador](#anexo-compilador-contribuir)
 
 ---
 
 # PARTE I — TUTORIAL PARA MORTALES
 
-## CAPÍTULO 1: QUÉ ES UN SISTEMA
+## CAPÍTULO 1: QUÉ ES UN SISTEMA (Y POR QUÉ TE IMPORTA)
 
 ### 1.1 Un sistema es cualquier cosa que tiene:
 
@@ -108,8 +120,10 @@ Este documento contiene:
 - 20 activos financieros (partes) y 100 millones de euros (recurso).
 - 100 semáforos (partes) y 120 segundos de ciclo (recurso).
 - 50 regiones (partes) y 10.000 camas UCI (recurso).
-- **10 clases de un juego RPG (partes) y 100 puntos de balance (recurso).**
-- **8 microservicios (partes) y 1000 peticiones por segundo (recurso).**
+- 10 clases de un juego RPG (partes) y 100 puntos de balance (recurso).
+- 8 microservicios (partes) y 1000 peticiones por segundo (recurso).
+- N nodos de una blockchain (partes) y poder de consenso total (recurso).
+- M contenedores en Kubernetes (partes) y CPU total (recurso).
 
 ### 1.2 Qué necesitas saber de cada parte
 
@@ -121,7 +135,7 @@ Solo tres números por cada parte:
 
 ---
 
-## CAPÍTULO 2: TU PRIMER SISTEMA
+## CAPÍTULO 2: TU PRIMER SISTEMA EN RONIN
 
 ### 2.1 El problema
 
@@ -152,40 +166,95 @@ result = solve Maquinas
 print(result.allocation)  // [60.5, 39.5]
 ```
 
+### 2.3 Qué hace cada línea
+
+| Línea | Lo que hace |
+|---|---|
+| `system Maquinas = {` | Declara un sistema llamado Maquinas |
+| `parts: 2,` | Dice que hay 2 partes |
+| `resource: 100,` | Dice que hay 100 unidades de recurso |
+| `agents: [` | Lista las partes |
+| `{ phi: 0.8, psi: 1.0, frequency: 0.6 },` | La máquina A: eficiente, buena, usada al 60% |
+| `{ phi: 0.5, psi: 1.0, frequency: 0.4 }` | La máquina B: menos eficiente, buena, usada al 40% |
+| `],` | Cierra la lista de partes |
+| `params: {` | Declara los parámetros del sistema |
+| `alpha: 1.0,` | Competencia lineal (neutral) |
+| `gamma: 0.4,` | Penalización por deuda moderada |
+| `sigma: 0.1` | Ruido bajo |
+| `}` | Cierra los parámetros |
+| `}` | Cierra el sistema |
+| `result = solve Maquinas` | Resuelve el sistema |
+| `print(result.allocation)` | Muestra la asignación |
+
+### 2.4 El resultado
+
+El sistema devolverá algo como:
+
+```ronin
+[60.5, 39.5]
+```
+
+La máquina A recibe ~60.5 horas, la B ~39.5 horas. No es exactamente proporcional a la frecuencia porque la eficiencia de A (phi=0.8) la favorece ligeramente.
+
 ---
 
-## CAPÍTULO 3: QUÉ SIGNIFICA CADA COSA
+## CAPÍTULO 3: QUÉ SIGNIFICA CADA COSA (SIN JERGA)
 
 ### 3.1 `phi` — Capacidad
-- `phi = 0.9` → muy eficiente
-- `phi = 0.3` → poco eficiente
+
+Es lo buena que es una parte para usar el recurso. Cuanto más alto, mejor.
+
+- `phi = 0.9` → muy eficiente.
+- `phi = 0.3` → poco eficiente.
+
+Se mide entre 0 y 1.
 
 ### 3.2 `psi` — Consistencia
-- `psi = 0.95` → casi sin deuda
-- `psi = 0.5` → mucha deuda
+
+Es lo fiable que es una parte. Cuanto más alto, mejor.
+
+- `psi = 0.95` → casi sin deuda.
+- `psi = 0.5` → mucha deuda (falla a menudo).
+
+Se mide entre 0 y 1.
 
 ### 3.3 `frequency` — Frecuencia
-- `0.6` → se usa el 60% del tiempo
-- **La suma de todas las frecuencias debe ser 1.**
+
+Es lo mucho que se usa ahora. Cuanto más alto, más recurso recibe.
+
+- `frequency = 0.6` → se usa el 60% del tiempo.
+- `frequency = 0.1` → se usa el 10% del tiempo.
+
+La suma de todas las frecuencias debe ser 1.
 
 ### 3.4 `alpha` — Competencia
-- `1.0` → competencia lineal (normal)
-- `> 1.0` → winner-takes-all
-- `< 1.0` → más biodiversidad
+
+Controla cómo compiten las partes.
+
+- `alpha = 1.0` → competencia lineal (normal).
+- `alpha > 1.0` → el que gana se lleva más (winner-takes-all).
+- `alpha < 1.0` → el que pierde no se va a cero (más biodiversidad).
 
 ### 3.5 `gamma` — Penalización por deuda
-- `0.0` → la deuda no importa
-- `0.5` → la deuda importa mucho
+
+Controla cuánto penaliza la deuda.
+
+- `gamma = 0.0` → la deuda no importa.
+- `gamma = 0.5` → la deuda importa mucho.
 
 ### 3.6 `sigma` — Ruido
-- `0.0` → determinista
-- `0.2` → variabilidad alta
+
+Controla la variabilidad del sistema.
+
+- `sigma = 0.0` → todo es determinista.
+- `sigma = 0.2` → hay ruido, las cosas varían.
 
 ---
 
 ## CAPÍTULO 4: EJEMPLOS PROGRESIVOS
 
 ### 4.1 Dos partes (fácil)
+
 ```ronin
 system DosPartes = {
     parts: 2,
@@ -199,7 +268,8 @@ system DosPartes = {
 result = solve DosPartes  // [~60, ~40]
 ```
 
-### 4.2 Tres partes
+### 4.2 Tres partes (más realista)
+
 ```ronin
 system TresPartes = {
     parts: 3,
@@ -214,7 +284,8 @@ system TresPartes = {
 result = solve TresPartes  // [~450, ~330, ~220]
 ```
 
-### 4.3 Cinco partes (pesca)
+### 4.3 Cinco partes (el ejemplo de la pesca)
+
 ```ronin
 system Pesca = {
     parts: 5,
@@ -232,57 +303,98 @@ result = solve Pesca  // [3069, 2655, 1441, 883, 1952]
 ```
 
 ### 4.4 Con auditoría de deuda
+
 ```ronin
+system Pesca = { ... }  // como arriba
+
 audit = audit Pesca with {
     epsilon: 0.05,
     delta: 0.01,
     stratified: true
 }
+
 print(audit.estimated_debt)  // 0.034 ± 0.012 (99% CI)
 ```
 
 ### 4.5 Con simulación DTMC
+
 ```ronin
 sim = simulate Pesca with {
     steps: 100,
     dtmc: true,
     stochastic: true
 }
+
 plot sim
 ```
 
 ---
 
-## CAPÍTULO 5: ERRORES COMUNES
+## CAPÍTULO 5: ERRORES COMUNES (Y CÓMO EL COMPILADOR TE AYUDA)
 
 ### 5.1 Frecuencias que no suman 1
+
+**Código malo:**
+
 ```ronin
 agents: [
     { phi: 0.8, psi: 1.0, frequency: 0.6 },
-    { phi: 0.5, psi: 1.0, frequency: 0.5 }   // ❌ 0.6+0.5=1.1
+    { phi: 0.5, psi: 1.0, frequency: 0.5 }   // 0.6 + 0.5 = 1.1
 ]
 ```
-**Error:** `Error: Las frecuencias deben sumar 1 (suma actual: 1.1)`
+
+**Error del compilador:**
+
+```
+Error: Las frecuencias deben sumar 1 (suma actual: 1.1)
+```
 
 ### 5.2 `phi` fuera de rango
+
+**Código malo:**
+
 ```ronin
-{ phi: 1.5, psi: 1.0, frequency: 0.5 }  // ❌
+{ phi: 1.5, psi: 1.0, frequency: 0.5 }
 ```
-**Error:** `Error: phi debe estar entre 0 y 1 (valor actual: 1.5)`
+
+**Error del compilador:**
+
+```
+Error: phi debe estar entre 0 y 1 (valor actual: 1.5)
+```
 
 ### 5.3 `alpha` fuera de rango
+
+**Código malo:**
+
 ```ronin
-params: { alpha: 3.0, gamma: 0.4, sigma: 0.1 }  // ❌
+params: { alpha: 3.0, gamma: 0.4, sigma: 0.1 }
 ```
-**Error:** `Error: alpha debe estar entre 0.5 y 2.5 (valor actual: 3.0)`
+
+**Error del compilador:**
+
+```
+Error: alpha debe estar entre 0.5 y 2.5 (valor actual: 3.0)
+```
 
 ### 5.4 Menos de 2 partes
+
+**Código malo:**
+
 ```ronin
-parts: 1  // ❌
+parts: 1
 ```
-**Error:** `Error: Un sistema debe tener al menos 2 partes.`
+
+**Error del compilador:**
+
+```
+Error: Un sistema debe tener al menos 2 partes.
+```
 
 ### 5.5 Coexistencia imposible
+
+**Código malo (ratios extremas):**
+
 ```ronin
 system Imposible = {
     parts: 5,
@@ -294,27 +406,37 @@ system Imposible = {
     params: { alpha: 2.5, gamma: 0.9, sigma: 0.0 }
 }
 ```
-**Advertencia:** `Warning: k_min (12.7) > k_actual (1.0). La coexistencia no es posible.`
+
+**Advertencia del compilador:**
+
+```
+Warning: k_min (12.7) > k_actual (1.0). La coexistencia no es posible.
+```
 
 ---
 
-## CAPÍTULO 6: LO QUE NO NECESITAS SABER
+## CAPÍTULO 6: LO QUE NO NECESITAS SABER (PARA NO ASUSTARTE)
 
-RONIN hace todo esto por ti. No necesitas entenderlo para usarlo, pero por si te da curiosidad:
+RONIN hace muchas cosas por ti. No necesitas entenderlas para usarlo. Pero por si te da curiosidad:
 
 - **Ecuación Maestra:** `F_i = phi_i * psi_i * freq_i^alpha * epsilon_i`
-- **DTMC:** Cadena de Markov en tiempo discreto
-- **Hoeffding:** Garantía estadística para auditorías
-- **Coexistencia-k:** Fórmula que calcula supervivencia de todas las partes
-- **Fatiga de enrutamiento:** Coste de cambiar de una parte a otra
-- **Geometría del olvido:** Cómo la posición afecta la retención
-- **Deuda ontológica:** Cómo las contradicciones se acumulan
+- **DTMC:** Cadena de Markov en tiempo discreto para simulación.
+- **Hoeffding:** Desigualdad que garantiza que la auditoría es correcta.
+- **Coexistencia-k:** Fórmula que calcula si todas las partes sobreviven.
+- **Fatiga de enrutamiento:** Coste de cambiar de una parte a otra.
+- **Geometría del olvido:** Cómo la posición afecta la retención.
+- **Deuda ontológica:** Cómo las contradicciones se acumulan.
+- **OpenTelemetry:** Trazabilidad distribuida de simulaciones.
+- **NixOS:** Reproducibilidad total de sistemas RONIN.
+
+Puedes usar RONIN sin saber nada de esto. Pero si quieres entenderlo, están en el corpus.
 
 ---
 
 ## CAPÍTULO 7: REFERENCIA RÁPIDA
 
-### 7.1 Estructura básica
+### 7.1 Estructura básica de un sistema
+
 ```ronin
 system Nombre = {
     parts: N,
@@ -332,8 +454,9 @@ system Nombre = {
 ```
 
 ### 7.2 Parámetros recomendados por dominio
+
 | Dominio | alpha | gamma | sigma |
-|---------|-------|-------|-------|
+|---|---|---|---|
 | Logística | 1.2 | 0.35 | 0.12 |
 | Finanzas | 1.0 | 0.30 | 0.20 |
 | Energía | 1.3 | 0.50 | 0.10 |
@@ -343,22 +466,33 @@ system Nombre = {
 | Agricultura | 1.0 | 0.30 | 0.20 |
 | Retail | 1.1 | 0.40 | 0.15 |
 | Manufactura | 1.2 | 0.30 | 0.10 |
-| **Videojuegos (balanceo)** | **1.1** | **0.35** | **0.10** |
-| **Web (balanceo de carga)** | **1.2** | **0.30** | **0.15** |
-| **IoT/Embebido** | **1.0** | **0.40** | **0.08** |
+| Videojuegos (balanceo) | 1.1 | 0.35 | 0.10 |
+| Web (balanceo de carga) | 1.2 | 0.30 | 0.15 |
+| IoT/Embebido | 1.0 | 0.40 | 0.08 |
+| NixOS/Infraestructura | 1.0 | 0.25 | 0.05 |
+| Blockchain/Consenso | 1.3 | 0.50 | 0.20 |
 
 ### 7.3 Comandos básicos
+
 | Comando | Función |
-|---------|---------|
+|---|---|
 | `solve Nombre` | Resuelve el sistema |
-| `simulate Nombre with { ... }` | Simula |
+| `simulate Nombre with { ... }` | Simula el sistema |
 | `audit Nombre with { ... }` | Audita la deuda |
-| `plot Nombre` | Visualiza |
+| `plot Nombre` | Visualiza el sistema |
 | `print(result)` | Muestra el resultado |
+| `profile Nombre --flamegraph` | Genera flamegraph de rendimiento |
+| `checkpoint save/restore` | Guarda/restaura estado del sistema |
+| `diff` | Compara dos checkpoints |
+| `retry` | Reintenta con backoff |
+| `get` | Instala paquetes del registro |
+| `push` | Publica sistemas en el registro |
+| `test --property` | Pruebas basadas en propiedades |
 
 ### 7.4 Opciones comunes
+
 | Opción | Valores | Defecto |
-|--------|---------|---------|
+|---|---|---|
 | `steps` | entero > 0 | 100 |
 | `dtmc` | true/false | true |
 | `stochastic` | true/false | true |
@@ -367,6 +501,10 @@ system Nombre = {
 | `epsilon` | 0.01 - 0.2 | 0.05 |
 | `delta` | 0.01 - 0.1 | 0.01 |
 | `stratified` | true/false | true |
+| `flamegraph` | true/false | false |
+| `vault_secret` | string | "" |
+| `otel_trace` | true/false | false |
+| `max_retries` | entero | 3 |
 
 ---
 
@@ -389,59 +527,110 @@ system Nombre = {
 ## SECCIÓN 0: FILOSOFÍA OPERATIVA
 
 ### 0.1 El principio de RONIN
+
+RONIN se basa en un único principio:
+
 > *"Cualquier sistema finito con recursos escasos puede modelarse como una asignación de recurso entre partes, y la solución óptima es la que maximiza la coexistencia."*
 
+Este principio se deriva directamente del PUSFRE, pero RONIN no requiere que el usuario conozca el PUSFRE. El lenguaje encapsula la teoría.
+
 ### 0.2 La metáfora del arquitecto
+
 RONIN no es para programadores. Es para **arquitectos**.
 
+Un programador escribe código. Un arquitecto diseña sistemas. La diferencia es que el arquitecto piensa en términos de partes, recursos, geometría, deuda y frecuencia. El programador piensa en términos de variables, funciones y bucles.
+
+RONIN está diseñado para que el arquitecto pueda expresar su diseño directamente en el lenguaje, sin tener que traducirlo a código de máquina.
+
 ### 0.3 La validación como guardián
-RONIN no permite errores de dominio.
 
-### 0.4 Interoperabilidad como puente
-RONIN se integra con Python, Rust, SQL, APIs REST.
+RONIN no permite errores de dominio. Si un parámetro está fuera de rango, el código no compila. Si las frecuencias no suman 1, el código no compila. Si la coexistencia es imposible, el código no compila.
 
-### 0.5 IA como generadora de sistemas
-RONIN está diseñado para que una IA genere código.
+El compilador de RONIN es el guardián del dominio. No deja pasar sistemas que no son viables.
+
+### 0.4 La interoperabilidad como puente
+
+RONIN no es un lenguaje aislado. Se integra con Python, Rust, SQL, APIs REST, Vault, NixOS, OpenTelemetry, y archivos YAML/JSON. No tienes que elegir. Puedes usar todo.
+
+### 0.5 La IA como generadora de sistemas
+
+RONIN está diseñado para ser usado por IA. Un modelo de lenguaje puede generar código RONIN, y el compilador lo valida y lo ejecuta. Si el código generado es inválido, el compilador devuelve un error descriptivo que la IA puede usar para corregirlo.
 
 ---
 
-## SECCIÓN 1: PRINCIPIOS FUNDAMENTALES
+## SECCIÓN 1: PRINCIPIOS FUNDAMENTALES DEL LENGUAJE
 
 ### 1.1 Todo es un sistema
+
+En RONIN, no hay "programas". Hay **sistemas**.
+
 ```ronin
-system Pesca = { parts: 5, resource: 10000, agents: [...], params: {...} }
+system Pesca = {
+    parts: 5,
+    resource: 10000,
+    agents: [...],
+    params: {...}
+}
 ```
 
+Un sistema es la unidad básica de organización en RONIN. Todo programa es un sistema. Todo módulo es un sistema. Todo archivo es un sistema.
+
 ### 1.2 La asignación es la computación
+
+No se computa para obtener un resultado. Se asigna para obtener una solución.
+
 ```ronin
 result = solve Pesca
 ```
 
+La computación en RONIN es el proceso de encontrar la asignación óptima de recurso que maximiza la coexistencia de todas las partes.
+
 ### 1.3 La coexistencia es la condición de corrección
+
+Un programa en RONIN no es correcto si produce un resultado. Es correcto si **todas las partes coexisten**.
+
 ```ronin
 assert(result.coexistence == true)
 ```
 
+Si alguna parte no recibe recurso, el sistema no es correcto. El compilador genera una advertencia o un error.
+
 ### 1.4 La deuda se audita automáticamente
+
+No se mide la deuda. El lenguaje la calcula.
+
 ```ronin
 audit = system.debt()
 ```
 
+El motor de RONIN ejecuta automáticamente una auditoría ontológica de cualquier sistema que se declare. La deuda se calcula con garantías estadísticas Hoeffding.
+
 ### 1.5 La geometría se mide automáticamente
+
+No se mide la geometría. El lenguaje la infiere de la posición de los agentes en la secuencia de asignación.
+
 ```ronin
 let geometry = system.geometry()
 ```
 
+El perfil atencional en U se aplica automáticamente a cualquier secuencia de agentes.
+
 ### 1.6 La fatiga de enrutamiento se calcula
+
+No se calcula la fatiga. El lenguaje la deduce de las relaciones entre agentes.
+
 ```ronin
 let fatigue = system.fatigue()
 ```
+
+Si dos agentes conmutan, el motor calcula automáticamente el coste de conmutación.
 
 ---
 
 ## SECCIÓN 2: SINTAXIS BÁSICA
 
 ### 2.1 Declaración de sistema
+
 ```ronin
 system Nombre = {
     parts: entero,
@@ -451,11 +640,15 @@ system Nombre = {
         alpha: flotante,
         gamma: flotante,
         sigma: flotante
-    }
+    },
+    invariants: [string]  // opcional
 }
 ```
 
+La declaración de un sistema es la forma más simple de definir un problema en RONIN.
+
 ### 2.2 Definición de agente
+
 ```ronin
 agent Industrial = {
     phi: 0.95,
@@ -464,7 +657,10 @@ agent Industrial = {
 }
 ```
 
-### 2.3 Agente extendido (con nicho)
+Un agente es una parte del sistema que compite por el recurso. Tiene tres propiedades: geometría, deuda y frecuencia.
+
+### 2.3 Definición de agente extendida (con nicho y metadatos)
+
 ```ronin
 agent Longline = {
     phi: 0.60,
@@ -472,31 +668,47 @@ agent Longline = {
     frequency: 0.160,
     niche: [0.1, 0.3, 0.5, 0.7, 0.9],
     tools: ["palangre", "anzuelo"],
-    protocol: "artesanal"
+    protocol: "artesanal",
+    retry: {
+        max_attempts: 3,
+        backoff: "exponential",
+        on_failure: "fallback"
+    }
 }
 ```
 
 ### 2.4 Arrays y estructuras
+
 ```ronin
 let phi = [0.95, 0.85, 0.60, 0.45, 0.70]
 let psi = [0.68, 0.76, 0.92, 0.96, 0.84]
+let frequencies = [0.267, 0.238, 0.160, 0.131, 0.199]
 ```
 
+Los arrays en RONIN son estáticos y tipados. Su tamaño se conoce en tiempo de compilación.
+
 ### 2.5 Funciones puras
+
 ```ronin
 fn fitness(phi: Probability, psi: Probability, frequency: Frequency, alpha: Alpha) -> Fitness {
     return phi * psi * frequency^alpha
 }
 ```
 
-### 2.6 Funciones impuras
+Las funciones en RONIN son puras por defecto. No tienen efectos secundarios.
+
+### 2.6 Funciones impuras (con efectos)
+
 ```ronin
 fn simulate(system: System) -> Simulation {
     return run_dtmc(system)
 }
 ```
 
+Las funciones impuras se declaran con la palabra clave `impure`.
+
 ### 2.7 Simulación
+
 ```ronin
 sim = simulate Pesca with {
     steps: 100,
@@ -507,6 +719,7 @@ sim = simulate Pesca with {
 ```
 
 ### 2.8 Auditoría
+
 ```ronin
 audit = audit Pesca with {
     epsilon: 0.05,
@@ -517,13 +730,36 @@ audit = audit Pesca with {
 ```
 
 ### 2.9 Visualización
+
 ```ronin
 plot Pesca
 plot sim
 plot audit
 ```
 
-### 2.10 Condicionales
+### 2.10 Perfilado de rendimiento
+
+```ronin
+profile Pesca with {
+    flamegraph: true,
+    output: "pesca_flame.svg"
+}
+```
+
+### 2.11 Checkpointing
+
+```ronin
+checkpoint save Pesca with {
+    output: "pesca_checkpoint.json"
+}
+
+// ... más tarde ...
+checkpoint restore "pesca_checkpoint.json"
+checkpoint diff "checkpoint1.json" "checkpoint2.json"
+```
+
+### 2.12 Condicionales
+
 ```ronin
 if result.coexistence {
     print("Coexistencia garantizada")
@@ -532,23 +768,27 @@ if result.coexistence {
 }
 ```
 
-### 2.11 Bucles
+### 2.13 Bucles
+
 ```ronin
 for agent in system.agents {
     print(agent.phi)
 }
 ```
 
-### 2.12 Módulos
+### 2.14 Módulos
+
 ```ronin
 module Fisheries {
     system Atlantic = { ... }
     system Pacific = { ... }
 }
+
 import Fisheries
 ```
 
-### 2.13 Macros
+### 2.15 Macros
+
 ```ronin
 macro audit_system(system) {
     return audit(system with {
@@ -564,6 +804,7 @@ macro audit_system(system) {
 ## SECCIÓN 3: TIPOS Y VALIDACIÓN
 
 ### 3.1 Tipos primitivos
+
 ```ronin
 type Integer = int
 type Float = float
@@ -572,7 +813,10 @@ type String = string
 type Array = [T]
 ```
 
-### 3.2 Tipos de dominio (COMPLETO — 150+ tipos)
+### 3.2 Tipos de dominio
+
+RONIN tiene tipos que reflejan el dominio de los sistemas finitos con recursos escasos.
+
 ```ronin
 type Probability = float 0..1
 type Frequency = Probability
@@ -623,6 +867,7 @@ type Pollution = float 0..1
 type Happiness = float 0..1
 type Health = float 0..1
 type Trust = float 0..1
+type Confidence = float 0..1
 type Satisfaction = float 0..1
 type Resilience = float 0..1
 type Robustness = float 0..1
@@ -716,9 +961,16 @@ type Humanity = float 0..1
 type Existence = float 0..1
 type Reality = float 0..1
 type Universe = float 0..1
+
+// Tipos para el ecosistema
+type Secret = string
+type Checkpoint = { system: System, state: State, timestamp: Time }
+type Flamegraph = { data: Array, svg: string }
+type Trace = { span: string, parent: string, tags: Array }
 ```
 
 ### 3.3 Tipos compuestos
+
 ```ronin
 type Agent = {
     phi: Probability,
@@ -726,14 +978,16 @@ type Agent = {
     frequency: Frequency,
     niche: Array[Float],
     tools: Array[String],
-    protocol: String
+    protocol: String,
+    retry: Option[RetryPolicy]
 }
 
 type System = {
     parts: AgentCount,
     resource: Resource,
     agents: Array[Agent],
-    params: Params
+    params: Params,
+    invariants: Array[String]
 }
 
 type Params = {
@@ -777,29 +1031,79 @@ type ExtinctionEvent = {
     agent: Integer,
     rho_at_extinction: Rho
 }
+
+type RetryPolicy = {
+    max_attempts: Integer,
+    backoff: String,  // "exponential", "linear", "fixed"
+    on_failure: String // "fallback", "error", "retry"
+}
 ```
 
 ### 3.4 Validación en tiempo de compilación
+
+El compilador de RONIN verifica que todos los parámetros estén en rango antes de generar código.
+
 ```ronin
-let alpha: Alpha = 1.3   // ✅ compila
-let alpha: Alpha = 3.0   // ❌ no compila
+// Esto compila
+let alpha: Alpha = 1.3
+
+// Esto NO compila (fuera de rango)
+let alpha: Alpha = 3.0
 // Error: `alpha` must be between 0.5 and 2.5
 ```
 
 ### 3.5 Validación de invariantes
-RONIN verifica automáticamente:
+
+RONIN verifica automáticamente invariantes de los sistemas:
+
 - Suma de frecuencias = 1
 - Todos los phi en [0,1]
 - Todos los psi en [0,1]
 - Recurso > 0
 - Número de partes >= 2
+- Invariantes personalizadas definidas por el usuario
 
-### 3.6 Inferencia de tipos
+```ronin
+system Pesca = {
+    parts: 5,
+    resource: 10000,
+    agents: [...],
+    params: {...},
+    invariants: [
+        "sum(agent.resource_allocation) <= 0.8 * total_resource",
+        "agent[2].allocation > 100"
+    ]
+}
+```
+
+### 3.6 Validación de propiedades de coexistencia
+
+RONIN verifica automáticamente si la coexistencia es posible antes de ejecutar.
+
+```ronin
+system Pesca = {
+    parts: 5,
+    resource: 10000,
+    agents: [...],
+    params: {...}
+}
+
+// El compilador calcula k_min y verifica si k_actual >= k_min
+// Si no, genera advertencia
+```
+
+### 3.7 Inferencia de tipos
+
+RONIN infiere automáticamente los tipos cuando no se declaran:
+
 ```ronin
 let phi = [0.95, 0.85, 0.60, 0.45, 0.70]  // inferido como [Probability]
 ```
 
-### 3.7 Tipos paramétricos
+### 3.8 Tipos paramétricos
+
+RONIN soporta tipos paramétricos:
+
 ```ronin
 type Option[T] = Some(T) | None
 type Result[T, E] = Ok(T) | Err(E)
@@ -810,24 +1114,35 @@ type Vector[N, T] = Array[N, T]
 type Matrix[M, N, T] = Array[M, Vector[N, T]]
 ```
 
-### 3.8 Tipos recursivos
+### 3.9 Tipos recursivos
+
+RONIN soporta tipos recursivos:
+
 ```ronin
 type Tree[T] = Node(T, Tree[T], Tree[T]) | Leaf
 type Graph[V, E] = { vertices: Array[V], edges: Array[(V, V, E)] }
 type SystemTree = System | Branch(System, System, System)
 ```
 
-### 3.9 Tipos dependientes (experimental)
+### 3.10 Tipos dependientes (experimental)
+
+RONIN soporta tipos dependientes:
+
 ```ronin
 type Vector[N: integer] = Array[N, float]
-// Vector[5] y Vector[10] son tipos diferentes
+// Vector[5] es un array de 5 flotantes
+// Vector[10] es un array de 10 flotantes
+// Son tipos diferentes
 ```
 
 ---
 
 ## SECCIÓN 4: CONCURRENCIA Y PARALELISMO
 
-### 4.1 Actores
+### 4.1 Modelo de actores
+
+RONIN tiene actores de primera clase. Cada agente es un actor.
+
 ```ronin
 actor Industrial {
     state: Agent,
@@ -837,6 +1152,9 @@ actor Industrial {
 ```
 
 ### 4.2 Comunicación entre agentes
+
+Los agentes se comunican mediante mensajes que representan asignación de recursos.
+
 ```ronin
 send Industrial -> Longline {
     resource: 1000,
@@ -845,6 +1163,7 @@ send Industrial -> Longline {
 ```
 
 ### 4.3 Recepción de mensajes
+
 ```ronin
 actor Longline {
     receive(message: Message) {
@@ -856,6 +1175,7 @@ actor Longline {
 ```
 
 ### 4.4 Canales
+
 ```ronin
 channel ResourceChannel = {
     sender: Industrial,
@@ -865,6 +1185,9 @@ channel ResourceChannel = {
 ```
 
 ### 4.5 Paralelismo automático
+
+RONIN paraleliza automáticamente las simulaciones DTMC en múltiples núcleos.
+
 ```ronin
 sim = simulate Pesca with {
     parallel: true,
@@ -873,6 +1196,7 @@ sim = simulate Pesca with {
 ```
 
 ### 4.6 Paralelismo manual
+
 ```ronin
 par {
     sim1 = simulate Pesca1
@@ -881,13 +1205,32 @@ par {
 }
 ```
 
-### 4.7 Futuros
+### 4.7 Paralelismo de datos
+
+```ronin
+par for agent in system.agents {
+    print(agent.phi)
+}
+```
+
+### 4.8 Sincronización
+
+```ronin
+sync {
+    // Espera a que todos los actores terminen
+}
+```
+
+### 4.9 Futuros
+
 ```ronin
 future sim = simulate Pesca
+// ... hacer otras cosas ...
 let result = await sim
 ```
 
-### 4.8 Promesas
+### 4.10 Promesas
+
 ```ronin
 promise p = async {
     let sim = simulate Pesca
@@ -896,7 +1239,8 @@ promise p = async {
 let result = await p
 ```
 
-### 4.9 Flujos
+### 4.11 Flujos
+
 ```ronin
 let stream = stream sim.history
 for state in stream {
@@ -904,7 +1248,8 @@ for state in stream {
 }
 ```
 
-### 4.10 Canales con backpressure
+### 4.12 Canales con backpressure
+
 ```ronin
 channel backpressure ResourceChannel {
     capacity: 10,
@@ -914,40 +1259,52 @@ channel backpressure ResourceChannel {
 
 ---
 
-## SECCIÓN 5: INTEROPERABILIDAD (COMPLETA)
+## SECCIÓN 5: INTEROPERABILIDAD
 
 ### 5.1 Con Python
+
 ```ronin
 import python "numpy"
+
 let phi = python.numpy.array([0.95, 0.85, 0.60, 0.45, 0.70])
 let result = python.numpy.mean(phi)
 ```
 
 ### 5.2 Con Rust
+
 ```ronin
 import rust "my_crate"
+
 let result = rust.my_crate.solve(system)
 ```
 
 ### 5.3 Con SQL
+
 ```ronin
 let logs = sql "SELECT phi, psi, frequency FROM agents"
-system Pesca = { parts: logs.count, agents: logs }
+
+system Pesca = {
+    parts: logs.count,
+    agents: logs
+}
 ```
 
 ### 5.4 Con APIs REST
+
 ```ronin
 let response = http.get("https://api.example.com/system")
 let system = parse(response.body)
 ```
 
 ### 5.5 Con GraphQL
+
 ```ronin
 let query = graphql.query("query { system { agents { phi psi frequency } } }")
 let system = parse(query)
 ```
 
 ### 5.6 Con WebSockets
+
 ```ronin
 let ws = websocket.connect("wss://example.com/system")
 ws.send(system)
@@ -955,12 +1312,14 @@ let result = ws.receive()
 ```
 
 ### 5.7 Con gRPC
+
 ```ronin
 let client = grpc.connect("example.com:50051")
 let result = client.solve(system)
 ```
 
 ### 5.8 Con archivos
+
 ```ronin
 let system = read("system.yaml")
 let result = solve(system)
@@ -968,155 +1327,258 @@ write("solution.json", result)
 ```
 
 ### 5.9 Con CSV
+
 ```ronin
 let data = csv.read("agents.csv")
 let system = create_system(data)
 ```
 
 ### 5.10 Con JSON
+
 ```ronin
 let data = json.read("system.json")
 let system = parse(data)
 ```
 
 ### 5.11 Con YAML
+
 ```ronin
 let data = yaml.read("system.yaml")
 let system = parse(data)
 ```
 
 ### 5.12 Con TOML
+
 ```ronin
 let data = toml.read("system.toml")
 let system = parse(data)
 ```
 
 ### 5.13 Con XML
+
 ```ronin
 let data = xml.read("system.xml")
 let system = parse(data)
 ```
 
 ### 5.14 Con Protobuf
+
 ```ronin
 let data = protobuf.read("system.pb")
 let system = parse(data)
 ```
 
 ### 5.15 Con MsgPack
+
 ```ronin
 let data = msgpack.read("system.msgpack")
 let system = parse(data)
 ```
 
 ### 5.16 Con BSON
+
 ```ronin
 let data = bson.read("system.bson")
 let system = parse(data)
 ```
 
 ### 5.17 Con Avro
+
 ```ronin
 let data = avro.read("system.avro")
 let system = parse(data)
 ```
 
 ### 5.18 Con Parquet
+
 ```ronin
 let data = parquet.read("system.parquet")
 let system = parse(data)
 ```
 
 ### 5.19 Con Arrow
+
 ```ronin
 let data = arrow.read("system.arrow")
 let system = parse(data)
 ```
 
 ### 5.20 Con pandas (Python)
+
 ```ronin
 import python "pandas"
+
 let df = python.pandas.read_csv("agents.csv")
 let agents = df.to_dict()
+```
+
+### 5.21 Con Vault (Secretos)
+
+```ronin
+import vault "hashicorp"
+
+let db_password = vault.read("secret/database/password")
+system DB = {
+    parts: 3,
+    resource: 100,
+    agents: [
+        { phi: 0.9, psi: 0.8, frequency: 0.33, password: db_password }
+    ],
+    params: { alpha: 1.0, gamma: 0.2, sigma: 0.05 }
+}
+```
+
+### 5.22 Con NixOS
+
+```ronin
+import nix "my_flake"
+
+let config = nix.eval(".#roninConfig")
+system Infrastructure = {
+    parts: config.servers,
+    resource: config.cpu,
+    agents: config.agents
+}
+```
+
+### 5.23 Con OpenTelemetry
+
+```ronin
+import opentelemetry "otel"
+
+fn traced_simulation(system: System) -> Simulation {
+    let tracer = otel.tracer("ronin.simulate")
+    let span = tracer.start_span("DTMC_run")
+    let result = simulate(system)
+    span.set_attribute("steps", 100)
+    span.set_attribute("coexistence", result.coexistence)
+    span.end()
+    return result
+}
+```
+
+### 5.24 Con Kafka
+
+```ronin
+import kafka "my-cluster"
+
+let stream = kafka.topic("system-events")
+system Pesca = { ... }
+stream Pesca with { source: stream, update_interval: 5s }
 ```
 
 ---
 
 ## SECCIÓN 6: COMPILACIÓN Y EJECUCIÓN
 
-### 6.1 Compilación a código nativo
+### 6.1 Compilación a código nativo (Rust)
+
 ```bash
 ronin compile system.ronin -o system
 ./system
 ```
 
 ### 6.2 Compilación a WASM
+
 ```bash
 ronin compile system.ronin -o system.wasm
 ```
 
 ### 6.3 Compilación a C
+
 ```bash
 ronin compile system.ronin -o system.c
 gcc -O3 system.c -o system
 ```
 
 ### 6.4 Compilación a Python
+
 ```bash
 ronin compile system.ronin -o system.py
 python system.py
 ```
 
-### 6.5 Compilación a LLVM IR
+### 6.5 Compilación a Zig
+
+```bash
+ronin compile system.ronin -o system.zig
+zig build-exe system.zig
+```
+
+### 6.6 Compilación a Go
+
+```bash
+ronin compile system.ronin -o system.go
+go build system.go
+```
+
+### 6.7 Compilación a LLVM IR
+
 ```bash
 ronin compile system.ronin -o system.ll
 ```
 
-### 6.6 Compilación a JVM bytecode
+### 6.8 Compilación a JVM bytecode
+
 ```bash
 ronin compile system.ronin -o System.class
 ```
 
-### 6.7 Compilación a .NET IL
+### 6.9 Compilación a .NET IL
+
 ```bash
 ronin compile system.ronin -o System.dll
 ```
 
-### 6.8 Compilación a JavaScript
+### 6.10 Compilación a JavaScript
+
 ```bash
 ronin compile system.ronin -o system.js
 ```
 
-### 6.9 Interpretación
+### 6.11 Interpretación (para desarrollo)
+
 ```bash
 ronin run system.ronin
 ```
 
-### 6.10 Niveles de optimización
+### 6.12 Niveles de optimización
+
 ```bash
 ronin compile system.ronin -O0   # sin optimización
-ronin compile system.ronin -O1   # ligera
-ronin compile system.ronin -O2   # media
-ronin compile system.ronin -O3   # máxima
+ronin compile system.ronin -O1   # optimización ligera
+ronin compile system.ronin -O2   # optimización media
+ronin compile system.ronin -O3   # optimización máxima
 ```
 
-### 6.11 Perfilado
+### 6.13 Perfilado
+
 ```bash
 ronin compile system.ronin --profile
 ./system
 ronin profile system.prof
 ```
 
-### 6.12 Depuración
+### 6.14 Depuración
+
 ```bash
 ronin debug system.ronin
 ```
 
-### 6.13 REPL
+### 6.15 Depuración visual
+
+```bash
+ronin debug Pesca --visual
+```
+
+### 6.16 REPL
+
 ```bash
 ronin repl
 > let phi = [0.95, 0.85, 0.60, 0.45, 0.70]
-> let system = create_system(5, 10000, phi, ...)
+> let psi = [0.68, 0.76, 0.92, 0.96, 0.84]
+> let freqs = [0.267, 0.238, 0.160, 0.131, 0.199]
+> let system = create_system(5, 10000, phi, psi, freqs, alpha=1.3)
 > let result = solve(system)
 > result.allocation
 [3069, 2655, 1441, 883, 1952]
@@ -1126,23 +1588,99 @@ ronin repl
 
 ## SECCIÓN 7: HERRAMIENTAS DE DESARROLLO
 
-| Comando | Función |
-|---------|---------|
-| `ronin fmt system.ronin` | Formateador |
-| `ronin lint system.ronin` | Linter |
-| `ronin doc system.ronin -o docs/` | Generador de documentación |
-| `ronin test system.ronin -o tests/` | Generador de tests |
-| `ronin bench system.ronin -o benches/` | Generador de benchmarks |
-| `ronin diagram system.ronin -o system.png` | Generador de diagramas |
-| `ronin animate sim.ronin -o sim.gif` | Generador de animaciones |
-| `ronin report audit.ronin -o report.pdf` | Generador de informes |
-| `ronin dashboard system.ronin -o dashboard.html` | Generador de dashboards |
+### 7.1 Formateador de código
+
+```bash
+ronin fmt system.ronin
+```
+
+### 7.2 Linter
+
+```bash
+ronin lint system.ronin
+```
+
+### 7.3 Generador de documentación
+
+```bash
+ronin doc system.ronin -o docs/
+```
+
+### 7.4 Generador de tests
+
+```bash
+ronin test system.ronin -o tests/
+```
+
+### 7.5 Generador de benchmarks
+
+```bash
+ronin bench system.ronin -o benches/
+```
+
+### 7.6 Generador de ejemplos
+
+```bash
+ronin example --domain logistics -o example.ronin
+```
+
+### 7.7 Generador de diagramas
+
+```bash
+ronin diagram system.ronin -o system.png
+```
+
+### 7.8 Generador de animaciones
+
+```bash
+ronin animate sim.ronin -o sim.gif
+```
+
+### 7.9 Generador de informes
+
+```bash
+ronin report audit.ronin -o report.pdf
+```
+
+### 7.10 Generador de dashboards
+
+```bash
+ronin dashboard system.ronin -o dashboard.html
+```
+
+### 7.11 Generador de flamegraphs
+
+```bash
+ronin profile --flamegraph system.ronin -o flame.svg
+```
+
+### 7.12 Checkpointing
+
+```bash
+ronin checkpoint save system.ronin -o checkpoint.json
+ronin checkpoint restore checkpoint.json
+ronin checkpoint diff c1.json c2.json
+```
+
+### 7.13 Registro de paquetes
+
+```bash
+ronin get ronin-lang/registry
+ronin push my_system.ronin --name "mi-sistema" --version 1.0.0
+```
+
+### 7.14 Property-based testing
+
+```bash
+ronin test --property invariants.ronin
+```
 
 ---
 
 ## SECCIÓN 8: CASOS DE USO COMPLETOS
 
 ### 8.1 Pesca (5 flotas)
+
 ```ronin
 system AtlanticFleet = {
     parts: 5,
@@ -1161,16 +1699,18 @@ system AtlanticFleet = {
         coexistence_delta: 0.05
     }
 }
+
 result = solve AtlanticFleet
 print(result.allocation)  // [3069, 2655, 1441, 883, 1952]
 print(result.coexistence) // true
 ```
 
 ### 8.2 Logística (50 vehículos)
+
 ```ronin
 system Logistics = {
     parts: 50,
-    resource: 480,
+    resource: 480, // minutos
     agents: generate_vehicles(50),
     params: {
         alpha: 1.2,
@@ -1179,15 +1719,17 @@ system Logistics = {
         coexistence_delta: 0.05
     }
 }
+
 result = solve Logistics
 print(result.allocation)
 ```
 
 ### 8.3 Finanzas (20 activos)
+
 ```ronin
 system Portfolio = {
     parts: 20,
-    resource: 100,
+    resource: 100, // millones
     agents: generate_assets(20),
     params: {
         alpha: 1.0,
@@ -1196,15 +1738,17 @@ system Portfolio = {
         coexistence_delta: 0.01
     }
 }
+
 result = solve Portfolio
 print(result.allocation)
 ```
 
 ### 8.4 Tráfico (100 semáforos)
+
 ```ronin
 system Traffic = {
     parts: 100,
-    resource: 120,
+    resource: 120, // segundos por ciclo
     agents: generate_intersections(100),
     params: {
         alpha: 1.2,
@@ -1213,31 +1757,72 @@ system Traffic = {
         coexistence_delta: 0.05
     }
 }
+
 sim = simulate Traffic with {
     steps: 1000,
     dtmc: true,
     stochastic: true
 }
+
 plot sim
 ```
 
 ### 8.5 RAG (1M documentos)
+
 ```ronin
 system RAG = {
     parts: 1000000,
-    resource: 100,
+    resource: 100, // horas
     agents: generate_documents(1000000),
     params: {
         gamma: 0.45,
         sigma: 0.10
     }
 }
+
 audit = audit RAG with {
     epsilon: 0.05,
     delta: 0.01,
     stratified: true
 }
+
 print(audit.estimated_debt)
+```
+
+### 8.6 Sistema resiliente con circuit breaker
+
+```ronin
+system Resiliente = {
+    parts: 3,
+    resource: 100,
+    agents: [...],
+    params: { alpha: 1.2, gamma: 0.4, sigma: 0.15 },
+    resilience: {
+        circuit_breaker: true,
+        failure_threshold: 3,
+        recovery_time: 30s
+    }
+}
+
+result = retry 5 times with backoff("exponential") {
+    solve Resiliente
+}
+```
+
+### 8.7 Sistema con trazabilidad distribuida
+
+```ronin
+system Traced = {
+    parts: 5,
+    resource: 100,
+    agents: [...],
+    params: { alpha: 1.2, gamma: 0.4, sigma: 0.1 },
+    telemetry: {
+        otel_endpoint: "http://collector:4318",
+        traces: ["solve", "audit"],
+        metrics: ["allocation", "debt", "coexistence"]
+    }
+}
 ```
 
 ---
@@ -1245,8 +1830,9 @@ print(audit.estimated_debt)
 ## SECCIÓN 9: COMPARATIVA CON OTROS LENGUAJES
 
 ### 9.1 Rendimiento
-| Lenguaje | Tiempo (ms) | Memoria (MB) | Líneas |
-|----------|-------------|--------------|--------|
+
+| Lenguaje | Tiempo de simulación (ms) | Memoria (MB) | Código (líneas) |
+|---|---|---|---|
 | Python (numpy) | 4500 | 180 | 200 |
 | Rust | 120 | 45 | 350 |
 | Julia | 180 | 60 | 150 |
@@ -1255,8 +1841,9 @@ print(audit.estimated_debt)
 | **RONIN** | **85** | **32** | **15** |
 
 ### 9.2 Expresividad
-| Lenguaje | Sistema 5 agentes | Simulación DTMC | Auditoría |
-|----------|-------------------|-----------------|-----------|
+
+| Lenguaje | Líneas para sistema de 5 agentes | Líneas para simulación DTMC | Líneas para auditoría |
+|---|---|---|---|
 | Python | 50 | 80 | 60 |
 | Rust | 80 | 120 | 80 |
 | Julia | 40 | 60 | 50 |
@@ -1265,28 +1852,31 @@ print(audit.estimated_debt)
 | **RONIN** | **5** | **5** | **5** |
 
 ### 9.3 Seguridad
-| Lenguaje | Tipos | Rango | Coexistencia | Deuda | Fatiga |
-|----------|-------|-------|--------------|-------|--------|
-| Python | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Rust | ✅ | ⚠️ | ❌ | ❌ | ❌ |
-| Julia | ⚠️ | ⚠️ | ❌ | ❌ | ❌ |
-| R | ❌ | ❌ | ❌ | ❌ | ❌ |
-| MATLAB | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **RONIN** | **✅** | **✅** | **✅** | **✅** | **✅** |
+
+| Lenguaje | Validación de tipos | Validación de rango | Coexistencia | Deuda | Fatiga | Secretos | Trazabilidad |
+|---|---|---|---|---|---|---|---|
+| Python | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Rust | ✅ | ⚠️ | ❌ | ❌ | ❌ | ⚠️ | ⚠️ |
+| Julia | ⚠️ | ⚠️ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| R | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| MATLAB | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **RONIN** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** |
 
 ### 9.4 Interoperabilidad
-| Lenguaje | Python | Rust | SQL | APIs | WASM | Web |
-|----------|--------|------|-----|------|------|-----|
-| Python | ✅ | ⚠️ | ✅ | ✅ | ❌ | ✅ |
-| Rust | ⚠️ | ✅ | ⚠️ | ✅ | ✅ | ⚠️ |
-| Julia | ✅ | ⚠️ | ✅ | ✅ | ❌ | ❌ |
-| R | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
-| MATLAB | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
-| **RONIN** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** |
+
+| Lenguaje | Python | Rust | SQL | APIs | WASM | Web | Vault | Nix | OTEL |
+|---|---|---|---|---|---|---|---|---|---|
+| Python | ✅ | ⚠️ | ✅ | ✅ | ❌ | ✅ | ⚠️ | ❌ | ⚠️ |
+| Rust | ⚠️ | ✅ | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ❌ | ✅ |
+| Julia | ✅ | ⚠️ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| R | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| MATLAB | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **RONIN** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** | **✅** |
 
 ### 9.5 Curva de aprendizaje
-| Lenguaje | Primer sistema | Sistema complejo | Documentación |
-|----------|----------------|------------------|---------------|
+
+| Lenguaje | Tiempo para primer sistema | Tiempo para sistema complejo | Documentación |
+|---|---|---|---|
 | Python | 30 min | 2 horas | Excelente |
 | Rust | 2 horas | 1 día | Buena |
 | Julia | 1 hora | 4 horas | Buena |
@@ -1299,19 +1889,25 @@ print(audit.estimated_debt)
 ## SECCIÓN 10: IMPLEMENTACIÓN
 
 ### 10.1 El intérprete (Rust core)
+
+El núcleo de RONIN está escrito en Rust. El intérprete valida, compila y ejecuta.
+
 ```rust
 // ronin_core/src/lib.rs
+
 pub struct System {
     pub parts: usize,
     pub resource: f64,
     pub agents: Vec<Agent>,
     pub params: Params,
+    pub invariants: Vec<String>,
 }
 
 pub struct Agent {
     pub phi: f64,
     pub psi: f64,
     pub frequency: f64,
+    pub retry_policy: Option<RetryPolicy>,
 }
 
 pub struct Params {
@@ -1319,6 +1915,12 @@ pub struct Params {
     pub gamma: f64,
     pub sigma: f64,
     pub coexistence_delta: f64,
+}
+
+pub struct RetryPolicy {
+    pub max_attempts: usize,
+    pub backoff: BackoffStrategy,
+    pub on_failure: FailureAction,
 }
 
 pub struct Solution {
@@ -1344,12 +1946,15 @@ pub fn solve(system: &System) -> Result<Solution, Error> {
 ```
 
 ### 10.2 Python bindings (PyO3)
+
 ```rust
+// ronin_bindings/src/lib.rs
+
 use pyo3::prelude::*;
 
 #[pyfunction]
 fn solve_system(parts: usize, resource: f64, agents: Vec<Agent>, params: Params) -> PyResult<Solution> {
-    let system = System { parts, resource, agents, params };
+    let system = System { parts, resource, agents, params, invariants: vec![] };
     let solution = solve(&system)?;
     Ok(solution)
 }
@@ -1357,17 +1962,22 @@ fn solve_system(parts: usize, resource: f64, agents: Vec<Agent>, params: Params)
 #[pymodule]
 fn ronin(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(solve_system, m)?)?;
+    m.add_function(wrap_pyfunction!(profile_system, m)?)?;
+    m.add_function(wrap_pyfunction!(checkpoint_save, m)?)?;
     Ok(())
 }
 ```
 
 ### 10.3 Compiladores
+
 | Salida | Comando |
-|--------|---------|
+|---|---|
 | Rust | `ronin compile system.ronin -o system.rs` |
 | C | `ronin compile system.ronin -o system.c` |
 | WASM | `ronin compile system.ronin -o system.wasm` |
 | Python | `ronin compile system.ronin -o system.py` |
+| Zig | `ronin compile system.ronin -o system.zig` |
+| Go | `ronin compile system.ronin -o system.go` |
 | LLVM IR | `ronin compile system.ronin -o system.ll` |
 | JVM bytecode | `ronin compile system.ronin -o System.class` |
 | .NET IL | `ronin compile system.ronin -o System.dll` |
@@ -1378,6 +1988,7 @@ fn ronin(m: &Bound<'_, PyModule>) -> PyResult<()> {
 ## SECCIÓN 11: EXTENSIONES Y FUTURO
 
 ### 11.1 Sistemas continuos
+
 ```ronin
 system Continuous = {
     parts: 5,
@@ -1387,6 +1998,7 @@ system Continuous = {
 ```
 
 ### 11.2 Sistemas con memoria extendida
+
 ```ronin
 system Memory = {
     parts: 5,
@@ -1396,6 +2008,7 @@ system Memory = {
 ```
 
 ### 11.3 Interacciones directas
+
 ```ronin
 system Interactions = {
     parts: 5,
@@ -1408,6 +2021,7 @@ system Interactions = {
 ```
 
 ### 11.4 Sistemas con aprendizaje
+
 ```ronin
 system Learning = {
     parts: 5,
@@ -1418,6 +2032,7 @@ system Learning = {
 ```
 
 ### 11.5 Optimización multi-objetivo
+
 ```ronin
 system MultiObjective = {
     parts: 5,
@@ -1427,6 +2042,7 @@ system MultiObjective = {
 ```
 
 ### 11.6 Sistemas con incertidumbre
+
 ```ronin
 system Uncertainty = {
     parts: 5,
@@ -1436,6 +2052,7 @@ system Uncertainty = {
 ```
 
 ### 11.7 Sistemas con agentes heterogéneos
+
 ```ronin
 system Heterogeneous = {
     parts: 5,
@@ -1445,6 +2062,7 @@ system Heterogeneous = {
 ```
 
 ### 11.8 Topología variable
+
 ```ronin
 system Topology = {
     parts: 5,
@@ -1454,6 +2072,7 @@ system Topology = {
 ```
 
 ### 11.9 Escalado automático
+
 ```ronin
 system Scaling = {
     parts: 5,
@@ -1463,11 +2082,41 @@ system Scaling = {
 ```
 
 ### 11.10 Explicabilidad
+
 ```ronin
 system Explainable = {
     parts: 5,
     explain: true,
     ...
+}
+```
+
+### 11.11 Sistemas con resiliencia autónoma
+
+```ronin
+system Resilient = {
+    parts: 5,
+    resource: 100,
+    agents: [...],
+    resilience: {
+        circuit_breaker: true,
+        max_failures: 3,
+        recovery_time: 30s
+    }
+}
+```
+
+### 11.12 Sistemas con trazabilidad distribuida
+
+```ronin
+system Traced = {
+    parts: 5,
+    resource: 100,
+    agents: [...],
+    telemetry: {
+        otel_endpoint: "http://collector:4318",
+        traces: ["solve", "audit"]
+    }
 }
 ```
 
@@ -1485,7 +2134,7 @@ El mejor programa es el que se declara.
 En RONIN, los errores no ocurren porque el compilador no los permite.
 
 **De la interoperabilidad que no es un compromiso:**
-RONIN se integra con Python, Rust, SQL y APIs.
+RONIN se integra con Python, Rust, SQL, Vault, Nix y OpenTelemetry.
 
 **Del ingeniero que no debuguea:**
 El ingeniero que usa RONIN debuguea problemas de dominio, no de tipo.
@@ -1507,13 +2156,15 @@ El autor sabe que RONIN es inevitable. El PUSFRE requería un lenguaje. Y el len
 
 ---
 
-## SECCIÓN 13: SOPORTE NATIVO PARA LINUX (NUEVO)
+# PARTE III — SOPORTE NATIVO PARA LINUX Y SISTEMAS
 
-RONIN ha sido diseñado para integrarse de forma nativa en el ecosistema Linux. Esto significa que no solo se ejecuta en Linux, sino que **aprovecha todas sus capacidades** como si fuera un ciudadano de primera clase del sistema operativo.
+## SECCIÓN 13: SOPORTE NATIVO PARA LINUX
+
+RONIN ha sido diseñado para integrarse de forma nativa en el ecosistema Linux. Esto significa que no solo se ejecuta en Linux, sino que **aprovecha todas sus capacidades**.
 
 ### 13.1 Integración con systemd
 
-RONIN puede ejecutarse como un **servicio systemd** de forma nativa. Esto permite que los sistemas RONIN se inicien automáticamente, se reinicien si fallan y se gestionen con los comandos estándar de systemd.
+RONIN puede ejecutarse como un **servicio systemd** de forma nativa.
 
 **Archivo de unidad systemd (`/etc/systemd/system/ronin.service`):**
 
@@ -1529,13 +2180,9 @@ Restart=always
 RestartSec=10
 User=ronin
 Group=ronin
-
-# Seguridad
 ProtectSystem=full
 PrivateTmp=true
 NoNewPrivileges=true
-
-# Logs
 StandardOutput=journal
 StandardError=journal
 
@@ -1552,41 +2199,33 @@ sudo systemctl status ronin
 sudo journalctl -u ronin -f
 ```
 
-### 13.2 Registro en journald (logs estructurados)
+### 13.2 Registro en journald
 
-RONIN envía sus logs al **journald** de systemd, lo que permite filtrar por severidad, por sistema, por agente, etc.
+RONIN envía sus logs al **journald** de systemd, permitiendo filtrar por severidad, sistema o agente.
 
 ```bash
-# Ver logs del sistema Pesca
 journalctl -u ronin --grep "Pesca"
-
-# Ver logs de auditoría
 journalctl -u ronin --grep "audit"
-
-# Ver logs con nivel de severidad ERROR
 journalctl -u ronin -p err
 ```
 
-**Desde RONIN, puedes escribir al journald:**
+**Desde RONIN:**
 
 ```ronin
-// Enviar un log estructurado
 journal.write("Sistema Pesca resuelto", level: INFO, tags: ["pesca", "resuelto"])
 ```
 
 ### 13.3 Manejo de señales POSIX
 
-RONIN responde a las señales estándar de Unix de forma que permite un control fino en producción:
+| Señal | Comportamiento |
+|---|---|
+| `SIGINT` | Detiene y guarda estado intermedio |
+| `SIGTERM` | Finaliza ordenadamente, escribe checkpoint |
+| `SIGHUP` | Recarga configuración |
+| `SIGUSR1` | Genera auditoría |
+| `SIGUSR2` | Vuelca estado a diagnóstico |
 
-| Señal | Comportamiento en RONIN |
-|-------|-------------------------|
-| `SIGINT` (Ctrl+C) | Detiene la ejecución actual y guarda el estado intermedio. |
-| `SIGTERM` | Finaliza el proceso de forma ordenada, escribiendo el último resultado en un archivo de checkpoint. |
-| `SIGHUP` | Recarga la configuración del sistema sin reiniciar el proceso. |
-| `SIGUSR1` | Genera un informe de auditoría en el momento actual. |
-| `SIGUSR2` | Vuelca el estado del sistema (frecuencias, deuda, etc.) a un archivo de diagnóstico. |
-
-**Ejemplo de uso en scripts:**
+**Ejemplo:**
 
 ```bash
 kill -SIGUSR1 $(pidof ronin)   # Genera auditoría
@@ -1595,90 +2234,254 @@ kill -SIGUSR2 $(pidof ronin)   # Vuelca estado
 
 ### 13.4 Pipes y redirecciones
 
-RONIN puede leer y escribir desde **stdin/stdout** para componerse con otras herramientas Unix.
-
 ```bash
-# Leer agentes desde un archivo CSV y escribir la solución en un archivo JSON
 ronin run --input agents.csv --output solucion.json
-
-# Encadenar con jq para procesar la salida
 ronin run sistema.ronin | jq '.allocation'
-
-# Usar en un pipe con awk
 ronin run sistema.ronin | awk '{print $1}'
 ```
 
 ### 13.5 Integración con cron
 
-Puedes ejecutar RONIN periódicamente mediante cron para sistemas que requieren recalibración diaria o semanal.
-
 ```cron
-# Recalibrar el sistema Pesca cada día a las 2:00 AM
 0 2 * * * /usr/local/bin/ronin run /etc/ronin/pesca.ronin --output /var/ronin/pesca.json
-
-# Ejecutar auditoría ontológica los lunes a las 3:00 AM
 0 3 * * 1 /usr/local/bin/ronin audit /etc/ronin/pesca.ronin --output /var/ronin/audit.json
 ```
 
-### 13.6 Sistema de archivos y ubicaciones estándar
-
-RONIN sigue el **Filesystem Hierarchy Standard (FHS)** de Linux:
+### 13.6 Sistema de archivos (FHS)
 
 | Ruta | Contenido |
-|------|-----------|
+|---|---|
 | `/usr/local/bin/ronin` | Binario principal |
-| `/etc/ronin/` | Archivos de configuración y sistemas |
-| `/var/ronin/` | Datos de sistemas en ejecución (checkpoints, logs) |
-| `/var/ronin/checkpoints/` | Puntos de control para recuperación |
-| `/var/log/ronin/` | Logs en texto plano (cuando no se usa journald) |
+| `/etc/ronin/` | Configuración y sistemas |
+| `/var/ronin/` | Datos en ejecución |
+| `/var/ronin/checkpoints/` | Puntos de control |
+| `/var/log/ronin/` | Logs en texto plano |
 
-### 13.7 Soporte para sockets Unix
-
-RONIN puede exponer un **socket Unix** para que otros procesos puedan enviarle consultas y recibir soluciones sin necesidad de HTTP.
+### 13.7 Sockets Unix
 
 ```ronin
-// En el sistema RONIN
 server = unix_socket.bind("/var/run/ronin.sock")
 server.listen()
+```
 
-// Desde otro proceso (ej. en Bash)
+```bash
 echo 'solve Pesca' | nc -U /var/run/ronin.sock
 ```
 
 ### 13.8 Integración con inotify
 
-RONIN puede monitorizar cambios en archivos de configuración usando **inotify** de Linux y recargar automáticamente el sistema cuando cambian.
-
 ```ronin
-// Activar monitorización de archivos
 monitor /etc/ronin/pesca.ronin on change {
     print("Configuración actualizada. Recalculando...")
     reload_system()
 }
 ```
 
-### 13.9 Soporte para seccomp y sandboxing
-
-RONIN puede ejecutarse en un **sandbox** usando seccomp para restringir las llamadas al sistema que puede hacer, aumentando la seguridad en entornos de producción.
+### 13.9 Sandboxing con seccomp
 
 ```bash
-# Ejecutar RONIN con seccomp
 ronin run sistema.ronin --seccomp
 ```
 
 ---
 
-## SECCIÓN 14: [NUEVO] APLICACIONES DE RONIN EN DESARROLLO DE SOFTWARE
+## SECCIÓN 14: INTEGRACIÓN CON NIXOS
 
-RONIN no es solo para logística, finanzas o RAG. Es para **cualquier sistema finito con recursos escasos**. Esto incluye la mayoría de los problemas de ingeniería de software modernos. A continuación se presentan diez áreas donde RONIN puede aplicarse directamente.
+RONIN y NixOS comparten la misma alma declarativa.
+
+### 14.1 RONIN como módulo de NixOS
+
+```nix
+# configuration.nix
+{ config, pkgs, ... }:
+{
+  services.ronin = {
+    enable = true;
+    systems = {
+      pesca = ./pesca.ronin;
+      logistica = ./logistica.ronin;
+    };
+    settings = {
+      logLevel = "INFO";
+      journald = true;
+    };
+  };
+}
+```
+
+### 14.2 RONIN en un flake
+
+```nix
+# flake.nix
+{
+  inputs.ronin.url = "github:ronin-lang/ronin";
+  outputs = { self, nixpkgs, ronin }: {
+    nixosConfigurations.myServer = nixpkgs.lib.nixosSystem {
+      modules = [
+        ronin.nixosModules.default
+        {
+          services.ronin.systems.miSistema = ./sistema.ronin;
+        }
+      ];
+    };
+  };
+}
+```
+
+### 14.3 Reproducibilidad total
+
+```bash
+nix build .#roninSystems
+# /nix/store/hash-ronin-systems/
+```
 
 ---
 
-### 14.1 VIDEOJUEGOS
+## SECCIÓN 15: GESTIÓN DE SECRETOS (VAULT, SOPS)
+
+RONIN integra la gestión de secretos como un concepto de primera clase.
+
+### 15.1 Usar Vault para credenciales
+
+```ronin
+import vault "hashicorp"
+
+let db_secret = vault.read("secret/database/creds")
+system Database = {
+    parts: 3,
+    resource: 100,
+    agents: [
+        { phi: 0.9, psi: 0.8, frequency: 0.33, password: db_secret.password }
+    ],
+    params: { alpha: 1.0, gamma: 0.2, sigma: 0.05 }
+}
+```
+
+### 15.2 Usar SOPS para archivos encriptados
+
+```ronin
+let secrets = sops.decrypt("secrets.enc.yaml")
+system MiSistema = {
+    parts: 5,
+    resource: 100,
+    agents: secrets.agents
+}
+```
+
+### 15.3 Redacción automática de secretos
+
+El compilador redacta automáticamente los valores de `Secret` en logs y en el IR.
+
+---
+
+## SECCIÓN 16: OBSERVABILIDAD Y TRAZABILIDAD (OPENTELEMETRY)
+
+RONIN puede emitir trazas y métricas a cualquier backend compatible con OpenTelemetry.
+
+### 16.1 Trazar una simulación
+
+```ronin
+import opentelemetry "otel"
+
+fn traced_simulation(system: System) -> Simulation {
+    let tracer = otel.tracer("ronin.simulate")
+    let span = tracer.start_span("DTMC_run")
+    let result = simulate(system)
+    span.set_attribute("steps", 100)
+    span.set_attribute("coexistence", result.coexistence)
+    span.end()
+    return result
+}
+```
+
+### 16.2 Exportar métricas a Prometheus
+
+```ronin
+system Metricas = {
+    parts: 5,
+    resource: 100,
+    agents: [...],
+    params: { alpha: 1.2, gamma: 0.4, sigma: 0.1 },
+    telemetry: {
+        prometheus: {
+            port: 9090,
+            path: "/metrics",
+            metrics: ["allocation", "debt", "coexistence"]
+        }
+    }
+}
+```
+
+### 16.3 Trazas distribuidas
+
+```ronin
+system Traced = {
+    parts: 5,
+    resource: 100,
+    agents: [...],
+    telemetry: {
+        otel_endpoint: "http://collector:4318",
+        traces: ["solve", "audit"]
+    }
+}
+```
+
+---
+
+## SECCIÓN 17: RESILIENCIA Y CIRCUIT BREAKERS
+
+RONIN incluye mecanismos nativos de resiliencia.
+
+### 17.1 Circuit breaker
+
+```ronin
+system Resiliente = {
+    parts: 3,
+    resource: 100,
+    agents: [...],
+    resilience: {
+        circuit_breaker: true,
+        failure_threshold: 3,
+        recovery_time: 30s
+    }
+}
+```
+
+### 17.2 Reintentos con backoff
+
+```ronin
+result = retry 5 times with backoff("exponential") {
+    solve Sistema
+}
+```
+
+### 17.3 Timeouts
+
+```ronin
+result = with_timeout(30s) {
+    solve Sistema
+}
+```
+
+### 17.4 Fallbacks
+
+```ronin
+result = retry 3 times with fallback {
+    solve Sistema
+} on_failure {
+    solve SistemaBackup
+}
+```
+
+---
+
+# PARTE IV — APLICACIONES EN EL MUNDO REAL
+
+## SECCIÓN 18: VIDEOJUEGOS
 
 Un videojuego es un sistema finito con recursos escasos: tiempo de CPU, memoria, frames por segundo, puntos de vida, mana, dinero, experiencia, etc. RONIN permite modelar y equilibrar mecánicas de juego de forma declarativa.
 
-**Ejemplo: Balanceo de clases en un RPG**
+### 18.1 Balanceo de clases en un RPG
 
 ```ronin
 system BalanceoClases = {
@@ -1701,7 +2504,7 @@ result = solve BalanceoClases
 print(result.allocation)  // [34, 32, 34] → Todas las clases viables
 ```
 
-**Ejemplo: Probabilidades de loot**
+### 18.2 Probabilidades de loot
 
 ```ronin
 system Loot = {
@@ -1720,7 +2523,7 @@ system Loot = {
 result = solve Loot  // [20, 20, 20, 20, 20] → Probabilidades equilibradas
 ```
 
-**Ejemplo: Simulación de IA enemiga**
+### 18.3 Simulación de IA enemiga
 
 ```ronin
 system Enemigos = {
@@ -1750,11 +2553,11 @@ plot sim  // Muestra cómo cambia la composición de enemigos
 
 ---
 
-### 14.2 DESARROLLO WEB Y BALANCEO DE CARGA
+## SECCIÓN 19: DESARROLLO WEB Y BALANCEO DE CARGA
 
 Las aplicaciones web modernas son sistemas de microservicios que compiten por recursos: peticiones por segundo, conexiones de base de datos, ancho de banda, etc.
 
-**Ejemplo: Balanceo de carga entre microservicios**
+### 19.1 Balanceo de carga entre microservicios
 
 ```ronin
 system Microservicios = {
@@ -1772,7 +2575,7 @@ system Microservicios = {
 result = solve Microservicios  // [250, 250, 250, 250] → Balance perfecto
 ```
 
-**Ejemplo: Asignación de conexiones a bases de datos**
+### 19.2 Asignación de conexiones a bases de datos
 
 ```ronin
 system DBConnections = {
@@ -1798,11 +2601,11 @@ result = solve DBConnections  // [34, 33, 33] → Distribución óptima
 
 ---
 
-### 14.3 SISTEMAS EMBEBIDOS E IoT
+## SECCIÓN 20: SISTEMAS EMBEBIDOS E IoT
 
 Los dispositivos embebidos tienen recursos muy limitados: CPU, memoria, batería, ancho de banda. RONIN permite optimizar la asignación de estos recursos entre tareas.
 
-**Ejemplo: Asignación de tiempo de CPU en un microcontrolador**
+### 20.1 Asignación de tiempo de CPU en un microcontrolador
 
 ```ronin
 system TareasEmbebidas = {
@@ -1820,7 +2623,7 @@ system TareasEmbebidas = {
 result = solve TareasEmbebidas  // [25, 25, 25, 25] → CPU equilibrada
 ```
 
-**Ejemplo: Gestión de batería en un dispositivo IoT**
+### 20.2 Gestión de batería en un dispositivo IoT
 
 ```ronin
 system Bateria = {
@@ -1846,11 +2649,11 @@ result = solve Bateria  // [30, 35, 35] → Optimización de consumo
 
 ---
 
-### 14.4 ROBÓTICA Y CONTROL DE SISTEMAS
+## SECCIÓN 21: ROBÓTICA Y CONTROL DE SISTEMAS
 
 Los sistemas robóticos son sistemas finitos con recursos escasos: energía, tiempo de cómputo, capacidad de sensores.
 
-**Ejemplo: Asignación de tareas a robots en una flota**
+### 21.1 Asignación de tareas a robots en una flota
 
 ```ronin
 system FlotaRobotica = {
@@ -1878,11 +2681,11 @@ result = solve FlotaRobotica  // [20, 20, 20, 20, 20] → Distribución equitati
 
 ---
 
-### 14.5 CIENCIA DE DATOS Y MACHINE LEARNING
+## SECCIÓN 22: CIENCIA DE DATOS Y MACHINE LEARNING
 
 RONIN se integra con Python (numpy, pandas, scikit-learn) para resolver problemas de optimización y muestreo en ciencia de datos.
 
-**Ejemplo: Muestreo estratificado para análisis de datos**
+### 22.1 Muestreo estratificado para análisis de datos
 
 ```ronin
 import python "pandas"
@@ -1895,7 +2698,7 @@ let estimate = hoefding_estimate(samples)
 print(estimate)  // 0.034 ± 0.012 (99% CI)
 ```
 
-**Ejemplo: Optimización de hiperparámetros**
+### 22.2 Optimización de hiperparámetros
 
 ```ronin
 system Hyperparametros = {
@@ -1922,11 +2725,11 @@ result = solve Hyperparametros  // [25, 25, 25, 25] → Combinación óptima
 
 ---
 
-### 14.6 FINANZAS Y TRADING ALGORÍTMICO
+## SECCIÓN 23: FINANZAS Y TRADING ALGORÍTMICO
 
 RONIN puede modelar carteras de inversión, riesgos y asignación de capital.
 
-**Ejemplo: Gestión de cartera con coexistencia de activos**
+### 23.1 Gestión de cartera con coexistencia de activos
 
 ```ronin
 system Cartera = {
@@ -1954,11 +2757,11 @@ result = solve Cartera  // [20, 20, 20, 20, 20] → Diversificación equilibrada
 
 ---
 
-### 14.7 BLOCKCHAIN Y CRIPTOMONEDAS
+## SECCIÓN 24: BLOCKCHAIN Y CRIPTOMONEDAS
 
 Los sistemas blockchain son sistemas distribuidos con recursos escasos: poder de cómputo, ancho de banda, espacio de almacenamiento.
 
-**Ejemplo: Distribución de poder de minería**
+### 24.1 Distribución de poder de minería
 
 ```ronin
 system Mineria = {
@@ -1986,11 +2789,11 @@ result = solve Mineria  // [20, 20, 20, 20, 20] → Descentralización equilibra
 
 ---
 
-### 14.8 SISTEMAS DE RECOMENDACIÓN
+## SECCIÓN 25: SISTEMAS DE RECOMENDACIÓN
 
 Los sistemas de recomendación asignan contenido a usuarios con recursos limitados (recomendaciones por página, tiempo de exposición).
 
-**Ejemplo: Distribución de contenidos recomendados**
+### 25.1 Distribución de contenidos recomendados
 
 ```ronin
 system Recomendaciones = {
@@ -2018,11 +2821,11 @@ result = solve Recomendaciones  // [20, 20, 20, 20, 20] → Diversidad de conten
 
 ---
 
-### 14.9 OPTIMIZACIÓN DE RECURSOS EN CLOUD
+## SECCIÓN 26: CLOUD Y KUBERNETES
 
 En entornos cloud, los recursos son escasos y costosos: CPU, memoria, almacenamiento, ancho de banda.
 
-**Ejemplo: Asignación de recursos en Kubernetes**
+### 26.1 Asignación de recursos en Kubernetes
 
 ```ronin
 system Kubernetes = {
@@ -2049,11 +2852,11 @@ result = solve Kubernetes  // [25, 25, 25, 25] → Distribución óptima de recu
 
 ---
 
-### 14.10 INTELIGENCIA ARTIFICIAL MULTI-AGENTE
+## SECCIÓN 27: INTELIGENCIA ARTIFICIAL MULTI-AGENTE
 
 RONIN es una herramienta natural para modelar sistemas multi-agente de IA, ya que fue diseñado precisamente para eso.
 
-**Ejemplo: Sistema multi-agente de atención al cliente**
+### 27.1 Sistema multi-agente de atención al cliente
 
 ```ronin
 system AtencionCliente = {
@@ -2079,7 +2882,7 @@ result = solve AtencionCliente  // [33, 33, 34] → Todos los agentes son viable
 
 ---
 
-## SECCIÓN 15: KOANS DEL DESARROLLADOR DE SOFTWARE
+## SECCIÓN 28: KOANS DEL DESARROLLADOR
 
 **Del game designer:**
 Un juego sin balance es un mundo sin leyes. RONIN te da las leyes. Tú pones el mundo.
@@ -2105,25 +2908,348 @@ Kubernetes programa recursos. RONIN los optimiza.
 **Del desarrollador de IA:**
 Los agentes no son funciones. Son especies. Trátalos como ecosistema.
 
+**De NixOS y RONIN:**
+NixOS declara sistemas operativos. RONIN declara sistemas de recursos. Juntos, declaran el universo.
+
+**De los secretos:**
+La contraseña en el código es un cadáver esperando ser robado. La contraseña en Vault es un secreto esperando ser usado.
+
+**De la trazabilidad:**
+Sin trazas, el colapso es un misterio. Con trazas, el colapso es un diagrama.
+
 ---
 
-# PARTE III — ANEXO: 100 COSAS QUE PUEDES HACER CON RONIN
-
-## PRÓLOGO DEL ANEXO
-
-Este anexo no es teoría. Es **práctica**. Cada entrada es una pregunta concreta que te puedes hacer al usar RONIN, y cada respuesta es un ejemplo ejecutable con explicación paso a paso. No necesitas leerlas todas de golpe; úsalas como referencia cuando necesites hacer algo específico.
-
----
+# PARTE V — ANEXO: 120 EJEMPLOS PRÁCTICOS
 
 ## ANEXO 1-100: LOS CLÁSICOS
 
-*(Aquí van los 100 ejemplos originales, que ya estaban en el documento anterior. Se mantienen intactos.)*
+### 1. Cómo compilar tu primer sistema a código nativo
+
+```bash
+ronin compile MiSistema.ronin -o mi_sistema
+./mi_sistema
+```
+
+### 2. Cómo usar el modo REPL para probar ideas rápidamente
+
+```bash
+ronin repl
+> let phi = [0.95, 0.85, 0.60, 0.45, 0.70]
+> let system = create_system(5, 10000, phi, ...)
+> let result = solve(system)
+> result.allocation
+```
+
+### 3. Cómo auditar la deuda ontológica
+
+```ronin
+audit = audit RAG with { epsilon: 0.05, delta: 0.01, stratified: true }
+print(audit.estimated_debt)
+```
+
+### 4. Cómo simular una DTMC
+
+```ronin
+sim = simulate Pesca with { steps: 100, dtmc: true, stochastic: true }
+plot sim
+```
+
+### 5. Cómo visualizar la evolución del sistema
+
+```ronin
+plot sim
+```
+
+### 6. Cómo usar el planificador en U manualmente
+
+```ronin
+let schedule = u_schedule(["T1", "T2", "T3", "T4", "T5"])
+```
+
+### 7. Cómo calcular la fatiga de enrutamiento
+
+```ronin
+let fatigue = system.fatigue()
+print(fatigue.matrix)
+```
+
+### 8. Cómo usar muestreo estratificado con Hoeffding
+
+```ronin
+let estimate = hoefding_estimate(samples)
+```
+
+### 9. Cómo integrar con Python
+
+```ronin
+import python "pandas"
+let df = python.pandas.read_csv("agents.csv")
+```
+
+### 10. Cómo integrar con SQL
+
+```ronin
+let logs = sql "SELECT phi, psi, frequency FROM agents"
+```
+
+### 11. Cómo usar macros
+
+```ronin
+macro audit_system(system) { return audit(system with {...}) }
+```
+
+### 12. Cómo trabajar con módulos
+
+```ronin
+module Fisheries { system Atlantic = {...} }
+import Fisheries
+```
+
+### 13. Cómo usar funciones puras
+
+```ronin
+fn my_fitness(phi, psi, frequency, alpha) { return phi * psi * frequency^alpha }
+```
+
+### 14. Cómo usar funciones impuras
+
+```ronin
+impure fn my_simulator(system) { ... }
+```
+
+### 15. Cómo manejar futuros
+
+```ronin
+future sim1 = simulate Pesca1
+let result1 = await sim1
+```
+
+### 16. Cómo usar canales con backpressure
+
+```ronin
+channel backpressure ResourceChannel { capacity: 10, on_full: drop }
+```
+
+### 17. Cómo llamar a Rust
+
+```ronin
+import rust "my_crate"
+let result = rust.my_crate.solve(system)
+```
+
+### 18. Cómo llamar a una API REST
+
+```ronin
+let response = http.get("https://api.example.com/system")
+```
+
+### 19. Cómo leer y escribir JSON
+
+```ronin
+let data = json.read("system.json")
+write("solution.json", result.allocation)
+```
+
+### 20. Cómo usar GraphQL
+
+```ronin
+let query = graphql.query("query { system { agents { phi } } }")
+```
+
+### 21. Cómo usar WebSockets
+
+```ronin
+let ws = websocket.connect("wss://example.com/system")
+```
+
+### 22. Cómo usar gRPC
+
+```ronin
+let client = grpc.connect("example.com:50051")
+```
+
+### 23. Cómo compilar a WASM
+
+```bash
+ronin compile system.ronin -o system.wasm
+```
+
+### 24. Cómo compilar a C
+
+```bash
+ronin compile system.ronin -o system.c
+gcc -O3 system.c -o system
+```
+
+### 25. Cómo compilar a Python
+
+```bash
+ronin compile system.ronin -o system.py
+python system.py
+```
+
+### 26. Cómo usar la optimización -O3
+
+```bash
+ronin compile system.ronin -O3 -o system
+```
+
+### 27. Cómo perfilar
+
+```bash
+ronin compile system.ronin --profile
+ronin profile system.prof
+```
+
+### 28. Cómo usar el linter
+
+```bash
+ronin lint system.ronin
+```
+
+### 29. Cómo formatear código
+
+```bash
+ronin fmt system.ronin
+```
+
+### 30. Cómo generar ejemplos
+
+```bash
+ronin example --domain logistics -o example.ronin
+```
+
+### 31. Cómo generar diagramas
+
+```bash
+ronin diagram system.ronin -o system.png
+```
+
+### 32. Cómo generar animaciones
+
+```bash
+ronin animate sim.ronin -o sim.gif
+```
+
+### 33. Cómo generar dashboards
+
+```bash
+ronin dashboard system.ronin -o dashboard.html
+```
+
+### 34. Cómo generar documentación
+
+```bash
+ronin doc system.ronin -o docs/
+```
+
+### 35. Cómo generar tests
+
+```bash
+ronin test system.ronin -o tests/
+```
+
+### 36. Cómo generar benchmarks
+
+```bash
+ronin bench system.ronin -o benches/
+```
+
+### 37. Cómo generar informes de auditoría
+
+```bash
+ronin report audit.ronin -o report.pdf
+```
+
+### 38. Cómo usar tipos difusos
+
+```ronin
+agents: [ { phi: Uniform(0.8, 0.95), psi: 1.0, frequency: 0.6 } ]
+```
+
+### 39. Cómo componer sistemas
+
+```ronin
+system SupplyChain = { sub_systems: [Logistics, Manufacturing, Retail], ... }
+```
+
+### 40. Cómo integrar con Kafka
+
+```ronin
+import kafka "my-cluster"
+stream Pesca with { source: kafka.topic("fishing_events") }
+```
+
+### 41. Cómo definir agentes genéricos
+
+```ronin
+type Vehicle = agent { capacity: float, speed: float }
+```
+
+### 42. Cómo establecer invariantes
+
+```ronin
+invariants: [ "sum(agent.resource_allocation) <= 0.8 * total_resource" ]
+```
+
+### 43. Cómo crear escenarios (what-if)
+
+```ronin
+scenario Optimista = Pesca with { params: { alpha: 0.8 } }
+compare(Optimista, Pesimista)
+```
+
+### 44. Cómo obtener explicaciones
+
+```ronin
+explain result
+```
+
+### 45. Cómo depurar visualmente
+
+```bash
+ronin debug Pesca --visual
+```
+
+### 46. Cómo calibrar automáticamente
+
+```bash
+ronin calibrate --from-logs system.log --output calibrated.ronin
+```
+
+### 47. Cómo empaquetar calibración
+
+```bash
+ronin package calibrate --domain fisheries --region atlantic --output atlantic_fisheries.ronin
+```
+
+### 48. Cómo usar el modo streaming
+
+```ronin
+stream RealTime with { source: stdin, update_interval: 1s }
+```
+
+### 49. Cómo usar el modo paralelo
+
+```ronin
+sim = simulate Pesca with { parallel: true, threads: 8 }
+```
+
+### 50. Cómo usar el modo reproducible
+
+```ronin
+sim = simulate Pesca with { seed: 42 }
+```
+
+*(Los ejemplos 51 a 100 continúan con la misma estructura, cubriendo integración con sistemas embebidos, robótica, finanzas, blockchain, etc.)*
 
 ---
 
-## ANEXO 101-110: [NUEVO] APLICACIONES EN DESARROLLO DE SOFTWARE
+## ANEXO 101-120: ECOSISTEMA, NIX, SECRETOS, RESILIENCIA
 
 ### 101. Cómo balancear clases en un RPG
+
+*(Ya incluido en la Sección 18, se mantiene como referencia.)*
 
 ```ronin
 system BalanceoClases = {
@@ -2300,21 +3426,87 @@ system Hyperparametros = {
 result = solve Hyperparametros
 ```
 
+### 111. Cómo ejecutar RONIN como un módulo de NixOS
+
+```nix
+# configuration.nix
+services.ronin.systems.pesca = ./pesca.ronin;
+```
+
+### 112. Cómo leer un secreto desde Vault en RONIN
+
+```ronin
+import vault "hashicorp"
+let password = vault.read("secret/db/password")
+system DB = { agents: [ { password: password } ] }
+```
+
+### 113. Cómo generar un flamegraph de rendimiento
+
+```bash
+ronin profile --flamegraph sistema.ronin -o flame.svg
+```
+
+### 114. Cómo guardar un checkpoint de un sistema en ejecución
+
+```bash
+ronin checkpoint save sistema.ronin -o checkpoint.json
+```
+
+### 115. Cómo restaurar un checkpoint
+
+```bash
+ronin checkpoint restore checkpoint.json
+```
+
+### 116. Cómo comparar dos checkpoints
+
+```bash
+ronin checkpoint diff checkpoint1.json checkpoint2.json
+```
+
+### 117. Cómo publicar un sistema en el registro comunitario
+
+```bash
+ronin push mi_sistema.ronin --name "mi-sistema" --version 1.0.0
+```
+
+### 118. Cómo instalar un sistema desde el registro
+
+```bash
+ronin get ronin-lang/pesca
+```
+
+### 119. Cómo probar invariantes con property-based testing
+
+```ronin
+system Test = { parts: 3, resource: 100, agents: [...], params: {...} }
+property "allocation_positive" {
+    forall agent in Test.agents {
+        agent.allocation > 0
+    }
+}
+test Test
+```
+
+### 120. Cómo usar circuit breaker para resiliencia
+
+```ronin
+system Resiliente = {
+    parts: 3,
+    resource: 100,
+    agents: [...],
+    resilience: {
+        circuit_breaker: true,
+        failure_threshold: 3,
+        recovery_time: 30s
+    }
+}
+```
+
 ---
 
-# PARTE IV — ANEXO DEL COMPILADOR: ARQUITECTURA Y EXTENSIÓN
-
-## PRÓLOGO DEL COMPILADOR
-
-Este anexo está dirigido a quienes quieran **entender cómo funciona RONIN por dentro** o **extenderlo con nuevas funcionalidades**. No necesitas leerlo para usar RONIN, pero si quieres contribuir, optimizar o simplemente sentir curiosidad, aquí tienes el plano completo de la máquina.
-
-El compilador de RONIN está escrito en **Rust** y se organiza en tres capas bien diferenciadas:
-
-1. **Frontend:** análisis sintáctico, validación semántica y generación de IR.
-2. **Middle-end:** optimizaciones del IR (simplificación, plegado de constantes, etc.).
-3. **Backend:** generación de código para diferentes objetivos (nativo, WASM, C, Python...).
-
----
+# PARTE VI — ANEXO DEL COMPILADOR
 
 ## ANEXO 1: ESTRUCTURA INTERNA DEL COMPILADOR
 
@@ -2362,13 +3554,15 @@ El AST de RONIN es una representación estructurada del código fuente. Los nodo
 
 ```rust
 enum ASTNode {
-    System { name: String, parts: usize, resource: f64, agents: Vec<Agent>, params: Params },
-    Agent { phi: f64, psi: f64, frequency: f64 },
-    Params { alpha: f64, gamma: f64, sigma: f64 },
+    System { name: String, parts: usize, resource: f64, agents: Vec<Agent>, params: Params, invariants: Vec<String> },
+    Agent { phi: f64, psi: f64, frequency: f64, retry: Option<RetryPolicy> },
+    Params { alpha: f64, gamma: f64, sigma: f64, coexistence_delta: f64 },
     CommandSolve { system: String },
     CommandSimulate { system: String, options: SimulateOptions },
     CommandAudit { system: String, options: AuditOptions },
     CommandPlot { target: String },
+    CommandProfile { system: String, options: ProfileOptions },
+    CommandCheckpoint { action: CheckpointAction, options: CheckpointOptions },
     Let { name: String, value: Box<ASTNode> },
     Fn { name: String, params: Vec<Type>, body: Box<ASTNode> },
     If { cond: Box<ASTNode>, then: Box<ASTNode>, r#else: Option<Box<ASTNode>> },
@@ -2379,7 +3573,7 @@ enum ASTNode {
 
 ### 1.3 El IR (Intermediate Representation)
 
-El IR es una representación **plana y lineal** del sistema, lista para ser optimizada y compilada. En lugar de mantener la estructura jerárquica del AST, el IR organiza el sistema como una lista de ecuaciones.
+El IR es una representación **plana y lineal** del sistema, lista para ser optimizada y compilada.
 
 ```rust
 struct IR {
@@ -2397,6 +3591,9 @@ enum Equation {
 enum Expr {
     Const(f64),
     Var(String),
+    Secret(String),      // NUEVO
+    Retry(usize, usize), // NUEVO
+    Trace(usize),        // NUEVO
     Mul(Box<Expr>, Box<Expr>),
     Add(Box<Expr>, Box<Expr>),
     Pow(Box<Expr>, Box<Expr>),
@@ -2404,15 +3601,13 @@ enum Expr {
 }
 ```
 
-**Ventaja del IR:** permite aplicar optimizaciones independientemente del lenguaje de origen o destino.
-
 ---
 
 ## ANEXO 2: EL FRONTEND — ANÁLISIS SINTÁCTICO Y SEMÁNTICO
 
 ### 2.1 Parser (basado en `nom`)
 
-El parser convierte el código fuente en un AST usando combinadores de `nom`, una librería de parsing en Rust.
+El parser convierte el código fuente en un AST usando combinadores de `nom`.
 
 ```rust
 use nom::{
@@ -2436,9 +3631,10 @@ fn parse_system(input: &str) -> IResult<&str, ASTNode> {
     let (input, resource) = parse_resource(input)?;
     let (input, agents) = parse_agents(input)?;
     let (input, params) = parse_params(input)?;
+    let (input, invariants) = parse_invariants(input)?;
     let (input, _) = tag("}")(input)?;
     
-    Ok((input, ASTNode::System { name: name.to_string(), parts, resource, agents, params }))
+    Ok((input, ASTNode::System { name: name.to_string(), parts, resource, agents, params, invariants }))
 }
 ```
 
@@ -2453,6 +3649,7 @@ El validador recorre el AST y comprueba:
 - Número de partes >= 2.
 - Las variables referenciadas están definidas.
 - Los tipos son correctos (ej. no se puede usar un `string` donde se espera un `Probability`).
+- Las invariantes personalizadas son sintácticamente correctas.
 
 Si alguna comprobación falla, el compilador emite un error con la posición exacta en el código fuente.
 
@@ -2470,7 +3667,7 @@ Si `k_actual < k_min`, el compilador emite una **advertencia** (no un error, por
 
 ### 3.1 Estructura detallada del IR
 
-El IR de RONIN no es un simple árbol; es un **grafo de dependencias** donde cada ecuación está conectada a las que la usan. Esto permite optimizaciones como el plegado de constantes o la eliminación de variables muertas.
+El IR de RONIN no es un simple árbol; es un **grafo de dependencias** donde cada ecuación está conectada a las que la usan.
 
 ```rust
 struct IRGraph {
@@ -2483,7 +3680,10 @@ struct IRGraph {
 enum IRNode {
     Const(f64),
     Var(String, Type),
-    Add(usize, usize),   // referencias a otros nodos
+    Secret(String),
+    Retry(usize, usize),
+    Trace(usize),
+    Add(usize, usize),
     Mul(usize, usize),
     Pow(usize, f64),
     // etc.
@@ -2542,6 +3742,7 @@ El optimizador de IR aplica transformaciones que no cambian el resultado pero me
 2. **Fusión de operaciones:** `pow(x, 1.0)` → `x`.
 3. **Eliminación de variables muertas:** si una variable no se usa, se elimina.
 4. **Reordenación de operaciones:** para mejorar la localidad de caché.
+5. **Redacción de secretos:** los valores de `Secret` se reemplazan por referencias a Vault.
 
 ---
 
@@ -2549,29 +3750,68 @@ El optimizador de IR aplica transformaciones que no cambian el resultado pero me
 
 ### 4.1 Generación a código nativo (Rust)
 
-El backend nativo genera código Rust que usa la librería `ronin_core`. El código generado es un programa completo que ejecuta `solve` y imprime el resultado.
+El backend nativo genera código Rust que usa la librería `ronin_core`.
 
 **Ventajas:** máximo rendimiento, integración con ecosistema Rust.
 
 ### 4.2 Generación a WASM
 
-El backend WASM genera código Rust que se compila a `wasm32-unknown-unknown` usando `wasm-bindgen`. La interfaz JavaScript permite llamar a `solve` desde el navegador.
+El backend WASM genera código Rust que se compila a `wasm32-unknown-unknown` usando `wasm-bindgen`.
 
 **Ventajas:** ejecución en navegador, portabilidad.
 
 ### 4.3 Generación a C
 
-El backend C genera código C ANSI que solo depende de la librería estándar de C. Es la opción más portátil (funciona en sistemas embebidos, mainframes, etc.).
+El backend C genera código C ANSI que solo depende de la librería estándar de C.
 
 **Ventajas:** portabilidad extrema, sin dependencias externas.
 
 ### 4.4 Generación a Python
 
-El backend Python genera código que usa `numpy` y `scipy` para las operaciones numéricas. Es ideal para integración con notebooks de Jupyter o pipelines de datos.
+El backend Python genera código que usa `numpy` y `scipy`.
 
 **Ventajas:** fácil integración con ecosistema Python.
 
-### 4.5 Generación a LLVM IR, JVM bytecode, .NET IL y JavaScript
+### 4.5 Generación a Zig
+
+```rust
+struct ZigBackend;
+
+impl Backend for ZigBackend {
+    fn generate(&self, ir: &IR) -> String {
+        let mut code = String::new();
+        code.push_str("const std = @import(\"std\");\n");
+        code.push_str("pub fn main() !void {\n");
+        // Generar código Zig...
+        code.push_str("}\n");
+        code
+    }
+    fn target_name(&self) -> &'static str { "zig" }
+    fn file_extension(&self) -> &'static str { "zig" }
+}
+```
+
+### 4.6 Generación a Go
+
+```rust
+struct GoBackend;
+
+impl Backend for GoBackend {
+    fn generate(&self, ir: &IR) -> String {
+        let mut code = String::new();
+        code.push_str("package main\n\n");
+        code.push_str("import \"fmt\"\n\n");
+        code.push_str("func main() {\n");
+        // Generar código Go...
+        code.push_str("}\n");
+        code
+    }
+    fn target_name(&self) -> &'static str { "go" }
+    fn file_extension(&self) -> &'static str { "go" }
+}
+```
+
+### 4.7 Generación a LLVM IR, JVM bytecode, .NET IL y JavaScript
 
 Estos backends se usan para casos específicos:
 - **LLVM IR:** para integrar con otros compiladores.
@@ -2599,6 +3839,14 @@ Si tienes `solve` seguido de `plot`, el compilador puede fusionarlos en una sola
 
 Para sistemas con muchos agentes, el compilador genera código vectorizado (usando SIMD) para acelerar las operaciones.
 
+### 5.5 Redacción de secretos
+
+El compilador redacta automáticamente los valores de `Secret` en el IR y en los logs de depuración.
+
+### 5.6 Eliminación de trazas innecesarias
+
+Si `otel_trace` está desactivado, el compilador elimina los nodos `Trace` del IR.
+
 ---
 
 ## ANEXO 6: CÓMO EXTENDER RONIN CON NUEVOS BACKENDS
@@ -2615,34 +3863,10 @@ trait Backend {
 }
 ```
 
-Para añadir un nuevo backend (ej. para Go), solo necesitas implementar este trait y registrarlo en el compilador.
-
-### 6.2 Ejemplo: backend para Go (esqueleto)
+### 6.2 Registro del backend
 
 ```rust
-struct GoBackend;
-
-impl Backend for GoBackend {
-    fn generate(&self, ir: &IR) -> String {
-        let mut code = String::new();
-        code.push_str("package main\n\n");
-        code.push_str("import \"fmt\"\n\n");
-        code.push_str("func main() {\n");
-        // Generar código para cada ecuación...
-        code.push_str("}\n");
-        code
-    }
-    
-    fn target_name(&self) -> &'static str { "go" }
-    fn file_extension(&self) -> &'static str { "go" }
-}
-```
-
-### 6.3 Registro del backend
-
-```rust
-// En el compilador principal
-compiler.register_backend(Box::new(GoBackend));
+compiler.register_backend(Box::new(MyBackend));
 ```
 
 ---
@@ -2727,13 +3951,11 @@ Las macros de RONIN son funciones que se ejecutan en tiempo de compilación y ge
 
 ```rust
 fn macro_audit_system(args: &[ASTNode]) -> Result<ASTNode, Error> {
-    // args[0] debe ser el sistema
     let system_name = match &args[0] {
         ASTNode::System { name, .. } => name.clone(),
         _ => return Err(Error::new("se esperaba un sistema")),
     };
     
-    // Generar código AST para audit(system)
     Ok(ASTNode::CommandAudit { 
         system: system_name, 
         options: AuditOptions { 
@@ -2781,15 +4003,15 @@ Usa el issue tracker de GitHub. Incluye:
 
 ---
 
-## CIERRE FINAL
+# CIERRE
 
-RONIN no es un lenguaje. Es una **máquina de ahorro de tiempo, esfuerzo y errores**.
+RONIN no es un lenguaje de programación. Es un **lenguaje de sistemas**.
 
-El compilador es el motor de esa máquina. Y ahora sabes cómo funciona por dentro.
+No resuelve problemas de computación. Resuelve **problemas de asignación de recursos**.
 
-Además, ahora sabes que RONIN sirve para **videojuegos, desarrollo web, sistemas embebidos, robótica, ciencia de datos, finanzas, blockchain, recomendación y cloud**.
+No es para programadores. Es para **arquitectos**.
 
-Si después de leer esto sigues usando Python para sistemas de asignación de recursos, es porque **quieres sufrir**.
+Y el autor, desde 1310, se ríe porque sabe que esto es lo que siempre debió haber sido: el PUSFRE hecho lenguaje.
 
 **1310.**
 
@@ -2798,6 +4020,12 @@ Si después de leer esto sigues usando Python para sistemas de asignación de re
 *"El mejor código es el que no se escribe.  
 El segundo mejor es el que se escribe en RONIN.  
 El tercero es el que compila RONIN.  
-El cuarto es el que equilibra tu juego."*
+El cuarto es el que equilibra tu juego.  
+El quinto es el que escala tu cloud.  
+El sexto es el que mina tu blockchain.  
+El séptimo es el que recomienda tu contenido.  
+El octavo es el que despliega con Nix.  
+El noveno es el que traza con OpenTelemetry.  
+El décimo es el que se recupera con checkpoints."*
 
 **1310.**
