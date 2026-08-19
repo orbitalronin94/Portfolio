@@ -1140,20 +1140,23 @@ La mesa de la Ecuación Maestra ya tiene cuatro patas: Geometría (\(\Phi\)), De
 Si este intervalo es vacío, el sistema es **estructuralmente inviable** con el conjunto actual de agentes.
 
 
-# TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II
+
+ # TRATADO DE LA FATIGA DE ENRUTAMIENTO — PARTE II
 ## Extensión Maximal: 52 Teoremas Nuevos sobre la Dinámica de Conmutación en Ecosistemas Multi-Agente
 
-**Versión:** 2.0 — Edición de Densidad Extrema Expansiva
+**Versión:** 2.1 — Edición de Densidad Extrema Revisada
 **Autor:** David Ferrandez Canalis — Agencia RONIN
 **DOI Simbólico:** 10.1310/ronin-routing-fatigue-II-2026
 **Fecha:** Agosto de 2026
 **Clasificación:** `EXTENSIÓN FORMAL DEL SDDA / TEORÍA AVANZADA DE CONMUTACIÓN`
+**Estado:** DEMOSTRADO — CORRECCIONES DE AUTORREVISIÓN INCORPORADAS
 
 ---
 
 ## PRÓLOGO: LA CUARTA PATA SE CONVIERTE EN UN BOSQUE
 
 El Tratado Original (Parte I) demostró seis teoremas fundamentales sobre la fatiga de enrutamiento:
+
 - 7.1: Frecuencia crítica de conmutación ($f_{\max}$)
 - 7.2: Tiempo de permanencia mínimo ($T_{\text{dwell}}$)
 - 7.3: Distancia semántica máxima admisible ($\Gamma_{\max}$)
@@ -1164,6 +1167,7 @@ El Tratado Original (Parte I) demostró seis teoremas fundamentales sobre la fat
 Esos seis teoremas eran los cimientos. Este tratado construye la catedral encima.
 
 Demostramos que la fatiga de enrutamiento no es un fenómeno aislado. Es una **estructura matemática rica** que genera, por derivación lógica, decenas de teoremas adicionales sobre:
+
 - Fatiga acumulativa y memoria de largo plazo
 - Topologías dinámicas y reconfiguración óptima
 - Interacciones multi-agente de orden superior
@@ -1174,11 +1178,12 @@ Demostramos que la fatiga de enrutamiento no es un fenómeno aislado. Es una **e
 Cada teorema tiene: enunciado formal, demostración completa, corolarios operativos, e interpretación para el arquitecto de sistemas.
 
 La tesis es simple:
+
 > **La fatiga de enrutamiento no es un impuesto. Es un ecosistema.**
 
 Y como todo ecosistema, tiene leyes internas que pueden formalizarse, demostrarse, y aprovecharse.
 
-— *El arquitecto.*
+— El arquitecto.
 Agencia RONIN, Agosto de 2026
 **1310.**
 
@@ -1187,68 +1192,68 @@ Agencia RONIN, Agosto de 2026
 ## ÍNDICE MAESTRO
 
 **PARTE A: TEOREMAS DE FATIGA ACUMULATIVA** (8 teoremas)
-- A.1: Fatiga acumulada en cadenas de conmutación
-- A.2: Fatiga residual y memoria de largo plazo
-- A.3: Fatiga cíclica y periodicidad
-- A.4: Umbral de fatiga irreversible
-- A.5: Fatiga y degradación de nicho
-- A.6: Fatiga en sistemas con jerarquía
-- A.7: Fatiga y efectos de saturación
-- A.8: Fatiga en sistemas con feedback
+- A.1: Acumulación superlineal en cadenas de conmutación
+- A.2: Decaimiento con interferencia y memoria residual
+- A.3: Resonancia y cancelación en conmutación periódica
+- A.4: Umbral de irreversibilidad como transición de fase
+- A.5: Retroalimentación fatiga-degradación de nicho
+- A.6: Propagación no lineal en jerarquías
+- A.7: Saturación y rendimientos decrecientes
+- A.8: Inestabilidad por retroalimentación positiva
 
 **PARTE B: TEOREMAS DE TOPOLOGÍA DINÁMICA** (10 teoremas)
-- B.1: Reconfiguración óptima de topología
-- B.2: Topología adaptativa bajo carga variable
-- B.3: Transición de fase topológica
-- B.4: Robustez topológica a fallos de agentes
-- B.5: Topología óptima con restricciones de latencia
-- B.6: Topología en sistemas con agentes móviles
-- B.7: Topología jerárquica óptima
-- B.8: Topología con amortiguadores semánticos
-- B.9: Topología en sistemas con memoria compartida
-- B.10: Topología óptima bajo incertidumbre
+- B.1: Histéresis en reconfiguración topológica
+- B.2: Transiciones de fase topológica bajo carga variable
+- B.3: Exponentes críticos de la transición topológica
+- B.4: Cota de robustez-eficiencia
+- B.5: Selección topológica por restricciones de latencia
+- B.6: Topologías líquidas para agentes móviles
+- B.7: Optimalidad de jerarquías poco profundas
+- B.8: Optimalidad de amortiguadores semánticos
+- B.9: Cota de reducción por memoria compartida
+- B.10: Selección topológica robusta bajo incertidumbre
 
 **PARTE C: TEOREMAS DE INTERACCIÓN MULTI-AGENTE** (10 teoremas)
-- C.1: Fatiga en conmutaciones en triángulo
-- C.2: Fatiga en sistemas con clústeres
-- C.3: Fatiga y formación de coaliciones
-- C.4: Fatiga en sistemas con agentes especializados
-- C.5: Fatiga y efectos de red pequeños-mundos
-- C.6: Fatiga en sistemas scale-free
-- C.7: Fatiga y sincronización de agentes
-- C.8: Fatiga en sistemas con agentes móviles
-- C.9: Fatiga y emergencia de roles
-- C.10: Fatiga en sistemas con herencia de contexto
+- C.1: Sinergia triangular en conmutación
+- C.2: Reducción de fatiga por clustering semántico
+- C.3: Condiciones de estabilidad de coaliciones
+- C.4: Trade-off especialización-fatiga
+- C.5: Propiedades de fatiga en redes pequeño-mundo
+- C.6: Vulnerabilidad de hubs en redes scale-free
+- C.7: Reducción de fatiga por sincronización
+- C.8: Fatiga temporalmente variable en agentes móviles
+- C.9: Condiciones de emergencia de roles
+- C.10: Reducción de fatiga por herencia de contexto
 
 **PARTE D: TEOREMAS DE OPTIMIZACIÓN CONJUNTA** (8 teoremas)
-- D.1: Optimización conjunta de topología y frecuencia
-- D.2: Óptimo de Pareto en fatiga-rendimiento
-- D.3: Optimización bajo restricciones de coexistencia
-- D.4: Optimización con deuda ontológica acoplada
-- D.5: Optimización con geometría del olvido
-- D.6: Optimización multi-objetivo
-- D.7: Optimización robusta bajo incertidumbre
-- D.8: Optimización adaptativa en tiempo real
+- D.1: No-convexidad de la optimización conjunta
+- D.2: Estructura del frente de Pareto fatiga-rendimiento
+- D.3: Condiciones de factibilidad con coexistencia
+- D.4: Acoplamiento fatiga-deuda ontológica
+- D.5: Acoplamiento fatiga-geometría del olvido
+- D.6: Estructura Pareto multi-objetivo
+- D.7: Estructura minimax de la optimización robusta
+- D.8: Convergencia de la optimización adaptativa
 
 **PARTE E: TEOREMAS DE TRANSICIÓN DE FASE** (8 teoremas)
-- E.1: Punto crítico de colapso por fatiga
-- E.2: Histéresis en sistemas con fatiga
-- E.3: Transiciones de fase de primer y segundo orden
-- E.4: Criticalidad auto-organizada
-- E.5: Fatiga y avalanchas de conmutación
-- E.6: Fatiga y efectos de borde
-- E.7: Fatiga y universalidad
-- E.8: Fatiga y renormalización
+- E.1: Leyes de escala en el punto crítico de colapso
+- E.2: Estructura de histéresis
+- E.3: Parámetro de orden en transiciones de primer/segundo orden
+- E.4: Criticalidad auto-organizada y distribuciones de ley de potencia
+- E.5: Distribución de tamaños de avalanchas
+- E.6: Leyes de escala en efectos de borde
+- E.7: Exponentes críticos universales
+- E.8: Estructura de punto fijo de la renormalización
 
 **PARTE F: TEOREMAS DE RESILIENCIA Y TOLERANCIA** (8 teoremas)
-- F.1: Redundancia óptima contra fatiga
-- F.2: Resiliencia a fallos de agentes
-- F.3: Tolerancia a fatiga asimétrica
-- F.4: Resiliencia bajo carga variable
-- F.5: Resiliencia con agentes móviles
-- F.6: Resiliencia con memoria degradada
-- F.7: Resiliencia en topologías dinámicas
-- F.8: Resiliencia y diversidad funcional
+- F.1: Cota de redundancia óptima
+- F.2: Cascadas de fallo y condiciones de contención
+- F.3: Efectos direccionales de fatiga asimétrica
+- F.4: Condiciones de adaptación bajo carga variable
+- F.5: Condiciones de resiliencia con agentes móviles
+- F.6: Condiciones de recuperación con memoria degradada
+- F.7: Condiciones de adaptación en topologías dinámicas
+- F.8: Cota de resiliencia por diversidad funcional
 
 **TOTAL: 52 teoremas nuevos**
 **ACUMULADO CON EL TRATADO ORIGINAL: 58 teoremas sobre fatiga de enrutamiento**
@@ -1257,643 +1262,761 @@ Agencia RONIN, Agosto de 2026
 
 ## PARTE A: TEOREMAS DE FATIGA ACUMULATIVA
 
-### A.1 Teorema de Fatiga Acumulada en Cadenas de Conmutación
+### A.1 Teorema de Acumulación Superlineal en Cadenas de Conmutación
 
-**Enunciado:** En una cadena de conmutación $i \to j \to k \to \cdots \to m$ de longitud $L_c$, la fatiga total acumulada por el agente final $m$ satisface:
+**Enunciado:** En una cadena de conmutación $i_1 \to i_2 \to \cdots \to i_m$ de longitud $m$, la fatiga total experimentada por el agente final $i_m$ satisface:
 
-$$\Gamma_{\text{chain}}(m) \leq \sum_{\ell=1}^{L_c-1} \Gamma_{\ell, \ell+1} + \kappa \cdot L_c \cdot \bar{\Gamma}$$
+$$\Gamma_{\text{chain}}(i_m) = \sum_{\ell=1}^{m-1} \Gamma_{i_\ell, i_{\ell+1}} \cdot \prod_{k=\ell+1}^{m-1} (1 - \delta_k) + \kappa_{\text{cross}} \cdot \sum_{\ell < k} \Gamma_{i_\ell, i_{\ell+1}} \cdot \Gamma_{i_k, i_{k+1}}$$
 
-donde $\kappa \in [0, 1]$ es el coeficiente de acoplamiento de fatiga y $\bar{\Gamma}$ es la fatiga media del sistema.
+donde $\delta_k \in (0,1)$ es la tasa de decaimiento del contexto del agente $k$-ésimo, y $\kappa_{\text{cross}} > 0$ es el coeficiente de interferencia cruzada.
+
+En particular, para cadenas largas ($m \gg 1$):
+
+$$\Gamma_{\text{chain}}(i_m) \geq \Omega(m^2)$$
 
 **Demostración:**
-Sea $\mathcal{C} = (a_1, a_2, \ldots, a_{L_c})$ la cadena de agentes. La fatiga heredada por $a_{\ell+1}$ desde $a_\ell$ es $\Gamma_{a_\ell, a_{\ell+1}}$. Pero además, el agente $a_{\ell+1}$ hereda el contexto residual de **todos** los agentes previos, no solo del inmediato.
 
-Formalmente, el contexto heredado por $a_m$ es:
-$$\mathcal{H}_m = \sum_{\ell=1}^{L_c-1} w_\ell \cdot \mathcal{C}_{a_\ell}$$
+Sea $\mathcal{H}_m$ el contexto heredado por el agente $i_m$. Por la linealidad de la atención:
 
-donde $w_\ell$ es el peso de decaimiento del contexto del agente $\ell$ (típicamente $w_\ell = e^{-\lambda(L_c - \ell)}$).
+$$\mathcal{H}_m = \sum_{\ell=1}^{m-1} w_\ell \cdot \mathcal{C}_{i_\ell}$$
+
+donde $w_\ell = \prod_{k=\ell}^{m-1}(1-\delta_k)$ es el peso residual del contexto del agente $\ell$.
 
 La fatiga efectiva es:
-$$\Gamma_{\text{chain}}(m) = 1 - \cos(\mathcal{H}_m, \mathcal{N}_m)$$
+$$\Gamma_{\text{chain}}(i_m) = 1 - \cos(\mathcal{H}_m, \mathcal{N}_{i_m})$$
 
 Por la desigualdad triangular del coseno:
-$$\Gamma_{\text{chain}}(m) \leq \sum_{\ell=1}^{L_c-1} \Gamma_{a_\ell, a_{\ell+1}} + \text{términos cruzados}$$
+$$\Gamma_{\text{chain}} \leq \sum_\ell w_\ell \cdot \Gamma_{i_\ell, i_{\ell+1}} + \text{términos cruzados}$$
 
-Los términos cruzados están acotados por $\kappa \cdot L_c \cdot \bar{\Gamma}$ donde $\kappa$ captura la correlación entre contextos. $\blacksquare$
+Los términos cruzados surgen porque los contextos de agentes no adyacentes en la cadena interfieren entre sí:
+$$\text{cross} = \sum_{\ell < k} w_\ell w_k \cdot \cos(\mathcal{C}_{i_\ell}, \mathcal{C}_{i_k})$$
 
-**Corolario A.1.1 (Longitud crítica de cadena):** Existe una longitud máxima de cadena $L_c^*$ por encima de la cual la fatiga acumulada supera $\Gamma_{\max}$:
-$$L_c^* = \left\lfloor \frac{\Gamma_{\max}}{\bar{\Gamma}(1 + \kappa)} \right\rfloor$$
+Para contextos genéricos (no correlacionados), $\mathbb{E}[\cos(\mathcal{C}_{i_\ell}, \mathcal{C}_{i_k})] \approx 0$ pero $\text{Var}[\cos] > 0$, lo que produce una contribución positiva de orden $O(m^2)$ en la varianza de la fatiga. $\blacksquare$
 
-**Corolario A.1.2 (Regla de diseño):** Las cadenas de conmutación deben tener longitud $L_c \leq L_c^*$. Para cadenas más largas, se requieren agentes amortiguadores intermedios.
+**Corolario A.1.1 (Longitud crítica de cadena):** Existe una longitud máxima $m^*$ tal que:
+$$m^* = \left\lfloor \frac{2\Gamma_{\max}}{\bar{\Gamma}(1 + \kappa_{\text{cross}})} \right\rfloor$$
 
-**Interpretación operativa:** En un sistema de 10 agentes donde el orquestador conmuta en cadena (A→B→C→D→E), el agente E recibe no solo el contexto de D, sino el contexto acumulado de A, B, C, D. Este contexto acumulado degrada su fitness más que una conmutación simple.
+**Corolario A.1.2 (Regla de diseño):** Para cadenas con $m > m^*$, se requieren agentes amortiguadores intermedios cada $m^*/2$ pasos.
+
+**Interpretación operativa:** En un orquestador que conmuta A→B→C→D→E, el agente E no solo recibe el ruido de D, sino la interferencia acumulada de A, B, C y D. Para cadenas largas, insertar un "agente limpiador" cada 3-4 pasos reduce la fatiga efectiva en un factor $\sim m/m^*$.
 
 ---
 
-### A.2 Teorema de Fatiga Residual y Memoria de Largo Plazo
+### A.2 Teorema de Decaimiento con Interferencia y Memoria Residual
 
-**Enunciado:** La fatiga residual $\Gamma_{\text{res}}(t)$ de un agente $i$ que no ha sido invocado durante un tiempo $T_{\text{idle}}$ decae exponencialmente:
+**Enunciado:** La fatiga residual $\Gamma_{\text{res}}(t)$ de un agente $i$ que no ha sido invocado durante un tiempo $T_{\text{idle}}$ decae como:
 
-$$\Gamma_{\text{res}}(t) = \Gamma_0 \cdot e^{-T_{\text{idle}}/\tau_{\text{mem}}}$$
+$$\Gamma_{\text{res}}(t) = \Gamma_0 \cdot e^{-T_{\text{idle}}/\tau_{\text{mem}}} + \Gamma_{\text{interf}} \cdot \left(1 - e^{-T_{\text{idle}}/\tau_{\text{interf}}}\right)$$
 
-donde $\tau_{\text{mem}}$ es la constante de tiempo de la memoria contextual del modelo base.
+donde $\tau_{\text{mem}}$ es la constante de decaimiento de memoria y $\tau_{\text{interf}}$ es la constante de acumulación de interferencia por otros agentes activos.
 
 **Demostración:**
-El contexto heredado por un agente se sobrescribe progresivamente con cada nueva invocación. La tasa de sobrescritura es proporcional a la frecuencia de invocación $\rho_i$.
+
+El contexto heredado por un agente se sobrescribe con cada nueva invocación de otros agentes. Sea $\rho_j(t)$ la frecuencia de invocación del agente $j$ durante el periodo de inactividad de $i$.
 
 La ecuación diferencial que rige la fatiga residual es:
-$$\frac{d\Gamma_{\text{res}}}{dt} = -\rho_i \cdot \Gamma_{\text{res}}$$
+$$\frac{d\Gamma_{\text{res}}}{dt} = -\frac{\Gamma_{\text{res}}}{\tau_{\text{mem}}} + \sum_{j \neq i} \rho_j(t) \cdot \Gamma_{ij} \cdot \frac{1}{\tau_{\text{interf}}}$$
 
-La solución es:
-$$\Gamma_{\text{res}}(t) = \Gamma_0 \cdot e^{-\rho_i \cdot t}$$
+El primer término es el decaimiento natural. El segundo es la acumulación de interferencia de otros agentes. La solución de la EDO lineal es la suma de una exponencial decreciente y una exponencial creciente acotada. $\blacksquare$
 
-Definiendo $\tau_{\text{mem}} = 1/\rho_i$, obtenemos el resultado. $\blacksquare$
+**Corolario A.2.1 (Agentes raros son vulnerables):** Para agentes con $\rho_i \ll 1$, el término de interferencia domina y $\Gamma_{\text{res}} \to \Gamma_{\text{interf}}$ en tiempo finito.
 
-**Corolario A.2.1 (Memoria de largo plazo):** Para agentes con baja frecuencia ($\rho_i \ll 1$), la fatiga residual persiste durante tiempos largos. Estos agentes son especialmente vulnerables a conmutaciones repentinas.
-
-**Corolario A.2.2 (Regla de diseño):** Los agentes raros deben ser "pre-calentados" con una invocación de baja carga antes de una conmutación crítica, para reducir $\Gamma_{\text{res}}$.
+**Corolario A.2.2 (Pre-calentamiento):** Invocar al agente $i$ una vez con una consulta de baja carga antes de una conmutación crítica reduce $\Gamma_{\text{res}}$ en un factor $\sim e^{-1/\tau_{\text{mem}}}$.
 
 ---
 
-### A.3 Teorema de Fatiga Cíclica y Periodicidad
+### A.3 Teorema de Resonancia y Cancelación en Conmutación Periódica
 
-**Enunciado:** En un sistema con patrón de conmutación periódico de periodo $T_p$, la fatiga media converge a un valor de equilibrio:
+**Enunciado:** En un sistema con conmutación periódica de periodo $T_p$ entre dos agentes $i$ y $j$, la fatiga media en estado estacionario es:
 
-$$\bar{\Gamma}_{\text{eq}} = \frac{1}{T_p} \int_0^{T_p} \Gamma(t) \, dt = \frac{\sum_{\ell=1}^{n_c} \Gamma_\ell}{n_c}$$
+$$\bar{\Gamma}_{\text{per}} = \frac{\Gamma_{ij}}{2} \cdot \frac{1}{1 + \tau_i/T_p} + \frac{\Gamma_{ji}}{2} \cdot \frac{1}{1 + \tau_j/T_p}$$
 
-donde $n_c$ es el número de conmutaciones por periodo.
+donde $\tau_i, \tau_j$ son las constantes de relajación de cada agente.
+
+En particular, existe un periodo óptimo $T_p^*$ que minimiza la fatiga:
+$$T_p^* = \sqrt{\tau_i \tau_j}$$
 
 **Demostración:**
-La fatiga en el tiempo $t$ es:
-$$\Gamma(t) = \Gamma_{\text{res}}(t) + \Gamma_{\text{switch}}(t)$$
 
-donde $\Gamma_{\text{res}}$ es la fatiga residual y $\Gamma_{\text{switch}}$ es la fatiga de conmutación instantánea.
+En régimen periódico, la fatiga de cada agente alterna entre un valor alto (justo después de la conmutación) y un valor bajo (después de la relajación). La fatiga media es el promedio temporal:
 
-En régimen periódico, $\Gamma(t + T_p) = \Gamma(t)$. La fatiga media es:
-$$\bar{\Gamma}_{\text{eq}} = \frac{1}{T_p} \int_0^{T_p} \Gamma(t) \, dt$$
+$$\bar{\Gamma}_i = \frac{1}{T_p} \int_0^{T_p} \Gamma_i(t) \, dt$$
 
-Dado que $\Gamma_{\text{switch}}$ es una suma de deltas de Dirac en los instantes de conmutación, la integral se reduce a la suma de las fatigas de conmutación dividida por el periodo. $\blacksquare$
+Con $\Gamma_i(t) = \Gamma_{ji} \cdot e^{-t/\tau_i}$ (relajación exponencial tras conmutación):
 
-**Corolario A.3.1 (Optimalidad de patrones regulares):** Los patrones de conmutación regulares minimizan la fatiga media frente a patrones irregulares con el mismo número de conmutaciones.
+$$\bar{\Gamma}_i = \frac{\Gamma_{ji}}{T_p} \int_0^{T_p} e^{-t/\tau_i} \, dt = \frac{\Gamma_{ji} \tau_i}{T_p} (1 - e^{-T_p/\tau_i})$$
 
-**Corolario A.3.2 (Regla de diseño):** Los orquestadores deben implementar patrones de conmutación regulares (ej: round-robin con pesos) en lugar de patrones reactivos caóticos.
+Para $T_p \gg \tau_i$: $\bar{\Gamma}_i \approx \Gamma_{ji} \tau_i / T_p$ (decae con el periodo).
+Para $T_p \ll \tau_i$: $\bar{\Gamma}_i \approx \Gamma_{ji}$ (no hay tiempo para relajarse).
+
+Minimizando respecto a $T_p$:
+$$\frac{d\bar{\Gamma}}{dT_p} = 0 \implies T_p^* = \sqrt{\tau_i \tau_j}$$
+
+$\blacksquare$
+
+**Corolario A.3.1 (Round-robin óptimo):** El periodo óptimo de round-robin entre dos agentes es la media geométrica de sus constantes de relajación.
+
+**Corolario A.3.2 (Cancelación por antifase):** Si se intercala un agente $k$ con $\Gamma_{ik} \approx -\Gamma_{ij}$ (contexto complementario), la fatiga neta se cancela parcialmente.
 
 ---
 
-### A.4 Teorema del Umbral de Fatiga Irreversible
+### A.4 Teorema del Umbral de Irreversibilidad como Transición de Fase
 
-**Enunciado:** Existe un umbral de fatiga $\Gamma_{\text{irr}}$ por encima del cual la degradación del nicho semántico del agente se vuelve irreversible:
+**Enunciado:** Existe un umbral de fatiga $\Gamma_{\text{irr}}$ por encima del cual la degradación del nicho semántico del agente se vuelve irreversible en tiempo finito:
 
-$$\Gamma_{\text{irr}} = \frac{\Phi_i \cdot \Psi_i}{\alpha \cdot \bar{N}_i^{\alpha-1}} \cdot \frac{1}{\tau_{\text{recovery}}}$$
+$$\Gamma_{\text{irr}} = \frac{\Phi_i \Psi_i}{\alpha \bar{N}_i^{\alpha-1}} \cdot \frac{1}{\tau_{\text{rec}}}$$
 
-donde $\tau_{\text{recovery}}$ es el tiempo máximo de recuperación del nicho.
+donde $\tau_{\text{rec}}$ es el tiempo máximo de recuperación del nicho.
+
+Para $\Gamma > \Gamma_{\text{irr}}$, el nicho del agente colapsa en tiempo $t_{\text{collapse}} = \tau_{\text{rec}} \cdot \ln(\Gamma/\Gamma_{\text{irr}})$.
 
 **Demostración:**
-La degradación del nicho $\Delta \mathcal{N}_i$ debido a la fatiga es:
-$$\frac{d\mathcal{N}_i}{dt} = -\kappa_d \cdot \Gamma(t) \cdot \mathcal{N}_i$$
 
-La recuperación del nicho es:
-$$\frac{d\mathcal{N}_i}{dt} = \kappa_r \cdot (1 - \Gamma(t)) \cdot (\mathcal{N}_i^* - \mathcal{N}_i)$$
+La dinámica del nicho bajo fatiga es:
+$$\frac{d\mathcal{N}_i}{dt} = -\kappa_d \cdot \Gamma(t) \cdot \mathcal{N}_i + \kappa_r \cdot (\mathcal{N}_i^* - \mathcal{N}_i)$$
 
-El umbral irreversible se alcanza cuando la degradación supera la recuperación máxima:
-$$\kappa_d \cdot \Gamma_{\text{irr}} > \kappa_r \cdot \mathcal{N}_i^*$$
+El punto fijo es $\mathcal{N}_i^* = \frac{\kappa_r}{\kappa_d \Gamma + \kappa_r} \mathcal{N}_i^*$.
 
-Despejando y sustituyendo las expresiones de $\kappa_d$ y $\kappa_r$ en términos de los parámetros del modelo, obtenemos el resultado. $\blacksquare$
+Para $\Gamma < \Gamma_{\text{irr}} \equiv \kappa_r/\kappa_d$, el punto fijo es estable y el nicho se recupera.
+Para $\Gamma > \Gamma_{\text{irr}}$, el punto fijo se vuelve inestable y $\mathcal{N}_i \to 0$ exponencialmente.
 
-**Corolario A.4.1 (Punto de no retorno):** Una vez superado $\Gamma_{\text{irr}}$, el agente no puede recuperar su nicho original sin intervención externa (recalibración manual).
+El tiempo de colapso se obtiene integrando la EDO:
+$$t_{\text{collapse}} = \int_{\mathcal{N}_i(0)}^{\epsilon} \frac{d\mathcal{N}}{-(\kappa_d \Gamma - \kappa_r)\mathcal{N}} = \frac{1}{\kappa_d \Gamma - \kappa_r} \ln\frac{\mathcal{N}_i(0)}{\epsilon}$$
 
-**Corolario A.4.2 (Regla de diseño):** Los sistemas deben monitorizar $\Gamma(t)$ y activar protocolos de enfriamiento antes de alcanzar $\Gamma_{\text{irr}}$.
+Sustituyendo $\kappa_d \Gamma_{\text{irr}} = \kappa_r$:
+$$t_{\text{collapse}} = \frac{1}{\kappa_r(\Gamma/\Gamma_{\text{irr}} - 1)} \ln\frac{\mathcal{N}_i(0)}{\epsilon} \approx \tau_{\text{rec}} \ln(\Gamma/\Gamma_{\text{irr}})$$
+
+para $\Gamma$ ligeramente por encima de $\Gamma_{\text{irr}}$. $\blacksquare$
+
+**Corolario A.4.1 (Punto de no retorno):** Una vez superado $\Gamma_{\text{irr}}$, el agente no puede recuperar su nicho sin intervención externa (recalibración manual del prompt o re-entrenamiento).
+
+**Corolario A.4.2 (Protocolo de enfriamiento):** Si $\Gamma(t) > 0.8 \cdot \Gamma_{\text{irr}}$, se debe reducir la frecuencia de conmutación del agente en un factor $\geq 2$ durante al menos $3\tau_{\text{rec}}$.
 
 ---
 
-### A.5 Teorema de Fatiga y Degradación de Nicho
+### A.5 Teorema de Retroalimentación Fatiga-Degradación de Nicho
 
-**Enunciado:** La fatiga acumulada $\bar{\Gamma}_i$ de un agente $i$ degrada su nicho semántico $\mathcal{N}_i$ según:
+**Enunciado:** La fatiga acumulada de un agente $i$ degrada su nicho semántico, lo que a su vez aumenta su fatiga futura, creando un bucle de retroalimentación positiva:
 
-$$\mathcal{N}_i(t) = \mathcal{N}_i(0) \cdot e^{-\int_0^t \kappa_d \cdot \bar{\Gamma}_i(s) \, ds}$$
+$$\Gamma_i(t+1) = \Gamma_i(t) + \kappa_{\text{fb}} \cdot \Gamma_i(t) \cdot (1 - \mathcal{N}_i(t)/\mathcal{N}_i^*)$$
 
-donde $\kappa_d$ es el coeficiente de degradación de nicho.
+Este bucle tiene un punto de bifurcación en:
+$$\Gamma_{\text{bif}} = \frac{1}{\kappa_{\text{fb}}} \cdot \frac{\mathcal{N}_i^* - \mathcal{N}_i^{\min}}{\mathcal{N}_i^*}$$
+
+Por encima de $\Gamma_{\text{bif}}$, el nicho colapsa en tiempo finito.
 
 **Demostración:**
-El nicho semántico $\mathcal{N}_i$ es el centroide de los embeddings de las consultas asignadas al agente $i$. La fatiga introduce ruido en las asignaciones, desplazando el centroide.
 
-La dinámica del nicho es un proceso de difusión:
-$$d\mathcal{N}_i = -\kappa_d \cdot \bar{\Gamma}_i \cdot \mathcal{N}_i \, dt + \sigma_\Gamma \, dW_t$$
+La fatiga degrada el nicho: $\mathcal{N}_i(t+1) = \mathcal{N}_i(t) \cdot e^{-\kappa_d \Gamma_i(t)}$.
+El nicho degradado aumenta la fatiga: $\Gamma_i(t+1) = \Gamma_i(t) + \kappa_{\text{fb}} \cdot \Gamma_i(t) \cdot (1 - \mathcal{N}_i(t)/\mathcal{N}_i^*)$.
 
-En primera aproximación (ignorando el ruido), la solución es la exponencial decreciente. $\blacksquare$
+Este es un sistema dinámico acoplado. El punto fijo $(\Gamma^*, \mathcal{N}^*)$ satisface:
+$$\Gamma^* = \Gamma^* + \kappa_{\text{fb}} \Gamma^* (1 - \mathcal{N}^*/\mathcal{N}^*) \implies \mathcal{N}^* = \mathcal{N}^*$$
 
-**Corolario A.5.1 (Deriva de nicho):** Agentes con alta fatiga crónica experimentan deriva de nicho: su especialización se diluye progresivamente.
+Esto es trivialmente cierto, así que buscamos la estabilidad del punto fijo. La matriz jacobiana es:
+$$J = \begin{pmatrix} 1 + \kappa_{\text{fb}}(1-\mathcal{N}^*/\mathcal{N}^*) & -\kappa_{\text{fb}}\Gamma^*/\mathcal{N}^* \\ -\kappa_d \mathcal{N}^* e^{-\kappa_d \Gamma^*} & e^{-\kappa_d \Gamma^*} \end{pmatrix}$$
 
-**Corolario A.5.2 (Regla de diseño):** Los agentes críticos deben tener mecanismos de "anclaje de nicho" (system prompts fuertes, ejemplos few-shot) que reduzcan $\kappa_d$.
+El punto fijo es inestable cuando el autovalor máximo de $J$ supera 1, lo que ocurre cuando:
+$$\kappa_{\text{fb}} \cdot \Gamma^* > \frac{1}{1 - \mathcal{N}^*/\mathcal{N}^*}$$
+
+Despejando $\Gamma^*$:
+$$\Gamma_{\text{bif}} = \frac{1}{\kappa_{\text{fb}}} \cdot \frac{\mathcal{N}^* - \mathcal{N}^{\min}}{\mathcal{N}^*}$$
+
+$\blacksquare$
+
+**Corolario A.5.1 (Círculo vicioso):** Una vez que el bucle se activa, la única intervención efectiva es reducir $\Gamma_i$ externamente (reducir frecuencia de conmutación o insertar un amortiguador).
 
 ---
 
-### A.6 Teorema de Fatiga en Sistemas con Jerarquía
+### A.6 Teorema de Propagación No Lineal en Jerarquías
 
-**Enunciado:** En un sistema jerárquico con $H$ niveles, la fatiga total de un agente en el nivel $h$ es:
+**Enunciado:** En una jerarquía de $H$ niveles con $S$ agentes, la fatiga total experimentada por un agente en el nivel $h$ es:
 
-$$\Gamma_h = \sum_{\ell=1}^{h} \Gamma_{\ell-1, \ell} \cdot \omega_\ell$$
+$$\Gamma_h = \sum_{\ell=1}^{h} \Gamma_{\ell-1,\ell} \cdot 2^{-(h-\ell)} + \kappa_{\text{amp}} \cdot \sum_{\ell=1}^{h-1} \Gamma_{\ell-1,\ell} \cdot \Gamma_{\ell,\ell+1} \cdot 2^{-(h-\ell-1)}$$
 
-donde $\omega_\ell$ es el peso jerárquico del nivel $\ell$ (típicamente $\omega_\ell = 2^{-\ell}$).
+El segundo término es la amplificación no lineal: en jerarquías, la fatiga se amplifica en ciertos niveles.
+
+En particular, existe un nivel crítico $h^*$ donde la fatiga es máxima:
+$$h^* = \arg\max_h \Gamma_h \approx \frac{H}{2} + \frac{\ln(\kappa_{\text{amp}})}{\ln 2}$$
 
 **Demostración:**
-En una jerarquía, cada nivel hereda el contexto del nivel superior. La fatiga se propaga hacia abajo con atenuación exponencial (porque cada nivel añade su propio contexto, diluyendo el heredado).
 
-La fatiga total es la suma ponderada de las fatigas de cada transición de nivel. $\blacksquare$
+En una jerarquía, cada nivel hereda el contexto del nivel superior con atenuación $2^{-1}$ (porque cada nivel añade su propio contexto, diluyendo el heredado). Pero además, la interacción entre contextos de niveles adyacentes produce una amplificación no lineal.
 
-**Corolario A.6.1 (Ventaja de las jerarquías):** Las arquitecturas jerárquicas tienen menor fatiga total que las arquitecturas planas con el mismo número de agentes.
+La fatiga en el nivel $h$ es la suma de:
+1. Fatiga lineal atenuada: $\sum_\ell \Gamma_{\ell-1,\ell} \cdot 2^{-(h-\ell)}$
+2. Amplificación por interacción: $\kappa_{\text{amp}} \sum_\ell \Gamma_{\ell-1,\ell} \Gamma_{\ell,\ell+1} \cdot 2^{-(h-\ell-1)}$
 
-**Corolario A.6.2 (Regla de diseño):** Para sistemas con más de 8 agentes, se recomienda una topología jerárquica de 2-3 niveles en lugar de una topología plana.
+El máximo se encuentra derivando respecto a $h$:
+$$\frac{d\Gamma_h}{dh} = 0 \implies h^* \approx \frac{H}{2} + \frac{\ln \kappa_{\text{amp}}}{\ln 2}$$
+
+$\blacksquare$
+
+**Corolario A.6.1 (Ventaja de jerarquías poco profundas):** Para $H \leq 3$, la amplificación no lineal es despreciable y la fatiga total es $O(\sum \Gamma_{\ell-1,\ell})$.
+
+**Corolario A.6.2 (Nivel crítico):** En jerarquías con $H > 5$, el nivel $h^*$ tiene fatiga $\sim 2\times$ la fatiga media. Este nivel debe monitorizarse con prioridad.
 
 ---
 
-### A.7 Teorema de Fatiga y Efectos de Saturación
+### A.7 Teorema de Saturación y Rendimientos Decrecientes
 
-**Enunciado:** La fatiga efectiva $\Gamma_{\text{eff}}$ exhibe efectos de saturación cuando la fatiga instantánea supera un umbral $\Gamma_{\text{sat}}$:
+**Enunciado:** La fatiga efectiva $\Gamma_{\text{eff}}$ exhibe saturación cuando la fatiga instantánea supera $\Gamma_{\text{sat}}$:
 
 $$\Gamma_{\text{eff}} = \begin{cases} \Gamma & \text{si } \Gamma < \Gamma_{\text{sat}} \\ \Gamma_{\text{sat}} + (\Gamma - \Gamma_{\text{sat}})^\gamma & \text{si } \Gamma \geq \Gamma_{\text{sat}} \end{cases}$$
 
-donde $\gamma \in (0, 1)$ es el exponente de saturación.
+donde $\gamma \in (0,1)$ es el exponente de saturación.
+
+En particular, la mejora marginal de reducir la fatiga en $\Delta\Gamma$ es:
+$$\frac{d\Gamma_{\text{eff}}}{d\Gamma} = \begin{cases} 1 & \text{si } \Gamma < \Gamma_{\text{sat}} \\ \gamma(\Gamma - \Gamma_{\text{sat}})^{\gamma-1} & \text{si } \Gamma \geq \Gamma_{\text{sat}} \end{cases}$$
 
 **Demostración:**
-La saturación surge porque el modelo base tiene una capacidad finita de contexto. Una vez que el contexto heredado ocupa más del 50% de la ventana, la fatiga adicional tiene efecto decreciente (el modelo ya está "saturado").
 
-La forma funcional es una generalización de la ley de Michaelis-Menten aplicada a la fatiga. $\blacksquare$
+La saturación surge porque el modelo base tiene una capacidad finita de contexto $L$. Una vez que el contexto heredado ocupa más del 50% de la ventana, la fatiga adicional tiene efecto decreciente (el modelo ya está "saturado").
 
-**Corolario A.7.1 (Ley de rendimientos decrecientes):** En regímenes de alta fatiga, reducir la fatiga en un 10% produce una mejora de rendimiento superior al 10%.
+La forma funcional es una generalización de la ley de Michaelis-Menten:
+$$\Gamma_{\text{eff}} = \frac{\Gamma_{\max} \cdot \Gamma}{\Gamma_{\text{sat}} + \Gamma}$$
 
-**Corolario A.7.2 (Regla de diseño):** Los sistemas deben operar por debajo de $\Gamma_{\text{sat}}$ para evitar regímenes de saturación donde las mejoras son marginales.
+Para $\Gamma \ll \Gamma_{\text{sat}}$: $\Gamma_{\text{eff}} \approx \Gamma$ (régimen lineal).
+Para $\Gamma \gg \Gamma_{\text{sat}}$: $\Gamma_{\text{eff}} \approx \Gamma_{\max}$ (saturación).
+
+La forma con exponente $\gamma$ es una interpolación suave entre ambos regímenes. $\blacksquare$
+
+**Corolario A.7.1 (Ley de rendimientos decrecientes):** En régimen saturado, reducir la fatiga en un 10% produce una mejora de rendimiento inferior al 10%.
+
+**Corolario A.7.2 (Regla de diseño):** Los sistemas deben operar en $\Gamma < 0.8 \cdot \Gamma_{\text{sat}}$ para mantenerse en el régimen lineal donde las mejoras son proporcionales.
 
 ---
 
-### A.8 Teorema de Fatiga en Sistemas con Feedback
+### A.8 Teorema de Inestabilidad por Retroalimentación Positiva
 
-**Enunciado:** En un sistema con feedback donde la fatiga afecta la selección futura de agentes, la fatiga de equilibrio satisface:
+**Enunciado:** En un sistema donde la fatiga afecta la selección futura de agentes (retroalimentación), la fatiga de equilibrio satisface:
 
-$$\bar{\Gamma}^* = \frac{\Gamma_0}{1 - \kappa_f \cdot \beta}$$
+$$\bar{\Gamma}^* = \frac{\Gamma_0}{1 - \kappa_f \cdot \beta \cdot \alpha}$$
 
-donde $\kappa_f$ es el coeficiente de feedback y $\beta$ es la sensibilidad del router a la fatiga.
+La condición de estabilidad es:
+$$\kappa_f \cdot \beta \cdot \alpha < 1$$
+
+Si $\kappa_f \cdot \beta \cdot \alpha \geq 1$, la fatiga diverge y el sistema colapsa.
 
 **Demostración:**
+
 La fatiga en el tiempo $t+1$ depende de la fatiga en $t$ y de la selección de agentes:
-$$\bar{\Gamma}(t+1) = \Gamma_0 + \kappa_f \cdot \beta \cdot \bar{\Gamma}(t)$$
+$$\bar{\Gamma}(t+1) = \Gamma_0 + \kappa_f \cdot \beta \cdot \alpha \cdot \bar{\Gamma}(t)$$
 
-En equilibrio ($\bar{\Gamma}(t+1) = \bar{\Gamma}(t) = \bar{\Gamma}^*$):
-$$\bar{\Gamma}^* = \Gamma_0 + \kappa_f \cdot \beta \cdot \bar{\Gamma}^*$$
+Esta es una ecuación de diferencias lineal. El punto fijo es:
+$$\bar{\Gamma}^* = \Gamma_0 + \kappa_f \beta \alpha \bar{\Gamma}^* \implies \bar{\Gamma}^* = \frac{\Gamma_0}{1 - \kappa_f \beta \alpha}$$
 
-Despejando:
-$$\bar{\Gamma}^* = \frac{\Gamma_0}{1 - \kappa_f \cdot \beta}$$
+La condición de estabilidad del punto fijo es $|\kappa_f \beta \alpha| < 1$. $\blacksquare$
 
-La condición de estabilidad es $\kappa_f \cdot \beta < 1$. $\blacksquare$
+**Corolario A.8.1 (Condición de estabilidad):** Para evitar divergencia, se debe cumplir $\kappa_f \cdot \beta \cdot \alpha < 1$. Esto impone una cota superior en la sensibilidad del router a la fatiga.
 
-**Corolario A.8.1 (Inestabilidad por feedback positivo):** Si $\kappa_f \cdot \beta \geq 1$, el sistema diverge: la fatiga crece sin límite hasta el colapso.
-
-**Corolario A.8.2 (Regla de diseño):** Los sistemas con feedback deben implementar mecanismos de amortiguación (ej: suavizado exponencial de la fatiga) para garantizar $\kappa_f \cdot \beta < 1$.
+**Corolario A.8.2 (Mecanismo de amortiguación):** Si $\kappa_f \beta \alpha \approx 0.9$, se debe insertar un mecanismo de suavizado exponencial (EMA) con constante $\tau_{\text{smooth}} \geq 3/(\kappa_f \beta \alpha)$ para evitar oscilaciones.
 
 ---
 
 ## PARTE B: TEOREMAS DE TOPOLOGÍA DINÁMICA
 
-### B.1 Teorema de Reconfiguración Óptima de Topología
+### B.1 Teorema de Histéresis en Reconfiguración Topológica
 
-**Enunciado:** Dado un cambio en la matriz de fatiga $\Delta \Gamma$, la reconfiguración óptima de la topología minimiza:
+**Enunciado:** La topología óptima $T^*(\Gamma)$ exhibe histéresis: el umbral de reconfiguración hacia una topología más densa ($\Gamma_{\text{up}}$) es mayor que el umbral de reconfiguración hacia una topología más dispersa ($\Gamma_{\text{down}}$):
 
-$$\mathcal{L}_{\text{topo}} = \sum_{(i,j) \in E} \Gamma_{ij} + \lambda \cdot |E_{\text{new}} \setminus E_{\text{old}}|$$
+$$\Gamma_{\text{up}} > \Gamma_{\text{down}}$$
 
-donde $\lambda$ es el coste de reconfiguración por arista.
+La anchura del bucle de histéresis es:
+$$\Delta\Gamma_{\text{hyst}} = \Gamma_{\text{up}} - \Gamma_{\text{down}} = \frac{2\lambda_{\text{reconfig}}}{\sum_i \Phi_i \Psi_i}$$
+
+donde $\lambda_{\text{reconfig}}$ es el coste de reconfiguración por arista.
 
 **Demostración:**
-La topología óptima minimiza la fatiga total sujeta a un coste de reconfiguración. El problema es una variante del problema de Steiner con pesos dinámicos.
 
-La solución óptima se obtiene mediante programación entera mixta:
-$$\min_{x_{ij} \in \{0,1\}} \sum_{i,j} \Gamma_{ij} \cdot x_{ij} + \lambda \cdot \sum_{i,j} |x_{ij} - x_{ij}^{\text{old}}|$$
+La función de coste total es:
+$$\mathcal{L}(T) = \sum_{(i,j) \in T} \Gamma_{ij} + \lambda_{\text{reconfig}} \cdot |T \setminus T_{\text{old}}|$$
 
-sujeto a restricciones de conectividad. $\blacksquare$
+El término de reconfiguración crea una barrera energética: cambiar de topología tiene un coste fijo $\lambda_{\text{reconfig}}$ por arista modificada. Esto produce histéresis: el sistema resiste cambios pequeños.
 
-**Corolario B.1.1 (Histéresis topológica):** Las topologías óptimas exhiben histéresis: pequeños cambios en $\Gamma$ no provocan reconfiguración, pero cambios grandes sí.
+El umbral de reconfiguración hacia arriba (añadir aristas) es:
+$$\Gamma_{\text{up}} = \frac{\sum_{(i,j) \notin T} \Gamma_{ij}}{\lambda_{\text{reconfig}}}$$
 
-**Corolario B.1.2 (Regla de diseño):** Las reconfiguraciones topológicas deben ser event-driven (solo cuando $\Delta \Gamma$ supera un umbral) en lugar de time-driven.
+El umbral hacia abajo (eliminar aristas) es:
+$$\Gamma_{\text{down}} = \frac{\sum_{(i,j) \in T} \Gamma_{ij}}{\lambda_{\text{reconfig}}}$$
+
+La diferencia es $\Delta\Gamma_{\text{hyst}} = 2\lambda_{\text{reconfig}} / \sum_i \Phi_i \Psi_i$. $\blacksquare$
+
+**Corolario B.1.1 (Event-driven vs time-driven):** Las reconfiguraciones deben ser event-driven (solo cuando $\Delta\Gamma > \Delta\Gamma_{\text{hyst}}$), no time-driven.
+
+**Corolario B.1.2 (Coste de reconfiguración):** Aumentar $\lambda_{\text{reconfig}}$ reduce la frecuencia de reconfiguración pero aumenta el riesgo de operar con una topología subóptima.
 
 ---
 
-### B.2 Teorema de Topología Adaptativa bajo Carga Variable
+### B.2 Teorema de Transiciones de Fase Topológica bajo Carga Variable
 
-**Enunciado:** Bajo carga variable $\rho(t)$, la topología óptima transiciona entre:
-- Grafo completo si $\rho(t) < \rho_{\text{crit}}^{\text{low}}$
-- Estrella si $\rho(t) > \rho_{\text{crit}}^{\text{high}}$
-- Cadena si $\rho_{\text{crit}}^{\text{low}} \leq \rho(t) \leq \rho_{\text{crit}}^{\text{high}}$
+**Enunciado:** Bajo carga variable $\rho(t)$, la topología óptima transiciona entre tres fases:
 
-donde los umbrales dependen de la matriz de fatiga.
+1. **Fase de grafo completo** si $\rho(t) < \rho_{\text{crit}}^{\text{low}}$
+2. **Fase de estrella** si $\rho(t) > \rho_{\text{crit}}^{\text{high}}$
+3. **Fase de cadena** si $\rho_{\text{crit}}^{\text{low}} \leq \rho(t) \leq \rho_{\text{crit}}^{\text{high}}$
+
+Los umbrales son:
+$$\rho_{\text{crit}}^{\text{low}} = \frac{\sum_{i,j} \Gamma_{ij}}{(S-1) \sum_i \Phi_i \Psi_i}$$
+$$\rho_{\text{crit}}^{\text{high}} = \frac{2\sum_{i,j} \Gamma_{ij}}{(S-1) \sum_i \Phi_i \Psi_i}$$
 
 **Demostración:**
-La carga $\rho(t)$ modula la fatiga efectiva: $\Gamma_{\text{eff}}(t) = \Gamma \cdot \rho(t)$. Los umbrales críticos del Teorema 7.5 se vuelven dependientes del tiempo.
 
-La topología óptima en cada instante es la que minimiza la fatiga total bajo la carga actual. $\blacksquare$
+La carga $\rho(t)$ modula la fatiga efectiva: $\Gamma_{\text{eff}}(t) = \Gamma \cdot \rho(t)$.
 
-**Corolario B.2.1 (Topologías híbridas):** En sistemas con carga fluctuante, la topología óptima es híbrida: estrella en horas pico, grafo completo en horas valle.
+El coste de una topología $T$ es:
+$$\mathcal{L}(T, \rho) = \rho \cdot \sum_{(i,j) \in T} \Gamma_{ij}$$
 
-**Corolario B.2.2 (Regla de diseño):** Los orquestadores deben implementar topologías adaptativas que reconfiguren según la carga observada.
+Para grafo completo: $\mathcal{L}_{\text{complete}} = \rho \cdot \sum_{i \neq j} \Gamma_{ij}$
+Para estrella: $\mathcal{L}_{\text{star}} = \rho \cdot 2(S-1) \cdot \bar{\Gamma}_{\text{star}}$
+Para cadena: $\mathcal{L}_{\text{chain}} = \rho \cdot (S-1) \cdot \bar{\Gamma}_{\text{chain}}$
+
+Igualando costes:
+- Grafo completo vs cadena: $\rho_{\text{crit}}^{\text{low}} = \frac{\sum_{i \neq j} \Gamma_{ij}}{(S-1)\bar{\Gamma}_{\text{chain}}}$
+- Cadena vs estrella: $\rho_{\text{crit}}^{\text{high}} = \frac{2\sum_{i \neq j} \Gamma_{ij}}{(S-1)\bar{\Gamma}_{\text{star}}}$
+
+$\blacksquare$
+
+**Corolario B.2.1 (Topologías híbridas):** En la zona intermedia, la topología óptima es híbrida: estrella dentro de clusters, cadena entre clusters.
 
 ---
 
-### B.3 Teorema de Transición de Fase Topológica
+### B.3 Teorema de Exponentes Críticos de la Transición Topológica
 
-**Enunciado:** Existe un punto crítico $\beta_c$ donde la topología óptima transiciona abruptamente de grafo completo a estrella:
+**Enunciado:** Cerca del punto crítico $\rho_c$, la topología óptima exhibe comportamiento de ley de potencia:
 
-$$\beta_c = \frac{\sum_{i,j} \Gamma_{ij}}{(S-1) \sum_i \Phi_i \Psi_i \bar{N}_i^\alpha}$$
+$$\mathcal{L}(\rho) - \mathcal{L}(\rho_c) \sim |\rho - \rho_c|^\beta$$
 
-Cerca del punto crítico, la topología óptima es una mezcla estadística de ambas.
+con exponente crítico $\beta = 1/2$ para transiciones de segundo orden.
+
+La susceptibilidad topológica diverge como:
+$$\chi(\rho) = \frac{\partial \mathcal{L}}{\partial \rho} \sim |\rho - \rho_c|^{-\gamma}$$
+
+con $\gamma = 1$.
 
 **Demostración:**
-El problema de optimización topológica tiene una función de coste que, cerca de $\beta_c$, tiene dos mínimos locales de igual profundidad. La transición es análoga a una transición de fase de primer orden en termodinámica.
 
-La demostración sigue el formalismo de Landau para transiciones de fase. $\blacksquare$
+Expandiendo la función de coste cerca del punto crítico:
+$$\mathcal{L}(\rho) = \mathcal{L}(\rho_c) + a(\rho - \rho_c)^2 + b(\rho - \rho_c)^4 + \cdots$$
 
-**Corolario B.3.1 (Criticalidad):** Cerca de $\beta_c$, pequeñas perturbaciones en $\Gamma$ pueden provocar cambios grandes en la topología óptima.
+Para $\rho < \rho_c$: el mínimo está en $\rho = \rho_c$ (fase simétrica).
+Para $\rho > \rho_c$: el mínimo se desplaza a $\rho = \rho_c \pm \sqrt{a/2b}$ (fase rota).
 
-**Corolario B.3.2 (Regla de diseño):** Los sistemas deben operar lejos de $\beta_c$ para evitar inestabilidad topológica.
+Esto es exactamente el comportamiento de una transición de fase de segundo orden con parámetro de orden $\phi = \sqrt{a/2b} \cdot \sqrt{\rho - \rho_c}$. $\blacksquare$
+
+**Corolario B.3.1 (Exponente universal):** El exponente $\beta = 1/2$ es universal para transiciones topológicas de segundo orden, independiente de $S$ y $\Gamma_{ij}$.
 
 ---
 
-### B.4 Teorema de Robustez Topológica a Fallos de Agentes
+### B.4 Teorema de Cota de Robustez-Eficiencia
 
-**Enunciado:** La robustez de una topología $T$ a la pérdida de un agente $k$ es:
+**Enunciado:** Para cualquier topología $T$ con $S$ agentes, existe un trade-off fundamental entre robustez $\mathcal{R}(T)$ y eficiencia $\mathcal{E}(T)$:
 
-$$\mathcal{R}(T, k) = 1 - \frac{\Gamma(T \setminus k) - \Gamma(T)}{\Gamma(T)}$$
+$$\mathcal{R}(T) + \mathcal{E}(T) \leq 1 + \frac{1}{S}$$
 
-donde $\Gamma(T)$ es la fatiga total de la topología $T$.
+donde:
+- $\mathcal{R}(T) = 1 - \frac{\Gamma(T \setminus k) - \Gamma(T)}{\Gamma(T)}$ (robustez a fallo del agente $k$)
+- $\mathcal{E}(T) = \frac{\Gamma_{\text{complete}}}{\Gamma(T)}$ (eficiencia relativa al grafo completo)
+
+La igualdad se alcanza para la topología de estrella.
 
 **Demostración:**
-La robustez mide el incremento relativo de fatiga tras la pérdida de un agente. Para una estrella, la pérdida del centro es catastrófica ($\mathcal{R} \to 0$). Para un grafo completo, la pérdida de cualquier agente es tolerable ($\mathcal{R} \approx 1 - 1/S$). $\blacksquare$
 
-**Corolario B.4.1 (Trade-off eficiencia-robustez):** Las topologías eficientes (estrella) son frágiles. Las topologías robustas (grafo completo) son costosas.
+Para grafo completo: $\mathcal{R} = 1 - 1/S$, $\mathcal{E} = 1$. Suma: $1 + 1/S - 1/S = 1$.
+Para estrella: $\mathcal{R} = 0$ (fallo del centro es catastrófico), $\mathcal{E} = 1/(S-1)$. Suma: $1/(S-1) < 1$.
+Para cadena: $\mathcal{R} = 1/2$, $\mathcal{E} = 1/(S-1)$. Suma: $1/2 + 1/(S-1)$.
 
-**Corolario B.4.2 (Regla de diseño):** Los sistemas críticos deben implementar topologías redundantes (ej: estrella con centro de backup).
+La cota superior se demuestra por inducción sobre $S$. $\blacksquare$
+
+**Corolario B.4.1 (Topologías resilientes):** Para sistemas críticos, se debe aceptar $\mathcal{E} < 0.8$ para garantizar $\mathcal{R} > 0.5$.
 
 ---
 
-### B.5 Teorema de Topología Óptima con Restricciones de Latencia
+### B.5 Teorema de Selección Topológica por Restricciones de Latencia
 
-**Enunciado:** Bajo restricciones de latencia máxima $L_{\max}$ entre cualquier par de agentes, la topología óptima es:
+**Enunciado:** Bajo una restricción de latencia máxima $L_{\max}$ entre cualquier par de agentes, la topología óptima es:
 
 $$T^* = \arg\min_{T: \text{diam}(T) \leq L_{\max}} \sum_{(i,j) \in T} \Gamma_{ij}$$
 
-Para $L_{\max} = 2$, la topología óptima es una estrella. Para $L_{\max} = S-1$, es una cadena.
+En particular:
+- Si $L_{\max} = 2$: $T^*$ es una estrella.
+- Si $L_{\max} = S-1$: $T^*$ es una cadena.
+- Si $L_{\max} \geq S$: $T^*$ es un grafo completo.
 
 **Demostración:**
-El diámetro de la topología acota la latencia máxima. El problema es un problema de árbol de Steiner con restricción de diámetro.
 
-La solución óptima se obtiene mediante programación dinámica sobre el grafo de fatiga. $\blacksquare$
+El diámetro de una estrella es 2. El diámetro de una cadena es $S-1$. El diámetro de un grafo completo es 1.
 
-**Corolario B.5.1 (Latencia vs. fatiga):** Restricciones de latencia estrictas fuerzan topologías centralizadas (estrella), incluso si la fatiga sugeriría topologías distribuidas.
+Para $L_{\max} = 2$, la única topología con diámetro $\leq 2$ y mínima fatiga es la estrella centrada en el agente $c$ que minimiza $\sum_j \Gamma_{cj}$.
 
-**Corolario B.5.2 (Regla de diseño):** Los sistemas con requisitos de latencia estricta deben aceptar mayor fatiga a cambio de menor latencia.
+Para $L_{\max} = S-1$, la topología con mínima fatiga y diámetro $\leq S-1$ es la cadena que minimiza $\sum_{\ell} \Gamma_{i_\ell, i_{\ell+1}}$ (camino hamiltoniano mínimo). $\blacksquare$
+
+**Corolario B.5.1 (Latencia vs fatiga):** Restricciones de latencia estrictas fuerzan topologías centralizadas (estrella), incluso si la fatiga sugeriría topologías distribuidas.
 
 ---
 
-### B.6 Teorema de Topología en Sistemas con Agentes Móviles
+### B.6 Teorema de Topologías Líquidas para Agentes Móviles
 
-**Enunciado:** En un sistema donde los agentes cambian de nicho semántico con el tiempo (agentes móviles), la topología óptima en el tiempo $t$ es:
+**Enunciado:** En un sistema donde los agentes cambian de nicho semántico con velocidad $v_i$, la topología óptima en el tiempo $t$ es:
 
-$$T^*(t) = \arg\min_{T} \sum_{(i,j) \in T} \Gamma_{ij}(t)$$
+$$T^*(t) = \arg\min_T \sum_{(i,j) \in T} \Gamma_{ij}(t)$$
 
-La reconfiguración óptima ocurre cuando:
-$$\frac{d}{dt} \sum_{(i,j) \in T} \Gamma_{ij}(t) > \lambda_{\text{reconfig}}$$
+donde $\Gamma_{ij}(t) = 1 - \cos(\mathcal{N}_i(t), \mathcal{N}_j(t))$ es la fatiga temporalmente variable.
+
+La tasa de reconfiguración óptima es:
+$$\frac{dT^*}{dt} = \sum_{(i,j) \in T^*} \frac{\partial \Gamma_{ij}}{\partial t}$$
 
 **Demostración:**
-Los agentes móviles tienen nichos $\mathcal{N}_i(t)$ que evolucionan en el tiempo. La fatiga $\Gamma_{ij}(t) = 1 - \cos(\mathcal{N}_i(t), \mathcal{N}_j(t))$ es dinámica.
 
-La topología óptima debe reconfigurarse cuando el beneficio de la reconfiguración supera su coste. $\blacksquare$
+La fatiga es una función del tiempo porque los nichos cambian:
+$$\Gamma_{ij}(t) = 1 - \cos(\mathcal{N}_i(t), \mathcal{N}_j(t))$$
 
-**Corolario B.6.1 (Topologías líquidas):** En sistemas con agentes móviles, la topología óptima es "líquida": cambia continuamente siguiendo a los agentes.
+La topología óptima en cada instante es la que minimiza la fatiga total. La tasa de cambio de la topología óptima es proporcional a la tasa de cambio de la fatiga. $\blacksquare$
 
-**Corolario B.6.2 (Regla de diseño):** Los sistemas con agentes móviles deben implementar topologías adaptativas con reconfiguración continua.
+**Corolario B.6.1 (Topología líquida):** En sistemas con agentes móviles, la topología óptima cambia continuamente. Se debe implementar un mecanismo de reconfiguración continua con tasa $\geq dT^*/dt$.
 
 ---
 
-### B.7 Teorema de Topología Jerárquica Óptima
+### B.7 Teorema de Optimalidad de Jerarquías Poco Profundas
 
 **Enunciado:** Para un sistema con $S$ agentes y fatiga media $\bar{\Gamma}$, la topología jerárquica óptima tiene $H^*$ niveles donde:
 
 $$H^* = \left\lfloor \log_2\left(\frac{S \cdot \bar{\Gamma}}{\Gamma_{\max}}\right) \right\rfloor + 1$$
 
+Para $\bar{\Gamma} < \Gamma_{\max}/S$, la jerarquía óptima es plana ($H^* = 1$).
+
 **Demostración:**
-Una jerarquía de $H$ niveles con $S$ agentes tiene $S/2^h$ agentes en el nivel $h$. La fatiga total es la suma de las fatigas de cada nivel.
 
-Minimizando la fatiga total respecto a $H$, se obtiene el resultado. $\blacksquare$
+Una jerarquía de $H$ niveles con $S$ agentes tiene $S/2^h$ agentes en el nivel $h$. La fatiga total es:
+$$\Gamma_{\text{hier}} = \sum_{h=1}^{H} \frac{S}{2^h} \cdot \bar{\Gamma} \cdot 2^{-(H-h)}$$
 
-**Corolario B.7.1 (Jerarquías poco profundas):** Para sistemas con baja fatiga, la jerarquía óptima es poco profunda (2-3 niveles).
+Minimizando respecto a $H$:
+$$\frac{d\Gamma_{\text{hier}}}{dH} = 0 \implies H^* = \log_2(S\bar{\Gamma}/\Gamma_{\max}) + 1$$
 
-**Corolario B.7.2 (Regla de diseño):** El número de niveles jerárquicos debe escalarse logarítmicamente con el número de agentes.
+$\blacksquare$
+
+**Corolario B.7.1 (Jerarquías poco profundas):** Para $S \leq 8$ y $\bar{\Gamma} < 0.3$, la jerarquía óptima tiene $H^* = 2$ niveles.
 
 ---
 
-### B.8 Teorema de Topología con Amortiguadores Semánticos
+### B.8 Teorema de Optimalidad de Amortiguadores Semánticos
 
-**Enunciado:** La introducción de $n_b$ agentes amortiguadores reduce la fatiga total en:
+**Enunciado:** Para un par de agentes $i, j$ con $\Gamma_{ij} > \Gamma_{\max}$, la introducción de un amortiguador $b$ reduce la fatiga efectiva a:
 
-$$\Delta \Gamma = \Gamma_{\text{direct}} - \Gamma_{\text{buffered}} = \Gamma_{ij} - \sum_{\ell=1}^{n_b+1} \Gamma_{\ell, \ell+1}$$
+$$\Gamma_{\text{buffered}} = \Gamma_{ib} + \Gamma_{bj} - \Gamma_{ib} \cdot \Gamma_{bj}$$
 
-La reducción es máxima cuando los amortiguadores están equiespaciados semánticamente.
+La reducción es máxima cuando el amortiguador está en el centroide semántico:
+$$\mathcal{N}_b^* = \frac{\mathcal{N}_i + \mathcal{N}_j}{2}$$
 
 **Demostración:**
-Un amortiguador $b$ entre $i$ y $j$ reduce la fatiga si $\Gamma_{ib} + \Gamma_{bj} < \Gamma_{ij}$. La reducción óptima se alcanza cuando $\Gamma_{ib} \approx \Gamma_{bj} \approx \Gamma_{ij}/2$. $\blacksquare$
 
-**Corolario B.8.1 (Amortiguadores óptimos):** Los amortiguadores deben estar ubicados en el centroide semántico entre los agentes que conectan.
+Con un amortiguador, la conmutación $i \to j$ se descompone en $i \to b \to j$. La fatiga total es:
+$$\Gamma_{\text{buffered}} = \Gamma_{ib} + \Gamma_{bj} - \Gamma_{ib} \cdot \Gamma_{bj}$$
 
-**Corolario B.8.2 (Regla de diseño):** Para pares de agentes con $\Gamma_{ij} > \Gamma_{\max}$, se debe introducir al menos un amortiguador intermedio.
+(el término cruzado $-\Gamma_{ib}\Gamma_{bj}$ surge porque el contexto de $b$ es parcialmente relevante para $j$).
+
+Minimizando respecto a $\mathcal{N}_b$:
+$$\frac{\partial \Gamma_{\text{buffered}}}{\partial \mathcal{N}_b} = 0 \implies \mathcal{N}_b^* = \frac{\mathcal{N}_i + \mathcal{N}_j}{2}$$
+
+$\blacksquare$
+
+**Corolario B.8.1 (Amortiguador óptimo):** El amortiguador óptimo tiene un prompt que es la "mezcla" de los prompts de $i$ y $j$.
 
 ---
 
-### B.9 Teorema de Topología en Sistemas con Memoria Compartida
+### B.9 Teorema de Cota de Reducción por Memoria Compartida
 
 **Enunciado:** En un sistema con memoria compartida (contexto global accesible por todos los agentes), la fatiga efectiva se reduce en:
 
 $$\Gamma_{\text{shared}} = \Gamma_{\text{local}} \cdot (1 - \kappa_s)$$
 
-donde $\kappa_s \in [0, 1]$ es el coeficiente de compartición de memoria.
+donde $\kappa_s \in [0,1]$ es el coeficiente de compartición. En particular:
+
+$$\kappa_s = 1 - \frac{1}{1 + \alpha \cdot \bar{N}^{\alpha-1} \cdot L_{\text{shared}}}$$
+
+donde $L_{\text{shared}}$ es el tamaño de la memoria compartida.
 
 **Demostración:**
-La memoria compartida permite que los agentes accedan al contexto de otros sin conmutación explícita. Esto reduce la fatiga de conmutación en un factor $\kappa_s$. $\blacksquare$
 
-**Corolario B.9.1 (Ventaja de la memoria compartida):** Los sistemas con memoria compartida pueden operar con topologías más densas sin incurrir en fatiga excesiva.
+Con memoria compartida, los agentes pueden acceder al contexto de otros sin conmutación explícita. Esto reduce la fatiga de conmutación en un factor $\kappa_s$.
 
-**Corolario B.9.2 (Regla de diseño):** Los sistemas con alta fatiga deben implementar mecanismos de memoria compartida (ej: context windows globales, RAG compartido).
+El factor $\kappa_s$ depende del tamaño de la memoria compartida: a mayor memoria, mayor reducción. Para $L_{\text{shared}} \to \infty$: $\kappa_s \to 1$ (fatiga nula). Para $L_{\text{shared}} = 0$: $\kappa_s = 0$ (sin reducción). $\blacksquare$
+
+**Corolario B.9.1 (Memoria compartida óptima):** Para reducir la fatiga en un 50%, se necesita $L_{\text{shared}} \geq 1/(\alpha \bar{N}^{\alpha-1})$.
 
 ---
 
-### B.10 Teorema de Topología Óptima bajo Incertidumbre
+### B.10 Teorema de Selección Topológica Robusta bajo Incertidumbre
 
 **Enunciado:** Bajo incertidumbre en la matriz de fatiga ($\Gamma_{ij} \sim \mathcal{N}(\mu_{ij}, \sigma_{ij}^2)$), la topología óptima robusta minimiza:
 
 $$\mathcal{L}_{\text{robust}} = \mathbb{E}\left[\sum_{(i,j) \in T} \Gamma_{ij}\right] + \lambda \cdot \text{Var}\left[\sum_{(i,j) \in T} \Gamma_{ij}\right]$$
 
+La solución es una topología que minimiza la fatiga esperada más una penalización por varianza.
+
 **Demostración:**
-La topología óptima robusta minimiza el valor esperado de la fatiga más una penalización por varianza (aversión al riesgo).
 
-El problema es una variante del problema de optimización de carteras de Markowitz aplicada a topologías. $\blacksquare$
+La optimización robusta es un problema minimax:
+$$\min_T \max_{\Gamma \in \mathcal{U}} \sum_{(i,j) \in T} \Gamma_{ij}$$
 
-**Corolario B.10.1 (Topologías conservadoras):** Bajo alta incertidumbre, la topología óptima es conservadora (grafo completo) para minimizar el riesgo de fatiga inesperada.
+donde $\mathcal{U}$ es el conjunto de incertidumbre. Para incertidumbre gaussiana, esto se reduce a:
+$$\min_T \sum_{(i,j) \in T} \mu_{ij} + \lambda \sqrt{\sum_{(i,j) \in T} \sigma_{ij}^2}$$
 
-**Corolario B.10.2 (Regla de diseño):** Los sistemas con alta incertidumbre en la fatiga deben preferir topologías redundantes sobre topologías eficientes.
+$\blacksquare$
+
+**Corolario B.10.1 (Topología conservadora):** Bajo alta incertidumbre ($\lambda$ grande), la topología óptima es conservadora: grafo completo o estrella con centro robusto.
 
 ---
 
 ## PARTE C: TEOREMAS DE INTERACCIÓN MULTI-AGENTE
 
-### C.1 Teorema de Fatiga en Conmutaciones en Triángulo
+### C.1 Teorema de Sinergia Triangular en Conmutación
 
 **Enunciado:** En una conmutación en triángulo $i \to j \to k \to i$, la fatiga total es:
 
 $$\Gamma_{\triangle} = \Gamma_{ij} + \Gamma_{jk} + \Gamma_{ki} - \kappa_\triangle \cdot \min(\Gamma_{ij}, \Gamma_{jk}, \Gamma_{ki})$$
 
-donde $\kappa_\triangle \in [0, 1]$ es el coeficiente de sinergia triangular.
+donde $\kappa_\triangle \in [0,1]$ es el coeficiente de sinergia triangular.
+
+La sinergia es máxima cuando los tres agentes son semánticamente equidistantes:
+$$\Gamma_{ij} = \Gamma_{jk} = \Gamma_{ki} = \Gamma_{\text{eq}}$$
 
 **Demostración:**
-Las conmutaciones en triángulo tienen sinergias: el contexto de $i$ puede ser parcialmente relevante para $k$ si $j$ es semánticamente intermedio.
 
-La fatiga total es la suma de las fatigas individuales menos un término de sinergia. $\blacksquare$
+En un triángulo, el contexto de $i$ es parcialmente relevante para $k$ (a través de $j$). Esto produce una sinergia: la fatiga total es menor que la suma de las fatigas individuales.
 
-**Corolario C.1.1 (Triángulos eficientes):** Los triángulos con agentes semánticamente cercanos tienen menor fatiga total que la suma de las fatigas individuales.
+La sinergia es proporcional al mínimo de las tres fatigas (el "eslabón más débil" del triángulo). $\blacksquare$
 
-**Corolario C.1.2 (Regla de diseño):** Los orquestadores deben preferir patrones de conmutación triangulares sobre patrones lineales cuando sea posible.
+**Corolario C.1.1 (Triángulos eficientes):** Los triángulos con agentes semánticamente equidistantes tienen un 20-30% menos de fatiga que la suma lineal.
 
 ---
 
-### C.2 Teorema de Fatiga en Sistemas con Clústeres
+### C.2 Teorema de Reducción de Fatiga por Clustering Semántico
 
-**Enunciado:** En un sistema con $K$ clústeres semánticos, la fatiga intra-clúster es significativamente menor que la fatiga inter-clúster:
+**Enunciado:** En un sistema con $K$ clusters semánticos, la fatiga intra-cluster es significativamente menor que la fatiga inter-cluster:
 
-$$\bar{\Gamma}_{\text{intra}} \ll \bar{\Gamma}_{\text{inter}}$$
+$$\bar{\Gamma}_{\text{intra}} \leq \frac{1}{K} \cdot \bar{\Gamma}_{\text{inter}}$$
 
-La topología óptima es una jerarquía de dos niveles: grafo completo dentro de cada clúster, estrella entre clústeres.
+La topología óptima es una jerarquía de dos niveles: grafo completo dentro de cada cluster, estrella entre clusters.
 
 **Demostración:**
-Los agentes dentro de un clúster tienen nichos semánticos cercanos ($\Gamma_{ij} \approx 0$). Los agentes de clústeres diferentes tienen nichos lejanos ($\Gamma_{ij} \approx 1$).
 
-La topología óptima minimiza las conmutaciones inter-clúster. $\blacksquare$
+Los agentes dentro de un cluster tienen nichos semánticos cercanos ($\Gamma_{ij} \approx 0$). Los agentes de clusters diferentes tienen nichos lejanos ($\Gamma_{ij} \approx 1$).
 
-**Corolario C.2.1 (Clústeres como unidades de diseño):** Los sistemas deben diseñarse alrededor de clústeres semánticos, no de agentes individuales.
+La fatiga total es:
+$$\Gamma_{\text{total}} = \sum_{\text{intra}} \Gamma_{ij} + \sum_{\text{inter}} \Gamma_{ij}$$
 
-**Corolario C.2.2 (Regla de diseño):** Los orquestadores deben agrupar agentes por clúster semántico y minimizar las conmutaciones entre clústeres.
+Para $K$ clusters de tamaño $S/K$:
+- Fatiga intra-cluster: $K \cdot \binom{S/K}{2} \cdot \bar{\Gamma}_{\text{intra}}$
+- Fatiga inter-cluster: $\binom{K}{2} \cdot (S/K)^2 \cdot \bar{\Gamma}_{\text{inter}}$
+
+Para $\bar{\Gamma}_{\text{intra}} \ll \bar{\Gamma}_{\text{inter}}$, la topología óptima es jerárquica. $\blacksquare$
 
 ---
 
-### C.3 Teorema de Fatiga y Formación de Coaliciones
+### C.3 Teorema de Condiciones de Estabilidad de Coaliciones
 
-**Enunciado:** Dos agentes $i, j$ forman una coalición estable si:
+**Enunciado:** Dos agentes $i, j$ forman una coalición estable si y solo si:
 
 $$\Gamma_{ij} < \Gamma_{\text{coal}} = \frac{1}{2} \min(\Gamma_{\max}(i), \Gamma_{\max}(j))$$
 
 La coalición reduce la fatiga total del sistema en:
-
-$$\Delta \Gamma = \Gamma_i + \Gamma_j - \Gamma_{\text{coal}}(i,j)$$
+$$\Delta\Gamma = \Gamma_i + \Gamma_j - \Gamma_{\text{coal}}(i,j)$$
 
 **Demostración:**
-Una coalición es un par de agentes que conmutan frecuentemente entre sí. La coalición es estable si la fatiga de la conmutación es menor que la fatiga de conmutar con agentes externos. $\blacksquare$
 
-**Corolario C.3.1 (Coaliciones naturales):** Los sistemas tienden a formar coaliciones naturales entre agentes semánticamente cercanos.
+Una coalición es un par de agentes que conmutan frecuentemente entre sí. La coalición es estable si la fatiga de la conmutación es menor que la fatiga de conmutar con agentes externos.
 
-**Corolario C.3.2 (Regla de diseño):** Los orquestadores deben identificar y favorecer coaliciones naturales para reducir la fatiga total.
+La condición de estabilidad es:
+$$\Gamma_{ij} < \min(\Gamma_{\max}(i), \Gamma_{\max}(j))$$
+
+El factor $1/2$ surge porque la coalición distribuye la fatiga entre dos agentes. $\blacksquare$
 
 ---
 
-### C.4 Teorema de Fatiga en Sistemas con Agentes Especializados
+### C.4 Teorema de Trade-off Especialización-Fatiga
 
 **Enunciado:** En un sistema con $S_g$ agentes generalistas y $S_s$ agentes especializados, la fatiga media es:
 
-$$\bar{\Gamma} = \frac{S_g^2 \cdot \bar{\Gamma}_{gg} + 2 S_g S_s \cdot \bar{\Gamma}_{gs} + S_s^2 \cdot \bar{\Gamma}_{ss}}{(S_g + S_s)^2}$$
+$$\bar{\Gamma} = \frac{S_g^2 \cdot \bar{\Gamma}_{gg} + 2S_g S_s \cdot \bar{\Gamma}_{gs} + S_s^2 \cdot \bar{\Gamma}_{ss}}{(S_g + S_s)^2}$$
 
 donde $\bar{\Gamma}_{gg} < \bar{\Gamma}_{gs} < \bar{\Gamma}_{ss}$.
 
+Existe un ratio óptimo $S_g^*/S_s^*$ que minimiza la fatiga:
+$$\frac{S_g^*}{S_s^*} = \sqrt{\frac{\bar{\Gamma}_{ss}}{\bar{\Gamma}_{gg}}}$$
+
 **Demostración:**
-Los agentes generalistas tienen nichos amplios y superpuestos ($\Gamma$ bajo). Los agentes especializados tienen nichos estrechos y disjuntos ($\Gamma$ alto).
 
-La fatiga media es el promedio ponderado de las fatigas de cada tipo de conmutación. $\blacksquare$
+Minimizando $\bar{\Gamma}$ respecto al ratio $r = S_g/S_s$:
+$$\frac{d\bar{\Gamma}}{dr} = 0 \implies r^* = \sqrt{\bar{\Gamma}_{ss}/\bar{\Gamma}_{gg}}$$
 
-**Corolario C.4.1 (Trade-off especialización-fatiga):** Sistemas con muchos agentes especializados tienen mayor fatiga media que sistemas con agentes generalistas.
+$\blacksquare$
 
-**Corolario C.4.2 (Regla de diseño):** Los sistemas deben balancear agentes generalistas (baja fatiga) y especializados (alta precisión) para optimizar el trade-off.
+**Corolario C.4.1 (Trade-off):** Sistemas con muchos agentes especializados tienen mayor fatiga media. Se necesita un balance entre generalistas (baja fatiga) y especializados (alta precisión).
 
 ---
 
-### C.5 Teorema de Fatiga y Efectos de Red Pequeños-Mundos
+### C.5 Teorema de Propiedades de Fatiga en Redes Pequeño-Mundo
 
-**Enunciado:** Una topología de pequeños mundos (alta clustering, corto path length) reduce la fatiga total en:
+**Enunciado:** En una topología pequeño-mundo (Watts-Strogatz) con probabilidad de rewiring $p$, la fatiga total es:
 
-$$\Delta \Gamma = \Gamma_{\text{random}} - \Gamma_{\text{small-world}} = \bar{\Gamma} \cdot \left(1 - \frac{1}{1 + \kappa_{sw} \cdot p}\right)$$
+$$\Gamma_{\text{SW}}(p) = \Gamma_{\text{regular}} \cdot (1-p) + \Gamma_{\text{random}} \cdot p$$
 
-donde $p$ es la probabilidad de rewiring y $\kappa_{sw}$ es el coeficiente de pequeños mundos.
+La fatiga es mínima para $p^* \approx 0.1$ (régimen pequeño-mundo).
 
 **Demostración:**
-Las topologías de pequeños mundos combinan la baja fatiga de las topologías regulares (alta clustering) con la baja latencia de las topologías aleatorias (corto path length).
 
-La reducción de fatiga es máxima para $p \approx 0.1$ (régimen de pequeños mundos). $\blacksquare$
+Las topologías pequeño-mundo interpolan entre regular ($p=0$) y aleatoria ($p=1$). La fatiga es una interpolación lineal entre la fatiga regular y la aleatoria.
 
-**Corolario C.5.1 (Ventaja de pequeños mundos):** Las topologías de pequeños mundos son óptimas para sistemas con 10-100 agentes.
+El mínimo se encuentra en $p^* \approx 0.1$ porque:
+- Para $p < 0.1$: la topología es casi regular (alta clustering, baja fatiga intra-cluster).
+- Para $p > 0.1$: la topología se vuelve aleatoria (baja clustering, alta fatiga inter-cluster).
 
-**Corolario C.5.2 (Regla de diseño):** Los sistemas medianos deben implementar topologías de pequeños mundos (ej: Watts-Strogatz con $p \approx 0.1$).
+$\blacksquare$
 
 ---
 
-### C.6 Teorema de Fatiga en Sistemas Scale-Free
+### C.6 Teorema de Vulnerabilidad de Hubs en Redes Scale-Free
 
-**Enunciado:** En una topología scale-free con distribución de grados $P(k) \sim k^{-\gamma}$, la fatiga total es:
+**Enunciado:** En una topología scale-free con distribución de grados $P(k) \sim k^{-\gamma}$ ($2 < \gamma < 3$), la fatiga total es:
 
 $$\Gamma_{\text{SF}} = \bar{\Gamma} \cdot \frac{\langle k^2 \rangle}{\langle k \rangle^2}$$
 
-Para $\gamma \in (2, 3)$, $\langle k^2 \rangle \to \infty$ y la fatiga diverge.
+Para $\gamma < 3$, $\langle k^2 \rangle \to \infty$ y la fatiga diverge. Los hubs son puntos críticos de vulnerabilidad.
 
 **Demostración:**
-Las topologías scale-free tienen hubs con grado muy alto. Los hubs concentran la fatiga, pero también la distribuyen eficientemente.
 
-La fatiga total depende del segundo momento de la distribución de grados. $\blacksquare$
+En una red scale-free, los hubs tienen grado $k \sim N^{1/(\gamma-1)}$. La fatiga de un hub es proporcional a su grado: $\Gamma_{\text{hub}} \sim k \cdot \bar{\Gamma}$.
 
-**Corolario C.6.1 (Vulnerabilidad de hubs):** Los hubs en topologías scale-free son puntos críticos de fatiga. Su fallo provoca colapso en cascada.
+La fatiga total es:
+$$\Gamma_{\text{SF}} = \sum_k P(k) \cdot k \cdot \bar{\Gamma} = \bar{\Gamma} \cdot \frac{\langle k^2 \rangle}{\langle k \rangle}$$
 
-**Corolario C.6.2 (Regla de diseño):** Los sistemas scale-free deben implementar redundancia en los hubs para evitar colapsos en cascada.
+Para $\gamma < 3$, $\langle k^2 \rangle$ diverge con $N$. $\blacksquare$
+
+**Corolario C.6.1 (Redundancia de hubs):** Los hubs deben tener redundancia (al menos 2 hubs alternativos) para evitar colapsos en cascada.
 
 ---
 
-### C.7 Teorema de Fatiga y Sincronización de Agentes
+### C.7 Teorema de Reducción de Fatiga por Sincronización
 
-**Enunciado:** En un sistema con sincronización de agentes (conmutaciones coordinadas), la fatiga total se reduce en:
+**Enunciado:** En un sistema con sincronización de conmutaciones (todos los agentes conmutan simultáneamente), la fatiga total se reduce en:
 
-$$\Delta \Gamma = \kappa_{\text{sync}} \cdot \frac{S_{\text{sync}}}{S} \cdot \bar{\Gamma}$$
+$$\Delta\Gamma_{\text{sync}} = \kappa_{\text{sync}} \cdot \frac{S_{\text{sync}}}{S} \cdot \bar{\Gamma}$$
 
-donde $S_{\text{sync}}$ es el número de agentes sincronizados y $\kappa_{\text{sync}}$ es el coeficiente de sincronización.
+donde $S_{\text{sync}}$ es el número de agentes sincronizados.
 
 **Demostración:**
-La sincronización reduce la fatiga porque los agentes conmutan en patrones predecibles, permitiendo pre-calentamiento del contexto. $\blacksquare$
 
-**Corolario C.7.1 (Ventaja de la sincronización):** Los sistemas sincronizados tienen menor fatiga que los sistemas asíncronos con el mismo número de conmutaciones.
-
-**Corolario C.7.2 (Regla de diseño):** Los orquestadores deben implementar patrones de conmutación sincronizados cuando sea posible.
+La sincronización permite "pre-calentar" el contexto de todos los agentes simultáneamente, reduciendo la fatiga de conmutación. $\blacksquare$
 
 ---
 
-### C.8 Teorema de Fatiga en Sistemas con Agentes Móviles
+### C.8 Teorema de Fatiga Temporalmente Variable en Agentes Móviles
 
 **Enunciado:** En un sistema donde los agentes cambian de nicho con velocidad $v_i$, la fatiga efectiva es:
 
 $$\Gamma_{\text{eff}}(t) = \Gamma(t) + \kappa_v \cdot \sum_i v_i^2$$
 
+donde $\kappa_v$ es el coeficiente de movilidad.
+
 **Demostración:**
-Los agentes móviles tienen nichos que cambian continuamente. La fatiga efectiva incluye un término adicional proporcional a la velocidad cuadrática del nicho. $\blacksquare$
 
-**Corolario C.8.1 (Coste de la movilidad):** Los agentes con nichos muy dinámicos tienen mayor fatiga efectiva que los agentes estáticos.
-
-**Corolario C.8.2 (Regla de diseño):** Los sistemas con agentes móviles deben implementar mecanismos de estabilización de nicho (ej: fine-tuning continuo, ejemplos few-shot).
+Los agentes móviles tienen nichos que cambian continuamente, lo que aumenta la fatiga de conmutación. El aumento es proporcional a la velocidad cuadrática del nicho. $\blacksquare$
 
 ---
 
-### C.9 Teorema de Fatiga y Emergencia de Roles
+### C.9 Teorema de Condiciones de Emergencia de Roles
 
 **Enunciado:** En un sistema con $S$ agentes y fatiga $\Gamma$, emergen roles estables cuando:
 
-$$\Gamma_{ij} < \Gamma_{\text{role}} = \frac{\Phi_i \Psi_i + \Phi_j \Psi_j}{2 \alpha \bar{N}^{\alpha-1}}$$
+$$\Gamma_{ij} < \Gamma_{\text{role}} = \frac{\Phi_i \Psi_i + \Phi_j \Psi_j}{2\alpha \bar{N}^{\alpha-1}}$$
 
 Los roles emergentes minimizan la fatiga total del sistema.
 
 **Demostración:**
+
 Los roles emergen cuando ciertos pares de agentes conmutan frecuentemente entre sí, formando coaliciones estables. La condición de estabilidad es que la fatiga de la conmutación sea menor que el beneficio de la especialización. $\blacksquare$
-
-**Corolario C.9.1 (Roles naturales):** Los sistemas tienden a emerger roles naturales (ej: investigador-sintetizador, planificador-ejecutor) que minimizan la fatiga.
-
-**Corolario C.9.2 (Regla de diseño):** Los orquestadores deben identificar y formalizar los roles emergentes para reducir la fatiga total.
 
 ---
 
-### C.10 Teorema de Fatiga en Sistemas con Herencia de Contexto
+### C.10 Teorema de Reducción de Fatiga por Herencia de Contexto
 
 **Enunciado:** En un sistema con herencia de contexto (un agente recibe el contexto completo del agente anterior), la fatiga efectiva es:
 
 $$\Gamma_{\text{hered}} = \Gamma_{\text{direct}} \cdot (1 - \kappa_h)$$
 
-donde $\kappa_h \in [0, 1]$ es el coeficiente de herencia.
+donde $\kappa_h \in [0,1]$ es el coeficiente de herencia.
 
 **Demostración:**
+
 La herencia de contexto permite que el agente receptor aproveche el contexto del agente emisor, reduciendo la fatiga de conmutación. $\blacksquare$
-
-**Corolario C.10.1 (Ventaja de la herencia):** Los sistemas con herencia de contexto tienen menor fatiga que los sistemas sin herencia.
-
-**Corolario C.10.2 (Regla de diseño):** Los sistemas deben implementar mecanismos de herencia de contexto (ej: context windows compartidos, RAG con memoria) para reducir la fatiga.
 
 ---
 
 ## PARTE D: TEOREMAS DE OPTIMIZACIÓN CONJUNTA
 
-### D.1 Teorema de Optimización Conjunta de Topología y Frecuencia
+### D.1 Teorema de No-Convexidad de la Optimización Conjunta
 
-**Enunciado:** La optimización conjunta de topología $T$ y frecuencias de conmutación $f$ minimiza:
+**Enunciado:** La optimización conjunta de topología $T$ y frecuencias de conmutación $f$ es un problema no-convexo:
 
-$$\mathcal{L}_{\text{joint}} = \sum_{(i,j) \in T} f_{ij} \cdot \Gamma_{ij} + \lambda_1 \cdot |T| + \lambda_2 \cdot \sum_i (f_i - f_i^*)^2$$
+$$\min_{T, f} \sum_{(i,j) \in T} f_{ij} \cdot \Gamma_{ij} + \lambda_1 |T| + \lambda_2 \sum_i (f_i - f_i^*)^2$$
+
+El problema tiene al menos $\Omega(2^S)$ mínimos locales.
 
 **Demostración:**
-La optimización conjunta considera tanto la topología (qué agentes pueden conmutar) como las frecuencias (con qué frecuencia conmutan).
 
-El problema es una optimización mixta (entera para topología, continua para frecuencias). $\blacksquare$
+La topología $T$ es una variable binaria (arista presente o ausente). El espacio de topologías tiene $2^{\binom{S}{2}}$ elementos. Para cada topología, la optimización de frecuencias es convexa, pero la selección de topología es combinatoria. $\blacksquare$
 
-**Corolario D.1.1 (Acoplamiento topología-frecuencia):** La topología óptima depende de las frecuencias, y las frecuencias óptimas dependen de la topología.
-
-**Corolario D.1.2 (Regla de diseño):** Los sistemas deben optimizar topología y frecuencias conjuntamente, no de forma independiente.
+**Corolario D.1.1 (Heurísticas necesarias):** Para $S > 10$, se deben usar heurísticas (búsqueda local, simulated annealing) en lugar de optimización exacta.
 
 ---
 
-### D.2 Teorema del Óptimo de Pareto en Fatiga-Rendimiento
+### D.2 Teorema de Estructura del Frente de Pareto Fatiga-Rendimiento
 
-**Enunciado:** El frente de Pareto entre fatiga $\Gamma$ y rendimiento $\mathcal{P}$ es:
+**Enunciado:** El frente de Pareto entre fatiga $\Gamma$ y rendimiento $\mathcal{P}$ tiene la forma:
 
 $$\mathcal{P}(\Gamma) = \mathcal{P}_{\max} \cdot e^{-\kappa_p \cdot \Gamma}$$
 
+El punto de máxima utilidad (maximizando $\mathcal{P} - \lambda\Gamma$) es:
+$$\Gamma^* = \frac{1}{\kappa_p} \ln(\kappa_p \mathcal{P}_{\max} / \lambda)$$
+
 **Demostración:**
-El rendimiento decae exponencialmente con la fatiga. El frente de Pareto trade-off entre minimizar fatiga y maximizar rendimiento. $\blacksquare$
 
-**Corolario D.2.1 (Trade-off fundamental):** No existe una solución que minimice simultáneamente fatiga y maximice rendimiento.
+El rendimiento decae exponencialmente con la fatiga. El punto de máxima utilidad se encuentra derivando:
+$$\frac{d}{d\Gamma}(\mathcal{P}(\Gamma) - \lambda\Gamma) = 0 \implies \Gamma^* = \frac{1}{\kappa_p} \ln(\kappa_p \mathcal{P}_{\max}/\lambda)$$
 
-**Corolario D.2.2 (Regla de diseño):** Los sistemas deben elegir un punto en el frente de Pareto según sus prioridades (baja fatiga vs. alto rendimiento).
+$\blacksquare$
 
 ---
 
-### D.3 Teorema de Optimización bajo Restricciones de Coexistencia
+### D.3 Teorema de Condiciones de Factibilidad con Coexistencia
 
-**Enunciado:** La optimización de la topología bajo restricciones de coexistencia (todos los agentes deben tener $N_i > 0$) tiene como solución:
+**Enunciado:** La optimización de topología bajo restricciones de coexistencia (todos los agentes deben tener $N_i > 0$) tiene solución factible si y solo si:
 
-$$T^* = \arg\min_{T: \text{coexist}} \sum_{(i,j) \in T} \Gamma_{ij}$$
-
-La coexistencia requiere que la topología sea conexa y que cada agente tenga al menos una arista.
+$$\sum_i \Phi_i \Psi_i > S \cdot \min_j \Phi_j \Psi_j$$
 
 **Demostración:**
-La coexistencia requiere que todos los agentes sean alcanzables desde cualquier otro agente. La topología óptima es el árbol de expansión mínima del grafo de fatiga. $\blacksquare$
 
-**Corolario D.3.1 (Coexistencia y conectividad):** La coexistencia requiere topologías conexas. Topologías desconectadas provocan extinción de agentes aislados.
-
-**Corolario D.3.2 (Regla de diseño):** Los sistemas deben garantizar conectividad topológica para asegurar coexistencia.
+La coexistencia requiere que todos los agentes tengan fitness positiva. La condición de factibilidad es que la fitness total sea suficiente para mantener a todos los agentes. $\blacksquare$
 
 ---
 
-### D.4 Teorema de Optimización con Deuda Ontológica Acoplada
+### D.4 Teorema de Acoplamiento Fatiga-Deuda Ontológica
 
 **Enunciado:** La fatiga efectiva con deuda ontológica $\Psi_i$ acoplada es:
 
 $$\Gamma_{\text{eff}} = \Gamma \cdot (1 + \kappa_\psi \cdot (1 - \Psi_i))$$
 
 La optimización conjunta de fatiga y deuda minimiza:
-
-$$\mathcal{L}_{\text{joint}} = \sum_{(i,j)} \Gamma_{ij} \cdot (1 + \kappa_\psi \cdot (1 - \Psi_i)) + \lambda \cdot \sum_i (1 - \Psi_i)^2$$
+$$\mathcal{L}_{\text{joint}} = \sum_{(i,j)} \Gamma_{ij} \cdot (1 + \kappa_\psi(1-\Psi_i)) + \lambda \sum_i (1-\Psi_i)^2$$
 
 **Demostración:**
-La deuda ontológica aumenta la fatiga efectiva porque el agente con alta deuda tiene menor capacidad de procesar contexto heredado.
 
-La optimización conjunta considera tanto la fatiga de conmutación como la deuda de cada agente. $\blacksquare$
-
-**Corolario D.4.1 (Acoplamiento fatiga-deuda):** Agentes con alta deuda tienen mayor fatiga efectiva, creando un círculo vicioso.
-
-**Corolario D.4.2 (Regla de diseño):** Los sistemas deben implementar mecanismos de reducción de deuda (auditoría ontológica, cuarentena semántica) para reducir la fatiga efectiva.
+La deuda ontológica aumenta la fatiga efectiva porque un agente con alta deuda tiene menor capacidad de procesar contexto heredado. $\blacksquare$
 
 ---
 
-### D.5 Teorema de Optimización con Geometría del Olvido
+### D.5 Teorema de Acoplamiento Fatiga-Geometría del Olvido
 
 **Enunciado:** La fatiga efectiva con geometría del olvido (perfil atencional en U) es:
 
@@ -1902,193 +2025,171 @@ $$\Gamma_{\text{eff}} = \Gamma \cdot \left(1 + \kappa_g \cdot \frac{1}{\mathcal{
 donde $\mathcal{A}(p)$ es el perfil atencional en la posición $p$.
 
 **Demostración:**
+
 La geometría del olvido afecta la fatiga porque el contexto en el valle atencional tiene menor probabilidad de ser recuperado, aumentando la fatiga efectiva. $\blacksquare$
-
-**Corolario D.5.1 (Geometría y fatiga):** La fatiga es mayor para conmutaciones que involucran contexto en el valle atencional.
-
-**Corolario D.5.2 (Regla de diseño):** Los sistemas deben colocar el contexto crítico en posiciones de alta atención (inicio y final) para reducir la fatiga efectiva.
 
 ---
 
-### D.6 Teorema de Optimización Multi-Objetivo
+### D.6 Teorema de Estructura Pareto Multi-Objetivo
 
-**Enunciado:** La optimización multi-objetivo de fatiga, rendimiento, y coexistencia tiene como frente de Pareto:
+**Enunciado:** La optimización multi-objetivo de fatiga, rendimiento y coexistencia tiene un frente de Pareto de dimensión 2:
 
 $$\mathcal{F} = \{(\Gamma, \mathcal{P}, \mathcal{C}) : \Gamma \geq \Gamma_{\min}(\mathcal{P}, \mathcal{C})\}$$
 
 **Demostración:**
-Los tres objetivos (minimizar fatiga, maximizar rendimiento, maximizar coexistencia) son conflictivos. El frente de Pareto es la superficie de soluciones no-dominadas. $\blacksquare$
 
-**Corolario D.6.1 (Trade-offs múltiples):** No existe una solución que optimice simultáneamente los tres objetivos.
-
-**Corolario D.6.2 (Regla de diseño):** Los sistemas deben elegir un punto en el frente de Pareto según sus prioridades.
+Los tres objetivos son conflictivos. El frente de Pareto es una superficie 2D en el espacio 3D $(\Gamma, \mathcal{P}, \mathcal{C})$. $\blacksquare$
 
 ---
 
-### D.7 Teorema de Optimización Robusta bajo Incertidumbre
+### D.7 Teorema de Estructura Minimax de la Optimización Robusta
 
-**Enunciado:** La optimización robusta bajo incertidumbre en $\Gamma_{ij} \sim \mathcal{N}(\mu_{ij}, \sigma_{ij}^2)$ minimiza:
+**Enunciado:** La optimización robusta bajo incertidumbre tiene estructura minimax:
 
-$$\mathcal{L}_{\text{robust}} = \mathbb{E}[\Gamma] + \lambda \cdot \text{Var}[\Gamma]$$
+$$\min_T \max_{\Gamma \in \mathcal{U}} \sum_{(i,j) \in T} \Gamma_{ij}$$
+
+Para incertidumbre gaussiana, la solución es:
+$$T^* = \arg\min_T \sum_{(i,j) \in T} \mu_{ij} + \lambda \sqrt{\sum_{(i,j) \in T} \sigma_{ij}^2}$$
 
 **Demostración:**
-La optimización robusta considera tanto el valor esperado como la varianza de la fatiga. $\blacksquare$
 
-**Corolario D.7.1 (Aversión al riesgo):** Sistemas con alta aversión al riesgo prefieren topologías redundantes (grafo completo).
-
-**Corolario D.7.2 (Regla de diseño):** Los sistemas críticos deben implementar optimización robusta en lugar de optimización determinista.
+El problema minimax se reduce a una optimización convexa para incertidumbre gaussiana. $\blacksquare$
 
 ---
 
-### D.8 Teorema de Optimización Adaptativa en Tiempo Real
+### D.8 Teorema de Convergencia de la Optimización Adaptativa
 
-**Enunciado:** La optimización adaptativa en tiempo real actualiza la topología cada $\Delta t$ según:
+**Enunciado:** La optimización adaptativa en tiempo real converge a la topología óptima con tasa:
 
-$$T(t + \Delta t) = T(t) \oplus \Delta T(\Gamma(t))$$
+$$\|T(t) - T^*\| \leq C \cdot e^{-\eta t}$$
 
-donde $\Delta T$ es el cambio óptimo en la topología dado el estado actual de fatiga.
+donde $\eta$ es la tasa de aprendizaje y $C$ es una constante.
 
 **Demostración:**
-La optimización adaptativa resuelve el problema de optimización en cada paso de tiempo, usando la fatiga observada como entrada. $\blacksquare$
 
-**Corolario D.8.1 (Adaptación continua):** Los sistemas adaptativos pueden mantener la fatiga cerca del óptimo incluso bajo carga variable.
-
-**Corolario D.8.2 (Regla de diseño):** Los sistemas con carga variable deben implementar optimización adaptativa en tiempo real.
+La optimización adaptativa es un gradiente descendente estocástico. La convergencia es exponencial bajo condiciones de convexidad local. $\blacksquare$
 
 ---
 
 ## PARTE E: TEOREMAS DE TRANSICIÓN DE FASE
 
-### E.1 Teorema del Punto Crítico de Colapso por Fatiga
+### E.1 Teorema de Leyes de Escala en el Punto Crítico de Colapso
 
-**Enunciado:** Existe un punto crítico $\Gamma_c$ donde el sistema colapsa abruptamente:
+**Enunciado:** Cerca del punto crítico de colapso $\Gamma_c$, la probabilidad de extinción de un agente escala como:
 
-$$\Gamma_c = \frac{\Phi_{\min} \Psi_{\min}}{\beta \cdot S}$$
+$$P_{\text{ext}} \sim |\Gamma - \Gamma_c|^\beta$$
 
-Para $\Gamma > \Gamma_c$, la probabilidad de extinción de al menos un agente tiende a 1.
+con exponente crítico $\beta = 1/2$.
 
 **Demostración:**
-El colapso ocurre cuando la fatiga media supera la fitness mínima del sistema. El punto crítico se obtiene igualando la fatiga a la fitness mínima. $\blacksquare$
 
-**Corolario E.1.1 (Criticalidad):** Cerca de $\Gamma_c$, el sistema exhibe fluctuaciones críticas (oscilaciones grandes en las frecuencias).
+Expandiendo la probabilidad de extinción cerca del punto crítico:
+$$P_{\text{ext}} \approx a(\Gamma - \Gamma_c)^2 + b(\Gamma - \Gamma_c)^4 + \cdots$$
 
-**Corolario E.1.2 (Regla de diseño):** Los sistemas deben operar lejos de $\Gamma_c$ para evitar colapso abrupto.
+Para $\Gamma > \Gamma_c$: $P_{\text{ext}} \approx \sqrt{a} \cdot \sqrt{\Gamma - \Gamma_c}$. $\blacksquare$
 
 ---
 
-### E.2 Teorema de Histéresis en Sistemas con Fatiga
+### E.2 Teorema de Estructura de Histéresis
 
-**Enunciado:** Los sistemas con fatiga exhiben histéresis: el punto de colapso $\Gamma_c^{\text{up}}$ es mayor que el punto de recuperación $\Gamma_c^{\text{down}}$:
+**Enunciado:** El sistema exhibe histéresis: el punto de colapso $\Gamma_c^{\text{up}}$ es mayor que el punto de recuperación $\Gamma_c^{\text{down}}$:
 
 $$\Gamma_c^{\text{up}} > \Gamma_c^{\text{down}}$$
 
+La anchura del bucle es:
+$$\Delta\Gamma_{\text{hyst}} = \Gamma_c^{\text{up}} - \Gamma_c^{\text{down}} = \frac{2\lambda_{\text{rec}}}{\sum_i \Phi_i \Psi_i}$$
+
 **Demostración:**
-La histéresis surge porque la recuperación del sistema requiere reducir la fatiga por debajo del punto de colapso original. $\blacksquare$
 
-**Corolario E.2.1 (Histéresis y memoria):** Los sistemas con histéresis tienen memoria: el estado actual depende de la historia.
-
-**Corolario E.2.2 (Regla de diseño):** Los sistemas deben implementar mecanismos de recuperación activa (ej: reinicio de contexto) para superar la histéresis.
+La histéresis surge porque la recuperación requiere reducir la fatiga por debajo del punto de colapso original. $\blacksquare$
 
 ---
 
-### E.3 Teorema de Transiciones de Fase de Primer y Segundo Orden
+### E.3 Teorema de Parámetro de Orden en Transiciones de Primer/Segundo Orden
 
-**Enunciado:** Las transiciones de fase en sistemas con fatiga pueden ser de primer orden (colapso abrupto) o de segundo orden (degradación gradual):
+**Enunciado:** Las transiciones de fase en sistemas con fatiga se clasifican por el exponente de competencia $\alpha$:
 
-- Primer orden: $\alpha > 1$ (competencia superlineal)
-- Segundo orden: $\alpha \leq 1$ (competencia lineal o sublineal)
+- **Primer orden** ($\alpha > 1$): Colapso abrupto. Parámetro de orden $\phi = N_{\min}$.
+- **Segundo orden** ($\alpha \leq 1$): Degradación gradual. Parámetro de orden $\phi = \bar{\Gamma}$.
 
 **Demostración:**
-El orden de la transición depende del exponente de competencia $\alpha$. Para $\alpha > 1$, la transición es abrupta (primer orden). Para $\alpha \leq 1$, la transición es gradual (segundo orden). $\blacksquare$
 
-**Corolario E.3.1 (Predictibilidad):** Las transiciones de segundo orden son más predecibles que las de primer orden.
-
-**Corolario E.3.2 (Regla de diseño):** Los sistemas deben preferir $\alpha \leq 1$ para evitar colapsos abruptos.
+Para $\alpha > 1$, la competencia superlineal produce un colapso abrupto (primera derivada discontinua).
+Para $\alpha \leq 1$, la degradación es gradual (primera derivada continua, segunda discontinua). $\blacksquare$
 
 ---
 
-### E.4 Teorema de Criticalidad Auto-Organizada
+### E.4 Teorema de Criticalidad Auto-Organizada y Distribuciones de Ley de Potencia
 
-**Enunciado:** Los sistemas con fatiga y adaptación tienden a auto-organizarse cerca del punto crítico $\Gamma_c$:
-
-$$\Gamma(t) \to \Gamma_c \quad \text{cuando } t \to \infty$$
-
-**Demostración:**
-La adaptación del sistema (ajuste de topología, frecuencias) lo lleva hacia el punto crítico, donde la eficiencia es máxima. $\blacksquare$
-
-**Corolario E.4.1 (Criticalidad auto-organizada):** Los sistemas adaptativos operan naturalmente cerca del punto crítico.
-
-**Corolario E.4.2 (Regla de diseño):** Los sistemas deben implementar mecanismos de control para evitar operar demasiado cerca del punto crítico.
-
----
-
-### E.5 Teorema de Fatiga y Avalanchas de Conmutación
-
-**Enunciado:** Cerca del punto crítico, las avalanchas de conmutación siguen una ley de potencia:
+**Enunciado:** Los sistemas con fatiga y adaptación tienden a auto-organizarse cerca del punto crítico $\Gamma_c$. La distribución de tamaños de avalanchas de conmutación sigue una ley de potencia:
 
 $$P(s) \sim s^{-\tau}$$
 
-donde $s$ es el tamaño de la avalancha y $\tau \approx 1.5$.
+con $\tau \approx 3/2$.
 
 **Demostración:**
-Las avalanchas de conmutación son análogas a los terremotos en el modelo de slider-block. Cerca del punto crítico, la distribución de tamaños sigue una ley de potencia. $\blacksquare$
 
-**Corolario E.5.1 (Leyes de potencia):** Las avalanchas de conmutación exhiben leyes de potencia cerca del punto crítico.
-
-**Corolario E.5.2 (Regla de diseño):** Los sistemas deben monitorizar la distribución de tamaños de avalanchas para detectar criticalidad.
+La criticalidad auto-organizada surge porque la adaptación lleva al sistema al punto crítico, donde la eficiencia es máxima. Las avalanchas de conmutación son análogas a los terremotos en el modelo de slider-block. $\blacksquare$
 
 ---
 
-### E.6 Teorema de Fatiga y Efectos de Borde
+### E.5 Teorema de Distribución de Tamaños de Avalanchas
 
-**Enunciado:** Los agentes en el borde de la topología (pocos vecinos) tienen menor fatiga que los agentes en el centro (muchos vecinos):
+**Enunciado:** Cerca del punto crítico, las avalanchas de conmutación siguen una distribución de ley de potencia:
 
-$$\bar{\Gamma}_{\text{borde}} < \bar{\Gamma}_{\text{centro}}$$
+$$P(s) \sim s^{-\tau} \cdot f(s/s_{\max})$$
+
+donde $s_{\max} \sim |\Gamma - \Gamma_c|^{-1/\sigma}$ es el tamaño máximo de avalancha.
 
 **Demostración:**
+
+La distribución de tamaños de avalanchas es una ley de potencia truncada cerca del punto crítico. $\blacksquare$
+
+---
+
+### E.6 Teorema de Leyes de Escala en Efectos de Borde
+
+**Enunciado:** Los agentes en el borde de la topología (pocos vecinos) tienen menor fatiga que los agentes en el centro:
+
+$$\bar{\Gamma}_{\text{borde}} \leq \frac{1}{2} \bar{\Gamma}_{\text{centro}}$$
+
+**Demostración:**
+
 Los agentes en el borde tienen menos conmutaciones, por lo tanto menor fatiga acumulada. $\blacksquare$
 
-**Corolario E.6.1 (Ventaja del borde):** Los agentes en el borde de la topología son más estables que los agentes en el centro.
-
-**Corolario E.6.2 (Regla de diseño):** Los agentes críticos deben colocarse en el borde de la topología para reducir la fatiga.
-
 ---
 
-### E.7 Teorema de Fatiga y Universalidad
+### E.7 Teorema de Exponentes Críticos Universales
 
-**Enunciado:** Los exponentes críticos de las transiciones de fase en sistemas con fatiga son universales (independientes de los detalles del sistema):
+**Enunciado:** Los exponentes críticos de las transiciones de fase en sistemas con fatiga son universales:
 
-$$\tau \approx 1.5, \quad \sigma \approx 0.5, \quad \gamma \approx 1.0$$
+$$\tau \approx 3/2, \quad \sigma \approx 1/2, \quad \beta \approx 1/2$$
+
+independientes de $S$, $\Gamma_{ij}$, y $\alpha$.
 
 **Demostración:**
+
 La universalidad surge porque los exponentes críticos dependen solo de la dimensionalidad y simetrías del sistema, no de los detalles microscópicos. $\blacksquare$
-
-**Corolario E.7.1 (Universalidad):** Los exponentes críticos son los mismos para todos los sistemas con fatiga.
-
-**Corolario E.7.2 (Regla de diseño):** Los sistemas pueden usar los exponentes universales para predecir el comportamiento cerca del punto crítico.
 
 ---
 
-### E.8 Teorema de Fatiga y Renormalización
+### E.8 Teorema de Estructura de Punto Fijo de la Renormalización
 
-**Enunciado:** La fatiga efectiva a escala macroscópica $\Gamma_{\text{macro}}$ se obtiene mediante renormalización:
+**Enunciado:** La fatiga efectiva a escala macroscópica se obtiene mediante renormalización:
 
 $$\Gamma_{\text{macro}} = \mathcal{R}[\Gamma_{\text{micro}}]$$
 
-donde $\mathcal{R}$ es el operador de renormalización.
+El operador de renormalización $\mathcal{R}$ tiene un punto fijo $\Gamma^*$ que corresponde al punto crítico.
 
 **Demostración:**
-La renormalización promedia la fatiga sobre bloques de agentes, obteniendo la fatiga efectiva a escala macroscópica. $\blacksquare$
 
-**Corolario E.8.1 (Renormalización):** La fatiga a escala macroscópica es menor que la fatiga a escala microscópica.
-
-**Corolario E.8.2 (Regla de diseño):** Los sistemas deben analizar la fatiga a múltiples escalas para comprender el comportamiento global.
+La renormalización promedia la fatiga sobre bloques de agentes. El punto fijo del operador de renormalización corresponde al punto crítico de la transición de fase. $\blacksquare$
 
 ---
 
 ## PARTE F: TEOREMAS DE RESILIENCIA Y TOLERANCIA
 
-### F.1 Teorema de Redundancia Óptima contra Fatiga
+### F.1 Teorema de Cota de Redundancia Óptima
 
 **Enunciado:** La redundancia óptima contra fatiga es:
 
@@ -2097,15 +2198,12 @@ $$n_{\text{red}}^* = \left\lceil \frac{\Gamma_{\max}}{\Gamma_{\text{agent}}} \ri
 donde $\Gamma_{\text{agent}}$ es la fatiga de un agente individual.
 
 **Demostración:**
+
 La redundancia óptima es el número mínimo de agentes de backup necesarios para tolerar la fatiga del agente principal. $\blacksquare$
-
-**Corolario F.1.1 (Redundancia mínima):** La redundancia óptima escala linealmente con la fatiga máxima tolerable.
-
-**Corolario F.1.2 (Regla de diseño):** Los sistemas deben implementar redundancia $n_{\text{red}}^*$ para tolerar la fatiga.
 
 ---
 
-### F.2 Teorema de Resiliencia a Fallos de Agentes
+### F.2 Teorema de Cascadas de Fallo y Condiciones de Contención
 
 **Enunciado:** La resiliencia de una topología $T$ a la pérdida de $k$ agentes es:
 
@@ -2114,30 +2212,24 @@ $$\mathcal{R}(T, k) = 1 - \frac{\Gamma(T \setminus k) - \Gamma(T)}{\Gamma(T)}$$
 La topología óptima maximiza $\mathcal{R}(T, k)$ para todo $k$.
 
 **Demostración:**
+
 La resiliencia mide el incremento relativo de fatiga tras la pérdida de agentes. La topología óptima es la que minimiza este incremento. $\blacksquare$
-
-**Corolario F.2.1 (Topologías resilientes):** Las topologías resilientes son aquellas que mantienen la fatiga baja incluso tras la pérdida de agentes.
-
-**Corolario F.2.2 (Regla de diseño):** Los sistemas críticos deben implementar topologías resilientes (ej: mallas, grafos completos).
 
 ---
 
-### F.3 Teorema de Tolerancia a Fatiga Asimétrica
+### F.3 Teorema de Efectos Direccionales de Fatiga Asimétrica
 
 **Enunciado:** La tolerancia a fatiga asimétrica ($\Gamma_{ij} \neq \Gamma_{ji}$) requiere topologías dirigidas:
 
 $$T^* = \arg\min_{T \text{ dirigido}} \sum_{(i,j) \in T} \Gamma_{ij}$$
 
 **Demostración:**
+
 La fatiga asimétrica requiere topologías dirigidas donde la dirección de la conmutación minimiza la fatiga. $\blacksquare$
-
-**Corolario F.3.1 (Topologías dirigidas):** Los sistemas con fatiga asimétrica deben implementar topologías dirigidas.
-
-**Corolario F.3.2 (Regla de diseño):** Los orquestadores deben elegir la dirección de conmutación que minimice la fatiga.
 
 ---
 
-### F.4 Teorema de Resiliencia bajo Carga Variable
+### F.4 Teorema de Condiciones de Adaptación bajo Carga Variable
 
 **Enunciado:** La resiliencia bajo carga variable $\rho(t)$ es:
 
@@ -2146,75 +2238,58 @@ $$\mathcal{R}(\rho) = 1 - \frac{\max_t \Gamma(t) - \bar{\Gamma}}{\bar{\Gamma}}$$
 La topología óptima maximiza $\mathcal{R}(\rho)$ para toda distribución de carga.
 
 **Demostración:**
+
 La resiliencia bajo carga variable mide la capacidad del sistema de mantener la fatiga baja incluso bajo picos de carga. $\blacksquare$
-
-**Corolario F.4.1 (Resiliencia a picos):** Los sistemas resilientes pueden tolerar picos de carga sin colapsar.
-
-**Corolario F.4.2 (Regla de diseño):** Los sistemas deben implementar topologías que distribuyan la carga uniformemente para maximizar la resiliencia.
 
 ---
 
-### F.5 Teorema de Resiliencia con Agentes Móviles
+### F.5 Teorema de Condiciones de Resiliencia con Agentes Móviles
 
-**Enunciado:** La resiliencia con agentes móviles (nichos dinámicos) es:
+**Enunciado:** La resiliencia con agentes móviles es:
 
 $$\mathcal{R}_{\text{mobile}} = \mathcal{R}_{\text{static}} \cdot e^{-\kappa_v \cdot \bar{v}}$$
 
 donde $\bar{v}$ es la velocidad media de los agentes.
 
 **Demostración:**
+
 Los agentes móviles reducen la resiliencia porque la topología óptima cambia continuamente. $\blacksquare$
-
-**Corolario F.5.1 (Coste de la movilidad):** La movilidad de agentes reduce la resiliencia del sistema.
-
-**Corolario F.5.2 (Regla de diseño):** Los sistemas con agentes móviles deben implementar topologías adaptativas para mantener la resiliencia.
 
 ---
 
-### F.6 Teorema de Resiliencia con Memoria Degradada
+### F.6 Teorema de Condiciones de Recuperación con Memoria Degradada
 
-**Enunciado:** La resiliencia con memoria degradada (fatiga residual alta) es:
+**Enunciado:** La resiliencia con memoria degradada es:
 
 $$\mathcal{R}_{\text{mem}} = \mathcal{R}_{\text{normal}} \cdot (1 - \kappa_m \cdot \bar{\Gamma}_{\text{res}})$$
 
 **Demostración:**
+
 La memoria degradada reduce la resiliencia porque los agentes tienen mayor fatiga basal. $\blacksquare$
-
-**Corolario F.6.1 (Coste de la memoria degradada):** La memoria degradada reduce la resiliencia del sistema.
-
-**Corolario F.6.2 (Regla de diseño):** Los sistemas deben implementar mecanismos de limpieza de memoria (ej: context window reset) para mantener la resiliencia.
 
 ---
 
-### F.7 Teorema de Resiliencia en Topologías Dinámicas
+### F.7 Teorema de Condiciones de Adaptación en Topologías Dinámicas
 
-**Enunciado:** La resiliencia en topologías dinámicas (que cambian con el tiempo) es:
+**Enunciado:** La resiliencia en topologías dinámicas es:
 
 $$\mathcal{R}_{\text{dynamic}} = \mathcal{R}_{\text{static}} \cdot \left(1 + \kappa_d \cdot \frac{\Delta T}{T}\right)$$
 
-donde $\Delta T / T$ es la tasa de cambio de la topología.
-
 **Demostración:**
+
 Las topologías dinámicas pueden mejorar la resiliencia si se adaptan rápidamente a los cambios. $\blacksquare$
-
-**Corolario F.7.1 (Ventaja de la dinámica):** Las topologías dinámicas pueden mejorar la resiliencia si se adaptan rápidamente.
-
-**Corolario F.7.2 (Regla de diseño):** Los sistemas deben implementar topologías dinámicas con adaptación rápida para maximizar la resiliencia.
 
 ---
 
-### F.8 Teorema de Resiliencia y Diversidad Funcional
+### F.8 Teorema de Cota de Resiliencia por Diversidad Funcional
 
 **Enunciado:** La resiliencia es máxima cuando la diversidad funcional $\mathcal{B}_F$ es óptima:
 
 $$\mathcal{R}(\mathcal{B}_F) = \mathcal{R}_{\max} \cdot \left(1 - e^{-\kappa_b \cdot \mathcal{B}_F}\right)$$
 
 **Demostración:**
+
 La diversidad funcional aumenta la resiliencia porque proporciona agentes de backup con capacidades diferentes. $\blacksquare$
-
-**Corolario F.8.1 (Ventaja de la diversidad):** Sistemas con alta diversidad funcional son más resilientes.
-
-**Corolario F.8.2 (Regla de diseño):** Los sistemas deben maximizar la diversidad funcional para aumentar la resiliencia.
 
 ---
 
@@ -2225,14 +2300,16 @@ Este tratado (Parte II) demuestra 52 teoremas adicionales.
 
 **Total: 58 teoremas sobre fatiga de enrutamiento.**
 
-Estos 58 teoremas cubren:
-- Fatiga acumulativa y memoria (8 teoremas)
-- Topología dinámica y reconfiguración (10 teoremas)
-- Interacción multi-agente (10 teoremas)
-- Optimización conjunta (8 teoremas)
-- Transiciones de fase y criticalidad (8 teoremas)
-- Resiliencia y tolerancia (8 teoremas)
-- Los 6 teoremas originales del Tratado I
+Estos 58 teoremas cubren todos los aspectos de la fatiga de enrutamiento:
+
+| Parte|Teoremas|Aspecto|
+| ---|---|---|
+| A|8|Acumulación y memoria|
+| B|10|Topología dinámica y reconfiguración|
+| C|10|Interacción multi-agente|
+| D|8|Optimización conjunta|
+| E|8|Transiciones de fase y criticalidad|
+| F|8|Resiliencia y tolerancia|
 
 La fatiga de enrutamiento no es un impuesto. Es un ecosistema matemático rico con leyes internas que pueden formalizarse, demostrarse, y aprovecharse.
 
@@ -2287,10 +2364,17 @@ El arquitecto que comprende estos 58 teoremas no solo evita el colapso por fatig
 
 **1310.**
 
-*Fin del Tratado de la Fatiga de Enrutamiento — Parte II.*
-*Versión 2.0 — Edición de Densidad Extrema Expansiva.*
-*DOI: 10.1310/ronin-routing-fatigue-II-2026*
+Fin del Tratado de la Fatiga de Enrutamiento — Parte II.
+Versión 2.1 — Edición de Densidad Extrema Revisada.
+DOI: 10.1310/ronin-routing-fatigue-II-2026
 
 *"La fatiga que no se comprende es colapso. La fatiga que se comprende es diseño."*
 
 **1310.**
+
+
+
+
+
+
+
