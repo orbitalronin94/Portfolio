@@ -100,6 +100,7 @@ Tres documentos que cierran el ciclo:
 ### Nivel 6: Implementación Computacional (RONIN 1.0)
 Un documento que materializa el PUSFRE como **lenguaje de programación de dominio específico (DSL)**:
 - **RONIN 1.0 — Especificación Completa Verificable** → sintaxis, sistema de tipos (150+ tipos de dominio), semántica normativa, arquitectura del compilador (parser en Rust con `nom`, IR, backends múltiples), integración nativa con Linux (systemd, journald, señales POSIX, pipes), y 110 ejemplos prácticos que cubren desde flotas pesqueras hasta videojuegos, blockchain y sistemas multi-agente de IA.
+- **La implementación ejecutable (runtime de referencia)** se encuentra en la carpeta `runtimeRonin/` dentro del corpus, con su propio README y código fuente. No es un añadido teórico: es código funcional que permite ejecutar los ejemplos y validar el lenguaje.
 
 **Nota sobre este nivel:** RONIN no es un paper teórico. Es una especificación de ingeniería. Su función es que un arquitecto pueda escribir:
 
@@ -138,6 +139,7 @@ en lugar de 200 líneas de Python. El lenguaje **no añade nada** al PUSFRE que 
 | `# EL ATLAS DE REDUCCIONES...md` | Primera parte: 48 teoremas clásicos | 5 | Cartografía de casos límite |
 | `# EL ATLAS DE REDUCCIONES — SEGUNDA PARTE.md` | Segunda parte: 48 teoremas adicionales | 5 | Cartografía extendida |
 | `RONIN_1.0_ESPECIFICACION_COMPLETA_VERIFICABLE.md` | Lenguaje de dominio específico (DSL) | 6 | Especificación de ingeniería |
+| `runtimeRonin/` (carpeta) | Implementación ejecutable del runtime de referencia (código fuente, CLI, ejemplos y tests) | 6 | Código funcional (Python) |
 
 ---
 
@@ -174,6 +176,7 @@ en lugar de 200 líneas de Python. El lenguaje **no añade nada** al PUSFRE que 
 4. **Parte IV — Anexo del Compilador** → si quieres extender el lenguaje, añadir backends o tipos de dominio.
 5. **Sección 13 — Soporte Nativo para Linux** → si vas a desplegar RONIN como servicio en producción.
 6. **Sección 14 — Aplicaciones en Desarrollo de Software** → videojuegos, web, IoT, robótica, ML, finanzas, blockchain, recomendadores, cloud, IA multi-agente.
+7. **Carpeta `runtimeRonin/`** → ejecuta los ejemplos, prueba el CLI y modifica el runtime si lo deseas.
 
 ### Ruta 5: Para Especialistas en Orquestación Multi-Agente (quiero dominar la conmutación)
 1. **Tratado de la Fatiga de Enrutamiento (Parte I)** → los 6 teoremas fundamentales.
@@ -185,7 +188,7 @@ en lugar de 200 líneas de Python. El lenguaje **no añade nada** al PUSFRE que 
 7. **Tratado de la Fatiga de Enrutamiento (Parte II), Parte F** → resiliencia y tolerancia.
 8. **Dinámica Unificada** → para entender cómo la fatiga se integra con la Ecuación Maestra.
 
-**Nota sobre la Ruta 4:** RONIN es un lenguaje de dominio específico. No pretende sustituir a Python, Rust o C. Pretende que un arquitecto de sistemas pueda declarar un problema de asignación de recursos en 10 líneas y obtener la solución sin escribir código de infraestructura. Si lo que quieres es la teoría detrás del lenguaje, vuelve a la Ruta 1 o 2. El lenguaje es el martillo; la teoría es la física del martillo.
+**Nota sobre la Ruta 4:** RONIN es un lenguaje de dominio específico. No pretende sustituir a Python, Rust o C. Pretende que un arquitecto de sistemas pueda declarar un problema de asignación de recursos en 10 líneas y obtener la solución sin escribir código de infraestructura. Si lo que quieres es la teoría detrás del lenguaje, vuelve a la Ruta 1 o 2. El lenguaje es el martillo; la teoría es la física del martillo. La carpeta `runtimeRonin/` contiene la implementación real del martillo.
 
 ---
 
@@ -226,7 +229,7 @@ El corpus no está cerrado. Las tareas pendientes, reconocidas por el autor, son
 - Formalizar completamente el coste de la información en la Ecuación Maestra (diálogo abierto con Wolpert).
 - Validar empíricamente los 6 teoremas de la fatiga de enrutamiento (Parte I) en sistemas multi‑agente de producción.
 - **Validar empíricamente los 52 teoremas de la Fatiga de Enrutamiento (Parte II)**, especialmente los de topología dinámica, transiciones de fase y resiliencia.
-- Implementar el runtime de referencia de RONIN 1.0 en Rust, con los backends obligatorios (nativo, WASM, C, Python) y el conjunto mínimo de conformidad definido en el anexo normativo.
+- Implementar el runtime de referencia de RONIN 1.0 en Rust, con los backends obligatorios (nativo, WASM, C, Python) y el conjunto mínimo de conformidad definido en el anexo normativo. (Nota: la carpeta `runtimeRonin/` contiene una implementación funcional en Python, pero el runtime completo en Rust es una tarea pendiente).
 - Publicar el protocolo de benchmark de RONIN con hardware, sistema operativo, versión del runtime, y resultados reproducibles.
 
 El corpus es un programa de investigación en marcha, no una verdad revelada.
@@ -235,7 +238,7 @@ El corpus es un programa de investigación en marcha, no una verdad revelada.
 
 ## 8. Epílogo del Autor
 
-He escrito esto para que quien quiera construir, construya. Para que quien quiera criticar, critique con precisión. Para que quien quiera entender, tenga un mapa. El Corpus RONIN no es un destino. Es un punto de partida. Ahora, con el Tratado de la Fatiga de Enrutamiento extendido a 58 teoremas (Partes I y II), el Atlas extendido y el lenguaje RONIN 1.0, el mapa cubre el coste de moverse entre agentes, la totalidad de los teoremas de asignación de recursos conocidos, y una sintaxis ejecutable para declararlos sin programarlos. Quien quiera navegar, tiene brújula, mapa y vehículo.
+He escrito esto para que quien quiera construir, construya. Para que quien quiera criticar, critique con precisión. Para que quien quiera entender, tenga un mapa. El Corpus RONIN no es un destino. Es un punto de partida. Ahora, con el Tratado de la Fatiga de Enrutamiento extendido a 58 teoremas (Partes I y II), el Atlas extendido, el lenguaje RONIN 1.0 y su runtime ejecutable en la carpeta `runtimeRonin/`, el mapa cubre el coste de moverse entre agentes, la totalidad de los teoremas de asignación de recursos conocidos, y una sintaxis ejecutable para declararlos sin programarlos. Quien quiera navegar, tiene brújula, mapa y vehículo.
 
 — *El arquitecto.*
 Agencia RONIN, Agosto de 2026
@@ -451,7 +454,7 @@ No. Es un complemento. Los modelos clásicos son más simples y rápidos cuando 
 Sí, pero menos de lo que parece. El muestreo estratificado con Hoeffding permite calibrar los parámetros con 1.060 pares de documentos, en lugar de millones. La calibración bayesiana requiere unas pocas decenas de evaluaciones. (Ver: Dinámica Unificada, Sección 5.)
 
 **60. ¿El PUSFRE es fácil de implementar?**
-El código está disponible y es ejecutable. No requiere frameworks especializados (solo Python + numpy + scipy). La dificultad no está en la implementación, sino en la medición de los parámetros ($\Phi, \Psi, \Gamma$) en tu sistema concreto. (Ver: Apéndice B de Dinámica Unificada y Tratado de Fatiga.)
+El código está disponible y es ejecutable. No requiere frameworks especializados (solo Python + numpy + scipy). La dificultad no está en la implementación, sino en la medición de los parámetros ($\Phi, \Psi, \Gamma$) en tu sistema concreto. (Ver: Apéndice B de Dinámica Unificada y Tratado de Fatiga.) La carpeta `runtimeRonin/` proporciona una implementación funcional para empezar rápidamente.
 
 ### 9.7 Sobre el Autor y el Contexto de la Obra
 
@@ -552,7 +555,7 @@ Lotka‑Volterra y Gause son casos límite. El PUSFRE generaliza la ecología a 
 ### 9.10 Preguntas Prácticas para Operadores de Sistemas
 
 **91. ¿Cómo empiezo a usar el PUSFRE en mi sistema?**
-Sigue el protocolo de las 5 P del Manual Práctico. Identifica Partes, mide Parámetros ($\Phi, \Psi, \Omega$), calcula Fitness, asigna Recurso, verifica Coexistencia. Luego aplica las herramientas específicas según tu problema (auditoría ontológica, ecología de agentes, fatiga de enrutamiento). (Ver: Manual Práctico, Capítulo 4.)
+Sigue el protocolo de las 5 P del Manual Práctico. Identifica Partes, mide Parámetros ($\Phi, \Psi, \Omega$), calcula Fitness, asigna Recurso, verifica Coexistencia. Luego aplica las herramientas específicas según tu problema (auditoría ontológica, ecología de agentes, fatiga de enrutamiento). (Ver: Manual Práctico, Capítulo 4.) Puedes probar los ejemplos con el runtime de la carpeta `runtimeRonin/`.
 
 **92. ¿Cuánto tiempo lleva calibrar el PUSFRE para un sistema concreto?**
 Depende del sistema. Para sistemas RAG multi‑agente típicos (5‑10 agentes, 50‑100 consultas/día), la calibración inicial lleva 1‑2 semanas (incluyendo recolección de logs). Con los scripts de optimización bayesiana, el ajuste fino es automático. (Ver: Dinámica Unificada, Sección 3.)
@@ -579,12 +582,12 @@ Posibles causas: ciclos depredador‑presa (teorema 7.3), explosión mutualista 
 Sí. El Manual Práctico proporciona un protocolo de diseño: define las partes, el recurso, los parámetros objetivo y usa la Ecuación Maestra para predecir el equilibrio. Luego itera ajustando ($\Phi$) y ($\Psi$) hasta alcanzar el equilibrio deseado. (Ver: Manual Práctico, Capítulo 4.)
 
 **100. ¿Cuál es la mejor manera de empezar a leer el corpus?**
-Depende de tu perfil: Ingeniero → Manual Práctico (Capítulo 0) + Dinámica Unificada (Secciones 1 y 3). Teórico → Teorema Fundamental + Fundamentación Matemática. Crítico → Autorrevisión + Mapa de Corrección. Curioso → README + Atlas de Reducciones (Primera Parte). Desarrollador → RONIN 1.0 Especificación (Parte I: Tutorial para Mortales). (Ver: README, Sección 4.)
+Depende de tu perfil: Ingeniero → Manual Práctico (Capítulo 0) + Dinámica Unificada (Secciones 1 y 3). Teórico → Teorema Fundamental + Fundamentación Matemática. Crítico → Autorrevisión + Mapa de Corrección. Curioso → README + Atlas de Reducciones (Primera Parte). Desarrollador → RONIN 1.0 Especificación (Parte I: Tutorial para Mortales) y luego ejecuta los ejemplos en `runtimeRonin/`. (Ver: README, Sección 4.)
 
 ### 9.11 Sobre RONIN 1.0 (el lenguaje)
 
 **101. ¿Qué es RONIN 1.0 exactamente?**
-Es un lenguaje de programación de dominio específico (DSL) diseñado para declarar y resolver sistemas finitos con recursos escasos. No es un lenguaje de propósito general como Python o Rust. Es un lenguaje que traduce la Ecuación Maestra del PUSFRE a sintaxis ejecutable. Quien sabe declarar un sistema en RONIN puede resolverlo en una línea. (Ver: RONIN 1.0 Especificación, Prólogo.)
+Es un lenguaje de programación de dominio específico (DSL) diseñado para declarar y resolver sistemas finitos con recursos escasos. No es un lenguaje de propósito general como Python o Rust. Es un lenguaje que traduce la Ecuación Maestra del PUSFRE a sintaxis ejecutable. Quien sabe declarar un sistema en RONIN puede resolverlo en una línea. (Ver: RONIN 1.0 Especificación, Prólogo.) El runtime de referencia está en la carpeta `runtimeRonin/`.
 
 **102. ¿Por qué un lenguaje nuevo? ¿No basta con Python?**
 Basta. De hecho, todo el corpus teórico se ha desarrollado y validado en Python. RONIN no reemplaza a Python; lo complementa. Su función es que un arquitecto que no quiere programar pueda declarar un sistema de 5 flotas pesqueras en 10 líneas y obtener la solución sin escribir código de infraestructura. Es una cuestión de ergonomía, no de capacidad. (Ver: RONIN 1.0 Especificación, Sección 0.)
@@ -596,10 +599,10 @@ No. Nada. RONIN es la capa de implementación, no la capa teórica. Toda la mate
 Porque no lo es. El autor considera que inventar un lenguaje de programación es fontanería de alto nivel, no arquitectura. Los logros principales del corpus son los 65 teoremas demostrados, las 96+6 reducciones, las 10 herramientas operativas y la validación empírica. RONIN es una herramienta más, no el edificio. Aparece en el Anexo de Logros, pero en su propia sección (10.7), no mezclado con los teoremas. (Ver: Anexo de Logros, Sección 10.7.)
 
 **105. ¿RONIN está implementado ya?**
-La especificación sí. El runtime de referencia (en Rust, con parser `nom`, IR, y backends) está descrito en la Parte IV de la especificación, pero la implementación completa y verificable es una tarea pendiente reconocida en la Sección 7 del README. La política de afirmaciones verificables de la v1.0 es explícita: una capacidad no se presenta como disponible por el mero hecho de estar descrita. (Ver: RONIN 1.0 Especificación, Política de Afirmaciones Verificables.)
+La especificación sí. El runtime de referencia (en Rust, con parser `nom`, IR, y backends) está descrito en la Parte IV de la especificación, pero la implementación completa y verificable es una tarea pendiente reconocida en la Sección 7 del README. No obstante, existe una implementación funcional en Python en la carpeta `runtimeRonin/` que cubre el núcleo (sintaxis, validación, solve y simulate). La política de afirmaciones verificables de la v1.0 es explícita: una capacidad no se presenta como disponible por el mero hecho de estar descrita. (Ver: RONIN 1.0 Especificación, Política de Afirmaciones Verificables; y README Sección 7.)
 
 **106. ¿Puedo usar RONIN hoy?**
-Puedes leer la especificación, entender la sintaxis, y escribir programas RONIN sobre el papel. Para ejecutarlos, necesitas el runtime, que está pendiente de implementación conforme. Mientras tanto, puedes usar el código Python del Manual Práctico y de la Dinámica Unificada, que hace exactamente lo mismo. (Ver: Manual Práctico, Apéndice C.)
+Puedes leer la especificación, entender la sintaxis, y escribir programas RONIN sobre el papel. Para ejecutarlos, puedes usar el runtime de Python incluido en la carpeta `runtimeRonin/`. Mientras tanto, el código Python del Manual Práctico y de la Dinámica Unificada hace lo mismo. (Ver: Manual Práctico, Apéndice C; y carpeta `runtimeRonin/`.)
 
 **107. ¿Qué hace a RONIN diferente de otros DSLs?**
 Tres cosas: (1) un sistema de tipos con 150+ tipos de dominio blindados (`Probability`, `Frequency`, `Alpha`, `Debt`, `Geometry`, etc.) que impiden errores semánticos en tiempo de compilación; (2) integración nativa con Linux (systemd, journald, señales POSIX, pipes, inotify) pensada para despliegue en producción; (3) una semántica normativa verificable con tests de conformidad (Test 1‑4) y tolerancias numéricas explícitas. (Ver: RONIN 1.0 Especificación, Secciones 3 y 13.)
@@ -743,6 +746,7 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | Librería `ronin_fatigue_II` | **52 teoremas de fatiga de enrutamiento (Parte II)**: fatiga acumulativa, topología dinámica, interacción multi-agente, optimización conjunta, transiciones de fase, resiliencia. | Código ejecutable en la Parte II. |
 | Scripts de Calibración | Pipeline de optimización bayesiana para calibrar ($\gamma, \alpha, \sigma_\epsilon$) desde logs de producción. | Apéndice C de Dinámica Unificada. |
 | Notebooks de Ablaciones | Suite `ronin‑bench` para reproducir las 4 ablaciones y validar el SDDA. | Apéndice D de Dinámica Unificada. |
+| `runtimeRonin/` (carpeta) | Implementación ejecutable del runtime de referencia en Python (CLI, ejemplos y tests). | Código funcional (cubre core de la especificación). |
 
 ### 10.7 RONIN 1.0 — El Lenguaje de Dominio Específico
 
@@ -755,11 +759,11 @@ El Corpus RONIN no es un dogma. Es un programa de investigación abierto. Si tie
 | Semántica Normativa | Reglas verificables para `solve` (determinista) y `simulate` (estocástica con `seed`). Tests normativos (Test 1‑4) con tolerancias numéricas explícitas (`1e-9`). | Definidos en el Anexo Normativo v1.0. |
 | Integración Nativa Linux | Soporte para systemd (unidades de servicio), journald (logs estructurados), señales POSIX (SIGINT, SIGTERM, SIGHUP, SIGUSR1, SIGUSR2), pipes y redirecciones Unix, cron, sockets Unix, inotify, seccomp y sandboxing. | Descrito en la Sección 13 de la especificación. |
 | Arquitectura del Compilador | Frontend en Rust con `nom` (parser combinator), validador semántico, generador de IR (grafo de dependencias), optimizador (plegado de constantes, fusión de operaciones, vectorización SIMD), y backends (nativo, WASM, C, Python, LLVM IR, JVM, .NET, JavaScript). | Descrito en la Parte IV de la especificación. |
-| Runtime de Referencia | Implementación completa en Rust del parser, validador, evaluador de `solve`, coexistencia, deuda, auditoría básica y simulador reproducible. | **Tarea pendiente** (reconocida en README Sección 7). |
+| Runtime de Referencia | Implementación completa en Rust del parser, validador, evaluador de `solve`, coexistencia, deuda, auditoría básica y simulador reproducible. | **Tarea pendiente** (reconocida en README Sección 7). No obstante, la carpeta `runtimeRonin/` contiene una implementación funcional en Python que cubre el núcleo. |
 | Protocolo de Benchmark | Estándar para comparar implementaciones: versión del runtime, commit, hardware, SO, tamaño de entrada, repeticiones, calentamiento, distribución de resultados, código utilizado. | Definido en la Sección 9 de la especificación. |
 | 110 Ejemplos Prácticos | Desde *"Dos máquinas, 100 horas"* hasta *"Optimización de carteras con coexistencia"*, *"Control de tráfico predictivo"*, *"Detección de comunidades anómalas en redes sociales"*, *"Planificación de mantenimiento con recursos escasos"*, *"Balanceo de clases en un RPG"*, *"Asignación de frecuencias con interferencia"*, etc. | Documentados en la Parte III de la especificación. |
 
-**Aclaración importante sobre el estatus de RONIN 1.0:** La especificación es completa y verificable sobre el papel. La implementación conforme es una tarea pendiente. La política de afirmaciones verificables de la v1.0 es explícita: una capacidad no se presenta como disponible por el mero hecho de estar descrita. Cifras de rendimiento, compatibilidad de backends y propiedades de seguridad solo se considerarán afirmaciones verificadas cuando exista una implementación, un protocolo y resultados reproducibles.
+**Aclaración importante sobre el estatus de RONIN 1.0:** La especificación es completa y verificable sobre el papel. La implementación conforme es una tarea pendiente. La política de afirmaciones verificables de la v1.0 es explícita: una capacidad no se presenta como disponible por el mero hecho de estar descrita. Cifras de rendimiento, compatibilidad de backends y propiedades de seguridad solo se considerarán afirmaciones verificadas cuando exista una implementación, un protocolo y resultados reproducibles. La carpeta `runtimeRonin/` proporciona una implementación funcional en Python que sirve como punto de partida y demostración práctica.
 
 ### 10.8 Sistema de Autocorrección (Mapa de Corrección)
 
