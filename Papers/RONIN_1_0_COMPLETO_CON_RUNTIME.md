@@ -1,6 +1,6 @@
 # 🥚 RONIN — THE LANGUAGE OF FINITE SYSTEMS WITH SCARCE RESOURCES
 
-## *Versión 2.0 — Edición con Implementación Rust y Extensiones para IA Nativa*
+##  — Edición con Implementación Rust y Extensiones para IA Nativa*
 
 ---
   
