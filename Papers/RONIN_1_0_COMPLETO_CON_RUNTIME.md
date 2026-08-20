@@ -1,15 +1,13 @@
-Aquí tienes el archivo Markdown completo con la integración de RONIN Office + Ollama y el índice actualizado. He rellenado la Parte VII con el contenido real de las extensiones (no solo "(igual que el original)") para que sea autocontenido.
-
-```markdown
+markdown
 # 🥚 RONIN — THE LANGUAGE OF FINITE SYSTEMS WITH SCARCE RESOURCES
 
-## Versión 1.0 — Edición Unificada: Especificación + Runtime Python + Implementación Rust + Extensiones IA Nativa
+## Versión 1.0 — Edición Unificada: Especificación + Runtime Python + Implementación Rust + RONIN Office
 
 ---
 
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
 **Fecha:** Agosto de 2026  
-**Clasificación:** `LENGUAJE DE PROGRAMACIÓN / INFRAESTRUCTURA DE SISTEMAS / IA NATIVA / DESARROLLO DE SOFTWARE`
+**Clasificación:** `LENGUAJE DE PROGRAMACIÓN / INFRAESTRUCTURA DE SISTEMAS / DESARROLLO DE SOFTWARE`
 
 ---
 
@@ -19,7 +17,7 @@ Esta edición unifica la especificación completa del lenguaje RONIN 1.0 con:
 
 1. **Runtime de referencia en Python** (funcional, testeado, reproducible).
 2. **Implementación canónica en Rust** del compilador y runtime.
-3. **Extensiones para IA nativa**: aprendizaje, planificación, memoria a largo plazo, meta-aprendizaje, autoevolución, comunicación entre agentes, protocolos de consenso, agentes con estado interno, sistemas con propósito, auto-optimización, detección de anomalías y auto-reparación, coordinación jerárquica, aprendizaje por refuerzo multi-agente.
+3. **RONIN Office**: Interfaz visual para diseñar, resolver y simular sistemas.
 4. **Visión de futuro**: RONIN como lenguaje nativo para sistemas multi-agente autónomos.
 
 La semántica normativa de `solve` y `simulate` es la base inmutable del lenguaje. Todas las extensiones son aditivas y no rompen compatibilidad.
@@ -65,9 +63,8 @@ Este documento contiene:
 - Un anexo con la arquitectura interna del compilador.
 - **Una sección con aplicaciones de RONIN en videojuegos y otras ramas del desarrollo de software.**
 - **Parte VI: Implementación completa en Rust del compilador y runtime.**
-- **Parte VII: Extensiones para IA nativa.**
-- **Parte VIII: RONIN Office + Ollama — Interfaz nativa de IA.**
-- **Parte IX: Visión de futuro: RONIN como lenguaje nativo de IA.**
+- **Parte VII: RONIN Office — Interfaz visual para diseñar sistemas.**
+- **Parte VIII: Visión de futuro: RONIN como lenguaje de sistemas.**
 
 **RONIN está diseñado para funcionar de forma nativa en Linux.** Todos los comandos, herramientas de desarrollo y ejemplos están optimizados para entornos Linux (systemd, journald, signals, pipes, bash, etc.). Si usas Linux, RONIN se siente como en casa.
 
@@ -167,55 +164,38 @@ Este documento contiene:
 63. [Backend a C](#612-backend-a-c)
 64. [Optimizaciones del compilador Rust](#613-optimizaciones-del-compilador-rust)
 
-**PARTE VII — EXTENSIONES PARA IA NATIVA**
+**PARTE VII — RONIN OFFICE: INTERFAZ VISUAL**
 
-65. [Aprendizaje (learning)](#71-aprendizaje-learning)
-66. [Planificación (planning)](#72-planificación-planning)
-67. [Memoria a largo plazo](#73-memoria-a-largo-plazo)
-68. [Meta-aprendizaje](#74-meta-aprendizaje)
-69. [Autoevolución del sistema](#75-autoevolución-del-sistema)
-70. [Comunicación entre agentes](#76-comunicación-entre-agentes)
-71. [Protocolos de consenso](#77-protocolos-de-consenso)
-72. [Agentes con estado interno](#78-agentes-con-estado-interno)
-73. [Sistemas con propósito (goal-directed)](#79-sistemas-con-propósito-goal-directed)
-74. [Auto-optimización de parámetros](#710-auto-optimización-de-parámetros)
-75. [Detección de anomalías y auto-reparación](#711-detección-de-anomalías-y-auto-reparación)
-76. [Coordinación jerárquica](#712-coordinación-jerárquica)
-77. [Aprendizaje por refuerzo multi-agente](#713-aprendizaje-por-refuerzo-multi-agente)
+65. [Visión general](#71-visión-general)
+66. [Arquitectura de la interfaz](#72-arquitectura-de-la-interfaz)
+67. [Panel de Chat — El cerebro de la interfaz](#73-panel-de-chat--el-cerebro-de-la-interfaz)
+68. [Panel Sheet — Editor de código RONIN](#74-panel-sheet--editor-de-código-ronin)
+69. [Panel Optimizer — Optimización automática](#75-panel-optimizer--optimización-automática)
+70. [Panel Simulator — Simulación DTMC](#76-panel-simulator--simulación-dtmc)
+71. [Panel Agent Studio — Diseño visual de agentes](#77-panel-agent-studio--diseño-visual-de-agentes)
+72. [Motor RONIN — Implementación en JavaScript](#78-motor-ronin--implementación-en-javascript)
+73. [Flujo de trabajo completo](#79-flujo-de-trabajo-completo)
+74. [Generador local de sistemas](#710-generador-local-de-sistemas)
+75. [Estado de la implementación](#711-estado-de-la-implementación)
+76. [Koans de RONIN Office](#712-koans-de-ronin-office)
+77. [Referencias técnicas](#713-referencias-técnicas)
 
-**PARTE VIII — RONIN OFFICE + OLLAMA: INTERFAZ NATIVA DE IA**
+**PARTE VIII — EL FUTURO: RONIN COMO LENGUAJE DE SISTEMAS**
 
-78. [Visión general](#781-visión-general)
-79. [Arquitectura de la interfaz](#782-arquitectura-de-la-interfaz)
-80. [Panel de Chat — El cerebro de la interfaz](#783-panel-de-chat--el-cerebro-de-la-interfaz)
-81. [Panel Sheet — Editor de código RONIN](#784-panel-sheet--editor-de-código-ronin)
-82. [Panel Optimizer — Optimización automática](#785-panel-optimizer--optimización-automática)
-83. [Panel Simulator — Simulación DTMC](#786-panel-simulator--simulación-dtmc)
-84. [Panel Agent Studio — Diseño visual de agentes](#787-panel-agent-studio--diseño-visual-de-agentes)
-85. [Motor RONIN — Implementación en JavaScript](#788-motor-ronin--implementación-en-javascript)
-86. [Flujo de trabajo completo](#789-flujo-de-trabajo-completo)
-87. [Integración con Ollama — Especificación técnica](#7810-integración-con-ollama--especificación-técnica)
-88. [Fallback local — Sin Ollama](#7811-fallback-local--sin-ollama)
-89. [Estado de la implementación](#7812-estado-de-la-implementación)
-90. [Koans de RONIN Office](#7813-koans-de-ronin-office)
-91. [Referencias técnicas](#7814-referencias-técnicas)
-
-**PARTE IX — EL FUTURO: RONIN COMO LENGUAJE NATIVO DE IA**
-
-92. [Visión: IA que escribe RONIN](#81-visión-ia-que-escribe-ronin)
-93. [RONIN como lenguaje de orquestación](#82-ronin-como-lenguaje-de-orquestación)
-94. [El ecosistema RONIN](#83-el-ecosistema-ronin)
-95. [RONIN y la computación neuromórfica](#84-ronin-y-la-computación-neuromórfica)
-96. [RONIN y los sistemas autónomos](#85-ronin-y-los-sistemas-autónomos)
-97. [Koans del futuro](#86-koans-del-futuro)
+78. [Visión: Sistemas que se diseñan solos](#81-visión-sistemas-que-se-diseñan-solos)
+79. [RONIN como lenguaje de orquestación](#82-ronin-como-lenguaje-de-orquestación)
+80. [El ecosistema RONIN](#83-el-ecosistema-ronin)
+81. [RONIN y la computación neuromórfica](#84-ronin-y-la-computación-neuromórfica)
+82. [RONIN y los sistemas autónomos](#85-ronin-y-los-sistemas-autónomos)
+83. [Koans del futuro](#86-koans-del-futuro)
 
 **ANEXO NORMATIVO V1.0**
 
-98. [Contrato de implementación](#n1-contrato-de-implementación)
-99. [Tests normativos](#n2-tests-normativos)
-100. [Conformidad](#n3-conformidad)
-101. [Estado de las extensiones](#n4-estado-de-las-extensiones)
-102. [Política de afirmaciones verificables](#n5-política-de-afirmaciones-verificables)
+84. [Contrato de implementación](#n1-contrato-de-implementación)
+85. [Tests normativos](#n2-tests-normativos)
+86. [Conformidad](#n3-conformidad)
+87. [Estado de las extensiones](#n4-estado-de-las-extensiones)
+88. [Política de afirmaciones verificables](#n5-política-de-afirmaciones-verificables)
 
 ---
 
@@ -527,8 +507,8 @@ RONIN no permite errores de dominio.
 ### 0.4 Interoperabilidad como puente
 RONIN se integra con Python, Rust, SQL, APIs REST.
 
-### 0.5 IA como generadora de sistemas
-RONIN está diseñado para que una IA genere código.
+### 0.5 RONIN Office como interfaz
+RONIN Office permite diseñar sistemas visualmente sin escribir código.
 
 ---
 
@@ -3729,8 +3709,6 @@ ronin/
 │   │       ├── solver.rs
 │   │       ├── simulator.rs
 │   │       ├── validator.rs
-│   │       ├── learning.rs
-│   │       ├── planning.rs
 │   │       └── optimizer.rs
 │   ├── ronin-parser/             # Lexer + parser con nom
 │   │   ├── Cargo.toml
@@ -4616,197 +4594,7 @@ impl Optimizer {
 
 ---
 
-## 6.10 APRENDIZAJE (LEARNING)
-
-### `crates/ronin-core/src/learning.rs`
-
-```rust
-use super::ast::{System, Agent};
-use super::solver::solve;
-
-pub struct LearningParams {
-    pub rate: f64,
-    pub memory: usize,
-    pub update_rule: UpdateRule,
-}
-
-pub enum UpdateRule {
-    Gradient { phi: bool, psi: bool, freq: bool },
-    Hebbian,
-    Reinforcement { alpha: f64, gamma: f64 },
-    Evolutionary { mutation_rate: f64, selection_pressure: f64 },
-}
-
-pub fn learn(system: &mut System, steps: usize, params: &LearningParams) -> Vec<System> {
-    let mut history = Vec::with_capacity(steps);
-    
-    for _ in 0..steps {
-        let solution = solve(system, 0.05).unwrap();
-        let fitness = &solution.fitness;
-        let total_fitness: f64 = fitness.iter().sum();
-        
-        for (i, agent) in system.agents.iter_mut().enumerate() {
-            match &params.update_rule {
-                UpdateRule::Gradient { phi, psi, freq } => {
-                    if *phi {
-                        agent.phi += params.rate * (fitness[i] - agent.phi);
-                        agent.phi = agent.phi.clamp(0.0, 1.0);
-                    }
-                    if *psi {
-                        agent.psi += params.rate * (1.0 - fitness[i] - agent.psi);
-                        agent.psi = agent.psi.clamp(0.0, 1.0);
-                    }
-                    if *freq && total_fitness > 0.0 {
-                        let normalized_fitness = fitness[i] / total_fitness;
-                        agent.frequency += params.rate * (normalized_fitness - agent.frequency);
-                    }
-                }
-                UpdateRule::Reinforcement { alpha, gamma: _ } => {
-                    let reward = fitness[i] - total_fitness / fitness.len() as f64;
-                    agent.phi += *alpha as f64 * reward * agent.phi * (1.0 - agent.phi);
-                    agent.phi = agent.phi.clamp(0.0, 1.0);
-                }
-                UpdateRule::Hebbian => {
-                    // Hebbian: increase frequency if fitness is above average
-                    let mean_fitness = total_fitness / fitness.len() as f64;
-                    if fitness[i] > mean_fitness {
-                        agent.frequency += params.rate * (1.0 - agent.frequency);
-                    } else {
-                        agent.frequency -= params.rate * agent.frequency;
-                    }
-                    agent.frequency = agent.frequency.clamp(0.01, 0.99);
-                }
-                UpdateRule::Evolutionary { mutation_rate, selection_pressure: _ } => {
-                    // Simple evolutionary update
-                    let mutation = (rng_sample() - 0.5) * *mutation_rate;
-                    agent.phi = (agent.phi + mutation).clamp(0.0, 1.0);
-                    agent.psi = (agent.psi + mutation * 0.5).clamp(0.0, 1.0);
-                }
-            }
-        }
-        
-        // Normalize frequencies
-        let sum: f64 = system.agents.iter().map(|a| a.frequency).sum();
-        if sum > 0.0 {
-            for agent in system.agents.iter_mut() {
-                agent.frequency /= sum;
-            }
-        }
-        
-        history.push(system.clone());
-    }
-    
-    history
-}
-
-fn rng_sample() -> f64 {
-    use rand::Rng;
-    rand::thread_rng().gen()
-}
-```
-
----
-
-## 6.11 PLANIFICACIÓN (PLANNING)
-
-### `crates/ronin-core/src/planning.rs`
-
-```rust
-use super::ast::{System, Agent};
-use super::solver::solve;
-
-#[derive(Debug, Clone)]
-pub struct Plan {
-    pub actions: Vec<Action>,
-    pub predicted_states: Vec<System>,
-    pub objective_value: f64,
-}
-
-#[derive(Debug, Clone)]
-pub enum Action {
-    AdjustPhi { agent: usize, delta: f64 },
-    AdjustPsi { agent: usize, delta: f64 },
-    AdjustFrequency { agent: usize, delta: f64 },
-    AddAgent { agent: Agent },
-    RemoveAgent { agent: usize },
-    ChangeResource { new_resource: f64 },
-}
-
-#[derive(Debug, Clone)]
-pub enum Objective {
-    MaximizeCoexistence,
-    MaximizeFitness,
-    MinimizeDebt,
-    MaximizeDiversity,
-}
-
-pub fn plan(
-    system: &System,
-    horizon: usize,
-    objective: Objective,
-    constraints: Vec<String>,
-) -> Plan {
-    // Simple implementation: evaluate a few candidate actions
-    let mut best_actions = Vec::new();
-    let mut best_value = f64::NEG_INFINITY;
-    let mut best_state = system.clone();
-    
-    // Try adjusting each agent's phi
-    for i in 0..system.agents.len() {
-        for delta in [-0.1, -0.05, 0.05, 0.1] {
-            let mut candidate = system.clone();
-            candidate.agents[i].phi = (candidate.agents[i].phi + delta).clamp(0.0, 1.0);
-            
-            if let Ok(solution) = solve(&candidate, 0.05) {
-                let value = evaluate_objective(&solution, &objective);
-                if value > best_value {
-                    best_value = value;
-                    best_actions = vec![Action::AdjustPhi { agent: i, delta }];
-                    best_state = candidate;
-                }
-            }
-        }
-    }
-    
-    Plan {
-        actions: best_actions,
-        predicted_states: vec![best_state],
-        objective_value: best_value,
-    }
-}
-
-fn evaluate_objective(solution: &super::solver::Solution, objective: &Objective) -> f64 {
-    match objective {
-        Objective::MaximizeCoexistence => {
-            if let Some(coex) = solution.coexistence {
-                if coex { 1.0 } else { 0.0 }
-            } else { 0.0 }
-        }
-        Objective::MaximizeFitness => {
-            solution.fitness.iter().sum()
-        }
-        Objective::MinimizeDebt => {
-            -solution.debt
-        }
-        Objective::MaximizeDiversity => {
-            // Shannon entropy of allocation
-            let alloc = &solution.allocation;
-            let total: f64 = alloc.iter().sum();
-            if total <= 0.0 { return 0.0; }
-            let probs: Vec<f64> = alloc.iter().map(|x| x / total).collect();
-            let entropy = probs.iter()
-                .filter(|&&p| p > 0.0)
-                .map(|&p| -p * p.ln())
-                .sum::<f64>();
-            entropy / (alloc.len() as f64).ln() // Normalized entropy
-        }
-    }
-}
-```
-
----
-
-## 6.12 CLI CON CLAP
+## 6.10 CLI CON CLAP
 
 ### `crates/ronin-cli/src/main.rs`
 
@@ -4818,8 +4606,6 @@ use std::path::PathBuf;
 use ronin_core::solver::solve;
 use ronin_core::simulator::simulate;
 use ronin_core::validator::validate;
-use ronin_core::learning::{learn, LearningParams, UpdateRule};
-use ronin_core::planning::{plan, Objective};
 use ronin_parser::parser::parse;
 
 const TOLERANCE: f64 = 1e-9;
@@ -4859,28 +4645,6 @@ enum Command {
         /// Random seed for reproducibility
         #[arg(long)]
         seed: Option<u64>,
-    },
-    /// Learn and adapt a RONIN system
-    Learn {
-        /// Path to the .ronin file
-        file: PathBuf,
-        /// Number of learning steps
-        #[arg(long, default_value_t = 100)]
-        steps: usize,
-        /// Learning rate
-        #[arg(long, default_value_t = 0.01)]
-        rate: f64,
-    },
-    /// Plan actions for a RONIN system
-    Plan {
-        /// Path to the .ronin file
-        file: PathBuf,
-        /// Planning horizon
-        #[arg(long, default_value_t = 10)]
-        horizon: usize,
-        /// Objective function
-        #[arg(long, default_value = "maximize_coexistence")]
-        objective: String,
     },
 }
 
@@ -4930,57 +4694,13 @@ fn main() -> Result<(), String> {
             println!("{}", json);
             Ok(())
         }
-        
-        Command::Learn { file, steps, rate } => {
-            let source = fs::read_to_string(&file)
-                .map_err(|e| format!("Cannot read file: {}", e))?;
-            let systems = parse(&source)
-                .map_err(|e| format!("Parse error: {}", e))?;
-            let mut system = systems.into_iter().next()
-                .ok_or("No system declaration found")?;
-            
-            let params = LearningParams {
-                rate,
-                memory: 100,
-                update_rule: UpdateRule::Gradient { phi: true, psi: true, freq: true },
-            };
-            
-            let history = learn(&mut system, steps, &params);
-            let json = serde_json::to_string_pretty(&history)
-                .map_err(|e| format!("JSON error: {}", e))?;
-            println!("{}", json);
-            Ok(())
-        }
-        
-        Command::Plan { file, horizon, objective } => {
-            let source = fs::read_to_string(&file)
-                .map_err(|e| format!("Cannot read file: {}", e))?;
-            let systems = parse(&source)
-                .map_err(|e| format!("Parse error: {}", e))?;
-            let system = systems.first()
-                .ok_or("No system declaration found")?;
-            
-            let obj = match objective.as_str() {
-                "maximize_coexistence" => Objective::MaximizeCoexistence,
-                "maximize_fitness" => Objective::MaximizeFitness,
-                "minimize_debt" => Objective::MinimizeDebt,
-                "maximize_diversity" => Objective::MaximizeDiversity,
-                _ => Objective::MaximizeCoexistence,
-            };
-            
-            let plan = plan(system, horizon, obj, vec![]);
-            let json = serde_json::to_string_pretty(&plan)
-                .map_err(|e| format!("JSON error: {}", e))?;
-            println!("{}", json);
-            Ok(())
-        }
     }
 }
 ```
 
 ---
 
-## 6.13 TESTS NORMATIVOS EN RUST
+## 6.11 TESTS NORMATIVOS EN RUST
 
 ### `tests/test_maquinas.rs`
 
@@ -4990,8 +4710,6 @@ mod tests {
     use ronin_core::solver::solve;
     use ronin_core::simulator::simulate;
     use ronin_core::validator::validate;
-    use ronin_core::learning::{learn, LearningParams, UpdateRule};
-    use ronin_core::planning::{plan, Objective};
     use ronin_parser::parser::parse;
     use approx::assert_relative_eq;
 
@@ -5091,38 +4809,12 @@ mod tests {
         assert_eq!(sim1.history, sim2.history);
         assert_eq!(sim1.final_state, sim2.final_state);
     }
-
-    #[test]
-    fn test_learning_convergence() {
-        let systems = parse(MAQ).unwrap();
-        let mut s = systems[0].clone();
-        let params = LearningParams {
-            rate: 0.1,
-            memory: 10,
-            update_rule: UpdateRule::Gradient { phi: true, psi: true, freq: true },
-        };
-        let history = learn(&mut s, 10, &params);
-        // After learning, both agents should have comparable fitness
-        let solution = solve(&s, DELTA).unwrap();
-        assert!(solution.allocation[0] > 30.0);
-        assert!(solution.allocation[1] > 30.0);
-        assert_relative_eq!(solution.allocation.iter().sum::<f64>(), 100.0, epsilon = TOLERANCE);
-    }
-
-    #[test]
-    fn test_planning() {
-        let systems = parse(MAQ).unwrap();
-        let s = &systems[0];
-        let plan = plan(s, 5, Objective::MaximizeCoexistence, vec![]);
-        assert!(!plan.actions.is_empty());
-        assert!(plan.objective_value >= 0.0);
-    }
 }
 ```
 
 ---
 
-## 6.14 INTEGRACIÓN CON PYTHON (PYO3)
+## 6.12 INTEGRACIÓN CON PYTHON (PYO3)
 
 ### `crates/ronin-pyo3/src/lib.rs`
 
@@ -5132,7 +4824,6 @@ use pyo3::types::PyList;
 use ronin_core::solver::solve;
 use ronin_core::simulator::simulate;
 use ronin_core::validator::validate;
-use ronin_core::learning::{learn, LearningParams, UpdateRule};
 use ronin_parser::parser::parse;
 
 const DELTA: f64 = 0.05;
@@ -5177,45 +4868,18 @@ fn check_file(file_path: &str) -> PyResult<bool> {
     Ok(true)
 }
 
-#[pyfunction]
-fn learn_file(file_path: &str, steps: usize, rate: f64) -> PyResult<Vec<Vec<f64>>> {
-    let source = std::fs::read_to_string(file_path)
-        .map_err(|e| pyo3::exceptions::PyIOError::new_err(e.to_string()))?;
-    let systems = parse(&source)
-        .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
-    let mut system = systems.into_iter().next()
-        .ok_or_else(|| pyo3::exceptions::PyValueError::new_err("No system declaration found"))?;
-    
-    let params = LearningParams {
-        rate,
-        memory: 100,
-        update_rule: UpdateRule::Gradient { phi: true, psi: true, freq: true },
-    };
-    
-    let history = learn(&mut system, steps, &params);
-    // Return the allocation history
-    let allocations: Vec<Vec<f64>> = history.iter()
-        .map(|s| {
-            let solution = solve(s, DELTA).unwrap();
-            solution.allocation
-        })
-        .collect();
-    Ok(allocations)
-}
-
 #[pymodule]
 fn ronin_rust(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(solve_file, m)?)?;
     m.add_function(wrap_pyfunction!(simulate_file, m)?)?;
     m.add_function(wrap_pyfunction!(check_file, m)?)?;
-    m.add_function(wrap_pyfunction!(learn_file, m)?)?;
     Ok(())
 }
 ```
 
 ---
 
-## 6.15 BACKEND A WASM
+## 6.13 BACKEND A WASM
 
 ### `crates/ronin-wasm/src/lib.rs`
 
@@ -5265,7 +4929,7 @@ pub fn simulate_ronin(source: &str, steps: usize, seed: Option<u64>) -> String {
 
 ---
 
-## 6.16 BACKEND A C
+## 6.14 BACKEND A C
 
 ### `crates/ronin-c-backend/src/lib.rs`
 
@@ -5340,414 +5004,20 @@ pub fn generate_c(system: &System) -> String {
 
 ---
 
-# PARTE VII — EXTENSIONES PARA IA NATIVA
+# PARTE VII — RONIN OFFICE: INTERFAZ VISUAL
 
-## 7.1 APRENDIZAJE (LEARNING)
+## 7.1 VISIÓN GENERAL
 
-RONIN permite que los sistemas aprendan y se adapten con el tiempo. El aprendizaje modifica los parámetros de los agentes (phi, psi, frequency) para optimizar la asignación de recursos.
-
-**Modos de aprendizaje:**
-
-```ronin
-system Aprendizaje = {
-    parts: 5,
-    resource: 1000,
-    agents: [...],
-    params: { alpha: 1.2, gamma: 0.4, sigma: 0.1 },
-    learning: {
-        rate: 0.01,
-        method: "gradient",
-        memory: 100
-    }
-}
-
-learn Aprendizaje with {
-    steps: 100,
-    seed: 42,
-    update: "fitness-proportional"
-}
-```
-
-**Reglas de actualización disponibles:**
-- **Gradiente:** Ajuste basado en el gradiente de fitness.
-- **Hebbiano:** "Las neuronas que se activan juntas, se conectan juntas."
-- **Refuerzo:** Recompensa basada en el fitness relativo.
-- **Evolutivo:** Mutación y selección natural.
-
-**Ejemplo de aprendizaje:**
-
-```ronin
-system Learner = {
-    parts: 2,
-    resource: 100,
-    agents: [
-        { phi: 0.5, psi: 0.5, frequency: 0.5 },
-        { phi: 0.5, psi: 0.5, frequency: 0.5 }
-    ],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.0 },
-    learning: { rate: 0.1, method: "gradient" }
-}
-
-learn Learner with { steps: 10, seed: 42 }
-// Después de 10 pasos, la asignación se aproxima a 50/50
-```
-
----
-
-## 7.2 PLANIFICACIÓN (PLANNING)
-
-RONIN puede planificar acciones futuras para alcanzar un objetivo. El planificador evalúa diferentes acciones y selecciona las que maximizan la función objetivo.
-
-**Objetivos soportados:**
-- **Maximizar coexistencia:** Todas las partes sobreviven.
-- **Maximizar fitness:** La suma de fitness es máxima.
-- **Minimizar deuda:** La deuda ontológica es mínima.
-- **Maximizar diversidad:** La entropía de la asignación es máxima.
-
-**Ejemplo de planificación:**
-
-```ronin
-system Planner = {
-    parts: 2,
-    resource: 100,
-    agents: [
-        { phi: 0.8, psi: 1.0, frequency: 0.6 },
-        { phi: 0.5, psi: 1.0, frequency: 0.4 }
-    ],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.0 },
-    planning: {
-        objective: "maximize_coexistence",
-        horizon: 5
-    }
-}
-
-plan = plan Planner
-print(plan.actions)  // [AdjustPhi { agent: 0, delta: -0.05 }]
-```
-
-**Acciones disponibles:**
-- `AdjustPhi { agent: i, delta: d }` — Ajusta phi del agente i.
-- `AdjustPsi { agent: i, delta: d }` — Ajusta psi del agente i.
-- `AdjustFrequency { agent: i, delta: d }` — Ajusta frecuencia del agente i.
-- `AddAgent { agent: a }` — Añade un nuevo agente.
-- `RemoveAgent { agent: i }` — Elimina un agente.
-- `ChangeResource { new_resource: r }` — Cambia el recurso total.
-
----
-
-## 7.3 MEMORIA A LARGO PLAZO
-
-RONIN puede mantener memoria de estados pasados para mejorar la toma de decisiones.
-
-**Tipos de memoria:**
-- **Episódica:** Secuencia de estados anteriores.
-- **Semántica:** Patrones y relaciones aprendidas.
-- **Procedimental:** Estrategias exitosas.
-
-```ronin
-system Memoria = {
-    parts: 5,
-    resource: 1000,
-    agents: [...],
-    memory: {
-        type: "episodic",
-        capacity: 1000,
-        decay: 0.01
-    }
-}
-
-let estado_anterior = memoria.recall(step: 42)
-print(estado_anterior.allocation)
-```
-
----
-
-## 7.4 META-APRENDIZAJE
-
-RONIN puede aprender a aprender. El meta-aprendizaje ajusta los hiperparámetros del sistema para mejorar la velocidad y calidad del aprendizaje.
-
-**Parámetros ajustables:**
-- Tasa de aprendizaje.
-- Método de actualización.
-- Capacidad de memoria.
-- Penalización por deuda.
-
-```ronin
-meta_learn Aprendizaje with {
-    search: "bayesian",
-    budget: 100,
-    metric: "convergence_time"
-}
-```
-
----
-
-## 7.5 AUTOEVOLUCIÓN DEL SISTEMA
-
-RONIN puede autoevolucionar, modificando su propia estructura para adaptarse a nuevos entornos.
-
-**Mecanismos de autoevolución:**
-- **Adición/eliminación de agentes.**
-- **Cambio de topología.**
-- **Mutación de parámetros.**
-- **Recombinación con otros sistemas.**
-
-```ronin
-system Evolutivo = {
-    parts: 5,
-    resource: 1000,
-    agents: [...],
-    evolution: {
-        mutation_rate: 0.01,
-        crossover_rate: 0.5,
-        population_size: 20
-    }
-}
-
-evolve Evolutivo with {
-    generations: 100,
-    fitness: "coexistence"
-}
-```
-
----
-
-## 7.6 COMUNICACIÓN ENTRE AGENTES
-
-Los agentes pueden comunicarse entre sí, compartiendo información y recursos.
-
-**Protocolos de comunicación:**
-- **Broadcast:** Envía a todos los agentes.
-- **Unicast:** Envía a un agente específico.
-- **Multicast:** Envía a un grupo de agentes.
-- **Request-Reply:** Petición y respuesta.
-
-```ronin
-send Agente1 -> Agente2 {
-    message: "Necesito recurso",
-    priority: 1
-}
-
-let respuesta = receive Agente2
-```
-
----
-
-## 7.7 PROTOCOLOS DE CONSENSO
-
-RONIN implementa protocolos de consenso para que los agentes acuerden la asignación de recursos.
-
-**Protocolos soportados:**
-- **Paxos:** Consenso tolerante a fallos.
-- **Raft:** Consenso con líder.
-- **Federated:** Consenso entre subgrupos.
-- **Majority:** Voto por mayoría.
-
-```ronin
-consenso = consensus Sistema with {
-    protocol: "Raft",
-    timeout: 100,
-    quorum: 0.6
-}
-```
-
----
-
-## 7.8 AGENTES CON ESTADO INTERNO
-
-Los agentes pueden tener estado interno que influye en su comportamiento.
-
-**Estado interno:**
-- **Recursos acumulados.**
-- **Deuda ontológica.**
-- **Memoria de interacciones.**
-- **Estrategias aprendidas.**
-
-```ronin
-agent Avanzado = {
-    phi: 0.9,
-    psi: 0.8,
-    frequency: 0.25,
-    state: {
-        resources: 100,
-        debt: 0.02,
-        strategy: "cooperative",
-        memory: [0.1, 0.2, 0.3]
-    }
-}
-```
-
----
-
-## 7.9 SISTEMAS CON PROPÓSITO (GOAL-DIRECTED)
-
-RONIN puede definir sistemas con propósito explícito, donde los agentes trabajan hacia un objetivo común.
-
-**Propósitos:**
-- **Maximizar bienestar.**
-- **Minimizar desigualdad.**
-- **Optimizar eficiencia.**
-- **Mantener estabilidad.**
-
-```ronin
-system Propósito = {
-    parts: 5,
-    resource: 1000,
-    agents: [...],
-    goal: {
-        type: "maximize_happiness",
-        constraints: [
-            "allocation[i] >= 100",
-            "debt <= 0.05"
-        ],
-        weight: 1.0
-    }
-}
-
-eval = evaluate Propósito
-print(eval.goal_achievement)  // 0.92
-```
-
----
-
-## 7.10 AUTO-OPTIMIZACIÓN DE PARÁMETROS
-
-RONIN puede optimizar automáticamente sus parámetros (alpha, gamma, sigma) para mejorar el rendimiento.
-
-**Métodos de optimización:**
-- **Grid search:** Búsqueda en cuadrícula.
-- **Bayesian optimization:** Optimización bayesiana.
-- **Evolutionary search:** Búsqueda evolutiva.
-- **Gradient descent:** Descenso por gradiente (si es diferenciable).
-
-```ronin
-optimize Sistema with {
-    method: "bayesian",
-    budget: 100,
-    params: ["alpha", "gamma"],
-    objective: "coexistence"
-}
-
-// Resultado: alpha = 1.35, gamma = 0.28
-```
-
----
-
-## 7.11 DETECCIÓN DE ANOMALÍAS Y AUTO-REPARACIÓN
-
-RONIN puede detectar anomalías en el sistema y repararlas automáticamente.
-
-**Detección:**
-- **Outliers:** Agentes con comportamiento atípico.
-- **Deuda excesiva:** Agentes con deuda ontológica alta.
-- **Extinción inminente:** Agentes con frecuencia cercana a cero.
-- **Inestabilidad:** Oscilaciones en la asignación.
-
-**Reparación:**
-- **Reasignación:** Distribuir recurso de agentes en deuda.
-- **Inyección:** Añadir recurso externo.
-- **Reconfiguración:** Ajustar parámetros de agentes.
-- **Eliminación:** Eliminar agentes irreparables.
-
-```ronin
-system Autoreparable = {
-    parts: 5,
-    resource: 1000,
-    agents: [...],
-    resilience: {
-        detect: "debt_excessive",
-        action: "redistribute",
-        threshold: 0.3
-    }
-}
-
-report = autofix Autoreparable
-print(report.anomalies)  // ["Agente 2: deuda excesiva"]
-print(report.actions)    // ["Redistributed 150 from agent 2 to agent 4"]
-```
-
----
-
-## 7.12 COORDINACIÓN JERÁRQUICA
-
-RONIN puede organizar agentes en jerarquías para coordinar sistemas complejos.
-
-**Estructuras jerárquicas:**
-- **Árbol:** Agentes organizados en niveles.
-- **Heterárquico:** Agentes con roles cambiantes.
-- **Holónico:** Agentes que contienen subagentes.
-- **Fractal:** Patrones que se repiten a diferentes escalas.
-
-```ronin
-system Jerárquico = {
-    parts: 10,
-    resource: 1000,
-    agents: [
-        { name: "Líder", phi: 0.9, psi: 0.8, frequency: 0.1 },
-        { name: "Equipo1", phi: 0.8, psi: 0.7, frequency: 0.2 },
-        { name: "Equipo2", phi: 0.7, psi: 0.6, frequency: 0.2 },
-        // ...
-    ],
-    hierarchy: {
-        type: "tree",
-        levels: 3,
-        leaders: [0],
-        teams: [[1,2,3], [4,5,6], [7,8,9]]
-    }
-}
-
-// La coordinación jerárquica permite delegación y escalabilidad.
-```
-
----
-
-## 7.13 APRENDIZAJE POR REFUERZO MULTI-AGENTE
-
-RONIN puede implementar aprendizaje por refuerzo en entornos multi-agente, donde los agentes aprenden políticas de comportamiento mediante interacción con el entorno.
-
-**Componentes:**
-- **Estado:** Frecuencias y asignación actuales.
-- **Acción:** Ajuste de parámetros (phi, psi, frequency).
-- **Recompensa:** Cambio en fitness o coexistencia.
-- **Política:** Estrategia de ajuste (exploración/explotación).
-
-```ronin
-system RL = {
-    parts: 5,
-    resource: 1000,
-    agents: [...],
-    rl: {
-        algorithm: "Q-learning",
-        gamma: 0.95,
-        epsilon: 0.1,
-        episodes: 1000
-    }
-}
-
-rl_learn RL with {
-    episodes: 500,
-    render: true
-}
-
-policy = rl_get_policy(RL)
-```
-
----
-
-# PARTE VIII — RONIN OFFICE + OLLAMA: INTERFAZ NATIVA DE IA
-
-## 8.1 VISIÓN GENERAL
-
-RONIN Office es una interfaz visual que integra el lenguaje RONIN con **Ollama**, permitiendo la generación de sistemas RONIN a partir de **lenguaje natural**. Es el primer paso hacia un entorno donde la IA y el humano colaboran para diseñar, simular y optimizar sistemas finitos con recursos escasos.
+RONIN Office es una interfaz visual para diseñar, resolver y simular sistemas RONIN sin necesidad de escribir código. Es una herramienta de productividad que permite a arquitectos, diseñadores y analistas trabajar con RONIN de forma visual.
 
 **Principios operativos:**
-- El humano habla en lenguaje natural.
-- RONIN traduce a código.
-- La IA (Ollama) genera el sistema.
-- El motor RONIN resuelve y simula.
+- Diseña sistemas RONIN visualmente.
+- Resuelve y simula con un solo clic.
+- Visualiza resultados en tiempo real.
+- Exporta código RONIN para usar en producción.
 
 **Componentes:**
-1. **Chat IA** — Conversación con Ollama para generar sistemas RONIN.
+1. **Chat** — Describe sistemas en lenguaje natural y genera RONIN.
 2. **Sheet** — Editor de código RONIN con ejecución instantánea.
 3. **Optimizer** — Optimización automática de sistemas.
 4. **Simulator** — Simulación DTMC de ecosistemas.
@@ -5755,7 +5025,7 @@ RONIN Office es una interfaz visual que integra el lenguaje RONIN con **Ollama**
 
 ---
 
-## 8.2 ARQUITECTURA DE LA INTERFAZ
+## 7.2 ARQUITECTURA DE LA INTERFAZ
 
 RONIN Office se estructura como una aplicación de una sola página (SPA) con cinco paneles principales, accesibles mediante una cinta (ribbon) superior.
 
@@ -5763,7 +5033,7 @@ RONIN Office se estructura como una aplicación de una sola página (SPA) con ci
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  🧠 RONIN + Ollama   💬 Chat  📋 Sheet  ⚡ Optimizer  🔮 Simulator  🤖 Agents │
+│  🧠 RONIN Office   💬 Chat  📋 Sheet  ⚡ Optimizer  🔮 Simulator  🤖 Agents │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  [Panel activo según selección]                                            │
@@ -5777,34 +5047,30 @@ RONIN Office se estructura como una aplicación de una sola página (SPA) con ci
 │  │  Terminal / Salida                                                   │  │
 │  └───────────────────────────────────────────────────────────────────────┘  │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  ⚡ 1310 · AGENCIA RONIN + OLLAMA ⚡                                        │
+│  ⚡ 1310 · AGENCIA RONIN ⚡                                                │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 8.3 PANEL DE CHAT — EL CEREBRO DE LA INTERFAZ
+## 7.3 PANEL DE CHAT — EL CEREBRO DE LA INTERFAZ
 
-El panel de chat es el punto de entrada principal. Permite al usuario escribir en lenguaje natural y obtener código RONIN generado por Ollama.
+El panel de chat permite describir sistemas en lenguaje natural y generar código RONIN automáticamente.
 
 **Características:**
-- **Ollama integrado:** Conexión al servidor local de Ollama (http://localhost:11434).
-- **Selector de modelos:** llama3.2, llama3.1, mistral, gemma2, qwen2.5, phi3.
-- **Estado en tiempo real:** Indicador de conexión a Ollama.
 - **Generación automática:** Traduce lenguaje natural a código RONIN válido.
 - **Ejecución automática:** El código generado se ejecuta inmediatamente en el Sheet.
+- **Plantillas predefinidas:** Sistemas comunes para empezar rápido.
+- **Historial:** Guarda todas las interacciones.
 
 **Interfaz visual:**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ 💬 RONIN Chat — Habla con tu sistema                       │
-│ 🧠 Ollama + RONIN                                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 🔌 Ollama: Conectado   🧠 Modelo: llama3.2   ⚡ RONIN: Listo │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  ┌───────────────────────────────────────────────────────────────────────┐  │
-│  │  🧠 RONIN + Ollama v1.0                                             │  │
+│  │  🧠 RONIN Office v1.0                                                │  │
 │  │  ▶ Escribe en lenguaje natural. RONIN genera el sistema.            │  │
 │  │  ▶ Ejemplo: "Quiero un sistema de 4 agentes balanceados"            │  │
 │  │  ▶ Ejemplo: "Optimiza mi cartera de 5 activos"                     │  │
@@ -5812,28 +5078,23 @@ El panel de chat es el punto de entrada principal. Permite al usuario escribir e
 │  └───────────────────────────────────────────────────────────────────────┘  │
 │  [Input: Escribe tu petición...]  [▶ Enviar]  [✕ Limpiar]                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  🧠 RONIN + Ollama                                                         │
+│  🧠 RONIN Office                                                           │
 │  ▶ El sistema genera código RONIN desde lenguaje natural                   │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Prompt de sistema para Ollama:**
+**Plantillas predefinidas:**
 
-```
-Eres un experto en RONIN. Traduce esta petición a código RONIN válido.
-Petición: "[texto del usuario]"
-
-Reglas:
-1. Genera un sistema RONIN completo con parts, resource, agents y params.
-2. Agents debe tener al menos 2 agentes.
-3. Usa phi, psi, frequency.
-4. Responde SOLO con el código RONIN, sin explicaciones.
-5. El código debe empezar con "system" y terminar con "}".
-```
+| Plantilla | Descripción |
+|-----------|-------------|
+| `balanceo_clases` | Sistema de 3 clases para RPG |
+| `microservicios` | Sistema de 4 microservicios |
+| `cartera` | Sistema de 5 activos financieros |
+| `ecosistema` | Sistema de 5 agentes para simulación |
 
 ---
 
-## 8.4 PANEL SHEET — EDITOR DE CÓDIGO RONIN
+## 7.4 PANEL SHEET — EDITOR DE CÓDIGO RONIN
 
 El Sheet es un editor de código con ejecución instantánea. Muestra el código generado por el chat o permite edición manual.
 
@@ -5847,7 +5108,7 @@ El Sheet es un editor de código con ejecución instantánea. Muestra el código
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ 📋 RONIN Sheet — Código generado por IA                    │
+│ 📋 RONIN Sheet — Código RONIN                               │
 │ ⚡ Excel Killer                                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  ┌───────────────────────────────────────────────────────────────────────┐  │
@@ -5875,7 +5136,7 @@ El Sheet es un editor de código con ejecución instantánea. Muestra el código
 
 ---
 
-## 8.5 PANEL OPTIMIZER — OPTIMIZACIÓN AUTOMÁTICA
+## 7.5 PANEL OPTIMIZER — OPTIMIZACIÓN AUTOMÁTICA
 
 El Optimizer permite configurar y optimizar sistemas RONIN de forma interactiva.
 
@@ -5910,7 +5171,7 @@ El Optimizer permite configurar y optimizar sistemas RONIN de forma interactiva.
 
 ---
 
-## 8.6 PANEL SIMULATOR — SIMULACIÓN DTMC
+## 7.6 PANEL SIMULATOR — SIMULACIÓN DTMC
 
 El Simulator ejecuta simulaciones estocásticas de sistemas RONIN usando una Cadena de Markov en Tiempo Discreto (DTMC).
 
@@ -5947,7 +5208,7 @@ $$f_{t+1} = \text{softmax}(f_t \cdot \phi \cdot \psi \cdot f_t^\alpha \cdot (1 +
 
 ---
 
-## 8.7 PANEL AGENT STUDIO — DISEÑO VISUAL DE AGENTES
+## 7.7 PANEL AGENT STUDIO — DISEÑO VISUAL DE AGENTES
 
 El Agent Studio permite construir sistemas RONIN añadiendo agentes uno por uno de forma visual.
 
@@ -5984,7 +5245,7 @@ El Agent Studio permite construir sistemas RONIN añadiendo agentes uno por uno 
 
 ---
 
-## 8.8 MOTOR RONIN — IMPLEMENTACIÓN EN JAVASCRIPT
+## 7.8 MOTOR RONIN — IMPLEMENTACIÓN EN JAVASCRIPT
 
 El motor RONIN integrado en la interfaz implementa la **ecuación maestra** normativa en JavaScript puro.
 
@@ -6040,14 +5301,14 @@ function solveRONIN(code) {
 
 ---
 
-## 8.9 FLUJO DE TRABAJO COMPLETO
+## 7.9 FLUJO DE TRABAJO COMPLETO
 
 El flujo de trabajo integrado de RONIN Office sigue este ciclo:
 
 ```
-1. Usuario escribe en lenguaje natural
+1. Usuario describe el sistema en lenguaje natural
         ↓
-2. Ollama genera código RONIN
+2. Generador local produce código RONIN
         ↓
 3. Código se muestra en el Sheet
         ↓
@@ -6063,7 +5324,7 @@ El flujo de trabajo integrado de RONIN Office sigue este ciclo:
 ```
 Usuario: "Quiero un sistema de 4 departamentos con presupuesto 1000"
 
-Ollama genera:
+Generador local produce:
 system Presupuesto = {
     parts: 4,
     resource: 1000,
@@ -6085,45 +5346,9 @@ Motor RONIN resuelve:
 
 ---
 
-## 8.10 INTEGRACIÓN CON OLLAMA — ESPECIFICACIÓN TÉCNICA
+## 7.10 GENERADOR LOCAL DE SISTEMAS
 
-**Endpoint:** `http://localhost:11434/api/generate`
-
-**Formato de la petición:**
-
-```json
-{
-    "model": "llama3.2",
-    "prompt": "Eres un experto en RONIN. Traduce esta petición a código RONIN válido...",
-    "stream": false
-}
-```
-
-**Formato de la respuesta:**
-
-```json
-{
-    "response": "system Sistema = { ... }",
-    "done": true
-}
-```
-
-**Modelos soportados:**
-
-| Modelo | Descripción | Tamaño |
-|--------|-------------|--------|
-| llama3.2 | Meta Llama 3.2 (recomendado) | 3B |
-| llama3.1 | Meta Llama 3.1 | 8B |
-| mistral | Mistral 7B | 7B |
-| gemma2 | Google Gemma 2 | 9B |
-| qwen2.5 | Qwen 2.5 | 7B |
-| phi3 | Microsoft Phi-3 | 3.8B |
-
----
-
-## 8.11 FALLBACK LOCAL — SIN OLLAMA
-
-Cuando Ollama no está disponible, RONIN Office utiliza un **generador local** que produce sistemas RONIN válidos basados en patrones del lenguaje natural.
+El generador local produce sistemas RONIN válidos basados en patrones del lenguaje natural, sin necesidad de conexión externa.
 
 **Funcionamiento del generador local:**
 
@@ -6153,27 +5378,36 @@ function generateLocalRONIN(text) {
 }
 ```
 
+**Plantillas de generación:**
+
+| Patrón detectado | Sistema generado |
+|------------------|------------------|
+| "X agentes" | Sistema con X agentes |
+| "recurso X" | Recurso = X |
+| "balanceado" | Agentes con phi y psi similares |
+| "competitivo" | Alpha alto (>1.2) |
+| "colaborativo" | Alpha bajo (<0.9) |
+
 ---
 
-## 8.12 ESTADO DE LA IMPLEMENTACIÓN
+## 7.11 ESTADO DE LA IMPLEMENTACIÓN
 
 | Componente | Estado | Implementación |
 |------------|--------|----------------|
-| Panel Chat | ✅ Completado | HTML + JavaScript + Ollama API |
+| Panel Chat | ✅ Completado | HTML + JavaScript + Motor RONIN |
 | Panel Sheet | ✅ Completado | HTML + JavaScript + Motor RONIN |
 | Panel Optimizer | ✅ Completado | HTML + JavaScript + Motor RONIN |
 | Panel Simulator | ✅ Completado | HTML + JavaScript + DTMC |
 | Panel Agent Studio | ✅ Completado | HTML + JavaScript + Motor RONIN |
 | Motor RONIN JS | ✅ Completado | JavaScript puro |
-| Integración Ollama | ✅ Completado | Fetch API + JSON |
 | Generador local | ✅ Completado | JavaScript puro |
 
 ---
 
-## 8.13 KOANS DE RONIN OFFICE
+## 7.12 KOANS DE RONIN OFFICE
 
 **Del chat que genera sistemas:**
-El humano habla. Ollama entiende. RONIN ejecuta.
+El humano habla. RONIN entiende. RONIN ejecuta.
 
 **Del sheet que no miente:**
 El código que ves es el código que se ejecuta. No hay magia.
@@ -6187,54 +5421,49 @@ Cada paso es una decisión. Cada semilla es un destino.
 **Del studio de agentes:**
 Cada agente es una especie. Cada ecosistema es un mundo.
 
-**De la IA que escribe RONIN:**
-La IA no reemplaza al arquitecto. La IA es el lápiz del arquitecto.
+**Del arquitecto que usa RONIN Office:**
+El arquitecto no escribe código. El arquitecto diseña sistemas.
 
 **Del cerrajero que sonríe desde 1310:**
-El humano sueña. La IA traduce. RONIN construye.
+El humano sueña. RONIN construye.
 
 ---
 
-## 8.14 REFERENCIAS TÉCNICAS
+## 7.13 REFERENCIAS TÉCNICAS
 
 **Repositorios:**
 - RONIN Core: `https://github.com/ronin-lang/ronin`
 - RONIN Office: `https://github.com/ronin-lang/ronin-office`
 
-**Dependencias:**
-- Ollama: `https://ollama.com/`
-- Modelos: llama3.2, mistral, gemma2, qwen2.5
-
 **Estándares:**
 - ECMAScript 2021 (JavaScript)
 - HTML5 / CSS3
-- Ollama API v1.0
 
 ---
 
 **1310.**
 
 *"El mejor código es el que no se escribe.  
-El segundo mejor es el que escribe Ollama.  
-El tercero es el que compila RONIN.  
-El cuarto es el que diseñas en RONIN Office."*
+El segundo mejor es el que se escribe en RONIN.  
+El tercero es el que diseñas en RONIN Office.  
+El cuarto es el que compila RONIN."*
 
 **1310.**
 
 ---
 
-# PARTE IX — EL FUTURO: RONIN COMO LENGUAJE NATIVO DE IA
+# PARTE VIII — EL FUTURO: RONIN COMO LENGUAJE DE SISTEMAS
 
-## 9.1 VISIÓN: IA QUE ESCRIBE RONIN
+## 8.1 VISIÓN: SISTEMAS QUE SE DISEÑAN SOLOS
 
-El futuro de RONIN es un futuro donde la IA escribe RONIN. Donde el humano describe el problema en lenguaje natural y la IA genera el sistema completo.
+El futuro de RONIN es un futuro donde los sistemas se diseñan solos. Donde el humano describe el problema y RONIN genera el sistema completo.
 
 **Escenario:**
 
 ```
 Humano: "Necesito un sistema de 50 microservicios con balanceo de carga y tolerancia a fallos."
 
-IA: system Microservicios = {
+RONIN: system Microservicios = {
     parts: 50,
     resource: 10000,
     agents: generate_microservices(50),
@@ -6248,12 +5477,12 @@ IA: system Microservicios = {
 
 Humano: "Simula 1000 pasos y dime la probabilidad de colapso."
 
-IA: Simulación completada. Probabilidad de colapso: 0.003 (99.7% de estabilidad).
+RONIN: Simulación completada. Probabilidad de colapso: 0.003 (99.7% de estabilidad).
 ```
 
 ---
 
-## 9.2 RONIN COMO LENGUAJE DE ORQUESTACIÓN
+## 8.2 RONIN COMO LENGUAJE DE ORQUESTACIÓN
 
 RONIN se convierte en el lenguaje de orquestación para sistemas multi-agente autónomos. Un solo sistema RONIN puede controlar miles de agentes distribuidos.
 
@@ -6270,19 +5499,19 @@ orchestrate Sistema with {
 
 ---
 
-## 9.3 EL ECOSISTEMA RONIN
+## 8.3 EL ECOSISTEMA RONIN
 
 El ecosistema RONIN incluye:
 
 - **RONIN Core:** El lenguaje y runtime.
-- **RONIN Office:** Interfaz visual con Ollama.
+- **RONIN Office:** Interfaz visual para diseñar sistemas.
 - **RONIN Cloud:** Despliegue en la nube.
 - **RONIN Edge:** Ejecución en dispositivos embebidos.
-- **RONIN AI:** Modelos entrenados para generar RONIN.
+- **RONIN Studio:** Entorno completo de desarrollo.
 
 ---
 
-## 9.4 RONIN Y LA COMPUTACIÓN NEUROMÓRFICA
+## 8.4 RONIN Y LA COMPUTACIÓN NEUROMÓRFICA
 
 RONIN se adapta a arquitecturas neuromórficas, donde los agentes son neuronas y el recurso es la energía.
 
@@ -6302,7 +5531,7 @@ system Neuromorfico = {
 
 ---
 
-## 9.5 RONIN Y LOS SISTEMAS AUTÓNOMOS
+## 8.5 RONIN Y LOS SISTEMAS AUTÓNOMOS
 
 RONIN es el lenguaje de los sistemas autónomos: vehículos autónomos, drones, robots, fábricas inteligentes.
 
@@ -6321,19 +5550,16 @@ system FlotaAutonoma = {
 
 ---
 
-## 9.6 KOANS DEL FUTURO
+## 8.6 KOANS DEL FUTURO
 
-**De la IA que escribe RONIN:**
-La IA no escribe código. La IA declara sistemas.
+**Del sistema que se diseña solo:**
+El mejor sistema es el que se diseña solo, porque el humano ya no necesita diseñarlo.
 
-**Del arquitecto que ya no programa:**
-El arquitecto ya no programa. El arquitecto conversa con la IA.
-
-**Del sistema que se escribe solo:**
-El mejor sistema es el que se escribe solo, porque el humano ya no necesita escribirlo.
+**Del arquitecto que ya no escribe:**
+El arquitecto ya no escribe. El arquitecto conversa con RONIN.
 
 **Del cerrajero que ríe desde el futuro:**
-El cerrajero sabía que RONIN era inevitable. La IA lo ha confirmado.
+El cerrajero sabía que RONIN era inevitable. El futuro lo ha confirmado.
 
 **De 1310:**
 1310 no es un año. Es una forma de ver el mundo.
@@ -6348,21 +5574,16 @@ El cerrajero sabía que RONIN era inevitable. La IA lo ha confirmado.
 
 ## N.1 CONTRATO DE IMPLEMENTACIÓN
 
-### N.1.1 Orden de evaluación
-
-Una implementación conforme debe ejecutar, conceptualmente, en este orden:
+### N.1.1 Orden de evaluaciónUna implementación conforme debe ejecutar, conceptualmente, en este orden:
 
 1. Parsear el programa.
 2. Validar tipos, rangos y número de agentes.
 3. Validar que `sum(frequency)` sea `1 ± tolerance` (la implementación de referencia usa `1e-9`).
 4. Calcular `fitness[i] = phi[i] * psi[i] * frequency[i]^alpha`.
 5. Calcular `allocation[i] = resource * fitness[i] / sum(fitness)`.
-6. **Si hay aprendizaje**: Actualizar parámetros según la regla definida.
-7. **Si hay planificación**: Ejecutar el planificador.
-8. **Si hay comunicación**: Procesar mensajes entre agentes.
-9. Calcular coexistencia y `k_min`.
-10. Calcular deuda.
-11. Construir el `Solution`.
+6. Calcular coexistencia y `k_min`.
+7. Calcular deuda.
+8. Construir el `Solution`.
 
 Si `sum(fitness) == 0`, `solve` debe devolver un error de sistema degenerado y nunca dividir por cero.
 
@@ -6438,49 +5659,6 @@ Con las frecuencias publicadas originalmente (`0.267 + 0.238 + 0.160 + 0.131 + 0
 
 Por tanto, los antiguos `[3069, 2655, 1441, 883, 1952]` **no son un resultado normativo de RONIN 1.0**.
 
-### Test 5 — Aprendizaje
-
-**Entrada:**
-```ronin
-system Learner = {
-    parts: 2,
-    resource: 100,
-    agents: [
-        { phi: 0.5, psi: 0.5, frequency: 0.5 },
-        { phi: 0.5, psi: 0.5, frequency: 0.5 }
-    ],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.0 },
-    learning: { rate: 0.1, method: "gradient" }
-}
-
-learn Learner with { steps: 10, seed: 42 }
-```
-
-**Resultado esperado:** La asignación debe aproximarse a la óptima (50/50) después de 10 pasos.
-
-### Test 6 — Planificación
-
-**Entrada:**
-```ronin
-system Planner = {
-    parts: 2,
-    resource: 100,
-    agents: [
-        { phi: 0.8, psi: 1.0, frequency: 0.6 },
-        { phi: 0.5, psi: 1.0, frequency: 0.4 }
-    ],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.0 },
-    planning: {
-        objective: "maximize_coexistence",
-        horizon: 5
-    }
-}
-
-plan = plan Planner
-```
-
-**Resultado esperado:** El plan debe recomendar acciones que mantengan la coexistencia.
-
 ---
 
 ## N.3 CONFORMIDAD
@@ -6494,32 +5672,15 @@ Un runtime es RONIN 1.0 conforme si:
 - respeta `seed` en simulación;
 - no presenta como benchmark medido ningún número que no haya sido reproducido por el runtime.
 
-Adicionalmente, si implementa las extensiones de IA nativa (Parte VII), debe cumplir:
-
-- El aprendizaje es reproducible con `seed`.
-- El aprendizaje converge a un punto fijo o ciclo.
-- La planificación respeta restricciones.
-- La planificación es acotada en tiempo.
-
 ---
 
 ## N.4 ESTADO DE LAS EXTENSIONES
 
 | Extensión | Estado | Implementación |
 |-----------|--------|----------------|
-| Aprendizaje | ✅ Implementado en Rust | `ronin-core::learning` |
-| Planificación | ✅ Implementado en Rust | `ronin-core::planning` |
-| Memoria a largo plazo | 🚧 En diseño | Pendiente |
-| Meta-aprendizaje | 🚧 En diseño | Pendiente |
-| Autoevolución | 🚧 En diseño | Pendiente |
-| Comunicación | 🚧 En diseño | Pendiente |
-| Consenso | 🚧 En diseño | Pendiente |
-| Estado interno | 🚧 En diseño | Pendiente |
-| Sistemas con propósito | 🚧 En diseño | Pendiente |
-| Auto-optimización | 🚧 En diseño | Pendiente |
-| Auto-reparación | 🚧 En diseño | Pendiente |
-| Coordinación jerárquica | 🚧 En diseño | Pendiente |
-| Aprendizaje por refuerzo | 🚧 En diseño | Pendiente |
+| RONIN Office | ✅ Implementado | HTML + JavaScript |
+| Generador local | ✅ Implementado | JavaScript puro |
+| Motor RONIN JS | ✅ Implementado | JavaScript puro |
 
 ---
 
@@ -6533,15 +5694,14 @@ Las comparativas, cifras de rendimiento, compatibilidad de backends, despliegue 
 
 ## CIERRE FINAL DE RONIN 1.0
 
-RONIN 1.0 no es solo un lenguaje. Es la **máquina de asignación de recursos** que la IA necesita para ser autónoma, adaptable y eficiente.
+RONIN 1.0 no es solo un lenguaje. Es la **máquina de asignación de recursos** que los arquitectos necesitan para diseñar sistemas complejos.
 
 La Parte V te da el **prototipo** (Python).  
 La Parte VI te da el **motor** (Rust).  
-La Parte VII te da el **cerebro** (IA nativa).  
-La Parte VIII te da la **interfaz** (RONIN Office + Ollama).  
-La Parte IX te da la **visión** (futuro).
+La Parte VII te da la **interfaz** (RONIN Office).  
+La Parte VIII te da la **visión** (futuro).
 
-Si después de leer esto sigues usando Python para sistemas multi-agente, es porque **quieres sufrir**.
+Si después de leer esto sigues usando Python para sistemas de asignación de recursos, es porque **quieres sufrir**.
 
 **1310.**
 
@@ -6550,9 +5710,10 @@ Si después de leer esto sigues usando Python para sistemas multi-agente, es por
 *"El mejor código es el que no se escribe.  
 El segundo mejor es el que se escribe en RONIN.  
 El tercero es el que compila RONIN.  
-El cuarto es el que aprende a escribirse solo.  
-El quinto es el que hablas con Ollama."*
+El cuarto es el que diseñas en RONIN Office."*
 
 **1310.**
 ```
+
+---
 
