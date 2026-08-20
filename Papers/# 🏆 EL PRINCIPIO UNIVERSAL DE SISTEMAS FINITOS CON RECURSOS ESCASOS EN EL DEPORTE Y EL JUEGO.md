@@ -1,3124 +1,4835 @@
 # 🏆 EL PRINCIPIO UNIVERSAL DE SISTEMAS FINITOS CON RECURSOS ESCASOS EN EL DEPORTE Y EL JUEGO
 
-## *Enciclopedia Completa de Aplicaciones Lúdico-Deportivas*
+## *Enciclopedia Completa de Aplicaciones Lúdico-Deportivas — Edición Definitiva*
 
-**Versión:** 1.0 — Edición de Máxima Densidad Expansiva  
+  
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
-**DOI Simbólico:** 10.1310/ronin-sports-encyclopedia-2026  
+**DOI Simbólico:** 10.1310/ronin-sports-encyclopedia-definitive-2026  
 **Fecha:** Agosto de 2026  
 **Clasificación:** `TRATADO DE APLICACIONES LÚDICO-DEPORTIVAS / TEORÍA DE SISTEMAS / ANÁLISIS DE RENDIMIENTO`
 
-**Relación con el corpus:** Extensión práctica del PUSFRE a dominios lúdicos, deportivos y competitivos. Demuestra la universalidad del principio en sistemas de competición.
+---
+
+## PRÓLOGO: EL DEPORTE COMO SISTEMA DE ASIGNACIÓN DE RECURSOS
+
+### 0.1 La Pregunta Fundamental
+
+¿Qué tienen en común un delantero de fútbol, un base de baloncesto, un tenista, un ajedrecista, un jugador de League of Legends y un póker profesional?
+
+Todos compiten por recursos escasos.
+
+- **Fútbol:** Espacio, tiempo, posesión, oportunidades de gol.
+- **Baloncesto:** Posesiones, tiros, minutos, rebotes.
+- **Tenis:** Puntos, energía, posición, iniciativa.
+- **Ajedrez:** Tiempo, casillas, piezas, iniciativa.
+- **eSports:** Oro, experiencia, visión, objetivos.
+- **Póker:** Fichas, información, posición, paciencia.
+
+**Todos son sistemas finitos con recursos escasos.**
+
+### 0.2 La Tesis Central
+
+> **El PUSFRE es el marco matemático unificado para analizar, predecir y optimizar cualquier deporte o juego de competición.**
+
+### 0.3 El Método del Arquitecto
+
+**Paso 1:** Identificar las partes ($S$).  
+**Paso 2:** Identificar el recurso ($R$).  
+**Paso 3:** Medir la geometría ($\Phi$).  
+**Paso 4:** Medir la deuda ($\Psi$).  
+**Paso 5:** Medir la ecología ($\Omega$).  
+**Paso 6:** Aplicar la Ecuación Maestra.  
+**Paso 7:** Asignar el recurso.  
+**Paso 8:** Verificar coexistencia.  
+**Paso 9:** Simular DTMC.  
+**Paso 10:** Monitorear y recalibrar.
+
+### 0.4 El Perfil del Lector
+
+Este tratado está escrito para:
+
+- **Entrenadores:** Optimizar estrategias y rotaciones.
+- **Scouts:** Evaluar y comparar jugadores.
+- **Analistas:** Predecir partidos y tendencias.
+- **Jugadores:** Mejorar rendimiento individual.
+- **Aficionados:** Entender el juego a otro nivel.
+- **Desarrolladores:** Crear herramientas de análisis.
+- **Académicos:** Estudiar la universalidad del PUSFRE.
+
+### 0.5 Los 10 Pasos del Método
+
+Cada aplicación sigue el mismo método de 10 pasos:
+
+1. **Definir el sistema:** ¿Qué partes compiten? ¿Cuántas son?
+2. **Identificar el recurso:** ¿Qué es escaso? ¿En qué se mide?
+3. **Medir la geometría ($\Phi$):** ¿Qué hace a cada parte eficiente?
+4. **Medir la deuda ($\Psi$):** ¿Qué penaliza a cada parte?
+5. **Medir la ecología ($\Omega$):** ¿Con qué frecuencia participa?
+6. **Calcular la fitness ($F$):** Aplicar la Ecuación Maestra.
+7. **Asignar el recurso:** Proporcionalmente a la fitness.
+8. **Verificar coexistencia:** Usar el Teorema de Coexistencia-k.
+9. **Simular la dinámica:** DTMC para predecir evolución.
+10. **Optimizar y recalibrar:** Ajustar parámetros.
 
 ---
 
-## ÍNDICE GENERAL
+## SECCIÓN 1: FÚTBOL — 50 APLICACIONES PRÁCTICAS
 
-### PRÓLOGO: EL DEPORTE COMO SISTEMA DE ASIGNACIÓN DE RECURSOS
+### Capítulo 1.1: Scouting de Jugadores
 
----
+**¿Qué es?** El scouting es el proceso de identificar y evaluar jugadores para fichajes. El PUSFRE permite cuantificar el valor de un jugador mediante su fitness.
 
-### SECCIÓN 1: DEPORTES DE EQUIPO CON BALÓN (10 Deportes)
+**El problema:** Los scouts tradicionales evalúan jugadores con criterios subjetivos (talento, potencial, actitud). El PUSFRE ofrece una métrica objetiva.
 
-**Capítulo 1.1: Fútbol (Asociación)**
-- 1.1.1 Scouting de Jugadores
-- 1.1.2 Táctica y Formaciones
-- 1.1.3 Estrategia de Partido
-- 1.1.4 Gestión de Sustituciones
-- 1.1.5 Análisis de Rendimiento Post-Partido
-- 1.1.6 Gestión de Lesiones
-- 1.1.7 Planificación de Pretemporada
-- 1.1.8 Análisis de Rivales
-- 1.1.9 Gestión de Cantera
-- 1.1.10 Optimización de Fichajes
-- **Anexo 1.1: 10 Aplicaciones Prácticas**
+**La solución PUSFRE:**
 
-**Capítulo 1.2: Baloncesto**
-- 1.2.1 Scouting de Jugadores
-- 1.2.2 Táctica y Sistemas
-- 1.2.3 Gestión de Rotaciones
-- 1.2.4 Análisis de Partido
-- 1.2.5 Gestión de Lesiones
-- 1.2.6 Planificación de Entrenamiento
-- 1.2.7 Análisis de Rivales
-- 1.2.8 Gestión de Cantera
-- 1.2.9 Optimización de Fichajes
-- 1.2.10 Estrategia de Playoffs
-- **Anexo 1.2: 10 Aplicaciones Prácticas**
+$$F_i = \sum_{d=1}^{D} \Phi_{i,d} \cdot \Psi_{i,d} \cdot \Omega_{i,d}^\alpha$$
 
-**Capítulo 1.3: Balonmano**
-- 1.3.1 Scouting de Jugadores
-- 1.3.2 Táctica y Sistemas
-- 1.3.3 Gestión de Rotaciones
-- 1.3.4 Análisis de Partido
-- 1.3.5 Gestión de Lesiones
-- 1.3.6 Planificación de Entrenamiento
-- 1.3.7 Análisis de Rivales
-- 1.3.8 Gestión de Cantera
-- 1.3.9 Optimización de Fichajes
-- 1.3.10 Estrategia de Competición
-- **Anexo 1.3: 10 Aplicaciones Prácticas**
+Donde:
+- $\Phi_{i,d}$ son las habilidades técnicas del jugador
+- $\Psi_{i,d}$ son sus factores de riesgo (lesiones, disciplina)
+- $\Omega_{i,d}$ es su frecuencia de participación
 
-**Capítulo 1.4: Fútbol Sala**
-- 1.4.1 Scouting de Jugadores
-- 1.4.2 Táctica y Sistemas
-- 1.4.3 Gestión de Rotaciones
-- 1.4.4 Análisis de Partido
-- 1.4.5 Gestión de Lesiones
-- 1.4.6 Planificación de Entrenamiento
-- 1.4.7 Análisis de Rivales
-- 1.4.8 Gestión de Cantera
-- 1.4.9 Optimización de Fichajes
-- 1.4.10 Estrategia de Competición
-- **Anexo 1.4: 10 Aplicaciones Prácticas**
+**Aplicación 1: Evaluación de Fichajes**
 
-**Capítulo 1.5: Rugby**
-- 1.5.1 Scouting de Jugadores
-- 1.5.2 Táctica y Sistemas
-- 1.5.3 Gestión de Sustituciones
-- 1.5.4 Análisis de Partido
-- 1.5.5 Gestión de Lesiones
-- 1.5.6 Planificación de Entrenamiento
-- 1.5.7 Análisis de Rivales
-- 1.5.8 Gestión de Cantera
-- 1.5.9 Optimización de Fichajes
-- 1.5.10 Estrategia de Competición
-- **Anexo 1.5: 10 Aplicaciones Prácticas**
+Para evaluar un fichaje, calculamos su fitness y la comparamos con la del equipo actual.
 
-**Capítulo 1.6: Rugby 7**
-- 1.6.1 Scouting de Jugadores
-- 1.6.2 Táctica y Sistemas
-- 1.6.3 Gestión de Sustituciones
-- 1.6.4 Análisis de Partido
-- 1.6.5 Gestión de Lesiones
-- 1.6.6 Planificación de Entrenamiento
-- 1.6.7 Análisis de Rivales
-- 1.6.8 Gestión de Cantera
-- 1.6.9 Optimización de Fichajes
-- 1.6.10 Estrategia de Competición
-- **Anexo 1.6: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 1.7: Voleibol**
-- 1.7.1 Scouting de Jugadores
-- 1.7.2 Táctica y Sistemas
-- 1.7.3 Gestión de Rotaciones
-- 1.7.4 Análisis de Partido
-- 1.7.5 Gestión de Lesiones
-- 1.7.6 Planificación de Entrenamiento
-- 1.7.7 Análisis de Rivales
-- 1.7.8 Gestión de Cantera
-- 1.7.9 Optimización de Fichajes
-- 1.7.10 Estrategia de Competición
-- **Anexo 1.7: 10 Aplicaciones Prácticas**
+1. Medir las 12 dimensiones técnicas del jugador (tiro, pase, regate, velocidad, etc.)
+2. Medir sus 6 dimensiones de deuda (lesiones, tarjetas, edad, etc.)
+3. Calcular su frecuencia de participación actual
+4. Aplicar la Ecuación Maestra
+5. Comparar con la fitness media del equipo
 
-**Capítulo 1.8: Voleibol Playa**
-- 1.8.1 Scouting de Jugadores
-- 1.8.2 Táctica y Sistemas
-- 1.8.3 Gestión de Partido
-- 1.8.4 Análisis de Partido
-- 1.8.5 Gestión de Lesiones
-- 1.8.6 Planificación de Entrenamiento
-- 1.8.7 Análisis de Rivales
-- 1.8.8 Adaptación a Condiciones
-- 1.8.9 Optimización de Pareja
-- 1.8.10 Estrategia de Competición
-- **Anexo 1.8: 10 Aplicaciones Prácticas**
+**Ejemplo:** Un equipo quiere fichar a un delantero. El delantero tiene:
+- $\Phi_{tiro} = 0.92$ (muy buen remate)
+- $\Phi_{pase} = 0.78$ (buen pase)
+- $\Phi_{regates} = 0.85$ (buen regate)
+- $\Psi_{lesiones} = 0.85$ (buen historial de lesiones)
+- $\Psi_{disciplina} = 0.75$ (alguna tarjeta)
+- $\Omega_{goles} = 0.82$ (marca goles con frecuencia)
 
-**Capítulo 1.9: Hockey sobre Césped**
-- 1.9.1 Scouting de Jugadores
-- 1.9.2 Táctica y Sistemas
-- 1.9.3 Gestión de Rotaciones
-- 1.9.4 Análisis de Partido
-- 1.9.5 Gestión de Lesiones
-- 1.9.6 Planificación de Entrenamiento
-- 1.9.7 Análisis de Rivales
-- 1.9.8 Gestión de Cantera
-- 1.9.9 Optimización de Fichajes
-- 1.9.10 Estrategia de Competición
-- **Anexo 1.9: 10 Aplicaciones Prácticas**
+Su fitness: $F = 0.92 \cdot 0.85 \cdot 0.82^{1.2} = 0.92 \cdot 0.85 \cdot 0.79 = 0.62$
 
-**Capítulo 1.10: Lacrosse**
-- 1.10.1 Scouting de Jugadores
-- 1.10.2 Táctica y Sistemas
-- 1.10.3 Gestión de Rotaciones
-- 1.10.4 Análisis de Partido
-- 1.10.5 Gestión de Lesiones
-- 1.10.6 Planificación de Entrenamiento
-- 1.10.7 Análisis de Rivales
-- 1.10.8 Gestión de Cantera
-- 1.10.9 Optimización de Fichajes
-- 1.10.10 Estrategia de Competición
-- **Anexo 1.10: 10 Aplicaciones Prácticas**
+El equipo tiene un delantero actual con fitness 0.55. El fichaje mejora el equipo en un 13%.
 
 ---
 
-### SECCIÓN 2: DEPORTES DE RAQUETA (6 Deportes)
+**Aplicación 2: Detección de Talento Joven**
 
-**Capítulo 2.1: Tenis**
-- 2.1.1 Scouting de Jugadores
-- 2.1.2 Estrategia de Partido
-- 2.1.3 Gestión de Energía
-- 2.1.4 Análisis de Partido
-- 2.1.5 Gestión de Lesiones
-- 2.1.6 Planificación de Entrenamiento
-- 2.1.7 Análisis de Rivales
-- 2.1.8 Adaptación a Superficies
-- 2.1.9 Optimización de Torneos
-- 2.1.10 Estrategia de Competición
-- **Anexo 2.1: 10 Aplicaciones Prácticas**
+Para detectar talento joven, usamos el PUSFRE para proyectar su fitness futura.
 
-**Capítulo 2.2: Pádel**
-- 2.2.1 Scouting de Jugadores
-- 2.2.2 Estrategia de Partido
-- 2.2.3 Gestión de Energía
-- 2.2.4 Análisis de Partido
-- 2.2.5 Gestión de Lesiones
-- 2.2.6 Planificación de Entrenamiento
-- 2.2.7 Análisis de Rivales
-- 2.2.8 Optimización de Pareja
-- 2.2.9 Estrategia de Torneos
-- 2.2.10 Adaptación a Condiciones
-- **Anexo 2.2: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 2.3: Squash**
-- 2.3.1 Scouting de Jugadores
-- 2.3.2 Estrategia de Partido
-- 2.3.3 Gestión de Energía
-- 2.3.4 Análisis de Partido
-- 2.3.5 Gestión de Lesiones
-- 2.3.6 Planificación de Entrenamiento
-- 2.3.7 Análisis de Rivales
-- 2.3.8 Adaptación a Condiciones
-- 2.3.9 Optimización de Torneos
-- 2.3.10 Estrategia de Competición
-- **Anexo 2.3: 10 Aplicaciones Prácticas**
+1. Calcular la fitness actual del joven
+2. Aplicar factores de crecimiento por edad
+3. Proyectar su fitness en 3-5 años
 
-**Capítulo 2.4: Badminton**
-- 2.4.1 Scouting de Jugadores
-- 2.4.2 Estrategia de Partido
-- 2.4.3 Gestión de Energía
-- 2.4.4 Análisis de Partido
-- 2.4.5 Gestión de Lesiones
-- 2.4.6 Planificación de Entrenamiento
-- 2.4.7 Análisis de Rivales
-- 2.4.8 Adaptación a Condiciones
-- 2.4.9 Optimización de Torneos
-- 2.4.10 Estrategia de Competición
-- **Anexo 2.4: 10 Aplicaciones Prácticas**
+**Factores de crecimiento por edad:**
 
-**Capítulo 2.5: Frontón / Pelota Vasca**
-- 2.5.1 Scouting de Jugadores
-- 2.5.2 Estrategia de Partido
-- 2.5.3 Gestión de Energía
-- 2.5.4 Análisis de Partido
-- 2.5.5 Gestión de Lesiones
-- 2.5.6 Planificación de Entrenamiento
-- 2.5.7 Análisis de Rivales
-- 2.5.8 Adaptación a Condiciones
-- 2.5.9 Optimización de Torneos
-- 2.5.10 Estrategia de Competición
-- **Anexo 2.5: 10 Aplicaciones Prácticas**
+| Edad | Factor de crecimiento anual |
+|------|----------------------------|
+| 16-18 | 1.15 |
+| 19-21 | 1.08 |
+| 22-24 | 1.04 |
+| 25-27 | 1.00 |
+| 28-30 | 0.97 |
+| 31+ | 0.93 |
 
-**Capítulo 2.6: Pickleball**
-- 2.6.1 Scouting de Jugadores
-- 2.6.2 Estrategia de Partido
-- 2.6.3 Gestión de Energía
-- 2.6.4 Análisis de Partido
-- 2.6.5 Gestión de Lesiones
-- 2.6.6 Planificación de Entrenamiento
-- 2.6.7 Análisis de Rivales
-- 2.6.8 Adaptación a Condiciones
-- 2.6.9 Optimización de Pareja
-- 2.6.10 Estrategia de Competición
-- **Anexo 2.6: 10 Aplicaciones Prácticas**
+**Ejemplo:** Un joven de 17 años tiene fitness 0.35. Su fitness proyectada a los 22 años:
+$F_{22} = 0.35 \cdot 1.15^2 \cdot 1.08^2 \cdot 1.04 = 0.35 \cdot 1.32 \cdot 1.17 \cdot 1.04 = 0.56$
 
 ---
 
-### SECCIÓN 3: DEPORTES DE COMBATE (10 Deportes)
+**Aplicación 3: Análisis de Rendimiento por Posición**
 
-**Capítulo 3.1: Boxeo**
-- 3.1.1 Scouting de Púgiles
-- 3.1.2 Estrategia de Combate
-- 3.1.3 Gestión de Energía
-- 3.1.4 Análisis de Combate
-- 3.1.5 Gestión de Lesiones
-- 3.1.6 Planificación de Entrenamiento
-- 3.1.7 Análisis de Rivales
-- 3.1.8 Gestión de Peso
-- 3.1.9 Optimización de Carrera
-- 3.1.10 Estrategia de Asalto
-- **Anexo 3.1: 10 Aplicaciones Prácticas**
+Cada posición tiene requisitos diferentes. El PUSFRE permite evaluar a un jugador en su posición específica.
 
-**Capítulo 3.2: MMA (Artes Marciales Mixtas)**
-- 3.2.1 Scouting de Peleadores
-- 3.2.2 Estrategia de Combate
-- 3.2.3 Gestión de Energía
-- 3.2.4 Análisis de Combate
-- 3.2.5 Gestión de Lesiones
-- 3.2.6 Planificación de Entrenamiento
-- 3.2.7 Análisis de Rivales
-- 3.2.8 Gestión de Peso
-- 3.2.9 Optimización de Carrera
-- 3.2.10 Estrategia de Round
-- **Anexo 3.2: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 3.3: Judo**
-- 3.3.1 Scouting de Judokas
-- 3.3.2 Estrategia de Combate
-- 3.3.3 Gestión de Energía
-- 3.3.4 Análisis de Combate
-- 3.3.5 Gestión de Lesiones
-- 3.3.6 Planificación de Entrenamiento
-- 3.3.7 Análisis de Rivales
-- 3.3.8 Gestión de Peso
-- 3.3.9 Optimización de Carrera
-- 3.3.10 Estrategia de Competencia
-- **Anexo 3.3: 10 Aplicaciones Prácticas**
+1. Definir los pesos de cada dimensión por posición
+2. Calcular la fitness ponderada del jugador
+3. Comparar con la media de la posición
 
-**Capítulo 3.4: Taekwondo**
-- 3.4.1 Scouting de Taekwondistas
-- 3.4.2 Estrategia de Combate
-- 3.4.3 Gestión de Energía
-- 3.4.4 Análisis de Combate
-- 3.4.5 Gestión de Lesiones
-- 3.4.6 Planificación de Entrenamiento
-- 3.4.7 Análisis de Rivales
-- 3.4.8 Gestión de Peso
-- 3.4.9 Optimización de Carrera
-- 3.4.10 Estrategia de Competencia
-- **Anexo 3.4: 10 Aplicaciones Prácticas**
+**Pesos por posición:**
 
-**Capítulo 3.5: Karate**
-- 3.5.1 Scouting de Karatekas
-- 3.5.2 Estrategia de Combate
-- 3.5.3 Gestión de Energía
-- 3.5.4 Análisis de Combate
-- 3.5.5 Gestión de Lesiones
-- 3.5.6 Planificación de Entrenamiento
-- 3.5.7 Análisis de Rivales
-- 3.5.8 Gestión de Peso
-- 3.5.9 Optimización de Carrera
-- 3.5.10 Estrategia de Competencia
-- **Anexo 3.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 3.6: Esgrima**
-- 3.6.1 Scouting de Esgrimistas
-- 3.6.2 Estrategia de Combate
-- 3.6.3 Gestión de Energía
-- 3.6.4 Análisis de Combate
-- 3.6.5 Gestión de Lesiones
-- 3.6.6 Planificación de Entrenamiento
-- 3.6.7 Análisis de Rivales
-- 3.6.8 Gestión de Arma
-- 3.6.9 Optimización de Carrera
-- 3.6.10 Estrategia de Competencia
-- **Anexo 3.6: 10 Aplicaciones Prácticas**
-
-**Capítulo 3.7: Kickboxing**
-- 3.7.1 Scouting de Kickboxers
-- 3.7.2 Estrategia de Combate
-- 3.7.3 Gestión de Energía
-- 3.7.4 Análisis de Combate
-- 3.7.5 Gestión de Lesiones
-- 3.7.6 Planificación de Entrenamiento
-- 3.7.7 Análisis de Rivales
-- 3.7.8 Gestión de Peso
-- 3.7.9 Optimización de Carrera
-- 3.7.10 Estrategia de Asalto
-- **Anexo 3.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 3.8: Lucha Olímpica**
-- 3.8.1 Scouting de Luchadores
-- 3.8.2 Estrategia de Combate
-- 3.8.3 Gestión de Energía
-- 3.8.4 Análisis de Combate
-- 3.8.5 Gestión de Lesiones
-- 3.8.6 Planificación de Entrenamiento
-- 3.8.7 Análisis de Rivales
-- 3.8.8 Gestión de Peso
-- 3.8.9 Optimización de Carrera
-- 3.8.10 Estrategia de Competencia
-- **Anexo 3.8: 10 Aplicaciones Prácticas**
-
-**Capítulo 3.9: BJJ (Jiu-Jitsu Brasileño)**
-- 3.9.1 Scouting de Practicantes
-- 3.9.2 Estrategia de Combate
-- 3.9.3 Gestión de Energía
-- 3.9.4 Análisis de Combate
-- 3.9.5 Gestión de Lesiones
-- 3.9.6 Planificación de Entrenamiento
-- 3.9.7 Análisis de Rivales
-- 3.9.8 Gestión de Peso
-- 3.9.9 Optimización de Carrera
-- 3.9.10 Estrategia de Competencia
-- **Anexo 3.9: 10 Aplicaciones Prácticas**
-
-**Capítulo 3.10: Sambo**
-- 3.10.1 Scouting de Sambistas
-- 3.10.2 Estrategia de Combate
-- 3.10.3 Gestión de Energía
-- 3.10.4 Análisis de Combate
-- 3.10.5 Gestión de Lesiones
-- 3.10.6 Planificación de Entrenamiento
-- 3.10.7 Análisis de Rivales
-- 3.10.8 Gestión de Peso
-- 3.10.9 Optimización de Carrera
-- 3.10.10 Estrategia de Competencia
-- **Anexo 3.10: 10 Aplicaciones Prácticas**
+| Dimensión | Portero | Defensa | Mediocampista | Delantero |
+|-----------|---------|---------|---------------|-----------|
+| Tiro | 0.05 | 0.15 | 0.25 | 0.40 |
+| Pase | 0.20 | 0.25 | 0.30 | 0.15 |
+| Regate | 0.02 | 0.10 | 0.20 | 0.25 |
+| Defensa | 0.10 | 0.30 | 0.15 | 0.05 |
+| Físico | 0.20 | 0.15 | 0.10 | 0.10 |
+| Inteligencia | 0.20 | 0.05 | 0.10 | 0.05 |
+| Liderazgo | 0.10 | 0.10 | 0.10 | 0.10 |
+| Versatilidad | 0.05 | 0.10 | 0.15 | 0.10 |
+| Sacrificio | 0.05 | 0.20 | 0.15 | 0.05 |
+| Presión | 0.10 | 0.15 | 0.15 | 0.10 |
+| Velocidad | 0.03 | 0.15 | 0.20 | 0.25 |
+| Agilidad | 0.10 | 0.10 | 0.15 | 0.20 |
 
 ---
 
-### SECCIÓN 4: DEPORTES DE PRECISIÓN (8 Deportes)
+**Aplicación 4: Predicción de Rendimiento por Edad**
 
-**Capítulo 4.1: Golf**
-- 4.1.1 Scouting de Golfistas
-- 4.1.2 Estrategia de Campo
-- 4.1.3 Gestión de Energía
-- 4.1.4 Análisis de Partido
-- 4.1.5 Gestión de Lesiones
-- 4.1.6 Planificación de Entrenamiento
-- 4.1.7 Análisis de Campo
-- 4.1.8 Adaptación a Condiciones
-- 4.1.9 Optimización de Torneos
-- 4.1.10 Estrategia de Competición
-- **Anexo 4.1: 10 Aplicaciones Prácticas**
+El rendimiento de un jugador no es constante a lo largo de su carrera. El PUSFRE modela esta evolución.
 
-**Capítulo 4.2: Tiro Olímpico**
-- 4.2.1 Scouting de Tiradores
-- 4.2.2 Estrategia de Competición
-- 4.2.3 Gestión de Concentración
-- 4.2.4 Análisis de Rendimiento
-- 4.2.5 Gestión de Lesiones
-- 4.2.6 Planificación de Entrenamiento
-- 4.2.7 Adaptación a Condiciones
-- 4.2.8 Optimización de Equipo
-- 4.2.9 Estrategia de Torneos
-- 4.2.10 Gestión de Presión
-- **Anexo 4.2: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 4.3: Billar**
-- 4.3.1 Scouting de Billaristas
-- 4.3.2 Estrategia de Partida
-- 4.3.3 Gestión de Concentración
-- 4.3.4 Análisis de Partido
-- 4.3.5 Gestión de Lesiones
-- 4.3.6 Planificación de Entrenamiento
-- 4.3.7 Análisis de Rivales
-- 4.3.8 Adaptación a Condiciones
-- 4.3.9 Optimización de Torneos
-- 4.3.10 Estrategia de Competición
-- **Anexo 4.3: 10 Aplicaciones Prácticas**
+1. Obtener datos históricos del jugador
+2. Ajustar una curva de rendimiento por edad
+3. Predecir su rendimiento futuro
 
-**Capítulo 4.4: Dardos**
-- 4.4.1 Scouting de Jugadores
-- 4.4.2 Estrategia de Partida
-- 4.4.3 Gestión de Concentración
-- 4.4.4 Análisis de Partido
-- 4.4.5 Gestión de Lesiones
-- 4.4.6 Planificación de Entrenamiento
-- 4.4.7 Análisis de Rivales
-- 4.4.8 Adaptación a Condiciones
-- 4.4.9 Optimización de Torneos
-- 4.4.10 Estrategia de Competición
-- **Anexo 4.4: 10 Aplicaciones Prácticas**
+**Curva de rendimiento típica:**
 
-**Capítulo 4.5: Tiro con Arco**
-- 4.5.1 Scouting de Arqueros
-- 4.5.2 Estrategia de Competición
-- 4.5.3 Gestión de Concentración
-- 4.5.4 Análisis de Rendimiento
-- 4.5.5 Gestión de Lesiones
-- 4.5.6 Planificación de Entrenamiento
-- 4.5.7 Adaptación a Condiciones
-- 4.5.8 Optimización de Equipo
-- 4.5.9 Estrategia de Torneos
-- 4.5.10 Gestión de Presión
-- **Anexo 4.5: 10 Aplicaciones Prácticas**
+$$F(edad) = F_{max} \cdot e^{-\frac{(edad - edad_{max})^2}{2\sigma^2}}$$
 
-**Capítulo 4.6: Boccia**
-- 4.6.1 Scouting de Jugadores
-- 4.6.2 Estrategia de Partida
-- 4.6.3 Gestión de Concentración
-- 4.6.4 Análisis de Partido
-- 4.6.5 Gestión de Lesiones
-- 4.6.6 Planificación de Entrenamiento
-- 4.6.7 Análisis de Rivales
-- 4.6.8 Adaptación a Condiciones
-- 4.6.9 Optimización de Torneos
-- 4.6.10 Estrategia de Competición
-- **Anexo 4.6: 10 Aplicaciones Prácticas**
+Donde:
+- $F_{max}$ es el fitness máximo
+- $edad_{max}$ es la edad de máximo rendimiento (26-28 años)
+- $\sigma$ es la desviación estándar (4-5 años)
 
-**Capítulo 4.7: Bolos**
-- 4.7.1 Scouting de Jugadores
-- 4.7.2 Estrategia de Partida
-- 4.7.3 Gestión de Concentración
-- 4.7.4 Análisis de Partido
-- 4.7.5 Gestión de Lesiones
-- 4.7.6 Planificación de Entrenamiento
-- 4.7.7 Análisis de Rivales
-- 4.7.8 Adaptación a Condiciones
-- 4.7.9 Optimización de Torneos
-- 4.7.10 Estrategia de Competición
-- **Anexo 4.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 4.8: Snooker**
-- 4.8.1 Scouting de Jugadores
-- 4.8.2 Estrategia de Partida
-- 4.8.3 Gestión de Concentración
-- 4.8.4 Análisis de Partido
-- 4.8.5 Gestión de Lesiones
-- 4.8.6 Planificación de Entrenamiento
-- 4.8.7 Análisis de Rivales
-- 4.8.8 Adaptación a Condiciones
-- 4.8.9 Optimización de Torneos
-- 4.8.10 Estrategia de Competición
-- **Anexo 4.8: 10 Aplicaciones Prácticas**
+**Ejemplo:** Un jugador de 24 años con fitness 0.72 tiene $F_{max} = 0.78$ a los 27 años.
 
 ---
 
-### SECCIÓN 5: DEPORTES DE INVIERNO (10 Deportes)
+**Aplicación 5: Comparación de Jugadores**
 
-**Capítulo 5.1: Esquí Alpino**
-- 5.1.1 Scouting de Esquiadores
-- 5.1.2 Estrategia de Carrera
-- 5.1.3 Gestión de Riesgo
-- 5.1.4 Análisis de Rendimiento
-- 5.1.5 Gestión de Lesiones
-- 5.1.6 Planificación de Entrenamiento
-- 5.1.7 Análisis de Pista
-- 5.1.8 Adaptación a Condiciones
-- 5.1.9 Optimización de Material
-- 5.1.10 Estrategia de Competición
-- **Anexo 5.1: 10 Aplicaciones Prácticas**
+El PUSFRE permite comparar jugadores de manera objetiva.
 
-**Capítulo 5.2: Esquí de Fondo**
-- 5.2.1 Scouting de Esquiadores
-- 5.2.2 Estrategia de Carrera
-- 5.2.3 Gestión de Energía
-- 5.2.4 Análisis de Rendimiento
-- 5.2.5 Gestión de Lesiones
-- 5.2.6 Planificación de Entrenamiento
-- 5.2.7 Análisis de Ruta
-- 5.2.8 Adaptación a Condiciones
-- 5.2.9 Optimización de Material
-- 5.2.10 Estrategia de Competición
-- **Anexo 5.2: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 5.3: Snowboard**
-- 5.3.1 Scouting de Snowboarders
-- 5.3.2 Estrategia de Competición
-- 5.3.3 Gestión de Riesgo
-- 5.3.4 Análisis de Rendimiento
-- 5.3.5 Gestión de Lesiones
-- 5.3.6 Planificación de Entrenamiento
-- 5.3.7 Análisis de Terreno
-- 5.3.8 Adaptación a Condiciones
-- 5.3.9 Optimización de Material
-- 5.3.10 Estrategia de Torneos
-- **Anexo 5.3: 10 Aplicaciones Prácticas**
+1. Calcular la fitness de cada jugador
+2. Desglosar por dimensiones
+3. Identificar fortalezas y debilidades
 
-**Capítulo 5.4: Patinaje Artístico**
-- 5.4.1 Scouting de Patinadores
-- 5.4.2 Estrategia de Programa
-- 5.4.3 Gestión de Energía
-- 5.4.4 Análisis de Rendimiento
-- 5.4.5 Gestión de Lesiones
-- 5.4.6 Planificación de Entrenamiento
-- 5.4.7 Análisis de Jueces
-- 5.4.8 Adaptación a Condiciones
-- 5.4.9 Optimización de Coreografía
-- 5.4.10 Estrategia de Competición
-- **Anexo 5.4: 10 Aplicaciones Prácticas**
+**Ejemplo de comparación:**
 
-**Capítulo 5.5: Hockey sobre Hielo**
-- 5.5.1 Scouting de Jugadores
-- 5.5.2 Táctica y Sistemas
-- 5.5.3 Gestión de Rotaciones
-- 5.5.4 Análisis de Partido
-- 5.5.5 Gestión de Lesiones
-- 5.5.6 Planificación de Entrenamiento
-- 5.5.7 Análisis de Rivales
-- 5.5.8 Gestión de Cantera
-- 5.5.9 Optimización de Fichajes
-- 5.5.10 Estrategia de Playoffs
-- **Anexo 5.5: 10 Aplicaciones Prácticas**
+| Dimensión | Jugador A | Jugador B |
+|-----------|-----------|-----------|
+| Tiro | 0.85 | 0.92 |
+| Pase | 0.90 | 0.78 |
+| Regate | 0.75 | 0.88 |
+| Defensa | 0.65 | 0.55 |
+| Físico | 0.80 | 0.85 |
+| **Fitness** | **0.71** | **0.73** |
 
-**Capítulo 5.6: Curling**
-- 5.6.1 Scouting de Jugadores
-- 5.6.2 Estrategia de Partido
-- 5.6.3 Gestión de Energía
-- 5.6.4 Análisis de Partido
-- 5.6.5 Gestión de Lesiones
-- 5.6.6 Planificación de Entrenamiento
-- 5.6.7 Análisis de Rivales
-- 5.6.8 Adaptación a Condiciones
-- 5.6.9 Optimización de Equipo
-- 5.6.10 Estrategia de Competición
-- **Anexo 5.6: 10 Aplicaciones Prácticas**
-
-**Capítulo 5.7: Biatlón**
-- 5.7.1 Scouting de Biatletas
-- 5.7.2 Estrategia de Carrera
-- 5.7.3 Gestión de Energía
-- 5.7.4 Análisis de Rendimiento
-- 5.7.5 Gestión de Lesiones
-- 5.7.6 Planificación de Entrenamiento
-- 5.7.7 Análisis de Ruta
-- 5.7.8 Adaptación a Condiciones
-- 5.7.9 Optimización de Equipo
-- 5.7.10 Estrategia de Competición
-- **Anexo 5.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 5.8: Salto de Esquí**
-- 5.8.1 Scouting de Saltadores
-- 5.8.2 Estrategia de Salto
-- 5.8.3 Gestión de Riesgo
-- 5.8.4 Análisis de Rendimiento
-- 5.8.5 Gestión de Lesiones
-- 5.8.6 Planificación de Entrenamiento
-- 5.8.7 Análisis de Trampolín
-- 5.8.8 Adaptación a Condiciones
-- 5.8.9 Optimización de Técnica
-- 5.8.10 Estrategia de Competición
-- **Anexo 5.8: 10 Aplicaciones Prácticas**
-
-**Capítulo 5.9: Combinada Nórdica**
-- 5.9.1 Scouting de Atletas
-- 5.9.2 Estrategia de Competición
-- 5.9.3 Gestión de Energía
-- 5.9.4 Análisis de Rendimiento
-- 5.9.5 Gestión de Lesiones
-- 5.9.6 Planificación de Entrenamiento
-- 5.9.7 Análisis de Ruta
-- 5.9.8 Adaptación a Condiciones
-- 5.9.9 Optimización de Equipo
-- 5.9.10 Estrategia de Competición
-- **Anexo 5.9: 10 Aplicaciones Prácticas**
-
-**Capítulo 5.10: Skeleton**
-- 5.10.1 Scouting de Atletas
-- 5.10.2 Estrategia de Descenso
-- 5.10.3 Gestión de Riesgo
-- 5.10.4 Análisis de Rendimiento
-- 5.10.5 Gestión de Lesiones
-- 5.10.6 Planificación de Entrenamiento
-- 5.10.7 Análisis de Pista
-- 5.10.8 Adaptación a Condiciones
-- 5.10.9 Optimización de Equipo
-- 5.10.10 Estrategia de Competición
-- **Anexo 5.10: 10 Aplicaciones Prácticas**
+**Interpretación:** Jugador B es ligeramente mejor globalmente, pero Jugador A es mejor pasador y defensor.
 
 ---
 
-### SECCIÓN 6: DEPORTES ACUÁTICOS (10 Deportes)
+**Aplicación 6: Evaluación de Mercado**
 
-**Capítulo 6.1: Natación**
-- 6.1.1 Scouting de Nadadores
-- 6.1.2 Estrategia de Prueba
-- 6.1.3 Gestión de Energía
-- 6.1.4 Análisis de Rendimiento
-- 6.1.5 Gestión de Lesiones
-- 6.1.6 Planificación de Entrenamiento
-- 6.1.7 Análisis de Rivales
-- 6.1.8 Adaptación a Estilos
-- 6.1.9 Optimización de Técnica
-- 6.1.10 Estrategia de Competición
-- **Anexo 6.1: 10 Aplicaciones Prácticas**
+El PUSFRE puede estimar el valor de mercado de un jugador.
 
-**Capítulo 6.2: Saltos de Trampolín**
-- 6.2.1 Scouting de Saltadores
-- 6.2.2 Estrategia de Salto
-- 6.2.3 Gestión de Riesgo
-- 6.2.4 Análisis de Rendimiento
-- 6.2.5 Gestión de Lesiones
-- 6.2.6 Planificación de Entrenamiento
-- 6.2.7 Análisis de Jueces
-- 6.2.8 Adaptación a Condiciones
-- 6.2.9 Optimización de Técnica
-- 6.2.10 Estrategia de Competición
-- **Anexo 6.2: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 6.3: Waterpolo**
-- 6.3.1 Scouting de Jugadores
-- 6.3.2 Táctica y Sistemas
-- 6.3.3 Gestión de Rotaciones
-- 6.3.4 Análisis de Partido
-- 6.3.5 Gestión de Lesiones
-- 6.3.6 Planificación de Entrenamiento
-- 6.3.7 Análisis de Rivales
-- 6.3.8 Gestión de Cantera
-- 6.3.9 Optimización de Fichajes
-- 6.3.10 Estrategia de Competición
-- **Anexo 6.3: 10 Aplicaciones Prácticas**
+1. Calcular la fitness del jugador
+2. Ajustar por edad y posición
+3. Comparar con jugadores similares
 
-**Capítulo 6.4: Natación Artística (Sincronizada)**
-- 6.4.1 Scouting de Nadadoras
-- 6.4.2 Estrategia de Rutina
-- 6.4.3 Gestión de Energía
-- 6.4.4 Análisis de Rendimiento
-- 6.4.5 Gestión de Lesiones
-- 6.4.6 Planificación de Entrenamiento
-- 6.4.7 Análisis de Jueces
-- 6.4.8 Adaptación a Música
-- 6.4.9 Optimización de Coreografía
-- 6.4.10 Estrategia de Competición
-- **Anexo 6.4: 10 Aplicaciones Prácticas**
+**Fórmula de valor:**
 
-**Capítulo 6.5: Remo**
-- 6.5.1 Scouting de Remeros
-- 6.5.2 Estrategia de Carrera
-- 6.5.3 Gestión de Energía
-- 6.5.4 Análisis de Rendimiento
-- 6.5.5 Gestión de Lesiones
-- 6.5.6 Planificación de Entrenamiento
-- 6.5.7 Análisis de Rivales
-- 6.5.8 Adaptación a Condiciones
-- 6.5.9 Optimización de Equipo
-- 6.5.10 Estrategia de Competición
-- **Anexo 6.5: 10 Aplicaciones Prácticas**
+$$Valor = F \cdot (1 + 0.05 \cdot (28 - edad)) \cdot Bonus_{posición}$$
 
-**Capítulo 6.6: Piragüismo**
-- 6.6.1 Scouting de Piragüistas
-- 6.6.2 Estrategia de Carrera
-- 6.6.3 Gestión de Energía
-- 6.6.4 Análisis de Rendimiento
-- 6.6.5 Gestión de Lesiones
-- 6.6.6 Planificación de Entrenamiento
-- 6.6.7 Análisis de Ruta
-- 6.6.8 Adaptación a Condiciones
-- 6.6.9 Optimización de Equipo
-- 6.6.10 Estrategia de Competición
-- **Anexo 6.6: 10 Aplicaciones Prácticas**
-
-**Capítulo 6.7: Vela**
-- 6.7.1 Scouting de Regatistas
-- 6.7.2 Estrategia de Regata
-- 6.7.3 Gestión de Riesgo
-- 6.7.4 Análisis de Rendimiento
-- 6.7.5 Gestión de Lesiones
-- 6.7.6 Planificación de Entrenamiento
-- 6.7.7 Análisis de Viento
-- 6.7.8 Adaptación a Condiciones
-- 6.7.9 Optimización de Barco
-- 6.7.10 Estrategia de Competición
-- **Anexo 6.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 6.8: Windsurf**
-- 6.8.1 Scouting de Windsurfistas
-- 6.8.2 Estrategia de Competición
-- 6.8.3 Gestión de Riesgo
-- 6.8.4 Análisis de Rendimiento
-- 6.8.5 Gestión de Lesiones
-- 6.8.6 Planificación de Entrenamiento
-- 6.8.7 Análisis de Viento
-- 6.8.8 Adaptación a Condiciones
-- 6.8.9 Optimización de Equipo
-- 6.8.10 Estrategia de Competición
-- **Anexo 6.8: 10 Aplicaciones Prácticas**
-
-**Capítulo 6.9: Kitesurf**
-- 6.9.1 Scouting de Kitesurfistas
-- 6.9.2 Estrategia de Competición
-- 6.9.3 Gestión de Riesgo
-- 6.9.4 Análisis de Rendimiento
-- 6.9.5 Gestión de Lesiones
-- 6.9.6 Planificación de Entrenamiento
-- 6.9.7 Análisis de Viento
-- 6.9.8 Adaptación a Condiciones
-- 6.9.9 Optimización de Equipo
-- 6.9.10 Estrategia de Competición
-- **Anexo 6.9: 10 Aplicaciones Prácticas**
-
-**Capítulo 6.10: Surf**
-- 6.10.1 Scouting de Surfistas
-- 6.10.2 Estrategia de Competición
-- 6.10.3 Gestión de Riesgo
-- 6.10.4 Análisis de Rendimiento
-- 6.10.5 Gestión de Lesiones
-- 6.10.6 Planificación de Entrenamiento
-- 6.10.7 Análisis de Olas
-- 6.10.8 Adaptación a Condiciones
-- 6.10.9 Optimización de Tabla
-- 6.10.10 Estrategia de Torneos
-- **Anexo 6.10: 10 Aplicaciones Prácticas**
+**Ejemplo:** Un delantero de 24 años con fitness 0.75: $Valor = 0.75 \cdot (1 + 0.05 \cdot 4) \cdot 1.2 = 0.75 \cdot 1.2 \cdot 1.2 = 1.08$ (el 108% del valor de mercado promedio).
 
 ---
 
-### SECCIÓN 7: DEPORTES DE AVENTURA (6 Deportes)
+**Aplicación 7: Análisis de Fortalezas y Debilidades**
 
-**Capítulo 7.1: Escalada**
-- 7.1.1 Scouting de Escaladores
-- 7.1.2 Estrategia de Ruta
-- 7.1.3 Gestión de Riesgo
-- 7.1.4 Análisis de Rendimiento
-- 7.1.5 Gestión de Lesiones
-- 7.1.6 Planificación de Entrenamiento
-- 7.1.7 Análisis de Ruta
-- 7.1.8 Adaptación a Condiciones
-- 7.1.9 Optimización de Equipo
-- 7.1.10 Estrategia de Competición
-- **Anexo 7.1: 10 Aplicaciones Prácticas**
+El PUSFRE desglosa el rendimiento del jugador en sus componentes.
 
-**Capítulo 7.2: Bouldering**
-- 7.2.1 Scouting de Bouldermans
-- 7.2.2 Estrategia de Bloque
-- 7.2.3 Gestión de Riesgo
-- 7.2.4 Análisis de Rendimiento
-- 7.2.5 Gestión de Lesiones
-- 7.2.6 Planificación de Entrenamiento
-- 7.2.7 Análisis de Bloque
-- 7.2.8 Adaptación a Condiciones
-- 7.2.9 Optimización de Técnica
-- 7.2.10 Estrategia de Competición
-- **Anexo 7.2: 10 Aplicaciones Prácticas**
+**Cómo se hace:**
 
-**Capítulo 7.3: Esquí de Travesía**
-- 7.3.1 Scouting de Esquiadores
-- 7.3.2 Estrategia de Ruta
-- 7.3.3 Gestión de Riesgo
-- 7.3.4 Análisis de Rendimiento
-- 7.3.5 Gestión de Lesiones
-- 7.3.6 Planificación de Entrenamiento
-- 7.3.7 Análisis de Terreno
-- 7.3.8 Adaptación a Condiciones
-- 7.3.9 Optimización de Equipo
-- 7.3.10 Estrategia de Competición
-- **Anexo 7.3: 10 Aplicaciones Prácticas**
+1. Calcular la fitness de cada dimensión
+2. Identificar las dimensiones con mayor y menor valor
+3. Generar un perfil de fortalezas y debilidades
 
-**Capítulo 7.4: Snowboard de Travesía**
-- 7.4.1 Scouting de Snowboarders
-- 7.4.2 Estrategia de Ruta
-- 7.4.3 Gestión de Riesgo
-- 7.4.4 Análisis de Rendimiento
-- 7.4.5 Gestión de Lesiones
-- 7.4.6 Planificación de Entrenamiento
-- 7.4.7 Análisis de Terreno
-- 7.4.8 Adaptación a Condiciones
-- 7.4.9 Optimización de Equipo
-- 7.4.10 Estrategia de Competición
-- **Anexo 7.4: 10 Aplicaciones Prácticas**
+**Ejemplo de perfil:**
 
-**Capítulo 7.5: Parapente**
-- 7.5.1 Scouting de Pilotos
-- 7.5.2 Estrategia de Vuelo
-- 7.5.3 Gestión de Riesgo
-- 7.5.4 Análisis de Rendimiento
-- 7.5.5 Gestión de Lesiones
-- 7.5.6 Planificación de Entrenamiento
-- 7.5.7 Análisis de Viento
-- 7.5.8 Adaptación a Condiciones
-- 7.5.9 Optimización de Equipo
-- 7.5.10 Estrategia de Competición
-- **Anexo 7.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 7.6: Espeleología Deportiva**
-- 7.6.1 Scouting de Espeleólogos
-- 7.6.2 Estrategia de Exploración
-- 7.6.3 Gestión de Riesgo
-- 7.6.4 Análisis de Rendimiento
-- 7.6.5 Gestión de Lesiones
-- 7.6.6 Planificación de Entrenamiento
-- 7.6.7 Análisis de Cueva
-- 7.6.8 Adaptación a Condiciones
-- 7.6.9 Optimización de Equipo
-- 7.6.10 Estrategia de Competición
-- **Anexo 7.6: 10 Aplicaciones Prácticas**
-
----
-
-### SECCIÓN 8: DEPORTES DE MOTOR (6 Deportes)
-
-**Capítulo 8.1: Fórmula 1**
-- 8.1.1 Scouting de Pilotos
-- 8.1.2 Estrategia de Carrera
-- 8.1.3 Gestión de Riesgo
-- 8.1.4 Análisis de Rendimiento
-- 8.1.5 Gestión de Lesiones
-- 8.1.6 Planificación de Entrenamiento
-- 8.1.7 Análisis de Circuito
-- 8.1.8 Adaptación a Condiciones
-- 8.1.9 Optimización de Coche
-- 8.1.10 Estrategia de Competición
-- **Anexo 8.1: 10 Aplicaciones Prácticas**
-
-**Capítulo 8.2: MotoGP**
-- 8.2.1 Scouting de Pilotos
-- 8.2.2 Estrategia de Carrera
-- 8.2.3 Gestión de Riesgo
-- 8.2.4 Análisis de Rendimiento
-- 8.2.5 Gestión de Lesiones
-- 8.2.6 Planificación de Entrenamiento
-- 8.2.7 Análisis de Circuito
-- 8.2.8 Adaptación a Condiciones
-- 8.2.9 Optimización de Moto
-- 8.2.10 Estrategia de Competición
-- **Anexo 8.2: 10 Aplicaciones Prácticas**
-
-**Capítulo 8.3: Rally**
-- 8.3.1 Scouting de Pilotos
-- 8.3.2 Estrategia de Etapa
-- 8.3.3 Gestión de Riesgo
-- 8.3.4 Análisis de Rendimiento
-- 8.3.5 Gestión de Lesiones
-- 8.3.6 Planificación de Entrenamiento
-- 8.3.7 Análisis de Tramo
-- 8.3.8 Adaptación a Condiciones
-- 8.3.9 Optimización de Coche
-- 8.3.10 Estrategia de Competición
-- **Anexo 8.3: 10 Aplicaciones Prácticas**
-
-**Capítulo 8.4: Ciclismo en Ruta**
-- 8.4.1 Scouting de Ciclistas
-- 8.4.2 Estrategia de Carrera
-- 8.4.3 Gestión de Energía
-- 8.4.4 Análisis de Rendimiento
-- 8.4.5 Gestión de Lesiones
-- 8.4.6 Planificación de Entrenamiento
-- 8.4.7 Análisis de Ruta
-- 8.4.8 Adaptación a Condiciones
-- 8.4.9 Optimización de Bicicleta
-- 8.4.10 Estrategia de Competición
-- **Anexo 8.4: 10 Aplicaciones Prácticas**
-
-**Capítulo 8.5: Ciclismo de Montaña**
-- 8.5.1 Scouting de Ciclistas
-- 8.5.2 Estrategia de Carrera
-- 8.5.3 Gestión de Riesgo
-- 8.5.4 Análisis de Rendimiento
-- 8.5.5 Gestión de Lesiones
-- 8.5.6 Planificación de Entrenamiento
-- 8.5.7 Análisis de Terreno
-- 8.5.8 Adaptación a Condiciones
-- 8.5.9 Optimización de Bicicleta
-- 8.5.10 Estrategia de Competición
-- **Anexo 8.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 8.6: Ciclismo en Pista**
-- 8.6.1 Scouting de Ciclistas
-- 8.6.2 Estrategia de Carrera
-- 8.6.3 Gestión de Energía
-- 8.6.4 Análisis de Rendimiento
-- 8.6.5 Gestión de Lesiones
-- 8.6.6 Planificación de Entrenamiento
-- 8.6.7 Análisis de Pista
-- 8.6.8 Adaptación a Condiciones
-- 8.6.9 Optimización de Bicicleta
-- 8.6.10 Estrategia de Competición
-- **Anexo 8.6: 10 Aplicaciones Prácticas**
-
----
-
-### SECCIÓN 9: DEPORTES MENTALES (6 Deportes)
-
-**Capítulo 9.1: Ajedrez**
-- 9.1.1 Scouting de Jugadores
-- 9.1.2 Evaluación de Posición
-- 9.1.3 Estrategia de Apertura
-- 9.1.4 Gestión de Tiempo
-- 9.1.5 Análisis de Partido
-- 9.1.6 Planificación de Entrenamiento
-- 9.1.7 Análisis de Rivales
-- 9.1.8 Adaptación a Estilos
-- 9.1.9 Optimización de Preparación
-- 9.1.10 Estrategia de Torneos
-- **Anexo 9.1: 10 Aplicaciones Prácticas**
-
-**Capítulo 9.2: Go**
-- 9.2.1 Scouting de Jugadores
-- 9.2.2 Evaluación de Posición
-- 9.2.3 Estrategia de Apertura
-- 9.2.4 Gestión de Tiempo
-- 9.2.5 Análisis de Partido
-- 9.2.6 Planificación de Entrenamiento
-- 9.2.7 Análisis de Rivales
-- 9.2.8 Adaptación a Estilos
-- 9.2.9 Optimización de Preparación
-- 9.2.10 Estrategia de Torneos
-- **Anexo 9.2: 10 Aplicaciones Prácticas**
-
-**Capítulo 9.3: Shogi (Ajedrez Japonés)**
-- 9.3.1 Scouting de Jugadores
-- 9.3.2 Evaluación de Posición
-- 9.3.3 Estrategia de Apertura
-- 9.3.4 Gestión de Tiempo
-- 9.3.5 Análisis de Partido
-- 9.3.6 Planificación de Entrenamiento
-- 9.3.7 Análisis de Rivales
-- 9.3.8 Adaptación a Estilos
-- 9.3.9 Optimización de Preparación
-- 9.3.10 Estrategia de Torneos
-- **Anexo 9.3: 10 Aplicaciones Prácticas**
-
-**Capítulo 9.4: Xiangqi (Ajedrez Chino)**
-- 9.4.1 Scouting de Jugadores
-- 9.4.2 Evaluación de Posición
-- 9.4.3 Estrategia de Apertura
-- 9.4.4 Gestión de Tiempo
-- 9.4.5 Análisis de Partido
-- 9.4.6 Planificación de Entrenamiento
-- 9.4.7 Análisis de Rivales
-- 9.4.8 Adaptación a Estilos
-- 9.4.9 Optimización de Preparación
-- 9.4.10 Estrategia de Torneos
-- **Anexo 9.4: 10 Aplicaciones Prácticas**
-
-**Capítulo 9.5: Bridge**
-- 9.5.1 Scouting de Jugadores
-- 9.5.2 Estrategia de Subasta
-- 9.5.3 Estrategia de Juego
-- 9.5.4 Gestión de Información
-- 9.5.5 Análisis de Partido
-- 9.5.6 Planificación de Entrenamiento
-- 9.5.7 Análisis de Rivales
-- 9.5.8 Adaptación a Estilos
-- 9.5.9 Optimización de Pareja
-- 9.5.10 Estrategia de Torneos
-- **Anexo 9.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 9.6: Póker**
-- 9.6.1 Scouting de Jugadores
-- 9.6.2 Estrategia de Mano
-- 9.6.3 Gestión de Posición
-- 9.6.4 Estrategia de Torneo
-- 9.6.5 Análisis de Mesa
-- 9.6.6 Planificación de Entrenamiento
-- 9.6.7 Análisis de Rivales
-- 9.6.8 Adaptación a Estilos
-- 9.6.9 Optimización de Bankroll
-- 9.6.10 Estrategia de Competición
-- **Anexo 9.6: 10 Aplicaciones Prácticas**
-
----
-
-### SECCIÓN 10: eSPORTS — DEPORTES ELECTRÓNICOS (20 Juegos)
-
-**Capítulo 10.1: League of Legends**
-- 10.1.1 Scouting de Jugadores
-- 10.1.2 Estrategia de Equipo
-- 10.1.3 Gestión de Objetivos
-- 10.1.4 Análisis de Partido
-- 10.1.5 Gestión de Mentalidad
-- 10.1.6 Planificación de Entrenamiento
-- 10.1.7 Análisis de Rivales
-- 10.1.8 Adaptación a Meta
-- 10.1.9 Optimización de Pick/Ban
-- 10.1.10 Estrategia de Torneos
-- **Anexo 10.1: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.2: Dota 2**
-- 10.2.1 Scouting de Jugadores
-- 10.2.2 Estrategia de Equipo
-- 10.2.3 Gestión de Objetivos
-- 10.2.4 Análisis de Partido
-- 10.2.5 Gestión de Mentalidad
-- 10.2.6 Planificación de Entrenamiento
-- 10.2.7 Análisis de Rivales
-- 10.2.8 Adaptación a Meta
-- 10.2.9 Optimización de Pick/Ban
-- 10.2.10 Estrategia de Torneos
-- **Anexo 10.2: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.3: Counter-Strike**
-- 10.3.1 Scouting de Jugadores
-- 10.3.2 Estrategia de Equipo
-- 10.3.3 Gestión de Economía
-- 10.3.4 Análisis de Partido
-- 10.3.5 Gestión de Mentalidad
-- 10.3.6 Planificación de Entrenamiento
-- 10.3.7 Análisis de Rivales
-- 10.3.8 Adaptación a Meta
-- 10.3.9 Optimización de Tácticas
-- 10.3.10 Estrategia de Torneos
-- **Anexo 10.3: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.4: Valorant**
-- 10.4.1 Scouting de Jugadores
-- 10.4.2 Estrategia de Equipo
-- 10.4.3 Gestión de Habilidades
-- 10.4.4 Análisis de Partido
-- 10.4.5 Gestión de Mentalidad
-- 10.4.6 Planificación de Entrenamiento
-- 10.4.7 Análisis de Rivales
-- 10.4.8 Adaptación a Meta
-- 10.4.9 Optimización de Agentes
-- 10.4.10 Estrategia de Torneos
-- **Anexo 10.4: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.5: StarCraft II**
-- 10.5.1 Scouting de Jugadores
-- 10.5.2 Estrategia de Juego
-- 10.5.3 Gestión de Micro/Macro
-- 10.5.4 Análisis de Partido
-- 10.5.5 Gestión de Mentalidad
-- 10.5.6 Planificación de Entrenamiento
-- 10.5.7 Análisis de Rivales
-- 10.5.8 Adaptación a Meta
-- 10.5.9 Optimización de Builds
-- 10.5.10 Estrategia de Torneos
-- **Anexo 10.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.6: Rocket League**
-- 10.6.1 Scouting de Jugadores
-- 10.6.2 Estrategia de Equipo
-- 10.6.3 Gestión de Posicionamiento
-- 10.6.4 Análisis de Partido
-- 10.6.5 Gestión de Mentalidad
-- 10.6.6 Planificación de Entrenamiento
-- 10.6.7 Análisis de Rivales
-- 10.6.8 Adaptación a Meta
-- 10.6.9 Optimización de Mecánicas
-- 10.6.10 Estrategia de Torneos
-- **Anexo 10.6: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.7: Fortnite**
-- 10.7.1 Scouting de Jugadores
-- 10.7.2 Estrategia de Partida
-- 10.7.3 Gestión de Botín
-- 10.7.4 Análisis de Partido
-- 10.7.5 Gestión de Mentalidad
-- 10.7.6 Planificación de Entrenamiento
-- 10.7.7 Análisis de Rivales
-- 10.7.8 Adaptación a Meta
-- 10.7.9 Optimización de Construcción
-- 10.7.10 Estrategia de Torneos
-- **Anexo 10.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.8: PUBG**
-- 10.8.1 Scouting de Jugadores
-- 10.8.2 Estrategia de Partida
-- 10.8.3 Gestión de Botín
-- 10.8.4 Análisis de Partido
-- 10.8.5 Gestión de Mentalidad
-- 10.8.6 Planificación de Entrenamiento
-- 10.8.7 Análisis de Rivales
-- 10.8.8 Adaptación a Meta
-- 10.8.9 Optimización de Vehículos
-- 10.8.10 Estrategia de Torneos
-- **Anexo 10.8: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.9: Apex Legends**
-- 10.9.1 Scouting de Jugadores
-- 10.9.2 Estrategia de Equipo
-- 10.9.3 Gestión de Habilidades
-- 10.9.4 Análisis de Partido
-- 10.9.5 Gestión de Mentalidad
-- 10.9.6 Planificación de Entrenamiento
-- 10.9.7 Análisis de Rivales
-- 10.9.8 Adaptación a Meta
-- 10.9.9 Optimización de Composición
-- 10.9.10 Estrategia de Torneos
-- **Anexo 10.9: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.10: Call of Duty (Competitivo)**
-- 10.10.1 Scouting de Jugadores
-- 10.10.2 Estrategia de Equipo
-- 10.10.3 Gestión de Economía
-- 10.10.4 Análisis de Partido
-- 10.10.5 Gestión de Mentalidad
-- 10.10.6 Planificación de Entrenamiento
-- 10.10.7 Análisis de Rivales
-- 10.10.8 Adaptación a Meta
-- 10.10.9 Optimización de Clases
-- 10.10.10 Estrategia de Torneos
-- **Anexo 10.10: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.11: Rainbow Six Siege**
-- 10.11.1 Scouting de Jugadores
-- 10.11.2 Estrategia de Equipo
-- 10.11.3 Gestión de Habilidades
-- 10.11.4 Análisis de Partido
-- 10.11.5 Gestión de Mentalidad
-- 10.11.6 Planificación de Entrenamiento
-- 10.11.7 Análisis de Rivales
-- 10.11.8 Adaptación a Meta
-- 10.11.9 Optimización de Operadores
-- 10.11.10 Estrategia de Torneos
-- **Anexo 10.11: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.12: Overwatch**
-- 10.12.1 Scouting de Jugadores
-- 10.12.2 Estrategia de Equipo
-- 10.12.3 Gestión de Ultimates
-- 10.12.4 Análisis de Partido
-- 10.12.5 Gestión de Mentalidad
-- 10.12.6 Planificación de Entrenamiento
-- 10.12.7 Análisis de Rivales
-- 10.12.8 Adaptación a Meta
-- 10.12.9 Optimización de Composición
-- 10.12.10 Estrategia de Torneos
-- **Anexo 10.12: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.13: Fighting Games (Street Fighter, Tekken)**
-- 10.13.1 Scouting de Jugadores
-- 10.13.2 Estrategia de Combate
-- 10.13.3 Gestión de Técnica
-- 10.13.4 Análisis de Partido
-- 10.13.5 Gestión de Mentalidad
-- 10.13.6 Planificación de Entrenamiento
-- 10.13.7 Análisis de Rivales
-- 10.13.8 Adaptación a Personajes
-- 10.13.9 Optimización de Ejecución
-- 10.13.10 Estrategia de Torneos
-- **Anexo 10.13: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.14: Battle Royale (Mobile: PUBG Mobile, Free Fire)**
-- 10.14.1 Scouting de Jugadores
-- 10.14.2 Estrategia de Partida
-- 10.14.3 Gestión de Botín
-- 10.14.4 Análisis de Partido
-- 10.14.5 Gestión de Mentalidad
-- 10.14.6 Planificación de Entrenamiento
-- 10.14.7 Análisis de Rivales
-- 10.14.8 Adaptación a Meta
-- 10.14.9 Optimización de Controles
-- 10.14.10 Estrategia de Torneos
-- **Anexo 10.14: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.15: Juegos de Estrategia por Turnos (Civilization, Age of Wonders)**
-- 10.15.1 Scouting de Jugadores
-- 10.15.2 Estrategia de Partida
-- 10.15.3 Gestión de Recursos
-- 10.15.4 Análisis de Partido
-- 10.15.5 Gestión de Mentalidad
-- 10.15.6 Planificación de Entrenamiento
-- 10.15.7 Análisis de Rivales
-- 10.15.8 Adaptación a Estrategias
-- 10.15.9 Optimización de Builds
-- 10.15.10 Estrategia de Torneos
-- **Anexo 10.15: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.16: Juegos de Deportes (FIFA, NBA 2K, Madden)**
-- 10.16.1 Scouting de Jugadores
-- 10.16.2 Estrategia de Partido
-- 10.16.3 Gestión de Equipo
-- 10.16.4 Análisis de Partido
-- 10.16.5 Gestión de Mentalidad
-- 10.16.6 Planificación de Entrenamiento
-- 10.16.7 Análisis de Rivales
-- 10.16.8 Adaptación a Meta
-- 10.16.9 Optimización de Tácticas
-- 10.16.10 Estrategia de Torneos
-- **Anexo 10.16: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.17: Hearthstone**
-- 10.17.1 Scouting de Jugadores
-- 10.17.2 Estrategia de Mazo
-- 10.17.3 Gestión de Recursos
-- 10.17.4 Análisis de Partido
-- 10.17.5 Gestión de Mentalidad
-- 10.17.6 Planificación de Entrenamiento
-- 10.17.7 Análisis de Rivales
-- 10.17.8 Adaptación a Meta
-- 10.17.9 Optimización de Mazo
-- 10.17.10 Estrategia de Torneos
-- **Anexo 10.17: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.18: Magic: The Gathering Arena**
-- 10.18.1 Scouting de Jugadores
-- 10.18.2 Estrategia de Mazo
-- 10.18.3 Gestión de Recursos
-- 10.18.4 Análisis de Partido
-- 10.18.5 Gestión de Mentalidad
-- 10.18.6 Planificación de Entrenamiento
-- 10.18.7 Análisis de Rivales
-- 10.18.8 Adaptación a Meta
-- 10.18.9 Optimización de Mazo
-- 10.18.10 Estrategia de Torneos
-- **Anexo 10.18: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.19: Pokémon VGC (Competitivo)**
-- 10.19.1 Scouting de Jugadores
-- 10.19.2 Estrategia de Equipo
-- 10.19.3 Gestión de Recursos
-- 10.19.4 Análisis de Partido
-- 10.19.5 Gestión de Mentalidad
-- 10.19.6 Planificación de Entrenamiento
-- 10.19.7 Análisis de Rivales
-- 10.19.8 Adaptación a Meta
-- 10.19.9 Optimización de Equipo
-- 10.19.10 Estrategia de Torneos
-- **Anexo 10.19: 10 Aplicaciones Prácticas**
-
-**Capítulo 10.20: Clash Royale**
-- 10.20.1 Scouting de Jugadores
-- 10.20.2 Estrategia de Mazo
-- 10.20.3 Gestión de Elixir
-- 10.20.4 Análisis de Partido
-- 10.20.5 Gestión de Mentalidad
-- 10.20.6 Planificación de Entrenamiento
-- 10.20.7 Análisis de Rivales
-- 10.20.8 Adaptación a Meta
-- 10.20.9 Optimización de Mazo
-- 10.20.10 Estrategia de Torneos
-- **Anexo 10.20: 10 Aplicaciones Prácticas**
-
----
-
-### SECCIÓN 11: JUEGOS DE MESA MODERNOS (10 Juegos)
-
-**Capítulo 11.1: Catan**
-- 11.1.1 Scouting de Jugadores
-- 11.1.2 Estrategia de Asentamiento
-- 11.1.3 Gestión de Recursos
-- 11.1.4 Análisis de Partido
-- 11.1.5 Gestión de Comercio
-- 11.1.6 Planificación de Entrenamiento
-- 11.1.7 Análisis de Rivales
-- 11.1.8 Adaptación a Estrategias
-- 11.1.9 Optimización de Desarrollo
-- 11.1.10 Estrategia de Torneos
-- **Anexo 11.1: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.2: Carcassonne**
-- 11.2.1 Scouting de Jugadores
-- 11.2.2 Estrategia de Colocación
-- 11.2.3 Gestión de Recursos
-- 11.2.4 Análisis de Partido
-- 11.2.5 Gestión de Puntos
-- 11.2.6 Planificación de Entrenamiento
-- 11.2.7 Análisis de Rivales
-- 11.2.8 Adaptación a Estrategias
-- 11.2.9 Optimización de Rutas
-- 11.2.10 Estrategia de Torneos
-- **Anexo 11.2: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.3: Ticket to Ride**
-- 11.3.1 Scouting de Jugadores
-- 11.3.2 Estrategia de Rutas
-- 11.3.3 Gestión de Conexiones
-- 11.3.4 Análisis de Partido
-- 11.3.5 Gestión de Puntos
-- 11.3.6 Planificación de Entrenamiento
-- 11.3.7 Análisis de Rivales
-- 11.3.8 Adaptación a Estrategias
-- 11.3.9 Optimización de Conexiones
-- 11.3.10 Estrategia de Torneos
-- **Anexo 11.3: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.4: Terraforming Mars**
-- 11.4.1 Scouting de Jugadores
-- 11.4.2 Estrategia de Proyectos
-- 11.4.3 Gestión de Recursos
-- 11.4.4 Análisis de Partido
-- 11.4.5 Gestión de Puntos
-- 11.4.6 Planificación de Entrenamiento
-- 11.4.7 Análisis de Rivales
-- 11.4.8 Adaptación a Estrategias
-- 11.4.9 Optimización de Proyectos
-- 11.4.10 Estrategia de Torneos
-- **Anexo 11.4: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.5: Gloomhaven**
-- 11.5.1 Scouting de Jugadores
-- 11.5.2 Estrategia de Misiones
-- 11.5.3 Gestión de Recursos
-- 11.5.4 Análisis de Partido
-- 11.5.5 Gestión de Daño
-- 11.5.6 Planificación de Entrenamiento
-- 11.5.7 Análisis de Rivales
-- 11.5.8 Adaptación a Estrategias
-- 11.5.9 Optimización de Personajes
-- 11.5.10 Estrategia de Campaña
-- **Anexo 11.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.6: Spirit Island**
-- 11.6.1 Scouting de Jugadores
-- 11.6.2 Estrategia de Espíritus
-- 11.6.3 Gestión de Recursos
-- 11.6.4 Análisis de Partido
-- 11.6.5 Gestión de Daño
-- 11.6.6 Planificación de Entrenamiento
-- 11.6.7 Análisis de Rivales
-- 11.6.8 Adaptación a Estrategias
-- 11.6.9 Optimización de Espíritus
-- 11.6.10 Estrategia de Torneos
-- **Anexo 11.6: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.7: Scythe**
-- 11.7.1 Scouting de Jugadores
-- 11.7.2 Estrategia de Expansión
-- 11.7.3 Gestión de Recursos
-- 11.7.4 Análisis de Partido
-- 11.7.5 Gestión de Combate
-- 11.7.6 Planificación de Entrenamiento
-- 11.7.7 Análisis de Rivales
-- 11.7.8 Adaptación a Estrategias
-- 11.7.9 Optimización de Facción
-- 11.7.10 Estrategia de Torneos
-- **Anexo 11.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.8: Root**
-- 11.8.1 Scouting de Jugadores
-- 11.8.2 Estrategia de Facción
-- 11.8.3 Gestión de Recursos
-- 11.8.4 Análisis de Partido
-- 11.8.5 Gestión de Combate
-- 11.8.6 Planificación de Entrenamiento
-- 11.8.7 Análisis de Rivales
-- 11.8.8 Adaptación a Estrategias
-- 11.8.9 Optimización de Facción
-- 11.8.10 Estrategia de Torneos
-- **Anexo 11.8: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.9: Wingspan**
-- 11.9.1 Scouting de Jugadores
-- 11.9.2 Estrategia de Aves
-- 11.9.3 Gestión de Recursos
-- 11.9.4 Análisis de Partido
-- 11.9.5 Gestión de Puntos
-- 11.9.6 Planificación de Entrenamiento
-- 11.9.7 Análisis de Rivales
-- 11.9.8 Adaptación a Estrategias
-- 11.9.9 Optimización de Aves
-- 11.9.10 Estrategia de Torneos
-- **Anexo 11.9: 10 Aplicaciones Prácticas**
-
-**Capítulo 11.10: Brass: Birmingham**
-- 11.10.1 Scouting de Jugadores
-- 11.10.2 Estrategia de Industria
-- 11.10.3 Gestión de Recursos
-- 11.10.4 Análisis de Partido
-- 11.10.5 Gestión de Conexiones
-- 11.10.6 Planificación de Entrenamiento
-- 11.10.7 Análisis de Rivales
-- 11.10.8 Adaptación a Estrategias
-- 11.10.9 Optimización de Redes
-- 11.10.10 Estrategia de Torneos
-- **Anexo 11.10: 10 Aplicaciones Prácticas**
-
----
-
-### SECCIÓN 12: JUEGOS DE CARTAS (10 Juegos)
-
-**Capítulo 12.1: Magic: The Gathering**
-- 12.1.1 Scouting de Jugadores
-- 12.1.2 Estrategia de Mazo
-- 12.1.3 Gestión de Recursos
-- 12.1.4 Análisis de Partido
-- 12.1.5 Gestión de Mentalidad
-- 12.1.6 Planificación de Entrenamiento
-- 12.1.7 Análisis de Rivales
-- 12.1.8 Adaptación a Meta
-- 12.1.9 Optimización de Mazo
-- 12.1.10 Estrategia de Torneos
-- **Anexo 12.1: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.2: Hearthstone**
-- 12.2.1 Scouting de Jugadores
-- 12.2.2 Estrategia de Mazo
-- 12.2.3 Gestión de Recursos
-- 12.2.4 Análisis de Partido
-- 12.2.5 Gestión de Mentalidad
-- 12.2.6 Planificación de Entrenamiento
-- 12.2.7 Análisis de Rivales
-- 12.2.8 Adaptación a Meta
-- 12.2.9 Optimización de Mazo
-- 12.2.10 Estrategia de Torneos
-- **Anexo 12.2: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.3: Pokémon TCG**
-- 12.3.1 Scouting de Jugadores
-- 12.3.2 Estrategia de Mazo
-- 12.3.3 Gestión de Recursos
-- 12.3.4 Análisis de Partido
-- 12.3.5 Gestión de Mentalidad
-- 12.3.6 Planificación de Entrenamiento
-- 12.3.7 Análisis de Rivales
-- 12.3.8 Adaptación a Meta
-- 12.3.9 Optimización de Mazo
-- 12.3.10 Estrategia de Torneos
-- **Anexo 12.3: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.4: Yu-Gi-Oh!**
-- 12.4.1 Scouting de Jugadores
-- 12.4.2 Estrategia de Mazo
-- 12.4.3 Gestión de Recursos
-- 12.4.4 Análisis de Partido
-- 12.4.5 Gestión de Mentalidad
-- 12.4.6 Planificación de Entrenamiento
-- 12.4.7 Análisis de Rivales
-- 12.4.8 Adaptación a Meta
-- 12.4.9 Optimización de Mazo
-- 12.4.10 Estrategia de Torneos
-- **Anexo 12.4: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.5: Gwent**
-- 12.5.1 Scouting de Jugadores
-- 12.5.2 Estrategia de Mazo
-- 12.5.3 Gestión de Recursos
-- 12.5.4 Análisis de Partido
-- 12.5.5 Gestión de Mentalidad
-- 12.5.6 Planificación de Entrenamiento
-- 12.5.7 Análisis de Rivales
-- 12.5.8 Adaptación a Meta
-- 12.5.9 Optimización de Mazo
-- 12.5.10 Estrategia de Torneos
-- **Anexo 12.5: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.6: Legends of Runeterra**
-- 12.6.1 Scouting de Jugadores
-- 12.6.2 Estrategia de Mazo
-- 12.6.3 Gestión de Recursos
-- 12.6.4 Análisis de Partido
-- 12.6.5 Gestión de Mentalidad
-- 12.6.6 Planificación de Entrenamiento
-- 12.6.7 Análisis de Rivales
-- 12.6.8 Adaptación a Meta
-- 12.6.9 Optimización de Mazo
-- 12.6.10 Estrategia de Torneos
-- **Anexo 12.6: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.7: KeyForge**
-- 12.7.1 Scouting de Jugadores
-- 12.7.2 Estrategia de Mazo
-- 12.7.3 Gestión de Recursos
-- 12.7.4 Análisis de Partido
-- 12.7.5 Gestión de Mentalidad
-- 12.7.6 Planificación de Entrenamiento
-- 12.7.7 Análisis de Rivales
-- 12.7.8 Adaptación a Meta
-- 12.7.9 Optimización de Mazo
-- 12.7.10 Estrategia de Torneos
-- **Anexo 12.7: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.8: Flesh and Blood**
-- 12.8.1 Scouting de Jugadores
-- 12.8.2 Estrategia de Mazo
-- 12.8.3 Gestión de Recursos
-- 12.8.4 Análisis de Partido
-- 12.8.5 Gestión de Mentalidad
-- 12.8.6 Planificación de Entrenamiento
-- 12.8.7 Análisis de Rivales
-- 12.8.8 Adaptación a Meta
-- 12.8.9 Optimización de Mazo
-- 12.8.10 Estrategia de Torneos
-- **Anexo 12.8: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.9: Lorcana**
-- 12.9.1 Scouting de Jugadores
-- 12.9.2 Estrategia de Mazo
-- 12.9.3 Gestión de Recursos
-- 12.9.4 Análisis de Partido
-- 12.9.5 Gestión de Mentalidad
-- 12.9.6 Planificación de Entrenamiento
-- 12.9.7 Análisis de Rivales
-- 12.9.8 Adaptación a Meta
-- 12.9.9 Optimización de Mazo
-- 12.9.10 Estrategia de Torneos
-- **Anexo 12.9: 10 Aplicaciones Prácticas**
-
-**Capítulo 12.10: One Piece TCG**
-- 12.10.1 Scouting de Jugadores
-- 12.10.2 Estrategia de Mazo
-- 12.10.3 Gestión de Recursos
-- 12.10.4 Análisis de Partido
-- 12.10.5 Gestión de Mentalidad
-- 12.10.6 Planificación de Entrenamiento
-- 12.10.7 Análisis de Rivales
-- 12.10.8 Adaptación a Meta
-- 12.10.9 Optimización de Mazo
-- 12.10.10 Estrategia de Torneos
-- **Anexo 12.10: 10 Aplicaciones Prácticas**
-
----
-
-### SECCIÓN 13: ANÁLISIS COMPARATIVO Y SÍNTESIS
-
-**Capítulo 13.1: Tabla Maestra de Aplicaciones**
-- 13.1.1 Comparativa de Partes (S)
-- 13.1.2 Comparativa de Recursos (R)
-- 13.1.3 Comparativa de Dimensiones Φ
-- 13.1.4 Comparativa de Dimensiones Ψ
-- 13.1.5 Comparativa de Coexistencia
-
-**Capítulo 13.2: Patrones de Coexistencia por Tipo**
-- 13.2.1 Deportes de Equipo
-- 13.2.2 Deportes de Combate
-- 13.2.3 Deportes de Precisión
-- 13.2.4 Deportes de Invierno
-- 13.2.5 Deportes Acuáticos
-- 13.2.6 Deportes de Aventura
-- 13.2.7 Deportes de Motor
-- 13.2.8 Deportes Mentales
-- 13.2.9 eSports
-- 13.2.10 Juegos de Mesa
-
-**Capítulo 13.3: Métricas Comparativas**
-- 13.3.1 Dominancia (D)
-- 13.3.2 Diversidad (H)
-- 13.3.3 Estabilidad (S)
-- 13.3.4 Coexistencia (k)
-- 13.3.5 Eficiencia (E)
-
-**Capítulo 13.4: Aplicación del Teorema de Coexistencia-k**
-- 13.4.1 Fútbol
-- 13.4.2 Baloncesto
-- 13.4.3 Tenis
-- 13.4.4 Ajedrez
-- 13.4.5 Póker
-- 13.4.6 League of Legends
-- 13.4.7 Counter-Strike
-- 13.4.8 StarCraft II
-- 13.4.9 Fortnite
-- 13.4.10 Golf
-
-**Capítulo 13.5: Síntesis de la Ecuación Maestra en el Deporte**
-- 13.5.1 El Término Geométrico (Φ)
-- 13.5.2 El Término de Deuda (Ψ)
-- 13.5.3 El Término Ecológico (Ω)
-- 13.5.4 El Término Estocástico (ε)
-- 13.5.5 La Estructura Multiplicativa
-
----
-
-### SECCIÓN 14: HERRAMIENTAS DE OPTIMIZACIÓN
-
-**Capítulo 14.1: Scouting Automatizado**
-- 14.1.1 Algoritmo de Scouting
-- 14.1.2 Implementación en Python
-- 14.1.3 Ejemplos de Uso
-- 14.1.4 Optimización de Parámetros
-- 14.1.5 Validación de Resultados
-
-**Capítulo 14.2: Planificación de Entrenamiento**
-- 14.2.1 Algoritmo de Planificación
-- 14.2.2 Implementación en Python
-- 14.2.3 Ejemplos de Uso
-- 14.2.4 Optimización de Tiempo
-- 14.2.5 Validación de Resultados
-
-**Capítulo 14.3: Análisis de Partido en Tiempo Real**
-- 14.3.1 Algoritmo de Análisis
-- 14.3.2 Implementación en Python
-- 14.3.3 Ejemplos de Uso
-- 14.3.4 Optimización de Rendimiento
-- 14.3.5 Validación de Resultados
-
-**Capítulo 14.4: Optimización de Formación**
-- 14.4.1 Algoritmo de Asignación
-- 14.4.2 Implementación en Python
-- 14.4.3 Ejemplos de Uso
-- 14.4.4 Optimización de Posiciones
-- 14.4.5 Validación de Resultados
-
-**Capítulo 14.5: Dashboard de Rendimiento**
-- 14.5.1 Diseño de Dashboard
-- 14.5.2 Implementación en Python/JS
-- 14.5.3 Ejemplos de Uso
-- 14.5.4 Optimización de Visualización
-- 14.5.5 Validación de Resultados
-
----
-
-### SECCIÓN 15: KOANS Y CIERRE
-
-**Capítulo 15.1: Koans del Deporte**
-- 15.1.1 El Koan del Equilibrio
-- 15.1.2 El Koan del Faro y el Archipiélago
-- 15.1.3 El Koan de la Fotografía y el Río
-- 15.1.4 El Koan de la Catedral
-- 15.1.5 El Koan del Mapa y el Territorio
-
-**Capítulo 15.2: El Deporte como Laboratorio del PUSFRE**
-- 15.2.1 Reglas Claras
-- 15.2.2 Datos Abundantes
-- 15.2.3 Competencia Real
-- 15.2.4 Resultados Medibles
-- 15.2.5 Estrategias Complejas
-- 15.2.6 Pasión Humana
-- 15.2.7 Transversalidad
-
-**Capítulo 15.3: Cierre**
-- 15.3.1 El PUSFRE en el Deporte
-- 15.3.2 El Deporte como Sistema
-- 15.3.3 La Universalidad del Principio
-
----
-
-### ANEXO: 10 APLICACIONES PRÁCTICAS POR DEPORTE
-
-#### Anexo 1.1: Fútbol — 10 Aplicaciones Prácticas
-
-**Aplicación 1: Predicción de Rendimiento de Fichajes**
-```python
-def fitness_fichaje(jugador, equipo):
-    """
-    Evalúa el fitness de un fichaje potencial en un equipo.
-    """
-    F = sum(jugador['phi'][p] * jugador['psi'][p] * (equipo['omega'][p] ** alpha) for p in posiciones)
-    return F
 ```
+Fortalezas:
+- Tiro: 0.92 ⭐⭐⭐
+- Velocidad: 0.88 ⭐⭐⭐
+- Regate: 0.85 ⭐⭐
 
-**Aplicación 2: Optimización de Alineación**
-```python
-def alineacion_optima(jugadores, formacion):
-    """
-    Encuentra la alineación óptima para una formación dada.
-    """
-    # Usar algoritmo de asignación húngaro
-    return alineacion
-```
-
-**Aplicación 3: Gestión de Sustituciones**
-```python
-def gestion_sustituciones(jugadores, minuto):
-    """
-    Determina qué jugadores deben ser sustituidos en el minuto actual.
-    """
-    for j in jugadores:
-        if j['fatiga'] > umbral and j['fitness'] < j['fitness_base'] * 0.7:
-            return j
-```
-
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival(equipo_rival):
-    """
-    Analiza las fortalezas y debilidades de un rival.
-    """
-    return {
-        'fortalezas': [p for p in posiciones if equipo_rival['phi'][p] > 0.7],
-        'debilidades': [p for p in posiciones if equipo_rival['phi'][p] < 0.4]
-    }
-```
-
-**Aplicación 5: Planificación de Pretemporada**
-```python
-def plan_pretemporada(equipo, semanas):
-    """
-    Planifica el entrenamiento de pretemporada para maximizar fitness.
-    """
-    for semana in range(semanas):
-        for jugador in equipo:
-            # Alternar cargas
-            pass
-    return equipo
-```
-
-**Aplicación 6: Detección de Lesiones**
-```python
-def deteccion_lesiones(jugador):
-    """
-    Detecta riesgo de lesión basado en métricas PUSFRE.
-    """
-    if jugador['psi'] < 0.3 and jugador['omega'] > 0.8:
-        return "Alto riesgo de lesión"
-    return "Riesgo normal"
-```
-
-**Aplicación 7: Estrategia de Partido**
-```python
-def estrategia_partido(equipo, rival):
-    """
-    Determina la estrategia óptima para un partido.
-    """
-    F_equipo = sum(j['phi'] * j['psi'] * (j['omega'] ** alpha) for j in equipo)
-    F_rival = sum(j['phi'] * j['psi'] * (j['omega'] ** alpha) for j in rival)
-    if F_equipo > F_rival * 1.2:
-        return "Ofensivo"
-    elif F_rival > F_equipo * 1.2:
-        return "Defensivo"
-    else:
-        return "Equilibrado"
-```
-
-**Aplicación 8: Gestión de Cantera**
-```python
-def gestion_cantera(canteranos):
-    """
-    Evalúa y prioriza canteranos para el primer equipo.
-    """
-    for c in canteranos:
-        c['fitness'] = sum(c['phi'][p] * c['psi'][p] * (c['omega'][p] ** alpha) for p in posiciones)
-    return sorted(canteranos, key=lambda x: x['fitness'], reverse=True)
-```
-
-**Aplicación 9: Optimización de Fichajes**
-```python
-def optimizacion_fichajes(equipo, presupuesto, mercado):
-    """
-    Optimiza la compra de jugadores con presupuesto limitado.
-    """
-    # Problema de mochila con restricción de presupuesto
-    return fichajes_optimos
-```
-
-**Aplicación 10: Análisis Post-Partido**
-```python
-def analisis_post_partido(equipo, stats):
-    """
-    Analiza el rendimiento post-partido y sugiere mejoras.
-    """
-    return {
-        'puntos_fuertes': [p for p in posiciones if stats[p] > 0.7],
-        'areas_mejora': [p for p in posiciones if stats[p] < 0.4]
-    }
+Debilidades:
+- Defensa: 0.45 ❗
+- Juego aéreo: 0.50 ❗
+- Sacrificio: 0.55 ❗
 ```
 
 ---
 
-#### Anexo 1.2: Baloncesto — 10 Aplicaciones Prácticas
+**Aplicación 8: Análisis de Consistencia**
 
-**Aplicación 1: Evaluación de Tiros**
-```python
-def evaluacion_tiros(jugador, zona):
-    """
-    Evalúa la eficiencia de tiro de un jugador desde una zona.
-    """
-    return jugador['phi']['tiro'] * jugador['psi']['defensa'] * jugador['omega']['zona']
-```
+La consistencia mide la variabilidad del rendimiento.
 
-**Aplicación 2: Optimización de Rotaciones**
-```python
-def optimizacion_rotaciones(equipo, minutos_totales):
-    """
-    Optimiza los minutos de cada jugador para maximizar rendimiento.
-    """
-    fitness_total = sum(j['phi'] * j['psi'] * (j['omega'] ** alpha) for j in equipo)
-    for j in equipo:
-        j['minutos'] = minutos_totales * (j['phi'] * j['psi'] * (j['omega'] ** alpha)) / fitness_total
-    return equipo
-```
+**Cómo se hace:**
 
-**Aplicación 3: Análisis de Rivales**
-```python
-def analisis_rival_baloncesto(equipo_rival):
-    """
-    Analiza las fortalezas y debilidades de un rival de baloncesto.
-    """
-    return {
-        'ataque': sum(equipo_rival['phi']['tiro'] * equipo_rival['psi']['defensa'] for j in equipo_rival),
-        'defensa': sum(equipo_rival['phi']['defensa'] * equipo_rival['psi']['físico'] for j in equipo_rival)
-    }
-```
+1. Calcular la fitness en los últimos 10 partidos
+2. Calcular la desviación estándar
+3. Calcular el coeficiente de consistencia
 
-**Aplicación 4: Estrategia de Playoffs**
-```python
-def estrategia_playoffs(equipo, rival, serie):
-    """
-    Planifica la estrategia para una serie de playoffs.
-    """
-    # Ajustar según el rival y el momento de la serie
-    return estrategia
-```
+**Fórmula de consistencia:**
 
-**Aplicación 5: Gestión de Lesiones**
-```python
-def gestion_lesiones_baloncesto(jugador):
-    """
-    Detecta riesgo de lesión en baloncesto.
-    """
-    if jugador['psi'] < 0.25 and jugador['omega'] > 0.75:
-        return "Descanso recomendado"
-    return "Disponible"
-```
+$$C = 1 - \frac{\sigma(F)}{\mu(F)}$$
 
-**Aplicación 6: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_baloncesto(jugador, objetivo, semanas):
-    """
-    Planifica entrenamiento específico para mejorar una habilidad.
-    """
-    for semana in range(semanas):
-        jugador['phi'][objetivo] += 0.02
-    return jugador
-```
-
-**Aplicación 7: Evaluación de Fichajes**
-```python
-def evaluacion_fichajes_baloncesto(jugador, equipo):
-    """
-    Evalúa el impacto de un fichaje en el equipo.
-    """
-    F_actual = sum(j['phi'] * j['psi'] * (j['omega'] ** alpha) for j in equipo)
-    F_nuevo = F_actual + jugador['phi'] * jugador['psi'] * (jugador['omega'] ** alpha)
-    return F_nuevo - F_actual
-```
-
-**Aplicación 8: Gestión de Cantera**
-```python
-def gestion_cantera_baloncesto(canteranos, criterios):
-    """
-    Evalúa canteranos según criterios específicos.
-    """
-    for c in canteranos:
-        c['puntuacion'] = sum(c['phi'][p] * criterios[p] for p in criterios)
-    return sorted(canteranos, key=lambda x: x['puntuacion'], reverse=True)
-```
-
-**Aplicación 9: Estrategia de Partido**
-```python
-def estrategia_partido_baloncesto(equipo, rival):
-    """
-    Determina la estrategia óptima para un partido de baloncesto.
-    """
-    # Analizar matchup
-    return estrategia
-```
-
-**Aplicación 10: Análisis de Rendimiento**
-```python
-def analisis_rendimiento_baloncesto(equipo, stats):
-    """
-    Analiza el rendimiento y sugiere mejoras.
-    """
-    return {
-        'rating_ofensivo': stats['pts'] / stats['poss'],
-        'rating_defensivo': stats['pts_contra'] / stats['poss_contra'],
-        'net_rating': stats['pts'] / stats['poss'] - stats['pts_contra'] / stats['poss_contra']
-    }
-```
+**Ejemplo:** Un jugador con media 0.70 y desviación 0.08 tiene $C = 1 - 0.08/0.70 = 0.89$ (muy consistente).
 
 ---
 
-#### Anexo 1.3: Tenis — 10 Aplicaciones Prácticas
+**Aplicación 9: Análisis de Rendimiento en Grandes Partidos**
 
-**Aplicación 1: Evaluación de Superficie**
-```python
-def adaptacion_superficie(jugador, superficie):
-    """
-    Evalúa la adaptación de un jugador a una superficie.
-    """
-    pesos = {'tierra': {'fisico': 0.3, 'mental': 0.3, 'resto': 0.4},
-             'hierba': {'saque': 0.4, 'volea': 0.3, 'velocidad': 0.3},
-             'dura': {'saque': 0.25, 'resto': 0.25, 'fisico': 0.25, 'mental': 0.25}}
-    F = sum(jugador['phi'][p] * pesos[superficie].get(p, 0) * jugador['psi'][p] for p in jugador['phi'])
-    return F
-```
+El PUSFRE evalúa el rendimiento en partidos importantes.
 
-**Aplicación 2: Estrategia de Partido**
-```python
-def estrategia_tenis(jugador, rival, superficie):
-    """
-    Determina la estrategia óptima para un partido de tenis.
-    """
-    F_jugador = adaptacion_superficie(jugador, superficie)
-    F_rival = adaptacion_superficie(rival, superficie)
-    if F_jugador > F_rival * 1.2:
-        return "Agresivo"
-    elif F_rival > F_jugador * 1.2:
-        return "Defensivo"
-    else:
-        return "Equilibrado"
-```
+**Cómo se hace:**
 
-**Aplicación 3: Gestión de Energía**
-```python
-def gestion_energia_tenis(jugador, sets):
-    """
-    Gestiona el gasto de energía a lo largo de un partido.
-    """
-    energia_total = jugador['energia']
-    energia_por_set = energia_total / sets
-    for set_actual in range(sets):
-        jugador['energia'] -= energia_por_set * (1 + 0.1 * set_actual / sets)
-    return jugador
-```
+1. Calcular la fitness en partidos normales
+2. Calcular la fitness en partidos importantes (derbis, finales)
+3. Calcular el factor de grandeza
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_tenis(rival, superficie):
-    """
-    Analiza las fortalezas y debilidades de un rival en una superficie.
-    """
-    F = adaptacion_superficie(rival, superficie)
-    return {
-        'fortalezas': [p for p in rival['phi'] if rival['phi'][p] > 0.7],
-        'debilidades': [p for p in rival['phi'] if rival['phi'][p] < 0.4],
-        'fitness_adaptado': F
-    }
-```
+**Fórmula de factor de grandeza:**
 
-**Aplicación 5: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_tenis(jugador, objetivo, semanas):
-    """
-    Planifica entrenamiento específico para mejorar un golpe.
-    """
-    for semana in range(semanas):
-        jugador['phi'][objetivo] += 0.015
-    return jugador
-```
+$$G = \frac{F_{grandes}}{F_{normales}}$$
 
-**Aplicación 6: Gestión de Lesiones**
-```python
-def gestion_lesiones_tenis(jugador):
-    """
-    Detecta riesgo de lesión en tenis.
-    """
-    if jugador['psi'] < 0.2:
-        return "Descanso recomendado"
-    return "Disponible"
-```
+**Ejemplo:** Un jugador con $F_{normales} = 0.68$ y $F_{grandes} = 0.75$ tiene $G = 1.10$ (rinde mejor en partidos importantes).
 
-**Aplicación 7: Optimización de Torneos**
-```python
-def optimizacion_torneos_tenis(jugador, calendario):
-    """
-    Optimiza la selección de torneos para maximizar puntos.
-    """
-    for torneo in calendario:
-        F = adaptacion_superficie(jugador, torneo['superficie'])
-        torneo['fitness'] = F
-    return sorted(calendario, key=lambda x: x['fitness'], reverse=True)
-```
+---
+
+**Aplicación 10: Análisis de Progresión**
+
+El PUSFRE mide la mejora o declive del jugador a lo largo del tiempo.
+
+**Cómo se hace:**
+
+1. Calcular la fitness en cada temporada
+2. Ajustar una línea de tendencia
+3. Calcular la tasa de progresión
+
+**Fórmula de progresión:**
+
+$$P = \frac{F_{actual} - F_{anterior}}{F_{anterior}} \cdot 100$$
+
+**Ejemplo:** Un jugador con $F_{2023} = 0.65$ y $F_{2024} = 0.70$ tiene $P = (0.70-0.65)/0.65 \cdot 100 = 7.7\%$ de mejora.
+
+---
+
+### Capítulo 1.2: Táctica y Formaciones
+
+**Aplicación 11: Optimización de Formación**
+
+El PUSFRE encuentra la formación que maximiza la fitness del equipo.
+
+**Cómo se hace:**
+
+1. Definir las formaciones posibles
+2. Asignar jugadores a posiciones
+3. Calcular la fitness total para cada formación
+4. Seleccionar la mejor
+
+**Formaciones comunes:**
+
+| Formación | $\Phi$ total | $\Psi$ total | Fitness total |
+|-----------|--------------|--------------|---------------|
+| 4-3-3 | 0.85 | 0.78 | 0.66 |
+| 4-4-2 | 0.82 | 0.82 | 0.67 |
+| 3-5-2 | 0.80 | 0.85 | 0.68 |
+| 4-2-3-1 | 0.87 | 0.80 | 0.70 |
+
+**Ejemplo:** La formación 4-2-3-1 maximiza la fitness total.
+
+---
+
+**Aplicación 12: Análisis de Compatibilidad de Jugadores**
+
+El PUSFRE mide cómo encajan los jugadores entre sí.
+
+**Cómo se hace:**
+
+1. Calcular las dimensiones de cada jugador
+2. Calcular la sinergia entre pares
+3. Calcular la compatibilidad total del equipo
+
+**Fórmula de sinergia:**
+
+$$S_{ij} = \sum_{d} \Phi_{i,d} \cdot \Phi_{j,d}$$
+
+**Ejemplo:** Dos jugadores con alta sinergia en pase ($\Phi_{pase,i} = 0.90$, $\Phi_{pase,j} = 0.85$) tienen $S = 0.90 \cdot 0.85 = 0.77$.
+
+---
+
+**Aplicación 13: Optimización de Sistema de Juego**
+
+El PUSFRE selecciona el sistema de juego que mejor se adapta al equipo.
+
+**Cómo se hace:**
+
+1. Definir los sistemas posibles (directo, posesión, contragolpe, presión alta)
+2. Calcular la fitness de cada sistema
+3. Seleccionar el mejor
+
+**Sistemas de juego:**
+
+| Sistema | $\Phi$ requerido | $\Psi$ requerido | Fitness |
+|---------|------------------|------------------|---------|
+| Posesión | Pase (0.90) | Paciencia (0.85) | 0.77 |
+| Contragolpe | Velocidad (0.85) | Defensa (0.80) | 0.68 |
+| Presión alta | Físico (0.80) | Sacrificio (0.85) | 0.68 |
+| Directo | Tiro (0.85) | Físico (0.80) | 0.68 |
+
+---
+
+**Aplicación 14: Análisis de Estrategia de Partido**
+
+El PUSFRE adapta la estrategia al rival.
+
+**Cómo se hace:**
+
+1. Analizar las debilidades del rival
+2. Ajustar la estrategia para explotarlas
+3. Seleccionar la estrategia óptima
+
+**Ejemplo:** Si el rival tiene defensas lentas ($\Phi_{velocidad} < 0.60$), usar contragolpes.
+
+---
+
+**Aplicación 15: Gestión de Sustituciones**
+
+El PUSFRE optimiza las sustituciones durante el partido.
+
+**Cómo se hace:**
+
+1. Monitorear la fatiga de los jugadores
+2. Calcular la fitness de los suplentes
+3. Decidir cuándo y a quién sustituir
+
+**Regla de sustitución:**
+
+Un jugador debe ser sustituido cuando:
+
+$$F_i(t) < F_{suplente} \cdot 0.8$$
+
+---
+
+**Aplicación 16: Optimización de Balón Parado**
+
+El PUSFRE optimiza la ejecución de balones parados.
+
+**Cómo se hace:**
+
+1. Identificar los jugadores con mejor tiro, centro o cabeceo
+2. Asignar roles específicos
+3. Optimizar la estrategia según la situación
+
+**Roles en balón parado:**
+
+| Rol | Dimensión clave | Jugador ideal |
+|-----|-----------------|---------------|
+| Tirador | Tiro (0.90) | Jugador con mejor tiro |
+| Rematador | Cabeza (0.85) | Jugador más alto |
+| Bloqueador | Físico (0.80) | Jugador más fuerte |
+
+---
+
+**Aplicación 17: Análisis de Transiciones**
+
+El PUSFRE mide la eficiencia en las transiciones ataque-defensa.
+
+**Cómo se hace:**
+
+1. Calcular la velocidad de transición
+2. Calcular la precisión de los pases en transición
+3. Calcular la efectividad en las transiciones
+
+**Fórmula de transición:**
+
+$$T = \frac{Precisión_{pases} \cdot Velocidad}{Errores_{transición}}$$
+
+---
+
+**Aplicación 18: Optimización de Presión Alta**
+
+El PUSFRE optimiza la estrategia de presión alta.
+
+**Cómo se hace:**
+
+1. Analizar la capacidad de presión del equipo
+2. Identificar momentos óptimos para presionar
+3. Ajustar la intensidad según el partido
+
+**Ejemplo:** Presión alta en los primeros 15 minutos, luego replegarse.
+
+---
+
+**Aplicación 19: Análisis de Rendimiento Defensivo**
+
+El PUSFRE mide la eficiencia defensiva.
+
+**Cómo se hace:**
+
+1. Calcular la fitness defensiva de cada jugador
+2. Calcular la fitness defensiva del equipo
+3. Identificar áreas de mejora
+
+**Dimensiones defensivas:**
+
+| Dimensión | Peso |
+|-----------|------|
+| Anticipación | 0.30 |
+| Entrada | 0.25 |
+| Cobertura | 0.25 |
+| Sacrificio | 0.20 |
+
+---
+
+**Aplicación 20: Análisis de Rendimiento Ofensivo**
+
+El PUSFRE mide la eficiencia ofensiva.
+
+**Cómo se hace:**
+
+1. Calcular la fitness ofensiva de cada jugador
+2. Calcular la fitness ofensiva del equipo
+3. Identificar áreas de mejora
+
+**Dimensiones ofensivas:**
+
+| Dimensión | Peso |
+|-----------|------|
+| Tiro | 0.30 |
+| Pase | 0.25 |
+| Regate | 0.20 |
+| Movimiento | 0.25 |
+
+---
+
+### Capítulo 1.3: Gestión de Lesiones
+
+**Aplicación 21: Predicción de Riesgo de Lesión**
+
+El PUSFRE predice el riesgo de lesión de cada jugador.
+
+**Cómo se hace:**
+
+1. Monitorear la carga de trabajo
+2. Calcular el índice de fatiga
+3. Predecir el riesgo de lesión
+
+**Fórmula de riesgo:**
+
+$$R = \frac{Carga}{Carga_{base}} \cdot (1 - \Psi_{recuperación})$$
+
+**Ejemplo:** Un jugador con carga 120% y recuperación 0.70 tiene $R = 1.2 \cdot 0.3 = 0.36$ (riesgo moderado).
+
+---
+
+**Aplicación 22: Gestión de Carga**
+
+El PUSFRE optimiza la carga de trabajo para prevenir lesiones.
+
+**Cómo se hace:**
+
+1. Calcular la carga ideal por jugador
+2. Ajustar minutos y entrenamientos
+3. Monitorear el índice de fatiga
+
+**Carga ideal:**
+
+$$Carga_{ideal} = Carga_{base} \cdot (1 + 0.1 \cdot (1 - \Psi_{lesiones}))$$
+
+---
+
+**Aplicación 23: Gestión de Recuperación**
+
+El PUSFRE optimiza los tiempos de recuperación.
+
+**Cómo se hace:**
+
+1. Calcular el tiempo de recuperación necesario
+2. Planificar sesiones de recuperación
+3. Monitorear la evolución de la fatiga
+
+**Tiempo de recuperación:**
+
+$$T_{rec} = \frac{Fatiga}{Tasa_{recuperación}}$$
+
+---
+
+**Aplicación 24: Análisis de Historial de Lesiones**
+
+El PUSFRE analiza el historial de lesiones para prevenir recaídas.
+
+**Cómo se hace:**
+
+1. Recopilar historial de lesiones
+2. Identificar patrones
+3. Establecer protocolos de prevención
+
+**Ejemplo:** Un jugador con 3 lesiones en la misma zona tiene alto riesgo de recaída.
+
+---
+
+**Aplicación 25: Planificación de Pretemporada**
+
+El PUSFRE optimiza la pretemporada para maximizar fitness.
+
+**Cómo se hace:**
+
+1. Definir objetivos de fitness
+2. Planificar cargas progresivas
+3. Monitorear adaptación
+
+**Fase de pretemporada:**
+
+| Semana | Objetivo | Carga |
+|--------|----------|-------|
+| 1-2 | Base física | 60% |
+| 3-4 | Potencia | 80% |
+| 5-6 | Resistencia | 100% |
+| 7-8 | Afinamiento | 90% |
+
+---
+
+### Capítulo 1.4: Análisis de Partido
+
+**Aplicación 26: Predicción de Resultados**
+
+El PUSFRE predice el resultado de un partido.
+
+**Cómo se hace:**
+
+1. Calcular la fitness de cada equipo
+2. Calcular la probabilidad de victoria
+3. Estimar el marcador esperado
+
+**Probabilidad de victoria:**
+
+$$P_{local} = \frac{F_{local}}{F_{local} + F_{visitante}}$$
+
+**Marcador esperado:**
+
+$$Goles_{local} = F_{local} \cdot 0.4$$
+
+$$Goles_{visitante} = F_{visitante} \cdot 0.4$$
+
+---
+
+**Aplicación 27: Análisis Post-Partido**
+
+El PUSFRE analiza el rendimiento después del partido.
+
+**Cómo se hace:**
+
+1. Recopilar estadísticas del partido
+2. Calcular la fitness real vs esperada
+3. Identificar desviaciones
+
+**Ejemplo:** Un jugador tenía fitness esperada 0.70 pero rindió 0.80. Ha rendido por encima de lo esperado.
+
+---
+
+**Aplicación 28: Análisis de Momentos Clave**
+
+El PUSFRE analiza el rendimiento en momentos clave.
+
+**Cómo se hace:**
+
+1. Identificar momentos clave del partido
+2. Calcular fitness en esos momentos
+3. Evaluar la efectividad
+
+**Momentos clave:**
+
+| Momento | Fitness | Efectividad |
+|---------|---------|-------------|
+| Primeros 15 min | 0.75 | 0.80 |
+| Últimos 15 min | 0.65 | 0.55 |
+| Gol en contra | 0.70 | 0.75 |
+| Gol a favor | 0.85 | 0.90 |
+
+---
+
+**Aplicación 29: Análisis de Eficiencia Ofensiva**
+
+El PUSFRE mide la eficiencia ofensiva del equipo.
+
+**Cómo se hace:**
+
+1. Calcular tiros, posesión, ocasiones
+2. Calcular la eficiencia de conversión
+3. Identificar áreas de mejora
+
+**Fórmula de eficiencia ofensiva:**
+
+$$EO = \frac{Goles}{Tiros} \cdot \frac{Tiros}{Posesión}$$
+
+---
+
+**Aplicación 30: Análisis de Eficiencia Defensiva**
+
+El PUSFRE mide la eficiencia defensiva del equipo.
+
+**Cómo se hace:**
+
+1. Calcular tiros recibidos, posesión rival
+2. Calcular la eficiencia defensiva
+3. Identificar áreas de mejora
+
+**Fórmula de eficiencia defensiva:**
+
+$$ED = \frac{Goles_{recibidos}}{Tiros_{recibidos}} \cdot \frac{Tiros_{recibidos}}{Posesión_{rival}}$$
+
+---
+
+**Aplicación 31: Análisis de Posesión**
+
+El PUSFRE analiza la efectividad de la posesión.
+
+**Cómo se hace:**
+
+1. Calcular tiempo de posesión
+2. Calcular pases completados
+3. Calcular la efectividad de la posesión
+
+**Fórmula de efectividad de posesión:**
+
+$$EP = \frac{Pases_{completados}}{Pases_{totales}} \cdot \frac{Progresión}{Posesión}$$
+
+---
+
+**Aplicación 32: Análisis de Presión**
+
+El PUSFRE analiza la efectividad de la presión.
+
+**Cómo se hace:**
+
+1. Calcular recuperaciones en campo rival
+2. Calcular errores forzados
+3. Calcular la efectividad de la presión
+
+**Fórmula de efectividad de presión:**
+
+$$EP = \frac{Recuperaciones}{Tiempo_{presión}} \cdot \frac{Errores_{forzados}}{Recuperaciones}$$
+
+---
+
+**Aplicación 33: Análisis de Transiciones Ofensivas**
+
+El PUSFRE analiza la efectividad de las transiciones ofensivas.
+
+**Cómo se hace:**
+
+1. Calcular velocidad de transición
+2. Calcular precisión de pases en transición
+3. Calcular finalización
+
+**Fórmula de transición ofensiva:**
+
+$$TO = \frac{Velocidad \cdot Precisión_{pases}}{Tiempo_{transición}} \cdot Finalización$$
+
+---
+
+**Aplicación 34: Análisis de Transiciones Defensivas**
+
+El PUSFRE analiza la efectividad de las transiciones defensivas.
+
+**Cómo se hace:**
+
+1. Calcular velocidad de replegamiento
+2. Calcular recuperaciones defensivas
+3. Calcular efectividad
+
+**Fórmula de transición defensiva:**
+
+$$TD = \frac{Velocidad_{repliegue} \cdot Recuperaciones}{Tiempo_{reacción}}$$
+
+---
+
+**Aplicación 35: Análisis de Balón Parado Ofensivo**
+
+El PUSFRE analiza la efectividad de los balones parados ofensivos.
+
+**Cómo se hace:**
+
+1. Calcular centros, remates, goles
+2. Calcular la efectividad de cada situación
+3. Identificar áreas de mejora
+
+**Fórmula de balón parado ofensivo:**
+
+$$BPO = \frac{Goles_{BP}}{Centros_{BP}} \cdot \frac{Remates_{BP}}{Centros_{BP}}$$
+
+---
+
+**Aplicación 36: Análisis de Balón Parado Defensivo**
+
+El PUSFRE analiza la efectividad de los balones parados defensivos.
+
+**Cómo se hace:**
+
+1. Calcular goles recibidos en BP
+2. Calcular despejes y bloqueos
+3. Identificar áreas de mejora
+
+**Fórmula de balón parado defensivo:**
+
+$$BPD = \frac{Despejes + Bloqueos}{Goles_{recibidos\_BP} + 1}$$
+
+---
+
+**Aplicación 37: Análisis de Rendimiento Individual**
+
+El PUSFRE analiza el rendimiento individual de cada jugador.
+
+**Cómo se hace:**
+
+1. Calcular la fitness de cada jugador
+2. Comparar con la media del equipo
+3. Identificar jugadores destacados
+
+**Ejemplo de ranking:**
+
+| Jugador | Fitness | Evaluación |
+|---------|---------|------------|
+| Jugador A | 0.82 | Excelente |
+| Jugador B | 0.75 | Muy bueno |
+| Jugador C | 0.68 | Bueno |
+| Jugador D | 0.58 | Aceptable |
+| Jugador E | 0.45 | Mejorable |
+
+---
+
+**Aplicación 38: Análisis de Cooperación entre Jugadores**
+
+El PUSFRE mide la cooperación entre jugadores.
+
+**Cómo se hace:**
+
+1. Calcular pases entre jugadores
+2. Calcular asistencias
+3. Calcular la sinergia ofensiva
+
+**Fórmula de cooperación:**
+
+$$C = \frac{Pases_{i \to j}}{Pases_{totales_i}} \cdot \frac{Asistencias_{i \to j}}{Asistencias_{totales_i}}$$
+
+---
+
+**Aplicación 39: Análisis de Rendimiento en Casa y Fuera**
+
+El PUSFRE compara el rendimiento en casa y fuera.
+
+**Cómo se hace:**
+
+1. Calcular fitness en casa
+2. Calcular fitness fuera
+3. Calcular el factor campo
+
+**Fórmula de factor campo:**
+
+$$FC = \frac{F_{casa}}{F_{fuera}}$$
+
+**Ejemplo:** Un equipo con $F_{casa} = 0.75$ y $F_{fuera} = 0.65$ tiene $FC = 1.15$ (juega mejor en casa).
+
+---
+
+**Aplicación 40: Análisis de Rendimiento por Minutos**
+
+El PUSFRE analiza el rendimiento en diferentes momentos del partido.
+
+**Cómo se hace:**
+
+1. Dividir el partido en segmentos
+2. Calcular fitness en cada segmento
+3. Identificar patrones
+
+**Segmentos del partido:**
+
+| Segmento | Fitness | Rendimiento |
+|----------|---------|-------------|
+| 0-15 | 0.75 | Buena entrada |
+| 15-30 | 0.70 | Regular |
+| 30-45 | 0.65 | Bajo |
+| 45-60 | 0.72 | Recuperación |
+| 60-75 | 0.80 | Mejor momento |
+| 75-90 | 0.68 | Descenso |
+
+---
+
+### Capítulo 1.5: Gestión de Cantera
+
+**Aplicación 41: Evaluación de Talentos de Cantera**
+
+El PUSFRE evalúa el potencial de los jugadores de la cantera.
+
+**Cómo se hace:**
+
+1. Calcular fitness actual del juvenil
+2. Proyectar su fitness futura
+3. Comparar con jugadores del primer equipo
+
+**Ejemplo:** Un juvenil de 17 años con fitness 0.35 tiene potencial para llegar a 0.65 a los 22 años.
+
+---
+
+**Aplicación 42: Seguimiento de Progresión de Cantera**
+
+El PUSFRE monitorea la progresión de los jugadores de cantera.
+
+**Cómo se hace:**
+
+1. Calcular fitness en cada temporada
+2. Calcular la tasa de progresión
+3. Identificar jugadores con mayor proyección
+
+**Ejemplo de progresión:**
+
+| Edad | Fitness | Progresión |
+|------|---------|------------|
+| 16 | 0.30 | - |
+| 17 | 0.35 | +16% |
+| 18 | 0.42 | +20% |
+| 19 | 0.50 | +19% |
+
+---
+
+**Aplicación 43: Optimización de Promociones**
+
+El PUSFRE decide cuándo promocionar un jugador de cantera.
+
+**Cómo se hace:**
+
+1. Evaluar fitness del juvenil
+2. Evaluar necesidades del primer equipo
+3. Decidir el momento óptimo para la promoción
+
+**Regla de promoción:**
+
+Un juvenil debe ser promocionado cuando:
+
+$$F_{juvenil} > 0.6 \cdot F_{titular}$$
+
+---
+
+**Aplicación 44: Análisis de Adaptación al Primer Equipo**
+
+El PUSFRE predice la adaptación de un juvenil al primer equipo.
+
+**Cómo se hace:**
+
+1. Evaluar dimensiones técnicas
+2. Evaluar dimensiones psicológicas
+3. Calcular la probabilidad de éxito
+
+**Fórmula de adaptación:**
+
+$$P_{éxito} = \frac{\Phi_{técnico} \cdot \Psi_{psicológico}}{\Phi_{media\_equipo} \cdot \Psi_{media\_equipo}}$$
+
+---
+
+**Aplicación 45: Gestión de Préstamos**
+
+El PUSFRE optimiza las decisiones de préstamo.
+
+**Cómo se hace:**
+
+1. Evaluar necesidades de desarrollo del jugador
+2. Evaluar ofertas de préstamo
+3. Seleccionar la mejor opción
+
+**Ejemplo:** Un jugador necesita minutos y un equipo ofrece 20 partidos garantizados. El préstamo es favorable.
+
+---
+
+### Capítulo 1.6: Optimización de Fichajes
+
+**Aplicación 46: Selección de Fichajes**
+
+El PUSFRE selecciona los mejores fichajes para el equipo.
+
+**Cómo se hace:**
+
+1. Identificar necesidades del equipo
+2. Buscar jugadores que cubran esas necesidades
+3. Priorizar por fitness
+
+**Ejemplo:** El equipo necesita un delantero. Se busca el delantero con mayor fitness disponible.
+
+---
+
+**Aplicación 47: Evaluación de Coste-Beneficio**
+
+El PUSFRE evalúa la relación coste-beneficio de los fichajes.
+
+**Cómo se hace:**
+
+1. Calcular la fitness del jugador
+2. Calcular el coste (fichaje + salario)
+3. Calcular el ratio coste-beneficio
+
+**Fórmula de coste-beneficio:**
+
+$$CB = \frac{Fitness}{Coste}$$
+
+---
+
+**Aplicación 48: Análisis de Riesgo de Fichaje**
+
+El PUSFRE evalúa el riesgo de un fichaje.
+
+**Cómo se hace:**
+
+1. Evaluar historial de lesiones
+2. Evaluar consistencia de rendimiento
+3. Calcular el índice de riesgo
+
+**Índice de riesgo:**
+
+$$R = (1 - \Psi_{lesiones}) \cdot (1 - C)$$
+
+**Ejemplo:** Un jugador con $\Psi_{lesiones} = 0.75$ y $C = 0.85$ tiene $R = 0.25 \cdot 0.15 = 0.04$ (riesgo bajo).
+
+---
+
+**Aplicación 49: Optimización de Fichajes por Posición**
+
+El PUSFRE optimiza los fichajes según la posición necesaria.
+
+**Cómo se hace:**
+
+1. Identificar la posición con menor fitness
+2. Buscar jugadores en esa posición
+3. Seleccionar el mejor
+
+**Ejemplo:** El equipo tiene un portero con fitness 0.60. Se busca un portero con fitness >0.70.
+
+---
+
+**Aplicación 50: Planificación de Fichajes a Largo Plazo**
+
+El PUSFRE planifica los fichajes a largo plazo.
+
+**Cómo se hace:**
+
+1. Proyectar necesidades futuras
+2. Identificar jugadores con potencial
+3. Planificar fichajes en ventanas de mercado
+
+**Ejemplo:** En 2 años, el delantero titular tendrá 32 años. Se debe fichar a su sustituto ahora.
+
+---
+
+## SECCIÓN 2: BALONCESTO — 50 APLICACIONES PRÁCTICAS
+
+### Capítulo 2.1: Scouting de Jugadores
+
+**Aplicación 1: Evaluación de Tiradores**
+
+El PUSFRE evalúa la eficiencia de tiro de un jugador.
+
+**Cómo se hace:**
+
+1. Medir porcentaje de tiro ($\Phi_{tiro}$)
+2. Medir volumen de tiros ($\Omega_{tiro}$)
+3. Medir consistencia ($\Psi_{consistencia}$)
+
+**Fórmula de eficiencia de tiro:**
+
+$$ET = \Phi_{tiro} \cdot \Psi_{consistencia} \cdot \Omega_{tiro}^{1.2}$$
+
+---
+
+**Aplicación 2: Evaluación de Defensores**
+
+El PUSFRE evalúa la capacidad defensiva de un jugador.
+
+**Cómo se hace:**
+
+1. Medir capacidad de robo ($\Phi_{robo}$)
+2. Medir capacidad de bloqueo ($\Phi_{bloqueo}$)
+3. Medir intensidad defensiva ($\Psi_{intensidad}$)
+
+**Fórmula de capacidad defensiva:**
+
+$$CD = \Phi_{robo} \cdot \Phi_{bloqueo} \cdot \Psi_{intensidad}$$
+
+---
+
+**Aplicación 3: Evaluación de Rebotadores**
+
+El PUSFRE evalúa la capacidad de rebote de un jugador.
+
+**Cómo se hace:**
+
+1. Medir rebotes ofensivos ($\Phi_{RO}$)
+2. Medir rebotes defensivos ($\Phi_{RD}$)
+3. Medir posicionamiento ($\Psi_{posicionamiento}$)
+
+**Fórmula de capacidad de rebote:**
+
+$$CR = (\Phi_{RO} + \Phi_{RD}) \cdot \Psi_{posicionamiento} \cdot \Omega_{minutos}$$
+
+---
+
+**Aplicación 4: Evaluación de Creadores de Juego**
+
+El PUSFRE evalúa la capacidad de creación de juego.
+
+**Cómo se hace:**
+
+1. Medir asistencias ($\Phi_{asistencias}$)
+2. Medir visión de juego ($\Phi_{visión}$)
+3. Medir ratio asistencias/pérdidas ($\Psi_{eficiencia}$)
+
+**Fórmula de creación de juego:**
+
+$$CJ = \Phi_{asistencias} \cdot \Phi_{visión} \cdot \Psi_{eficiencia}$$
+
+---
+
+**Aplicación 5: Evaluación de Versatilidad**
+
+El PUSFRE evalúa la versatilidad de un jugador.
+
+**Cómo se hace:**
+
+1. Medir capacidad en múltiples posiciones ($\Phi_{versatilidad}$)
+2. Medir adaptabilidad ($\Psi_{adaptabilidad}$)
+3. Medir inteligencia de juego ($\Phi_{IQ}$)
+
+**Fórmula de versatilidad:**
+
+$$V = \Phi_{versatilidad} \cdot \Psi_{adaptabilidad} \cdot \Phi_{IQ}$$
+
+---
+
+### Capítulo 2.2: Táctica y Sistemas
+
+**Aplicación 6: Optimización de Rotaciones**
+
+El PUSFRE optimiza los minutos de cada jugador.
+
+**Cómo se hace:**
+
+1. Calcular fitness de cada jugador
+2. Asignar minutos proporcionalmente
+3. Ajustar según el partido
+
+**Fórmula de minutos:**
+
+$$Minutos_i = \frac{F_i}{\sum F_j} \cdot 240$$
+
+---
+
+**Aplicación 7: Estrategia de Ataque**
+
+El PUSFRE selecciona la estrategia ofensiva óptima.
+
+**Cómo se hace:**
+
+1. Analizar debilidades defensivas del rival
+2. Seleccionar la estrategia que las explote
+3. Ejecutar la estrategia
+
+**Ejemplo:** Si el rival tiene defensa exterior débil, atacar con tiros de 3.
+
+---
+
+**Aplicación 8: Estrategia de Defensa**
+
+El PUSFRE selecciona la estrategia defensiva óptima.
+
+**Cómo se hace:**
+
+1. Analizar fortalezas ofensivas del rival
+2. Seleccionar la estrategia que las neutralice
+3. Ejecutar la estrategia
+
+**Ejemplo:** Si el rival ataca por dentro, usar defensa en zona.
+
+---
+
+**Aplicación 9: Gestión de Faltas**
+
+El PUSFRE gestiona el riesgo de acumulación de faltas.
+
+**Cómo se hace:**
+
+1. Monitorear faltas de cada jugador
+2. Decidir cuándo arriesgar
+3. Gestionar los tiempos muertos
+
+**Regla de gestión de faltas:**
+
+Un jugador con 4 faltas debe jugar con cuidado.
+
+---
+
+**Aplicación 10: Optimización de Pick and Roll**
+
+El PUSFRE optimiza la ejecución del pick and roll.
+
+**Cómo se hace:**
+
+1. Identificar la mejor pareja para el pick and roll
+2. Decidir el tipo de pick (slip, roll, pop)
+3. Ejecutar la jugada
+
+**Ejemplo:** El base con mejor pase y el pívot con mejor finalización.
+
+---
+
+### Capítulo 2.3: Análisis de Partido
+
+**Aplicación 11: Predicción de Resultados**
+
+El PUSFRE predice el resultado de un partido.
+
+**Cómo se hace:**
+
+1. Calcular fitness de cada equipo
+2. Calcular probabilidad de victoria
+3. Estimar el marcador esperado
+
+**Fórmula de probabilidad de victoria:**
+
+$$P_{local} = \frac{F_{local}}{F_{local} + F_{visitante}}$$
+
+---
+
+**Aplicación 12: Análisis de Eficiencia Ofensiva**
+
+El PUSFRE mide la eficiencia ofensiva del equipo.
+
+**Cómo se hace:**
+
+1. Calcular puntos por posesión ($PPP$)
+2. Calcular porcentaje de tiro ($FG\%$)
+3. Calcular ratio asistencias/pérdidas
+
+**Fórmula de eficiencia ofensiva:**
+
+$$EO = PPP \cdot FG\% \cdot (1 + Asistencias/Pérdidas)$$
+
+---
+
+**Aplicación 13: Análisis de Eficiencia Defensiva**
+
+El PUSFRE mide la eficiencia defensiva del equipo.
+
+**Cómo se hace:**
+
+1. Calcular puntos por posesión rival
+2. Calcular porcentaje de tiro rival
+3. Calcular robos y tapones
+
+**Fórmula de eficiencia defensiva:**
+
+$$ED = \frac{Robos + Tapones}{PPP_{rival} \cdot FG\%_{rival}}$$
+
+---
+
+**Aplicación 14: Análisis de Rebotes**
+
+El PUSFRE analiza la efectividad en rebotes.
+
+**Cómo se hace:**
+
+1. Calcular rebotes ofensivos
+2. Calcular rebotes defensivos
+3. Calcular diferencia de rebotes
+
+**Fórmula de efectividad de rebotes:**
+
+$$ER = \frac{Rebotes_{propios}}{Rebotes_{rivales}}$$
+
+---
+
+**Aplicación 15: Análisis de Uso de Posesiones**
+
+El PUSFRE analiza cómo se usan las posesiones.
+
+**Cómo se hace:**
+
+1. Calcular tiros por posesión
+2. Calcular pérdidas por posesión
+3. Calcular eficiencia por posesión
+
+**Fórmula de uso de posesión:**
+
+$$UP = \frac{Tiros \cdot Eficiencia_{tiro} - Pérdidas}{Posesiones}$$
+
+---
+
+### Capítulo 2.4: Gestión de Plantilla
+
+**Aplicación 16: Optimización de Plantilla**
+
+El PUSFRE optimiza la construcción de la plantilla.
+
+**Cómo se hace:**
+
+1. Definir necesidades por posición
+2. Evaluar jugadores disponibles
+3. Seleccionar la mejor combinación
+
+**Ejemplo:** Un equipo necesita 3 bases, 4 escoltas, 3 aleros, 2 ala-pívots, 3 pívots.
+
+---
+
+**Aplicación 17: Gestión de Salario**
+
+El PUSFRE optimiza la estructura salarial.
+
+**Cómo se hace:**
+
+1. Calcular el valor de cada jugador
+2. Asignar salarios proporcionales
+3. Mantener el equilibrio financiero
+
+**Fórmula de valor salarial:**
+
+$$VS = \frac{Fitness \cdot (1 + Factor_{mercado})}{Salario}$$
+
+---
+
+**Aplicación 18: Análisis de Contratos**
+
+El PUSFRE evalúa el valor de los contratos.
+
+**Cómo se hace:**
+
+1. Calcular la fitness actual
+2. Proyectar la fitness futura
+3. Evaluar el valor del contrato
+
+**Ejemplo:** Un jugador de 28 años con fitness 0.80 tiene contrato por 3 años. El valor está en la primera temporada.
+
+---
+
+**Aplicación 19: Gestión de Agentes Libres**
+
+El PUSFRE optimiza la firma de agentes libres.
+
+**Cómo se hace:**
+
+1. Evaluar agentes libres disponibles
+2. Calcular su fitness
+3. Priorizar por necesidad y presupuesto
+
+**Ejemplo:** Un base agente libre con fitness 0.75 es una buena opción.
+
+---
+
+**Aplicación 20: Planificación de Draft**
+
+El PUSFRE planifica la selección en el draft.
+
+**Cómo se hace:**
+
+1. Evaluar prospectos
+2. Proyectar su fitness futura
+3. Seleccionar el mejor prospecto
+
+**Ejemplo:** Un prospecto de 19 años con fitness actual 0.40 y potencial 0.80 es una buena selección.
+
+---
+
+### Capítulo 2.5: Gestión de Lesiones
+
+**Aplicación 21: Predicción de Lesiones**
+
+El PUSFRE predice el riesgo de lesión en baloncesto.
+
+**Cómo se hace:**
+
+1. Monitorear minutos jugados
+2. Monitorear carga de trabajo
+3. Predecir el riesgo
+
+**Fórmula de riesgo:**
+
+$$R = \frac{Minutos_{últimos\_7} + Carga_{entrenamiento}}{Carga_{base}}$$
+
+---
+
+**Aplicación 22: Gestión de Carga**
+
+El PUSFRE optimiza la carga de trabajo.
+
+**Cómo se hace:**
+
+1. Calcular minutos ideales por jugador
+2. Ajustar entrenamientos según carga
+3. Monitorear la evolución
+
+**Minutos ideales por posición:**
+
+| Posición | Minutos ideales | Max recomendado |
+|----------|-----------------|-----------------|
+| Base | 30-35 | 38 |
+| Escolta | 28-33 | 36 |
+| Alero | 30-35 | 38 |
+| Ala-pívot | 25-30 | 34 |
+| Pívot | 25-30 | 34 |
+
+---
+
+**Aplicación 23: Gestión de Recuperación**
+
+El PUSFRE optimiza la recuperación de lesiones.
+
+**Cómo se hace:**
+
+1. Calcular tiempo de recuperación
+2. Planificar protocolo de recuperación
+3. Monitorear la evolución
+
+**Tiempo de recuperación por tipo de lesión:**
+
+| Tipo | Tiempo estimado |
+|------|-----------------|
+| Esguince | 2-4 semanas |
+| Distensión | 3-6 semanas |
+| Fractura | 6-12 semanas |
+| Rotura de ligamentos | 6-12 meses |
+
+---
+
+**Aplicación 24: Análisis de Historial**
+
+El PUSFRE analiza el historial de lesiones.
+
+**Cómo se hace:**
+
+1. Recopilar historial de lesiones
+2. Identificar patrones
+3. Establecer protocolos de prevención
+
+**Ejemplo:** Un jugador con lesiones recurrentes en el tobillo necesita entrenamiento específico.
+
+---
+
+**Aplicación 25: Prevención de Lesiones**
+
+El PUSFRE establece protocolos de prevención.
+
+**Cómo se hace:**
+
+1. Identificar factores de riesgo
+2. Diseñar ejercicios preventivos
+3. Implementar y monitorear
+
+**Ejercicios preventivos:**
+
+- Fortalecimiento de músculos estabilizadores
+- Entrenamiento de propiocepción
+- Estiramientos específicos
+
+---
+
+### Capítulo 2.6: Análisis Avanzado
+
+**Aplicación 26: Análisis de Plus-Minus**
+
+El PUSFRE analiza el impacto del jugador en el equipo.
+
+**Cómo se hace:**
+
+1. Calcular la diferencia de puntos con el jugador en pista
+2. Calcular la diferencia de puntos sin el jugador
+3. Calcular el plus-minus ajustado
+
+**Fórmula de plus-minus:**
+
+$$PM = \frac{Puntos_{con} - Puntos_{sin}}{Minutos}$$
+
+---
+
+**Aplicación 27: Análisis de Valoración**
+
+El PUSFRE calcula la valoración del jugador.
+
+**Cómo se hace:**
+
+1. Sumar estadísticas positivas
+2. Restar estadísticas negativas
+3. Calcular la valoración
+
+**Fórmula de valoración:**
+
+$$V = (Pts + Reb + Ast + Rob + Tap) - (Fallos + Pérdidas + Faltas)$$
+
+---
+
+**Aplicación 28: Análisis de Eficiencia**
+
+El PUSFRE analiza la eficiencia del jugador.
+
+**Cómo se hace:**
+
+1. Calcular la eficiencia en ataque
+2. Calcular la eficiencia en defensa
+3. Calcular la eficiencia global
+
+**Fórmula de eficiencia global:**
+
+$$EG = \frac{Eficiencia_{ataque} + Eficiencia_{defensa}}{2}$$
+
+---
+
+**Aplicación 29: Análisis de Clutch**
+
+El PUSFRE analiza el rendimiento en momentos clave.
+
+**Cómo se hace:**
+
+1. Identificar momentos de clutch
+2. Calcular fitness en clutch
+3. Calcular el factor clutch
+
+**Factor clutch:**
+
+$$FC = \frac{F_{clutch}}{F_{normal}}$$
+
+**Ejemplo:** Un jugador con $F_{clutch} = 0.85$ y $F_{normal} = 0.70$ tiene $FC = 1.21$ (excelente en clutch).
+
+---
+
+**Aplicación 30: Análisis de Partidos Importantes**
+
+El PUSFRE analiza el rendimiento en partidos importantes.
+
+**Cómo se hace:**
+
+1. Identificar partidos importantes
+2. Calcular fitness en esos partidos
+3. Calcular el factor de grandeza
+
+**Factor de grandeza:**
+
+$$FG = \frac{F_{importante}}{F_{normal}}$$
+
+---
+
+**Aplicación 31: Análisis de Rendimiento en Casa y Fuera**
+
+El PUSFRE compara el rendimiento en casa y fuera.
+
+**Cómo se hace:**
+
+1. Calcular fitness en casa
+2. Calcular fitness fuera
+3. Calcular el factor campo
+
+**Factor campo:**
+
+$$FC = \frac{F_{casa}}{F_{fuera}}$$
+
+---
+
+**Aplicación 32: Análisis de Rendimiento por Cuartos**
+
+El PUSFRE analiza el rendimiento en cada cuarto.
+
+**Cómo se hace:**
+
+1. Dividir el partido en cuartos
+2. Calcular fitness en cada cuarto
+3. Identificar patrones
+
+**Ejemplo de patrones:**
+
+| Cuarto | Fitness | Evaluación |
+|--------|---------|------------|
+| 1º | 0.75 | Bueno |
+| 2º | 0.65 | Regular |
+| 3º | 0.80 | Muy bueno |
+| 4º | 0.70 | Bueno |
+
+---
+
+**Aplicación 33: Análisis de Uso de Banca**
+
+El PUSFRE analiza la contribución de la banca.
+
+**Cómo se hace:**
+
+1. Calcular la fitness de los titulares
+2. Calcular la fitness de los suplentes
+3. Calcular la profundidad de la banca
+
+**Profundidad de banca:**
+
+$$PB = \frac{F_{suplentes}}{F_{titulares}}$$
+
+---
+
+**Aplicación 34: Análisis de Química de Equipo**
+
+El PUSFRE mide la química del equipo.
+
+**Cómo se hace:**
+
+1. Calcular sinergias entre jugadores
+2. Calcular el tiempo de juego conjunto
+3. Calcular la química global
+
+**Fórmula de química:**
+
+$$Q = \frac{\sum_{i<j} Sinergia_{ij} \cdot Minutos_{ij}}{Minutos_{totales}}$$
+
+---
+
+**Aplicación 35: Análisis de Momentum**
+
+El PUSFRE mide el momentum del equipo.
+
+**Cómo se hace:**
+
+1. Calcular rachas de puntos
+2. Calcular rachas de paradas
+3. Calcular el momentum global
+
+**Fórmula de momentum:**
+
+$$M = \frac{Rachas_{positivas} - Rachas_{negativas}}{Rachas_{totales}}$$
+
+---
+
+### Capítulo 2.7: Estrategia de Playoffs
+
+**Aplicación 36: Estrategia de Ronda de Playoffs**
+
+El PUSFRE planifica la estrategia para cada ronda de playoffs.
+
+**Cómo se hace:**
+
+1. Analizar al rival
+2. Ajustar la estrategia según la ronda
+3. Planificar ajustes durante la serie
+
+**Ejemplo:** En primera ronda, atacar la debilidad del rival; en finales, jugar más defensivo.
+
+---
+
+**Aplicación 37: Gestión de Minutos en Playoffs**
+
+El PUSFRE optimiza los minutos en playoffs.
+
+**Cómo se hace:**
+
+1. Reducir rotaciones
+2. Aumentar minutos de los mejores
+3. Gestionar la fatiga
+
+**Minutos en playoffs:**
+
+| Jugador | Temporada regular | Playoffs |
+|---------|-------------------|----------|
+| Titular 1 | 32 min | 38 min |
+| Titular 2 | 30 min | 36 min |
+| Suplente 1 | 20 min | 15 min |
+| Suplente 2 | 18 min | 10 min |
+
+---
+
+**Aplicación 38: Análisis de Matchups**
+
+El PUSFRE analiza los matchups individuales.
+
+**Cómo se hace:**
+
+1. Identificar jugadores clave del rival
+2. Buscar el mejor defensor para cada uno
+3. Planificar la estrategia defensiva
+
+**Ejemplo:** El rival tiene un base anotador. Se le asigna el mejor defensor perimetral.
+
+---
+
+**Aplicación 39: Estrategia de Ajustes en Series**
+
+El PUSFRE planifica ajustes en series largas.
+
+**Cómo se hace:**
+
+1. Analizar partidos previos
+2. Identificar patrones del rival
+3. Ajustar estrategia
+
+**Ejemplo:** El rival ha anotado mucho en pick and roll. Se ajusta la defensa para cerrarlo.
+
+---
+
+**Aplicación 40: Gestión de Fatiga en Playoffs**
+
+El PUSFRE gestiona la fatiga en playoffs.
+
+**Cómo se hace:**
+
+1. Monitorear minutos jugados
+2. Calcular días de descanso
+3. Planificar recuperación
+
+**Ejemplo:** Después de un partido de 40 minutos, el jugador necesita 2 días de descanso.
+
+---
+
+### Capítulo 2.8: Desarrollo de Jugadores
+
+**Aplicación 41: Plan de Desarrollo Individual**
+
+El PUSFRE diseña un plan de desarrollo para cada jugador.
+
+**Cómo se hace:**
+
+1. Identificar debilidades
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Un jugador necesita mejorar su tiro exterior. Plan: 200 tiros de 3 por día.
+
+---
+
+**Aplicación 42: Seguimiento de Progreso**
+
+El PUSFRE monitorea el progreso de los jugadores.
+
+**Cómo se hace:**
+
+1. Calcular fitness en intervalos regulares
+2. Comparar con objetivos
+3. Ajustar el plan de desarrollo
+
+**Ejemplo:** El jugador ha mejorado su tiro exterior de 0.55 a 0.65 en 3 meses.
+
+---
+
+**Aplicación 43: Evaluación de Potencial**
+
+El PUSFRE evalúa el potencial de un jugador.
+
+**Cómo se hace:**
+
+1. Calcular fitness actual
+2. Calcular la tasa de progresión
+3. Proyectar la fitness futura
+
+**Fórmula de potencial:**
+
+$$P = F_{actual} \cdot (1 + Tasa_{progresión})^{Años}$$
+
+---
+
+**Aplicación 44: Análisis de Comparativa con Jugadores Elite**
+
+El PUSFRE compara a un jugador con jugadores elite.
+
+**Cómo se hace:**
+
+1. Identificar jugadores similares
+2. Comparar dimensiones
+3. Identificar brechas
+
+**Ejemplo:** Un joven base se compara con un base All-Star. Tiene potencial para alcanzarlo en 3 años.
+
+---
+
+**Aplicación 45: Optimización de Entrenamiento**
+
+El PUSFRE optimiza el entrenamiento para maximizar el desarrollo.
+
+**Cómo se hace:**
+
+1. Identificar áreas de mejora
+2. Asignar tiempo de entrenamiento
+3. Monitorear el progreso
+
+**Distribución de tiempo de entrenamiento:**
+
+| Área | Tiempo sugerido |
+|------|-----------------|
+| Tiro | 30% |
+| Fundamentos | 25% |
+| Físico | 20% |
+| Táctica | 15% |
+| Mental | 10% |
+
+---
+
+### Capítulo 2.9: Análisis de Mercado
+
+**Aplicación 46: Evaluación de Valor de Mercado**
+
+El PUSFRE estima el valor de mercado de un jugador.
+
+**Cómo se hace:**
+
+1. Calcular la fitness del jugador
+2. Ajustar por edad y posición
+3. Comparar con jugadores similares
+
+**Fórmula de valor de mercado:**
+
+$$VM = F \cdot Factor_{edad} \cdot Factor_{posición} \cdot Factor_{mercado}$$
+
+---
+
+**Aplicación 47: Análisis de Tendencias de Mercado**
+
+El PUSFRE analiza las tendencias del mercado.
+
+**Cómo se hace:**
+
+1. Analizar jugadores en el mercado
+2. Identificar tendencias de precios
+3. Predecir movimientos futuros
+
+**Ejemplo:** Los bases con buen tiro exterior están aumentando de valor.
+
+---
+
+**Aplicación 48: Estrategia de Fichajes**
+
+El PUSFRE optimiza la estrategia de fichajes.
+
+**Cómo se hace:**
+
+1. Identificar necesidades del equipo
+2. Buscar jugadores que las cubran
+3. Priorizar por valor de mercado
+
+**Ejemplo:** El equipo necesita un ala-pívot con rebote. Se busca el mejor valor en esa posición.
+
+---
+
+**Aplicación 49: Análisis de Contratos**
+
+El PUSFRE evalúa contratos existentes.
+
+**Cómo se hace:**
+
+1. Calcular el valor actual del jugador
+2. Comparar con su salario
+3. Evaluar si el contrato es favorable
+
+**Ejemplo:** Un jugador con fitness 0.80 gana 5M. Su valor de mercado es 8M. Contrato favorable.
+
+---
+
+**Aplicación 50: Planificación de Renovaciones**
+
+El PUSFRE planifica las renovaciones de contrato.
+
+**Cómo se hace:**
+
+1. Evaluar la fitness actual
+2. Proyectar la fitness futura
+3. Decidir el momento óptimo para renovar
+
+**Ejemplo:** Un jugador de 30 años con fitness 0.75 debe renovar pronto, antes de que su fitness decline.
+
+---
+
+## SECCIÓN 3: TENIS — 50 APLICACIONES PRÁCTICAS
+
+### Capítulo 3.1: Scouting de Jugadores
+
+**Aplicación 1: Evaluación de Saque**
+
+El PUSFRE evalúa la calidad del saque.
+
+**Cómo se hace:**
+
+1. Medir velocidad del saque ($\Phi_{velocidad}$)
+2. Medir precisión del saque ($\Phi_{precisión}$)
+3. Medir porcentaje de primeros servicios ($\Omega_{1er\%}$)
+
+**Fórmula de calidad de saque:**
+
+$$QS = \Phi_{velocidad} \cdot \Phi_{precisión} \cdot \Omega_{1er\%}^{1.2}$$
+
+---
+
+**Aplicación 2: Evaluación de Resto**
+
+El PUSFRE evalúa la calidad del resto.
+
+**Cómo se hace:**
+
+1. Medir porcentaje de restos ganados ($\Phi_{resto}$)
+2. Medir profundidad del resto ($\Psi_{profundidad}$)
+3. Medir consistencia ($\Psi_{consistencia}$)
+
+**Fórmula de calidad de resto:**
+
+$$QR = \Phi_{resto} \cdot \Psi_{profundidad} \cdot \Psi_{consistencia}$$
+
+---
+
+**Aplicación 3: Evaluación de Juego de Red**
+
+El PUSFRE evalúa la calidad del juego de red.
+
+**Cómo se hace:**
+
+1. Medir porcentaje de voleas ganadas ($\Phi_{volea}$)
+2. Medir capacidad de aproximación ($\Psi_{aproximación}$)
+3. Medir capacidad de remate ($\Phi_{remate}$)
+
+**Fórmula de juego de red:**
+
+$$JR = \Phi_{volea} \cdot \Psi_{aproximación} \cdot \Phi_{remate}$$
+
+---
+
+**Aplicación 4: Evaluación de Juego de Fondo**
+
+El PUSFRE evalúa la calidad del juego de fondo.
+
+**Cómo se hace:**
+
+1. Medir capacidad de golpeo ($\Phi_{golpeo}$)
+2. Medir capacidad defensiva ($\Psi_{defensa}$)
+3. Medir consistencia ($\Psi_{consistencia}$)
+
+**Fórmula de juego de fondo:**
+
+$$JF = \Phi_{golpeo} \cdot \Psi_{defensa} \cdot \Psi_{consistencia}$$
+
+---
+
+**Aplicación 5: Evaluación de Adaptación a Superficies**
+
+El PUSFRE evalúa la adaptación a diferentes superficies.
+
+**Cómo se hace:**
+
+1. Calcular fitness en tierra batida ($F_{tierra}$)
+2. Calcular fitness en hierba ($F_{hierba}$)
+3. Calcular fitness en pista dura ($F_{dura}$)
+
+**Ejemplo de adaptación:**
+
+| Superficie | Fitness | Evaluación |
+|------------|---------|------------|
+| Tierra | 0.75 | Bueno |
+| Hierba | 0.85 | Muy bueno |
+| Dura | 0.80 | Bueno |
+
+---
+
+### Capítulo 3.2: Estrategia de Partido
+
+**Aplicación 6: Estrategia Contra un Rival Específico**
+
+El PUSFRE diseña la estrategia óptima contra un rival.
+
+**Cómo se hace:**
+
+1. Analizar fortalezas y debilidades del rival
+2. Diseñar estrategia para explotar debilidades
+3. Planificar ajustes durante el partido
+
+**Ejemplo:** Si el rival tiene revés débil, atacar su revés.
+
+---
+
+**Aplicación 7: Gestión de Energía**
+
+El PUSFRE gestiona la energía durante el partido.
+
+**Cómo se hace:**
+
+1. Calcular el gasto energético por punto
+2. Distribuir la energía a lo largo del partido
+3. Ajustar la intensidad según el momento
+
+**Distribución de energía:**
+
+| Fase | Intensidad | Energía |
+|------|------------|---------|
+| Inicio | Media | 20% |
+| Medio | Alta | 40% |
+| Final | Máxima | 40% |
+
+---
 
 **Aplicación 8: Estrategia de Saque**
-```python
-def estrategia_saque(jugador, rival, lado):
-    """
-    Determina la estrategia de saque óptima.
-    """
-    # Analizar debilidades del rival
-    return {'direccion': lado_debil, 'efecto': 'cortado'}
-```
 
-**Aplicación 9: Análisis de Partido**
-```python
-def analisis_partido_tenis(stats, jugador):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'eficiencia': stats['winners'] / stats['unforced_errors'],
-        'primer_servicio': stats['first_serve_%'],
-        'puntos_ganados': stats['points_won'] / stats['points_total']
-    }
-```
+El PUSFRE optimiza la estrategia de saque.
 
-**Aplicación 10: Gestión de Presión**
-```python
-def gestion_presion_tenis(jugador, momento):
-    """
-    Gestiona la presión en momentos clave.
-    """
-    if momento in ['break_point', 'match_point']:
-        jugador['mental'] *= 0.9
-    return jugador
-```
+**Cómo se hace:**
+
+1. Identificar puntos débiles del rival
+2. Seleccionar la dirección del saque
+3. Variar velocidad y efecto
+
+**Ejemplo:** Si el rival tiene débil resto de revés, sacar a su revés.
 
 ---
 
-#### Anexo 2.1: Ajedrez — 10 Aplicaciones Prácticas
+**Aplicación 9: Estrategia de Resto**
 
-**Aplicación 1: Evaluación Posicional**
-```python
-def evaluacion_posicional(tablero, lado):
-    """
-    Evalúa la posición desde la perspectiva de un lado.
-    """
-    F = 0
-    for pieza in tablero.piezas[lado]:
-        F += pieza.phi * pieza.psi * (pieza.omega ** alpha)
-    return F
-```
+El PUSFRE optimiza la estrategia de resto.
 
-**Aplicación 2: Selección de Movimiento**
-```python
-def seleccion_movimiento(posicion, profundidad):
-    """
-    Selecciona el mejor movimiento usando evaluación PUSFRE.
-    """
-    movimientos = posicion.movimientos_legales()
-    for mov in movimientos:
-        nueva = posicion.aplicar_movimiento(mov)
-        mov['fitness'] = evaluacion_posicional(nueva, posicion.turno)
-    return max(movimientos, key=lambda x: x['fitness'])
-```
+**Cómo se hace:**
 
-**Aplicación 3: Gestión de Tiempo**
-```python
-def gestion_tiempo_ajedrez(tiempo_total, movimientos_restantes, complejidad):
-    """
-    Distribuye el tiempo según la complejidad de la posición.
-    """
-    return tiempo_total / (movimientos_restantes + complejidad * 2)
-```
+1. Identificar puntos débiles del saque rival
+2. Seleccionar la respuesta al saque
+3. Variar profundidad y dirección
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_ajedrez(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'agresividad': rival['phi']['ataque'],
-        'solidez': rival['psi']['defensa'],
-        'apertura': rival['omega']['apertura']
-    }
-```
-
-**Aplicación 5: Estrategia de Apertura**
-```python
-def estrategia_apertura(rival, repertorio):
-    """
-    Selecciona la apertura óptima contra un rival.
-    """
-    for apertura in repertorio:
-        if apertura['phi'] > 0.7 and rival['psi']['defensa'] < 0.4:
-            return apertura
-    return repertorio[0]
-```
-
-**Aplicación 6: Gestión de Finales**
-```python
-def gestion_finales(posicion):
-    """
-    Evalúa la posición en el final.
-    """
-    return evaluacion_posicional(posicion, posicion.turno)
-```
-
-**Aplicación 7: Entrenamiento de Tácticas**
-```python
-def entrenamiento_tacticas(jugador, ejercicios):
-    """
-    Planifica entrenamiento táctico.
-    """
-    for ejercicio in ejercicios:
-        jugador['phi']['tactica'] += 0.01
-    return jugador
-```
-
-**Aplicación 8: Estrategia de Torneos**
-```python
-def estrategia_torneos_ajedrez(rivales):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = []
-    for rival in rivales:
-        estrategias.append(analisis_rival_ajedrez(rival))
-    return estrategias
-```
-
-**Aplicación 9: Análisis de Partido**
-```python
-def analisis_partido_ajedrez(partida, jugador):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'precision': partida.precision,
-        'errores': partida.errores,
-        'tiempo_usado': partida.tiempo
-    }
-```
-
-**Aplicación 10: Optimización de Preparación**
-```python
-def optimizacion_preparacion_ajedrez(jugador, rival):
-    """
-    Optimiza la preparación para un rival específico.
-    """
-    if rival['omega']['apertura'] > 0.7:
-        # Preparar defensas contra su apertura favorita
-        pass
-    return jugador
-```
+**Ejemplo:** Si el rival tiene saque débil, restar agresivo.
 
 ---
 
-#### Anexo 3.1: League of Legends — 10 Aplicaciones Prácticas
+**Aplicación 10: Estrategia de Puntos Clave**
 
-**Aplicación 1: Evaluación de Pick/Ban**
-```python
-def evaluacion_pick_ban(campeones, equipo, rival):
-    """
-    Evalúa la mejor elección de campeones.
-    """
-    for campeon in campeones:
-        F = campeon['phi'] * campeon['psi'] * (campeon['omega'] ** alpha)
-        campeon['fitness'] = F
-    return sorted(campeones, key=lambda x: x['fitness'], reverse=True)
-```
+El PUSFRE optimiza la estrategia en puntos clave.
 
-**Aplicación 2: Estrategia de Objetivos**
-```python
-def estrategia_objetivos(equipo, minuto):
-    """
-    Determina la prioridad de objetivos según el minuto.
-    """
-    if minuto < 15:
-        return 'dragon'
-    elif minuto < 25:
-        return 'torretas'
-    else:
-        return 'baron'
-```
+**Cómo se hace:**
 
-**Aplicación 3: Gestión de Visión**
-```python
-def gestion_vision(equipo, zona):
-    """
-    Optimiza la colocación de visión.
-    """
-    if zona['control'] < 0.3:
-        return 'colocar_vision'
-    return 'mantener'
-```
+1. Identificar puntos clave (break points, set points)
+2. Seleccionar la estrategia adecuada
+3. Gestionar la presión
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_league(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'carry': rival['phi']['carry'],
-        'teamfight': rival['psi']['teamfight'],
-        'split_push': rival['omega']['split']
-    }
-```
-
-**Aplicación 5: Estrategia de Teamfight**
-```python
-def estrategia_teamfight(equipo, rival):
-    """
-    Determina la estrategia óptima de teamfight.
-    """
-    if sum(j['phi']['teamfight'] for j in equipo) > sum(j['phi']['teamfight'] for j in rival):
-        return 'forzar_pelea'
-    return 'split_push'
-```
-
-**Aplicación 6: Gestión de Mentalidad**
-```python
-def gestion_mentalidad_league(jugador):
-    """
-    Gestiona la mentalidad de los jugadores.
-    """
-    if jugador['tilt'] > 0.7:
-        return 'timeout_recomendado'
-    return 'continuar'
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_league(equipo, objetivos):
-    """
-    Planifica entrenamiento específico.
-    """
-    for jugador in equipo:
-        for objetivo in objetivos:
-            jugador['phi'][objetivo] += 0.01
-    return equipo
-```
-
-**Aplicación 8: Adaptación a Meta**
-```python
-def adaptacion_meta_league(campeones, meta):
-    """
-    Adapta el pool de campeones a la meta actual.
-    """
-    for campeon in campeones:
-        if campeon['nombre'] in meta['top']:
-            campeon['phi'] *= 1.1
-    return campeones
-```
-
-**Aplicación 9: Estrategia de Torneos**
-```python
-def estrategia_torneos_league(rivales):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_league(rival)
-    return estrategias
-```
-
-**Aplicación 10: Análisis de Partido**
-```python
-def analisis_partido_league(partida):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'gold': partida.gold,
-        'kda': partida.kda,
-        'vision': partida.vision,
-        'objetivos': partida.objetivos
-    }
-```
+**Ejemplo:** En break point, jugar más seguro y consistente.
 
 ---
 
-#### Anexo 4.1: Counter-Strike — 10 Aplicaciones Prácticas
+### Capítulo 3.3: Análisis de Partido
 
-**Aplicación 1: Gestión de Economía**
-```python
-def gestion_economia_cs(equipo, ronda):
-    """
-    Optimiza la gestión de economía en Counter-Strike.
-    """
-    if equipo['dinero'] > 5000 and ronda % 5 == 0:
-        return 'full_buy'
-    elif equipo['dinero'] > 3000:
-        return 'eco'
-    else:
-        return 'force_buy'
-```
+**Aplicación 11: Análisis de Estadísticas del Partido**
 
-**Aplicación 2: Estrategia de Utilidades**
-```python
-def estrategia_utilidades(equipo, mapa):
-    """
-    Optimiza el uso de utilidades.
-    """
-    return {
-        'smokes': mapa['puntos_estratégicos'],
-        'flashes': mapa['ángulos'],
-        'molotovs': mapa['defensas']
-    }
-```
+El PUSFRE analiza las estadísticas del partido.
 
-**Aplicación 3: Posicionamiento**
-```python
-def posicionamiento_cs(jugador, mapa):
-    """
-    Optimiza el posicionamiento en el mapa.
-    """
-    F = jugador['phi']['posicion'] * jugador['psi']['defensa'] * (jugador['omega']['mapa'] ** alpha)
-    return F
-```
+**Cómo se hace:**
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_cs(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'agresividad': rival['phi']['agresividad'],
-        'economia': rival['psi']['economia'],
-        'utilidades': rival['omega']['utilidades']
-    }
-```
+1. Calcular primeros servicios ($1er\%$)
+2. Calcular puntos ganados ($Pts\%$)
+3. Calcular winners y errores no forzados ($W/UE$)
 
-**Aplicación 5: Estrategia de Ronda**
-```python
-def estrategia_ronda_cs(equipo, rival, mapa):
-    """
-    Determina la estrategia óptima para la ronda.
-    """
-    if equipo['dinero'] > rival['dinero']:
-        return 'ejecutar'
-    return 'defender'
-```
+**Fórmula de eficiencia:**
 
-**Aplicación 6: Gestión de Clutch**
-```python
-def gestion_clutch_cs(jugador, rivales):
-    """
-    Gestiona situaciones de clutch.
-    """
-    if len(rivales) <= 2:
-        return 'agresivo'
-    return 'defensivo'
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_cs(equipo, objetivo):
-    """
-    Planifica entrenamiento específico.
-    """
-    for jugador in equipo:
-        jugador['phi'][objetivo] += 0.01
-    return equipo
-```
-
-**Aplicación 8: Estrategia de Torneos**
-```python
-def estrategia_torneos_cs(rivales):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_cs(rival)
-    return estrategias
-```
-
-**Aplicación 9: Análisis de Partido**
-```python
-def analisis_partido_cs(partida):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'kda': partida.kda,
-        'adr': partida.adr,
-        'utilidades': partida.utilidades,
-        'clutches': partida.clutches
-    }
-```
-
-**Aplicación 10: Optimización de Configuración**
-```python
-def optimizacion_configuracion_cs(jugador, config):
-    """
-    Optimiza la configuración del juego.
-    """
-    for param in config:
-        if param in jugador['preferencias']:
-            jugador['phi'][param] *= 1.05
-    return jugador
-```
+$$E = \frac{Winners}{Errores\_no\_forzados}$$
 
 ---
 
-#### Anexo 5.1: Golf — 10 Aplicaciones Prácticas
+**Aplicación 12: Análisis de Puntos Ganados**
 
-**Aplicación 1: Selección de Palo**
-```python
-def seleccion_palo_golf(jugador, distancia):
-    """
-    Selecciona el palo óptimo para una distancia.
-    """
-    palos = ['driver', 'madera3', 'hierro5', 'hierro7', 'hierro9', 'pitching', 'sand', 'putter']
-    for palo in palos:
-        if jugador['phi'][palo] * jugador['psi'][palo] > distancia:
-            return palo
-    return 'driver'
-```
+El PUSFRE analiza cómo se ganan los puntos.
 
-**Aplicación 2: Estrategia de Green**
-```python
-def estrategia_green(jugador, green):
-    """
-    Evalúa la estrategia en el green.
-    """
-    return {
-        'putt': jugador['phi']['putt'] * jugador['psi']['lectura'],
-        'aproximacion': jugador['phi']['wedge'] * jugador['psi']['precisión']
-    }
-```
+**Cómo se hace:**
 
-**Aplicación 3: Gestión de Riesgo**
-```python
-def gestion_riesgo_golf(jugador, hoyo):
-    """
-    Evalúa el riesgo de cada tiro.
-    """
-    if hoyo['bunkers'] > 0.5:
-        return 'conservador'
-    return 'agresivo'
-```
+1. Identificar tipos de puntos ganados
+2. Calcular la efectividad de cada tipo
+3. Identificar patrones
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_golf(rival, condiciones):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'drive': rival['phi']['drive'] * condiciones['viento'],
-        'aproximacion': rival['phi']['hierros'] * condiciones['terreno'],
-        'putt': rival['phi']['putt'] * condiciones['green']
-    }
-```
+**Tipos de puntos:**
 
-**Aplicación 5: Estrategia de Torneos**
-```python
-def estrategia_torneos_golf(rivales, campo):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_golf(rival, campo)
-    return estrategias
-```
-
-**Aplicación 6: Gestión de Lesiones**
-```python
-def gestion_lesiones_golf(jugador):
-    """
-    Detecta riesgo de lesión en golf.
-    """
-    if jugador['psi'] < 0.3 and jugador['omega'] > 0.7:
-        return "Descanso recomendado"
-    return "Disponible"
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_golf(jugador, objetivo, semanas):
-    """
-    Planifica entrenamiento específico.
-    """
-    for semana in range(semanas):
-        jugador['phi'][objetivo] += 0.015
-    return jugador
-```
-
-**Aplicación 8: Adaptación a Condiciones**
-```python
-def adaptacion_condiciones_golf(jugador, condiciones):
-    """
-    Adapta el juego a las condiciones.
-    """
-    for factor in condiciones:
-        jugador['psi'][factor] *= condiciones[factor]
-    return jugador
-```
-
-**Aplicación 9: Análisis de Campo**
-```python
-def analisis_campo_golf(campo):
-    """
-    Analiza las características del campo.
-    """
-    return {
-        'dificultad': sum(campo['bunkers'] + campo['agua']),
-        'longitud': campo['yardas'],
-        'tipo_green': campo['green']
-    }
-```
-
-**Aplicación 10: Optimización de Equipo**
-```python
-def optimizacion_equipo_golf(jugador, palos):
-    """
-    Optimiza la selección de palos.
-    """
-    for palo in palos:
-        if jugador['phi'][palo] > 0.7:
-            jugador['equipo'].append(palo)
-    return jugador
-```
+| Tipo | Porcentaje | Efectividad |
+|------|------------|-------------|
+| Winners | 35% | Alta |
+| Errores rival | 40% | Media |
+| Aces | 15% | Muy alta |
+| Otros | 10% | Baja |
 
 ---
 
-#### Anexo 6.1: Fórmula 1 — 10 Aplicaciones Prácticas
+**Aplicación 13: Análisis de Errores**
 
-**Aplicación 1: Estrategia de Neumáticos**
-```python
-def estrategia_neumaticos(equipo, circuito, clima):
-    """
-    Optimiza la estrategia de neumáticos.
-    """
-    if clima == 'seco':
-        return 'blandos' if circuito['desgaste'] < 0.3 else 'duros'
-    return 'intermedios' if clima == 'lluvia' else 'secos'
-```
+El PUSFRE analiza los errores cometidos.
 
-**Aplicación 2: Gestión de Combustible**
-```python
-def gestion_combustible(piloto, vueltas, consumo):
-    """
-    Optimiza la carga de combustible.
-    """
-    return vueltas * consumo * 1.05  # Margen de seguridad
-```
+**Cómo se hace:**
 
-**Aplicación 3: Estrategia de Parada**
-```python
-def estrategia_parada(circuito, neumaticos, tráfico):
-    """
-    Determina el momento óptimo de parada.
-    """
-    return {
-        'ventana': circuito['ventana_paradas'],
-        'tipo': 'temprana' if tráfico > 0.5 else 'tardía'
-    }
-```
+1. Identificar tipos de errores
+2. Calcular la frecuencia de cada tipo
+3. Identificar patrones de error
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_f1(rival, circuito):
-    """
-    Analiza el rendimiento de un rival.
-    """
-    return {
-        'ritmo': rival['phi']['ritmo'] * circuito['curvas'],
-        'gestion': rival['psi']['gestion'] * circuito['desgaste'],
-        'clasificacion': rival['omega']['clasificacion']
-    }
-```
+**Tipos de errores:**
 
-**Aplicación 5: Estrategia de Competición**
-```python
-def estrategia_competicion_f1(equipo, rivales, circuito):
-    """
-    Planifica la estrategia para una carrera.
-    """
-    for rival in rivales:
-        rival['rendimiento'] = analisis_rival_f1(rival, circuito)
-    return estrategia
-```
-
-**Aplicación 6: Gestión de Lesiones**
-```python
-def gestion_lesiones_f1(piloto):
-    """
-    Detecta riesgo de lesión en F1.
-    """
-    if piloto['psi'] < 0.2:
-        return "Descanso recomendado"
-    return "Disponible"
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_f1(piloto, objetivo, semanas):
-    """
-    Planifica entrenamiento específico.
-    """
-    for semana in range(semanas):
-        piloto['phi'][objetivo] += 0.015
-    return piloto
-```
-
-**Aplicación 8: Adaptación a Circuito**
-```python
-def adaptacion_circuito_f1(coche, circuito):
-    """
-    Adapta la configuración del coche al circuito.
-    """
-    if circuito['curvas'] > 0.6:
-        coche['downforce'] = 'alta'
-    else:
-        coche['downforce'] = 'baja'
-    return coche
-```
-
-**Aplicación 9: Análisis de Clasificación**
-```python
-def analisis_clasificacion_f1(equipo, calificación):
-    """
-    Analiza el rendimiento en clasificación.
-    """
-    return {
-        'vuelta_rapida': calificación['mejor_vuelta'],
-        'posicion': calificación['posicion'],
-        'gap': calificación['gap']
-    }
-```
-
-**Aplicación 10: Optimización de Coche**
-```python
-def optimizacion_coche_f1(coche, circuito):
-    """
-    Optimiza la configuración del coche.
-    """
-    if circuito['curvas'] > 0.6:
-        coche['suspension'] = 'blanda'
-        coche['aletas'] = 'alta'
-    else:
-        coche['suspension'] = 'dura'
-        coche['aletas'] = 'baja'
-    return coche
-```
+| Tipo | Porcentaje | Causa |
+|------|------------|-------|
+| No forzados | 45% | Falta de concentración |
+| Forzados | 35% | Presión rival |
+| Dobles faltas | 20% | Falta de confianza |
 
 ---
 
-#### Anexo 7.1: StarCraft II — 10 Aplicaciones Prácticas
+**Aplicación 14: Análisis de Break Points**
 
-**Aplicación 1: Estrategia de Build**
-```python
-def estrategia_build_sc2(jugador, rival, mapa):
-    """
-    Selecciona la build óptima contra un rival.
-    """
-    if rival['raza'] == 'Zerg':
-        return 'build_terran_vs_zerg'
-    elif rival['raza'] == 'Protoss':
-        return 'build_terran_vs_protoss'
-    else:
-        return 'build_terran_vs_terran'
-```
+El PUSFRE analiza el rendimiento en break points.
 
-**Aplicación 2: Gestión de Macro**
-```python
-def gestion_macro_sc2(jugador, minuto):
-    """
-    Optimiza la gestión macro.
-    """
-    if minuto < 5:
-        return 'expandir'
-    elif minuto < 10:
-        return 'tecnología'
-    else:
-        return 'ejército'
-```
+**Cómo se hace:**
 
-**Aplicación 3: Gestión de Micro**
-```python
-def gestion_micro_sc2(jugador, unidades):
-    """
-    Optimiza el control de unidades.
-    """
-    for unidad in unidades:
-        if unidad['salud'] < 0.3:
-            return 'retirar'
-    return 'avanzar'
-```
+1. Calcular break points convertidos
+2. Calcular break points salvados
+3. Calcular la efectividad en break points
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_sc2(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'macro': rival['phi']['macro'],
-        'micro': rival['psi']['micro'],
-        'estrategia': rival['omega']['estrategia']
-    }
-```
+**Fórmula de break points:**
 
-**Aplicación 5: Estrategia de Torneos**
-```python
-def estrategia_torneos_sc2(rivales):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_sc2(rival)
-    return estrategias
-```
-
-**Aplicación 6: Gestión de Mentalidad**
-```python
-def gestion_mentalidad_sc2(jugador):
-    """
-    Gestiona la mentalidad del jugador.
-    """
-    if jugador['tilt'] > 0.7:
-        return 'timeout_recomendado'
-    return 'continuar'
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_sc2(jugador, objetivo, semanas):
-    """
-    Planifica entrenamiento específico.
-    """
-    for semana in range(semanas):
-        jugador['phi'][objetivo] += 0.01
-    return jugador
-```
-
-**Aplicación 8: Adaptación a Meta**
-```python
-def adaptacion_meta_sc2(jugador, meta):
-    """
-    Adapta el estilo de juego a la meta actual.
-    """
-    for raza in meta:
-        if raza in jugador['preferencias']:
-            jugador['phi'][raza] *= 1.1
-    return jugador
-```
-
-**Aplicación 9: Análisis de Partido**
-```python
-def analisis_partido_sc2(partida):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'apm': partida.apm,
-        'macro': partida.macro,
-        'micro': partida.micro,
-        'decisiones': partida.decisiones
-    }
-```
-
-**Aplicación 10: Optimización de Builds**
-```python
-def optimizacion_builds_sc2(jugador, builds):
-    """
-    Optimiza la selección de builds.
-    """
-    for build in builds:
-        if build['contra'] == jugador['rival']['raza']:
-            jugador['build'] = build
-    return jugador
-```
+$$BP = \frac{BreakPoints_{convertidos}}{BreakPoints_{totales}}$$
 
 ---
 
-#### Anexo 8.1: Catan — 10 Aplicaciones Prácticas
+**Aplicación 15: Análisis de Rendimiento por Sets**
+
+El PUSFRE analiza el rendimiento en cada set.
+
+**Cómo se hace:**
+
+1. Calcular fitness en cada set
+2. Identificar tendencias
+3. Ajustar la estrategia
+
+**Ejemplo de tendencia:**
+
+| Set | Fitness | Evaluación |
+|-----|---------|------------|
+| 1º | 0.75 | Bueno |
+| 2º | 0.65 | Regular |
+| 3º | 0.80 | Muy bueno |
+
+---
+
+### Capítulo 3.4: Gestión de Torneos
+
+**Aplicación 16: Planificación de Torneos**
+
+El PUSFRE planifica la participación en torneos.
+
+**Cómo se hace:**
+
+1. Evaluar el calendario de torneos
+2. Seleccionar los torneos más favorables
+3. Planificar la preparación
+
+**Criterios de selección:**
+
+- Superficie favorable
+- Condiciones climáticas
+- Nivel de competencia
+
+---
+
+**Aplicación 17: Gestión de Fatiga en Torneos**
+
+El PUSFRE gestiona la fatiga en torneos largos.
+
+**Cómo se hace:**
+
+1. Monitorear la carga de partidos
+2. Planificar días de descanso
+3. Ajustar la intensidad de entrenamiento
+
+**Ejemplo:** Después de un partido largo, reducir el entrenamiento al 50%.
+
+---
+
+**Aplicación 18: Estrategia de Torneos de Grand Slam**
+
+El PUSFRE planifica la estrategia para Grand Slams.
+
+**Cómo se hace:**
+
+1. Analizar la superficie
+2. Evaluar el cuadro
+3. Planificar la progresión
+
+**Ejemplo:** En Roland Garros, enfocarse en el juego de fondo y la paciencia.
+
+---
+
+**Aplicación 19: Gestión de Viajes**
+
+El PUSFRE gestiona los viajes entre torneos.
+
+**Cómo se hace:**
+
+1. Calcular el impacto de los viajes
+2. Planificar la recuperación
+3. Ajustar el entrenamiento
+
+**Impacto de viajes:**
+
+| Distancia | Tiempo de adaptación |
+|-----------|----------------------|
+| < 3 horas | 1 día |
+| 3-6 horas | 2 días |
+| > 6 horas | 3 días |
+
+---
+
+**Aplicación 20: Optimización de Preparación**
+
+El PUSFRE optimiza la preparación antes de un torneo.
+
+**Cómo se hace:**
+
+1. Identificar áreas de mejora
+2. Planificar entrenamientos específicos
+3. Gestionar la recuperación
+
+**Ejemplo:** Antes de un torneo de hierba, entrenar saque y volea.
+
+---
+
+### Capítulo 3.5: Desarrollo de Jugadores
+
+**Aplicación 21: Plan de Desarrollo Técnico**
+
+El PUSFRE diseña un plan de desarrollo técnico.
+
+**Cómo se hace:**
+
+1. Identificar debilidades técnicas
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Mejorar el revés. Plan: 30 minutos diarios de práctica de revés.
+
+---
+
+**Aplicación 22: Plan de Desarrollo Táctico**
+
+El PUSFRE diseña un plan de desarrollo táctico.
+
+**Cómo se hace:**
+
+1. Identificar debilidades tácticas
+2. Establecer objetivos
+3. Planificar entrenamientos tácticos
+
+**Ejemplo:** Mejorar la lectura del juego. Plan: análisis de partidos y ejercicios de anticipación.
+
+---
+
+**Aplicación 23: Plan de Desarrollo Físico**
+
+El PUSFRE diseña un plan de desarrollo físico.
+
+**Cómo se hace:**
+
+1. Evaluar la condición física
+2. Establecer objetivos
+3. Planificar entrenamientos físicos
+
+**Ejemplo:** Mejorar la resistencia. Plan: carrera y ejercicios de intervalos.
+
+---
+
+**Aplicación 24: Plan de Desarrollo Mental**
+
+El PUSFRE diseña un plan de desarrollo mental.
+
+**Cómo se hace:**
+
+1. Evaluar la fortaleza mental
+2. Establecer objetivos
+3. Planificar entrenamientos mentales
+
+**Ejemplo:** Mejorar la concentración. Plan: meditación y ejercicios de focalización.
+
+---
+
+**Aplicación 25: Seguimiento de Progreso**
+
+El PUSFRE monitorea el progreso del jugador.
+
+**Cómo se hace:**
+
+1. Calcular fitness en intervalos regulares
+2. Comparar con objetivos
+3. Ajustar el plan de desarrollo
+
+**Ejemplo:** El jugador ha mejorado su fitness de 0.65 a 0.72 en 6 meses.
+
+---
+
+### Capítulo 3.6: Análisis Avanzado
+
+**Aplicación 26: Análisis de Patrones de Juego**
+
+El PUSFRE analiza los patrones de juego del jugador.
+
+**Cómo se hace:**
+
+1. Identificar patrones ofensivos
+2. Identificar patrones defensivos
+3. Calcular la efectividad de cada patrón
+
+**Ejemplo:** El jugador usa cross-court en el 60% de los puntos. Efectividad: 0.75.
+
+---
+
+**Aplicación 27: Análisis de Puntos Largos**
+
+El PUSFRE analiza el rendimiento en puntos largos.
+
+**Cómo se hace:**
+
+1. Identificar puntos de más de 10 golpes
+2. Calcular el rendimiento en esos puntos
+3. Identificar patrones
+
+**Ejemplo:** En puntos largos, el jugador tiene fitness 0.65 vs 0.78 en puntos cortos.
+
+---
+
+**Aplicación 28: Análisis de Uso de Golpes**
+
+El PUSFRE analiza el uso de cada golpe.
+
+**Cómo se hace:**
+
+1. Calcular la frecuencia de cada golpe
+2. Calcular la efectividad de cada golpe
+3. Identificar mejoras
+
+**Ejemplo de análisis:**
+
+| Golpe | Uso | Efectividad |
+|-------|-----|-------------|
+| Derecha | 45% | 0.82 |
+| Revés | 35% | 0.68 |
+| Volea | 12% | 0.75 |
+| Dejada | 8% | 0.60 |
+
+---
+
+**Aplicación 29: Análisis de Movimiento en Cancha**
+
+El PUSFRE analiza el movimiento en cancha.
+
+**Cómo se hace:**
+
+1. Medir distancia recorrida
+2. Medir velocidad de desplazamiento
+3. Calcular la eficiencia de movimiento
+
+**Fórmula de eficiencia de movimiento:**
+
+$$EM = \frac{Distancia}{Tiempo} \cdot \frac{Puntos_{ganados}}{Distancia}$$
+
+---
+
+**Aplicación 30: Análisis de Rendimiento en Condiciones Climáticas**
+
+El PUSFRE analiza el rendimiento en diferentes condiciones.
+
+**Cómo se hace:**
+
+1. Identificar condiciones climáticas
+2. Calcular fitness en cada condición
+3. Identificar preferencias
+
+**Ejemplo:** El jugador rinde mejor en condiciones cálidas y secas.
+
+---
+
+### Capítulo 3.7: Estrategia de Dobles
+
+**Aplicación 31: Evaluación de Pareja**
+
+El PUSFRE evalúa la compatibilidad de una pareja de dobles.
+
+**Cómo se hace:**
+
+1. Calcular sinergias entre jugadores
+2. Calcular la complementariedad
+3. Calcular la fitness de la pareja
+
+**Fórmula de compatibilidad:**
+
+$$C = \frac{Sinergia_{ij}}{Distancia_{estilos}}$$
+
+---
+
+**Aplicación 32: Estrategia de Dobles**
+
+El PUSFRE diseña la estrategia para dobles.
+
+**Cómo se hace:**
+
+1. Analizar fortalezas de la pareja
+2. Analizar debilidades del rival
+3. Diseñar estrategia
+
+**Ejemplo:** Si la pareja tiene buen juego de red, usar el ataque a la red.
+
+---
+
+**Aplicación 33: Posicionamiento en Dobles**
+
+El PUSFRE optimiza el posicionamiento en dobles.
+
+**Cómo se hace:**
+
+1. Determinar la mejor formación
+2. Asignar posiciones
+3. Coordinar los movimientos
+
+**Formaciones comunes:**
+
+| Formación | $\Phi$ ideal | $\Psi$ ideal |
+|-----------|--------------|--------------|
+| Australiana | Saque (0.85) | Comunicación (0.80) |
+| En la red | Volea (0.80) | Anticipación (0.85) |
+| En la línea | Consistencia (0.85) | Paciencia (0.80) |
+
+---
+
+**Aplicación 34: Gestión de Comunicación en Dobles**
+
+El PUSFRE optimiza la comunicación en dobles.
+
+**Cómo se hace:**
+
+1. Establecer señales
+2. Coordinar estrategias
+3. Gestionar la presión
+
+**Ejemplo:** Usar señales para indicar la dirección del saque.
+
+---
+
+**Aplicación 35: Análisis de Dobles**
+
+El PUSFRE analiza el rendimiento en dobles.
+
+**Cómo se hace:**
+
+1. Calcular la fitness de la pareja
+2. Analizar la efectividad de las estrategias
+3. Identificar áreas de mejora
+
+**Ejemplo:** La pareja pierde muchos puntos en la red. Mejorar la volea.
+
+---
+
+### Capítulo 3.8: Preparación Física
+
+**Aplicación 36: Planificación de Pretemporada**
+
+El PUSFRE planifica la pretemporada.
+
+**Cómo se hace:**
+
+1. Evaluar la condición física
+2. Establecer objetivos
+3. Planificar cargas de trabajo
+
+**Fases de pretemporada:**
+
+| Fase | Duración | Objetivo |
+|------|----------|----------|
+| Base | 4 semanas | Resistencia |
+| Fuerza | 4 semanas | Potencia |
+| Velocidad | 2 semanas | Agilidad |
+| Afinamiento | 2 semanas | Especificidad |
+
+---
+
+**Aplicación 37: Gestión de Carga Semanal**
+
+El PUSFRE gestiona la carga semanal de entrenamiento.
+
+**Cómo se hace:**
+
+1. Distribuir el entrenamiento en la semana
+2. Alternar cargas altas y bajas
+3. Incluir días de descanso
+
+**Ejemplo semanal:**
+
+| Día | Entrenamiento | Carga |
+|-----|---------------|-------|
+| Lunes | Técnica + Físico | Alta |
+| Martes | Táctica + Físico | Media |
+| Miércoles | Descanso | Baja |
+| Jueves | Técnica + Físico | Alta |
+| Viernes | Táctica | Media |
+| Sábado | Partido | Alta |
+| Domingo | Descanso | Baja |
+
+---
+
+**Aplicación 38: Prevención de Lesiones**
+
+El PUSFRE establece protocolos de prevención.
+
+**Cómo se hace:**
+
+1. Identificar factores de riesgo
+2. Diseñar ejercicios preventivos
+3. Monitorear la ejecución
+
+**Ejercicios preventivos:**
+
+- Fortalecimiento de hombros
+- Estiramientos de isquiotibiales
+- Entrenamiento de propiocepción
+
+---
+
+**Aplicación 39: Nutrición y Recuperación**
+
+El PUSFRE optimiza la nutrición y recuperación.
+
+**Cómo se hace:**
+
+1. Evaluar necesidades nutricionales
+2. Planificar comidas y suplementos
+3. Optimizar el sueño y descanso
+
+**Ejemplo:** Aumentar la ingesta de carbohidratos antes de los partidos.
+
+---
+
+**Aplicación 40: Análisis de Sueño**
+
+El PUSFRE analiza el impacto del sueño en el rendimiento.
+
+**Cómo se hace:**
+
+1. Monitorizar horas de sueño
+2. Calcular la calidad del sueño
+3. Optimizar los hábitos de sueño
+
+**Fórmula de impacto del sueño:**
+
+$$IS = \frac{Horas_{sueño}}{8} \cdot Calidad_{sueño}$$
+
+---
+
+### Capítulo 3.9: Análisis de Rivales
+
+**Aplicación 41: Scouting de Rivales**
+
+El PUSFRE analiza a los rivales potenciales.
+
+**Cómo se hace:**
+
+1. Recopilar datos de partidos del rival
+2. Identificar patrones de juego
+3. Identificar fortalezas y debilidades
+
+**Ejemplo:** El rival tiene un saque potente pero débil en el juego de fondo.
+
+---
+
+**Aplicación 42: Análisis de Tendencia de Rival**
+
+El PUSFRE analiza la tendencia de rendimiento del rival.
+
+**Cómo se hace:**
+
+1. Calcular la fitness del rival en los últimos partidos
+2. Identificar tendencias
+3. Predecir su rendimiento futuro
+
+**Ejemplo:** El rival está en una racha positiva. Fitness creciente.
+
+---
+
+**Aplicación 43: Preparación Específica para Rival**
+
+El PUSFRE diseña una preparación específica para cada rival.
+
+**Cómo se hace:**
+
+1. Identificar las armas del rival
+2. Diseñar estrategias para neutralizarlas
+3. Practicar situaciones específicas
+
+**Ejemplo:** Si el rival tiene buen drive, practicar el revés cruzado.
+
+---
+
+**Aplicación 44: Análisis de Partidos Previos**
+
+El PUSFRE analiza partidos previos contra el rival.
+
+**Cómo se hace:**
+
+1. Recopilar datos de enfrentamientos previos
+2. Identificar patrones
+3. Ajustar la estrategia
+
+**Ejemplo:** En los últimos 3 enfrentamientos, el jugador ha perdido en la red.
+
+---
+
+**Aplicación 45: Gestión de Presión de Rival**
+
+El PUSFRE gestiona la presión ejercida por el rival.
+
+**Cómo se hace:**
+
+1. Identificar momentos de presión
+2. Desarrollar estrategias para manejarla
+3. Practicar situaciones de presión
+
+**Ejemplo:** El rival presiona en los puntos de break. Practicar situaciones de break.
+
+---
+
+### Capítulo 3.10: Psicología Deportiva
+
+**Aplicación 46: Evaluación de Fortaleza Mental**
+
+El PUSFRE evalúa la fortaleza mental del jugador.
+
+**Cómo se hace:**
+
+1. Medir la capacidad de concentración
+2. Medir la gestión de presión
+3. Medir la capacidad de recuperación
+
+**Fórmula de fortaleza mental:**
+
+$$FM = \frac{Concentración + Gestión_{presión} + Recuperación}{3}$$
+
+---
+
+**Aplicación 47: Técnicas de Visualización**
+
+El PUSFRE utiliza técnicas de visualización.
+
+**Cómo se hace:**
+
+1. Visualizar puntos clave
+2. Visualizar estrategias
+3. Visualizar el éxito
+
+**Ejemplo:** Visualizar un saque ganador en punto de partido.
+
+---
+
+**Aplicación 48: Gestión de Emociones**
+
+El PUSFRE gestiona las emociones durante el partido.
+
+**Cómo se hace:**
+
+1. Identificar emociones negativas
+2. Desarrollar estrategias para manejarlas
+3. Mantener el control emocional
+
+**Ejemplo:** Cuando se siente frustración, respirar profundamente y enfocarse en el siguiente punto.
+
+---
+
+**Aplicación 49: Técnicas de Rutina**
+
+El PUSFRE establece rutinas pre-partido.
+
+**Cómo se hace:**
+
+1. Desarrollar una rutina de calentamiento
+2. Desarrollar una rutina de concentración
+3. Mantener la consistencia
+
+**Ejemplo:** Rutina de calentamiento: 15 minutos de estiramientos, 15 minutos de golpeo, 5 minutos de visualización.
+
+---
+
+**Aplicación 50: Análisis de Rendimiento en Situaciones de Presión**
+
+El PUSFRE analiza el rendimiento en situaciones de presión.
+
+**Cómo se hace:**
+
+1. Identificar situaciones de presión
+2. Calcular el rendimiento en esas situaciones
+3. Identificar áreas de mejora
+
+**Ejemplo:** En puntos de set, el jugador tiene fitness 0.60 vs 0.75 en puntos normales.
+
+---
+
+## SECCIÓN 4: AJEDREZ — 50 APLICACIONES PRÁCTICAS
+
+### Capítulo 4.1: Evaluación Posicional
+
+**Aplicación 1: Evaluación de Material**
+
+El PUSFRE evalúa la ventaja material.
+
+**Cómo se hace:**
+
+1. Asignar valores a las piezas ($\Phi_{pieza}$)
+2. Calcular la diferencia de material
+3. Ajustar por posición
+
+**Valores de piezas:**
+
+| Pieza | Valor $\Phi$ |
+|-------|--------------|
+| Reina | 9.0 |
+| Torre | 5.0 |
+| Alfil | 3.2 |
+| Caballo | 3.0 |
+| Peón | 1.0 |
+
+---
+
+**Aplicación 2: Evaluación de Estructura de Peones**
+
+El PUSFRE evalúa la estructura de peones.
+
+**Cómo se hace:**
+
+1. Identificar peones doblados ($\Psi_{doble}$)
+2. Identificar peones aislados ($\Psi_{aislado}$)
+3. Identificar peones retrasados ($\Psi_{retrasado}$)
+
+**Fórmula de estructura de peones:**
+
+$$EP = \frac{Peones_{sanos}}{Peones_{totales}} \cdot (1 - 0.2 \cdot Doblados - 0.3 \cdot Aislados)$$
+
+---
+
+**Aplicación 3: Evaluación de Control del Centro**
+
+El PUSFRE evalúa el control del centro.
+
+**Cómo se hace:**
+
+1. Identificar casillas centrales (e4, d4, e5, d5)
+2. Calcular el control de cada casilla
+3. Calcular el control total del centro
+
+**Fórmula de control del centro:**
+
+$$CC = \frac{\sum Control_{casilla\_central}}{4}$$
+
+---
+
+**Aplicación 4: Evaluación de Desarrollo**
+
+El PUSFRE evalúa el desarrollo de piezas.
+
+**Cómo se hace:**
+
+1. Identificar piezas desarrolladas
+2. Calcular el número de piezas desarrolladas
+3. Calcular el retraso en desarrollo
+
+**Fórmula de desarrollo:**
+
+$$D = \frac{Piezas_{desarrolladas}}{Piezas_{totales}}$$
+
+---
+
+**Aplicación 5: Evaluación de Seguridad del Rey**
+
+El PUSFRE evalúa la seguridad del rey.
+
+**Cómo se hace:**
+
+1. Identificar peones alrededor del rey
+2. Identificar piezas que atacan al rey
+3. Calcular la seguridad
+
+**Fórmula de seguridad del rey:**
+
+$$SR = \frac{Peones_{protectores}}{3} \cdot \frac{1}{1 + Ataques_{rey}}$$
+
+---
+
+### Capítulo 4.2: Estrategia de Apertura
+
+**Aplicación 6: Selección de Apertura**
+
+El PUSFRE selecciona la apertura óptima.
+
+**Cómo se hace:**
+
+1. Evaluar el repertorio de aperturas
+2. Analizar la preferencia del rival
+3. Seleccionar la apertura más favorable
+
+**Ejemplo:** Si el rival prefiere aperturas cerradas, elegir una apertura abierta.
+
+---
+
+**Aplicación 7: Evaluación de Variante de Apertura**
+
+El PUSFRE evalúa diferentes variantes de apertura.
+
+**Cómo se hace:**
+
+1. Identificar variantes principales
+2. Calcular la fitness de cada variante
+3. Seleccionar la mejor
+
+**Ejemplo de variantes:**
+
+| Variante | Fitness | Evaluación |
+|----------|---------|------------|
+| Española | 0.75 | Buena |
+| Italiana | 0.70 | Aceptable |
+| Siciliana | 0.80 | Muy buena |
+
+---
+
+**Aplicación 8: Preparación de Apertura**
+
+El PUSFRE optimiza la preparación de apertura.
+
+**Cómo se hace:**
+
+1. Identificar las aperturas más usadas por el rival
+2. Preparar líneas específicas
+3. Practicar las líneas preparadas
+
+**Ejemplo:** El rival usa la Siciliana. Preparar la variante Najdorf.
+
+---
+
+**Aplicación 9: Gestión de Tiempo en Apertura**
+
+El PUSFRE optimiza el uso del tiempo en la apertura.
+
+**Cómo se hace:**
+
+1. Calcular el tiempo disponible
+2. Distribuir el tiempo según la complejidad
+3. Mantener el control del reloj
+
+**Regla de tiempo en apertura:**
+
+$$\text{Usar el 30% del tiempo en la apertura}$$
+
+---
+
+**Aplicación 10: Análisis de Apertura Post-Partido**
+
+El PUSFRE analiza la apertura después del partido.
+
+**Cómo se hace:**
+
+1. Identificar errores en la apertura
+2. Analizar alternativas
+3. Ajustar el repertorio
+
+**Ejemplo:** En la apertura, se hizo una jugada imprecisa. Analizar la alternativa correcta.
+
+---
+
+### Capítulo 4.3: Estrategia de Medio Juego
+
+**Aplicación 11: Evaluación de Planes Estratégicos**
+
+El PUSFRE evalúa los planes estratégicos disponibles.
+
+**Cómo se hace:**
+
+1. Identificar planes posibles
+2. Calcular la efectividad de cada plan
+3. Seleccionar el mejor plan
+
+**Ejemplo de planes:**
+
+| Plan | Efectividad | Evaluación |
+|------|-------------|------------|
+| Ataque al enroque | 0.80 | Muy bueno |
+| Juego de centro | 0.70 | Bueno |
+| Presión en el flanco | 0.65 | Aceptable |
+
+---
+
+**Aplicación 12: Evaluación de Combinaciones Tácticas**
+
+El PUSFRE evalúa combinaciones tácticas.
+
+**Cómo se hace:**
+
+1. Identificar elementos tácticos
+2. Calcular la efectividad de la combinación
+3. Evaluar el riesgo
+
+**Fórmula de efectividad táctica:**
+
+$$ET = \frac{Ganancia_{material} + Ganancia_{posición}}{Riesgo}$$
+
+---
+
+**Aplicación 13: Gestión de Iniciativa**
+
+El PUSFRE gestiona la iniciativa en el medio juego.
+
+**Cómo se hace:**
+
+1. Evaluar quién tiene la iniciativa
+2. Mantener o recuperar la iniciativa
+3. Tomar decisiones activas
+
+**Ejemplo:** Si se tiene iniciativa, presionar al rival. Si no, buscar contrajuego.
+
+---
+
+**Aplicación 14: Evaluación de Cambios**
+
+El PUSFRE evalúa la conveniencia de los cambios.
+
+**Cómo se hace:**
+
+1. Identificar cambios posibles
+2. Calcular el impacto de cada cambio
+3. Decidir si cambiar
+
+**Regla de cambios:**
+
+$$\text{Cambiar si el cambio mejora la estructura o simplifica con ventaja}$$
+
+---
+
+**Aplicación 15: Evaluación de Ataques**
+
+El PUSFRE evalúa la efectividad de los ataques.
+
+**Cómo se hace:**
+
+1. Identificar elementos ofensivos
+2. Calcular la fuerza del ataque
+3. Evaluar las defensas rivales
+
+**Fórmula de fuerza de ataque:**
+
+$$FA = \frac{Piezas_{atacantes} \cdot Control_{casillas\_clave}}{Defensas_{rivales}}$$
+
+---
+
+### Capítulo 4.4: Estrategia de Final
+
+**Aplicación 16: Evaluación de Finales**
+
+El PUSFRE evalúa la posición en el final.
+
+**Cómo se hace:**
+
+1. Evaluar la ventaja material
+2. Evaluar la posición de los peones
+3. Evaluar la actividad del rey
+
+**Fórmula de evaluación de final:**
+
+$$EF = \frac{Material + Peones + Actividad_{rey}}{3}$$
+
+---
+
+**Aplicación 17: Gestión de Finales de Peones**
+
+El PUSFRE gestiona finales de peones.
+
+**Cómo se hace:**
+
+1. Identificar peones pasados
+2. Calcular la velocidad de los peones
+3. Decidir el plan
+
+**Ejemplo:** Un peón pasado en la 7ª fila tiene alta probabilidad de coronar.
+
+---
+
+**Aplicación 18: Gestión de Finales de Torres**
+
+El PUSFRE gestiona finales de torres.
+
+**Cómo se hace:**
+
+1. Evaluar la actividad de las torres
+2. Evaluar los peones pasados
+3. Decidir el plan
+
+**Ejemplo:** Colocar la torre detrás del peón pasado.
+
+---
+
+**Aplicación 19: Gestión de Finales de Alfiles**
+
+El PUSFRE gestiona finales de alfiles.
+
+**Cómo se hace:**
+
+1. Evaluar el color de los alfiles
+2. Evaluar los peones
+3. Decidir el plan
+
+**Ejemplo:** En final de alfiles de diferente color, la ventaja material importa menos.
+
+---
+
+**Aplicación 20: Gestión de Finales de Caballos**
+
+El PUSFRE gestiona finales de caballos.
+
+**Cómo se hace:**
+
+1. Evaluar la actividad del caballo
+2. Evaluar los peones
+3. Decidir el plan
+
+**Ejemplo:** El caballo es más fuerte cuando hay peones en ambos flancos.
+
+---
+
+### Capítulo 4.5: Gestión de Tiempo
+
+**Aplicación 21: Distribución de Tiempo por Fase**
+
+El PUSFRE distribuye el tiempo según la fase del juego.
+
+**Cómo se hace:**
+
+1. Calcular el tiempo total
+2. Distribuir según la fase
+3. Ajustar durante el partido
+
+**Distribución típica:**
+
+| Fase | % de tiempo |
+|------|-------------|
+| Apertura | 25% |
+| Medio juego | 40% |
+| Final | 35% |
+
+---
+
+**Aplicación 22: Gestión de Tiempo en Posiciones Críticas**
+
+El PUSFRE gestiona el tiempo en posiciones críticas.
+
+**Cómo se hace:**
+
+1. Identificar posiciones críticas
+2. Usar más tiempo en ellas
+3. Mantener el control del reloj
+
+**Ejemplo:** En posiciones tácticas, usar más tiempo para calcular.
+
+---
+
+**Aplicación 23: Gestión de Presión de Tiempo**
+
+El PUSFRE gestiona la presión de tiempo.
+
+**Cómo se hace:**
+
+1. Identificar momentos de presión
+2. Mantener la calma
+3. Tomar decisiones rápidas pero precisas
+
+**Ejemplo:** En presión de tiempo, jugar movimientos seguros y evitar complicaciones.
+
+---
+
+**Aplicación 24: Análisis de Uso de Tiempo Post-Partido**
+
+El PUSFRE analiza el uso del tiempo después del partido.
+
+**Cómo se hace:**
+
+1. Comparar tiempo usado vs tiempo disponible
+2. Identificar áreas de mejora
+3. Ajustar la estrategia de tiempo
+
+**Ejemplo:** Se usó demasiado tiempo en la apertura. Mejorar el conocimiento de apertura.
+
+---
+
+**Aplicación 25: Optimización de Ritmo de Juego**
+
+El PUSFRE optimiza el ritmo de juego.
+
+**Cómo se hace:**
+
+1. Establecer un ritmo adecuado
+2. Mantener la consistencia
+3. Ajustar según la posición
+
+**Ejemplo:** En posiciones simples, jugar rápido; en complejas, tomarse tiempo.
+
+---
+
+### Capítulo 4.6: Psicología en Ajedrez
+
+**Aplicación 26: Gestión de Emociones**
+
+El PUSFRE gestiona las emociones durante el partido.
+
+**Cómo se hace:**
+
+1. Identificar emociones negativas
+2. Desarrollar estrategias para manejarlas
+3. Mantener el control emocional
+
+**Ejemplo:** Cuando se comete un error, no dejarse llevar por la frustración.
+
+---
+
+**Aplicación 27: Gestión de Concentración**
+
+El PUSFRE mantiene la concentración durante el partido.
+
+**Cómo se hace:**
+
+1. Establecer rutinas de concentración
+2. Mantener la atención en el tablero
+3. Evitar distracciones
+
+**Ejemplo:** Antes de cada movimiento, tomar una respiración profunda.
+
+---
+
+**Aplicación 28: Gestión de Frustración**
+
+El PUSFRE gestiona la frustración.
+
+**Cómo se hace:**
+
+1. Identificar situaciones frustrantes
+2. Desarrollar estrategias para manejarlas
+3. Mantener la perspectiva
+
+**Ejemplo:** Después de una mala jugada, enfocarse en el siguiente movimiento.
+
+---
+
+**Aplicación 29: Gestión de Confianza**
+
+El PUSFRE mantiene la confianza.
+
+**Cómo se hace:**
+
+1. Reconocer los logros
+2. Mantener una actitud positiva
+3. Confiar en las habilidades
+
+**Ejemplo:** Recordar partidos anteriores ganados en posiciones similares.
+
+---
+
+**Aplicación 30: Gestión de Motivación**
+
+El PUSFRE mantiene la motivación.
+
+**Cómo se hace:**
+
+1. Establecer objetivos claros
+2. Mantener el interés en el juego
+3. Disfrutar del proceso
+
+**Ejemplo:** Enfocarse en el aprendizaje y mejora, no solo en ganar.
+
+---
+
+### Capítulo 4.7: Análisis de Rivales
+
+**Aplicación 31: Scouting de Rivales**
+
+El PUSFRE analiza a los rivales potenciales.
+
+**Cómo se hace:**
+
+1. Recopilar partidas del rival
+2. Identificar patrones de juego
+3. Identificar fortalezas y debilidades
+
+**Ejemplo:** El rival es agresivo en el ataque pero débil en la defensa.
+
+---
+
+**Aplicación 32: Análisis de Aperturas del Rival**
+
+El PUSFRE analiza el repertorio de aperturas del rival.
+
+**Cómo se hace:**
+
+1. Identificar aperturas favoritas del rival
+2. Analizar su efectividad
+3. Preparar líneas específicas
+
+**Ejemplo:** El rival usa la Caro-Kann. Preparar la variante del avance.
+
+---
+
+**Aplicación 33: Análisis de Estilo de Juego del Rival**
+
+El PUSFRE analiza el estilo de juego del rival.
+
+**Cómo se hace:**
+
+1. Identificar el estilo del rival
+2. Analizar su efectividad
+3. Diseñar estrategias
+
+**Estilos de juego:**
+
+| Estilo | Características | Estrategia |
+|--------|-----------------|------------|
+| Agresivo | Ataca constantemente | Defensa sólida |
+| Posicional | Juego estratégico | Líneas abiertas |
+| Táctico | Busca combinaciones | Cálculo preciso |
+| Defensivo | Espera errores | Presión constante |
+
+---
+
+**Aplicación 34: Preparación Específica para Rival**
+
+El PUSFRE diseña una preparación específica para cada rival.
+
+**Cómo se hace:**
+
+1. Identificar las armas del rival
+2. Diseñar estrategias para neutralizarlas
+3. Practicar situaciones específicas
+
+**Ejemplo:** Si el rival es fuerte en finales, buscar ganar en medio juego.
+
+---
+
+**Aplicación 35: Análisis de Partidos Previos**
+
+El PUSFRE analiza partidos previos contra el rival.
+
+**Cómo se hace:**
+
+1. Recopilar datos de enfrentamientos previos
+2. Identificar patrones
+3. Ajustar la estrategia
+
+**Ejemplo:** En los últimos partidos, el rival ha ganado en el medio juego.
+
+---
+
+### Capítulo 4.8: Preparación Física
+
+**Aplicación 36: Entrenamiento Físico para Ajedrez**
+
+El PUSFRE diseña un plan de entrenamiento físico para ajedrecistas.
+
+**Cómo se hace:**
+
+1. Evaluar la condición física
+2. Establecer objetivos
+3. Planificar entrenamientos
+
+**Ejemplo:** Los ajedrecistas necesitan buena resistencia para partidas largas.
+
+---
+
+**Aplicación 37: Gestión de Fatiga Mental**
+
+El PUSFRE gestiona la fatiga mental.
+
+**Cómo se hace:**
+
+1. Identificar síntomas de fatiga
+2. Tomar descansos
+3. Mantener la frescura mental
+
+**Ejemplo:** Tomar 5 minutos de descanso después de cada hora de juego.
+
+---
+
+**Aplicación 38: Nutrición para Ajedrecistas**
+
+El PUSFRE optimiza la nutrición para ajedrecistas.
+
+**Cómo se hace:**
+
+1. Evaluar necesidades nutricionales
+2. Planificar comidas
+3. Mantener la energía
+
+**Ejemplo:** Comer carbohidratos de liberación lenta para mantener la energía.
+
+---
+
+**Aplicación 39: Gestión del Sueño**
+
+El PUSFRE optimiza el sueño para ajedrecistas.
+
+**Cómo se hace:**
+
+1. Monitorizar horas de sueño
+2. Calcular la calidad del sueño
+3. Optimizar los hábitos de sueño
+
+**Ejemplo:** Dormir 8 horas antes de un partido importante.
+
+---
+
+**Aplicación 40: Gestión de Estrés**
+
+El PUSFRE gestiona el estrés en ajedrecistas.
+
+**Cómo se hace:**
+
+1. Identificar fuentes de estrés
+2. Desarrollar técnicas de relajación
+3. Mantener la calma
+
+**Ejemplo:** Practicar respiración profunda antes del partido.
+
+---
+
+### Capítulo 4.9: Estrategia de Torneos
+
+**Aplicación 41: Planificación de Torneos**
+
+El PUSFRE planifica la participación en torneos.
+
+**Cómo se hace:**
+
+1. Evaluar el calendario de torneos
+2. Seleccionar los torneos más favorables
+3. Planificar la preparación
+
+**Criterios de selección:**
+
+- Nivel del torneo
+- Formato de juego
+- Rivales esperados
+
+---
+
+**Aplicación 42: Gestión de Ritmo en Torneos**
+
+El PUSFRE gestiona el ritmo durante un torneo.
+
+**Cómo se hace:**
+
+1. Mantener la consistencia
+2. Gestionar la energía
+3. Evitar el burnout
+
+**Ejemplo:** Después de una partida larga, descansar y no estudiar demasiado.
+
+---
+
+**Aplicación 43: Estrategia en Torneos por Equipos**
+
+El PUSFRE planifica la estrategia en torneos por equipos.
+
+**Cómo se hace:**
+
+1. Analizar al equipo rival
+2. Asignar tableros
+3. Diseñar estrategias
+
+**Ejemplo:** El mejor jugador del equipo juega en el tablero 1.
+
+---
+
+**Aplicación 44: Gestión de Resultados**
+
+El PUSFRE gestiona los resultados del torneo.
+
+**Cómo se hace:**
+
+1. Analizar los resultados
+2. Identificar áreas de mejora
+3. Ajustar la estrategia
+
+**Ejemplo:** Se han perdido varias partidas en el medio juego. Mejorar el medio juego.
+
+---
+
+**Aplicación 45: Análisis Post-Torneo**
+
+El PUSFRE analiza el rendimiento en el torneo.
+
+**Cómo se hace:**
+
+1. Evaluar el rendimiento global
+2. Identificar áreas de mejora
+3. Planificar la siguiente fase
+
+**Ejemplo:** El torneo ha sido positivo. Continuar trabajando en las áreas identificadas.
+
+---
+
+### Capítulo 4.10: Desarrollo de Jugadores
+
+**Aplicación 46: Plan de Desarrollo Técnico**
+
+El PUSFRE diseña un plan de desarrollo técnico para ajedrecistas.
+
+**Cómo se hace:**
+
+1. Identificar debilidades técnicas
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Mejorar los finales. Estudiar 30 minutos de finales al día.
+
+---
+
+**Aplicación 47: Plan de Desarrollo Táctico**
+
+El PUSFRE diseña un plan de desarrollo táctico.
+
+**Cómo se hace:**
+
+1. Identificar debilidades tácticas
+2. Establecer objetivos
+3. Planificar entrenamientos tácticos
+
+**Ejemplo:** Resolver 20 ejercicios tácticos al día.
+
+---
+
+**Aplicación 48: Plan de Desarrollo Estratégico**
+
+El PUSFRE diseña un plan de desarrollo estratégico.
+
+**Cómo se hace:**
+
+1. Identificar debilidades estratégicas
+2. Establecer objetivos
+3. Planificar entrenamientos estratégicos
+
+**Ejemplo:** Estudiar partidas de jugadores posicionales.
+
+---
+
+**Aplicación 49: Plan de Desarrollo Psicológico**
+
+El PUSFRE diseña un plan de desarrollo psicológico.
+
+**Cómo se hace:**
+
+1. Identificar debilidades psicológicas
+2. Establecer objetivos
+3. Planificar entrenamientos psicológicos
+
+**Ejemplo:** Practicar meditación y visualización.
+
+---
+
+**Aplicación 50: Seguimiento de Progreso**
+
+El PUSFRE monitorea el progreso del ajedrecista.
+
+**Cómo se hace:**
+
+1. Calcular fitness en intervalos regulares
+2. Comparar con objetivos
+3. Ajustar el plan de desarrollo
+
+**Ejemplo:** El ajedrecista ha mejorado su fitness de 0.65 a 0.72 en 6 meses.
+
+---
+
+## SECCIÓN 5: LEAGUE OF LEGENDS — 50 APLICACIONES PRÁCTICAS
+
+### Capítulo 5.1: Scouting de Jugadores
+
+**Aplicación 1: Evaluación de Mecánicas**
+
+El PUSFRE evalúa las habilidades mecánicas del jugador.
+
+**Cómo se hace:**
+
+1. Medir precisión de habilidades ($\Phi_{precisión}$)
+2. Medir tiempo de reacción ($\Phi_{reflejos}$)
+3. Medir consistencia ($\Psi_{consistencia}$)
+
+**Fórmula de mecánicas:**
+
+$$M = \Phi_{precisión} \cdot \Phi_{reflejos} \cdot \Psi_{consistencia}$$
+
+---
+
+**Aplicación 2: Evaluación de Visión de Juego**
+
+El PUSFRE evalúa la visión de juego del jugador.
+
+**Cómo se hace:**
+
+1. Medir control de visión ($\Phi_{visión}$)
+2. Medir lectura de mapa ($\Psi_{mapa}$)
+3. Medir decisión ($\Omega_{decisión}$)
+
+**Fórmula de visión de juego:**
+
+$$VJ = \Phi_{visión} \cdot \Psi_{mapa} \cdot \Omega_{decisión}^{1.2}$$
+
+---
+
+**Aplicación 3: Evaluación de Macro**
+
+El PUSFRE evalúa la gestión macro del jugador.
+
+**Cómo se hace:**
+
+1. Medir farmeo ($\Phi_{farmeo}$)
+2. Medir gestión de objetivos ($\Psi_{objetivos}$)
+3. Medir rotaciones ($\Omega_{rotaciones}$)
+
+**Fórmula de macro:**
+
+$$M = \Phi_{farmeo} \cdot \Psi_{objetivos} \cdot \Omega_{rotaciones}$$
+
+---
+
+**Aplicación 4: Evaluación de Teamfight**
+
+El PUSFRE evalúa la capacidad de teamfight.
+
+**Cómo se hace:**
+
+1. Medir posicionamiento ($\Phi_{posición}$)
+2. Medir sinergia ($\Psi_{sinergia}$)
+3. Medir daño ($\Omega_{daño}$)
+
+**Fórmula de teamfight:**
+
+$$TF = \Phi_{posición} \cdot \Psi_{sinergia} \cdot \Omega_{daño}$$
+
+---
+
+**Aplicación 5: Evaluación de Adaptabilidad**
+
+El PUSFRE evalúa la adaptabilidad del jugador.
+
+**Cómo se hace:**
+
+1. Medir capacidad de adaptación a meta ($\Phi_{adaptación}$)
+2. Medir versatilidad ($\Psi_{versatilidad}$)
+3. Medir aprendizaje ($\Omega_{aprendizaje}$)
+
+**Fórmula de adaptabilidad:**
+
+$$A = \Phi_{adaptación} \cdot \Psi_{versatilidad} \cdot \Omega_{aprendizaje}$$
+
+---
+
+### Capítulo 5.2: Estrategia de Equipo
+
+**Aplicación 6: Optimización de Composición**
+
+El PUSFRE optimiza la composición del equipo.
+
+**Cómo se hace:**
+
+1. Evaluar sinergias entre campeones
+2. Evaluar matchups contra el rival
+3. Seleccionar la mejor composición
+
+**Ejemplo:** Composición con buen early game y late game.
+
+---
+
+**Aplicación 7: Estrategia de Pick/Ban**
+
+El PUSFRE optimiza la fase de pick/ban.
+
+**Cómo se hace:**
+
+1. Identificar campeones clave del rival
+2. Priorizar bans
+3. Seleccionar picks
+
+**Ejemplo:** Banear el campeón principal del rival, pickear el mejor campeón disponible.
+
+---
+
+**Aplicación 8: Gestión de Objetivos**
+
+El PUSFRE optimiza la gestión de objetivos.
+
+**Cómo se hace:**
+
+1. Identificar objetivos prioritarios
+2. Planificar la toma de objetivos
+3. Gestionar la visión
+
+**Prioridad de objetivos:**
+
+1. Barón (late game)
+2. Dragón (mid game)
+3. Torretas (early game)
+4. Inhibidores (late game)
+
+---
+
+**Aplicación 9: Estrategia de Rotaciones**
+
+El PUSFRE optimiza las rotaciones.
+
+**Cómo se hace:**
+
+1. Identificar oportunidades de rotación
+2. Coordinar movimientos
+3. Gestionar la visión
+
+**Ejemplo:** Rotar a bot para tomar dragón.
+
+---
+
+**Aplicación 10: Estrategia de Teamfight**
+
+El PUSFRE optimiza las teamfights.
+
+**Cómo se hace:**
+
+1. Identificar objetivos en teamfight
+2. Coordinar habilidades
+3. Gestionar el posicionamiento
+
+**Ejemplo:** Enfocarse al carry rival.
+
+---
+
+### Capítulo 5.3: Gestión de Recursos
+
+**Aplicación 11: Gestión de Oro**
+
+El PUSFRE optimiza la gestión de oro.
+
+**Cómo se hace:**
+
+1. Identificar fuentes de oro
+2. Priorizar la inversión
+3. Gestionar el gasto
+
+**Fórmula de eficiencia de oro:**
+
+$$EO = \frac{Daño}{Oro}$$
+
+---
+
+**Aplicación 12: Gestión de Experiencia**
+
+El PUSFRE optimiza la gestión de experiencia.
+
+**Cómo se hace:**
+
+1. Identificar fuentes de experiencia
+2. Priorizar el nivel
+3. Gestionar la distribución
+
+**Fórmula de eficiencia de experiencia:**
+
+$$EE = \frac{Habilidades}{Experiencia}$$
+
+---
+
+**Aplicación 13: Gestión de Visión**
+
+El PUSFRE optimiza la gestión de visión.
+
+**Cómo se hace:**
+
+1. Identificar zonas clave
+2. Colocar guardias
+3. Limpiar visión rival
+
+**Zonas clave de visión:**
+
+- Barón
+- Dragón
+- Ríos
+- Selva rival
+
+---
+
+**Aplicación 14: Gestión de Habilidades**
+
+El PUSFRE optimiza el uso de habilidades.
+
+**Cómo se hace:**
+
+1. Identificar habilidades clave
+2. Priorizar uso
+3. Gestionar tiempos de enfriamiento
+
+**Ejemplo:** Guardar ultimate para teamfight.
+
+---
+
+**Aplicación 15: Gestión de Summoner Spells**
+
+El PUSFRE optimiza el uso de summoner spells.
+
+**Cómo se hace:**
+
+1. Identificar spells clave
+2. Priorizar uso
+3. Gestionar tiempos de enfriamiento
+
+**Ejemplo:** Usar Flash para escapar o iniciar.
+
+---
+
+### Capítulo 5.4: Análisis de Partido
+
+**Aplicación 16: Análisis de Estadísticas del Partido**
+
+El PUSFRE analiza las estadísticas del partido.
+
+**Cómo se hace:**
+
+1. Calcular oro, daño, visión
+2. Calcular efectividad
+3. Identificar áreas de mejora
+
+**Ejemplo de estadísticas:**
+
+| Métrica | Valor | Evaluación |
+|---------|-------|------------|
+| Oro | 15K | Bueno |
+| Daño | 20K | Excelente |
+| Visión | 80 | Aceptable |
+
+---
+
+**Aplicación 17: Análisis de KDA**
+
+El PUSFRE analiza el KDA del jugador.
+
+**Cómo se hace:**
+
+1. Calcular bajas, asistencias, muertes
+2. Calcular ratio KDA
+3. Evaluar la efectividad
+
+**Fórmula de KDA:**
+
+$$KDA = \frac{Bajas + Asistencias}{Muertes + 1}$$
+
+---
+
+**Aplicación 18: Análisis de Daño**
+
+El PUSFRE analiza el daño infligido y recibido.
+
+**Cómo se hace:**
+
+1. Calcular daño infligido
+2. Calcular daño recibido
+3. Calcular ratio de daño
+
+**Fórmula de ratio de daño:**
+
+$$RD = \frac{Daño_{infligido}}{Daño_{recibido}}$$
+
+---
+
+**Aplicación 19: Análisis de Visión**
+
+El PUSFRE analiza la contribución de visión.
+
+**Cómo se hace:**
+
+1. Calcular guardias colocadas
+2. Calcular guardias eliminadas
+3. Calcular la efectividad de visión
+
+**Fórmula de visión:**
+
+$$V = \frac{Guardias_{colocadas} + Guardias_{eliminadas}}{Tiempo}$$
+
+---
+
+**Aplicación 20: Análisis de Objetivos**
+
+El PUSFRE analiza la contribución en objetivos.
+
+**Cómo se hace:**
+
+1. Calcular objetivos tomados
+2. Calcular participación en objetivos
+3. Calcular la efectividad en objetivos
+
+**Fórmula de objetivos:**
+
+$$O = \frac{Objetivos_{tomados}}{Objetivos_{totales}} \cdot Participación$$
+
+---
+
+### Capítulo 5.5: Gestión de Mentalidad
+
+**Aplicación 21: Gestión de Tilt**
+
+El PUSFRE gestiona el tilt del jugador.
+
+**Cómo se hace:**
+
+1. Identificar síntomas de tilt
+2. Desarrollar estrategias para manejarlo
+3. Mantener la calma
+
+**Ejemplo:** Después de una muerte, respirar y enfocarse en el siguiente objetivo.
+
+---
+
+**Aplicación 22: Gestión de Motivación**
+
+El PUSFRE mantiene la motivación.
+
+**Cómo se hace:**
+
+1. Establecer objetivos claros
+2. Mantener el interés en el juego
+3. Disfrutar del proceso
+
+**Ejemplo:** Enfocarse en la mejora, no solo en ganar.
+
+---
+
+**Aplicación 23: Gestión de Comunicación**
+
+El PUSFRE optimiza la comunicación en equipo.
+
+**Cómo se hace:**
+
+1. Establecer canales de comunicación
+2. Coordinar estrategias
+3. Mantener un ambiente positivo
+
+**Ejemplo:** Comunicar objetivos y rotaciones.
+
+---
+
+**Aplicación 24: Gestión de Presión**
+
+El PUSFRE gestiona la presión durante el partido.
+
+**Cómo se hace:**
+
+1. Identificar momentos de presión
+2. Desarrollar estrategias para manejarla
+3. Mantener la calma
+
+**Ejemplo:** En partidas importantes, mantener la rutina.
+
+---
+
+**Aplicación 25: Gestión de Confianza**
+
+El PUSFRE mantiene la confianza.
+
+**Cómo se hace:**
+
+1. Reconocer los logros
+2. Mantener una actitud positiva
+3. Confiar en las habilidades
+
+**Ejemplo:** Recordar partidas ganadas en situaciones similares.
+
+---
+
+### Capítulo 5.6: Análisis de Rivales
+
+**Aplicación 26: Scouting de Rivales**
+
+El PUSFRE analiza a los rivales potenciales.
+
+**Cómo se hace:**
+
+1. Recopilar datos de partidos del rival
+2. Identificar patrones de juego
+3. Identificar fortalezas y debilidades
+
+**Ejemplo:** El rival es fuerte en early game pero débil en late game.
+
+---
+
+**Aplicación 27: Análisis de Estilo de Juego del Rival**
+
+El PUSFRE analiza el estilo de juego del rival.
+
+**Cómo se hace:**
+
+1. Identificar el estilo del rival
+2. Analizar su efectividad
+3. Diseñar estrategias
+
+**Estilos de juego:**
+
+| Estilo | Características | Estrategia |
+|--------|-----------------|------------|
+| Agresivo | Busca peleas | Evitar early game |
+| Pasivo | Juego seguro | Presionar early game |
+| Macro | Objetivos | Controlar visión |
+| Teamfight | Peleas de equipo | Pickoff |
+
+---
+
+**Aplicación 28: Preparación Específica para Rival**
+
+El PUSFRE diseña una preparación específica para cada rival.
+
+**Cómo se hace:**
+
+1. Identificar las armas del rival
+2. Diseñar estrategias para neutralizarlas
+3. Practicar situaciones específicas
+
+**Ejemplo:** Si el rival es fuerte en early game, preparar una estrategia defensiva.
+
+---
+
+**Aplicación 29: Análisis de Partidos Previos**
+
+El PUSFRE analiza partidos previos contra el rival.
+
+**Cómo se hace:**
+
+1. Recopilar datos de enfrentamientos previos
+2. Identificar patrones
+3. Ajustar la estrategia
+
+**Ejemplo:** En los últimos partidos, el rival ha ganado por macro. Controlar la visión.
+
+---
+
+**Aplicación 30: Gestión de Meta**
+
+El PUSFRE se adapta a la meta actual.
+
+**Cómo se hace:**
+
+1. Analizar la meta actual
+2. Adaptar el estilo de juego
+3. Ajustar la composición
+
+**Ejemplo:** En meta de late game, elegir campeones de late game.
+
+---
+
+### Capítulo 5.7: Desarrollo de Jugadores
+
+**Aplicación 31: Plan de Desarrollo Mecánico**
+
+El PUSFRE diseña un plan de desarrollo mecánico.
+
+**Cómo se hace:**
+
+1. Identificar debilidades mecánicas
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Mejorar el farmeo. Practicar 30 minutos de farmeo al día.
+
+---
+
+**Aplicación 32: Plan de Desarrollo de Visión de Juego**
+
+El PUSFRE diseña un plan de desarrollo de visión de juego.
+
+**Cómo se hace:**
+
+1. Identificar debilidades en visión de juego
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Mejorar la lectura de mapa. Revisar el mapa cada 5 segundos.
+
+---
+
+**Aplicación 33: Plan de Desarrollo de Macro**
+
+El PUSFRE diseña un plan de desarrollo de macro.
+
+**Cómo se hace:**
+
+1. Identificar debilidades en macro
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Mejorar la gestión de objetivos. Estudiar rotaciones.
+
+---
+
+**Aplicación 34: Plan de Desarrollo de Teamfight**
+
+El PUSFRE diseña un plan de desarrollo de teamfight.
+
+**Cómo se hace:**
+
+1. Identificar debilidades en teamfight
+2. Establecer objetivos
+3. Planificar entrenamientos específicos
+
+**Ejemplo:** Mejorar el posicionamiento en teamfight. Practicar con amigos.
+
+---
+
+**Aplicación 35: Seguimiento de Progreso**
+
+El PUSFRE monitorea el progreso del jugador.
+
+**Cómo se hace:**
+
+1. Calcular fitness en intervalos regulares
+2. Comparar con objetivos
+3. Ajustar el plan de desarrollo
+
+**Ejemplo:** El jugador ha mejorado su fitness de 0.65 a 0.72 en 6 meses.
+
+---
+
+### Capítulo 5.8: Gestión de Equipo
+
+**Aplicación 36: Evaluación de Sinergias de Equipo**
+
+El PUSFRE evalúa las sinergias del equipo.
+
+**Cómo se hace:**
+
+1. Calcular sinergias entre jugadores
+2. Identificar parejas fuertes
+3. Optimizar la composición
+
+**Fórmula de sinergia:**
+
+$$S_{ij} = \frac{Campeones_{compatibles}}{Partidas_{juntas}}$$
+
+---
+
+**Aplicación 37: Gestión de Roles**
+
+El PUSFRE optimiza la asignación de roles.
+
+**Cómo se hace:**
+
+1. Identificar fortalezas de cada jugador
+2. Asignar roles según fortalezas
+3. Ajustar según el partido
+
+**Ejemplo:** El jugador con mejor mecánica juega ADC.
+
+---
+
+**Aplicación 38: Gestión de Comunicación en Equipo**
+
+El PUSFRE optimiza la comunicación en equipo.
+
+**Cómo se hace:**
+
+1. Establecer canales de comunicación
+2. Coordinar estrategias
+3. Mantener un ambiente positivo
+
+**Ejemplo:** Usar un shotcaller principal.
+
+---
+
+**Aplicación 39: Gestión de Estrategias de Equipo**
+
+El PUSFRE optimiza las estrategias de equipo.
+
+**Cómo se hace:**
+
+1. Identificar fortalezas del equipo
+2. Diseñar estrategias
+3. Practicar estrategias
+
+**Ejemplo:** El equipo es fuerte en teamfight. Jugar composiciones de teamfight.
+
+---
+
+**Aplicación 40: Gestión de Tácticas de Equipo**
+
+El PUSFRE optimiza las tácticas de equipo.
+
+**Cómo se hace:**
+
+1. Identificar tácticas efectivas
+2. Practicar tácticas
+3. Ajustar según el rival
+
+**Ejemplo:** Hacer un dive en bot para tomar torreta.
+
+---
+
+### Capítulo 5.9: Estrategia de Torneos
+
+**Aplicación 41: Planificación de Torneos**
+
+El PUSFRE planifica la participación en torneos.
+
+**Cómo se hace:**
+
+1. Evaluar el calendario de torneos
+2. Seleccionar los torneos más favorables
+3. Planificar la preparación
+
+**Criterios de selección:**
+
+- Nivel del torneo
+- Formato de juego
+- Rivales esperados
+
+---
+
+**Aplicación 42: Gestión de Ritmo en Torneos**
+
+El PUSFRE gestiona el ritmo durante un torneo.
+
+**Cómo se hace:**
+
+1. Mantener la consistencia
+2. Gestionar la energía
+3. Evitar el burnout
+
+**Ejemplo:** Después de una partida larga, descansar y no jugar demasiado.
+
+---
+
+**Aplicación 43: Estrategia en Torneos por Equipos**
+
+El PUSFRE planifica la estrategia en torneos por equipos.
+
+**Cómo se hace:**
+
+1. Analizar al equipo rival
+2. Asignar roles
+3. Diseñar estrategias
+
+**Ejemplo:** El mejor jugador del equipo juega en la posición más importante.
+
+---
+
+**Aplicación 44: Gestión de Resultados**
+
+El PUSFRE gestiona los resultados del torneo.
+
+**Cómo se hace:**
+
+1. Analizar los resultados
+2. Identificar áreas de mejora
+3. Ajustar la estrategia
+
+**Ejemplo:** Se han perdido varias partidas en early game. Mejorar el early game.
+
+---
+
+**Aplicación 45: Análisis Post-Torneo**
+
+El PUSFRE analiza el rendimiento en el torneo.
+
+**Cómo se hace:**
+
+1. Evaluar el rendimiento global
+2. Identificar áreas de mejora
+3. Planificar la siguiente fase
+
+**Ejemplo:** El torneo ha sido positivo. Continuar trabajando en las áreas identificadas.
+
+---
+
+### Capítulo 5.10: Análisis Avanzado
+
+**Aplicación 46: Análisis de Eficiencia en Early Game**
+
+El PUSFRE analiza el rendimiento en early game.
+
+**Cómo se hace:**
+
+1. Calcular oro y experiencia en early game
+2. Calcular objetivos en early game
+3. Evaluar la efectividad
+
+**Ejemplo:** El equipo tiene ventaja de oro en early game en el 70% de los partidos.
+
+---
+
+**Aplicación 47: Análisis de Eficiencia en Mid Game**
+
+El PUSFRE analiza el rendimiento en mid game.
+
+**Cómo se hace:**
+
+1. Calcular objetivos en mid game
+2. Calcular teamfights en mid game
+3. Evaluar la efectividad
+
+**Ejemplo:** El equipo gana el 60% de las teamfights en mid game.
+
+---
+
+**Aplicación 48: Análisis de Eficiencia en Late Game**
+
+El PUSFRE analiza el rendimiento en late game.
+
+**Cómo se hace:**
+
+1. Calcular objetivos en late game
+2. Calcular teamfights en late game
+3. Evaluar la efectividad
+
+**Ejemplo:** El equipo gana el 40% de las teamfights en late game. Necesita mejorar.
+
+---
+
+**Aplicación 49: Análisis de Tendencias**
+
+El PUSFRE analiza tendencias en el rendimiento.
+
+**Cómo se hace:**
+
+1. Calcular fitness en intervalos regulares
+2. Identificar tendencias
+3. Ajustar la estrategia
+
+**Ejemplo:** El rendimiento del equipo está mejorando en los últimos partidos.
+
+---
+
+**Aplicación 50: Análisis de Comparativa con Equipos Elite**
+
+El PUSFRE compara al equipo con equipos elite.
+
+**Cómo se hace:**
+
+1. Calcular fitness del equipo
+2. Comparar con equipos elite
+3. Identificar brechas
+
+**Ejemplo:** El equipo tiene buena macro pero mala ejecución en teamfights.
+
+---
+
+## SECCIÓN 6: JUEGOS DE MESA MODERNOS — 50 APLICACIONES PRÁCTICAS
+
+### Capítulo 6.1: Catan — 10 Aplicaciones
 
 **Aplicación 1: Selección de Asentamiento**
-```python
-def seleccion_asentamiento_catan(jugador, mapa):
-    """
-    Optimiza la ubicación de asentamientos.
-    """
-    for posicion in mapa['posiciones']:
-        jugador['phi'][posicion] = sum(mapa['recursos'][posicion])
-    return max(mapa['posiciones'], key=lambda x: jugador['phi'][x])
-```
+El PUSFRE optimiza la ubicación de asentamientos iniciales.
+
+**Cómo se hace:**
+1. Evaluar recursos disponibles en cada ubicación ($\Phi_{recursos}$)
+2. Evaluar diversidad de recursos ($\Psi_{diversidad}$)
+3. Evaluar probabilidad de desarrollo ($\Omega_{desarrollo}$)
+
+**Fórmula de ubicación:**
+$$U = \Phi_{recursos} \cdot \Psi_{diversidad} \cdot \Omega_{desarrollo}$$
+
+---
 
 **Aplicación 2: Estrategia de Comercio**
-```python
-def estrategia_comercio_catan(jugador, recursos, rivales):
-    """
-    Optimiza la estrategia de comercio.
-    """
-    for rival in rivales:
-        if rival['necesita'] in jugador['excedentes']:
-            return 'comerciar'
-    return 'esperar'
-```
+El PUSFRE optimiza la estrategia de comercio.
+
+**Cómo se hace:**
+1. Identificar excedentes y necesidades
+2. Evaluar ofertas de comercio
+3. Decidir cuándo comerciar
+
+**Regla de comercio:**
+$$\text{Comerciar si el excedente es >3}$$
+
+---
 
 **Aplicación 3: Gestión de Recursos**
-```python
-def gestion_recursos_catan(jugador):
-    """
-    Optimiza la gestión de recursos.
-    """
-    for recurso in jugador['recursos']:
-        if jugador['recursos'][recurso] > 5:
-            return 'vender'
-    return 'acumular'
-```
+El PUSFRE optimiza la gestión de recursos.
 
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_catan(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'expansion': rival['phi']['expansion'],
-        'comercio': rival['psi']['comercio'],
-        'desarrollo': rival['omega']['desarrollo']
-    }
-```
+**Cómo se hace:**
+1. Identificar recursos escasos
+2. Priorizar la acumulación
+3. Gestionar el uso
 
-**Aplicación 5: Estrategia de Desarrollo**
-```python
-def estrategia_desarrollo_catan(jugador, cartas):
-    """
-    Optimiza la compra de cartas de desarrollo.
-    """
-    for carta in cartas:
-        if carta['beneficio'] > jugador['psi']['desarrollo']:
-            return carta
-    return 'esperar'
-```
-
-**Aplicación 6: Gestión de Ladrón**
-```python
-def gestion_ladron_catan(mapa, rivales):
-    """
-    Optimiza la colocación del ladrón.
-    """
-    for rival in rivales:
-        if rival['puntos'] > 5:
-            return rival['posicion']
-    return None
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_catan(jugador, objetivo, partidas):
-    """
-    Planifica entrenamiento específico.
-    """
-    for partida in range(partidas):
-        jugador['phi'][objetivo] += 0.01
-    return jugador
-```
-
-**Aplicación 8: Estrategia de Torneos**
-```python
-def estrategia_torneos_catan(rivales):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_catan(rival)
-    return estrategias
-```
-
-**Aplicación 9: Análisis de Partido**
-```python
-def analisis_partido_catan(partida):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'puntos': partida.puntos,
-        'recursos': partida.recursos,
-        'comercios': partida.comercios,
-        'desarrollo': partida.desarrollo
-    }
-```
-
-**Aplicación 10: Optimización de Estrategia**
-```python
-def optimizacion_estrategia_catan(jugador, rivales):
-    """
-    Optimiza la estrategia general.
-    """
-    for rival in rivales:
-        if rival['phi'] > jugador['phi']:
-            jugador['estrategia'] = 'defensiva'
-    return jugador
-```
+**Ejemplo:** Si falta ladrillo, priorizar su obtención.
 
 ---
 
-#### Anexo 9.1: Magic: The Gathering — 10 Aplicaciones Prácticas
+**Aplicación 4: Estrategia de Desarrollo**
+El PUSFRE optimiza la estrategia de desarrollo.
 
-**Aplicación 1: Construcción de Mazo**
-```python
-def construccion_mazo_mtg(jugador, cartas, formato):
-    """
-    Optimiza la construcción de un mazo.
-    """
-    for carta in cartas:
-        if carta['formato'] == formato and carta['phi'] > 0.7:
-            jugador['mazo'].append(carta)
-    return jugador['mazo']
-```
+**Cómo se hace:**
+1. Identificar caminos de desarrollo
+2. Evaluar coste-beneficio
+3. Seleccionar la mejor opción
 
-**Aplicación 2: Gestión de Recursos**
-```python
-def gestion_recursos_mtg(jugador, mano):
-    """
-    Optimiza la gestión de recursos.
-    """
-    for carta in mano:
-        if carta['tipo'] == 'tierra':
-            return 'jugar_tierra'
-    return 'pasar_turno'
-```
-
-**Aplicación 3: Estrategia de Partido**
-```python
-def estrategia_partido_mtg(jugador, rival, vida):
-    """
-    Determina la estrategia óptima.
-    """
-    if vida > 10:
-        return 'agresivo'
-    return 'defensivo'
-```
-
-**Aplicación 4: Análisis de Rivales**
-```python
-def analisis_rival_mtg(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'agresividad': rival['phi']['agresividad'],
-        'control': rival['psi']['control'],
-        'combo': rival['omega']['combo']
-    }
-```
-
-**Aplicación 5: Sideboard**
-```python
-def sideboard_mtg(jugador, rival):
-    """
-    Optimiza el sideboard contra un rival.
-    """
-    for carta in jugador['sideboard']:
-        if carta['contra'] == rival['arquetipo']:
-            jugador['mazo'].append(carta)
-    return jugador['mazo']
-```
-
-**Aplicación 6: Gestión de Maná**
-```python
-def gestion_mana_mtg(jugador, mano):
-    """
-    Optimiza la gestión de maná.
-    """
-    return sum(jugador['mana'].values())
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_mtg(jugador, objetivo, sesiones):
-    """
-    Planifica entrenamiento específico.
-    """
-    for sesion in range(sesiones):
-        jugador['phi'][objetivo] += 0.01
-    return jugador
-```
-
-**Aplicación 8: Estrategia de Torneos**
-```python
-def estrategia_torneos_mtg(rivales):
-    """
-    Planifica la estrategia para un torneo.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_mtg(rival)
-    return estrategias
-```
-
-**Aplicación 9: Análisis de Partido**
-```python
-def analisis_partido_mtg(partida):
-    """
-    Analiza el rendimiento en un partido.
-    """
-    return {
-        'vida': partida.vida,
-        'maná': partida.mana,
-        'cartas': partida.cartas,
-        'daño': partida.daño
-    }
-```
-
-**Aplicación 10: Optimización de Mazo**
-```python
-def optimizacion_mazo_mtg(jugador, mazo, meta):
-    """
-    Optimiza el mazo según la meta.
-    """
-    for carta in mazo:
-        if carta['contra'] in meta:
-            jugador['mazo'].append(carta)
-    return jugador['mazo']
-```
+**Ejemplo:** Si se tienen muchos recursos, comprar cartas de desarrollo.
 
 ---
 
-#### Anexo 10.1: Póker — 10 Aplicaciones Prácticas
+**Aplicación 5: Gestión de Ladrón**
+El PUSFRE optimiza la colocación del ladrón.
 
-**Aplicación 1: Selección de Manos**
-```python
-def seleccion_manos_poker(jugador, posicion, rivales):
-    """
-    Selecciona las manos a jugar según posición.
-    """
-    if posicion == 'BTN':
-        return jugador['manos']['rangos']['BTN']
-    elif posicion == 'EP':
-        return jugador['manos']['rangos']['EP']
-    else:
-        return jugador['manos']['rangos']['MP']
-```
+**Cómo se hace:**
+1. Identificar al jugador con más puntos
+2. Colocar el ladrón en su ubicación
+3. Robar un recurso
 
-**Aplicación 2: Estrategia de Apuestas**
-```python
-def estrategia_apuestas_poker(jugador, mano, bote):
-    """
-    Determina el tamaño de apuesta óptimo.
-    """
-    F = jugador['phi']['mano'] * jugador['psi']['posicion'] * (jugador['omega']['oponentes'] ** alpha)
-    return F * bote * 0.5
-```
-
-**Aplicación 3: Gestión de Bankroll**
-```python
-def gestion_bankroll_poker(jugador, buy_in):
-    """
-    Optimiza la gestión de bankroll.
-    """
-    if jugador['bankroll'] < 20 * buy_in:
-        return 'bajar_nivel'
-    return 'mantener'
-```
-
-**Aplicación 4: Análisis de Mesa**
-```python
-def analisis_mesa_poker(mesa):
-    """
-    Analiza la dinámica de la mesa.
-    """
-    return {
-        'agresividad': sum(j['phi']['agresividad'] for j in mesa),
-        'tightness': sum(j['psi']['tightness'] for j in mesa),
-        'coexistencia': len(mesa)
-    }
-```
-
-**Aplicación 5: Estrategia de Torneo**
-```python
-def estrategia_torneo_poker(jugador, fase):
-    """
-    Planifica la estrategia según la fase del torneo.
-    """
-    if fase == 'early':
-        return 'tight'
-    elif fase == 'middle':
-        return 'agresivo'
-    else:
-        return 'selectivo'
-```
-
-**Aplicación 6: Gestión de Tilt**
-```python
-def gestion_tilt_poker(jugador):
-    """
-    Detecta y gestiona el tilt.
-    """
-    if jugador['tilt'] > 0.7:
-        return 'timeout_recomendado'
-    return 'continuar'
-```
-
-**Aplicación 7: Planificación de Entrenamiento**
-```python
-def plan_entrenamiento_poker(jugador, objetivo, sesiones):
-    """
-    Planifica entrenamiento específico.
-    """
-    for sesion in range(sesiones):
-        jugador['phi'][objetivo] += 0.01
-    return jugador
-```
-
-**Aplicación 8: Análisis de Rivales**
-```python
-def analisis_rival_poker(rival):
-    """
-    Analiza el estilo de juego de un rival.
-    """
-    return {
-        'agresividad': rival['phi']['agresividad'],
-        'tightness': rival['psi']['tightness'],
-        'bluff': rival['omega']['bluff']
-    }
-```
-
-**Aplicación 9: Estrategia de Competencia**
-```python
-def estrategia_competencia_poker(jugador, rivales):
-    """
-    Planifica la estrategia contra un campo de rivales.
-    """
-    estrategias = {}
-    for rival in rivales:
-        estrategias[rival] = analisis_rival_poker(rival)
-    return estrategias
-```
-
-**Aplicación 10: Optimización de Decisión**
-```python
-def optimizacion_decision_poker(jugador, mano, bote, oponentes):
-    """
-    Optimiza la decisión en cada calle.
-    """
-    F = jugador['phi']['mano'] * jugador['psi']['posicion'] * (jugador['omega']['oponentes'] ** alpha)
-    if F > 0.5:
-        return 'raise'
-    elif F > 0.2:
-        return 'call'
-    else:
-        return 'fold'
-```
+**Regla del ladrón:**
+$$\text{Colocar el ladrón en la ubicación del líder}$$
 
 ---
+
+### Capítulo 6.2: Carcassonne — 10 Aplicaciones
+
+**Aplicación 6: Selección de Ubicación de Ficha**
+El PUSFRE optimiza la colocación de fichas.
+
+**Cómo se hace:**
+1. Evaluar opciones de colocación
+2. Calcular puntos potenciales
+3. Seleccionar la mejor opción
+
+**Fórmula de colocación:**
+$$C = \frac{Puntos_{potenciales}}{Fichas_{usadas}}$$
+
+---
+
+**Aplicación 7: Estrategia de Ciudades**
+El PUSFRE optimiza la construcción de ciudades.
+
+**Cómo se hace:**
+1. Identificar oportunidades de ciudad
+2. Priorizar la finalización
+3. Gestionar los recursos
+
+**Ejemplo:** Priorizar ciudades grandes para más puntos.
+
+---
+
+**Aplicación 8: Estrategia de Caminos**
+El PUSFRE optimiza la construcción de caminos.
+
+**Cómo se hace:**
+1. Identificar oportunidades de camino
+2. Priorizar la finalización
+3. Gestionar los recursos
+
+**Ejemplo:** Construir caminos largos para más puntos.
+
+---
+
+**Aplicación 9: Estrategia de Monasterios**
+El PUSFRE optimiza la colocación de monasterios.
+
+**Cómo se hace:**
+1. Identificar ubicaciones de monasterio
+2. Priorizar la finalización
+3. Gestionar los recursos
+
+**Ejemplo:** Colocar monasterios en ubicaciones con buena visibilidad.
+
+---
+
+**Aplicación 10: Gestión de Agricultores**
+El PUSFRE optimiza la colocación de agricultores.
+
+**Cómo se hace:**
+1. Identificar campos grandes
+2. Priorizar la ocupación
+3. Gestionar los recursos
+
+**Ejemplo:** Ocupar campos grandes para más puntos al final.
+
+---
+
+### Capítulo 6.3: Ticket to Ride — 10 Aplicaciones
+
+**Aplicación 11: Selección de Rutas**
+El PUSFRE optimiza la selección de rutas.
+
+**Cómo se hace:**
+1. Evaluar conexiones disponibles
+2. Calcular puntos potenciales
+3. Seleccionar la mejor ruta
+
+**Fórmula de ruta:**
+$$R = \frac{Puntos_{ruta}}{Trenes_{usados}}$$
+
+---
+
+**Aplicación 12: Estrategia de Conexiones**
+El PUSFRE optimiza la construcción de conexiones.
+
+**Cómo se hace:**
+1. Identificar conexiones clave
+2. Priorizar la construcción
+3. Gestionar los recursos
+
+**Ejemplo:** Construir conexiones que conecten varias rutas.
+
+---
+
+**Aplicación 13: Gestión de Trenes**
+El PUSFRE optimiza el uso de trenes.
+
+**Cómo se hace:**
+1. Identificar trenes necesarios
+2. Priorizar el uso
+3. Gestionar el inventario
+
+**Ejemplo:** Usar trenes largos para ahorrar recursos.
+
+---
+
+**Aplicación 14: Estrategia de Tarjetas**
+El PUSFRE optimiza la selección de tarjetas.
+
+**Cómo se hace:**
+1. Identificar tarjetas necesarias
+2. Priorizar la obtención
+3. Gestionar la mano
+
+**Ejemplo:** Robar tarjetas de colores necesarios.
+
+---
+
+**Aplicación 15: Gestión de Bloqueos**
+El PUSFRE optimiza la estrategia de bloqueo.
+
+**Cómo se hace:**
+1. Identificar rutas rivales
+2. Bloquear rutas clave
+3. Gestionar los recursos
+
+**Regla de bloqueo:**
+$$\text{Evitar que el rival complete sus rutas}$$
+
+---
+
+### Capítulo 6.4: Terraforming Mars — 10 Aplicaciones
+
+**Aplicación 16: Selección de Proyectos**
+El PUSFRE optimiza la selección de proyectos.
+
+**Cómo se hace:**
+1. Evaluar proyectos disponibles
+2. Calcular coste-beneficio
+3. Seleccionar el mejor proyecto
+
+**Fórmula de proyecto:**
+$$P = \frac{Beneficio}{Coste}$$
+
+---
+
+**Aplicación 17: Gestión de Recursos**
+El PUSFRE optimiza la gestión de recursos.
+
+**Cómo se hace:**
+1. Identificar recursos escasos
+2. Priorizar la producción
+3. Gestionar el uso
+
+**Ejemplo:** Si falta energía, construir plantas de energía.
+
+---
+
+**Aplicación 18: Estrategia de Terraformación**
+El PUSFRE optimiza la terraformación.
+
+**Cómo se hace:**
+1. Identificar parámetros de terraformación
+2. Priorizar su mejora
+3. Gestionar los recursos
+
+**Ejemplo:** Aumentar la temperatura para ganar puntos.
+
+---
+
+**Aplicación 19: Estrategia de Cartas**
+El PUSFRE optimiza la selección de cartas.
+
+**Cómo se hace:**
+1. Evaluar cartas disponibles
+2. Calcular coste-beneficio
+3. Seleccionar las mejores cartas
+
+**Ejemplo:** Comprar cartas que den producción de recursos.
+
+---
+
+**Aplicación 20: Gestión de Puntos**
+El PUSFRE optimiza la obtención de puntos.
+
+**Cómo se hace:**
+1. Identificar fuentes de puntos
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Obtener puntos de terraformación y de cartas.
+
+---
+
+### Capítulo 6.5: Gloomhaven — 10 Aplicaciones
+
+**Aplicación 21: Selección de Misiones**
+El PUSFRE optimiza la selección de misiones.
+
+**Cómo se hace:**
+1. Evaluar misiones disponibles
+2. Calcular dificultad
+3. Seleccionar la mejor misión
+
+**Fórmula de misión:**
+$$M = \frac{Recompensa}{Dificultad}$$
+
+---
+
+**Aplicación 22: Gestión de Personajes**
+El PUSFRE optimiza la gestión de personajes.
+
+**Cómo se hace:**
+1. Evaluar fortalezas de cada personaje
+2. Asignar roles
+3. Gestionar los recursos
+
+**Ejemplo:** El personaje con más daño va al frente.
+
+---
+
+**Aplicación 23: Estrategia de Combate**
+El PUSFRE optimiza la estrategia de combate.
+
+**Cómo se hace:**
+1. Analizar enemigos
+2. Priorizar objetivos
+3. Gestionar habilidades
+
+**Ejemplo:** Enfocarse en el enemigo más débil primero.
+
+---
+
+**Aplicación 24: Gestión de Cartas**
+El PUSFRE optimiza el uso de cartas.
+
+**Cómo se hace:**
+1. Identificar cartas clave
+2. Priorizar su uso
+3. Gestionar el mazo
+
+**Ejemplo:** Guardar las cartas más poderosas para el final.
+
+---
+
+**Aplicación 25: Gestión de Daño**
+El PUSFRE optimiza la gestión de daño.
+
+**Cómo se hace:**
+1. Identificar fuentes de daño
+2. Priorizar la mitigación
+3. Gestionar la curación
+
+**Ejemplo:** Curar al personaje con menos vida.
+
+---
+
+### Capítulo 6.6: Spirit Island — 10 Aplicaciones
+
+**Aplicación 26: Selección de Espíritus**
+El PUSFRE optimiza la selección de espíritus.
+
+**Cómo se hace:**
+1. Evaluar espíritus disponibles
+2. Calcular sinergias
+3. Seleccionar los mejores espíritus
+
+**Fórmula de espíritu:**
+$$E = \frac{Sinergias}{Dificultad}$$
+
+---
+
+**Aplicación 27: Estrategia de Colonización**
+El PUSFRE optimiza la estrategia de colonización.
+
+**Cómo se hace:**
+1. Identificar colonos
+2. Priorizar la eliminación
+3. Gestionar los recursos
+
+**Ejemplo:** Eliminar colonos antes de que se expandan.
+
+---
+
+**Aplicación 28: Gestión de Poderes**
+El PUSFRE optimiza el uso de poderes.
+
+**Cómo se hace:**
+1. Identificar poderes disponibles
+2. Priorizar su uso
+3. Gestionar la energía
+
+**Ejemplo:** Usar poderes que den control de área.
+
+---
+
+**Aplicación 29: Estrategia de Defensa**
+El PUSFRE optimiza la estrategia de defensa.
+
+**Cómo se hace:**
+1. Identificar amenazas
+2. Priorizar la defensa
+3. Gestionar los recursos
+
+**Ejemplo:** Proteger las zonas más importantes.
+
+---
+
+**Aplicación 30: Gestión de Invaders**
+El PUSFRE optimiza la gestión de invasores.
+
+**Cómo se hace:**
+1. Identificar invasores
+2. Priorizar su eliminación
+3. Gestionar los recursos
+
+**Ejemplo:** Eliminar invasores antes de que se fortifiquen.
+
+---
+
+### Capítulo 6.7: Scythe — 10 Aplicaciones
+
+**Aplicación 31: Estrategia de Expansión**
+El PUSFRE optimiza la expansión territorial.
+
+**Cómo se hace:**
+1. Identificar territorios clave
+2. Priorizar la expansión
+3. Gestionar los recursos
+
+**Ejemplo:** Expandirse hacia territorios con recursos.
+
+---
+
+**Aplicación 32: Gestión de Recursos**
+El PUSFRE optimiza la gestión de recursos.
+
+**Cómo se hace:**
+1. Identificar recursos disponibles
+2. Priorizar su obtención
+3. Gestionar el uso
+
+**Ejemplo:** Priorizar la producción de acero.
+
+---
+
+**Aplicación 33: Estrategia de Combate**
+El PUSFRE optimiza la estrategia de combate.
+
+**Cómo se hace:**
+1. Analizar enemigos
+2. Priorizar objetivos
+3. Gestionar tropas
+
+**Ejemplo:** Atacar cuando se tiene ventaja de tropas.
+
+---
+
+**Aplicación 34: Gestión de Mejoras**
+El PUSFRE optimiza la gestión de mejoras.
+
+**Cómo se hace:**
+1. Identificar mejoras disponibles
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Mejorar la producción de recursos.
+
+---
+
+**Aplicación 35: Estrategia de Puntos**
+El PUSFRE optimiza la obtención de puntos.
+
+**Cómo se hace:**
+1. Identificar fuentes de puntos
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Obtener puntos de territorios y combates.
+
+---
+
+### Capítulo 6.8: Root — 10 Aplicaciones
+
+**Aplicación 36: Selección de Facción**
+El PUSFRE optimiza la selección de facción.
+
+**Cómo se hace:**
+1. Evaluar facciones disponibles
+2. Calcular sinergias
+3. Seleccionar la mejor facción
+
+**Ejemplo:** Elegir la facción que mejor se adapta al tablero.
+
+---
+
+**Aplicación 37: Estrategia de Expansión**
+El PUSFRE optimiza la expansión territorial.
+
+**Cómo se hace:**
+1. Identificar territorios clave
+2. Priorizar la expansión
+3. Gestionar los recursos
+
+**Ejemplo:** Expandirse hacia territorios con puntos.
+
+---
+
+**Aplicación 38: Gestión de Recursos**
+El PUSFRE optimiza la gestión de recursos.
+
+**Cómo se hace:**
+1. Identificar recursos disponibles
+2. Priorizar su obtención
+3. Gestionar el uso
+
+**Ejemplo:** Priorizar la obtención de cartas.
+
+---
+
+**Aplicación 39: Estrategia de Combate**
+El PUSFRE optimiza la estrategia de combate.
+
+**Cómo se hace:**
+1. Analizar enemigos
+2. Priorizar objetivos
+3. Gestionar tropas
+
+**Ejemplo:** Atacar cuando se tiene ventaja de tropas.
+
+---
+
+**Aplicación 40: Estrategia de Puntos**
+El PUSFRE optimiza la obtención de puntos.
+
+**Cómo se hace:**
+1. Identificar fuentes de puntos
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Obtener puntos de territorios y combates.
+
+---
+
+### Capítulo 6.9: Wingspan — 10 Aplicaciones
+
+**Aplicación 41: Selección de Aves**
+El PUSFRE optimiza la selección de aves.
+
+**Cómo se hace:**
+1. Evaluar aves disponibles
+2. Calcular sinergias
+3. Seleccionar las mejores aves
+
+**Ejemplo:** Elegir aves que den buenos puntos.
+
+---
+
+**Aplicación 42: Estrategia de Hábitats**
+El PUSFRE optimiza la estrategia de hábitats.
+
+**Cómo se hace:**
+1. Identificar hábitats clave
+2. Priorizar su desarrollo
+3. Gestionar los recursos
+
+**Ejemplo:** Desarrollar el hábitat que más puntos da.
+
+---
+
+**Aplicación 43: Gestión de Recursos**
+El PUSFRE optimiza la gestión de recursos.
+
+**Cómo se hace:**
+1. Identificar recursos disponibles
+2. Priorizar su obtención
+3. Gestionar el uso
+
+**Ejemplo:** Priorizar la obtención de comida.
+
+---
+
+**Aplicación 44: Estrategia de Huevos**
+El PUSFRE optimiza la estrategia de huevos.
+
+**Cómo se hace:**
+1. Identificar oportunidades de huevos
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Poner huevos cuando se tienen aves con alta capacidad.
+
+---
+
+**Aplicación 45: Estrategia de Puntos**
+El PUSFRE optimiza la obtención de puntos.
+
+**Cómo se hace:**
+1. Identificar fuentes de puntos
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Obtener puntos de aves y hábitats.
+
+---
+
+### Capítulo 6.10: Brass: Birmingham — 10 Aplicaciones
+
+**Aplicación 46: Selección de Industrias**
+El PUSFRE optimiza la selección de industrias.
+
+**Cómo se hace:**
+1. Evaluar industrias disponibles
+2. Calcular coste-beneficio
+3. Seleccionar la mejor industria
+
+**Ejemplo:** Elegir la industria que más puntos da.
+
+---
+
+**Aplicación 47: Estrategia de Conexiones**
+El PUSFRE optimiza la estrategia de conexiones.
+
+**Cómo se hace:**
+1. Identificar conexiones clave
+2. Priorizar su construcción
+3. Gestionar los recursos
+
+**Ejemplo:** Construir conexiones que conecten varias industrias.
+
+---
+
+**Aplicación 48: Gestión de Recursos**
+El PUSFRE optimiza la gestión de recursos.
+
+**Cómo se hace:**
+1. Identificar recursos disponibles
+2. Priorizar su obtención
+3. Gestionar el uso
+
+**Ejemplo:** Priorizar la obtención de carbón.
+
+---
+
+**Aplicación 49: Estrategia de Mercado**
+El PUSFRE optimiza la estrategia de mercado.
+
+**Cómo se hace:**
+1. Identificar demandas del mercado
+2. Priorizar su satisfacción
+3. Gestionar los recursos
+
+**Ejemplo:** Producir los bienes más demandados.
+
+---
+
+**Aplicación 50: Estrategia de Puntos**
+El PUSFRE optimiza la obtención de puntos.
+
+**Cómo se hace:**
+1. Identificar fuentes de puntos
+2. Priorizar su obtención
+3. Gestionar los recursos
+
+**Ejemplo:** Obtener puntos de industrias y conexiones.
 
 ---
 
@@ -3138,135 +4849,6 @@ El deporte es el mejor laboratorio para el PUSFRE porque:
 
 ---
 
-## APÉNDICE: CÓDIGO COMPLETO DE LA PUSFRE SPORTS SUITE
-
-```python
-# PUSFRE Sports Suite - Análisis y Optimización para 20 Disciplinas
-import numpy as np
-from typing import Dict, List, Tuple, Optional
-from dataclasses import dataclass, field
-
-@dataclass
-class Deportista:
-    """Representa un deportista con sus dimensiones PUSFRE."""
-    nombre: str
-    phi: Dict[str, float] = field(default_factory=dict)
-    psi: Dict[str, float] = field(default_factory=dict)
-    omega: Dict[str, float] = field(default_factory=dict)
-    energia: float = 1.0
-    mental: float = 1.0
-    lesiones: List[str] = field(default_factory=list)
-    
-    def fitness(self, alpha: float = 1.2, gamma: float = 0.4) -> float:
-        """Calcula la fitness del deportista."""
-        F = 0
-        for dimension in self.phi:
-            F += (self.phi.get(dimension, 0.5) * 
-                  self.psi.get(dimension, 0.5) * 
-                  (self.omega.get(dimension, 0.2) ** alpha))
-        return F * (1 - gamma * len(self.lesiones) / 10)
-
-@dataclass
-class Equipo:
-    """Representa un equipo con sus deportistas."""
-    nombre: str
-    deportistas: List[Deportista]
-    
-    def fitness_equipo(self, alpha: float = 1.2) -> float:
-        """Calcula la fitness total del equipo."""
-        return sum(d.fitness(alpha) for d in self.deportistas)
-    
-    def coexistencia(self, delta: float = 0.05) -> float:
-        """Calcula la coexistencia del equipo."""
-        S = len(self.deportistas)
-        fitnesses = [d.fitness() for d in self.deportistas]
-        ratio = max(fitnesses) / (min(fitnesses) + 0.001)
-        return S * ratio / np.log(S / delta)
-
-class PUSFRESports:
-    """Motor principal de análisis deportivo."""
-    
-    def __init__(self, alpha: float = 1.2, gamma: float = 0.4, sigma: float = 0.15):
-        self.alpha = alpha
-        self.gamma = gamma
-        self.sigma = sigma
-    
-    def fitness(self, deportista: Deportista) -> float:
-        """Calcula la fitness de un deportista."""
-        return deportista.fitness(self.alpha, self.gamma)
-    
-    def asignacion_recurso(self, equipo: Equipo, recurso_total: float) -> Dict[str, float]:
-        """Asigna recursos (tiempo, posesión, etc.) a los deportistas."""
-        fitnesses = [self.fitness(d) for d in equipo.deportistas]
-        total_fitness = sum(fitnesses)
-        return {
-            d.nombre: recurso_total * f / total_fitness 
-            for d, f in zip(equipo.deportistas, fitnesses)
-        }
-    
-    def simular_partido(self, equipo_local: Equipo, equipo_visitante: Equipo, 
-                        pasos: int = 100) -> Dict:
-        """Simula un partido usando DTMC."""
-        historia = []
-        for _ in range(pasos):
-            # Aplicar ruido
-            eps = np.random.lognormal(0, self.sigma, len(equipo_local.deportistas))
-            for i, d in enumerate(equipo_local.deportistas):
-                d.omega = {k: v * eps[i] for k, v in d.omega.items()}
-            # Calcular nuevo estado
-            historia.append({
-                'local': equipo_local.fitness_equipo(self.alpha),
-                'visitante': equipo_visitante.fitness_equipo(self.alpha)
-            })
-        return {
-            'historia': historia,
-            'resultado': 'local' if historia[-1]['local'] > historia[-1]['visitante'] else 'visitante'
-        }
-    
-    def scouting(self, deportistas: List[Deportista], dimensiones: List[str]) -> List[Deportista]:
-        """Ordena deportistas por fitness para scouting."""
-        for d in deportistas:
-            d.fitness_score = self.fitness(d)
-        return sorted(deportistas, key=lambda x: x.fitness_score, reverse=True)
-    
-    def optimizar_entrenamiento(self, deportista: Deportista, 
-                                objetivo: str, sesiones: int) -> Deportista:
-        """Optimiza el entrenamiento de un deportista."""
-        for _ in range(sesiones):
-            deportista.phi[objetivo] = min(1.0, deportista.phi.get(objetivo, 0.5) + 0.01)
-        return deportista
-
-# Ejemplo de uso
-if __name__ == "__main__":
-    # Crear deportistas
-    messi = Deportista(
-        nombre="Messi",
-        phi={"tiro": 0.95, "pase": 0.98, "regate": 0.99, "velocidad": 0.85},
-        psi={"lesiones": 0.8, "constancia": 0.95},
-        omega={"partidos": 0.9, "goles": 0.85}
-    )
-    
-    cristiano = Deportista(
-        nombre="Cristiano",
-        phi={"tiro": 0.98, "pase": 0.82, "regate": 0.88, "velocidad": 0.92},
-        psi={"lesiones": 0.75, "constancia": 0.92},
-        omega={"partidos": 0.95, "goles": 0.90}
-    )
-    
-    # Crear equipo
-    barcelona = Equipo("Barcelona", [messi, cristiano])
-    
-    # Crear motor
-    motor = PUSFRESports()
-    
-    # Calcular fitness
-    print(f"Fitness de Messi: {motor.fitness(messi):.3f}")
-    print(f"Fitness de Cristiano: {motor.fitness(cristiano):.3f}")
-    print(f"Fitness del equipo: {barcelona.fitness_equipo():.3f}")
-```
-
----
-
 ## KOANS FINALES
 
 **Del equilibrio en el deporte:**
@@ -3283,6 +4865,15 @@ if __name__ == "__main__":
 
 **De la catedral:**
 *Nash construyó una capilla. PUSFRE construyó una catedral. La capilla es el equilibrio. La catedral es la dinámica.*
+
+**Del arquitecto y el deportista:**
+*El deportista entrena el cuerpo. El arquitecto entrena el sistema. Juntos, construyen el rendimiento.*
+
+**Del reloj y el partido:**
+*El reloj mide el tiempo. PUSFRE mide el tiempo, el espacio y la energía.*
+
+**Del equipo y la coexistencia:**
+*Un equipo no es un conjunto de individuos. Es un ecosistema. PUSFRE lo equilibra.*
 
 ---
 
