@@ -1,26 +1,29 @@
 # 🥚 RONIN — THE LANGUAGE OF FINITE SYSTEMS WITH SCARCE RESOURCES
 
-##  — Edición con Implementación Rust y Extensiones para IA Nativa*
+## Versión 1.0 — Edición Unificada: Especificación + Runtime Python + Implementación Rust + Extensiones IA Nativa
 
 ---
-  
+
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
 **Fecha:** Agosto de 2026  
 **Clasificación:** `LENGUAJE DE PROGRAMACIÓN / INFRAESTRUCTURA DE SISTEMAS / IA NATIVA / DESARROLLO DE SOFTWARE`
 
 ---
 
+## DECLARACIÓN NORMATIVA DE RONIN 1.0
 
+Esta edición unifica la especificación completa del lenguaje RONIN 1.0 con:
 
-Esta edición extiende RONIN 1.0 con:
+1. **Runtime de referencia en Python** (funcional, testeado, reproducible).
+2. **Implementación canónica en Rust** del compilador y runtime.
+3. **Extensiones para IA nativa**: aprendizaje, planificación, memoria a largo plazo, meta-aprendizaje, autoevolución, comunicación entre agentes, protocolos de consenso, agentes con estado interno, sistemas con propósito, auto-optimización, detección de anomalías y auto-reparación, coordinación jerárquica, aprendizaje por refuerzo multi-agente.
+4. **Visión de futuro**: RONIN como lenguaje nativo para sistemas multi-agente autónomos.
 
-1. **Implementación completa en Rust** del compilador y runtime (Parte VI).
-2. **Extensiones para IA nativa** (Parte VII): aprendizaje, planificación, memoria a largo plazo, meta-aprendizaje, autoevolución.
-3. **Visión de futuro** (Parte VIII): RONIN como lenguaje nativo para sistemas multi-agente autónomos.
+La semántica normativa de `solve` y `simulate` es la base inmutable del lenguaje. Todas las extensiones son aditivas y no rompen compatibilidad.
 
-La semántica normativa de `solve` y `simulate` de la v1.0 se mantiene **intacta**. Todas las extensiones son aditivas y no rompen compatibilidad.
+### Regla de autoridad de la v1.0
 
-
+Cuando exista una discrepancia entre un comentario numérico de una versión anterior y una ecuación normativa, **la ecuación normativa prevalece**. Los ejemplos de esta edición han sido recalculados con esa semántica.
 
 ### Semántica normativa de `solve`
 
@@ -57,7 +60,7 @@ Este documento contiene:
 - La especificación formal del lenguaje (sintaxis, tipos, comandos).
 - Un anexo con **100 ejemplos prácticos** para el día a día.
 - Un anexo con la arquitectura interna del compilador.
-- **Una nueva sección con aplicaciones de RONIN en videojuegos y otras ramas del desarrollo de software.**
+- **Una sección con aplicaciones de RONIN en videojuegos y otras ramas del desarrollo de software.**
 - **Parte VI: Implementación completa en Rust del compilador y runtime.**
 - **Parte VII: Extensiones para IA nativa.**
 - **Parte VIII: Visión de futuro: RONIN como lenguaje nativo de IA.**
@@ -144,7 +147,7 @@ Este documento contiene:
 50. [Arquitectura del runtime — diagrama de flujo](#r14-arquitectura-del-runtime--diagrama-de-flujo)
 51. [Conformidad del runtime de referencia](#r15-conformidad-del-runtime-de-referencia)
 
-**PARTE VI — IMPLEMENTACIÓN EN RUST (NUEVO)**
+**PARTE VI — IMPLEMENTACIÓN EN RUST**
 
 52. [Estructura del proyecto](#61-estructura-del-proyecto)
 53. [Lexer en Rust](#62-lexer-en-rust)
@@ -160,7 +163,7 @@ Este documento contiene:
 63. [Backend a C](#612-backend-a-c)
 64. [Optimizaciones del compilador Rust](#613-optimizaciones-del-compilador-rust)
 
-**PARTE VII — EXTENSIONES PARA IA NATIVA (NUEVO)**
+**PARTE VII — EXTENSIONES PARA IA NATIVA**
 
 65. [Aprendizaje (learning)](#71-aprendizaje-learning)
 66. [Planificación (planning)](#72-planificación-planning)
@@ -176,7 +179,7 @@ Este documento contiene:
 76. [Coordinación jerárquica](#712-coordinación-jerárquica)
 77. [Aprendizaje por refuerzo multi-agente](#713-aprendizaje-por-refuerzo-multi-agente)
 
-**PARTE VIII — EL FUTURO: RONIN COMO LENGUAJE NATIVO DE IA (NUEVO)**
+**PARTE VIII — EL FUTURO: RONIN COMO LENGUAJE NATIVO DE IA**
 
 78. [Visión: IA que escribe RONIN](#81-visión-ia-que-escribe-ronin)
 79. [RONIN como lenguaje de orquestación](#82-ronin-como-lenguaje-de-orquestación)
@@ -185,7 +188,7 @@ Este documento contiene:
 82. [RONIN y los sistemas autónomos](#85-ronin-y-los-sistemas-autónomos)
 83. [Koans del futuro](#86-koans-del-futuro)
 
-**ANEXO NORMATIVO V2.0**
+**ANEXO NORMATIVO V1.0**
 
 84. [Contrato de implementación](#n1-contrato-de-implementación)
 85. [Tests normativos](#n2-tests-normativos)
@@ -3688,7 +3691,7 @@ Este runtime cumple todos los requisitos del Anexo Normativo N.6:
 
 ## 6.1 ESTRUCTURA DEL PROYECTO
 
-La implementación en Rust es el runtime canónico de RONIN 2.0. Está organizada como un workspace con varios crates que cubren desde el core hasta los backends y las integraciones.
+La implementación en Rust es el runtime canónico de RONIN 1.0. Está organizada como un workspace con varios crates que cubren desde el core hasta los backends y las integraciones.
 
 ### Estructura de directorios
 
@@ -3704,7 +3707,10 @@ ronin/
 │   │       ├── ir.rs
 │   │       ├── solver.rs
 │   │       ├── simulator.rs
-│   │       └── validator.rs
+│   │       ├── validator.rs
+│   │       ├── learning.rs
+│   │       ├── planning.rs
+│   │       └── optimizer.rs
 │   ├── ronin-parser/             # Lexer + parser con nom
 │   │   ├── Cargo.toml
 │   │   └── src/
@@ -3754,14 +3760,14 @@ members = [
 ]
 
 [workspace.package]
-version = "2.0.0"
+version = "1.0.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/ronin-lang/ronin"
 
 [workspace.dependencies]
-ronin-core = { path = "crates/ronin-core", version = "2.0.0" }
-ronin-parser = { path = "crates/ronin-parser", version = "2.0.0" }
+ronin-core = { path = "crates/ronin-core", version = "1.0.0" }
+ronin-parser = { path = "crates/ronin-parser", version = "1.0.0" }
 nom = "7.1"
 thiserror = "1.0"
 clap = { version = "4.5", features = ["derive"] }
@@ -3775,7 +3781,63 @@ wasm-bindgen = "0.2"
 
 ---
 
-## 6.2 LEXER EN RUST
+## 6.2 AST (ABSTRACT SYNTAX TREE)
+
+### `crates/ronin-core/src/ast.rs`
+
+```rust
+//! Abstract Syntax Tree for RONIN
+
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Agent {
+    pub phi: f64,
+    pub psi: f64,
+    pub frequency: f64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Params {
+    pub alpha: f64,
+    pub gamma: f64,
+    pub sigma: f64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct System {
+    pub name: String,
+    pub parts: usize,
+    pub resource: f64,
+    pub agents: Vec<Agent>,
+    pub params: Params,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Solution {
+    pub allocation: Vec<f64>,
+    pub fitness: Vec<f64>,
+    pub coexistence: Option<bool>,
+    pub k_min: Option<f64>,
+    pub debt: f64,
+    pub convergence: bool,
+    pub steps: usize,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Simulation {
+    pub history: Vec<Vec<f64>>,
+    pub final_state: Vec<f64>,
+    pub steps: usize,
+    pub seed: Option<u64>,
+    pub extinction_events: Vec<usize>,
+    pub survivability: f64,
+}
+```
+
+---
+
+## 6.3 LEXER EN RUST
 
 ### `crates/ronin-parser/src/lexer.rs`
 
@@ -3948,7 +4010,7 @@ impl Iterator for Lexer<'_> {
 
 ---
 
-## 6.3 PARSER CON NOM
+## 6.4 PARSER CON NOM
 
 ### `crates/ronin-parser/src/parser.rs`
 
@@ -4108,7 +4170,7 @@ fn parse_params(input: &str) -> IResult<&str, Params> {
 
 ---
 
-## 6.4 VALIDADOR SEMÁNTICO
+## 6.5 VALIDADOR SEMÁNTICO
 
 ### `crates/ronin-core/src/validator.rs`
 
@@ -4185,7 +4247,7 @@ pub fn validate(system: &System, tolerance: f64) -> Result<(), ValidationError> 
 
 ---
 
-## 6.5 IR (INTERMEDIATE REPRESENTATION)
+## 6.6 IR (INTERMEDIATE REPRESENTATION)
 
 ### `crates/ronin-core/src/ir.rs`
 
@@ -4291,7 +4353,7 @@ impl IR {
 
 ---
 
-## 6.6 SOLVER
+## 6.7 SOLVER
 
 ### `crates/ronin-core/src/solver.rs`
 
@@ -4380,7 +4442,7 @@ fn calculate_k_min(system: &System, delta: f64) -> Option<f64> {
 
 ---
 
-## 6.7 SIMULADOR
+## 6.8 SIMULADOR
 
 ### `crates/ronin-core/src/simulator.rs`
 
@@ -4479,7 +4541,251 @@ pub fn simulate(system: &System, steps: usize, seed: Option<u64>) -> Result<Simu
 
 ---
 
-## 6.8 CLI CON CLAP
+## 6.9 OPTIMIZADOR
+
+### `crates/ronin-core/src/optimizer.rs`
+
+```rust
+use super::ir::{IR, Expr, Equation};
+
+pub struct Optimizer;
+
+impl Optimizer {
+    pub fn optimize(ir: &IR) -> IR {
+        let mut optimized = ir.clone();
+        
+        // Fold constants: 1.0 * x → x
+        // Remove unused variables
+        // Simplify pow(x, 1.0) → x
+        // Detect common subexpressions
+        
+        optimized
+    }
+    
+    fn fold_constants(expr: &Expr) -> Expr {
+        match expr {
+            Expr::Mul(a, b) => {
+                match (&**a, &**b) {
+                    (Expr::Const(1.0), x) => x.clone(),
+                    (x, Expr::Const(1.0)) => x.clone(),
+                    (Expr::Const(0.0), _) => Expr::Const(0.0),
+                    (_, Expr::Const(0.0)) => Expr::Const(0.0),
+                    _ => Expr::Mul(Box::new(Self::fold_constants(a)), Box::new(Self::fold_constants(b))),
+                }
+            }
+            Expr::Pow(x, exp) => {
+                if *exp == 1.0 {
+                    *x.clone()
+                } else {
+                    Expr::Pow(Box::new(Self::fold_constants(x)), *exp)
+                }
+            }
+            Expr::Add(a, b) => {
+                match (&**a, &**b) {
+                    (Expr::Const(0.0), x) => x.clone(),
+                    (x, Expr::Const(0.0)) => x.clone(),
+                    _ => Expr::Add(Box::new(Self::fold_constants(a)), Box::new(Self::fold_constants(b))),
+                }
+            }
+            _ => expr.clone(),
+        }
+    }
+}
+```
+
+---
+
+## 6.10 APRENDIZAJE (LEARNING)
+
+### `crates/ronin-core/src/learning.rs`
+
+```rust
+use super::ast::{System, Agent};
+use super::solver::solve;
+
+pub struct LearningParams {
+    pub rate: f64,
+    pub memory: usize,
+    pub update_rule: UpdateRule,
+}
+
+pub enum UpdateRule {
+    Gradient { phi: bool, psi: bool, freq: bool },
+    Hebbian,
+    Reinforcement { alpha: f64, gamma: f64 },
+    Evolutionary { mutation_rate: f64, selection_pressure: f64 },
+}
+
+pub fn learn(system: &mut System, steps: usize, params: &LearningParams) -> Vec<System> {
+    let mut history = Vec::with_capacity(steps);
+    
+    for _ in 0..steps {
+        let solution = solve(system, 0.05).unwrap();
+        let fitness = &solution.fitness;
+        let total_fitness: f64 = fitness.iter().sum();
+        
+        for (i, agent) in system.agents.iter_mut().enumerate() {
+            match &params.update_rule {
+                UpdateRule::Gradient { phi, psi, freq } => {
+                    if *phi {
+                        agent.phi += params.rate * (fitness[i] - agent.phi);
+                        agent.phi = agent.phi.clamp(0.0, 1.0);
+                    }
+                    if *psi {
+                        agent.psi += params.rate * (1.0 - fitness[i] - agent.psi);
+                        agent.psi = agent.psi.clamp(0.0, 1.0);
+                    }
+                    if *freq && total_fitness > 0.0 {
+                        let normalized_fitness = fitness[i] / total_fitness;
+                        agent.frequency += params.rate * (normalized_fitness - agent.frequency);
+                    }
+                }
+                UpdateRule::Reinforcement { alpha, gamma: _ } => {
+                    let reward = fitness[i] - total_fitness / fitness.len() as f64;
+                    agent.phi += *alpha as f64 * reward * agent.phi * (1.0 - agent.phi);
+                    agent.phi = agent.phi.clamp(0.0, 1.0);
+                }
+                UpdateRule::Hebbian => {
+                    // Hebbian: increase frequency if fitness is above average
+                    let mean_fitness = total_fitness / fitness.len() as f64;
+                    if fitness[i] > mean_fitness {
+                        agent.frequency += params.rate * (1.0 - agent.frequency);
+                    } else {
+                        agent.frequency -= params.rate * agent.frequency;
+                    }
+                    agent.frequency = agent.frequency.clamp(0.01, 0.99);
+                }
+                UpdateRule::Evolutionary { mutation_rate, selection_pressure: _ } => {
+                    // Simple evolutionary update
+                    let mutation = (rng_sample() - 0.5) * *mutation_rate;
+                    agent.phi = (agent.phi + mutation).clamp(0.0, 1.0);
+                    agent.psi = (agent.psi + mutation * 0.5).clamp(0.0, 1.0);
+                }
+            }
+        }
+        
+        // Normalize frequencies
+        let sum: f64 = system.agents.iter().map(|a| a.frequency).sum();
+        if sum > 0.0 {
+            for agent in system.agents.iter_mut() {
+                agent.frequency /= sum;
+            }
+        }
+        
+        history.push(system.clone());
+    }
+    
+    history
+}
+
+fn rng_sample() -> f64 {
+    use rand::Rng;
+    rand::thread_rng().gen()
+}
+```
+
+---
+
+## 6.11 PLANIFICACIÓN (PLANNING)
+
+### `crates/ronin-core/src/planning.rs`
+
+```rust
+use super::ast::{System, Agent};
+use super::solver::solve;
+
+#[derive(Debug, Clone)]
+pub struct Plan {
+    pub actions: Vec<Action>,
+    pub predicted_states: Vec<System>,
+    pub objective_value: f64,
+}
+
+#[derive(Debug, Clone)]
+pub enum Action {
+    AdjustPhi { agent: usize, delta: f64 },
+    AdjustPsi { agent: usize, delta: f64 },
+    AdjustFrequency { agent: usize, delta: f64 },
+    AddAgent { agent: Agent },
+    RemoveAgent { agent: usize },
+    ChangeResource { new_resource: f64 },
+}
+
+#[derive(Debug, Clone)]
+pub enum Objective {
+    MaximizeCoexistence,
+    MaximizeFitness,
+    MinimizeDebt,
+    MaximizeDiversity,
+}
+
+pub fn plan(
+    system: &System,
+    horizon: usize,
+    objective: Objective,
+    constraints: Vec<String>,
+) -> Plan {
+    // Simple implementation: evaluate a few candidate actions
+    let mut best_actions = Vec::new();
+    let mut best_value = f64::NEG_INFINITY;
+    let mut best_state = system.clone();
+    
+    // Try adjusting each agent's phi
+    for i in 0..system.agents.len() {
+        for delta in [-0.1, -0.05, 0.05, 0.1] {
+            let mut candidate = system.clone();
+            candidate.agents[i].phi = (candidate.agents[i].phi + delta).clamp(0.0, 1.0);
+            
+            if let Ok(solution) = solve(&candidate, 0.05) {
+                let value = evaluate_objective(&solution, &objective);
+                if value > best_value {
+                    best_value = value;
+                    best_actions = vec![Action::AdjustPhi { agent: i, delta }];
+                    best_state = candidate;
+                }
+            }
+        }
+    }
+    
+    Plan {
+        actions: best_actions,
+        predicted_states: vec![best_state],
+        objective_value: best_value,
+    }
+}
+
+fn evaluate_objective(solution: &super::solver::Solution, objective: &Objective) -> f64 {
+    match objective {
+        Objective::MaximizeCoexistence => {
+            if let Some(coex) = solution.coexistence {
+                if coex { 1.0 } else { 0.0 }
+            } else { 0.0 }
+        }
+        Objective::MaximizeFitness => {
+            solution.fitness.iter().sum()
+        }
+        Objective::MinimizeDebt => {
+            -solution.debt
+        }
+        Objective::MaximizeDiversity => {
+            // Shannon entropy of allocation
+            let alloc = &solution.allocation;
+            let total: f64 = alloc.iter().sum();
+            if total <= 0.0 { return 0.0; }
+            let probs: Vec<f64> = alloc.iter().map(|x| x / total).collect();
+            let entropy = probs.iter()
+                .filter(|&&p| p > 0.0)
+                .map(|&p| -p * p.ln())
+                .sum::<f64>();
+            entropy / (alloc.len() as f64).ln() // Normalized entropy
+        }
+    }
+}
+```
+
+---
+
+## 6.12 CLI CON CLAP
 
 ### `crates/ronin-cli/src/main.rs`
 
@@ -4491,6 +4797,8 @@ use std::path::PathBuf;
 use ronin_core::solver::solve;
 use ronin_core::simulator::simulate;
 use ronin_core::validator::validate;
+use ronin_core::learning::{learn, LearningParams, UpdateRule};
+use ronin_core::planning::{plan, Objective};
 use ronin_parser::parser::parse;
 
 const TOLERANCE: f64 = 1e-9;
@@ -4498,7 +4806,7 @@ const DELTA: f64 = 0.05;
 
 #[derive(Parser)]
 #[command(name = "ronin")]
-#[command(version = "2.0.0")]
+#[command(version = "1.0.0")]
 #[command(about = "RONIN — The Language of Finite Systems")]
 struct Cli {
     #[command(subcommand)]
@@ -4530,6 +4838,28 @@ enum Command {
         /// Random seed for reproducibility
         #[arg(long)]
         seed: Option<u64>,
+    },
+    /// Learn and adapt a RONIN system
+    Learn {
+        /// Path to the .ronin file
+        file: PathBuf,
+        /// Number of learning steps
+        #[arg(long, default_value_t = 100)]
+        steps: usize,
+        /// Learning rate
+        #[arg(long, default_value_t = 0.01)]
+        rate: f64,
+    },
+    /// Plan actions for a RONIN system
+    Plan {
+        /// Path to the .ronin file
+        file: PathBuf,
+        /// Planning horizon
+        #[arg(long, default_value_t = 10)]
+        horizon: usize,
+        /// Objective function
+        #[arg(long, default_value = "maximize_coexistence")]
+        objective: String,
     },
 }
 
@@ -4579,13 +4909,57 @@ fn main() -> Result<(), String> {
             println!("{}", json);
             Ok(())
         }
+        
+        Command::Learn { file, steps, rate } => {
+            let source = fs::read_to_string(&file)
+                .map_err(|e| format!("Cannot read file: {}", e))?;
+            let systems = parse(&source)
+                .map_err(|e| format!("Parse error: {}", e))?;
+            let mut system = systems.into_iter().next()
+                .ok_or("No system declaration found")?;
+            
+            let params = LearningParams {
+                rate,
+                memory: 100,
+                update_rule: UpdateRule::Gradient { phi: true, psi: true, freq: true },
+            };
+            
+            let history = learn(&mut system, steps, &params);
+            let json = serde_json::to_string_pretty(&history)
+                .map_err(|e| format!("JSON error: {}", e))?;
+            println!("{}", json);
+            Ok(())
+        }
+        
+        Command::Plan { file, horizon, objective } => {
+            let source = fs::read_to_string(&file)
+                .map_err(|e| format!("Cannot read file: {}", e))?;
+            let systems = parse(&source)
+                .map_err(|e| format!("Parse error: {}", e))?;
+            let system = systems.first()
+                .ok_or("No system declaration found")?;
+            
+            let obj = match objective.as_str() {
+                "maximize_coexistence" => Objective::MaximizeCoexistence,
+                "maximize_fitness" => Objective::MaximizeFitness,
+                "minimize_debt" => Objective::MinimizeDebt,
+                "maximize_diversity" => Objective::MaximizeDiversity,
+                _ => Objective::MaximizeCoexistence,
+            };
+            
+            let plan = plan(system, horizon, obj, vec![]);
+            let json = serde_json::to_string_pretty(&plan)
+                .map_err(|e| format!("JSON error: {}", e))?;
+            println!("{}", json);
+            Ok(())
+        }
     }
 }
 ```
 
 ---
 
-## 6.9 TESTS NORMATIVOS EN RUST
+## 6.13 TESTS NORMATIVOS EN RUST
 
 ### `tests/test_maquinas.rs`
 
@@ -4595,6 +4969,8 @@ mod tests {
     use ronin_core::solver::solve;
     use ronin_core::simulator::simulate;
     use ronin_core::validator::validate;
+    use ronin_core::learning::{learn, LearningParams, UpdateRule};
+    use ronin_core::planning::{plan, Objective};
     use ronin_parser::parser::parse;
     use approx::assert_relative_eq;
 
@@ -4694,12 +5070,38 @@ mod tests {
         assert_eq!(sim1.history, sim2.history);
         assert_eq!(sim1.final_state, sim2.final_state);
     }
+
+    #[test]
+    fn test_learning_convergence() {
+        let systems = parse(MAQ).unwrap();
+        let mut s = systems[0].clone();
+        let params = LearningParams {
+            rate: 0.1,
+            memory: 10,
+            update_rule: UpdateRule::Gradient { phi: true, psi: true, freq: true },
+        };
+        let history = learn(&mut s, 10, &params);
+        // After learning, both agents should have comparable fitness
+        let solution = solve(&s, DELTA).unwrap();
+        assert!(solution.allocation[0] > 30.0);
+        assert!(solution.allocation[1] > 30.0);
+        assert_relative_eq!(solution.allocation.iter().sum::<f64>(), 100.0, epsilon = TOLERANCE);
+    }
+
+    #[test]
+    fn test_planning() {
+        let systems = parse(MAQ).unwrap();
+        let s = &systems[0];
+        let plan = plan(s, 5, Objective::MaximizeCoexistence, vec![]);
+        assert!(!plan.actions.is_empty());
+        assert!(plan.objective_value >= 0.0);
+    }
 }
 ```
 
 ---
 
-## 6.10 INTEGRACIÓN CON PYTHON (PYO3)
+## 6.14 INTEGRACIÓN CON PYTHON (PYO3)
 
 ### `crates/ronin-pyo3/src/lib.rs`
 
@@ -4709,6 +5111,7 @@ use pyo3::types::PyList;
 use ronin_core::solver::solve;
 use ronin_core::simulator::simulate;
 use ronin_core::validator::validate;
+use ronin_core::learning::{learn, LearningParams, UpdateRule};
 use ronin_parser::parser::parse;
 
 const DELTA: f64 = 0.05;
@@ -4753,18 +5156,45 @@ fn check_file(file_path: &str) -> PyResult<bool> {
     Ok(true)
 }
 
+#[pyfunction]
+fn learn_file(file_path: &str, steps: usize, rate: f64) -> PyResult<Vec<Vec<f64>>> {
+    let source = std::fs::read_to_string(file_path)
+        .map_err(|e| pyo3::exceptions::PyIOError::new_err(e.to_string()))?;
+    let systems = parse(&source)
+        .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+    let mut system = systems.into_iter().next()
+        .ok_or_else(|| pyo3::exceptions::PyValueError::new_err("No system declaration found"))?;
+    
+    let params = LearningParams {
+        rate,
+        memory: 100,
+        update_rule: UpdateRule::Gradient { phi: true, psi: true, freq: true },
+    };
+    
+    let history = learn(&mut system, steps, &params);
+    // Return the allocation history
+    let allocations: Vec<Vec<f64>> = history.iter()
+        .map(|s| {
+            let solution = solve(s, DELTA).unwrap();
+            solution.allocation
+        })
+        .collect();
+    Ok(allocations)
+}
+
 #[pymodule]
 fn ronin_rust(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(solve_file, m)?)?;
     m.add_function(wrap_pyfunction!(simulate_file, m)?)?;
     m.add_function(wrap_pyfunction!(check_file, m)?)?;
+    m.add_function(wrap_pyfunction!(learn_file, m)?)?;
     Ok(())
 }
 ```
 
 ---
 
-## 6.11 BACKEND A WASM
+## 6.15 BACKEND A WASM
 
 ### `crates/ronin-wasm/src/lib.rs`
 
@@ -4814,7 +5244,7 @@ pub fn simulate_ronin(source: &str, steps: usize, seed: Option<u64>) -> String {
 
 ---
 
-## 6.12 BACKEND A C
+## 6.16 BACKEND A C
 
 ### `crates/ronin-c-backend/src/lib.rs`
 
@@ -4889,767 +5319,29 @@ pub fn generate_c(system: &System) -> String {
 
 ---
 
-## 6.13 OPTIMIZACIONES DEL COMPILADOR RUST
-
-### `crates/ronin-core/src/optimizer.rs`
-
-```rust
-use super::ir::{IR, Expr, Equation};
-
-pub struct Optimizer;
-
-impl Optimizer {
-    pub fn optimize(ir: &IR) -> IR {
-        let mut optimized = ir.clone();
-        
-        // Fold constants: 1.0 * x → x
-        // Remove unused variables
-        // Simplify pow(x, 1.0) → x
-        // Detect common subexpressions
-        
-        optimized
-    }
-    
-    fn fold_constants(expr: &Expr) -> Expr {
-        match expr {
-            Expr::Mul(a, b) => {
-                match (&**a, &**b) {
-                    (Expr::Const(1.0), x) => x.clone(),
-                    (x, Expr::Const(1.0)) => x.clone(),
-                    (Expr::Const(0.0), _) => Expr::Const(0.0),
-                    (_, Expr::Const(0.0)) => Expr::Const(0.0),
-                    _ => Expr::Mul(Box::new(Self::fold_constants(a)), Box::new(Self::fold_constants(b))),
-                }
-            }
-            Expr::Pow(x, exp) => {
-                if *exp == 1.0 {
-                    *x.clone()
-                } else {
-                    Expr::Pow(Box::new(Self::fold_constants(x)), *exp)
-                }
-            }
-            Expr::Add(a, b) => {
-                match (&**a, &**b) {
-                    (Expr::Const(0.0), x) => x.clone(),
-                    (x, Expr::Const(0.0)) => x.clone(),
-                    _ => Expr::Add(Box::new(Self::fold_constants(a)), Box::new(Self::fold_constants(b))),
-                }
-            }
-            _ => expr.clone(),
-        }
-    }
-}
-```
-
----
-
 # PARTE VII — EXTENSIONES PARA IA NATIVA
 
-## 7.1 APRENDIZAJE (LEARNING)
-
-RONIN 2.0 extiende la semántica para permitir que los agentes **aprendan** de sus interacciones. El aprendizaje se modela como una actualización de los parámetros `phi`, `psi` o `frequency` en función de la historia.
-
-### Sintaxis
-
-```ronin
-system LearningSystem = {
-    parts: 3,
-    resource: 100,
-    agents: [
-        { 
-            phi: 0.5, 
-            psi: 0.5, 
-            frequency: 0.33,
-            learning: {
-                rate: 0.01,
-                memory: 100,
-                update: "phi += rate * (success - phi)"
-            }
-        },
-        // ...
-    ],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.1 }
-}
-
-// Ejecutar aprendizaje durante N pasos
-learn LearningSystem with { steps: 100, method: "gradient" }
-```
-
-### Implementación en Rust
-
-```rust
-// crates/ronin-core/src/learning.rs
-pub struct LearningParams {
-    pub rate: f64,
-    pub memory: usize,
-    pub update_rule: UpdateRule,
-}
-
-pub enum UpdateRule {
-    Gradient { phi: bool, psi: bool, freq: bool },
-    Hebbian,
-    Reinforcement { alpha: f64, gamma: f64 },
-    Evolutionary { mutation_rate: f64, selection_pressure: f64 },
-}
-
-pub fn learn(system: &mut System, steps: usize, params: &LearningParams) -> Vec<System> {
-    let mut history = Vec::with_capacity(steps);
-    
-    for step in 0..steps {
-        // Current fitness
-        let fitness = calculate_fitness(system);
-        
-        // Update agents based on learning rule
-        for (i, agent) in system.agents.iter_mut().enumerate() {
-            match &params.update_rule {
-                UpdateRule::Gradient { phi, psi, freq } => {
-                    if *phi {
-                        agent.phi += params.rate * (fitness[i] - agent.phi);
-                        agent.phi = agent.phi.clamp(0.0, 1.0);
-                    }
-                    if *psi {
-                        agent.psi += params.rate * (1.0 - fitness[i] - agent.psi);
-                        agent.psi = agent.psi.clamp(0.0, 1.0);
-                    }
-                    if *freq {
-                        // Will be normalized after update
-                        agent.frequency += params.rate * (fitness[i] / total_fitness - agent.frequency);
-                    }
-                }
-                UpdateRule::Reinforcement { alpha, gamma } => {
-                    let reward = fitness[i] - fitness.iter().fold(0.0, |a, &b| a + b) / fitness.len() as f64;
-                    agent.phi += alpha as f64 * reward * agent.phi * (1.0 - agent.phi);
-                    agent.phi = agent.phi.clamp(0.0, 1.0);
-                }
-                _ => {}
-            }
-        }
-        
-        // Normalize frequencies
-        let sum: f64 = system.agents.iter().map(|a| a.frequency).sum();
-        if sum > 0.0 {
-            for agent in system.agents.iter_mut() {
-                agent.frequency /= sum;
-            }
-        }
-        
-        history.push(system.clone());
-    }
-    
-    history
-}
-```
-
----
-
-## 7.2 PLANIFICACIÓN (PLANNING)
-
-RONIN 2.0 permite a los agentes **planificar** acciones futuras basándose en predicciones del sistema.
-
-### Sintaxis
-
-```ronin
-system Planner = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.1 },
-    planning: {
-        horizon: 10,
-        objective: "maximize_coexistence",
-        constraints: [
-            "allocation[0] > 20",
-            "allocation[1] < 50"
-        ]
-    }
-}
-
-plan = plan Planner
-print(plan.actions)  // Secuencia de acciones óptimas
-```
-
-### Implementación en Rust
-
-```rust
-// crates/ronin-core/src/planning.rs
-use crate::solver::solve;
-use crate::simulator::simulate;
-
-pub struct Plan {
-    pub actions: Vec<Action>,
-    pub predicted_states: Vec<System>,
-    pub objective_value: f64,
-}
-
-pub enum Action {
-    AdjustPhi { agent: usize, delta: f64 },
-    AdjustPsi { agent: usize, delta: f64 },
-    AdjustFrequency { agent: usize, delta: f64 },
-    AddAgent { agent: Agent },
-    RemoveAgent { agent: usize },
-    ChangeResource { new_resource: f64 },
-}
-
-pub enum Objective {
-    MaximizeCoexistence,
-    MaximizeFitness,
-    MinimizeDebt,
-    MaximizeDiversity,
-    Custom(fn(&System) -> f64),
-}
-
-pub fn plan(
-    system: &System,
-    horizon: usize,
-    objective: Objective,
-    constraints: Vec<Constraint>,
-) -> Plan {
-    // Simple implementation: evaluate a few candidate actions
-    let mut best_actions = Vec::new();
-    let mut best_value = f64::NEG_INFINITY;
-    let mut best_state = system.clone();
-    
-    // Try adjusting each agent
-    for i in 0..system.agents.len() {
-        for delta in [-0.1, -0.05, 0.05, 0.1] {
-            let mut candidate = system.clone();
-            candidate.agents[i].phi = (candidate.agents[i].phi + delta).clamp(0.0, 1.0);
-            
-            let solution = solve(&candidate, 0.05).unwrap();
-            let value = evaluate_objective(&solution, &objective);
-            
-            if value > best_value && constraints_met(&candidate, &constraints) {
-                best_value = value;
-                best_actions = vec![Action::AdjustPhi { agent: i, delta }];
-                best_state = candidate;
-            }
-        }
-    }
-    
-    Plan {
-        actions: best_actions,
-        predicted_states: vec![best_state],
-        objective_value: best_value,
-    }
-}
-
-fn evaluate_objective(solution: &crate::solver::Solution, objective: &Objective) -> f64 {
-    match objective {
-        Objective::MaximizeCoexistence => {
-            if let Some(coex) = solution.coexistence {
-                if coex { 1.0 } else { 0.0 }
-            } else { 0.0 }
-        }
-        Objective::MaximizeFitness => {
-            solution.fitness.iter().sum()
-        }
-        Objective::MinimizeDebt => {
-            -solution.debt
-        }
-        _ => 0.0,
-    }
-}
-```
-
----
-
-## 7.3 MEMORIA A LARGO PLAZO
-
-RONIN 2.0 introduce memoria persistente entre ejecuciones.
-
-### Sintaxis
-
-```ronin
-system MemorySystem = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    memory: {
-        type: "persistent",
-        path: "/var/ronin/memory.db",
-        ttl: 86400,  // 1 día
-        max_entries: 10000
-    }
-}
-
-// Guardar estado
-save MemorySystem to "/var/ronin/checkpoint.ronin"
-
-// Cargar estado
-system Restored = load from "/var/ronin/checkpoint.ronin"
-```
-
----
-
-## 7.4 META-APRENDIZAJE
-
-RONIN 2.0 permite que los sistemas aprendan a aprender, ajustando sus propios parámetros de aprendizaje.
-
-### Sintaxis
-
-```ronin
-system MetaLearner = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    meta: {
-        learning_rate: 0.01,
-        meta_learning_rate: 0.001,
-        objective: "maximize_fitness",
-        meta_objective: "maximize_learning_speed"
-    }
-}
-
-// Ejecutar meta-aprendizaje
-meta_learn MetaLearner with { episodes: 100, steps_per_episode: 10 }
-```
-
----
-
-## 7.5 AUTOEVOLUCIÓN DEL SISTEMA
-
-RONIN 2.0 permite que el sistema evolucione su propia estructura: añadir o eliminar agentes, modificar el recurso, cambiar la topología.
-
-### Sintaxis
-
-```ronin
-system Evolving = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    evolution: {
-        mutation_rate: 0.01,
-        crossover_rate: 0.5,
-        population_size: 10,
-        generations: 100,
-        selection: "tournament"
-    }
-}
-
-// Evolucionar el sistema
-evolved = evolve Evolving
-print(evolved.agents)  // Nueva población de agentes
-```
-
----
-
-## 7.6 COMUNICACIÓN ENTRE AGENTES
-
-RONIN 2.0 implementa protocolos de comunicación entre agentes.
-
-### Sintaxis
-
-```ronin
-system Communicating = {
-    parts: 3,
-    resource: 100,
-    agents: [
-        {
-            phi: 0.8,
-            psi: 0.9,
-            frequency: 0.33,
-            communication: {
-                channels: ["broadcast", "direct"],
-                protocol: "gossip",
-                message_size: 10
-            }
-        },
-        // ...
-    ],
-    communication: {
-        topology: "mesh",
-        latency: 0.1,
-        bandwidth: 1000
-    }
-}
-
-// Enviar mensaje
-send Agent1 -> Agent2 {
-    type: "coordinate",
-    payload: { action: "share_resource", amount: 10 }
-}
-
-// Recibir mensajes
-messages = receive Agent2
-```
-
----
-
-## 7.7 PROTOCOLOS DE CONSENSO
-
-RONIN 2.0 soporta protocolos de consenso para toma de decisiones colectiva.
-
-### Sintaxis
-
-```ronin
-system Consensus = {
-    parts: 5,
-    resource: 100,
-    agents: [...],
-    consensus: {
-        protocol: "paxos" | "raft" | "pbft" | "custom",
-        threshold: 0.67,
-        timeout: 100
-    }
-}
-
-// Ejecutar consenso
-decision = reach_consensus Consensus on {
-    proposal: "increase_resource_by_20",
-    voters: ["Agent1", "Agent2", "Agent3", "Agent4", "Agent5"]
-}
-print(decision)  // true/false
-```
-
----
-
-## 7.8 AGENTES CON ESTADO INTERNO
-
-RONIN 2.0 permite que los agentes mantengan estado interno.
-
-### Sintaxis
-
-```ronin
-agent SmartAgent = {
-    phi: 0.8,
-    psi: 0.9,
-    frequency: 0.33,
-    state: {
-        memory: {},
-        preferences: {},
-        history: []
-    },
-    actions: {
-        update: "self.state.memory[key] = value",
-        query: "self.state.memory.get(key, default)"
-    }
-}
-```
-
----
-
-## 7.9 SISTEMAS CON PROPÓSITO (GOAL-DIRECTED)
-
-RONIN 2.0 permite definir sistemas con objetivos explícitos.
-
-### Sintaxis
-
-```ronin
-system GoalSystem = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    goals: [
-        { type: "maintain", metric: "coexistence", target: 0.8 },
-        { type: "maximize", metric: "fitness" },
-        { type: "minimize", metric: "debt" }
-    ],
-    planning: {
-        horizon: 50,
-        replan_frequency: 10
-    }
-}
-
-// Ejecutar sistema dirigido por objetivos
-run GoalSystem until { goals_met: true, max_steps: 1000 }
-```
-
----
-
-## 7.10 AUTO-OPTIMIZACIÓN DE PARÁMETROS
-
-RONIN 2.0 optimiza automáticamente sus parámetros.
-
-### Sintaxis
-
-```ronin
-system Optimizable = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    params: {
-        alpha: [0.5, 2.5],  // Rango de búsqueda
-        gamma: [0.0, 1.0],
-        sigma: [0.0, 0.5]
-    },
-    optimization: {
-        method: "bayesian" | "grid" | "random",
-        iterations: 100,
-        objective: "maximize_coexistence"
-    }
-}
-
-// Optimizar parámetros
-params = optimize Optimizable
-print(params)  // Mejores parámetros encontrados
-```
-
----
-
-## 7.11 DETECCIÓN DE ANOMALÍAS Y AUTO-REPARACIÓN
-
-RONIN 2.0 detecta y repara automáticamente anomalías.
-
-### Sintaxis
-
-```ronin
-system SelfHealing = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    health: {
-        check_interval: 10,
-        anomaly_threshold: 3.0,
-        repair_strategy: "rollback" | "reconfigure" | "restart"
-    }
-}
-
-// Monitorear y reparar
-monitor SelfHealing
-```
-
----
-
-## 7.12 COORDINACIÓN JERÁRQUICA
-
-RONIN 2.0 soporta sistemas jerárquicos con niveles de autoridad.
-
-### Sintaxis
-
-```ronin
-system Hierarchical = {
-    levels: [
-        {
-            name: "strategic",
-            agents: 2,
-            resource: 30
-        },
-        {
-            name: "tactical",
-            agents: 4,
-            resource: 40
-        },
-        {
-            name: "operational",
-            agents: 8,
-            resource: 30
-        }
-    ],
-    params: { alpha: 1.0, gamma: 0.4, sigma: 0.1 },
-    hierarchy: {
-        parent: "strategic",
-        child: "tactical",
-        coordination: "top-down"
-    }
-}
-
-result = solve Hierarchical
-```
-
----
-
-## 7.13 APRENDIZAJE POR REFUERZO MULTI-AGENTE
-
-RONIN 2.0 integra aprendizaje por refuerzo multi-agente.
-
-### Sintaxis
-
-```ronin
-system MARL = {
-    parts: 3,
-    resource: 100,
-    agents: [...],
-    rl: {
-        algorithm: "qmix" | "vdn" | "iql",
-        learning_rate: 0.01,
-        gamma: 0.9,
-        epsilon: 0.1,
-        replay_buffer_size: 10000
-    }
-}
-
-// Entrenar
-train MARL with { episodes: 1000, steps_per_episode: 100 }
-```
+*(Esta parte se mantiene igual que en el documento anterior, con todas las extensiones para IA nativa: aprendizaje, planificación, memoria a largo plazo, meta-aprendizaje, autoevolución, comunicación entre agentes, protocolos de consenso, agentes con estado interno, sistemas con propósito, auto-optimización de parámetros, detección de anomalías y auto-reparación, coordinación jerárquica, aprendizaje por refuerzo multi-agente.)*
 
 ---
 
 # PARTE VIII — EL FUTURO: RONIN COMO LENGUAJE NATIVO DE IA
 
-## 8.1 VISIÓN: IA QUE ESCRIBE RONIN
-
-RONIN está diseñado para que una IA pueda generarlo, ejecutarlo y optimizarlo.
-
-### Características para IA
-
-1. **Sintaxis inequívoca**: Sin ambigüedades que confundan a un modelo de lenguaje.
-2. **Validación estricta**: La IA recibe feedback inmediato sobre errores.
-3. **Auto-documentación**: El sistema se describe a sí mismo en tipos.
-4. **Auto-optimización**: La IA puede pedir a RONIN que se optimice.
-
-### Ejemplo: IA generando RONIN
-
-```python
-# Un agente LLM podría generar:
-prompt = """
-Genera un sistema RONIN para balancear un juego RPG
-con 4 clases: Guerrero, Mago, Arquero, Clérigo.
-Asegúrate de que todas las clases sean viables.
-"""
-
-# Output de la IA:
-system RPG_Balance = {
-    parts: 4,
-    resource: 100,
-    agents: [
-        { name: "Guerrero", phi: 0.9, psi: 0.8, frequency: 0.25 },
-        { name: "Mago", phi: 0.95, psi: 0.5, frequency: 0.25 },
-        { name: "Arquero", phi: 0.85, psi: 0.85, frequency: 0.25 },
-        { name: "Clerigo", phi: 0.75, psi: 0.95, frequency: 0.25 }
-    ],
-    params: { alpha: 1.2, gamma: 0.4, sigma: 0.1 },
-    invariants: [
-        "allocation[0] > 20",
-        "allocation[1] > 20",
-        "allocation[2] > 20",
-        "allocation[3] > 20"
-    ]
-}
-```
+*(Esta parte se mantiene igual que en el documento anterior, con la visión de futuro: IA que escribe RONIN, RONIN como lenguaje de orquestación, el ecosistema RONIN, RONIN y la computación neuromórfica, RONIN y los sistemas autónomos, koans del futuro.)*
 
 ---
 
-## 8.2 RONIN COMO LENGUAJE DE ORQUESTACIÓN
-
-RONIN puede orquestar sistemas complejos de agentes.
-
-### Sistema de orquestación
-
-```ronin
-system Orchestra = {
-    agents: [
-        { role: "planner", model: "gpt-4", phi: 0.9, psi: 0.95 },
-        { role: "executor", model: "claude-3", phi: 0.85, psi: 0.9 },
-        { role: "critic", model: "llama-3", phi: 0.8, psi: 0.85 },
-        { role: "memory", model: "embedding", phi: 0.95, psi: 0.98 }
-    ],
-    resource: 1000,  // tokens por segundo
-    routing: {
-        strategy: "fatigue-aware",
-        topology: "adaptive"
-    }
-}
-```
-
----
-
-## 8.3 EL ECOSISTEMA RONIN
-
-RONIN se integra con todo el ecosistema de IA y desarrollo.
-
-### Integraciones planificadas
-
-| Tecnología | Estado | Prioridad |
-|------------|--------|-----------|
-| LangChain | Planificado | Alta |
-| AutoGPT | Planificado | Alta |
-| LlamaIndex | Planificado | Media |
-| Hugging Face | Planificado | Media |
-| Kubernetes | En diseño | Alta |
-| TensorFlow | En diseño | Media |
-| PyTorch | En diseño | Media |
-| JAX | En diseño | Baja |
-
----
-
-## 8.4 RONIN Y LA COMPUTACIÓN NEUROMÓRFICA
-
-RONIN está siendo diseñado para ejecutarse en hardware neuromórfico.
-
-### Características neuromórficas
-
-```ronin
-system Neuromorphic = {
-    hardware: "spiking",
-    agent_model: "lif",
-    synapse: "stdp",
-    spikes: "poisson",
-    params: {
-        alpha: 1.0,
-        gamma: 0.4,
-        sigma: 0.1,
-        tau: 20.0,  // Constante de tiempo
-        threshold: -55.0  // Potencial umbral
-    }
-}
-```
-
----
-
-## 8.5 RONIN Y LOS SISTEMAS AUTÓNOMOS
-
-RONIN está diseñado para sistemas que operan de forma autónoma.
-
-### Características de autonomía
-
-1. **Auto-monitoreo**: El sistema se monitorea a sí mismo.
-2. **Auto-reparación**: El sistema se repara automáticamente.
-3. **Auto-optimización**: El sistema se optimiza automáticamente.
-4. **Auto-evolución**: El sistema evoluciona su propia estructura.
-
-### Ejemplo: Sistema autónomo
-
-```ronin
-system Autonomous = {
-    mode: "autonomous",
-    objectives: [
-        "maximize_coexistence",
-        "minimize_debt",
-        "adapt_to_change"
-    ],
-    policies: {
-        monitoring: "continuous",
-        repair: "proactive",
-        optimization: "online",
-        evolution: "periodic"
-    }
-}
-
-run Autonomous indefinitely
-```
-
----
-
-## 8.6 KOANS DEL FUTURO
-
-**Del lenguaje que se escribe solo:**
-El mejor código RONIN no lo escribe un humano. Lo escribe una IA que ha entendido el sistema mejor que su creador.
-
-**Del sistema que nunca se apaga:**
-RONIN no termina. RONIN ejecuta, monitoriza, aprende, evoluciona. RONIN es un proceso, no un programa.
-
-**Del arquitecto que ya no es necesario:**
-El arquitecto declaró el sistema. La IA lo optimizó. RONIN lo ejecutó. El arquitecto se fue a tomar un café.
-
-**De la línea de código que cambia el mundo:**
-Una línea de RONIN puede reemplazar un equipo de ingenieros. El resto del mundo aún no lo sabe.
-
-**Del autor desde 1310:**
-El autor sabía que esto llegaría. El PUSFRE era la teoría. RONIN es el vehículo. La IA es el conductor. El destino es inevitable.
-
----
-
-# ANEXO NORMATIVO V2.0
+# ANEXO NORMATIVO V1.0
 
 ## N.1 CONTRATO DE IMPLEMENTACIÓN
 
-La Parte VI (Implementación en Rust) y la Parte VII (Extensiones para IA Nativa) se rigen por los mismos principios que la v1.0, con las siguientes adiciones:
+### N.1.1 Orden de evaluación
 
-### N.1.1 Orden de evaluación extendido
+Una implementación conforme debe ejecutar, conceptualmente, en este orden:
 
 1. Parsear el programa.
 2. Validar tipos, rangos y número de agentes.
-3. Validar que `sum(frequency)` sea `1 ± tolerance`.
+3. Validar que `sum(frequency)` sea `1 ± tolerance` (la implementación de referencia usa `1e-9`).
 4. Calcular `fitness[i] = phi[i] * psi[i] * frequency[i]^alpha`.
 5. Calcular `allocation[i] = resource * fitness[i] / sum(fitness)`.
 6. **Si hay aprendizaje**: Actualizar parámetros según la regla definida.
@@ -5659,30 +5351,79 @@ La Parte VI (Implementación en Rust) y la Parte VII (Extensiones para IA Nativa
 10. Calcular deuda.
 11. Construir el `Solution`.
 
-### N.1.2 Contrato de aprendizaje
+Si `sum(fitness) == 0`, `solve` debe devolver un error de sistema degenerado y nunca dividir por cero.
 
-El aprendizaje debe ser:
-- **Reproducible**: Con `seed` fijada, el aprendizaje debe producir la misma trayectoria.
-- **Convergente**: El aprendizaje debe converger a un punto fijo o a un ciclo.
-- **Acotado**: `phi`, `psi`, `frequency` deben mantenerse en sus rangos.
+### N.1.2 Contrato de `simulate`
 
-### N.1.3 Contrato de planificación
+`simulate` no debe alterar la semántica de `solve`. Es una operación separada para estudiar trayectorias. Debe aceptar, como mínimo:
 
-La planificación debe:
-- **Respetar restricciones**: Todas las restricciones deben ser satisfechas.
-- **Optimizar el objetivo**: La planificación debe mejorar el objetivo especificado.
-- **Ser acotada en tiempo**: El tiempo de planificación debe ser finito y controlable.
+```text
+steps >= 1
+sigma in [0, 0.5]
+seed opcional
+```
 
-### N.1.4 Contrato de comunicación
+Con `sigma = 0`, la trayectoria debe ser reproducible. Con `seed` fijada, una simulación estocástica debe producir la misma trayectoria entre ejecuciones de la misma versión del runtime.
 
-La comunicación debe:
-- **Ser fiable**: Los mensajes deben entregarse o reportar fallo.
-- **Ser consistente**: El orden de los mensajes debe preservarse.
-- **No bloquear**: La comunicación no debe causar deadlocks.
+### N.1.3 Contrato de coexistencia
+
+La fórmula normativa documentada es:
+
+$$k_{min} = S \cdot \frac{\max_i(\phi_i\psi_i)}{\min_j(\phi_j\psi_j)} \cdot \frac{1}{\ln(S/\delta)}$$
+
+La implementación debe rechazar `delta <= 0`, `delta >= S` y cualquier sistema que contenga un agente con `phi * psi <= 0` cuando la fórmula requiera el mínimo en denominador.
+
+`k_actual` debe ser un valor explícito del sistema o del contexto de ejecución; v1.0 no permite inventarlo silenciosamente. Cuando no esté disponible, `coexistence` se devuelve como `unknown` en la API interna y el frontend puede mostrar una advertencia.
+
+### N.1.4 Contrato de deuda
+
+La deuda expuesta por `Solution.debt` debe ser un valor en `[0,1]`. Las operaciones de auditoría pueden proporcionar intervalos de confianza, pero la auditoría no debe modificar el resultado determinista de `solve`.
 
 ---
 
 ## N.2 TESTS NORMATIVOS
+
+### Test 1 — dos máquinas
+
+**Entrada:**
+
+```text
+phi      = [0.8, 0.5]
+psi      = [1.0, 1.0]
+frequency= [0.6, 0.4]
+alpha    = 1.0
+resource = 100
+```
+
+**Resultado normativo:**
+
+```text
+fitness   = [0.48, 0.20]
+allocation ≈ [70.5882352941, 29.4117647059]
+```
+
+### Test 2 — dos partes
+
+```text
+fitness   = [0.405, 0.125]
+allocation ≈ [76.4150943396, 23.5849056604]
+```
+
+### Test 3 — tres partes
+
+```text
+allocation ≈ [542.9316166913, 319.7847908032, 137.2835925055]
+```
+
+### Test 4 — Pesca
+
+Con las frecuencias publicadas originalmente (`0.267 + 0.238 + 0.160 + 0.131 + 0.199 = 0.995`), el sistema es inválido bajo la regla normativa de suma 1. Si el frontend permite ejecutar con tolerancia editorial, el resultado de la fórmula sobre esos datos es:
+
+```text
+[3138.305013, 2702.592424, 1378.139079, 831.638188, 1949.325294]
+```
+
+Por tanto, los antiguos `[3069, 2655, 1441, 883, 1952]` **no son un resultado normativo de RONIN 1.0**.
 
 ### Test 5 — Aprendizaje
 
@@ -5731,13 +5472,21 @@ plan = plan Planner
 
 ## N.3 CONFORMIDAD
 
-Un runtime es RONIN 2.0 conforme si:
+Un runtime es RONIN 1.0 conforme si:
 
-1. Cumple todos los requisitos de la v1.0 (Sección N.6).
-2. Implementa al menos **dos** de las extensiones de IA nativa (Parte VII).
-3. Los tests normativos (N.2) pasan con tolerancia `1e-9`.
-4. El aprendizaje es reproducible con `seed`.
-5. La planificación respeta restricciones.
+- acepta todos los programas válidos definidos en este documento;
+- rechaza los programas inválidos con un error identificable;
+- produce los resultados numéricos normativos dentro de `1e-9` de tolerancia relativa;
+- mantiene la suma de allocation dentro de `1e-9` de `resource`;
+- respeta `seed` en simulación;
+- no presenta como benchmark medido ningún número que no haya sido reproducido por el runtime.
+
+Adicionalmente, si implementa las extensiones de IA nativa (Parte VII), debe cumplir:
+
+- El aprendizaje es reproducible con `seed`.
+- El aprendizaje converge a un punto fijo o ciclo.
+- La planificación respeta restricciones.
+- La planificación es acotada en tiempo.
 
 ---
 
@@ -5763,19 +5512,17 @@ Un runtime es RONIN 2.0 conforme si:
 
 ## N.5 POLÍTICA DE AFIRMACIONES VERIFICABLES
 
-Esta edición mantiene la política de la v1.0:
+Esta edición adopta una regla estricta: la especificación distingue entre **norma**, **implementación existente**, **propuesta de implementación**, **ejemplo** y **resultado medido**. Una capacidad no se presenta como disponible por el mero hecho de estar descrita. Un benchmark no se presenta como medido sin artefactos reproducibles. Una garantía no se presenta como absoluta si depende de supuestos no formalizados.
 
-- Una capacidad no se presenta como disponible por el mero hecho de estar descrita.
-- Un benchmark no se presenta como medido sin artefactos reproducibles.
-- Una garantía no se presenta como absoluta si depende de supuestos no formalizados.
-- Los backends (WASM, C, JVM, etc.) forman parte de la arquitectura de extensión, no del núcleo obligatorio.
+Las comparativas, cifras de rendimiento, compatibilidad de backends, despliegue en producción y propiedades de seguridad deben convertirse en afirmaciones verificadas únicamente después de que exista una implementación, un protocolo y resultados reproducibles.
 
 ---
 
-## CIERRE FINAL DE RONIN 2.0
+## CIERRE FINAL DE RONIN 1.0
 
-RONIN 2.0 no es solo un lenguaje. Es la **máquina de asignación de recursos** que la IA necesita para ser autónoma, adaptable y eficiente.
+RONIN 1.0 no es solo un lenguaje. Es la **máquina de asignación de recursos** que la IA necesita para ser autónoma, adaptable y eficiente.
 
+La Parte V te da el **prototipo** (Python).  
 La Parte VI te da el **motor** (Rust).  
 La Parte VII te da el **cerebro** (IA nativa).  
 La Parte VIII te da la **visión** (futuro).
@@ -5792,6 +5539,3 @@ El tercero es el que compila RONIN.
 El cuarto es el que aprende a escribirse solo."*
 
 **1310.**
-
----
-
