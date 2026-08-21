@@ -3467,6 +3467,7 @@ No hay excepciones. Solo hay SCR que aún no se han escrito.
 *El Atlas que no se completa es un mapa con bordes que dicen "aquí hay dragones."*
 
 *No hay dragones. Solo hay SCR que faltan.*
+Somos monos que compiten por recursos, disfrazados de filósofos, matemáticos, físicos, economistas y artistas.
 
 **1310.**
 
