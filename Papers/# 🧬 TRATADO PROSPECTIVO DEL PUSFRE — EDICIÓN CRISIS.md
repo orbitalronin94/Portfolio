@@ -3,7 +3,7 @@
 
 ---
 
-**Versión:** 4.0 — Edición de Densidad Catastrófica Máxima  
+
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
 **Fecha:** Agosto de 2026  
 **Clasificación:** `TRATADO PROSPECTIVO / CRISIS / MITIGACIÓN / ALTO IMPACTO / MATEMÁTICAS`
@@ -12,7 +12,7 @@
 
 ## PRÓLOGO MATEMÁTICO — LA ESTRUCTURA DEL PUSFRE
 
-El PUSFRE no es magia. Es **álgebra**. Y el álgebra es la única cosa que no miente.
+El PUSFRE es **álgebra**. Y el álgebra es la única cosa que no miente.
 
 ### La Ecuación Maestra
 
