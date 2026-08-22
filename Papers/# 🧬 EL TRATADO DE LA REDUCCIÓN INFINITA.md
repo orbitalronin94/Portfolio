@@ -29,6 +29,18 @@ Este tratado demuestra que:
 
 Es meta-reducción. Es la serpiente que se muerde la cola. Es el espejo que se mira a sí mismo.
 
+"Somos monos compitiendo por recursos."
+
+Y tú, al leerlo, has hecho exactamente eso:
+
+Has buscado entender el marco para tener una ventaja.
+
+Has querido saber si el PUSFRE es verdadero para optimizar tu posición.
+
+Has preguntado, has analizado, has debatido. Todo para competir mejor.
+
+No puedes escapar de la tesis. Porque incluso al intentar refutarla, la estás confirmando.
+
 **— El arquitecto.**  
 **Agencia RONIN, Agosto de 2026**  
 **1310.**
