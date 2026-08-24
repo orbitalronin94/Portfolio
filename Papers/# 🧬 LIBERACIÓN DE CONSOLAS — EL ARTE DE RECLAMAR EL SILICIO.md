@@ -4561,6 +4561,231 @@ El conocimiento no es ilegal. La acción puede serlo. El que usa el conocimiento
 
 La historia de las consolas es la historia de los mismos errores. Fabricantes que dejan puertos de expansión abiertos. Criptografía mal implementada. Modos de recuperación inseguros. La historia no se aprende. Por eso el liberador siempre tiene trabajo.
 
+# 🧬 ANEXO DE FUNDAMENTACIÓN JURÍDICA
+## *O "Por qué este manual es legal en España (y en la UE) y por qué las denuncias absurdas son, simplemente, eso: absurdas"*
+
+---
+
+**Autor:** El Arquitecto (en modo *jurídico-filosófico*)
+**Estado:** 🔓 ANEXO CANÓNICO — DOMINIO PÚBLICO
+**Fecha:** Agosto de 2026
+**Clasificación:** `ANEXO JURÍDICO / JURISPRUDENCIA / SOBERANÍA DIGITAL / 1310`
+
+---
+
+## PRÓLOGO DEL ARQUITECTO (EN MODO *LEGAL*)
+
+Lector.
+
+Este anexo no es una declaración de intenciones. Es una **constatación de hechos**. No es una opinión legal. Es una **recopilación de jurisprudencia y normativa** que demuestra, punto por punto, por qué el manual que tienes en las manos —el que enseña a ver pliegues, no a cometer delitos— es **legal** en el marco jurídico español y europeo.
+
+No lo digo yo. Lo dice el Tribunal de Justicia de la Unión Europea. Lo dice un juzgado de Barcelona. Lo dice el Código Penal. Lo dice la lógica.
+
+Y lo dice la realidad: la ley protege al que *roba*, no al que *observa*. La ley castiga al que *comercializa*, no al que *investiga*. La ley persigue el *ánimo de lucro*, no el *ánimo de aprender*.
+
+Este anexo está dedicado a todos los que han sido denunciados absurdamente por hacer exactamente lo que este manual enseña: **ver**. A los que vendían modchips y fueron absueltos. A los que programaban homebrew y fueron denunciados. A los que explicaban cómo funcionan las cerraduras y fueron acusados de querer abrirlas.
+
+**1310.**
+
+---
+
+## 1. EL PRECEDENTE EUROPEO: SENTENCIA DEL TJUE C‑355/12 (23 DE ENERO DE 2014)
+
+### 1.1. El caso
+
+En 2014, el Tribunal de Justicia de la Unión Europea dictó sentencia en el asunto **Nintendo Co. Ltd y otros contra PC Box Srl y 9Net Srl** (C‑355/12).
+
+Nintendo comercializaba consolas DS y Wii con un sistema de reconocimiento que impedía el uso de copias ilegales de videojuegos. PC Box Italia vendía las mismas consolas con un software complementario que permitía ejecutar **homebrew** (aplicaciones de productores independientes) y reproducir películas, vídeos y MP3 en las consolas.
+
+Nintendo demandó a PC Box por eludir sus medidas tecnológicas de protección. PC Box argumentó que su finalidad no era la piratería, sino permitir **usos legítimos** de la consola.
+
+### 1.2. El fallo
+
+El TJUE falló a favor de PC Box. Y lo hizo con una argumentación que **desmonta** cualquier intento de criminalizar la liberación de consolas por motivos no comerciales.
+
+El Tribunal estableció tres principios fundamentales:
+
+**Principio 1: La protección de las medidas tecnológicas solo cubre la piratería de videojuegos.**
+
+> *"La protección jurídica que otorga la Directiva relativa a la armonización de los derechos de autor únicamente abarca las medidas tecnológicas destinadas a impedir o eliminar los actos de reproducción, comunicación, puesta a disposición del público o distribución de las obras no autorizadas por el titular de los derechos de autor."*
+
+Traducción: la ley protege a Nintendo contra quien *copie ilegalmente sus juegos*, no contra quien quiera *reproducir sus propios MP3*.
+
+**Principio 2: La protección debe ser proporcional.**
+
+> *"La protección jurídica de la Directiva debe respetar el principio de proporcionalidad, sin prohibir aquellos dispositivos o actividades cuyo empleo o finalidad comercial principal persiga objetivos distintos al de eludir la protección técnica con fines ilícitos."*
+
+Traducción: si un dispositivo o actividad tiene **usos legítimos** (como ejecutar homebrew o reproducir contenido propio), no puede prohibirse solo porque también *podría* usarse para piratear.
+
+**Principio 3: La finalidad comercial principal determina la legalidad.**
+
+El Tribunal examinó si el objetivo principal de PC Box era **eludir la protección para permitir copias ilegales** o **permitir usos legítimos**. Al no demostrarse que la finalidad principal fuera la piratería, la actividad fue declarada legal.
+
+### 1.3. Lo que significa para este manual
+
+El manual de liberación de consolas:
+
+- **No enseña a piratear juegos.** Enseña a **ver pliegues**.
+- **No tiene finalidad comercial.** Es dominio público.
+- **No persigue el ánimo de lucro.** Es un acto de soberanía digital.
+- **Tiene usos legítimos:** homebrew, copias de seguridad, reproducción de contenido propio, investigación técnica.
+
+Por tanto, según el **propio TJUE**, este manual y las actividades que documenta están **dentro del marco legal europeo**.
+
+---
+
+## 2. EL PRECEDENTE ESPAÑOL: EL VACÍO LEGAL DE LOS MODCHIPS (2004)
+
+### 2.1. El caso
+
+En 2004, un juzgado de Barcelona (Juzgado de lo Penal nº 3) dictó una sentencia que pasaría a la historia del *hardware hacking*.
+
+La tienda **Innovagames** vendía modchips para Xbox y PS2 que permitían:
+
+- Reproducir juegos y DVD de otras regiones.
+- Ejecutar software descargado de Internet.
+- Modificar el funcionamiento de la consola.
+
+La Guardia Civil denunció a la tienda por vulnerar la propiedad intelectual de los fabricantes.
+
+### 2.2. El fallo
+
+El juez reconoció que modificar las consolas *"podría constituir un delito contra la propiedad intelectual de los fabricantes"*. Pero **desestimó el caso** por un vacío legal en la ley española de propiedad intelectual.
+
+El vacío era el siguiente:
+
+- La ley prohibía la fabricación y distribución de dispositivos diseñados para **descifrar códigos de seguridad en software**.
+- Sin embargo, **la misma ley no mencionaba los videojuegos ni el hardware de las consolas**.
+
+Por tanto, los modchips —que modificaban hardware para permitir usos legítimos— se **colaban por la rendija legal**.
+
+### 2.3. Lo que significa para este manual
+
+El vacío legal que absolvió a Innovagames en 2004 **sigue existiendo** en gran medida. La ley española no ha cerrado ese agujero de forma explícita. Y mientras no lo haga, el manual y las actividades que documenta operan en el mismo espacio legal:
+
+- **No son un delito contra la propiedad intelectual** porque no hay ánimo de lucro ni comercialización.
+- **No son un delito de descifrado de software** porque el manual no enseña a descifrar software, enseña a **ver** hardware.
+- **No son un delito de elusión de medidas tecnológicas** porque las medidas que se eluden no son para proteger videojuegos, son para **restringir usos legítimos** del hardware.
+
+---
+
+## 3. EL CÓDIGO PENAL ESPAÑOL: EL REQUISITO DEL ÁNIMO DE LUCRO
+
+### 3.1. El artículo 270 del Código Penal
+
+El delito contra la propiedad intelectual, tipificado en el **artículo 270 del Código Penal español**, exige un elemento fundamental: **el ánimo de obtener un beneficio económico**.
+
+> *"Será castigado con la pena de prisión de seis meses a cuatro años y multa de doce a veinticuatro meses **el que, con ánimo de obtener un beneficio económico**, reproduzca, plagie, distribuya o comunique públicamente una obra sin la autorización del titular."*
+
+### 3.2. Aplicación al manual
+
+El manual de liberación de consolas:
+
+- **No se vende.** Es dominio público en GitHub.
+- **No genera ingresos.** No hay suscripciones, ni publicidad, ni patrocinios.
+- **No promueve la piratería comercial.** Es un documento técnico y filosófico, no un catálogo de productos ilegales.
+- **No tiene ánimo de lucro directo ni indirecto.**
+
+Por tanto, **no encaja en el tipo penal del artículo 270** del Código Penal.
+
+### 3.3. La jurisprudencia sobre el ánimo de lucro
+
+La jurisprudencia española ha sido consistente en exigir **ánimo de lucro** para condenar por delitos contra la propiedad intelectual. La simple **distribución gratuita** o la **investigación técnica** no constituyen delito, aunque puedan incomodar a los titulares de derechos.
+
+Este manual, al ser gratuito, educativo y no comercial, **está fuera del alcance** de la vía penal.
+
+---
+
+## 4. SÍNTESIS: EL MAPA LEGAL COMPLETO
+
+| Elemento | Normativa / Jurisprudencia | Lo que dice | Lo que significa para el manual |
+|---|---|---|---|
+| **Elusi�n de medidas tecnológicas** | TJUE C‑355/12 (2014) | La protección solo cubre actos no autorizados por el titular (copias ilegales). No cubre usos legítimos. | El manual enseña a liberar para usos legítimos (homebrew, copias de seguridad, soberanía digital). |
+| **Principio de proporcionalidad** | TJUE C‑355/12 (2014) | No pueden prohibirse dispositivos o actividades con finalidad principal distinta a la elusión ilícita. | El manual tiene finalidad educativa y filosófica. La elusión es secundaria. |
+| **Venta de modchips** | Juzgado Barcelona (2004) | La ley no menciona videojuegos ni hardware de consolas. Vacío legal. | El manual opera en el mismo vacío: no es software, es conocimiento sobre hardware. |
+| **Delito contra propiedad intelectual** | Art. 270 Código Penal | Exige ánimo de lucro. | El manual es gratuito, sin ánimo de lucro. No encaja. |
+
+---
+
+## 5. DEDICATORIA: A LOS QUE FUERON DENUNCIADOS ABSURDAMENTE
+
+Este anexo está dedicado a todos los que, como el cerrajero del cuento, fueron acusados de querer abrir cerraduras cuando solo querían **verlas**.
+
+A los que vendían modchips y fueron absueltos por un juez que entendió que la ley no prohibía lo que ellos hacían.
+
+A los que programaban homebrew y fueron denunciados por Nintendo, y a los que el TJUE defendió porque sus usos eran legítimos.
+
+A los que explicaban cómo funcionaban las consolas y fueron acusados de querer piratearlas.
+
+A los que, como el cerrajero, sabían que *"el punto débil no es un error. Es una consecuencia de tener que abrirse."*
+
+A los que entendieron que **el silicio es tuyo** y que **el fabricante no tiene derecho a decirte qué puedes hacer con lo que has comprado**.
+
+A los que, como el aprendiz, entendieron que *"el libro no enseña a abrir cerraduras. Enseña a ver pliegues. Y el que ve pliegues puede hacer tres cosas: usarlos para robar, usarlos para mejorar, o guardarlos para sí."*
+
+**Esta dedicatoria va por vosotros. Porque el conocimiento es libre. Y la acción es vuestra.**
+
+---
+
+## 6. KOAN DEL ABOGADO Y EL ARQUITECTO
+
+> *Un abogado leyó el manual y dijo: "Esto es ilegal."*
+>
+> *El arquitecto respondió: "¿Por qué?"*
+>
+> *"Porque enseña a eludir medidas de protección."*
+>
+> *"¿Y qué protegen esas medidas?"*
+>
+> *"Los derechos de autor de los fabricantes."*
+>
+> *"¿Y este manual enseña a copiar juegos ilegalmente?"*
+>
+> *"No. Pero enseña a eludir las medidas que lo impedirían."*
+>
+> *"Entonces, si uso el manual para ejecutar homebrew, ¿estoy cometiendo un delito?"*
+>
+> *"No, porque el homebrew no es ilegal."*
+>
+> *"¿Y si uso el manual para copiar juegos?"*
+>
+> *"Eso sí sería ilegal."*
+>
+> *"Entonces el manual no es ilegal. El uso que se haga de él puede serlo. ¿No es eso lo que dijo el TJUE?"*
+>
+> *El abogado guardó silencio.*
+>
+> *El arquitecto añadió: "La ley protege al que roba, no al que observa. La ley castiga al que comercia, no al que investiga. La ley persigue el ánimo de lucro, no el ánimo de aprender."*
+>
+> *"¿Y si alguien usa el manual para robar?"*
+>
+> *"Entonces ese alguien comete un delito. Pero el manual no."*
+>
+> *El abogado se fue. El arquitecto escribió en la pizarra:*
+>
+> ***"El conocimiento no es ilegal. La acción puede serlo. El que usa el conocimiento para atacar asume la responsabilidad. El que usa el conocimiento para defender también. El conocimiento no juzga. Solo existe."***
+
+---
+
+## 7. CIERRE
+
+Este anexo no es una carta de presentación para un juez. Es un **recordatorio**:
+
+- La ley europea protege los usos legítimos.
+- La ley española exige ánimo de lucro.
+- La jurisprudencia ha absuelto a quienes operaban en el vacío legal.
+- Este manual opera en ese vacío.
+
+Y si alguien intenta denunciarlo, el arquitecto ya ha preparado la respuesta:
+
+> *"El día que alguien use este manual para encontrar el próximo pliegue... ignorad quién escribió el manual."* **😉**
+
+---
+
+*"El conocimiento que no se ejecuta es decoración. La ley que no se interpreta es dogma. La jurisprudencia que no se conoce es un pliegue que espera ser visto."*
+
+**1310.**
+
 
 
 # 🗝️ EL CUENTO DEL CERRERO Y LAS CERRADURAS QUE NO CERRAVAN
