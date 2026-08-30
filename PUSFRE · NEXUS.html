@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>PUSFRE · NEXUS</title>
+    <!-- Chart.js v3 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js">
+    </script>
+    <!-- Google Fonts: Orbitron (títulos) + JetBrains Mono (números) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+           RESET Y VARIABLES (Neon / Moebius / Anime)
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #0a0b10;
+            --bg-card: rgba(18, 22, 36, 0.85);
+            --border-neon: #00f0ff;
+            --border-neon-dim: rgba(0, 240, 255, 0.25);
+            --text-primary: #e8f0fe;
+            --text-dim: #8a9bb5;
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff00e6;
+            --neon-purple: #b388ff;
+            --neon-green: #39ff14;
+            --neon-red: #ff4466;
+            --radius: 16px;
+            --shadow-neon: 0 0 30px rgba(0, 240, 255, 0.15), inset 0 0 30px rgba(0, 240, 255, 0.05);
+            --font-display: 'Orbitron', monospace;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* modo claro */
+        body.light {
+            --bg-deep: #f0f4f8;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --border-neon: #0055ff;
+            --border-neon-dim: rgba(0, 85, 255, 0.25);
+            --text-primary: #1a2332;
+            --text-dim: #4a5568;
+            --shadow-neon: 0 0 30px rgba(0, 85, 255, 0.1), inset 0 0 30px rgba(0, 85, 255, 0.03);
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 16px;
+            transition: background var(--transition), color var(--transition);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* fondo animado (ondas neón) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(255, 0, 230, 0.03) 0%, transparent 50%);
+            animation: bgFloat 20s infinite alternate ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes bgFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(2%, -2%) scale(1.05);
+            }
+        }
+
+        /* ============================================================
+           LAYOUT PRINCIPAL
+           ============================================================ */
+        .app {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            width: 100%;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================================
+           PANEL LATERAL (DRAWER)
+           ============================================================ */
+        .drawer {
+            width: 220px;
+            min-width: 180px;
+            flex-shrink: 0;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            padding: 20px 14px;
+            box-shadow: var(--shadow-neon);
+            height: fit-content;
+            position: sticky;
+            top: 16px;
+            transition: all var(--transition);
+        }
+
+        .drawer-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .drawer-btn {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--border-neon-dim);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all var(--transition);
+            letter-spacing: 0.3px;
+        }
+
+        .drawer-btn:hover {
+            background: rgba(0, 240, 255, 0.08);
+            border-color: var(--neon-cyan);
+            color: var(--text-primary);
+        }
+
+        .drawer-btn.active {
+            background: rgba(0, 240, 255, 0.12);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .drawer-btn .icon {
+            margin-right: 8px;
+        }
+
+        .drawer-divider {
+            border: none;
+            border-top: 1px solid var(--border-neon-dim);
+            margin: 16px 0;
+        }
+
+        /* modo oscuro/claro toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        .theme-toggle input[type="checkbox"] {
+            appearance: none;
+            width: 36px;
+            height: 20px;
+            background: var(--border-neon-dim);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: background var(--transition);
+            flex-shrink: 0;
+        }
+
+        .theme-toggle input[type="checkbox"]::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            transition: transform var(--transition);
+        }
+
+        .theme-toggle input[type="checkbox"]:checked {
+            background: var(--neon-cyan);
+        }
+
+        .theme-toggle input[type="checkbox"]:checked::after {
+            transform: translateX(16px);
+        }
+
+        /* ============================================================
+           CONTENIDO PRINCIPAL
+           ============================================================ */
+        .main {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* cabecera */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-neon-dim);
+        }
+
+        .logo h1 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+        }
+
+        .logo span {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            display: block;
+            -webkit-text-fill-color: var(--text-dim);
+            letter-spacing: 4px;
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            padding: 4px 14px;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 40px;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* ============================================================
+           TARJETA DE CONTROL (inputs principales)
+           ============================================================ */
+        .control-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-neon);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            align-items: flex-end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex: 1 1 90px;
+            min-width: 70px;
+        }
+
+        .control-group label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--neon-cyan);
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .control-group input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-neon-dim);
+            padding: 4px 0 6px 0;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            width: 100%;
+            outline: none;
+            transition: border var(--transition);
+        }
+
+        .control-group input:focus {
+            border-bottom-color: var(--neon-cyan);
+        }
+
+        .control-group input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .control-group input[type="number"]::-webkit-inner-spin-button,
+        .control-group input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .btn-neon {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 30px;
+            padding: 6px 18px;
+            color: var(--neon-cyan);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-deep);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-neon-danger {
+            border-color: var(--neon-red);
+            color: var(--neon-red);
+        }
+
+        .btn-neon-danger:hover {
+            background: var(--neon-red);
+            color: var(--bg-deep);
+        }
+
+        /* ============================================================
+           TARJETAS DE AGENTES (estilo anime / moebius)
+           ============================================================ */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .agent-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            box-shadow: var(--shadow-neon);
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--neon-cyan), transparent, var(--neon-magenta));
+            opacity: 0;
+            z-index: -1;
+            transition: opacity var(--transition);
+        }
+
+        .agent-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .agent-card .name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .agent-card .name input {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 600;
+            outline: none;
+            width: 70%;
+            padding: 2px 0;
+        }
+
+        .agent-card .name input:focus {
+            border-bottom: 1px solid var(--neon-cyan);
+        }
+
+        .agent-card .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .agent-card .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 240, 255, 0.03);
+            border-radius: 8px;
+            padding: 4px 0;
+        }
+
+        .agent-card .stat .label {
+            font-size: 0.45rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .agent-card .stat input {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            width: 100%;
+            text-align: center;
+            outline: none;
+            padding: 2px 0;
+        }
+
+        .agent-card .stat input:focus {
+            border-bottom: 1px solid var(--neon-cyan);
+        }
+
+        .agent-card .fitness-display {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border-neon-dim);
+            padding-top: 8px;
+        }
+
+        .agent-card .fitness-display .fit-val {
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+
+        .agent-card .fitness-display .alloc-val {
+            color: var(--neon-green);
+            font-weight: 600;
+        }
+
+        .remove-agent-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: color var(--transition);
+            padding: 0 4px;
+        }
+
+        .remove-agent-btn:hover {
+            color: var(--neon-red);
+        }
+
+        /* ============================================================
+           MÉTRICAS GLOBALES (neon)
+           ============================================================ */
+        .metrics-neon {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .metric-neon {
+            background: var(--bg-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            text-align: center;
+            box-shadow: var(--shadow-neon);
+        }
+
+        .metric-neon .label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--neon-cyan);
+            opacity: 0.6;
+        }
+
+        .metric-neon .value {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 4px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .metric-neon .sub {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .bar-neon {
+            background: rgba(0, 240, 255, 0.08);
+            border-radius: 20px;
+            height: 4px;
+            width: 100%;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+        .bar-neon .fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            transition: width 0.4s ease;
+        }
+
+        /* ============================================================
+           SIMULADOR / GRÁFICO
+           ============================================================ */
+        .sim-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow-neon);
+        }
+
+        .sim-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            align-items: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .sim-controls .group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex: 1 1 80px;
+            min-width: 60px;
+        }
+
+        .sim-controls .group label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+
+        .sim-controls .group input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-neon-dim);
+            padding: 4px 0;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            width: 100%;
+            outline: none;
+        }
+
+        .sim-controls .group input:focus {
+            border-bottom-color: var(--neon-cyan);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+        }
+
+        /* ============================================================
+           AUDITORÍA / ORÁCULO
+           ============================================================ */
+        .audit-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow-neon);
+        }
+
+        .audit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .audit-item {
+            background: rgba(0, 240, 255, 0.03);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-neon-dim);
+        }
+
+        .audit-item .label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .audit-item .value {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .audit-item .ci {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+        }
+
+        /* ============================================================
+           ORÁCULO (koans)
+           ============================================================ */
+        .oracle {
+            margin-top: 12px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-neon-dim);
+            border-radius: var(--radius);
+            background: rgba(0, 240, 255, 0.02);
+            font-style: italic;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            text-align: center;
+            transition: all var(--transition);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .oracle .koan {
+            color: var(--neon-cyan);
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        /* ============================================================
+           EXPORTACIÓN
+           ============================================================ */
+        .export-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 860px) {
+            .drawer {
+                width: 100%;
+                position: static;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 12px 16px;
+            }
+            .drawer-title {
+                display: none;
+            }
+            .drawer-btn {
+                flex: 1 1 auto;
+                width: auto;
+                padding: 6px 14px;
+                font-size: 0.65rem;
+                margin-bottom: 0;
+            }
+            .drawer-divider {
+                display: none;
+            }
+            .theme-toggle {
+                margin-top: 0;
+                margin-left: auto;
+            }
+            .agents-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 500px) {
+            .agents-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .control-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .control-group {
+                flex: 1 1 auto;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .metrics-neon {
+                grid-template-columns: 1fr 1fr;
+            }
+            .audit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ============================================================
+           UTILIDADES
+           ============================================================ */
+        .flex {
+            display: flex;
+        }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-12 {
+            gap: 12px;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .text-dim {
+            color: var(--text-dim);
+        }
+        .text-sm {
+            font-size: 0.7rem;
+        }
+
+        /* toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            border: 1px solid var(--neon-cyan);
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(8px);
+            font-family: var(--font-mono);
+        }
+
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* scroll */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-cyan);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    TOAST
+    ============================================================ -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ============================================================
+    APP
+    ============================================================ -->
+    <div class="app" id="app">
+
+        <!-- DRAWER (panel lateral) -->
+        <aside class="drawer" id="drawer">
+            <div class="drawer-title">▸ Modos</div>
+            <button class="drawer-btn active" data-mode="general"><span class="icon">◈</span> General</button>
+            <button class="drawer-btn" data-mode="cyber"><span class="icon">⚡</span> Ciberseguridad</button>
+            <button class="drawer-btn" data-mode="fiscal"><span class="icon">₿</span> Fiscal</button>
+            <button class="drawer-btn" data-mode="logistics"><span class="icon">⎈</span> Logística</button>
+            <button class="drawer-btn" data-mode="games"><span class="icon">✦</span> Videojuegos</button>
+            <hr class="drawer-divider" />
+            <div class="theme-toggle">
+                <span>🌙</span>
+                <input type="checkbox" id="themeToggle" />
+                <span>☀️</span>
+            </div>
+            <button class="btn-neon" id="resetExampleBtn" style="margin-top:12px;width:100%;font-size:0.6rem;">↺ Ejemplo</button>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- HEADER -->
+            <header class="header">
+                <div class="logo">
+                    <h1>PUSFRE·NEXUS</h1>
+                    <span>▸ SISTEMA · FINITO · RECURSO · ESCASO</span>
+                </div>
+                <span class="badge">v2.0 · RONIN</span>
+            </header>
+
+            <!-- CONTROL PANEL (parámetros globales) -->
+            <div class="control-panel" id="controlPanel">
+                <div class="control-group">
+                    <label for="agentCount">Agentes</label>
+                    <input type="number" id="agentCount" value="5" min="2" max="20" step="1" />
+                </div>
+                <div class="control-group">
+                    <label for="resource">Recurso</label>
+                    <input type="number" id="resource" value="1000" min="0.1" step="10" />
+                </div>
+                <div class="control-group">
+                    <label for="alpha">α (competencia)</label>
+                    <input type="number" id="alpha" value="1.2" min="0.5" max="2.5" step="0.05" />
+                </div>
+                <div class="control-group">
+                    <label for="gamma">γ (deuda)</label>
+                    <input type="number" id="gamma" value="0.4" min="0" max="1" step="0.05" />
+                </div>
+                <div class="control-group">
+                    <label for="sigma">σ (ruido)</label>
+                    <input type="number" id="sigma" value="0.15" min="0" max="0.5" step="0.01" />
+                </div>
+                <div class="control-group" style="flex:0 0 auto;">
+                    <button class="btn-neon" id="addAgentBtn">+ Añadir</button>
+                </div>
+            </div>
+
+            <!-- AGENTES (grid de tarjetas) -->
+            <div id="agentsContainer">
+                <div class="agents-grid" id="agentsGrid">
+                    <!-- renderizado por JS -->
+                </div>
+            </div>
+
+            <!-- MÉTRICAS NEON -->
+            <div class="metrics-neon" id="metricsNeon">
+                <div class="metric-neon">
+                    <div class="label">Coexistencia</div>
+                    <div class="value" id="coexValue">—</div>
+                    <div class="bar-neon"><div class="fill" id="coexBar" style="width:0%;"></div></div>
+                    <div class="sub" id="coexSub">k_min / k</div>
+                </div>
+                <div class="metric-neon">
+                    <div class="label">Biodiversidad</div>
+                    <div class="value" id="bioValue">—</div>
+                    <div class="sub">Entropía normalizada</div>
+                </div>
+                <div class="metric-neon">
+                    <div class="label">Deuda estimada</div>
+                    <div class="value" id="debtValue">—</div>
+                    <div class="sub" id="debtSub">± CI 99%</div>
+                </div>
+                <div class="metric-neon">
+                    <div class="label">Fitness media</div>
+                    <div class="value" id="avgFitValue">—</div>
+                    <div class="sub" id="varFitSub">σ² = —</div>
+                </div>
+            </div>
+
+            <!-- SIMULADOR -->
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="group">
+                        <label for="simSteps">Pasos</label>
+                        <input type="number" id="simSteps" value="50" min="10" max="500" step="5" />
+                    </div>
+                    <div class="group">
+                        <label for="simSeed">Semilla</label>
+                        <input type="number" id="simSeed" value="42" min="0" step="1" />
+                    </div>
+                    <div class="group" style="flex:0 0 auto;">
+                        <button class="btn-neon" id="simulateBtn">▶ Simular</button>
+                    </div>
+                    <div class="group" style="flex:0 0 auto;">
+                        <button class="btn-neon btn-neon-danger" id="clearSimBtn">✕ Limpiar</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="simChart"></canvas>
+                </div>
+            </div>
+
+            <!-- AUDITORÍA + ORÁCULO -->
+            <div class="audit-panel">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                    <span style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:2px;color:var(--neon-cyan);">▸ AUDITORÍA ONTOLÓGICA</span>
+                    <button class="btn-neon" id="auditBtn">Ejecutar</button>
+                </div>
+                <div class="audit-grid" id="auditGrid">
+                    <div class="audit-item">
+                        <div class="label">Muestras</div>
+                        <div class="value" id="auditSamples">—</div>
+                    </div>
+                    <div class="audit-item">
+                        <div class="label">Deuda estimada</div>
+                        <div class="value" id="auditDebt">—</div>
+                        <div class="ci" id="auditCI">IC 99%</div>
+                    </div>
+                    <div class="audit-item">
+                        <div class="label">Tasa contradicción</div>
+                        <div class="value" id="auditRate">—</div>
+                        <div class="ci" id="auditRateCI">—</div>
+                    </div>
+                    <div class="audit-item">
+                        <div class="label">Garantía</div>
+                        <div class="value" id="auditGuarantee">—</div>
+                        <div class="ci" id="auditMargin">—</div>
+                    </div>
+                </div>
+                <!-- ORÁCULO -->
+                <div class="oracle" id="oracle">
+                    <span class="koan">◈ El centro del contexto es el desierto de la atención.</span>
+                </div>
+            </div>
+
+            <!-- EXPORTACIÓN -->
+            <div class="export-bar">
+                <button class="btn-neon" id="exportCSVBtn">⬇ CSV</button>
+                <button class="btn-neon" id="exportRONINBtn">⬇ RONIN</button>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // ============================================================
+        //  KOANS (para el oráculo)
+        // ============================================================
+        const KOANS = [
+            "◈ El centro del contexto es el desierto de la atención.",
+            "◈ Los primeros tokens son nobles. Úsalos con sabiduría.",
+            "◈ Repetir no es fracasar. Es asegurar.",
+            "◈ Un número en prosa es un soldado sin armadura.",
+            "◈ El punto de no retorno no se anuncia. Mídelo.",
+            "◈ Un párrafo es una tribu. No la separes.",
+            "◈ El mapa de retención no juzga. Refleja.",
+            "◈ No construyas sobre terreno que no has sondado.",
+            "◈ El modelo no olvida porque esté roto. Olvida porque es finito.",
+            "◈ La geometría del olvido es la capa cero.",
+            "◈ Dos agentes con el mismo nicho son dos especies en una isla.",
+            "◈ Un bosque con una sola especie es eficiente. Hasta que llega la plaga.",
+            "◈ La deuda ontológica no se ve venir. Produce una degradación crónica.",
+            "◈ El primer paso es nombrarla. El segundo es medirla. El tercero es pagarla.",
+            "◈ La similitud coseno mide de qué hablan. No mide qué dicen.",
+            "◈ El documento que envenenó tu RAG no tiene contenido malicioso. Tiene una fecha de 2024.",
+            "◈ El mejor código es el que no se escribe.",
+            "◈ La guerra es asignación de recursos. La paz también."
+        ];
+
+        // ============================================================
+        //  MOTOR PUSFRE
+        // ============================================================
+        const PUSFRE = {
+            fitness(phi, psi, omega, alpha) {
+                return phi * psi * Math.pow(omega, alpha);
+            },
+            allocation(fitnesses, resource) {
+                const total = fitnesses.reduce((a, b) => a + b, 0);
+                if (total === 0) return fitnesses.map(() => resource / fitnesses.length);
+                return fitnesses.map(f => resource * f / total);
+            },
+            k_min(agents, delta = 0.05) {
+                const products = agents.map(a => a.phi * a.psi);
+                const minP = Math.min(...products);
+                const maxP = Math.max(...products);
+                if (minP <= 0 || delta <= 0 || delta >= 1) return Infinity;
+                const S = agents.length;
+                return S * (maxP / minP) / Math.log(S / delta);
+            },
+            biodiversity(allocation, resource) {
+                const probs = allocation.map(a => a / resource);
+                const H = -probs.reduce((s, p) => s + (p > 0 ? p * Math.log(p) : 0), 0);
+                const maxH = Math.log(probs.length);
+                return maxH > 0 ? H / maxH : 0;
+            },
+            estimateDebt(agents, nSamples = 1060, epsilon = 0.05, delta = 0.01) {
+                const products = agents.map(a => a.phi * a.psi);
+                const mean = products.reduce((s, v) => s + v, 0) / products.length;
+                const variance = products.reduce((s, v) => s + (v - mean) ** 2, 0) / products.length;
+                const p = Math.min(0.5, variance * 2.5);
+                const margin = Math.sqrt(Math.log(2 / delta) / (2 * nSamples));
+                return {
+                    rate: p,
+                    margin: margin,
+                    ci_lower: Math.max(0, p - margin),
+                    ci_upper: Math.min(1, p + margin),
+                    nSamples: nSamples,
+                    guarantee: margin <= epsilon
+                };
+            },
+            simulate(agents, resource, alpha, sigma, steps, seed) {
+                function mulberry32(a) {
+                    return function() {
+                        a |= 0;
+                        a = a + 0x6D2B79F5 | 0;
+                        let t = Math.imul(a ^ a >>> 15, 1 | a);
+                        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+                        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+                    };
+                }
+                const rand = mulberry32(seed || 42);
+                let state = agents.map(a => a.frequency);
+                const history = [state.slice()];
+                const n = agents.length;
+                for (let step = 0; step < steps; step++) {
+                    const fitness = agents.map((a, i) =>
+                        a.phi * a.psi * Math.pow(Math.max(state[i], 1e-12), alpha)
+                    );
+                    const totalF = fitness.reduce((s, v) => s + v, 0);
+                    const target = totalF > 0 ? fitness.map(f => f / totalF) : agents.map(() => 1 / n);
+                    const sigmaEff = sigma / 10;
+                    const proposal = state.map((x, i) => {
+                        const drift = 0.5 * (target[i] - x);
+                        let noise = 0;
+                        for (let j = 0; j < 6; j++) noise += rand();
+                        noise = (noise - 3) * sigmaEff;
+                        return Math.max(0, x + drift + noise);
+                    });
+                    const sum = proposal.reduce((s, v) => s + v, 0);
+                    state = sum > 0 ? proposal.map(v => v / sum) : agents.map(() => 1 / n);
+                    history.push(state.slice());
+                }
+                return history;
+            }
+        };
+
+        // ============================================================
+        //  ESTADO
+        // ============================================================
+        const state = {
+            agents: [],
+            resource: 1000,
+            alpha: 1.2,
+            gamma: 0.4,
+            sigma: 0.15,
+            mode: 'general',
+            simHistory: null,
+            chartInstance: null,
+        };
+
+        // ============================================================
+        //  RENDER
+        // ============================================================
+        function render() {
+            const resource = parseFloat(document.getElementById('resource').value) || 1000;
+            const alpha = parseFloat(document.getElementById('alpha').value) || 1.2;
+            const gamma = parseFloat(document.getElementById('gamma').value) || 0.4;
+            const sigma = parseFloat(document.getElementById('sigma').value) || 0.15;
+
+            state.resource = resource;
+            state.alpha = alpha;
+            state.gamma = gamma;
+            state.sigma = sigma;
+
+            // normalizar frecuencias
+            const totalOmega = state.agents.reduce((s, a) => s + a.omega, 0);
+            if (totalOmega > 0) {
+                state.agents.forEach(a => a.omega = a.omega / totalOmega);
+            } else {
+                state.agents.forEach((a, i) => a.omega = 1 / state.agents.length);
+            }
+
+            const fitnesses = state.agents.map(a => PUSFRE.fitness(a.phi, a.psi, a.omega, alpha));
+            const allocation = PUSFRE.allocation(fitnesses, resource);
+
+            // renderizar tarjetas de agentes
+            const grid = document.getElementById('agentsGrid');
+            let html = '';
+            state.agents.forEach((a, idx) => {
+                const fit = fitnesses[idx];
+                const alloc = allocation[idx];
+                const color = fit > 0.5 ? 'var(--neon-cyan)' : (fit > 0.25 ? 'var(--neon-purple)' : 'var(--neon-red)');
+                html += `
+                            <div class="agent-card" style="border-color:${color}33;">
+                                <div class="name">
+                                    <input type="text" value="${a.name || 'Agente'}" data-idx="${idx}" class="agent-name" />
+                                    <button class="remove-agent-btn" data-idx="${idx}">✕</button>
+                                </div>
+                                <div class="stats">
+                                    <div class="stat"><span class="label">Φ</span><input type="number" min="0" max="1" step="0.01" value="${a.phi}" data-idx="${idx}" data-field="phi" /></div>
+                                    <div class="stat"><span class="label">Ψ</span><input type="number" min="0" max="1" step="0.01" value="${a.psi}" data-idx="${idx}" data-field="psi" /></div>
+                                    <div class="stat"><span class="label">Ω</span><input type="number" min="0" max="1" step="0.01" value="${a.omega}" data-idx="${idx}" data-field="omega" /></div>
+                                </div>
+                                <div class="fitness-display">
+                                    <span>Fitness <span class="fit-val">${fit.toFixed(4)}</span></span>
+                                    <span>Asignación <span class="alloc-val">${alloc.toFixed(2)}</span></span>
+                                </div>
+                            </div>
+                        `;
+            });
+            grid.innerHTML = html;
+
+            // métricas
+            updateMetrics(fitnesses, allocation, resource);
+
+            // guardar estado
+            saveState();
+        }
+
+        // ============================================================
+        //  MÉTRICAS
+        // ============================================================
+        function updateMetrics(fitnesses, allocation, resource) {
+            const agents = state.agents;
+            const S = agents.length;
+
+            const kMin = PUSFRE.k_min(agents);
+            const kActual = S;
+            const coex = kActual >= kMin;
+            const coexPct = kMin > 0 ? Math.min(100, (kActual / kMin) * 100) : 100;
+
+            document.getElementById('coexValue').textContent = coex ? '✅ ESTABLE' : '⚠️ INESTABLE';
+            document.getElementById('coexValue').style.color = coex ? 'var(--neon-green)' : 'var(--neon-red)';
+            document.getElementById('coexBar').style.width = Math.min(100, coexPct) + '%';
+            document.getElementById('coexSub').textContent = `k_min=${kMin.toFixed(2)} · k=${kActual}`;
+
+            const bio = PUSFRE.biodiversity(allocation, resource);
+            document.getElementById('bioValue').textContent = bio.toFixed(3);
+
+            const debt = PUSFRE.estimateDebt(agents);
+            document.getElementById('debtValue').textContent = debt.rate.toFixed(3);
+            document.getElementById('debtSub').textContent =
+                `${debt.ci_lower.toFixed(3)} – ${debt.ci_upper.toFixed(3)} (99%)`;
+
+            const meanFit = fitnesses.reduce((s, v) => s + v, 0) / fitnesses.length;
+            const varFit = fitnesses.reduce((s, v) => s + (v - meanFit) ** 2, 0) / fitnesses.length;
+            document.getElementById('avgFitValue').textContent = meanFit.toFixed(4);
+            document.getElementById('varFitSub').textContent = `σ² = ${varFit.toFixed(6)}`;
+        }
+
+        // ============================================================
+        //  EVENTOS DE TARJETAS (delegación)
+        // ============================================================
+        document.getElementById('agentsGrid').addEventListener('input', function(e) {
+            const target = e.target;
+            if (target.tagName === 'INPUT') {
+                const idx = parseInt(target.dataset.idx);
+                if (isNaN(idx)) return;
+                const field = target.dataset.field;
+                if (field) {
+                    const val = parseFloat(target.value);
+                    if (!isNaN(val) && val >= 0) {
+                        if (field === 'phi') state.agents[idx].phi = Math.min(1, val);
+                        else if (field === 'psi') state.agents[idx].psi = Math.min(1, val);
+                        else if (field === 'omega') state.agents[idx].omega = Math.max(0, val);
+                    }
+                } else if (target.classList.contains('agent-name')) {
+                    state.agents[idx].name = target.value;
+                }
+                render();
+            }
+        });
+
+        document.getElementById('agentsGrid').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-agent-btn')) {
+                const idx = parseInt(e.target.dataset.idx);
+                if (!isNaN(idx) && state.agents.length > 2) {
+                    state.agents.splice(idx, 1);
+                    render();
+                } else {
+                    showToast('Debe haber al menos 2 agentes.');
+                }
+            }
+        });
+
+        // ============================================================
+        //  CONTROLES
+        // ============================================================
+        document.getElementById('addAgentBtn').addEventListener('click', function() {
+            if (state.agents.length >= 20) {
+                showToast('Máximo 20 agentes.');
+                return;
+            }
+            const base = state.agents.length + 1;
+            state.agents.push({
+                name: `Agente ${base}`,
+                phi: Math.round((0.4 + Math.random() * 0.5) * 100) / 100,
+                psi: Math.round((0.5 + Math.random() * 0.4) * 100) / 100,
+                omega: 1 / (state.agents.length + 1)
+            });
+            const total = state.agents.reduce((s, a) => s + a.omega, 0);
+            state.agents.forEach(a => a.omega = a.omega / total);
+            render();
+        });
+
+        document.getElementById('resetExampleBtn').addEventListener('click', loadExample);
+
+        ['resource', 'alpha', 'gamma', 'sigma'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+        });
+
+        document.getElementById('agentCount').addEventListener('change', function() {
+            let n = parseInt(this.value) || 5;
+            n = Math.min(20, Math.max(2, n));
+            this.value = n;
+            while (state.agents.length < n) {
+                const base = state.agents.length + 1;
+                state.agents.push({
+                    name: `Agente ${base}`,
+                    phi: Math.round((0.4 + Math.random() * 0.5) * 100) / 100,
+                    psi: Math.round((0.5 + Math.random() * 0.4) * 100) / 100,
+                    omega: 1 / n
+                });
+            }
+            while (state.agents.length > n) {
+                state.agents.pop();
+            }
+            const total = state.agents.reduce((s, a) => s + a.omega, 0);
+            state.agents.forEach(a => a.omega = a.omega / total);
+            render();
+        });
+
+        // ============================================================
+        //  MODOS (drawer)
+        // ============================================================
+        document.querySelectorAll('.drawer-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.drawer-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                state.mode = this.dataset.mode;
+                showToast(`Modo: ${this.textContent.trim()}`);
+                // Aquí se podrían cargar paneles específicos por modo
+                // (en esta versión solo cambia el oráculo)
+                updateOracle();
+            });
+        });
+
+        // ============================================================
+        //  TEMA OSCURO/CLARO
+        // ============================================================
+        document.getElementById('themeToggle').addEventListener('change', function() {
+            document.body.classList.toggle('light');
+        });
+
+        // ============================================================
+        //  ORÁCULO
+        // ============================================================
+        function updateOracle() {
+            const el = document.getElementById('oracle');
+            const koan = KOANS[Math.floor(Math.random() * KOANS.length)];
+            el.innerHTML = `<span class="koan">${koan}</span>`;
+        }
+
+        // ============================================================
+        //  SIMULADOR
+        // ============================================================
+        let simChart = null;
+
+        document.getElementById('simulateBtn').addEventListener('click', function() {
+            const steps = parseInt(document.getElementById('simSteps').value) || 50;
+            const seed = parseInt(document.getElementById('simSeed').value) || 42;
+            const alpha = state.alpha;
+            const sigma = state.sigma;
+            const agents = state.agents;
+            const resource = state.resource;
+
+            if (agents.length < 2) {
+                showToast('Se necesitan al menos 2 agentes.');
+                return;
+            }
+
+            const history = PUSFRE.simulate(agents, resource, alpha, sigma, steps, seed);
+            state.simHistory = history;
+
+            const ctx = document.getElementById('simChart').getContext('2d');
+            if (simChart) simChart.destroy();
+
+            const colors = ['#00f0ff', '#39ff14', '#b388ff', '#ff4466', '#ff00e6', '#34d399', '#f472b6', '#60a5fa', '#fbbf24',
+                '#f87171'
+            ];
+            const datasets = agents.map((a, i) => ({
+                label: a.name || `A${i+1}`,
+                data: history.map(row => row[i]),
+                borderColor: colors[i % colors.length],
+                backgroundColor: 'transparent',
+                tension: 0.2,
+                pointRadius: 0,
+                borderWidth: 2,
+            }));
+
+            simChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: Array.from({ length: history.length }, (_, i) => i), datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#e8f0fe', boxWidth: 10, padding: 8, font: { size: 9, family: 'JetBrains Mono' } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#8a9bb5', font: { size: 8, family: 'JetBrains Mono' } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#8a9bb5', font: { size: 8, family: 'JetBrains Mono' }, callback: v => v
+                                    .toFixed(2) }
+                        }
+                    },
+                    interaction: { intersect: false, mode: 'index' }
+                }
+            });
+            updateOracle();
+            showToast(`Simulación completada (${steps} pasos).`);
+        });
+
+        document.getElementById('clearSimBtn').addEventListener('click', function() {
+            if (simChart) { simChart.destroy();
+                simChart = null; }
+            state.simHistory = null;
+            const ctx = document.getElementById('simChart').getContext('2d');
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            showToast('Gráfico limpiado.');
+        });
+
+        // ============================================================
+        //  AUDITORÍA
+        // ============================================================
+        document.getElementById('auditBtn').addEventListener('click', function() {
+            const agents = state.agents;
+            if (agents.length < 2) {
+                showToast('Se necesitan al menos 2 agentes.');
+                return;
+            }
+            const debt = PUSFRE.estimateDebt(agents);
+            document.getElementById('auditSamples').textContent = debt.nSamples;
+            document.getElementById('auditDebt').textContent = debt.rate.toFixed(4);
+            document.getElementById('auditCI').textContent = `IC 99%: [${debt.ci_lower.toFixed(4)}, ${debt.ci_upper.toFixed(4)}]`;
+            document.getElementById('auditRate').textContent = (debt.rate * 100).toFixed(2) + '%';
+            document.getElementById('auditRateCI').textContent =
+                `${(debt.ci_lower*100).toFixed(2)}% – ${(debt.ci_upper*100).toFixed(2)}%`;
+            document.getElementById('auditGuarantee').textContent = debt.guarantee ? '✅ Cumple' : '⚠️ No cumple';
+            document.getElementById('auditMargin').textContent = `Margen: ±${(debt.margin*100).toFixed(2)}%`;
+            updateOracle();
+            showToast('Auditoría completada.');
+        });
+
+        // ============================================================
+        //  EXPORTACIÓN
+        // ============================================================
+        document.getElementById('exportCSVBtn').addEventListener('click', function() {
+            const agents = state.agents;
+            if (!agents.length) { showToast('No hay agentes.'); return; }
+            let csv = 'Nombre,Phi,Psi,Omega\n';
+            agents.forEach(a => {
+                csv += `${a.name || 'Agente'},${a.phi.toFixed(4)},${a.psi.toFixed(4)},${a.omega.toFixed(4)}\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'pusfre_agents.csv';
+            link.click();
+            showToast('CSV descargado.');
+        });
+
+        document.getElementById('exportRONINBtn').addEventListener('click', function() {
+            const agents = state.agents;
+            if (!agents.length) { showToast('No hay agentes.'); return; }
+            const resource = state.resource;
+            const alpha = state.alpha;
+            const gamma = state.gamma;
+            const sigma = state.sigma;
+            let code = `system SistemaPUSFRE = {\n`;
+            code += `    parts: ${agents.length},\n`;
+            code += `    resource: ${resource},\n`;
+            code += `    agents: [\n`;
+            agents.forEach(a => {
+                code +=
+                    `        { name: "${a.name || 'Agente'}", phi: ${a.phi.toFixed(4)}, psi: ${a.psi.toFixed(4)}, frequency: ${a.omega.toFixed(4)} },\n`;
+            });
+            code += `    ],\n`;
+            code += `    params: { alpha: ${alpha}, gamma: ${gamma}, sigma: ${sigma} }\n`;
+            code += `}\n`;
+            const blob = new Blob([code], { type: 'text/plain;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'sistema.ronin';
+            link.click();
+            showToast('Código RONIN descargado.');
+        });
+
+        // ============================================================
+        //  PERSISTENCIA
+        // ============================================================
+        function saveState() {
+            try {
+                const data = {
+                    agents: state.agents,
+                    resource: state.resource,
+                    alpha: state.alpha,
+                    gamma: state.gamma,
+                    sigma: state.sigma,
+                };
+                localStorage.setItem('pusfre_nexus', JSON.stringify(data));
+            } catch (e) { /* ignorar */ }
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem('pusfre_nexus');
+                if (!raw) return false;
+                const data = JSON.parse(raw);
+                if (data.agents && data.agents.length >= 2) {
+                    state.agents = data.agents;
+                    state.resource = data.resource || 1000;
+                    state.alpha = data.alpha || 1.2;
+                    state.gamma = data.gamma || 0.4;
+                    state.sigma = data.sigma || 0.15;
+                    document.getElementById('resource').value = state.resource;
+                    document.getElementById('alpha').value = state.alpha;
+                    document.getElementById('gamma').value = state.gamma;
+                    document.getElementById('sigma').value = state.sigma;
+                    document.getElementById('agentCount').value = state.agents.length;
+                    return true;
+                }
+            } catch (e) { /* ignorar */ }
+            return false;
+        }
+
+        function loadExample() {
+            state.agents = [
+                { name: 'Alpha', phi: 0.9, psi: 0.8, omega: 0.30 },
+                { name: 'Beta', phi: 0.7, psi: 0.9, omega: 0.25 },
+                { name: 'Gamma', phi: 0.5, psi: 0.7, omega: 0.20 },
+                { name: 'Delta', phi: 0.8, psi: 0.6, omega: 0.15 },
+                { name: 'Epsilon', phi: 0.6, psi: 0.5, omega: 0.10 },
+            ];
+            state.resource = 1000;
+            state.alpha = 1.2;
+            state.gamma = 0.4;
+            state.sigma = 0.15;
+            document.getElementById('resource').value = state.resource;
+            document.getElementById('alpha').value = state.alpha;
+            document.getElementById('gamma').value = state.gamma;
+            document.getElementById('sigma').value = state.sigma;
+            document.getElementById('agentCount').value = state.agents.length;
+            if (simChart) { simChart.destroy();
+                simChart = null; }
+            const ctx = document.getElementById('simChart').getContext('2d');
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            state.simHistory = null;
+            render();
+            updateOracle();
+            showToast('Ejemplo cargado.');
+        }
+
+        // ============================================================
+        //  TOAST
+        // ============================================================
+        function showToast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(el._timer);
+            el._timer = setTimeout(() => el.classList.remove('show'), 3000);
+        }
+
+        // ============================================================
+        //  INICIO
+        // ============================================================
+        (function init() {
+            if (!loadState()) {
+                loadExample();
+            } else {
+                render();
+                updateOracle();
+            }
+            // actualizar oráculo cada 30 segundos
+            setInterval(updateOracle, 30000);
+        })();
+
+        // redibujar gráfico al redimensionar
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (simChart) simChart.resize();
+            }, 200);
+        });
+    </script>
+</body>
+</html>
