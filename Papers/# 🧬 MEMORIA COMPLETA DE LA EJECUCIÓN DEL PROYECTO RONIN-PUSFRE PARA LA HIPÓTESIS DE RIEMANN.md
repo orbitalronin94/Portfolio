@@ -5,7 +5,7 @@
 ### Edición Definitiva — Versión Formalizada y Validada
 
 **Versión:** 4.0 — Edición Formalizada y Validada  
-**DOI:** 10.5281/zenodo.13102026 (registrado en Zenodo)  
+**DOI:** 10.5281/ronin)  
 **Fecha de publicación:** 9 de septiembre de 2026  
 **Clasificación:** TRATADO COMPLETO / DEMOSTRACIÓN FORMAL / CASO DE ESTUDIO DEL CORPUS RONIN / MATEMÁTICAS  
 
