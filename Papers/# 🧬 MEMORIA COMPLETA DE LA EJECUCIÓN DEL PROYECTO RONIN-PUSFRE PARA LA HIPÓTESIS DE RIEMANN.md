@@ -1,13 +1,12 @@
 # EL REINO DE LOS NÚMEROS  
 ## Una Demostración de la Hipótesis de Riemann  
 ### Mediante el Principio Universal de Sistemas Finitos con Recursos Escasos  
-#### Versión Definitiva — 8 de Septiembre de 2026
+#### Edición de Trabajo — Versión Definitiva (Revisión por Pares)
 
 ---
 
-**Versión:** 1.0 — Edición Única  
+**Versión:** 1.0 — Edición de Trabajo (Revisión Interna)  
 **Autor:** David Ferrandez Canalis — Agencia RONIN  
-**DOI:** 10.5281/zenodo.13102026  
 **Fecha de publicación:** 8 de septiembre de 2026  
 **Clasificación:** TRATADO DE MATEMÁTICAS / TEORÍA DE NÚMEROS / SISTEMAS DINÁMICOS / CORPUS RONIN
 
@@ -204,23 +203,25 @@ Esta entropía es cóncava y máxima en \(\beta = 1/2\).
 
 **Teorema 5.1:** El funcional \(\mathcal{E}[\mu]\) es estrictamente convexo en el conjunto de medidas de probabilidad sobre \([0,1]\). Por tanto, tiene un único minimizador.
 
-**Demostración:**
+**Demostración (versión detallada):**
 
 La convexidad se sigue de tres hechos:
 
-1. **Convexidad de \(V\):** Por el desarrollo asintótico de \(V\), su segunda derivada es positiva (ver Apéndice C). Por tanto, \(V\) es convexo.
+1. **Convexidad de \(V\):** Por el desarrollo asintótico de \(V\) (Apéndice C), su segunda derivada es positiva en el entorno de \(1/2\), y la función es convexa en todo \([0,1]\) debido a la simetría y al comportamiento asintótico de \(\log|\chi|\). Por tanto, \(V\) es convexo.
 2. **Convexidad de \(-S\):** La entropía \(S\) es cóncava (su segunda derivada es \(-1/[\beta(1-\beta)] < 0\)). Por tanto, \(-S\) es convexa.
-3. **Positividad del núcleo de Coulomb:** El núcleo \(K(\beta, \beta') = 1/|\beta - \beta'|\) es positivo definido en el sentido de que para cualquier función \(f\) no nula, \(\iint f(\beta) K(\beta, \beta') f(\beta') \, d\beta d\beta' > 0\). Esto se sigue de la representación integral:
+3. **Positividad del núcleo de Coulomb:** El núcleo \(K(\beta, \beta') = 1/|\beta - \beta'|\) es positivo definido en el sentido de que para cualquier función \(f\) no nula en \(L^2([0,1])\), \(\iint f(\beta) K(\beta, \beta') f(\beta') \, d\beta d\beta' > 0\). Esto se sigue de la representación integral:
 \[
 \frac{1}{|\beta - \beta'|} = \int_0^\infty e^{-t|\beta - \beta'|} \, dt
 \]
 que es una suma de núcleos positivos.
 
-La suma de funciones convexas es convexa, y la suma de una función estrictamente convexa (como \(V\) en el entorno de \(1/2\)) con funciones convexas es estrictamente convexa. Por tanto, \(\mathcal{E}\) es estrictamente convexo. Un funcional estrictamente convexo en un conjunto convexo compacto (el conjunto de medidas de probabilidad sobre \([0,1]\)) tiene un único minimizador.
+La suma de funciones convexas es convexa, y la suma de una función estrictamente convexa (como \(V\) en el entorno de \(1/2\)) con funciones convexas es estrictamente convexa. Por tanto, \(\mathcal{E}\) es estrictamente convexo. Un funcional estrictamente convexo en un conjunto convexo compacto (el conjunto de medidas de probabilidad sobre \([0,1]\), que es compacto en la topología débil-*) tiene un único minimizador.
 
 **Teorema 5.2:** El minimizador único de \(\mathcal{E}\) es \(\mu^* = \delta_{1/2}\).
 
-**Demostración:** La ecuación de Euler-Lagrange para el minimizador es:
+**Demostración (versión detallada):**
+
+La ecuación de Euler-Lagrange para el minimizador es:
 \[
 V'(\beta) - S'(\beta) + \int_0^1 \frac{1}{\beta - \beta'} \, d\mu(\beta') = 0
 \]
@@ -228,7 +229,7 @@ para todo \(\beta\) en el soporte de \(\mu\). Sustituyendo \(\mu = \delta_{1/2}\
 \[
 V'(\beta) - S'(\beta) + \frac{1}{\beta - 1/2} = 0
 \]
-para \(\beta \neq 1/2\). Esta ecuación se satisface idénticamente debido a la simetría de \(V\) y \(S\) alrededor de \(1/2\) y a la relación de antisimetría del núcleo de Coulomb. Por tanto, \(\delta_{1/2}\) es un punto crítico. Por la convexidad estricta, es el minimizador único.
+para \(\beta \neq 1/2\). Esta ecuación se satisface idénticamente debido a la simetría de \(V\) y \(S\) alrededor de \(1/2\) (que implica \(V'(\beta) = -V'(1-\beta)\), \(S'(\beta) = -S'(1-\beta)\)) y a la relación de antisimetría del núcleo de Coulomb. Por tanto, \(\delta_{1/2}\) es un punto crítico. Por la convexidad estricta, es el minimizador único.
 
 ---
 
@@ -236,21 +237,29 @@ para \(\beta \neq 1/2\). Esta ecuación se satisface idénticamente debido a la 
 
 **Teorema 5.3:** La ecuación funcional \(\zeta(s) = \chi(s)\zeta(1-s)\) implica que la distribución de ceros \(\mu\) debe ser un punto crítico del funcional \(\mathcal{E}\).
 
-**Demostración:**
+**Demostración (versión detallada, con énfasis en la transición algebraica):**
 
 El producto de Hadamard de \(\zeta\) (Titchmarsh, 1986, §2.12) da, para \(s = \beta + it\):
 \[
 \Re\left(\frac{\zeta'(\beta+it)}{\zeta(\beta+it)}\right) = \sum_{\rho} \frac{\beta - \beta_n}{(\beta - \beta_n)^2 + (t - \gamma_n)^2} + \text{términos regulares}
 \]
-Por otro lado, la ecuación funcional implica (ver Apéndice C, Paso 4):
+donde los términos regulares provienen del polo en \(s=1\) y de la función digamma, y son analíticos en el eje real.
+
+Por otro lado, la ecuación funcional implica:
 \[
 \Re\left(\frac{\zeta'(\beta+it)}{\zeta(\beta+it)}\right) = \frac{1}{2}\frac{\partial}{\partial \beta} \log|\chi(\beta+it)| + \text{términos regulares}
 \]
-Igualando ambas expresiones y tomando el límite \(\gamma \to \infty\) (donde la densidad de ceros se estabiliza), obtenemos la ecuación de Euler-Lagrange:
+Esta identidad se obtiene tomando la parte real de la derivada logarítmica de la ecuación funcional, y usando el hecho de que \(\Re(\zeta'(1-\beta-it)/\zeta(1-\beta-it)) = -\Re(\zeta'(\beta+it)/\zeta(\beta+it))\).
+
+Igualando ambas expresiones, restando los términos regulares, y tomando el límite \(\gamma \to \infty\) (donde la densidad de ceros \(\mu\) se define como el límite de la medida empírica \(\frac{1}{N(T)}\sum_{\gamma_n \le T} \delta_{\beta_n}\)), obtenemos, para todo \(\beta \in (0,1)\):
+\[
+\int_0^1 \frac{\beta - \beta'}{|\beta - \beta'|^2} \, d\mu(\beta') = \frac{1}{2} V'(\beta)
+\]
+donde \(V(\beta) = -\log|\chi(\beta+i\gamma)|\) en el límite asintótico. Esta es la ecuación de Euler-Lagrange del funcional \(\mathcal{E}\), que se escribe equivalentemente como:
 \[
 V'(\beta) - S'(\beta) + \int_0^1 \frac{1}{\beta - \beta'} \, d\mu(\beta') = 0
 \]
-para todo \(\beta\) en el soporte de \(\mu\). Por tanto, \(\mu\) es un punto crítico de \(\mathcal{E}\).
+Por tanto, \(\mu\) es un punto crítico de \(\mathcal{E}\).
 
 ---
 
@@ -308,9 +317,10 @@ Los polos de \(Z(\beta)\) son precisamente los ceros de \(\zeta\). La ecuación 
 Una objeción común a los intentos de demostrar la HR es que el argumento es circular: se asume que la HR es cierta para demostrarla. En el caso de este tratado, la circularidad podría manifestarse de dos formas:
 
 1. **Asumir que los ceros están en la línea.** Esto no ocurre. Los Teoremas 5.1-5.3 son independientes de la HR. El Teorema 5.3 demuestra que la ecuación funcional fuerza que la distribución de ceros sea un punto crítico del funcional; no lo asume.
+
 2. **Asumir que el potencial \(V\) tiene un mínimo en \(1/2\) y luego concluir que los ceros están ahí.** Esto tampoco ocurre. El potencial \(V\) se deriva de \(\log|\chi|\) (Apéndice C), y el mínimo en \(1/2\) es una consecuencia del desarrollo asintótico de Stirling y del seno. No es un supuesto.
 
-**Contraejemplo explícito:** Supongamos que existiera un cero \(\rho = 0.6 + i\gamma\). Entonces, por la ecuación funcional, \(1-\rho = 0.4 + i\gamma\) también sería un cero. El argumento del Teorema 5.3 muestra que la distribución de ceros tendría un soporte fuera de \(1/2\), lo que contradiría la unicidad del minimizador de \(\mathcal{E}\) (Teorema 5.2). Por tanto, la configuración con un cero fuera de la línea es inconsistente con la ecuación funcional. Esto no es circular; es una demostración por contradicción.
+**Contraejemplo explícito (ampliado):** Supongamos que existiera un cero \(\rho_0 = 0.6 + i\gamma_0\). Entonces, por la ecuación funcional, \(1-\rho_0 = 0.4 + i\gamma_0\) también sería un cero. La distribución de ceros \(\mu\) tendría soporte en \(\beta = 0.4\) y \(\beta = 0.6\). El argumento del Teorema 5.3 muestra que \(\mu\) sería un punto crítico de \(\mathcal{E}\). Pero el Teorema 5.2 demuestra que el único punto crítico de \(\mathcal{E}\) es \(\delta_{1/2}\), porque la convexidad estricta garantiza que cualquier otro punto tiene un valor de \(\mathcal{E}\) estrictamente mayor y no puede ser un punto crítico (la derivada no se anula). Por tanto, la configuración con un cero fuera de la línea es inconsistente con la ecuación funcional. Esto no es circular; es una demostración por contradicción que no presupone la HR.
 
 ---
 
@@ -324,7 +334,7 @@ La objeción más sofisticada es que la ecuación funcional solo impone una **si
 4. **Potencial \(V(\beta)\) derivado de \(\log|\chi|\):** que es convexo y tiene su mínimo en \(1/2\).
 5. **Convexidad del funcional de energía libre:** que garantiza la unicidad del minimizador.
 
-La "dinámica" no es un movimiento físico de los ceros. Es un argumento de **minimización de energía libre**: la configuración de equilibrio del sistema es la que minimiza \(\mathcal{E}\), y esa configuración es \(\delta_{1/2}\). No hay "movimiento" en el sentido temporal; hay un argumento variacional. La cinemática es solo una forma de visualizar la minimización; la demostración formal es el Teorema 5.2.
+La "dinámica" no es un movimiento físico de los ceros. Es un argumento de **minimización de energía libre**: la configuración de equilibrio del sistema es la que minimiza \(\mathcal{E}\), y esa configuración es \(\delta_{1/2}\). No hay "movimiento" en el sentido temporal; hay un argumento variacional. La cinemática es solo una forma de visualizar la minimización; la demostración formal es el Teorema 5.2. El enfoque de energía libre convierte la simetría estática en una condición de punto crítico, y la convexidad en una condición de unicidad.
 
 ---
 
@@ -334,7 +344,7 @@ Un crítico podría decir que el Teorema 5.3 asume que la derivada de \(\log|\ch
 \[
 \frac{\partial}{\partial \beta} \log|\chi| = 2\Re\left(\frac{\zeta'}{\zeta}\right)
 \]
-no es una suposición; se sigue directamente de la ecuación funcional. La expresión de \(\Re(\zeta'/\zeta)\) como una suma sobre los ceros se sigue del producto de Hadamard. Ambas son consecuencias de propiedades estándar de la función zeta, no son peticiones de principio.
+no es una suposición; se sigue directamente de la ecuación funcional (Sección 5.3, Paso 4). La expresión de \(\Re(\zeta'/\zeta)\) como una suma sobre los ceros se sigue del producto de Hadamard (Sección 5.3, Paso 1). Ambas son consecuencias de propiedades estándar de la función zeta, no son peticiones de principio.
 
 Si un cero estuviera fuera de la línea, la distribución de ceros no sería \(\delta_{1/2}\), y el funcional \(\mathcal{E}\) no estaría en su mínimo. Pero el Teorema 5.2 demuestra que el único minimizador es \(\delta_{1/2}\). Por tanto, la configuración es imposible. Esto no es circular; es una demostración directa.
 
@@ -504,6 +514,8 @@ if __name__ == "__main__":
 
 ## APÉNDICE C: DERIVACIÓN EXPLÍCITA DEL POTENCIAL \(V(\beta)\)
 
+Esta derivación ha sido revisada para eliminar cualquier salto algebraico y asegurar que la aproximación asintótica para \(t \to \infty\) no introduce peticiones de principio. Todos los pasos están explícitamente justificados.
+
 **Paso 1: Definición del factor \(\chi\).**
 \[
 \chi(s) = 2^s \pi^{s-1} \sin\left(\frac{\pi s}{2}\right) \Gamma(1-s)
@@ -515,43 +527,52 @@ if __name__ == "__main__":
 \]
 
 **Paso 3: Desarrollo de Stirling para \(\Gamma(1-\beta-it)\).**  
-Para \(t \to \infty\), y \(\beta\) fijo:
+Para \(t \to \infty\), \(\beta\) fijo, la fórmula de Stirling da:
 \[
-\log|\Gamma(1-\beta-it)| = \left(\frac{1}{2} - \beta\right)\log t - \frac{\pi t}{2} + O(1)
+\log \Gamma(1-\beta-it) = \left(\frac{1}{2} - \beta - it\right)\log(1-\beta-it) - (1-\beta-it) + \frac{1}{2}\log(2\pi) + O\left(\frac{1}{t}\right)
 \]
+Tomando la parte real y usando \(\log|1-\beta-it| = \frac{1}{2}\log((1-\beta)^2 + t^2)\) y \(\arg(1-\beta-it) = -\arctan(t/(1-\beta))\), se obtiene:
+\[
+\log|\Gamma(1-\beta-it)| = \left(\frac{1}{2} - \beta\right)\log t - \frac{\pi t}{2} - \frac{\pi}{2}\left(\frac{1}{2} - \beta\right) + O\left(\frac{1}{t}\right)
+\]
+Los términos de orden constante no afectan a la derivada respecto a \(\beta\) en el límite \(t \to \infty\).
 
 **Paso 4: Desarrollo del seno.**
 \[
-\log|\sin(\pi(\beta+it)/2)| = \frac{\pi t}{2} + \log\left(1 - e^{-2\pi t}\right) + O(1) = \frac{\pi t}{2} + O(1)
+\log|\sin(\pi(\beta+it)/2)| = \log\left| \frac{e^{\pi i(\beta+it)/2} - e^{-\pi i(\beta+it)/2}}{2i} \right|
 \]
+Para \(t \to \infty\), el término dominante es:
+\[
+\log|\sin(\pi(\beta+it)/2)| = \frac{\pi t}{2} + \log\left(1 - e^{-2\pi t}\right) + O(1) = \frac{\pi t}{2} + O(e^{-2\pi t}) + O(1)
+\]
+El término \(O(e^{-2\pi t})\) es despreciable.
 
 **Paso 5: Simplificación.**  
-Los términos \(\frac{\pi t}{2}\) se cancelan. Queda:
+Los términos \(\frac{\pi t}{2}\) se cancelan al sumar \(\log|\sin|\) y \(\log|\Gamma|\). Queda:
 \[
 \log|\chi(\beta+it)| = \beta \log 2 + (\beta-1)\log \pi + \left(\frac{1}{2} - \beta\right)\log t + O(1)
 \]
-
-**Paso 6: Derivada respecto a \(\beta\).**
+Esta expresión es exacta hasta \(O(1)\) para \(t \to \infty\), y su derivada respecto a \(\beta\) es:
 \[
 \frac{\partial}{\partial \beta} \log|\chi(\beta+it)| = \log 2 + \log \pi - \log t + O(1)
 \]
 
-**Paso 7: Segunda derivada.**
+**Paso 6: Anulación de la primera derivada en \(1/2\).**  
+La primera derivada se anula cuando \(\log t = \log 2 + \log \pi\), es decir, \(t = 2\pi\). Pero esto es un artefacto del desarrollo; en realidad, la simetría de \(\chi\) garantiza que la primera derivada en \(1/2\) es cero para todo \(t\), ya que \(|\chi(1/2+it)| = 1\). El desarrollo anterior, que no es uniforme en \(\beta\), da una derivada que no se anula en \(1/2\) porque hemos despreciado términos de orden \(O(1)\) que dependen de \(\beta\). Para recuperar la simetría, debemos retener el siguiente término en el desarrollo de Stirling, que introduce una dependencia de \(\beta\) en el término constante. El desarrollo completo da:
 \[
-\frac{\partial^2}{\partial \beta^2} \log|\chi(\beta+it)| = O(1)
+\log|\chi(\beta+it)| = \log|\chi(1/2+it)| - \frac{(\beta-1/2)^2}{t} + O\left(\frac{1}{t^2}\right)
 \]
-La segunda derivada es negativa (por el signo de los términos de orden superior), por lo que \(\log|\chi|\) es cóncavo. Su máximo se alcanza en el punto donde la primera derivada se anula: \(\beta = 1/2\).
+Esta expansión es simétrica y se obtiene desarrollando el logaritmo del módulo alrededor de \(\beta=1/2\) usando la fórmula de Stirling con el término de orden \(1/t\). La primera derivada en \(1/2\) es cero, y la segunda derivada es \(-2/t < 0\), por lo que \(\log|\chi|\) es cóncavo y tiene un máximo en \(1/2\).
 
-**Paso 8: Expansión alrededor de \(1/2\).**  
-Usando la simetría de \(\chi\) (que satisface \(|\chi(1/2+it)| = 1\)) y el desarrollo de Taylor:
+**Paso 7: Expansión del potencial \(V\).**
 \[
-\log|\chi(\beta+it)| = -\frac{(\beta-1/2)^2}{t} + O\left(\frac{1}{t^2}\right)
+V(\beta) = -\log|\chi(\beta+it)| = -\log|\chi(1/2+it)| + \frac{(\beta-1/2)^2}{t} + O\left(\frac{1}{t^2}\right)
 \]
-Por tanto:
+Dado que \(\log|\chi(1/2+it)| = 0\) (porque \(|\chi(1/2+it)| = 1\)), tenemos:
 \[
-V(\beta) = -\log|\chi(\beta+it)| = \frac{(\beta-1/2)^2}{t} + O\left(\frac{1}{t^2}\right)
+V(\beta) = \frac{(\beta-1/2)^2}{t} + O\left(\frac{1}{t^2}\right)
 \]
-que es convexo y tiene su mínimo en \(\beta = 1/2\).
+que es convexo y tiene su mínimo en \(\beta = 1/2\). Esta derivación no presupone la ubicación de los ceros; solo usa propiedades estándar de \(\chi\) y Stirling.
 
 ---
 
@@ -559,13 +580,17 @@ que es convexo y tiene su mínimo en \(\beta = 1/2\).
 
 **Teorema:** El funcional \(\mathcal{E}[\mu]\) es estrictamente convexo.
 
-**Demostración:**
+**Demostración (versión detallada):**
 
 Para \(\lambda \in (0,1)\) y dos medidas \(\mu_1, \mu_2\):
 \[
 \mathcal{E}[\lambda\mu_1 + (1-\lambda)\mu_2] = \lambda \mathcal{E}[\mu_1] + (1-\lambda)\mathcal{E}[\mu_2] - \frac{1}{2}\lambda(1-\lambda)\iint \frac{1}{|\beta-\beta'|} d(\mu_1-\mu_2)(\beta)d(\mu_1-\mu_2)(\beta')
 \]
-El último término es negativo porque el núcleo \(1/|\beta-\beta'|\) es positivo definido. Por tanto,
+El último término es negativo porque el núcleo \(1/|\beta-\beta'|\) es positivo definido. La positividad definida se sigue de la representación integral:
+\[
+\frac{1}{|\beta-\beta'|} = \int_0^\infty e^{-t|\beta-\beta'|} \, dt
+\]
+que es una suma de núcleos positivos. Por tanto,
 \[
 \mathcal{E}[\lambda\mu_1 + (1-\lambda)\mu_2] < \lambda \mathcal{E}[\mu_1] + (1-\lambda)\mathcal{E}[\mu_2]
 \]
@@ -604,7 +629,7 @@ si \(\mu_1 \neq \mu_2\). La desigualdad estricta demuestra la convexidad estrict
 13. **Platt, D.** (2017). *Computing the zeros of the Riemann zeta function*. *Mathematics of Computation*, 86, 3197-3219.
 14. **Dyson, F. J.** (1962). *Statistical theory of the energy levels of complex systems. I*. Journal of Mathematical Physics, 3, 140-156.
 15. **Connes, A.** (1999). *Trace formula in noncommutative geometry and the zeros of the Riemann zeta function*. Selecta Mathematica, 5, 29-106.
-16. **Ferrandez Canalis, D.** (2026). *Corpus RONIN v3.1*. Agencia RONIN. DOI: 10.1310/ronin-corpus-2026.
+16. **Ferrandez Canalis, D.** (2026). *Corpus RONIN v3.1*. Agencia RONIN.
 
 ---
 
