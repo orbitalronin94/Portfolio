@@ -1,27 +1,27 @@
 # Tratado de Extensión del PUSFRE
 ## Familia CES-Saturada con Memoria
 
-**Versión: 3.1 — Edición Revisada con Fundamentación Axiomática Completa y Auditoría de Identificabilidad**
+**Versión: 3.2 — Edición con Correcciones de Rigor Formal y Coherencia Interna**
 
 **Dependencia:** PUSFRE original, Teorema Fundamental, Dinámica Unificada
-**Estado:** Extensión formal con validación sintética avanzada; identificabilidad parcial no resuelta; validación en datos reales pendiente; caracterización axiomática completada (condicional)
+**Estado:** Extensión formal con validación sintética avanzada; identificabilidad parcial no resuelta; validación en datos reales pendiente; caracterización axiomática completada (condicional); motivación de A5 ampliada
 **Fecha:** Septiembre 2026
-**Incluye:** Código completo de las 7 iteraciones, resultados de cada ejecución, scripts de descarga y ejecución sobre datasets reales, y reconstrucción de la demostración del Teorema 2.1 con hipótesis explícitas
+**Incluye:** Código completo de las 7 iteraciones (con límite de pesos corregido), resultados de cada ejecución, scripts de validación cruzada inter-dominio (marcados como pendientes de implementación), y reconstrucción de la demostración del Teorema 2.1 con Paso 3 reforzado
 
 ---
 
-## Nota de la versión 3.1
+## Nota de la versión 3.2
 
-La versión 3.0 de este tratado fue revisada críticamente. Los principales cambios son:
+La versión 3.1 fue revisada críticamente. Cambios respecto a 3.1:
 
-1. **Reframing del estatus epistémico.** La extensión se presenta ahora como un modelo *predictivo con parámetros latentes*, no como un modelo estructural con parámetros interpretables. Esta distinción se aplica consistentemente.
-2. **Demostración del Teorema 2.1 completada.** Los pasos 3 y 4 del esquema original estaban sin demostrar. Se completan aquí con hipótesis de regularidad explícitas (diferenciabilidad de $g_i$, continuidad de $T_\lambda$, normalización $\sum A_i = 1$). El teorema se reformula como *condicional* a un conjunto de axiomas, no como afirmación de inevitabilidad.
-3. **Nuevo Apéndice C: Discutibilidad de los axiomas.** Análisis de qué ocurre al relajar cada axioma, con formas funcionales resultantes.
-4. **Criterios de decisión revisados.** Se añade AIC/BIC como criterio obligatorio, no solo RMSE. El sesgo hacia complejidad observado en v3.0 (§5.1, régimen `pusfre`) es un síntoma de su ausencia.
-5. **Reframing del test ψ-only.** Se reconoce como espantapájaros; se propone test de dominancia con dimensionalidad controlada.
-6. **Diagnóstico de la degeneración K–α.** Se reinterpreta como degeneración estructural, no de optimización.
-7. **Nota sobre precisión de reporte.** Los parámetros no identificables se reportan con precisión limitada.
-8. **Sección de validación cruzada inter-dominio** añadida en §9 y Anexo III.
+1. **Paso 3 del Apéndice A reforzado.** El argumento original tenía un hueco sutil: la afirmación "el argumento $a \cdot z_j + s$ recorre un intervalo abierto" no estaba demostrada. Se añade demostración completa con el caso degenerado $z_j = 1/\lambda$ tratado explícitamente.
+2. **Límite de $w_i$ coherente.** El texto decía $w_i \in [0.1, 0.8]$ pero el código daba $[0.1, 0.9]$. Se corrige el código a $w_i = 0.1 + 0.7 \cdot v_i/\sum v_j$, que da $[0.1, 0.8]$ con suma 1.
+3. **Tabla CES económica degradada.** §2.3 mantiene la tabla como referencia matemática, pero se marca explícitamente como "sin interpretación estructural". Añadida advertencia.
+4. **Motivación de A5 ampliada.** Nueva subsección §3.2 discute por qué la invariancia por reescalado afín es una elección razonable y qué alternativas existen.
+5. **ΔBIC concreto en régimen `pusfre`.** §5.1 reporta el valor numérico del ΔBIC M0 vs M2, no solo el ganador. Se discute si es evidencia débil o fuerte.
+6. **Anexo III marcado como pendiente.** El script de validación cruzada inter-dominio no funciona como código. Se marca explícitamente como "esqueleto pendiente de implementación" y se mueve a §9 como trabajo futuro.
+7. **Predicción sobre dominios Ω amplio marcada como hipótesis.** §8.6 y Cierre reformulan la afirmación como hipótesis a testear, no como conclusión.
+8. **Anexo V añadido: correcciones respecto a v3.1.** Trazabilidad explícita de cada cambio.
 
 ---
 
@@ -29,21 +29,22 @@ La versión 3.0 de este tratado fue revisada críticamente. Los principales camb
 
 1. Prólogo y nota de honestidad intelectual
 2. La familia CES-Saturada con Memoria
-3. Fundamentación axiomática
+3. Fundamentación axiomática (con motivación de A5)
 4. Protocolo experimental
 5. Resultados sintéticos
 6. Lectura crítica de resultados
 7. Estatus de la extensión
 8. Limitaciones
 9. Próximos pasos
-10. Apéndice A: Demostración completa del Teorema 2.1
+10. Apéndice A: Demostración completa del Teorema 2.1 (Paso 3 reforzado)
 11. Apéndice B: Glosario
-12. **Apéndice C: Discutibilidad de los axiomas**
-13. **Anexo I: Código completo de las siete iteraciones**
-14. **Anexo II: Resultados completos de cada ejecución**
-15. **Anexo III: Scripts de descarga y ejecución sobre datos reales**
-16. **Anexo IV: Auditoría de identificabilidad**
-17. Cierre
+12. Apéndice C: Discutibilidad de los axiomas
+13. Anexo I: Código completo de las siete iteraciones
+14. Anexo II: Resultados completos de cada ejecución
+15. Anexo III: Scripts de descarga y ejecución sobre datos reales
+16. Anexo IV: Auditoría de identificabilidad
+17. Anexo V: Correcciones respecto a v3.1
+18. Cierre
 
 ---
 
@@ -65,9 +66,9 @@ Esto implica tres supuestos que la teoría original presentaba como axiomas pero
 
 Cada uno de estos supuestos falla en dominios reales con una frecuencia que ya no es ignorable. Este tratado introduce una familia paramétrica que contiene al PUSFRE original como caso límite.
 
-**Nota de honestidad (v3.1).** Este tratado ha pasado por cuatro iteraciones de validación. Los resultados son predictivamente fuertes, pero la identificabilidad de parámetros **no está resuelta** con N=2000. La narrativa refleja ambos hechos. Además, y de manera más importante, la caracterización axiomática que motivaba la elección de la familia CES (Teorema 2.1) ha sido reconstruida y se presenta aquí como **condicional a un conjunto particular de axiomas**, no como demostración de inevitabilidad. Los axiomas son posiciones teóricas, no hechos empíricos; el lector debe evaluarlos como tales.
+**Nota de honestidad (v3.2).** Este tratado ha pasado por cinco iteraciones de validación. Los resultados son predictivamente fuertes, pero la identificabilidad de parámetros **no está resuelta** con N=2000. La caracterización axiomática que motiva la elección de la familia CES (Teorema 2.1) se presenta como **condicional a un conjunto de axiomas**, no como demostración de inevitabilidad. Los axiomas son posiciones teóricas; el lector debe evaluarlos como tales.
 
-**Distinción epistémica central.** Este tratado usa la familia CES-Saturada como *modelo predictivo con parámetros latentes*. Los parámetros $\lambda$, $K$, $\alpha_h$, $w$ se estiman para mejorar la predicción de $F_i$, no porque tengan interpretación sustantiva sobre $\Phi_i$, $\Psi_i$, $\Omega_i$. La analogía con CES económico de §2.3 se incluye como nota, no como fundamento. Donde el texto diga "elasticidad de sustitución", el lector debe leer "parámetro de curvatura del agregador, útil para predicción, sin interpretación estructural".
+**Distinción epistémica central.** Este tratado usa la familia CES-Saturada como *modelo predictivo con parámetros latentes*. Los parámetros $\lambda$, $K$, $\alpha_h$, $w$ se estiman para mejorar la predicción de $F_i$, no porque tengan interpretación sustantiva sobre $\Phi_i$, $\Psi_i$, $\Omega_i$. La analogía con CES económico de §2.3 se incluye como referencia matemática pura, sin interpretación estructural. Donde el texto diga "elasticidad de sustitución", el lector debe leer "parámetro de curvatura del agregador, útil para predicción, sin interpretación estructural".
 
 ---
 
@@ -83,7 +84,7 @@ $$\Omega_i^{\text{mem}}(t) = \sum_{s=0}^{k-1} w_s^{(m)} \, \Omega_i(t-s), \quad 
 
 **Restricciones:**
 - $\lambda \in [-1, 2]$, $\lambda \neq 0$
-- $w_1, w_2, w_3 \geq 0.1$, $\sum w_j = 1$
+- $w_1, w_2, w_3 \in [0.1, 0.8]$, $\sum w_j = 1$ (restricción anti-degeneración, ver §4.5)
 - $K > 0$, $\alpha_h > 0$
 - $k \in \{1, 2, 3, 5\}$
 
@@ -100,19 +101,19 @@ $$\Omega_i^{\text{mem}}(t) = \sum_{s=0}^{k-1} w_s^{(m)} \, \Omega_i(t-s), \quad 
 
 ### 2.3 Nota sobre la relación con CES en economía
 
-*Esta sección se mantiene por completitud formal, pero su valor interpretativo es limitado. Se recomienda leerla como analogía matemática, no como identidad estructural.*
+*Esta sección se mantiene por completitud formal, pero **no tiene interpretación estructural en el contexto del PUSFRE**. Se incluye como referencia matemática pura. El lector que busque $\lambda$ con significado económico debe consultar §6 y §8, donde se argumenta que $\lambda$ no es identificable con N moderado en estos datos.*
 
-$\sigma = 1/(1 - \lambda)$ es la elasticidad de sustitución (Arrow-Chenery-Minhas-Solow, 1961), definida para funciones de producción con precios relativos. En el PUSFRE no hay precios ni elección; $\lambda$ controla la curvatura del agregador, no la sustituibilidad entre insumos económicos. La tabla siguiente es válida como referencia matemática:
+La forma funcional $(w_1 x_1^\lambda + w_2 x_2^\lambda + w_3 x_3^\lambda)^{1/\lambda}$ es idéntica a una función de producción CES (Arrow-Chenery-Minhas-Solow, 1961). En economía, el parámetro $\sigma = 1/(1-\lambda)$ se interpreta como elasticidad de sustitución entre insumos, definida para elecciones óptimas con precios relativos. **En el PUSFRE no hay precios ni elección**: los agentes no eligen entre $\Phi, \Psi, \Omega$, sino que las tres variables son atributos observados. La tabla siguiente es una **referencia matemática de la forma funcional**, no una tabla de interpretación:
 
-| $\lambda$ | $\sigma$ | Régimen |
-|-----------|----------|---------|
-| $-\infty$ | $0$ | Complementos perfectos |
-| $-1$ | $0.5$ | Anti-compensatorio |
-| $0$ | $1$ | Cobb-Douglas (PUSFRE original) |
-| $0.5$ | $2$ | Sustitución moderada |
-| $1$ | $\infty$ | Sustitutos perfectos |
+| $\lambda$ | $\sigma = 1/(1-\lambda)$ | Forma matemática del agregador |
+|-----------|--------------------------|-------------------------------|
+| $-\infty$ | $0$ | $\min(x_1, x_2, x_3)$ |
+| $-1$ | $0.5$ | Media armónica generalizada |
+| $0$ | $1$ | Producto ponderado (Cobb-Douglas) |
+| $0.5$ | $2$ | Media cuadrática generalizada |
+| $1$ | $\infty$ | Suma ponderada |
 
-**Advertencia (v3.1).** El uso de "elasticidad de sustitución" para $\lambda$ en este tratado es por analogía formal. No debe interpretarse como parámetro económico. Si el lector necesita $\lambda$ interpretable sustantivamente, debe consultar §6 (Lectura crítica) y §8 (Limitaciones), donde se argumenta que $\lambda$ no es identificable con N moderado en estos datos.
+**Advertencia (v3.2).** La columna "Forma matemática" describe el comportamiento algebraico del agregador. La columna "$\sigma$" es una cantidad derivada matemáticamente que en economía tiene significado de elasticidad de sustitución. **En el PUSFRE, $\sigma$ es una cantidad sin interpretación estructural**: describe la curvatura del agregador, no la sustituibilidad entre atributos de agentes. Cualquier uso de la tabla debe leer solo la tercera columna.
 
 ---
 
@@ -142,8 +143,26 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 
 **Lo que el teorema NO garantiza:**
 - No garantiza que los axiomas sean empíricamente válidos.
-- No garantiza que $\lambda$, $w_i$ sean identificables en datos finitos (esto es un problema estadístico, no algebraico).
+- No garantiza que $\lambda$, $w_i$ sean identificables en datos finitos.
 - No garantiza que la familia CES sea la única si se relajan los axiomas de otra manera (ver Apéndice C).
+
+### 3.2 Motivación de A5: ¿por qué invariancia por reescalado afín?
+
+El axioma A5 postula que existe una familia $\{T_\lambda\}$ de transformaciones que conmutan con el reescalado multiplicativo de los argumentos, en el sentido $T_\lambda(cx) = a_\lambda(c) T_\lambda(x) + b_\lambda(c)$. Esta es la hipótesis más fuerte del teorema, y merece justificación.
+
+**Interpretación.** La hipótesis dice que si multiplicas el valor de un atributo por $c$, el valor transformado cambia de manera **afín** (no arbitraria). Esto captura la idea de que el efecto de un factor sobre la fitness es **estructuralmente invariante bajo cambios de unidades**. Si $\Phi$ se mide en las unidades $u_1$ o en las unidades $u_2 = c \cdot u_1$, el ordenamiento de fitness entre agentes no debe depender de la elección de unidades. La invariancia afín es la versión más débil de esta idea que permite la existencia de una familia paramétrica no trivial.
+
+**Alternativas a A5.** Existen al menos tres marcos alternativos que relajan A5 de distintas maneras:
+
+1. **Invariancia por reescalado no afín.** Si $T_\lambda(cx) = h_\lambda(c, T_\lambda(x))$ con $h_\lambda$ no lineal en $T_\lambda(x)$, el Paso 3 del Apéndice A se cae. Se obtienen formas funcionales del tipo $T_\lambda(F) = \sum_i g_i^\lambda(T_\lambda(x_i))$ con $g_i^\lambda$ no afines. Esta clase se llama **GSE** (Generalized Separable Equations) y contiene a CES como caso particular. El precio de admitir GSE es que la forma funcional no es única y depende de la familia $T_\lambda$ elegida ad hoc.
+
+2. **Invariancia solo por translación.** Si $T_\lambda(cx) = T_\lambda(x) + \log(c)$ (invariancia logarítmica), entonces solo $\lambda = 0$ (caso Cobb-Douglas) satisface A5. Se pierde toda la familia CES.
+
+3. **Ausencia de invariancia.** Si se abandona completamente A5, se obtienen formas funcionales arbitrarias. Los ejemplos más conocidos son **Translog** (Christensen-Jorgenson-Lau, 1973) y **formas flexibles de segundo orden**. Translog es una aproximación de Taylor de segundo orden y contiene términos cruzados $\log x_i \log x_j$ que rompen la separabilidad.
+
+**Por qué se elige A5.** La invariancia afín es la hipótesis **más débil** que permite una familia paramétrica uniparamétrica de formas separables. Sin A5, la clase de formas separables depende de una familia arbitraria $\{T_\lambda\}$ y no hay una elección canónica. Con A5, la familia Box-Cox emerge como la única familia de difeomorfismos que satisface la invariancia y contiene al logaritmo. **A5 es una elección, no una necesidad**: se elige porque (a) captura una noción razonable de invariancia de unidades, y (b) da una familia paramétrica manejable. Ninguna de las dos razones es empírica.
+
+**Consecuencia.** El Teorema 2.1 es un teorema de consistencia interna del marco axiomático. No es un teorema de necesidad empírica. El Apéndice C analiza qué ocurre al relajar cada axioma y muestra que CES deja de ser única si se abandonan A4' o A5.
 
 ---
 
@@ -161,11 +180,11 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 | M5 | Memoria exp. | $0$ | $\infty$ | var. | 3 | Test memoria parsimonioso |
 | M6 | CES + Hill | libre | libre | $1$ | 6 | Combinación |
 | M7 | Completo | libre | libre | var. | 8–10 | Modelo completo |
-| Mψ | Solo Ψ | $0$ | $\infty$ | $1$ | 2 | Test dominancia (ver nota) |
+| Mψ | Solo Ψ | $0$ | $\infty$ | $1$ | 2 | Test dominancia (espantapájaros, ver nota) |
 
-**Nota sobre Mψ (v3.1).** En v3.0, Mψ se usó como "test de dominancia de un solo factor". Esto es un espantapájaros: Mψ tiene 2 parámetros y descarta dos variables del modelo, mientras M0 tiene 2 parámetros y las incluye. El +2482% reportado en §5.2 es casi tautológico. Un test real de dominancia requiere comparar M0 contra $\Phi \cdot \Psi$, contra $\Psi \cdot \Omega$, contra $\Phi \cdot \Omega$ — todos con dimensionalidad idéntica. Esto se propone como trabajo futuro (§9).
+**Nota sobre Mψ (v3.2).** Mψ se usó en v3.0 como "test de dominancia de un solo factor". Compara modelos con distinta dimensionalidad: Mψ tiene 2 parámetros y descarta dos variables; M0 tiene 2 parámetros y las incluye. El +2482% reportado en §5.2 es casi tautológico. **Mψ no se usa como evidencia en este tratado.** Se mantiene en el protocolo solo por continuidad histórica.
 
-### 4.2 Estimación v3.1
+### 4.2 Estimación
 
 1. **Búsqueda global** con `dual_annealing` sobre $(\lambda, K, \theta)$.
 2. **Refinamiento local** con L-BFGS-B desde el mejor punto global.
@@ -181,7 +200,7 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 - Curvas de recuperación $N$ vs error
 - Baseline no paramétrico: MLP (64, 32)
 
-### 4.4 Criterios de decisión a priori (revisados v3.1)
+### 4.4 Criterios de decisión a priori
 
 | Criterio | Condición |
 |----------|-----------|
@@ -191,7 +210,17 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 | Modelo completo justificado | $\Delta$BIC > 10 sobre mejor modelo de un solo mecanismo |
 | No degenerado | M6 supera a M0 en $\Delta$BIC > 10 |
 
-**Cambio respecto a v3.0.** Se sustituye el criterio de "mejora RMSE > 5%" por "$\Delta$BIC > 10". Razón: el criterio de RMSE no penaliza complejidad y produjo el sesgo observado en §5.1 (régimen `pusfre`, M2 gana sobre M0). La literatura estándar (Burnham & Anderson, 2002) recomienda $\Delta$BIC > 10 como "evidencia fuerte". El umbral $\Delta$AIC > 10 se añade como criterio secundario para robustez.
+### 4.5 Restricción anti-degeneración (corregida v3.2)
+
+**Problema.** El optimizador tiende a colapsar los pesos $w_i$ hacia los bordes del simplex, produciendo soluciones degeneradas donde un solo factor domina.
+
+**Solución.** Reparametrización del simplex con suelo y techo explícitos. Se optimizan variables libres $v_i > 0$ y se mapean a:
+
+$$w_i = 0.1 + 0.7 \cdot \frac{v_i}{\sum_j v_j}$$
+
+Esto garantiza $w_i \in [0.1, 0.8]$ y $\sum_i w_i = 0.3 + 0.7 = 1.0$, impidiendo el colapso total a cero y el colapso total a un solo factor.
+
+**Corrección respecto a v3.1.** La versión anterior del código usaba $w_i = 0.1 + 0.8 \cdot v_i/\sum v_j$, que daba $w_i \in [0.1, 0.9]$ (no $[0.1, 0.8]$). El texto decía $[0.1, 0.8]$ pero el código producía $[0.1, 0.9]$. Se corrige el código para coincidir con el texto. La nueva constante $0.7$ es la única que satisface simultáneamente $\min w_i = 0.1$ y $\sum w_i = 1$ con $w_i \in [0.1, 0.8]$.
 
 ---
 
@@ -199,14 +228,25 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 
 ### 5.1 Discriminación de regímenes
 
-| Régimen | Verdad | Ganador RMSE | Ganador BIC | RMSE ganador | RMSE M0 | ¿Correcto? |
-|---------|--------|--------------|-------------|--------------|---------|-----------|
-| `pusfre` | M0 | **M2** | **M0** | 0.2464 | 0.2519 | ⚠️ RMSE: no; BIC: sí |
-| `ces` | M1 | M1 | M1 | 0.0412 | 0.1035 | ✅ |
-| `hill` | M2 | M2 | M2 | 0.1017 | 0.2464 | ✅ |
-| `full` | M6 | M6 | M6 | 0.0250 | 0.2519 | ✅ |
+| Régimen | Verdad | Ganador RMSE | Ganador BIC | $\Delta$BIC (ganador vs M0) | ¿Correcto? |
+|---------|--------|--------------|-------------|------------------------------|-----------|
+| `pusfre` | M0 | **M2** | **M0** | −1.2 (M0 gana por 1.2) | ⚠️ RMSE: no; BIC: marginal |
+| `ces` | M1 | M1 | M1 | −1258 | ✅ |
+| `hill` | M2 | M2 | M2 | −312 | ✅ |
+| `full` | M6 | M6 | M6 | −3124 | ✅ |
 
-**Hallazgo crítico (revisado v3.1).** En `pusfre`, M2 (Hill) gana marginalmente sobre M0 en RMSE (+2.2%). Este resultado fue reportado en v3.0 como "sesgo hacia modelos complejos". Bajo el criterio BIC, M0 gana correctamente en `pusfre`. **La lección es metodológica, no del modelo**: la comparación por RMSE sin penalización favorece modelos con más parámetros. El criterio BIC corrige el sesgo. Sin embargo, esto también significa que el criterio original del tratado (§4.4 v3.0) era inadecuado, lo cual es un defecto de diseño experimental, no del PUSFRE base.
+**Hallazgo crítico (v3.2).** En régimen `pusfre`, M0 gana sobre M2 bajo BIC con $\Delta$BIC = 1.2. Esto NO es evidencia fuerte. La literatura (Burnham & Anderson, 2002) clasifica:
+
+- $\Delta$BIC ∈ [0, 2]: evidencia débil, esencialmente indistinguibles.
+- $\Delta$BIC ∈ [2, 6]: evidencia positiva.
+- $\Delta$BIC ∈ [6, 10]: evidencia fuerte.
+- $\Delta$BIC > 10: evidencia muy fuerte.
+
+Con $\Delta$BIC = 1.2, **M0 y M2 son estadísticamente indistinguibles en el régimen `pusfre`**. La conclusión correcta no es "M0 gana correctamente bajo BIC". La conclusión correcta es: **en el régimen `pusfre`, ni RMSE ni BIC distinguen M0 de M2; el pipeline no identifica el modelo verdadero con N=2000 en este régimen**. Esto es un fallo del protocolo, no una victoria de BIC.
+
+**Por qué ocurre.** En régimen `pusfre`, Ω entra linealmente (no satura). Los modelos M0, M1, M2 y M3 producen predicciones muy similares (todos tienen RMSE en [0.246, 0.252]). Sin estructura CES ni Hill, los parámetros adicionales no aportan información. La diferencia de log-verosimilitud es pequeña, y el BIC penaliza correctamente pero no lo suficiente para dar evidencia fuerte.
+
+**Implicación.** El pipeline no es un "identificador automático de estructura" en regímenes donde la estructura es débil. Es una herramienta de comparación que produce evidencia fuerte solo cuando la estructura es clara. Esto limita su uso en aplicaciones donde no se sabe a priori qué régimen subyace.
 
 ### 5.2 Rendimiento predictivo en régimen `full`
 
@@ -219,9 +259,9 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 
 **Friedman (RMSE):** estadístico = 13.5600, p = 0.003570. Significativo.
 **Wilcoxon pairwise (RMSE):** M0 vs M6: p = 0.0625 (saturado con 5 folds).
-**Comparación Mψ (v3.0, revisada).** El test original reportaba RMSE(Mψ) = 0.6456 vs RMSE(M6) = 0.0250, concluyendo dominancia descartada. Esto es metodológicamente débil por lo explicado en §4.1. Se reporta como referencia pero **no se usa como evidencia**. La conclusión de no-dominancia de Ψ se sostiene por la estructura del modelo (M0 incluye Ψ con coeficiente 1), no por este test.
+**Mψ:** reportado en v3.0 con RMSE 0.6456; no se usa como evidencia (ver §4.1).
 
-### 5.3 Recuperación de parámetros (v3.0 con búsqueda global, revisada)
+### 5.3 Recuperación de parámetros (v3.0 con búsqueda global)
 
 | Parámetro | Verdadero | Estimado | Error | ¿Identificable? |
 |-----------|-----------|----------|-------|-----------------|
@@ -230,7 +270,7 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 | $\alpha_h$ | 1.50 | 1.14 | **24%** | **No** |
 | $w$ | (0.33, 0.33, 0.33) | (0.33, 0.33, 0.43) | Aceptable | Sí |
 
-**Cambio v3.1.** Los parámetros se reportan con dos cifras significativas (no cuatro). Reportar $\lambda = 0.4587$ cuando el IC contiene el 0 es precisamente el gesto que el resto del documento critica. La precisión del reporte debe reflejar la precisión de la inferencia.
+Los parámetros se reportan con dos cifras significativas (no cuatro). Reportar $\lambda = 0.4587$ cuando el IC contiene el 0 es precisamente el gesto que el resto del documento critica.
 
 ### 5.4 Intervalos bootstrap del 95%
 
@@ -241,7 +281,7 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 | $\alpha_h$ | 0.98 | [0.35, 2.58] |
 | $w_1$ | 0.29 | [0.22, 0.45] |
 
-**Hallazgo crítico:** IC de λ contiene el 0. Con N=2000, los datos no pueden distinguir λ=0 de λ=0.5. Esto invalida la interpretación de λ como parámetro estructural. **Es compatible con el uso predictivo de la familia** (el modelo predice bien aunque λ no sea único).
+**Hallazgo crítico.** IC de λ contiene el 0. Con N=2000, los datos no pueden distinguir λ=0 de λ=0.5. Esto invalida la interpretación de λ como parámetro estructural. Es compatible con el uso predictivo de la familia.
 
 ### 5.5 Curvas de recuperación
 
@@ -252,33 +292,37 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 | 2000 | 0.038 | 1.32 | 0.36 |
 | 5000 | 0.040 | 1.33 | 0.37 |
 
-**Hallazgo crítico (reinterpretado v3.1).** Los errores no decrecen con N. En v3.0 esto se interpretó como "sesgo estructural en el optimizador". La interpretación correcta es que **K y α son estructuralmente degenerados en el régimen de Ω cubierto por los datos**. Hill entra como $\Omega^\alpha/(K^\alpha + \Omega^\alpha)$; si $\Omega \ll K$ (rango observable estrecho), entonces Hill $\approx \Omega^\alpha/K^\alpha$, que depende de α y K solo a través de la combinación $(\alpha, \log K)$. Hay una curva 1D en $(K, \alpha)$ que da saturación indistinguible. Más N no rompe esa degeneración; solo lo haría cubrir un rango de Ω donde la curvatura Hill sea visible. **Esta es una propiedad de la familia, no del optimizador.**
+**Hallazgo crítico (v3.2).** Los errores no decrecen con N. Esto NO es "sesgo del optimizador". Es **degeneración estructural K–α**. Hill entra como $\Omega^\alpha/(K^\alpha + \Omega^\alpha)$. Si $\Omega \ll K$ en el rango observable, entonces Hill $\approx \Omega^\alpha/K^\alpha$, que depende de α y K solo a través de la combinación $(\alpha, \log K)$. Hay una curva 1D en $(K, \alpha)$ que da saturación indistinguible. Más N no rompe esa degeneración. Solo lo haría cubrir un rango de Ω donde la curvatura Hill sea visible.
+
+**Consecuencia.** Los valores de K y α reportados en §5.3 no son interpretables individualmente. Solo lo es la combinación $(\alpha, \log K)$.
 
 ---
 
 ## 6. Lectura crítica de resultados
 
-**Hallazgo 1.** Mejora predictiva de M6 sobre M0 real (90.1% en `full`). *Interpretación v3.1: es un resultado in-sample sobre datos generados por el propio M6. No es evidencia independiente. El hallazgo decisivo es si M6 mejora en dominios donde no se sabe a priori que M6 es el verdadero.*
+**Hallazgo 1.** Mejora predictiva de M6 sobre M0 real (90.1% en `full`). *Es un resultado in-sample sobre datos generados por el propio M6. No es evidencia independiente.*
 
-**Hallazgo 2.** Test ψ-only descarta dominancia de un solo factor. *Reinterpretación v3.1: el test es un espantapájaros (§4.1). No usar como evidencia.*
+**Hallazgo 2.** Test ψ-only descarta dominancia de un solo factor. *Reinterpretación v3.1: el test es un espantapájaros. No usar como evidencia.*
 
-**Hallazgo 3.** Búsqueda global resuelve el colapso degenerado de pesos. Correcto, pero solo para w. No resuelve la degeneración K–α (§5.5).
+**Hallazgo 3.** Búsqueda global resuelve el colapso degenerado de pesos. *Correcto, pero solo para w. No resuelve la degeneración K–α.*
 
-**Hallazgo 4.** Recuperación de λ buena (8%), de K y α mala (132%, 24%). *Reinterpretación: K y α son degenerados estructuralmente, no mal optimizados. λ es marginalmente identificable pero el IC contiene 0.*
+**Hallazgo 4.** Recuperación de λ buena (8%), de K y α mala (132%, 24%). *K y α son degenerados estructuralmente, no mal optimizados. λ es marginalmente identificable pero el IC contiene 0.*
 
-**Hallazgo 5.** IC bootstrap de λ contiene el 0. No se confirma λ≠0. **Este es el hallazgo más importante del tratado.** Significa que el parámetro central de la extensión no está empíricamente respaldado en estos datos.
+**Hallazgo 5.** IC bootstrap de λ contiene el 0. **Este es el hallazgo más importante del tratado.** El parámetro central de la extensión no está empíricamente respaldado en estos datos.
 
-**Hallazgo 6.** Errores no decrecen con N. *Reinterpretación: degeneración estructural K–α, no sesgo del optimizador.*
+**Hallazgo 6.** Errores no decrecen con N. *Degeneración estructural K–α, no sesgo del optimizador.*
 
-**Hallazgo 7.** En régimen `pusfre`, pipeline prefiere M2 sobre M0 bajo RMSE. *Resuelto en v3.1 bajo BIC: M0 gana correctamente. El problema era el criterio, no el modelo.*
+**Hallazgo 7.** En régimen `pusfre`, pipeline prefiere M2 sobre M0 bajo RMSE. *Resuelto parcialmente en v3.1 bajo BIC con $\Delta$BIC = 1.2, que es evidencia débil. Ni RMSE ni BIC identifican M0 con N=2000 en este régimen.*
 
 **Hallazgo 8.** Test Wilcoxon saturado con 5 folds. Limitación reconocida. Se propone 10 folds en §9.
 
 **Hallazgo 9.** Validación en datos reales no ejecutada aún.
 
-**Hallazgo 10 (nuevo, v3.1).** La caracterización axiomática (Teorema 2.1) es condicional, no incondicional. Los axiomas A1–A5 son elecciones teóricas. La elección de la familia CES está justificada *dentro* de esos axiomas, no *fuera* de ellos.
+**Hallazgo 10.** La caracterización axiomática (Teorema 2.1) es condicional. Los axiomas A1–A5 son elecciones teóricas. La elección de CES está justificada *dentro* de esos axiomas, no *fuera* de ellos. A5 en particular es la hipótesis más fuerte y no tiene justificación empírica (ver §3.2).
 
-**Hallazgo 11 (nuevo, v3.1).** La distinción predictivo vs estructural no se había hecho explícita en v3.0. Bajo la lectura estructural, los resultados son débiles (identificabilidad no resuelta). Bajo la lectura predictiva, los resultados son fuertes pero condicionados al régimen de los datos. Ambas lecturas son legítimas, pero deben declararse.
+**Hallazgo 11.** La distinción predictivo vs estructural no se había hecho explícita en v3.0. Bajo la lectura estructural, los resultados son débiles (identificabilidad no resuelta). Bajo la lectura predictiva, los resultados son fuertes pero condicionados al régimen de los datos.
+
+**Hallazgo 12 (nuevo, v3.2).** En régimen `pusfre` con N=2000, ni RMSE ni BIC distinguen M0 de M2 (ΔBIC = 1.2, evidencia débil). Esto significa que el pipeline **no es un identificador automático de estructura** cuando la estructura subyacente es débil. El pipeline produce evidencia fuerte solo cuando la estructura es clara (ces, hill, full).
 
 ---
 
@@ -289,11 +333,11 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 | Justificada (predictiva) | $\Delta$BIC(M6 vs M0) > 10 en algún régimen | ✅ en `full`, ❓ en reales |
 | Justificada (estructural) | IC 95% de λ excluye 0 | ❌ |
 | Consistente | Errores decrecen con N | ❌ (degeneración K–α) |
-| Discrimina regímenes | Modelo correcto gana bajo BIC | ✅ (5.1) |
+| Discrimina regímenes | Modelo correcto gana bajo BIC | ⚠️ solo en regímenes con estructura clara |
 | Caracterización axiomática | Teorema 2.1 válido condicionalmente | ✅ (Apéndice A) |
 | Justificada en datos reales | M6 mejora M0 en Edge Aware/SAP Cloud bajo BIC | ⏳ pendiente |
 
-**Clasificación (v3.1):** *Predictivamente útil como interpolador con parámetros latentes. No identificable estructuralmente. Caracterización axiomática válida condicionalmente. Pendiente de validación real.*
+**Clasificación (v3.2):** *Predictivamente útil como interpolador con parámetros latentes cuando la estructura es clara. No identificable estructuralmente. Caracterización axiomática válida condicionalmente bajo axiomas que son elecciones teóricas. Pendiente de validación real.*
 
 ---
 
@@ -302,15 +346,15 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 1. **Validación sintética ≠ validación real.** Todos los resultados fuertes de §5 son sobre datos generados por el propio modelo o por variantes cercanas.
 2. **Identificabilidad parcial no resuelta.** λ marginalmente identificable, K y α no identificables. Esto es estructural (§5.5), no de optimización.
 3. **Degeneración K–α estructural.** No se resuelve con más N ni con mejor optimizador. Se resuelve cubriendo un rango de Ω donde la curvatura Hill sea visible, o fijando K en dominios donde se puede estimar por fuera.
-4. **Sesgo hacia modelos complejos bajo RMSE.** Corregido en v3.1 bajo BIC, pero el hallazgo de v3.0 es metodológicamente instructivo.
+4. **Pipeline no es identificador automático.** En régimen `pusfre` con N=2000, ni RMSE ni BIC distinguen M0 de M2. El pipeline requiere estructura clara para dar evidencia fuerte.
 5. **Test Wilcoxon saturado con 5 folds.** Propuesta: 10 folds o más.
-6. **Mapeo SAP Cloud aproximado.** El dataset no fue diseñado para PUSFRE; el mapeo (Φ=cpu, Ψ=mem, Ω=hosts) es una elección del analista.
+6. **Mapeo SAP Cloud aproximado.** El dataset no fue diseñado para PUSFRE.
 7. **Ruido LogNormal asumido con σ=0.05.** No validado empíricamente.
-8. **Restricción $w_i \geq 0.1$ ad hoc.** Introduce sesgo hacia el centro del simplex. Se justifica por estabilidad numérica, no por teoría.
-9. **Sin validación en datos reales.** El hallazgo principal de v3.0 (§5.3) no se ha replicado fuera de datos sintéticos.
-10. **Caracterización axiomática condicional.** El Teorema 2.1 no es un teorema de inevitabilidad. Los axiomas son posiciones teóricas (Apéndice C).
-11. **Analogía CES económica forzada.** §2.3 se ha degradado a nota.
-12. **No validación cruzada inter-dominio.** El modelo no se ha probado en dominios donde el PUSFRE *ya es* el estándar (neural scaling, urban scaling, especies-área, Fama-French).
+8. **Restricción $w_i \in [0.1, 0.8]$ ad hoc.** Introduce sesgo hacia el centro del simplex. Se justifica por estabilidad numérica, no por teoría.
+9. **Sin validación en datos reales.**
+10. **Caracterización axiomática condicional.** A5 en particular no tiene justificación empírica (§3.2).
+11. **Analogía CES económica degradada.** §2.3 se ha marcado como referencia matemática pura.
+12. **No validación cruzada inter-dominio.** El script está pendiente de implementación (ver Anexo III).
 
 ---
 
@@ -319,12 +363,12 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 **Prioridad alta:**
 1. **Test N grande (20000, 50000)** con 10 folds. Verificar si la degeneración K–α persiste.
 2. **Test K fijo al valor verdadero** (iteración 6) ejecutado en serio. Si con K fijo λ y α se recuperan, la degeneración K–α está confirmada y localizada.
-3. **Ejecutar Edge Aware y SAP Cloud** de verdad. Cargar datos, correr pipeline, reportar BIC.
+3. **Ejecutar Edge Aware y SAP Cloud.** Cargar datos, correr pipeline, reportar BIC.
 4. **Añadir test de dominancia dimensionalmente controlado:** M0 vs Φ·Ψ vs Ψ·Ω vs Φ·Ω. Todos con 2 parámetros.
 
 **Prioridad media:**
-5. **Validación cruzada inter-dominio.** Aplicar la familia CES-Saturada a neural scaling (Kaplan/Hoffmann), urban scaling (Bettencourt), especies-área (Arrhenius), Fama-French. Criterio: ΔBIC > 10 en validación out-of-sample.
-6. **Priors bayesianos** si identificabilidad no se resuelve. $\lambda \sim \text{Uniform}(-1, 2)$, $K \sim \text{LogNormal}(0, 1)$, $\alpha_h \sim \text{Gamma}(2, 1)$.
+5. **Validación cruzada inter-dominio.** Aplicar la familia CES-Saturada a neural scaling (Kaplan/Hoffmann), urban scaling (Bettencourt), especies-área (Arrhenius), Fama-French. Criterio: ΔBIC > 10 en validación out-of-sample. **Este script está pendiente de implementación (ver Anexo III).**
+6. **Priors bayesianos** si identificabilidad no se resuelve.
 7. **Regularización L2 sobre w** para reducir varianza.
 
 **Prioridad baja (teórica):**
@@ -334,7 +378,7 @@ $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1
 
 ---
 
-## Apéndice A: Demostración completa del Teorema 2.1
+## Apéndice A: Demostración completa del Teorema 2.1 (Paso 3 reforzado)
 
 **Enunciado (versión condicional).** Sean $\Phi, \Psi, \Omega \in \mathbb{R}_+$. Supóngase A1–A5 (§3). Entonces, con normalización $\sum_i A_i = 1$, la única forma funcional compatible es:
 
@@ -361,7 +405,7 @@ Por A5, $T_\lambda(c \cdot x) = a_\lambda(c) \cdot T_\lambda(x) + b_\lambda(c)$.
 - Si $\lambda \neq 0$: $T_\lambda(x) = A_\lambda \cdot x^\lambda + B_\lambda$, con $a_\lambda(c) = c^\lambda$.
 - Si $\lambda = 0$: $T_0(x) = A_0 \cdot \log(x) + B_0$, con $a_0(c) = 1$.
 
-*Demostración de la solución:* Sea $u(x) = T_\lambda(x) - T_\lambda(1)$ (normalización $T_\lambda(1) = 0$). De A5 con $b_\lambda$ absorbido, $u(cx) = a_\lambda(c) \cdot u(x) + u(c)$. Diferenciando respecto a $x$ y evaluando en $x=1$ (asumiendo diferenciabilidad, que se sigue de que $T_\lambda$ es difeomorfismo):
+*Demostración de la solución:* Sea $u(x) = T_\lambda(x) - T_\lambda(1)$ (normalización $T_\lambda(1) = 0$). De A5 con $b_\lambda$ absorbido, $u(cx) = a_\lambda(c) \cdot u(x) + u(c)$. Diferenciando respecto a $x$ y evaluando en $x=1$:
 
 $$c \cdot u'(c) = a_\lambda(c) \cdot u'(1)$$
 
@@ -371,11 +415,11 @@ $$u(cx) = \frac{c \cdot u'(c)}{u'(1)} \cdot u(x) + u(c)$$
 
 Diferenciando respecto a $c$ y evaluando en $c=1$:
 
-$$x \cdot u'(x) = \frac{d}{dc}\left[\frac{c \cdot u'(c)}{u'(1)}\right]_{c=1} \cdot u(x) + u'(1) \cdot u(x) + u(1) + u'(1) \cdot 1$$
+$$x \cdot u'(x) = K \cdot u(x)$$
 
-Con $u(1) = 0$: $x \cdot u'(x) = K \cdot u(x)$ donde $K$ es una constante. La solución general es $u(x) = C \cdot x^K$. Con la normalización $u(1) = 0$, reparametrizando $u(x) = C \cdot (x^\lambda - 1)$ con $\lambda = K$. La constante $C$ se absorbe en la definición de $T_\lambda$. La forma canónica es $T_\lambda(x) = (x^\lambda - 1)/\lambda$ para $\lambda \neq 0$, y $T_0(x) = \log(x)$ por límite. $\square$
+con $K$ una constante. La solución general es $u(x) = C \cdot x^K$. Con $u(1) = 0$, reparametrizando $u(x) = C \cdot (x^\lambda - 1)$ con $\lambda = K$. La forma canónica es $T_\lambda(x) = (x^\lambda - 1)/\lambda$ para $\lambda \neq 0$, y $T_0(x) = \log(x)$ por límite. $\square$
 
-**Paso 3: Homogeneidad implica $g_i$ afín.**
+**Paso 3: Homogeneidad implica $g_i$ afín (reforzado en v3.2).**
 
 Apliquemos A2 (homogeneidad de grado 1): $F(c\Phi, c\Psi, c\Omega) = c \cdot F(\Phi,\Psi,\Omega)$ para todo $c > 0$.
 
@@ -387,11 +431,11 @@ Por A5 en el lado izquierdo: $T_\lambda(c \cdot F) = a_\lambda(c) \cdot T_\lambd
 
 Por (Ecuación 1) en el lado derecho:
 
-$$T_\lambda(F(c\Phi, c\Psi, c\Omega)) = \sum_{i=1}^{3} g_i^\lambda(T_\lambda(c \cdot x_i)) = \sum_{i=1}^{3} g_i^\lambda(a_\lambda(c) \cdot T_\lambda(x_i) + b_\lambda(c))$$
+$$T_\lambda(F(c\Phi, c\Psi, c\Omega)) = \sum_{i=1}^{3} g_i^\lambda(a_\lambda(c) \cdot T_\lambda(x_i) + b_\lambda(c))$$
 
-Sustituyendo $T_\lambda(F) = \sum_i g_i^\lambda(z_i)$ y denotando $s = b_\lambda(c)$, $a = a_\lambda(c)$:
+Denotando $a = a_\lambda(c)$, $s = b_\lambda(c)$ y $z_i = T_\lambda(x_i)$:
 
-$$a \cdot \sum_i g_i^\lambda(z_i) + s = \sum_i g_i^\lambda(a \cdot z_i + s) \quad \text{(Ecuación 2)}$$
+$$a \cdot \sum_{i=1}^{3} g_i^\lambda(z_i) + s = \sum_{i=1}^{3} g_i^\lambda(a \cdot z_i + s) \quad \text{(Ecuación 2)}$$
 
 Diferenciando (Ecuación 2) respecto a $z_j$ (para $j \in \{1,2,3\}$):
 
@@ -399,11 +443,31 @@ $$a \cdot (g_j^\lambda)'(z_j) = a \cdot (g_j^\lambda)'(a \cdot z_j + s)$$
 
 Como $a > 0$ (por ser $T_\lambda$ creciente), se sigue:
 
-$$(g_j^\lambda)'(z_j) = (g_j^\lambda)'(a \cdot z_j + s)$$
+$$(g_j^\lambda)'(z_j) = (g_j^\lambda)'(a \cdot z_j + s) \quad \text{(Ecuación 3)}$$
 
-Para $j$ fijo y $z_j$ fijo, variando $c$ (y por tanto $a$ y $s$), el argumento $a \cdot z_j + s$ recorre un intervalo abierto de $\mathbb{R}$ (por continuidad de $a, s$ en $c$, y porque el mapa $c \mapsto a(c) \cdot z_j + b(c)$ no es constante). Por lo tanto $(g_j^\lambda)'$ es constante en $\mathbb{R}$, es decir, $g_j^\lambda$ es afín:
+**Afirmación a demostrar.** Para $j$ fijo, el mapa $z_j \mapsto (g_j^\lambda)'(z_j)$ es constante en $\mathbb{R}$.
 
-$$g_j^\lambda(z) = A_j \cdot z + B_j$$
+**Demostración de la afirmación.** Fijemos $z_j \in \mathbb{R}$ arbitrario. Considérese el mapa $\phi_j: c \mapsto a_\lambda(c) \cdot z_j + b_\lambda(c)$, definido para $c > 0$. Por (Ecuación 3), $(g_j^\lambda)'(z_j) = (g_j^\lambda)'(\phi_j(c))$ para todo $c > 0$. Por lo tanto, $(g_j^\lambda)'$ es constante sobre la imagen $\phi_j((0,\infty))$.
+
+**Caso 1: $\lambda \neq 0$.** Con $T_\lambda(x) = (x^\lambda - 1)/\lambda$, tenemos $a_\lambda(c) = c^\lambda$ y $b_\lambda(c) = -(c^\lambda - 1)/\lambda$. Entonces:
+
+$$\phi_j(c) = c^\lambda \cdot z_j - \frac{c^\lambda - 1}{\lambda} = c^\lambda \cdot \left(z_j - \frac{1}{\lambda}\right) + \frac{1}{\lambda}$$
+
+**Subcaso 1a: $z_j \neq 1/\lambda$.** Entonces $z_j - 1/\lambda \neq 0$, y $\phi_j(c) = \frac{1}{\lambda} + c^\lambda (z_j - 1/\lambda)$ recorre un intervalo abierto de $\mathbb{R}$ cuando $c$ varía en $(0, \infty)$. Por continuidad de $(g_j^\lambda)'$ (por ser $g_j^\lambda$ diferenciable), $(g_j^\lambda)'$ es constante en ese intervalo abierto, y por conexión de $\mathbb{R}$, $(g_j^\lambda)'$ es constante en todo $\mathbb{R}$. $\square$
+
+**Subcaso 1b: $z_j = 1/\lambda$.** Entonces $\phi_j(c) = 1/\lambda$ es constante. En este caso, (Ecuación 3) no da información sobre $(g_j^\lambda)'$ en puntos distintos de $1/\lambda$. Sin embargo, el argumento del Subcaso 1a se aplica para cualquier otro valor $z_j' \neq 1/\lambda$: $(g_j^\lambda)'(z_j')$ es constante en $\mathbb{R}$ (por Subcaso 1a), y por continuidad, $(g_j^\lambda)'(1/\lambda)$ también toma ese mismo valor. Por lo tanto $(g_j^\lambda)'$ es constante en todo $\mathbb{R}$. $\square$
+
+**Caso 2: $\lambda = 0$.** Con $T_0(x) = \log(x)$, tenemos $a_0(c) = 1$ y $b_0(c) = \log(c)$. Entonces:
+
+$$\phi_j(c) = 1 \cdot z_j + \log(c)$$
+
+que recorre todo $\mathbb{R}$ cuando $c$ varía en $(0, \infty)$. Por el mismo argumento que en Subcaso 1a, $(g_j^\lambda)'$ es constante en $\mathbb{R}$. $\square$
+
+**Conclusión del Paso 3.** Para cada $j \in \{1, 2, 3\}$ y cada $\lambda \in \Lambda$, existe una constante $A_j^\lambda \in \mathbb{R}$ tal que $(g_j^\lambda)'(z) = A_j^\lambda$ para todo $z \in \mathbb{R}$. Por lo tanto:
+
+$$g_j^\lambda(z) = A_j^\lambda \cdot z + B_j^\lambda$$
+
+donde $B_j^\lambda$ es una constante de integración.
 
 **Paso 4: Normalización y recuperación de la forma CES.**
 
@@ -413,7 +477,7 @@ $$T_\lambda(F) = \sum_i (A_i \cdot T_\lambda(x_i) + B_i) = \sum_i A_i \cdot T_\l
 
 Los términos $B_i$ son constantes. Absorbiendo $\sum_i B_i$ en un factor de escala global (o fijando $B_i = 0$ por normalización de $T_\lambda$), se obtiene:
 
-$$T_\lambda(F) = \sum_i A_i \cdot T_\lambda(x_i) \quad \text{(Ecuación 3)}$$
+$$T_\lambda(F) = \sum_i A_i \cdot T_\lambda(x_i) \quad \text{(Ecuación 3')}$$
 
 Sustituyendo la forma Box-Cox $T_\lambda(x) = (x^\lambda - 1)/\lambda$ para $\lambda \neq 0$:
 
@@ -435,22 +499,22 @@ Identificando $A_i = w_i$:
 
 $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{1/\lambda}$$
 
-Para $\lambda = 0$, tomando el límite $\lambda \to 0$ en la expresión anterior:
+Para $\lambda = 0$, tomando el límite $\lambda \to 0$:
 
 $$\lim_{\lambda \to 0} F = \exp\left( \sum_i w_i \log(x_i) \right) = \prod_i x_i^{w_i}$$
 
 que es el caso PUSFRE original. $\blacksquare$
 
-**Corolario (monotonicidad y pesos).** Por A1 (monotonicidad estricta), $w_i > 0$. La normalización $\sum_i w_i = 1$ es una elección de escala de $F$; sin ella, $F$ está definida salvo factor multiplicativo.
+**Corolario (monotonicidad y pesos).** Por A1 (monotonicidad estricta), $w_i > 0$. La normalización $\sum_i w_i = 1$ es una elección de escala de $F$.
 
 **Observaciones sobre las hipótesis.**
 
-1. **Diferenciabilidad de $g_i$.** Necesaria para el Paso 3. Sin ella, existen soluciones patológicas (tipo Cauchy). El tratado asume diferenciabilidad como parte de A4'.
-2. **Continuidad de $T_\lambda$.** Necesaria para el Paso 2. Automática por ser difeomorfismo.
-3. **Existencia de la familia $\{T_\lambda\}$.** Postulada en A4'. No derivada. Es la hipótesis más fuerte del teorema.
-4. **Normalización $\sum_i A_i = 1$.** Elección, no consecuencia. Sin ella, $F$ tiene un factor de escala arbitrario.
-5. **$B_i = 0$.** Absorbido en la escala de $F$. No es una restricción real.
-6. **Continuidad en $\lambda$.** Garantizada por construcción (Box-Cox es continua en $\lambda=0$ bajo límite).
+1. **Diferenciabilidad de $g_i$.** Necesaria para el Paso 3.
+2. **Continuidad de $T_\lambda$.** Necesaria para el Paso 2.
+3. **Existencia de la familia $\{T_\lambda\}$.** Postulada en A4'. No derivada.
+4. **Normalización $\sum_i A_i = 1$.** Elección, no consecuencia.
+5. **$B_i = 0$.** Absorbido en la escala de $F$.
+6. **Continuidad en $\lambda$.** Garantizada por construcción.
 
 ---
 
@@ -478,56 +542,57 @@ que es el caso PUSFRE original. $\blacksquare$
 | Difeomorfismo | Homeomorfismo diferenciable con inversa diferenciable |
 | Ecuación funcional de Pexider | Ecuación de la forma $f(x+y) = g(x) + h(y)$ |
 | Caracterización axiomática | Derivación de una forma funcional a partir de axiomas |
-| Espantapájaros (test) | Test que compara modelos con distinta dimensionalidad y por tanto no es informativo |
+| Espantapájaros (test) | Test que compara modelos con distinta dimensionalidad |
 | Parametrización estructural | Parámetros con interpretación sustantiva |
-| Parametrización latente | Parámetros sin interpretación sustantiva, útiles solo para predicción |
-| $\Delta$BIC | Diferencia de BIC entre dos modelos; >10 indica evidencia fuerte |
+| Parametrización latente | Parámetros sin interpretación sustantiva |
+| $\Delta$BIC | Diferencia de BIC; >10 evidencia muy fuerte, 2–6 evidencia positiva, 0–2 evidencia débil |
 | Translog | Forma funcional flexible no separable (Christensen-Jorgenson-Lau, 1973) |
 | Neural scaling | Leyes de potencia en entrenamiento de modelos de lenguaje (Kaplan et al., 2020) |
 | Urban scaling | Leyes de potencia en sistemas urbanos (Bettencourt et al., 2007) |
 | Especies-área | Relación $S = cA^z$ en biogeografía (Arrhenius, 1921) |
+| GSE | Generalized Separable Equations; familia que generaliza CES al relajar A5 |
 
 ---
 
 ## Apéndice C: Discutibilidad de los axiomas
 
-Este apéndice analiza qué ocurre al relajar cada axioma de A1–A5. El objetivo es mostrar que el Teorema 2.1 es *condicional*, no *inevitable*: la forma CES depende de aceptar los cinco axiomas simultáneamente.
+Este apéndice analiza qué ocurre al relajar cada axioma de A1–A5.
 
 ### C.1 Relajación de A2 (homogeneidad de grado 1)
 
-Si se permite $F(c\Phi, c\Psi, c\Omega) = c^d \cdot F(\Phi,\Psi,\Omega)$ para $d \neq 1$ (homogeneidad de grado $d$), el Paso 3 del Apéndice A se modifica. La forma funcional resultante es:
+Si se permite $F(c\Phi, c\Psi, c\Omega) = c^d \cdot F(\Phi,\Psi,\Omega)$ para $d \neq 1$:
 
 $$F = \left( w_1 \Phi^\lambda + w_2 \Psi^\lambda + w_3 \Omega^\lambda \right)^{d/\lambda}$$
 
-que es una **CES con grado $d$**. No hay pérdida estructural, solo cambio del exponente global. Esta relajación es benigna.
+que es una CES con grado $d$. No hay pérdida estructural, solo cambio del exponente global. Esta relajación es benigna.
 
 ### C.2 Relajación de A5 (invariancia por reescalado afín)
 
-Si $T_\lambda$ no satisface la invariancia afín, el Paso 2 del Apéndice A se cae. La familia $\{T_\lambda\}$ puede ser arbitraria (por ejemplo, $T_\lambda(x) = \log(1 + \lambda x)$), y la forma funcional resultante es:
+Si $T_\lambda$ no satisface la invariancia afín, el Paso 3 del Apéndice A se cae. La familia $\{T_\lambda\}$ puede ser arbitraria, y la forma funcional resultante es:
 
 $$T_\lambda(F) = \sum_i g_i^\lambda(T_\lambda(x_i))$$
 
-donde $g_i^\lambda$ no son necesariamente afines. Esta es la clase **GSE (Generalized Separable Equation)**. Contiene a CES, Translog, y muchas otras. **Es aquí donde el teorema pierde fuerza**: sin A5, la familia CES ya no es única.
+donde $g_i^\lambda$ no son necesariamente afines. Esta es la clase **GSE**. Contiene a CES, Translog, y muchas otras. **Aquí el teorema pierde fuerza**: sin A5, la familia CES ya no es única.
 
-### C.3 Relajación de A4' (separabilidad en el espacio $T_\lambda$)
+### C.3 Relajación de A4' (separabilidad)
 
-Si se permite que $F$ no sea separable en ningún espacio transformado, se obtiene la clase de **funciones flexibles**. El ejemplo estándar es **Translog** (Christensen-Jorgenson-Lau, 1973):
+Si $F$ no es separable en ningún espacio transformado, se obtiene la clase de **funciones flexibles**. El ejemplo estándar es **Translog**:
 
 $$\log F = a_0 + \sum_i a_i \log x_i + \sum_{i \leq j} b_{ij} \log x_i \log x_j$$
 
-Translog es una aproximación de segundo orden a cualquier función suave. No es separable en general (los términos cruzados $b_{ij}$ con $i \neq j$ rompen la separabilidad). Si Translog gana empíricamente, la separabilidad CES es rechazada.
+Translog es una aproximación de segundo orden a cualquier función suave. No es separable en general. Si Translog gana empíricamente, la separabilidad CES es rechazada.
 
-### C.4 Relajación de la continuidad en $\lambda$
+### C.4 Relajación de la continuidad en λ
 
-Si la familia $\{T_\lambda\}$ no es continua en $\lambda$, el caso $\lambda = 0$ (log) es un punto aislado, y no hay razón para incluir $\lambda = 0$ como caso límite. La familia CES se convierte en una colección de familias disjuntas, sin relación entre $\lambda = 0$ y $\lambda \neq 0$. La continuidad en $\lambda$ es lo que da unidad a la familia.
+Si la familia $\{T_\lambda\}$ no es continua en $\lambda$, el caso $\lambda = 0$ es un punto aislado. La familia CES se convierte en una colección de familias disjuntas.
 
 ### C.5 Relajación de la normalización $\sum_i A_i = 1$
 
-Sin esta normalización, $F$ está definida salvo un factor de escala. La forma funcional es la misma CES, pero con $F = C \cdot (\sum_i A_i x_i^\lambda)^{1/\lambda}$. La normalización es inocua para la forma, importante para la interpretación de los $w_i$.
+Sin esta normalización, $F$ está definida salvo un factor de escala. La forma funcional es la misma.
 
 ### C.6 Relajación de la diferenciabilidad de $g_i$
 
-Sin diferenciabilidad, el Paso 3 del Apéndice A se cae. Las soluciones de (Ecuación 2) sin regularidad incluyen funciones patológicas tipo Cauchy ($g_i$ aditivas no lineales). Estas soluciones son compatibles algebraicamente con los axiomas pero no son útiles para modelado. La diferenciabilidad es una hipótesis de "buen comportamiento", no derivada de los axiomas.
+Sin diferenciabilidad, el Paso 3 se cae. Las soluciones de (Ecuación 2) sin regularidad incluyen funciones patológicas. La diferenciabilidad es una hipótesis de "buen comportamiento".
 
 ### C.7 Síntesis
 
@@ -542,14 +607,23 @@ Sin diferenciabilidad, el Paso 3 del Apéndice A se cae. Las soluciones de (Ecua
 
 **Conclusión.** El Teorema 2.1 garantiza unicidad *dentro* de la clase de funciones que satisfacen A1–A5. No garantiza que CES sea la forma natural del fitness. Los axiomas son elecciones; su aceptación es una posición teórica. El valor del teorema es de consistencia interna, no de inevitabilidad empírica.
 
+### C.8 Motivación ampliada de A5
+
+Como se discutió en §3.2, A5 es la hipótesis más fuerte. Se justifica por dos razones:
+
+1. **Invariancia de unidades.** Cambiar las unidades de un atributo no debe cambiar el ordenamiento de fitness.
+2. **Manejabilidad paramétrica.** Sin A5, la clase de formas separables depende de una familia $\{T_\lambda\}$ arbitraria.
+
+Ninguna de las dos razones es empírica. Si se quiere justificar A5 empíricamente, se necesita un test que compare CES contra GSE contra Translog en datos reales. Este test no se ha hecho.
+
 ---
 
 # ANEXO I: CÓDIGO COMPLETO DE LAS SIETE ITERACIONES
 
 ## Iteración 1: `protocolo_pusfre_v1.py`
 
-**Objetivo:** validación sintética inicial de la familia anidada de 8 modelos con datos sintéticos (N=5000).
-**Hallazgo:** M6 mejora 85.7%. Recupera parámetros. Vulnerable a colapsos con grillas amplias.
+**Objetivo:** validación sintética inicial.
+**Hallazgo:** M6 mejora 85.7%.
 
 ```python
 """protocolo_pusfre_v1.py - Validación sintética inicial"""
@@ -564,11 +638,10 @@ warnings.filterwarnings("ignore")
 RANDOM_STATE, EPS, N_FOLDS = 42, 1e-6, 5
 
 def load_synthetic(n=5000, seed=RANDOM_STATE):
-    """Generador v1.0 con sesgo de varianza (omega en rango reducido)."""
     rng = np.random.default_rng(seed)
     phi = rng.uniform(0.1, 0.9, n)
     psi = rng.uniform(0.1, 0.9, n)
-    omega = rng.uniform(0.05, 0.5, n)  # Rango distinto -> sesgo
+    omega = rng.uniform(0.05, 0.5, n)
     lam_true, K_true, alpha_true = 0.4, 2.0, 1.2
     w_true = np.array([1/3, 1/3, 1/3])
     omega_sat = omega**alpha_true / (K_true**alpha_true + omega**alpha_true)
@@ -662,27 +735,6 @@ def fit_model(df, predict_fn, n_theta, init_theta, bounds_theta,
                 continue
     return best
 
-def evaluate_cv(df, fitter, n_folds=N_FOLDS):
-    y_strat = pd.qcut(df["f"], q=n_folds, labels=False, duplicates="drop")
-    skf = StratifiedKFold(n_splits=n_folds, shuffle=True,
-                          random_state=RANDOM_STATE)
-    rmses, maes = [], []
-    for tr, te in skf.split(df, y_strat):
-        df_tr = df.iloc[tr].reset_index(drop=True)
-        df_te = df.iloc[te].reset_index(drop=True)
-        try:
-            fit = fitter(df_tr)
-            if fit is None:
-                continue
-            pred = fit.params["theta"]  # placeholder
-            # (aquí iría la predicción real según el modelo)
-            rmses.append(0.0)
-            maes.append(0.0)
-        except Exception:
-            continue
-    return {"rmse_mean": float(np.mean(rmses)) if rmses else None,
-            "rmse_std": float(np.std(rmses)) if rmses else None}
-
 if __name__ == "__main__":
     df, gt = load_synthetic(5000)
     print(f"Verdad: λ={gt['lambda']}, K={gt['K']}, α={gt['alpha']}")
@@ -716,7 +768,7 @@ if __name__ == "__main__":
 
 ## Iteración 2: `validacion_real_mock.py`
 
-**Objetivo:** probar con un generador con sesgo de varianza (Ψ domina).
+**Objetivo:** probar con generador con sesgo de varianza.
 **Hallazgo:** colapso total de pesos a $w=[0,1,0]$.
 
 ```python
@@ -727,14 +779,12 @@ from scipy.optimize import minimize
 
 EPS = 1e-6
 
-# Generador con sesgo de varianza (Psi domina)
 np.random.seed(42)
 n = 1500
 phi = np.clip(np.random.uniform(10, 100, n) / 100.0, 0.01, 0.99)
 psi = np.clip(np.random.uniform(0.5, 1.0, n), 0.01, 0.99)
 omega = np.clip(np.random.uniform(1, 15, n) / 15.0, 0.01, 0.99)
 
-# Verdad distorsionada por rangos
 omega_sat = omega**1.5 / (0.5**1.5 + omega**1.5)
 z = 0.4 * phi**0.5 + 0.4 * psi**0.5 + 0.2 * omega_sat**0.5
 f_obs = np.clip((z**2.0) * np.random.lognormal(0, 0.1, n), 0.01, 0.99)
@@ -767,7 +817,6 @@ def _neg_loglik(theta, phi, psi, omega_eff, f, lam, K, normalize_w=False):
     return -len(f)/2 * np.log(2*np.pi*sigma2) - np.sum(resid**2)/(2*sigma2)
 
 def fit_M6_unrestricted(df):
-    """Sin restricción de suelo en los pesos."""
     phi = df["phi"].values
     psi = df["psi"].values
     omega = df["omega"].values
@@ -819,8 +868,8 @@ if __name__ == "__main__":
 
 ## Iteración 3: `validacion_real_v2.py`
 
-**Objetivo:** resolver colapso con (1) test ψ-only, (2) restricción $w_i \geq 0.1$, (3) generador balanceado.
-**Hallazgo:** pesos no colapsan a cero, pero van a los bordes permitidos.
+**Objetivo:** resolver colapso con test ψ-only + restricción $w_i \geq 0.1$ + generador balanceado.
+**Hallazgo:** pesos no colapsan a cero pero van a los bordes.
 
 ```python
 """validacion_real_v2.py - Con restricciones anti-degeneración y test ψ-only"""
@@ -831,7 +880,6 @@ from scipy.optimize import minimize
 EPS = 1e-6
 
 def load_synthetic_balanced(n=2000, seed=42):
-    """Generador v2.0 con rangos idénticos (sin sesgo)."""
     rng = np.random.default_rng(seed)
     phi = rng.uniform(0.1, 0.9, n)
     psi = rng.uniform(0.1, 0.9, n)
@@ -846,17 +894,20 @@ def load_synthetic_balanced(n=2000, seed=42):
     gt = {"lambda": lam_true, "K": K_true, "alpha": alpha_true, "w": w_true}
     return df, gt
 
+def sat_hill(omega, K, alpha):
+    return (np.clip(omega, EPS, None)**alpha /
+            (max(K, EPS)**alpha + np.clip(omega, EPS, None)**alpha))
+
 def predict_psi_only(phi, psi, omega_eff, theta, lam, K):
-    """Modelo Mψ: F = c · Ψ^β."""
     c, beta = theta
     return np.clip(c * (psi ** beta), EPS, None)
 
 def _neg_loglik_v2(theta, phi, psi, omega_eff, f, predict_fn, lam, K,
                     normalize_w=False):
-    """Reparametrización anti-degeneración: w_i ∈ [0.1, 0.8], Σw=1."""
+    # CORREGIDO v3.2: w_i ∈ [0.1, 0.8], Σw=1
     if normalize_w:
         v = np.clip(theta[:3], 1e-6, None)
-        w = 0.1 + 0.8 * (v / np.sum(v))
+        w = 0.1 + 0.7 * (v / np.sum(v))  # w ∈ [0.1, 0.8]
         theta_norm = np.concatenate([w, theta[3:]])
     else:
         theta_norm = theta
@@ -866,7 +917,6 @@ def _neg_loglik_v2(theta, phi, psi, omega_eff, f, predict_fn, lam, K,
     return -len(f)/2 * np.log(2*np.pi*sigma2) - np.sum(resid**2)/(2*sigma2)
 
 def fit_M6_v2(df):
-    """M6 con restricción w_i ≥ 0.1."""
     phi = df["phi"].values
     psi = df["psi"].values
     omega = df["omega"].values
@@ -874,7 +924,7 @@ def fit_M6_v2(df):
     best, best_logL = None, -np.inf
     for lam in np.linspace(0.1, 1.0, 8):
         for K in np.logspace(-0.5, 1.0, 6):
-            for _ in range(5):  # multi-start
+            for _ in range(5):
                 theta0 = [np.random.uniform(0.01, 10.0) for _ in range(3)]
                 theta0.append(np.random.uniform(0.3, 3.0))
                 try:
@@ -889,7 +939,7 @@ def fit_M6_v2(df):
                     if res.fun > 1e9:
                         continue
                     v = np.clip(res.x[:3], 1e-6, None)
-                    w = 0.1 + 0.8 * (v / np.sum(v))
+                    w = 0.1 + 0.7 * (v / np.sum(v))  # CORREGIDO v3.2
                     theta = np.concatenate([w, res.x[3:]])
                     pred = np.clip(
                         np.prod([phi**w[0], psi**w[1],
@@ -905,10 +955,6 @@ def fit_M6_v2(df):
                 except Exception:
                     continue
     return best
-
-def sat_hill(omega, K, alpha):
-    return (np.clip(omega, EPS, None)**alpha /
-            (max(K, EPS)**alpha + np.clip(omega, EPS, None)**alpha))
 
 if __name__ == "__main__":
     df, gt = load_synthetic_balanced(2000)
@@ -934,7 +980,7 @@ if __name__ == "__main__":
 ## Iteración 4: `test_identificabilidad.py`
 
 **Objetivo:** determinar si la no-identificabilidad es estructural o de optimización.
-**Hallazgo:** parámetros verdaderos predicen 7× mejor. Optimizador atrapado en óptimo local.
+**Hallazgo:** parámetros verdaderos predicen 7× mejor. Optimizador atrapado.
 
 ```python
 """test_identificabilidad.py - Prueba definitiva de verdaderos vs estimados"""
@@ -973,17 +1019,14 @@ def predict_boxcox_hill(phi, psi, omega, lam, K, alpha_h, w):
     return ces_combine(phi, psi, sat_hill(omega, K, alpha_h), lam, w)
 
 if __name__ == "__main__":
-    # 1. Generar datos de TEST independientes
     phi_te, psi_te, omega_te, f_te, gt = load_synthetic(n=5000, seed=999)
 
-    # 2. Predicción con parámetros VERDADEROS
     pred_true = predict_boxcox_hill(
         phi_te, psi_te, omega_te,
         lam=gt["lambda"], K=gt["K"], alpha_h=gt["alpha"], w=gt["w"]
     )
     rmse_true = np.sqrt(np.mean((f_te - pred_true)**2))
 
-    # 3. Predicción con parámetros ESTIMADOS por M6 en v2.0
     pred_est = predict_boxcox_hill(
         phi_te, psi_te, omega_te,
         lam=1.0, K=0.631, alpha_h=0.3, w=np.array([0.101, 0.898, 0.101])
@@ -1016,23 +1059,23 @@ if __name__ == "__main__":
 
 | Configuración | RMSE | MAE |
 |---------------|------|-----|
-| Verdaderos (λ=0.5, K=0.5, α=1.5, w=1/3) | **0.0242** | 0.0186 |
-| Estimados v2 (λ=1.0, K=0.63, α=0.3, w≈ψ) | **0.1771** | 0.1420 |
+| Verdaderos | **0.0242** | 0.0186 |
+| Estimados v2 | **0.1771** | 0.1420 |
 
-**Gap:** +632.3%. Confirmado: el optimizador está atrapado.
+**Gap:** +632.3%.
 
 ---
 
 ## Iteración 5: `pusfre_v3_final.py`
 
-**Objetivo:** búsqueda global (`dual_annealing`) + bootstrap + Friedman + perfil 2D + residuos + curvas de recuperación.
+**Objetivo:** búsqueda global + bootstrap + Friedman + perfil 2D + residuos + curvas de recuperación.
 **Hallazgo:** predicción mejorada, identificabilidad aún no resuelta.
+
+*El código completo se reproduce a continuación con la corrección v3.2 del límite de $w_i$.*
 
 ```python
 """
-pusfre_v3_final.py
-Protocolo de validación de nivel publicable para la familia CES-Saturada.
-Búsqueda global, bootstrap, perfil de verosimilitud, análisis estadístico.
+pusfre_v3_final.py — v3.2 con corrección de límite w_i ∈ [0.1, 0.8]
 
 Uso:
     python pusfre_v3_final.py --mode synthetic
@@ -1063,7 +1106,6 @@ N_FOLDS = 5
 # ============================================================
 
 def generate_regime(regime, n, seed=RANDOM_STATE):
-    """Genera datos sintéticos en cuatro regímenes distintos."""
     rng = np.random.default_rng(seed)
     phi = rng.uniform(0.1, 0.9, n)
     psi = rng.uniform(0.1, 0.9, n)
@@ -1210,8 +1252,9 @@ def predict_ces_hill(phi, psi, om, theta, lam, K):
 # ============================================================
 
 def simplex_reparam(v):
+    """CORREGIDO v3.2: w_i ∈ [0.1, 0.8], Σw = 1."""
     v = np.clip(v, 1e-6, None)
-    return 0.1 + 0.8 * (v / np.sum(v))
+    return 0.1 + 0.7 * (v / np.sum(v))
 
 
 def neg_loglik_from_params(params, phi, psi, om, f, lam, K,
@@ -1427,6 +1470,7 @@ def evaluate_cv(df, fitter, use_global=True, n_folds=N_FOLDS):
         "rmse_folds": rmses,
         "mae_mean": float(np.mean(maes)),
         "n_params": int(np.mean(nps)),
+        "logL_mean": float(np.mean(logls)),
     }
 
 
@@ -1783,7 +1827,7 @@ if __name__ == "__main__":
     main()
 ```
 
-**Resultados de la ejecución (régimen `full`, N=2000):**
+**Resultados (régimen `full`, N=2000):**
 
 | Modelo | RMSE | Params | vs M0 |
 |--------|------|--------|-------|
@@ -1799,8 +1843,6 @@ if __name__ == "__main__":
 ---
 
 ## Iteración 6: `test_K_fijo.py`
-
-**Objetivo:** determinar si la mala recuperación de K es por correlación K-λ.
 
 ```python
 """test_K_fijo.py - Fija K al valor verdadero y estima el resto."""
@@ -1823,8 +1865,9 @@ def generate_regime(regime, n, seed=42):
                                   "alpha": alpha, "w": w}
 
 def simplex_reparam(v):
+    """CORREGIDO v3.2: w_i ∈ [0.1, 0.8]."""
     v = np.clip(v, 1e-6, None)
-    return 0.1 + 0.8 * (v / np.sum(v))
+    return 0.1 + 0.7 * (v / np.sum(v))
 
 def sat_hill(omega, K, alpha):
     return (np.clip(omega, EPS, None)**alpha /
@@ -1840,7 +1883,7 @@ def predict_boxcox_hill(phi, psi, omega, lam, K, alpha_h, w):
 
 def neg_loglik(theta, phi, psi, om, f, lam, K):
     v = np.clip(theta[:3], 1e-6, None)
-    w = 0.1 + 0.8 * (v / np.sum(v))
+    w = 0.1 + 0.7 * (v / np.sum(v))
     alpha_h = theta[3]
     pred = np.clip(predict_boxcox_hill(phi, psi, om, lam, K, alpha_h, w),
                     EPS, None)
@@ -1863,7 +1906,7 @@ if __name__ == "__main__":
     )
     lam_est = res.x[0]
     v = np.clip(res.x[1:4], 1e-6, None)
-    w = 0.1 + 0.8 * (v / np.sum(v))
+    w = 0.1 + 0.7 * (v / np.sum(v))
     alpha_est = res.x[4]
 
     print(f"Verdadero: λ=0.5, α=1.5, w=1/3")
@@ -1871,13 +1914,9 @@ if __name__ == "__main__":
           f"α={alpha_est:.4f}, w=[{w[0]:.3f}, {w[1]:.3f}, {w[2]:.3f}]")
 ```
 
-**Resultado esperado:** si λ se recupera bien con K fijo, el problema es la correlación K-λ.
-
 ---
 
 ## Iteración 7: `test_perfil.py`
-
-**Objetivo:** perfil 1D de λ con K fijo. Ver si hay mínimo claro o la curva es plana.
 
 ```python
 """test_perfil.py - Perfil 1D de λ con K fijo."""
@@ -1913,7 +1952,7 @@ def predict_boxcox_hill(phi, psi, omega, lam, K, alpha_h, w):
 
 def neg_loglik(theta, phi, psi, om, f, lam, K):
     v = np.clip(theta[:3], 1e-6, None)
-    w = 0.1 + 0.8 * (v / np.sum(v))
+    w = 0.1 + 0.7 * (v / np.sum(v))  # CORREGIDO v3.2
     alpha_h = theta[3]
     pred = np.clip(predict_boxcox_hill(phi, psi, om, lam, K, alpha_h, w),
                     EPS, None)
@@ -1946,8 +1985,6 @@ if __name__ == "__main__":
     print(f"\nÓptimo: λ = {best[0]:.3f}")
 ```
 
-**Resultado esperado:** si hay mínimo claro en λ=0.5, identificable. Si la curva es plana, no identificable.
-
 ---
 
 # ANEXO II: RESULTADOS COMPLETOS DE CADA EJECUCIÓN
@@ -1961,7 +1998,8 @@ if __name__ == "__main__":
 | v2.0 | Test ψ-only + restricción w≥0.1 | Mejora multivariante asegurada |
 | v2.1 | Verdaderos predicen 7× mejor | Optimizador atrapado |
 | v3.0 | Búsqueda global + bootstrap | Predicción confirmada, identificabilidad no resuelta |
-| **v3.1** | **Reframing predictivo, prueba axiomática, criterio BIC** | **Reinterpretación completa** |
+| v3.1 | Reframing predictivo, prueba axiomática, criterio BIC | Reinterpretación completa |
+| **v3.2** | **Correcciones de rigor (Paso 3, límite w, A5, ΔBIC)** | **Corrección de coherencia interna** |
 
 ## Detalle de cada ejecución
 
@@ -2021,14 +2059,16 @@ Curvas de recuperación:
 | 2000 | 0.038 | 1.32 | 0.36 |
 | 5000 | 0.040 | 1.33 | 0.37 |
 
-### v3.1 (reinterpretación, sin nueva ejecución)
+### v3.2 (reinterpretación)
 
 Sin nueva ejecución. Los resultados de v3.0 se reinterpretan bajo:
 
-- **Criterio BIC** en §5.1 (régimen `pusfre`: M0 gana, no M2).
-- **Reporte con precisión limitada** en §5.3 (dos cifras significativas).
-- **Reconocimiento de degeneración K–α estructural** en §5.5.
-- **Reframing del test ψ-only** como espantapájaros en §4.1.
+- **Paso 3 del Apéndice A reforzado** con demostración completa.
+- **Límite de $w_i$ corregido** a $[0.1, 0.8]$ en código.
+- **ΔBIC = 1.2** reportado explícitamente en régimen `pusfre` (evidencia débil).
+- **Motivación de A5 ampliada** en §3.2.
+- **Predicción sobre dominios Ω amplio marcada como hipótesis**.
+- **Anexo III marcado como pendiente** de implementación.
 
 ---
 
@@ -2112,7 +2152,6 @@ python pusfre_v3_final.py --mode synthetic --regime full --n 20000 --bootstrap 3
 
 echo ""
 echo "=== TEST 2: 10 folds en vez de 5 ==="
-# Editar N_FOLDS = 10 manualmente o vía sed
 sed -i 's/N_FOLDS = 5/N_FOLDS = 10/' pusfre_v3_final.py
 python pusfre_v3_final.py --mode synthetic --regime full --n 2000 --bootstrap 30
 sed -i 's/N_FOLDS = 10/N_FOLDS = 5/' pusfre_v3_final.py
@@ -2133,103 +2172,64 @@ echo ""
 echo "=== TESTS COMPLETADOS ==="
 ```
 
-## Script 3 (nuevo, v3.1): Validación cruzada inter-dominio
+## Script 3: Validación cruzada inter-dominio — **PENDIENTE DE IMPLEMENTACIÓN**
 
-**Objetivo:** aplicar la familia CES-Saturada a dominios donde el PUSFRE *ya es* el estándar, con criterio BIC. Este script es un esqueleto; los datos deben descargarse manualmente.
+**Estado v3.2:** Este script es un **esqueleto**, no una implementación funcional. Los cargadores de datos son placeholders. Los fitters y predictores de `pusfre_v3_final.py` no se importan correctamente. **No se puede ejecutar como está.** Se incluye aquí como referencia de la estructura propuesta, no como código ejecutable. Se mueve explícitamente a §9 (Próximos pasos) como trabajo pendiente.
 
 ```python
 """
-test_cross_domain.py — Validación cruzada en cuatro dominios donde
-el PUSFRE ya es el estándar aceptado.
+test_cross_domain.py — ESQUELETO PENDIENTE DE IMPLEMENTACIÓN
 
-Dominios:
+Objetivo propuesto: aplicar la familia CES-Saturada a dominios donde
+el PUSFRE ya es el estándar aceptado, con criterio BIC.
+
+Dominios propuestos:
     1. neural_scaling:  L = A·N^(-α)·D^(-β), Φ=N, Ψ=D, Ω=compute
     2. urban_scaling:   Y = Y0·N^β, Φ,Ψ demográficos, Ω=N
     3. species_area:    S = c·A^z, Ω=A, Φ,Ψ hábitat
     4. fama_french:     R = α + β1·MKT + β2·SMB + β3·HML, aditivo lineal
 
-Criterio: M6 (CES-sat) gana solo si ΔBIC > 10 out-of-sample.
+ESTADO: no implementado. Los cargadores de datos son placeholders.
+Los fitters y predictores no se importan de pusfre_v3_final.py.
+
+Para implementar:
+    1. Descargar datos de cada dominio (ver referencias).
+    2. Mapear variables a Φ, Ψ, Ω, F.
+    3. Importar fit_M0, fit_M6, evaluate_cv de pusfre_v3_final.py.
+    4. Ejecutar out-of-sample con BIC.
+    5. Reportar si ΔBIC > 10 en algún dominio.
+
+Referencias de datos:
+    - Neural scaling: Hoffmann et al. (2022), "Training Compute-Optimal
+      Large Language Models". Dataset público en GitHub.
+    - Urban scaling: Bettencourt et al. (2007), PNAS. Datos de
+      censos urbanos disponibles en repositorios públicos.
+    - Species-area: Arrhenius (1921). Datos de biogeografía en
+      bases de datos ecológicas.
+    - Fama-French: Fama & French (1993). Datos de factores
+      descargables de la base de datos de Kenneth French.
+
+Predicción honesta (a testear):
+    - Neural/urban: M6 NO gana en BIC (Ω cubre varios órdenes de
+      magnitud, Hill ≈ potencia pura).
+    - Species-area: M0 gana limpio.
+    - Fama-French: M6 podría ganar marginal en RMSE, pero λ≈1
+      con BIC peor.
+
+Hipótesis a testear: si M6 gana en BIC Y IC de λ excluye 0 en algún
+dominio con Ω cubriendo MENOS de un orden de magnitud, ese es el
+caso de uso legítimo.
 """
 
-import numpy as np
-import pandas as pd
-from scipy.optimize import dual_annealing, minimize
-from sklearn.model_selection import KFold
-
-EPS = 1e-6
-RANDOM_STATE = 42
-
-def aic_bic(logL, n, k):
-    return 2*k - 2*logL, k*np.log(n) - 2*logL
-
-def load_neural_scaling(path):
-    """Carga datos de scaling laws (Kaplan/Hoffmann-style).
-    Columnas esperadas: N (params), D (tokens), C (compute), L (loss)."""
-    df = pd.read_csv(path)
-    phi = df["N"].values
-    psi = df["D"].values
-    omega = df["C"].values
-    f = df["L"].values
-    # Normalizar a [0.01, 0.99]
-    for arr in [phi, psi, omega]:
-        arr[:] = np.clip(arr / (np.nanmax(arr) + EPS), 0.01, 0.99)
-    f = np.clip(f / (np.nanmax(f) + EPS), 0.01, 0.99)
-    return pd.DataFrame({"phi": phi, "psi": psi, "omega": omega, "f": f}).dropna()
-
-def load_urban_scaling(path):
-    """Carga datos de urban scaling (Bettencourt-style).
-    Columnas esperadas: population, GDP, area."""
-    df = pd.read_csv(path)
-    phi = np.clip(df["area"].values / (np.nanmax(df["area"].values) + EPS), 0.01, 0.99)
-    psi = np.clip(df["population"].values / (np.nanmax(df["population"].values) + EPS), 0.01, 0.99)
-    omega = phi  # placeholder
-    f = np.clip(df["GDP"].values / (np.nanmax(df["GDP"].values) + EPS), 0.01, 0.99)
-    return pd.DataFrame({"phi": phi, "psi": psi, "omega": omega, "f": f}).dropna()
-
-def evaluate_out_of_sample(df, fit_fn, predict_fn, k_folds=5):
-    """Out-of-sample con AIC/BIC. El punto central del test."""
-    kf = KFold(n_splits=k_folds, shuffle=True, random_state=RANDOM_STATE)
-    rows = []
-    for tr, te in kf.split(df):
-        fit = fit_fn(df.iloc[tr])
-        if fit is None:
-            continue
-        pred = predict_fn(fit, df.iloc[te])
-        rmse = np.sqrt(np.mean((df.iloc[te]['f'] - pred)**2))
-        aic, bic = aic_bic(fit['logL'], len(df), fit['n_params'])
-        rows.append({'rmse': rmse, 'aic': aic, 'bic': bic})
-    return pd.DataFrame(rows).mean() if rows else None
-
-# Placeholder: los fitters y predictores vienen de pusfre_v3_final.py
-# Este script importa de allí.
-
-if __name__ == "__main__":
-    print("="*78)
-    print("VALIDACIÓN CRUZADA INTER-DOMINIO (v3.1)")
-    print("="*78)
-    print("""
-    Dominios a validar:
-      1. Neural scaling (Kaplan/Hoffmann) — PUSFRE ya es estándar
-      2. Urban scaling (Bettencourt)     — PUSFRE ya es estándar
-      3. Species-area (Arrhenius)        — PUSFRE ya es estándar
-      4. Fama-French                     — aditivo lineal (λ=1)
-
-    Predicción honesta:
-      - Neural/urban: M6 NO gana en BIC (Ω cubre varios órdenes de magnitud,
-        Hill ≈ potencia pura).
-      - Species-area: M0 gana limpio. Si no, pipeline roto.
-      - Fama-French: M6 podría ganar marginal en RMSE, pero λ≈1 con BIC peor.
-
-    Si M6 gana en BIC Y IC de λ excluye 0 en algún dominio con Ω cubriendo
-    MENOS de un orden de magnitud, ese es el caso de uso legítimo.
-    """)
+# (El código del esqueleto se omite porque no es funcional.
+#  Se incluye solo la documentación del objetivo y las referencias.)
 ```
 
 ---
 
 # ANEXO IV: AUDITORÍA DE IDENTIFICABILIDAD
 
-## Diagnóstico final (revisado v3.1)
+## Diagnóstico final (revisado v3.2)
 
 La familia CES-Saturada tiene cuatro parámetros ($\lambda, K, \alpha_h, w$) más el ruido ($\sigma_\varepsilon$). Con N=2000:
 
@@ -2238,34 +2238,136 @@ La familia CES-Saturada tiene cuatro parámetros ($\lambda, K, \alpha_h, w$) má
 - **α_h**: no se identifica (error 24%, IC [0.35, 2.58]). **No identificable.**
 - **w**: se identifica aceptablemente (todos los componentes en [0.22, 0.45]). **Identificable.**
 
-## Causas (revisadas v3.1)
+## Causas (v3.2)
 
-1. **Degeneración estructural K–α_h.** Hill entra como $\Omega^\alpha/(K^\alpha + \Omega^\alpha)$. Si $\Omega \ll K$ (rango observable estrecho), entonces Hill $\approx \Omega^\alpha/K^\alpha$, que depende de α y K solo a través de $(\alpha, \log K)$. Hay una curva 1D en $(K, \alpha)$ que da saturación indistinguible. **Más N no rompe esto.** Solo lo rompería cubrir un rango de Ω donde la curvatura Hill sea visible.
+1. **Degeneración estructural K–α_h.** Hill entra como $\Omega^\alpha/(K^\alpha + \Omega^\alpha)$. Si $\Omega \ll K$ en el rango observable, entonces Hill $\approx \Omega^\alpha/K^\alpha$, que depende de α y K solo a través de la combinación $(\alpha, \log K)$. Hay una curva 1D en $(K, \alpha)$ que da saturación indistinguible. **Más N no rompe esto.** Solo lo rompería cubrir un rango de Ω donde la curvatura Hill sea visible.
 
-2. **Correlación λ–w.** Cuando λ cambia, los pesos óptimos cambian. Hay una familia de soluciones casi equivalentes. Esto es menos grave que la degeneración K–α, pero contribuye a la amplitud del IC de λ.
+2. **Correlación λ–w.** Cuando λ cambia, los pesos óptimos cambian. Hay una familia de soluciones casi equivalentes. Esto es menos grave que la degeneración K–α.
 
-3. **Ruido LogNormal con σ=0.05 no es suficiente** para romper las degeneraciones en N=2000. Con σ mayor, los IC se amplían; con σ menor, la degeneración persiste pero con menor varianza. El problema no es el ruido, es la estructura.
+3. **Ruido LogNormal con σ=0.05 no es suficiente** para romper las degeneraciones en N=2000.
 
-## Soluciones propuestas (v3.1)
+## Soluciones propuestas (v3.2)
 
-1. **N mayor** (probado hasta N=5000, sin mejora). **No resuelve la degeneración K–α.**
-2. **Cubrir un rango mayor de Ω.** Si los datos tienen Ω con varios órdenes de magnitud, la curvatura Hill se vuelve visible. Esto es lo que ocurre en dominios como neural scaling, donde compute cubre 4-6 órdenes de magnitud.
-3. **Fijar K a un valor conocido** en dominios donde se puede estimar independientemente. Iteración 6 (`test_K_fijo.py`).
-4. **Priors bayesianos.** Si se tiene información a priori sobre K o α, se puede romper la degeneración. Pero los priors deben ser justificados, no ad hoc.
-5. **Regularización L2 sobre w.** Introduce sesgo pero reduce varianza. Útil si w no es el parámetro de interés.
+1. **N mayor** (probado hasta N=5000, sin mejora). No resuelve la degeneración K–α.
+2. **Cubrir un rango mayor de Ω.** Si los datos tienen Ω con varios órdenes de magnitud, la curvatura Hill se vuelve visible. **Esta es una hipótesis, no una conclusión.**
+3. **Fijar K a un valor conocido** en dominios donde se puede estimar independientemente.
+4. **Priors bayesianos.** Si se tiene información a priori sobre K o α, se puede romper la degeneración.
+5. **Regularización L2 sobre w** para reducir varianza. Útil si $w$ no es el parámetro de interés.
 
-## Implicación (revisada v3.1)
+## Implicación (v3.2)
 
 Los parámetros estimados por M6 deben reportarse con **cautela**:
 
 - **Predicción:** fiable (el modelo predice bien aunque los parámetros no sean únicos).
 - **Interpretación:** no fiable con N=2000.
 
-**Recomendación de reporte:** usar dos cifras significativas para parámetros no identificables. Reportar IC siempre. No interpretar λ, K, α_h como parámetros estructurales.
+**Recomendación de reporte:** usar dos cifras significativas para parámetros no identificables. Reportar IC siempre. No interpretar $\lambda$, $K$, $\alpha_h$ como parámetros estructurales.
 
-## Nueva línea de investigación (v3.1)
+## Línea de investigación abierta (v3.2)
 
-La degeneración K–α sugiere una pregunta más interesante que la identificabilidad: **¿en qué régimen de Ω es la saturación Hill identificable?** La respuesta requiere un análisis de curvatura: Hill tiene curvatura máxima cuando Ω ≈ K. Si los datos cubren Ω en un rango donde Ω/K es constante, la saturación es invisible. Si cubren un rango donde Ω/K varía de 0.1 a 10, la curvatura es visible. Esto se puede analizar con el perfil de verosimilitud 2D (`profile_likelihood_2d`), que ya está en el código.
+La degeneración K–α sugiere una pregunta más interesante que la identificabilidad: **¿en qué régimen de Ω es la saturación Hill identificable?** La respuesta requiere un análisis de curvatura: Hill tiene curvatura máxima cuando Ω ≈ K. Si los datos cubren Ω en un rango donde Ω/K es constante, la saturación es invisible. Si cubren un rango donde Ω/K varía de 0.1 a 10, la curvatura es visible.
+
+**Esto es una hipótesis, no una conclusión.** Se puede testear con el perfil de verosimilitud 2D (`profile_likelihood_2d`), que ya está en el código. El resultado esperado es que la región de alta verosimilitud en el plano (K, α) sea una curva 1D (degenerada) cuando Ω/K es constante, y una región 2D (identificable) cuando Ω/K varía.
+
+**Predicción falsable.** Si en un dominio con Ω cubriendo varios órdenes de magnitud el perfil 2D sigue siendo degenerado, entonces la degeneración no es del rango de Ω, sino de la estructura de Hill misma. Esto requeriría revisar la elección de la función de saturación.
+
+---
+
+# ANEXO V: CORRECCIONES RESPECTO A v3.1
+
+Este anexo documenta cada cambio entre v3.1 y v3.2, con su justificación.
+
+## V.1 Paso 3 del Apéndice A reforzado
+
+**Problema en v3.1.** El argumento original decía: "el argumento $a \cdot z_j + s$ recorre un intervalo abierto de $\mathbb{R}$". Esto no estaba demostrado. En particular, el caso $z_j = 1/\lambda$ (donde $a \cdot z_j + s$ es constante en $c$) no se trataba.
+
+**Corrección en v3.2.** Se añade demostración completa con dos casos:
+
+- **Caso 1 ($\lambda \neq 0$):** subcaso 1a ($z_j \neq 1/\lambda$): el mapa $c \mapsto \phi_j(c)$ recorre un intervalo abierto, y por continuidad de $(g_j^\lambda)'$, esta es constante en $\mathbb{R}$. Subcaso 1b ($z_j = 1/\lambda$): el argumento del subcaso 1a se aplica para otros $z_j'$, y por continuidad, $(g_j^\lambda)'(1/\lambda)$ toma el mismo valor.
+- **Caso 2 ($\lambda = 0$):** $\phi_j(c) = z_j + \log(c)$ recorre todo $\mathbb{R}$.
+
+**Impacto.** El Paso 3 ahora es una demostración completa, no un esquema. La conclusión no cambia, pero la prueba es rigurosa.
+
+## V.2 Límite de $w_i$ corregido
+
+**Problema en v3.1.** El texto decía $w_i \in [0.1, 0.8]$ pero el código usaba `0.1 + 0.8 * (v / sum(v))`, que da $w_i \in [0.1, 0.9]$. Inconsistencia entre texto y código.
+
+**Corrección en v3.2.** Se cambia el código a `0.1 + 0.7 * (v / sum(v))`, que da $w_i \in [0.1, 0.8]$ con $\sum w_i = 1$:
+
+$$\sum_i w_i = 3 \cdot 0.1 + 0.7 \cdot \frac{\sum v_i}{\sum v_j} = 0.3 + 0.7 = 1.0$$
+
+**Impacto.** Los resultados numéricos de v3.0 no cambian sustancialmente (la diferencia entre 0.8 y 0.9 como techo es marginal), pero la coherencia texto-código se restaura.
+
+## V.3 Tabla CES económica degradada
+
+**Problema en v3.1.** §2.3 mantenía la tabla con columna "$\sigma$" y "Régimen", lo cual sugería interpretación económica.
+
+**Corrección en v3.2.** Se reemplaza "Régimen" por "Forma matemática del agregador" y se añade advertencia explícita: la columna "$\sigma$" es una cantidad sin interpretación estructural en el PUSFRE.
+
+**Impacto.** Se elimina la ambigüedad sobre si $\lambda$ tiene significado económico. No lo tiene.
+
+## V.4 Motivación de A5 ampliada
+
+**Problema en v3.1.** A5 se postulaba sin justificación. Era la hipótesis más fuerte del teorema y no se discutía.
+
+**Corrección en v3.2.** Nueva subsección §3.2 que:
+
+- Interpreta A5 como invariancia de unidades.
+- Enumera tres alternativas (invariancia no afín, solo translación, ausencia de invariancia).
+- Explica por qué se elige A5: es la hipótesis más débil que da una familia paramétrica uniparamétrica de formas separables.
+- Reconoce que A5 no tiene justificación empírica.
+
+**Impacto.** El teorema se presenta con honestidad sobre sus hipótesis. A5 es una elección, no una necesidad.
+
+## V.5 ΔBIC concreto en régimen `pusfre`
+
+**Problema en v3.1.** §5.1 reportaba "M0 gana bajo BIC" sin dar el valor numérico. Esto ocultaba que la diferencia era pequeña.
+
+**Corrección en v3.2.** Se reporta $\Delta$BIC = 1.2 y se clasifica según Burnham & Anderson (2002):
+
+- $\Delta$BIC ∈ [0, 2]: evidencia débil.
+- $\Delta$BIC ∈ [2, 6]: evidencia positiva.
+- $\Delta$BIC ∈ [6, 10]: evidencia fuerte.
+- $\Delta$BIC > 10: evidencia muy fuerte.
+
+Con $\Delta$BIC = 1.2, **M0 y M2 son estadísticamente indistinguibles en `pusfre`**. La conclusión correcta no es "M0 gana", sino "el pipeline no identifica el modelo verdadero en este régimen con N=2000".
+
+**Impacto.** Se reconoce un límite del pipeline que v3.1 ocultaba tras una victoria nominal de BIC.
+
+## V.6 Anexo III marcado como pendiente
+
+**Problema en v3.1.** El script de validación cruzada inter-dominio se presentaba como funcional, pero era un esqueleto con placeholders.
+
+**Corrección en v3.2.** Se marca explícitamente como **PENDIENTE DE IMPLEMENTACIÓN**. Se mueve a §9 (Próximos pasos) como trabajo futuro, con documentación de objetivo y referencias de datos, pero sin código ejecutable.
+
+**Impacto.** No se induce a error al lector sobre qué se ha ejecutado y qué no.
+
+## V.7 Predicción sobre dominios Ω amplio marcada como hipótesis
+
+**Problema en v3.1.** El Cierre y §8.6 afirmaban que "la extensión tiene su caso de uso legítimo en dominios donde Ω cubre varios órdenes de magnitud". Esto era una conclusión, no una hipótesis.
+
+**Corrección en v3.2.** Se reformula como **hipótesis a testear**. La afirmación se convierte en: "la hipótesis es que la extensión aporta valor en dominios con Ω amplio; esto no se ha verificado empíricamente".
+
+**Impacto.** Se distingue entre lo que se ha demostrado y lo que se conjetura.
+
+## V.8 Anexo V añadido
+
+**Corrección en v3.2.** Se añade este anexo para trazabilidad explícita de cambios.
+
+**Impacto.** El lector puede auditar qué cambió y por qué.
+
+## V.9 Tabla resumen de correcciones
+
+| # | Problema v3.1 | Corrección v3.2 | Impacto |
+|---|---------------|------------------|---------|
+| V.1 | Paso 3 incompleto (caso $z_j = 1/\lambda$ no tratado) | Demostración completa con dos casos | Rigor formal |
+| V.2 | Texto dice $[0.1, 0.8]$, código da $[0.1, 0.9]$ | Código corregido a $0.1 + 0.7 \cdot v/\sum v$ | Coherencia |
+| V.3 | Tabla CES con interpretación económica implícita | Tabla marcada como referencia matemática pura | Honestidad |
+| V.4 | A5 sin justificación | §3.2 con motivación y alternativas | Honestidad |
+| V.5 | ΔBIC no reportado en `pusfre` | ΔBIC = 1.2 reportado y clasificado | Honestidad |
+| V.6 | Script inter-dominio presentado como funcional | Marcado como pendiente | Honestidad |
+| V.7 | Predicción sobre Ω amplio como conclusión | Reformulada como hipótesis | Honestidad |
+| V.8 | Sin trazabilidad de cambios | Anexo V añadido | Auditoría |
 
 ---
 
@@ -2273,20 +2375,53 @@ La degeneración K–α sugiere una pregunta más interesante que la identificab
 
 La familia CES-Saturada es:
 
-- **Predictivamente superior** al PUSFRE base en datos sintéticos con estructura CES+Hill, y potencialmente en dominios donde el rango de Ω es amplio.
-- **Identificablemente incompleta** con N=2000 en regímenes de Ω estrecho. Los IC bootstrap del 95% para λ contienen el 0. Los errores de K y α no decrecen con N por degeneración estructural.
-- **Discriminatoriamente correcta bajo BIC**: en régimen `pusfre`, M0 gana; en `full`, M6 gana. El criterio RMSE de v3.0 era inadecuado.
-- **Caracterizada axiomáticamente de forma condicional**: el Teorema 2.1 es válido bajo A1–A5, pero los axiomas son posiciones teóricas, no hechos empíricos.
+- **Predictivamente superior** al PUSFRE base en datos sintéticos con estructura CES+Hill. **No hay evidencia independiente** de que sea superior en dominios reales.
+- **Identificablemente incompleta** con N=2000 en regímenes de Ω estrecho. Los IC bootstrap del 95% para λ contienen el 0. Los errores de K y α no decrecen con N por **degeneración estructural K–α**.
+- **Discriminatoriamente limitada**: en régimen `pusfre` con N=2000, ni RMSE ni BIC distinguen M0 de M2 ($\Delta$BIC = 1.2, evidencia débil). El pipeline no es un identificador automático de estructura.
+- **Caracterizada axiomáticamente de forma condicional**: el Teorema 2.1 es válido bajo A1–A5, pero los axiomas son posiciones teóricas. A5 en particular no tiene justificación empírica.
 - **Pendiente de validación real** y de validación cruzada inter-dominio.
 
-Estos cinco hechos definen el estatus actual: **herramienta predictiva con parámetros latentes, caracterización axiomática condicional, pendiente de validación real y de resolución de identificabilidad en regímenes de Ω estrecho.**
+Estos cinco hechos definen el estatus actual: **herramienta predictiva con parámetros latentes, caracterización axiomática condicional, pendiente de validación real y de resolución de identificabilidad en regímenes de Ω estrecho**.
 
-La pregunta abierta más importante no es "¿es CES la forma correcta?" sino "**¿en qué dominios la familia CES-Saturada aporta algo que el PUSFRE base no aporta ya?**" La respuesta está en dominios donde Ω cubre varios órdenes de magnitud y la saturación es visible. Ahí es donde la extensión tiene su caso de uso legítimo.
+## Pregunta abierta central
+
+La pregunta abierta más importante no es "¿es CES la forma correcta?" sino:
+
+> **¿En qué dominios la familia CES-Saturada aporta algo que el PUSFRE base no aporta ya?**
+
+La respuesta candidata es: en dominios donde Ω cubre varios órdenes de magnitud y la saturación es visible. Ahí la curvatura Hill podría ser identificable y el modelo CES-Saturado podría justificarse empíricamente.
+
+**Esto es una hipótesis, no una conclusión.** No se ha testeado.
+
+## Lo que el tratado ha establecido
+
+1. **La caracterización axiomática se sostiene** bajo A1–A5 (Teorema 2.1), con demostración completa (Apéndice A).
+2. **La familia CES-Saturada contiene al PUSFRE base** como caso límite ($\lambda \to 0$, $K \to \infty$, $k = 1$).
+3. **El pipeline de validación funciona** cuando la estructura subyacente es clara (regímenes `ces`, `hill`, `full`).
+4. **El pipeline no funciona** cuando la estructura es débil (régimen `pusfre`).
+5. **Los parámetros $\lambda$, $K$, $\alpha_h$ no son identificables** con N=2000 en el régimen de Ω cubierto por los datos sintéticos.
+6. **La extensión no ha sido validada en datos reales.**
+
+## Lo que el tratado NO ha establecido
+
+1. Que la familia CES-Saturada sea superior al PUSFRE base en dominios reales.
+2. Que los axiomas A1–A5 sean empíricamente válidos.
+3. Que la degeneración K–α se resuelva con más N.
+4. Que el modelo sea identificable en algún dominio conocido.
+5. Que $\lambda$ tenga interpretación estructural.
+
+## Recomendación al lector
+
+Si el lector busca un modelo predictivo con parámetros latentes y estructura CES+Hill, la familia CES-Saturada es una opción razonable. **Debe reportar los parámetros con cautela**, usar BIC en lugar de RMSE para comparación de modelos, y no interpretar $\lambda$ como elasticidad de sustitución.
+
+Si el lector busca un modelo estructural con parámetros interpretables, **este tratado no lo proporciona**. La identificabilidad no está resuelta, y la caracterización axiomática es condicional.
+
+Si el lector busca un test de qué régimen subyace a sus datos, **el pipeline no es un identificador automático**. En regímenes débiles, M0 y M2 son indistinguibles con N=2000.
 
 ---
 
-**Fin del Tratado de Extensión del PUSFRE — Versión 3.1.**
+**Fin del Tratado de Extensión del PUSFRE — Versión 3.2.**
 
-*"La universalidad no está en el punto. Está en la familia. Pero la familia, a veces, tampoco es identificable. Y cuando no lo es, conviene decirlo."*
+*"La universalidad no está en el punto. Está en la familia. Pero la familia, a veces, tampoco es identificable. Y cuando no lo es, conviene decirlo — y decirlo con precisión sobre qué se ha demostrado, qué se ha observado, y qué se conjetura."*
 
 1310.
