@@ -440,7 +440,7 @@ Fama-French es un dominio donde:
 
 | Criterio | Neural Scaling | Fama-French |
 |:---|:---|:---|
-| Rango de $\Omega$ | 3 órdenes | < 1 orden |
+| Rango de $\Omega$ | 3 Órdenes | < 1 orden |
 | Estructura | Multiplicativa | Aditiva |
 | Saturación | Visible | No visible |
 | $\Delta$BIC M6 vs M0 | −14.3 | +8.7 |
@@ -707,7 +707,7 @@ $\Omega \sim 10^{\mathcal{U}(-2, 3)}$, $K_{\text{true}} = 1.0$, $\alpha_{\text{t
 | Régimen | Error $K$ | Error $\alpha_h$ | ¿Identificable? |
 |:---|:---|:---|:---|
 | Ω estrecho (0.1–0.9) | 132% | 24% | No |
-| Ω amplio (5 órdenes) | 8% | 2% | Sí |
+| Ω amplio (5 Órdenes) | 8% | 2% | Sí |
 
 ---
 
@@ -1738,7 +1738,7 @@ if __name__ == "__main__":
 | v3.1 | Reframing predictivo, caracterización axiomática | Reinterpretación completa |
 | v3.2 | Correcciones de rigor | Coherencia interna |
 | v3.4 | Paso 2 corregido, degeneración demostrada, Neural Scaling | Cierre epistémico |
-| **v3.5** | **Fama-French negativo, GSE desarrollado, test Ω 5+ órdenes** | **Cierre de pendientes** |
+| **v3.5** | **Fama-French negativo, GSE desarrollado, test Ω 5+ Órdenes** | **Cierre de pendientes** |
 
 ### Detalle numérico por iteración
 
@@ -1805,7 +1805,7 @@ if __name__ == "__main__":
 | Fama-French | M6 | 0.0231 | +8.7 |
 | Fama-French | Translog | 0.0220 | −2.1 |
 
-**v3.5 (test Ω 5+ órdenes):**
+**v3.5 (test Ω 5+ Órdenes):**
 
 | Parámetro | Verdadero | Estimado | Error | IC 95% |
 |:---|:---|:---|:---|:---|
@@ -1839,7 +1839,7 @@ if [ ! -f datos/fama_french.csv ]; then
 fi
 python pusfre_v3_final.py --mode fama_french --data datos/F-F_Research_Data_Factors.csv --bootstrap 200
 
-echo "=== [3/3] Test Ω 5+ órdenes de magnitud ==="
+echo "=== [3/3] Test Ω 5+ Órdenes de magnitud ==="
 python test_omega_amplio.py
 
 echo ""
@@ -1857,7 +1857,7 @@ echo "=== Completado ==="
 | Régimen de $\Omega$ | $\lambda$ | $K$ | $\alpha_h$ | $w$ |
 |:---|:---|:---|:---|:---|
 | Estrecho (1 orden) | ✅ [0.31, 0.62] | ❌ [0.42, 3.15] | ❌ [0.88, 1.42] | ✅ [0.28, 0.39] |
-| Amplio (5 órdenes) | ✅ [0.42, 0.56] | ✅ [0.78, 1.47] | ✅ [1.28, 1.71] | ✅ [0.31, 0.36] |
+| Amplio (5 Órdenes) | ✅ [0.42, 0.56] | ✅ [0.78, 1.47] | ✅ [1.28, 1.71] | ✅ [0.31, 0.36] |
 
 ### Causas
 
@@ -1891,7 +1891,7 @@ echo "=== Completado ==="
 | T2.1 | Neural Scaling | ✅ | ΔBIC = −14.3 |
 | T2.2 | Reposicionamiento | ✅ | Prólogo reescrito |
 | T2.3 | Apéndice GSE | ✅ | Cierre de vía A5 |
-| T2.4 | Test Ω 5+ órdenes | ✅ | Degeneración rota |
+| T2.4 | Test Ω 5+ Órdenes | ✅ | Degeneración rota |
 | T2.5 | Fama-French | ✅ | ΔBIC = +8.7 (negativo) |
 | T3.1 | Conteo de parámetros | ✅ | Consistencia |
 | T3.2 | Bootstrap 1000 | ✅ | Consistencia |
@@ -1975,7 +1975,7 @@ En matemáticas aplicadas, hay tres tipos de afirmaciones que se confunden con f
 | Categoría | Significado | Ejemplo |
 |-----------|-------------|---------|
 | **A** | Demostrado analíticamente. | Proposición 5.1 |
-| **B** | Inferencia razonable desde A. | Que la degeneración se rompe con Ω cubriendo 3+ órdenes |
+| **B** | Inferencia razonable desde A. | Que la degeneración se rompe con Ω cubriendo 3+ Órdenes |
 | **C** | Hipótesis operativa. | Que la saturación será visible en Neural Scaling a 10^25 FLOPs |
 | **D** | Analogía heurística. | Que la degeneración es análoga a un punto fijo de renormalización |
 
@@ -2129,7 +2129,7 @@ $$\text{Var}(\hat\alpha) = \frac{\sigma^2}{\sum_i (\log \Omega_i - \overline{\lo
 
 **Corolario 2.3.1.** *Categoría A.* La varianza de $\hat\alpha$ decrece con la varianza del log Ω.
 
-**Corolario 2.3.2.** *Categoría B.* Para error relativo < 10% se requiere Ω cubriendo al menos 1.5 órdenes de magnitud.
+**Corolario 2.3.2.** *Categoría B.* Para error relativo < 10% se requiere Ω cubriendo al menos 1.5 Órdenes de magnitud.
 
 ### §2.3 Detección automática de régimen
 
@@ -2222,7 +2222,7 @@ def analyze_subsaturated(Omega, H, alpha_prior=None):
     if omega_range < 1.0:
         warnings.append("Ω cubre < 1 orden. K no identificable.")
     elif omega_range < 3.0:
-        warnings.append("Ω cubre 1-3 órdenes. K marginalmente identificable.")
+        warnings.append("Ω cubre 1-3 Órdenes. K marginalmente identificable.")
     if saturation_detected:
         warnings.append("Saturación detectada. Ajustar Hill completa.")
     
@@ -3108,10 +3108,10 @@ def detect_regime(Omega: np.ndarray, H: np.ndarray) -> RegimeDetectionResult:
         warning = "Ω cubre < 1 orden. K no identificable. Usar solo A y α."
     elif omega_range < 3.0:
         regime = "subsaturated"
-        warning = "Ω cubre 1-3 órdenes. K marginalmente identificable."
+        warning = "Ω cubre 1-3 Órdenes. K marginalmente identificable."
     else:
         regime = "subsaturated"
-        warning = "Ω cubre > 3 órdenes. K potencialmente identificable."
+        warning = "Ω cubre > 3 Órdenes. K potencialmente identificable."
     
     return RegimeDetectionResult(
         regime=regime,
@@ -3305,3 +3305,6 @@ if __name__ == "__main__":
 *"El toolkit sub-saturado está disponible. La pregunta ya no es si la degeneración K–α existe, sino qué se hace con ella. Este anexo responde: se explota. Se convierte en herramienta. Se exporta a doce dominios. Se formaliza en código ejecutable. Y cuando el sistema finalmente muestra saturación, la misma herramienta que estimó A permite estimar K. Sin contradicción. Sin salto. Con coherencia matemática."*
 
 **1310.**
+
+---
+
