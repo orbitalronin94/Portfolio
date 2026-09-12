@@ -966,9 +966,7 @@ La familia CES-Saturada mejora en tres de cinco dominios. El resultado negativo 
 
 ---
 
-### Software
 
-Repositorio: `github.com/ronin-lang/trilogy/paper_c`. Datasets en Zenodo. CI con cobertura 94\%.
 
 ---
 
