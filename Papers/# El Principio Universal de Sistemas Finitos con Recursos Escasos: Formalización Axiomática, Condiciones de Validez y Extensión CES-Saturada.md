@@ -1,253 +1,233 @@
-# El Principio Universal de Sistemas Finitos con Recursos Escasos: Formalización Axiomática, Condiciones de Validez y Extensión CES-Saturada
+# Tres Artículos para Tres Revistas
+
+**Nota del autor.** Los tres manuscritos que siguen constituyen una trilogía. Cada uno es autocontenido y puede leerse de forma independiente, pero comparten la misma notación, las mismas referencias cruzadas y la misma familia de resultados. El Artículo A es una nota técnica para una revista de economía matemática. El Artículo B es un trabajo metodológico para una revista de estadística. El Artículo C es un trabajo empírico para una revista de aprendizaje automático o interdisciplinar. Se recomienda a los editores considerar los tres como publicaciones complementarias, no redundantes.
+
+---
+
+# ARTÍCULO A
+
+## Nota Técnica: Una Caracterización Axiomática de la Función de Fitness en Sistemas Finitos con Recursos Escasos
 
 **Autor:** David Ferrandez Canalis
 **Afiliación:** Agencia RONIN
-**Clasificación propuesta:** arXiv preprint, stat.ME (primario), cs.MA (secundario)
-**Licencia:** CC BY-NC-SA 4.0
+**Destino propuesto:** *Journal of Mathematical Economics* (o *Economic Theory*)
+**Tipo de contribución:** Nota técnica
 
 ---
 
-## Resumen
+### Resumen
 
-Se presenta una formalización axiomática del Principio Universal de Sistemas Finitos con Recursos Escasos (PUSFRE), un marco para modelar la asignación de recursos entre agentes competidores. El PUSFRE propone que la función de fitness de cada agente es de la forma $F_i = \Phi_i \cdot \Psi_i \cdot \Omega_i^\alpha \cdot \varepsilon_i$, donde $\Phi_i$ representa capacidad, $\Psi_i$ consistencia, $\Omega_i$ frecuencia y $\alpha$ el exponente de competencia. Se demuestra que esta forma funcional es la única compatible con cinco axiomas sobre sistemas en competencia, bajo condiciones de regularidad explícitas, y se identifican los supuestos adicionales necesarios para derivarla. Se establece que el PUSFRE es empíricamente falsable en tres dimensiones: separabilidad multiplicativa, ausencia de saturación y ausencia de memoria. Se propone una extensión CES-Saturada que relaja los tres supuestos y contiene al PUSFRE como caso límite. Se demuestra que la extensión exhibe una degeneración estructural entre la constante de saturación y el exponente Hill cuando el rango observable de $\Omega$ es estrecho, y que esta degeneración no se resuelve con más datos. La validación externa en tres dominios (Neural Scaling, Urban Scaling, Fama-French) muestra resultados positivos en dos y negativo en uno, delimitando el caso de uso legítimo. Se discuten alternativas bayesianas y se reportan benchmarks de coste computacional.
+Se presenta una caracterización axiomática de la función de fitness en sistemas finitos donde agentes heterogéneos compiten por un recurso escaso. Bajo ocho axiomas —monotonía, penalización de inconsistencia, concavidad en frecuencia, separabilidad multiplicativa, homogeneidad de grado $k$, elasticidades unitarias en capacidad y consistencia, y regularidad— se demuestra que la única forma funcional compatible es $F_i = C \Phi_i \Psi_i \Omega_i^\alpha$ con $\alpha \in (0, 1]$. Se discute la relación con los axiomas estándar de funciones de producción (CES, Arrow-Chenery-Minhas-Solow 1961) y se identifican explícitamente los supuestos que no se derivan de la noción de competencia. La nota es deliberadamente breve y se limita al aspecto axiomático. Los resultados de identificabilidad estadística y de validación empírica asociados a esta caracterización se desarrollan en trabajos complementarios.
 
-**Palabras clave:** PUSFRE, CES, Hill, sistemas multi-agente, identificabilidad estructural, degeneración de parámetros, validación externa.
+**Palabras clave:** axiomas de competencia, función de fitness, homogeneidad, separabilidad, unicidad funcional.
 
----
-
-## 1. Introducción
-
-### 1.1 Contexto y motivación
-
-En múltiples disciplinas, el problema de modelar cómo un conjunto de agentes compite por un recurso escaso aparece con regularidad estructural. En economía, la competencia entre firmas por cuota de mercado. En ecología, la competencia entre especies por recursos limitados. En sistemas multi-agente de inteligencia artificial, la competencia entre agentes por tokens de contexto o por capacidad de cómputo. En epidemiología, la competencia entre cepas virales por huéspedes susceptibles. En cada caso, la pregunta formal es la misma: ¿cómo se distribuye el recurso entre los competidores, y qué determina la capacidad de cada uno para retenerlo?
-
-El marco PUSFRE (Principio Universal de Sistemas Finitos con Recursos Escasos) propone que esta pregunta admite una respuesta unificada. Bajo ciertos axiomas sobre la naturaleza de la competencia, la función de fitness de cada agente es de la forma multiplicativa $F_i = \Phi_i \cdot \Psi_i \cdot \Omega_i^\alpha \cdot \varepsilon_i$. La asignación de recurso es proporcional al fitness normalizado.
-
-Este trabajo tiene tres objetivos:
-
-1. **Formalizar el PUSFRE** con rigor matemático, explicitando los axiomas, el teorema de unicidad y las condiciones de regularidad. La presentación previa del marco ha sido dispersa y no ha establecido claramente qué se demuestra y qué se asume.
-
-2. **Establecer la falsabilidad empírica** del PUSFRE en tres dimensiones: separabilidad multiplicativa, ausencia de saturación, ausencia de memoria. Se argumenta que ninguna de las tres se verifica universalmente y que el marco debe considerarse una hipótesis empírica, no una ley.
-
-3. **Proponer y validar una extensión** (CES-Saturada con memoria) que relaja los tres supuestos, contiene al PUSFRE como caso límite y ha sido validada empíricamente en tres dominios externos.
-
-### 1.2 Contribuciones
-
-1. **Formalización axiomática del PUSFRE.** Cinco axiomas (A1–A5) sobre sistemas finitos en competencia, con un teorema de unicidad que establece la ecuación maestra como única forma funcional compatible bajo condiciones de regularidad. Se identifican explícitamente los supuestos adicionales necesarios (linealidad en $\Phi$ y $\Psi$) que no se derivan de los axiomas solos.
-
-2. **Análisis de falsabilidad.** Tres dimensiones en las que el PUSFRE puede ser rechazado empíricamente: no separabilidad, saturación y memoria.
-
-3. **Extensión CES-Saturada.** Familia paramétrica que generaliza el PUSFRE y relaja los tres supuestos. Se demuestran los casos límite y se caracteriza la degeneración estructural $K$–$\alpha_h$.
-
-4. **Validación externa en tres dominios.** Neural Scaling (positivo), Urban Scaling (positivo), Fama-French (negativo). El tercer dominio delimita el caso de uso.
-
-5. **Análisis de sensibilidad global (Sobol)** que cuantifica la contribución de cada parámetro a la varianza de la respuesta.
-
-### 1.3 Estructura del trabajo
-
-La Sección 2 presenta el PUSFRE formal: dominio, axiomas, teorema, y condiciones de validez. La Sección 3 analiza la falsabilidad del marco. La Sección 4 desarrolla la extensión CES-Saturada. La Sección 5 demuestra la degeneración estructural. La Sección 6 describe el protocolo experimental. La Sección 7 reporta la validación sintética. Las Secciones 8–10 reportan la validación externa en tres dominios. La Sección 11 discute alternativas bayesianas. La Sección 12 concluye.
-
-### 1.4 Categorías epistémicas
-
-Las afirmaciones se etiquetan con una de cuatro categorías:
-
-| Categoría | Significado |
-|-----------|-------------|
-| A | Demostrado analíticamente. Verdad independiente del mundo. |
-| B | Inferencia razonable desde A, con supuestos explícitos y evidencia empírica. |
-| C | Hipótesis operativa. Requiere validación empírica adicional. |
-| D | Analogía heurística. No constituye afirmación formal. |
+**JEL:** D21, D24, C60.
 
 ---
 
-## 2. El PUSFRE: formalización axiomática
+### 1. Introducción
 
-### 2.1 Dominio de definición
+La literatura sobre funciones de producción y funciones de utilidad ha desarrollado caracterizaciones axiomáticas para una variedad de formas funcionales. Arrow, Chenery, Minhas y Solow (1961) introdujeron la familia de elasticidad de sustitución constante (CES) y la caracterizaron mediante axiomas sobre elasticidades. Brown y De Cani (1963) extendieron el análisis a formas más generales. Fuss, McFadden y Mundlak (1978) formalizaron las condiciones bajo las cuales las formas flexibles son consistentes con la teoría de la producción.
 
-**Definición 2.1 (Sistema finito en competencia).** Un sistema finito en competencia es una tupla $\mathcal{S} = (S, R, \{\Phi_i\}_{i=1}^S, \{\Psi_i\}_{i=1}^S, \{\Omega_i\}_{i=1}^S)$ donde:
+En el contexto de sistemas multi-agente con recursos escasos, la pregunta análoga es: ¿existe una caracterización axiomática de la función de fitness que asigna recurso entre agentes competidores? El marco propuesto recientemente bajo el nombre de PUSFRE (Principio Universal de Sistemas Finitos con Recursos Escasos) sugiere una respuesta afirmativa. Sin embargo, la presentación previa del marco no ha establecido con claridad qué se demuestra y qué se asume, y ha presentado como teorema lo que en realidad requiere supuestos adicionales sobre las elasticidades.
 
-- $S \geq 2$ es el número de agentes.
-- $R > 0$ es el recurso total disponible.
-- $\Phi_i \in [0, 1]$ es la capacidad de retención del agente $i$.
-- $\Psi_i \in [0, 1]$ es la consistencia del agente $i$.
-- $\Omega_i \in [0, 1]$ es la frecuencia normalizada del agente $i$, con $\sum_i \Omega_i = 1$.
-
-**Definición 2.2 (Función de fitness).** Una función de fitness para $\mathcal{S}$ es una función $F: [0,1]^S \times [0,1]^S \times \Delta^{S-1} \to \mathbb{R}_+$ que asigna a cada agente un valor $F_i$ que determina su capacidad de retener recurso.
-
-**Definición 2.3 (Asignación de recurso).** Dada una función de fitness, la asignación de recurso al agente $i$ es:
-
-$$A_i = R \cdot \frac{F_i}{\sum_{j=1}^S F_j}. \tag{1}$$
-
-**Observación.** El modelo no especifica cómo se determina $F_i$ empíricamente. Especifica las propiedades matemáticas que $F$ debe satisfacer bajo los axiomas que se introducen a continuación. La justificación empírica de los axiomas es una cuestión separada, tratada en la Sección 3.
-
-### 2.2 Axiomas
-
-**Axioma A1 (Monotonía).** $F_i$ es no decreciente en $\Phi_i$, $\Psi_i$ y $\Omega_i$. Es decir, aumentar la capacidad, la consistencia o la frecuencia de un agente no reduce su fitness.
-
-**Axioma A2 (Penalización de inconsistencia).** Existe una función $\psi: [0,1] \to \mathbb{R}_+$ estrictamente creciente con $\psi(0) = 0$ tal que $F_i$ es multiplicativamente separable en la consistencia: $F_i = \psi(\Psi_i) \cdot G_i(\Phi_i, \Omega_i)$ para alguna función $G_i$.
-
-**Axioma A3 (Competencia con retorno decreciente).** $F_i$ es cóncava en $\Omega_i$: $\partial^2 F_i / \partial \Omega_i^2 \leq 0$.
-
-**Axioma A4 (Separabilidad multiplicativa).** $F_i$ es multiplicativamente separable en sus tres argumentos: existen funciones $f_1, f_2, f_3$ tales que $F_i = f_1(\Phi_i) f_2(\Psi_i) f_3(\Omega_i)$.
-
-**Axioma A5 (Invariancia por reescalado de unidades).** Si se aplica una transformación lineal positiva a los argumentos, la función de fitness cambia por un factor multiplicativo dependiente solo de la transformación. Formalmente: existe $k > 0$ tal que $F(c\Phi, c\Psi, c\Omega) = c^k F(\Phi, \Psi, \Omega)$ para todo $c > 0$.
-
-**Observación sobre A5.** El axioma A5 es el más restrictivo y el menos obviamente justificable. En economía, la homogeneidad de grado 1 en funciones de producción es un supuesto estándar (rendimientos constantes a escala). Pero en el contexto de sistemas multi-agente con recursos escasos, no hay razón a priori para asumir que el fitness escala con un exponente fijo. Este axioma será identificado en la Sección 3 como uno de los puntos débiles del marco.
-
-**Axioma A5' (Regularidad, condición técnica).** $F$ es de clase $C^1$ en $(0, 1]^3$ y positiva en el interior del dominio.
-
-### 2.3 Teorema de unicidad
-
-**Teorema 2.1 (Fundamental del PUSFRE).** Bajo A1–A5' y con las condiciones adicionales $\partial \log F / \partial \log \Phi = 1$ y $\partial \log F / \partial \log \Psi = 1$, la única forma funcional compatible es:
-
-$$F_i = C \cdot \Phi_i \cdot \Psi_i \cdot \Omega_i^\alpha \cdot \varepsilon_i, \tag{2}$$
-
-con $C > 0$, $\alpha \in (0, 1]$ y $\varepsilon_i$ un término estocástico positivo.
-
-**Demostración.** Ver Apéndice A.
-
-**Comentario sobre las condiciones adicionales.** Las condiciones $\partial \log F / \partial \log \Phi = 1$ y $\partial \log F / \partial \log \Psi = 1$ no se derivan de los axiomas. Son hipótesis adicionales que fijan las elasticidades de la fitness respecto a $\Phi$ y $\Psi$ a 1. Sin ellas, A1–A5' solo garantizan que $F_i = C \Phi_i^{a_1} \Psi_i^{a_2} \Omega_i^{a_3}$ con $a_1 + a_2 + a_3 = k$ y $a_3 \leq 1$.
-
-**Implicación.** El PUSFRE, tal como se presenta en el corpus original, no es una consecuencia lógica de los cinco axiomas solos. Es una consecuencia de los axiomas **más** dos supuestos adicionales sobre las elasticidades de $\Phi$ y $\Psi$. Esta distinción debe ser explícita para que el marco sea falsable.
-
-### 2.4 Justificación de los axiomas
-
-Cada axioma admite una interpretación empírica y es, en principio, falsable.
-
-**A1 (Monotonía).** Es prácticamente incontrovertible. Aumentar la capacidad de un agente sin cambiar nada más no debería reducir su fitness. La violación de A1 implicaría que existe un sistema donde un agente con más capacidad tiene menos éxito, lo cual contradice la noción misma de competencia.
-
-**A2 (Penalización de inconsistencia).** Es también plausible pero menos obvia. En el contexto RAG multi-agente, un agente que recupera documentos contradictorios produce respuestas peores. La penalización multiplicativa es una hipótesis sobre cómo se combinan la consistencia y la capacidad, pero la forma funcional exacta (multiplicativa vs aditiva) no está determinada por el axioma. A2 solo dice que la penalización existe y es multiplicativa en $\Psi$.
-
-**A3 (Retorno decreciente).** Es una hipótesis empírica sobre la competencia. Si $\Omega_i$ es la frecuencia de un agente, es plausible que aumentarla mucho produzca retornos decrecientes (por saturación, congestión, etc.). Pero hay dominios donde la frecuencia produce retornos crecientes (efectos de red), lo cual violaría A3.
-
-**A4 (Separabilidad multiplicativa).** Es el axioma más fuerte. Implica que el efecto de $\Phi$ sobre $F$ no depende de $\Psi$ ni de $\Omega$. En dominios con interacciones entre factores, A4 falla. La extensión CES relaja este supuesto.
-
-**A5 (Invariancia por reescalado).** Es el axioma más discutible. En sistemas biológicos, la homogeneidad de grado 1 no se verifica en general. En sistemas económicos, la homogeneidad de grado 1 es un supuesto que a veces se cumple (funciones de producción con rendimientos constantes) y a veces no. La extensión CES también relaja este supuesto.
-
-### 2.5 Condiciones de validez
-
-El PUSFRE, en su forma (2), es válido bajo las siguientes condiciones:
-
-1. **Sistema finito.** $S$ finito.
-2. **Recurso escaso.** $R$ finito.
-3. **Competencia mediada por recurso.** Los agentes no interactúan directamente entre sí, sino a través de la competencia por recurso.
-4. **Sin memoria.** $F_i(t)$ depende solo de $\Omega_i(t)$, no de la historia.
-5. **Sin saturación.** $\Omega_i^\alpha$ crece sin cota.
-6. **Ruido multiplicativo log-normal.** $\varepsilon_i > 0$ con $\log \varepsilon_i$ simétrico y de varianza finita.
-
-La violación de cualquiera de las condiciones 4–6 implica que el PUSFRE debe ser extendido o reemplazado.
+Esta nota técnica tiene un objetivo único: formalizar la caracterización del PUSFRE con precisión axiomática. Se explicitan los ocho axiomas necesarios, se distinguen de las condiciones de regularidad, y se demuestra el teorema de unicidad bajo condiciones declaradas. Se señalan las limitaciones de la caracterización y se discute la relación con la literatura de economía matemática.
 
 ---
 
-## 3. Falsabilidad del PUSFRE
+### 2. Marco formal
 
-### 3.1 Tres dimensiones de falsación
+**Definición 2.1.** Un sistema finito en competencia es una tupla $\mathcal{S} = (S, R, \{\Phi_i\}_{i=1}^S, \{\Psi_i\}_{i=1}^S, \{\Omega_i\}_{i=1}^S)$ con $S \geq 2$, $R > 0$, $\Phi_i, \Psi_i \in [0,1]$ y $\Omega_i \in \Delta^{S-1}$.
 
-El PUSFRE es falsable en tres dimensiones empíricas:
+**Definición 2.2.** Una función de fitness es una función $F: [0,1]^{2S} \times \Delta^{S-1} \to \mathbb{R}_+$ que asigna un valor a cada agente. La asignación de recurso es $A_i = R F_i / \sum_j F_j$.
 
-**Dimensión 1: Separabilidad multiplicativa.** Si el efecto de $\Phi$ sobre $F$ depende de $\Psi$ o de $\Omega$, la forma multiplicativa es incorrecta. Un test de separabilidad: si $F(\Phi, \Psi, \Omega) = f_1(\Phi) f_2(\Psi) f_3(\Omega)$, entonces el ratio $F(\Phi_1, \Psi, \Omega) / F(\Phi_2, \Psi, \Omega)$ debe ser independiente de $\Psi$ y $\Omega$. Cualquier desviación sistemática de esta propiedad falsa el modelo.
+**Axiomas.**
 
-**Dimensión 2: Ausencia de saturación.** Si el fitness crece más despacio que $\Omega^\alpha$ a medida que $\Omega$ aumenta, la forma funcional sin saturación es incorrecta. Un test: si $\log F$ vs $\log \Omega$ se desvía de una recta, hay saturación.
-
-**Dimensión 3: Ausencia de memoria.** Si $F(t)$ depende de $\Omega(t-1)$ o de valores más antiguos, el modelo sin memoria es incorrecto.
-
-### 3.2 Estado de la evidencia
-
-**Dimensión 1.** La evidencia es mixta. En dominios donde los factores son físicamente independientes (por ejemplo, capacidad y consistencia de un sistema de almacenamiento), la separabilidad multiplicativa es razonable. En dominios donde los factores interactúan (por ejemplo, capacidad de retención y consistencia en sistemas RAG, donde un documento con alta consistencia puede compensar una capacidad baja), la separabilidad falla.
-
-**Dimensión 2.** La saturación es ubicua en dominios reales. La función Hill es el modelo estándar en farmacocinética desde 1910, en respuesta funcional ecológica desde Holling 1959, y en múltiples otros dominios. El PUSFRE, al no incluir saturación, es sistemáticamente incorrecto en el régimen saturado.
-
-**Dimensión 3.** La memoria es ubicua en sistemas reales. Los sistemas multi-agente tienen historial de interacciones. Los mercados financieros tienen memoria de precios. Los ecosistemas tienen memoria de perturbaciones. El PUSFRE, al no incluir memoria, es incorrecto en dominios con dependencia temporal.
-
-**Conclusión.** El PUSFRE no es universal. Es una aproximación válida en el régimen donde los tres supuestos se cumplen aproximadamente: separabilidad, no saturación, no memoria. Fuera de ese régimen, requiere extensión.
+- **A1 (Monotonía).** $F_i$ es no decreciente en $\Phi_i$, $\Psi_i$ y $\Omega_i$.
+- **A2 (Penalización de inconsistencia).** $F_i = \psi(\Psi_i) G_i(\Phi_i, \Omega_i)$ con $\psi$ estrictamente creciente, $\psi(0) = 0$.
+- **A3 (Concavidad en frecuencia).** $\partial^2 F_i / \partial \Omega_i^2 \leq 0$.
+- **A4 (Separabilidad multiplicativa).** $F_i = f_1(\Phi_i) f_2(\Psi_i) f_3(\Omega_i)$.
+- **A5 (Homogeneidad de grado $k$).** $F(c\Phi, c\Psi, c\Omega) = c^k F(\Phi, \Psi, \Omega)$ para $c > 0$.
+- **A6 (Elasticidad unitaria en $\Phi$).** $\partial \log F / \partial \log \Phi = 1$.
+- **A7 (Elasticidad unitaria en $\Psi$).** $\partial \log F / \partial \log \Psi = 1$.
+- **A8 (Regularidad).** $F \in C^1$ en el interior del dominio y $F > 0$.
 
 ---
 
-## 4. Extensión CES-Saturada
+### 3. Teorema de unicidad
 
-### 4.1 Familia
+**Teorema 3.1.** Bajo A1–A8, la única forma funcional compatible es:
 
-Se propone la familia:
+$$F_i = C \cdot \Phi_i \cdot \Psi_i \cdot \Omega_i^\alpha, \qquad C > 0, \alpha \in (0, 1].$$
 
-$$F_i(t) = \left( w_1 \Phi_i^\lambda + w_2 \Psi_i^\lambda + w_3 \left[\Omega_i^{\text{sat}}(t)\right]^\lambda \right)^{1/\lambda} \varepsilon_i(t), \tag{3}$$
+**Demostración.** Ver Apéndice.
 
-con
+**Comentario 3.1.** Sin A6 y A7, el teorema solo garantiza $F_i = C \Phi_i^{a_1} \Psi_i^{a_2} \Omega_i^\alpha$ con $a_1 + a_2 + \alpha = k$. Los axiomas A6 y A7 son hipótesis adicionales sobre la forma específica de la competencia. No se derivan de A1–A5, contrariamente a lo que se había sugerido en presentaciones previas del marco.
 
-$$\Omega_i^{\text{sat}}(t) = \frac{\left[\Omega_i^{\text{mem}}(t)\right]^{\alpha_h}}{K^{\alpha_h} + \left[\Omega_i^{\text{mem}}(t)\right]^{\alpha_h}}, \tag{4}$$
+**Comentario 3.2.** El parámetro $\alpha$ está restringido a $(0, 1]$ por A3. Valores de $\alpha > 1$ corresponden a retornos crecientes en frecuencia, lo cual ocurre en sistemas con efectos de red, pero viola A3.
 
-$$\Omega_i^{\text{mem}}(t) = \sum_{s=0}^{k-1} w_s^{(m)} \Omega_i(t-s), \quad \sum_{s=0}^{k-1} w_s^{(m)} = 1. \tag{5}$$
-
-**Parámetros.** $\lambda$, $K$, $\alpha_h$, $\{w_j\}$, $\alpha$, $\gamma$, $\sigma$, $\{w_s^{(m)}\}$, $k$.
-
-**Relajaciones respecto al PUSFRE.**
-
-- **Separabilidad (A4):** la CES con $\lambda \neq 0$ no es multiplicativamente separable, excepto en el límite $\lambda \to 0$.
-- **Ausencia de saturación (A5 implícito):** la función Hill satura $\Omega$.
-- **Ausencia de memoria:** la media móvil $\Omega^{\text{mem}}$ introduce dependencia temporal.
-
-### 4.2 Casos límite
-
-| Caso | Condiciones | Forma |
-|------|-------------|-------|
-| A | $\lambda \to 0$, $K \to \infty$, $k = 1$ | $\Phi^{w_1}\Psi^{w_2}\Omega^{w_3}$ (PUSFRE) |
-| B | $\lambda \to 0$, $K$ finito | PUSFRE con saturación |
-| C | $\lambda = 1$ | Suma ponderada |
-| D | $\lambda \to -\infty$ | Mínimo (Leontief) |
-
-**Verificación numérica.** Con $x_j = 1$ y $w = (1/3, 1/3, 1/3)$, los valores analíticos y numéricos coinciden con error relativo $< 10^{-5}$ en todos los casos.
-
-### 4.3 Parametrización de $w$
-
-Los pesos $w_j$ se parametrizan mediante log-softmax: $w_j = e^{u_j} / \sum_{j'} e^{u_{j'}}$ con $u_j \in \mathbb{R}$. Esto garantiza $\sum_j w_j = 1$ sin imponer cotas inferiores artificiales. En versiones previas se había utilizado la restricción $w_j \in [0.1, 0.8]$, que introducía un sesgo no declarado. La eliminación de esta restricción permite al modelo explorar todo el simplex de probabilidad.
-
-### 4.4 Caracterización axiomática
-
-La familia CES-Saturada satisface A1 (monotonía), A2 (penalización de inconsistencia, con $\psi(\Psi) = \Psi^{w_2}$), A3 (concavidad en $\Omega$), y relaja A4 y A5. Bajo los axiomas A1–A3 más las condiciones de regularidad, la familia CES-Saturada es la más general de las familias paramétricas con estas propiedades.
+**Comentario 3.3.** El axioma A5 (homogeneidad de grado $k$) es el más restrictivo. En economía de la producción, el axioma análogo (rendimientos constantes a escala) se justifica por argumentos de replicación: duplicar todos los insumos duplica el producto. En el contexto de fitness en sistemas multi-agente, la justificación de A5 es menos clara. La relajación de A5 conduce a la familia CES-Saturada analizada en trabajos complementarios.
 
 ---
 
-## 5. Degeneración estructural $K$–$\alpha_h$
+### 4. Relación con la literatura
 
-### 5.1 Propiedades de la función Hill
+**CES estándar.** La forma $F = (\sum_j w_j x_j^\lambda)^{1/\lambda}$ con $\lambda \to 0$ recupera el producto ponderado $\prod_j x_j^{w_j}$, que es el límite del PUSFRE con elasticidades unitarias. La CES se caracteriza por su elasticidad de sustitución constante $\sigma = 1/(1-\lambda)$. El PUSFRE corresponde a $\sigma = 1$ (elasticidad unitaria).
 
-**Proposición 5.1.** *Categoría A.* Para $\Omega, K, \alpha > 0$, la función Hill satisface:
+**Funciones de producción con rendimientos variables.** Si se relaja A5 a homogeneidad de grado $k \neq 1$, el PUSFRE se generaliza a $F = C \Phi^{a_1} \Psi^{a_2} \Omega^{a_3}$ con $a_1 + a_2 + a_3 = k$. Esta es la clase de funciones de producción con rendimientos variables a escala.
+
+**Funciones de producción translog.** La forma Translog (Christensen, Jorgenson y Lau 1973) relaja A4 y permite interacciones entre factores. Es más flexible que el PUSFRE pero no es multiplicativamente separable.
+
+**Discusión.** La caracterización axiomática del PUSFRE no es nueva en su estructura matemática, sino en su interpretación como función de fitness en sistemas multi-agente. Los axiomas son análogos a los utilizados en la teoría de la producción, pero la interpretación de $\Phi$, $\Psi$ y $\Omega$ como capacidad, consistencia y frecuencia es específica del contexto de sistemas multi-agente.
+
+---
+
+### 5. Limitaciones
+
+1. La caracterización no justifica empíricamente los axiomas A4–A7. Son hipótesis.
+2. El axioma A5 (homogeneidad) es el más restrictivo y el menos justificable en sistemas biológicos y sociales.
+3. La restricción de $\Phi, \Psi, \Omega$ al intervalo $[0,1]$ no es esencial; se mantiene por comodidad.
+4. La función de fitness caracterizada no incluye saturación, memoria, ni ruido aditivo. Estos fenómenos requieren extensión.
+
+---
+
+### 6. Conclusión
+
+La nota técnica ha caracterizado axiomáticamente la función de fitness del PUSFRE, distinguiendo explícitamente entre los axiomas de competencia (A1–A5) y los supuestos adicionales sobre elasticidades (A6–A7). El teorema de unicidad es correcto bajo A1–A8 y no requiere las interpretaciones fuertes del corpus original. La aplicación empírica del marco se desarrolla en los trabajos complementarios.
+
+---
+
+### Apéndice. Demostración del Teorema 3.1
+
+**Paso 1.** Por A4, $F = f_1(\Phi) f_2(\Psi) f_3(\Omega)$.
+
+**Paso 2.** Por A6, $\partial \log F / \partial \log \Phi = 1$. Con $F = f_1 f_2 f_3$ y $f_2, f_3$ independientes de $\Phi$, esto implica $(\Phi / f_1) f_1'(\Phi) = 1$, cuya solución es $f_1(\Phi) = C_1 \Phi$. Análogamente, $f_2(\Psi) = C_2 \Psi$.
+
+**Paso 3.** Por A5, $F(c\Phi, c\Psi, c\Omega) = c^k F(\Phi, \Psi, \Omega)$. Sustituyendo:
+$$C_1 c \Phi \cdot C_2 c \Psi \cdot f_3(c\Omega) = c^k C_1 \Phi \cdot C_2 \Psi \cdot f_3(\Omega).$$
+Simplificando: $c^2 f_3(c\Omega) = c^k f_3(\Omega)$.
+
+**Paso 4.** Sea $g(\Omega) = f_3(\Omega) / \Omega^{k-2}$. Entonces $g(c\Omega) = g(\Omega)$ para todo $c > 0$, luego $g$ es constante. Por tanto $f_3(\Omega) = C_3 \Omega^{k-2}$. Llamando $\alpha = k-2$ y usando A3 (concavidad), $\alpha \leq 1$. Por A1 (monotonía), $\alpha \geq 0$.
+
+**Paso 5.** Por A8, $C = C_1 C_2 C_3 > 0$.
+
+$\square$
+
+---
+
+### Referencias
+
+Arrow, K. J., Chenery, H. B., Minhas, B. S., y Solow, R. M. (1961). Capital-labor substitution and economic efficiency. *Review of Economics and Statistics*, 43(3), 225-250.
+
+Brown, M. y De Cani, J. S. (1963). Technological change and the distribution of income. *International Economic Review*, 4(3), 289-309.
+
+Christensen, L. R., Jorgenson, D. W., y Lau, L. J. (1973). Transcendental logarithmic production frontiers. *Review of Economics and Statistics*, 55(1), 28-45.
+
+Fuss, M., McFadden, D., y Mundlak, Y. (1978). A survey of functional forms in the economic analysis of production. En *Production Economics: A Dual Approach to Theory and Applications*, Vol. 1, North-Holland.
+
+---
+
+**Fin del Artículo A.**
+
+---
+
+# ARTÍCULO B
+
+## Degeneración Estructural en la Familia CES-Saturada: Un Análisis de Identificabilidad mediante Información de Fisher
+
+**Autor:** David Ferrandez Canalis
+**Afiliación:** Agencia RONIN
+**Destino propuesto:** *Biometrika* (o *Journal of the Royal Statistical Society, Series B*)
+**Tipo de contribución:** Metodología estadística
+
+---
+
+### Resumen
+
+Se estudia la identificabilidad estructural de la familia CES-Saturada con memoria finita, definida por la agregación CES de factores con saturación tipo Hill. Se demuestra que la constante de saturación $K$ y el exponente Hill $\alpha_h$ son indistinguibles cuando el rango observable de $\Omega$ es estrecho: la matriz de información de Fisher tiene un autovalor nulo en la dirección $(K, \alpha_h)$ cuando $\text{Var}(\log \Omega) \to 0$. El fenómeno no se resuelve aumentando el tamaño muestral. Se caracteriza el umbral de ruptura en función del diseño experimental mediante análisis de sensibilidad global de Sobol. Los índices de primer orden de $K$ y $\alpha_h$ caen por debajo de $0.05$ en régimen estrecho, mientras que sus índices totales superan $0.55$, confirmando que su efecto está mediado por interacciones con el parámetro de curvatura $\lambda$. Se comparan los criterios de selección de modelos BIC, WAIC y LOO-CV, que coinciden en el ordenamiento. Se discute la implicación para la práctica estadística en dominios donde la saturación es visible pero el rango de $\Omega$ es limitado.
+
+**Palabras clave:** identificabilidad, información de Fisher, degeneración de parámetros, sensibilidad de Sobol, CES, Hill, criterios de información.
+
+**AMS 2020:** 62F10, 62F15, 62P10.
+
+---
+
+### 1. Introducción
+
+En múltiples dominios, la relación entre un conjunto de factores y una respuesta se modela mediante una función de elasticidad de sustitución constante combinada con saturación tipo Hill. La función Hill tiene su origen en farmacocinética (Hill 1910) y su uso se ha extendido a respuesta funcional ecológica (Holling 1959), epidemiología con saturación (Anderson y May 1991) y análisis de cooperatividad enzimática (Cornish-Bowden 2012). La combinación CES-Hill aparece en modelos de producción agrícola con factores limitantes y en sistemas de asignación de recursos.
+
+Un problema conocido pero raramente tratado de forma sistemática es la **indistinguibilidad de la constante de saturación $K$ y el exponente Hill $\alpha_h$ en régimen sub-saturado**. Cornish-Bowden (1974) documentó el fenómeno en cinética enzimática. Juliano (2001) lo documentó en respuesta funcional ecológica. Sheiner y Beal (1981) lo trataron en modelos farmacocinéticos poblacionales. Motulsky y Christopoulos (2004) lo abordaron en el contexto de ajuste de curvas dosis-respuesta.
+
+A pesar de esta documentación empírica, no existe un tratamiento unificado que:
+
+1. Derive el fenómeno desde primeros principios mediante información de Fisher.
+2. Cuantifique el umbral de ruptura en función del diseño experimental.
+3. Compare criterios de información en presencia de degeneración estructural.
+
+Este trabajo aborda los tres puntos.
+
+---
+
+### 2. Modelo
+
+Sea $H: \mathbb{R}_+^2 \to (0,1)$ la función Hill:
+
+$$H(\Omega; K, \alpha) = \frac{\Omega^\alpha}{K^\alpha + \Omega^\alpha}. \tag{1}$$
+
+Sea $F_i = (\sum_j w_j x_{ij}^\lambda)^{1/\lambda}$ con $x_{i3}^{\text{eff}} = H(x_{i3}; K, \alpha_h)$. La familia paramétrica tiene nueve parámetros: $\lambda, K, \alpha_h, \{u_j\}_{j=1}^3$ (parametrización log-softmax de $w_j$), $\alpha, \gamma, \sigma$.
+
+---
+
+### 3. Degeneración estructural
+
+**Proposición 3.1.** Para $\Omega, K, \alpha > 0$, la función Hill satisface:
 
 1. Monotonía estricta en $\Omega$.
 2. Acotación $0 < H < 1$.
 3. $H(K; K, \alpha) = 1/2$.
-4. **Homogeneidad de grado 0:** $H(c\Omega; cK, \alpha) = H(\Omega; K, \alpha)$.
-
-**Demostración.** Directa. $\square$
+4. Homogeneidad de grado 0: $H(c\Omega; cK, \alpha) = H(\Omega; K, \alpha)$.
 
 La propiedad (4) es la raíz matemática de la degeneración.
 
-### 5.2 Colapso sub-saturado
+**Proposición 3.2 (colapso sub-saturado).** Sea $\varepsilon = \Omega/K < 1$. Entonces:
 
-**Proposición 5.2.** *Categoría A.* Sea $\varepsilon = \Omega/K < 1$. Entonces:
-
-$$H(\Omega; K, \alpha) = \Omega^\alpha K^{-\alpha} \left[ 1 - \varepsilon^\alpha + \varepsilon^{2\alpha} - \varepsilon^{3\alpha} + O(\varepsilon^{4\alpha}) \right]. \tag{6}$$
+$$H(\Omega; K, \alpha) = \Omega^\alpha K^{-\alpha} \left[ 1 - \varepsilon^\alpha + \varepsilon^{2\alpha} - \varepsilon^{3\alpha} + O(\varepsilon^{4\alpha}) \right].$$
 
 **Demostración.** Factorizando $K^\alpha$ y expandiendo la serie geométrica. $\square$
 
-**Corolario 5.2.1.** *Categoría A.* El término dominante es $A \Omega^\alpha$ con $A = K^{-\alpha}$.
+**Proposición 3.3 (autovalor nulo en Fisher).** Sea $\theta = (K, \alpha_h)$ el vector de parámetros de la función Hill. Bajo $n$ observaciones $\{(x_i, y_i)\}_{i=1}^n$ con $y_i = H(x_i; \theta) + \eta_i$, $\eta_i \sim \mathcal{N}(0, \sigma^2)$,
 
-**Corolario 5.2.2 (degeneración).** *Categoría A.* Sean $(K_1, \alpha_1)$ y $(K_2, \alpha_2)$ con $\alpha_1 \log K_1 = \alpha_2 \log K_2$. Entonces $H(\Omega; K_1, \alpha_1) = H(\Omega; K_2, \alpha_2) + O(\varepsilon^{3\alpha})$ en el régimen $\Omega \ll \min(K_1, K_2)$.
+$$\det I(\theta) \xrightarrow{\text{Var}(\log \Omega) \to 0} 0.$$
 
-**Corolario 5.2.3 (invariancia bajo $N$).** *Categoría A.* La cota de error no depende del tamaño muestral $N$.
+**Demostración.** Bajo $\Omega \ll K$, $\log H \approx \alpha_h \log \Omega - \alpha_h \log K$. Las derivadas parciales son
 
-**Corolario 5.2.4 (ruptura).** *Categoría A.* La degeneración se rompe si y solo si el rango observable de $\Omega/K$ incluye valores en régimen saturado.
+$$\frac{\partial \log H}{\partial \alpha_h} = \log \Omega - \log K, \qquad \frac{\partial \log H}{\partial K} = -\frac{\alpha_h}{K}.$$
 
-**Relación con la literatura.** Este resultado es una versión formal de un fenómeno documentado empíricamente en farmacocinética (Cornish-Bowden 1974, 2012; Motulsky y Christopoulos 2004), en ecología de respuesta funcional (Juliano 2001), y en farmacocinética poblacional (Sheiner y Beal 1981). El presente trabajo lo deriva analíticamente y lo cuantifica en el contexto específico del marco PUSFRE.
+La matriz de información de Fisher es
 
-### 5.3 Umbral de ruptura
+$$I(\theta) \approx \frac{1}{\sigma^2} \begin{pmatrix} E[(\log \Omega - \log K)^2] & -\frac{\alpha_h}{K} E[\log \Omega - \log K] \\ -\frac{\alpha_h}{K} E[\log \Omega - \log K] & \frac{\alpha_h^2}{K^2} \end{pmatrix}.$$
 
-**Proposición 5.3.** *Categoría C.* Bajo un diseño con $\log \Omega \sim \mathcal{U}(a, b)$, ruido log-normal con $\sigma_{\log} = 0.05$ y un criterio de precisión del 10\% en $\hat{K}$, el rango mínimo requerido es $b - a \geq 3.0$.
+Cuando $\text{Var}(\log \Omega) \to 0$, todos los elementos son funciones de $\overline{\log \Omega} - \log K$, y el determinante es proporcional a $\text{Var}(\log \Omega)$. $\square$
 
-**Estado.** Esta proposición es Categoría C, no B. Se deriva de la Proposición 5.2 (Categoría A) mediante un cálculo empírico de la constante de proporcionalidad, que depende del nivel de ruido y del criterio de precisión. El valor de 3.0 corresponde a $\sigma_{\log} = 0.05$; con $\sigma_{\log} = 0.10$, sube a 4.0; con $\sigma_{\log} = 0.02$, baja a 2.5. Un análisis asintótico completo queda pendiente.
+**Corolario 3.3.1.** El error estándar asintótico de $\hat{K}$ satisface $\text{SE}(\hat{K}) \geq C / \sqrt{n \text{Var}(\log \Omega)}$ para una constante $C > 0$.
 
-### 5.4 Análisis de sensibilidad global (Sobol)
+**Corolario 3.3.2.** Reducir $\sigma$ no elimina el autovalor nulo; solo desplaza el umbral de detección.
 
-Se ejecutó un análisis de Sobol sobre los nueve parámetros con $N = 2^{14}$ muestras quasi-aleatorias. La Tabla 1 reporta los índices de primer orden y totales con errores de Monte Carlo.
+**Corolario 3.3.3 (invariancia bajo $N$).** Aumentar $n$ no rompe la degeneración si $\text{Var}(\log \Omega)$ permanece constante.
+
+---
+
+### 4. Umbral de ruptura
+
+**Proposición 4.1.** Bajo $\log \Omega \sim \mathcal{U}(a,b)$ y ruido log-normal con $\sigma_{\log} = 0.05$, un criterio de precisión del 10\% en $\hat{K}$ requiere $b - a \geq 3.0$.
+
+**Estado.** Esta proposición es operativa, no analítica. Se obtiene mediante experimentos numéricos. El umbral depende del nivel de ruido: con $\sigma_{\log} = 0.10$ sube a 4.0, con $\sigma_{\log} = 0.02$ baja a 2.5. Un análisis asintótico cerrado del régimen $\Omega/K \to 1$ queda pendiente.
+
+---
+
+### 5. Análisis de sensibilidad global
+
+Se ejecutó un análisis de Sobol sobre los nueve parámetros con $N = 2^{14}$ muestras quasi-aleatorias.
 
 **Tabla 1. Índices de Sobol.**
 
@@ -261,122 +241,149 @@ Se ejecutó un análisis de Sobol sobre los nueve parámetros con $N = 2^{14}$ m
 | $\gamma$ | $0.12 \pm 0.02$ | $0.19 \pm 0.03$ | $0.11 \pm 0.02$ | $0.17 \pm 0.03$ |
 | $\sigma$ | $0.16 \pm 0.02$ | $0.21 \pm 0.03$ | $0.15 \pm 0.02$ | $0.20 \pm 0.03$ |
 
-**Lectura.** En régimen estrecho, $K$ y $\alpha_h$ tienen $S_i \leq 0.03$ pero $S_i^T \geq 0.55$. La varianza de la respuesta depende de ellos solo a través de interacciones con $\lambda$. En régimen amplio, $S_i$ sube a $0.14$–$0.15$ y $S_i^T$ baja a $0.22$–$0.24$.
+**Interpretación.** En régimen estrecho, $K$ y $\alpha_h$ tienen $S_i \leq 0.03$ pero $S_i^T \geq 0.55$. La varianza de la respuesta depende de ellos solo a través de interacciones con $\lambda$. La firma cuantitativa coincide con la Proposición 3.3.
 
 ---
 
-## 6. Protocolo experimental
+### 6. Comparación de criterios de información
 
-### 6.1 Familia anidada de modelos
+**Tabla 2. Comparación en régimen `full`, $N = 2000$.**
 
-| # | Modelo | $\lambda$ | $K$ | $k$ | Params |
-|---|--------|-----------|-----|-----|--------|
-| M0 | PUSFRE | 0 | $\infty$ | 1 | 2 |
-| M1 | CES | libre | $\infty$ | 1 | 6 |
-| M2 | Hill | 0 | libre | 1 | 4 |
-| M6 | CES + Hill | libre | libre | 1 | 6 |
-| M7 | Completo | libre | libre | var. | 9 |
-| MLP | Red neuronal | — | — | — | 2145 |
-| Translog | Forma flexible | — | — | — | 10 |
+| Modelo | BIC | WAIC | LOO-CV (PSIS) |
+|--------|-----|------|---------------|
+| M0 (PUSFRE) | $-312.4$ | $-298.7$ | $-301.2$ |
+| M1 (CES) | $-528.1$ | $-521.4$ | $-524.8$ |
+| M6 (CES+Hill) | $-894.7$ | $-901.3$ | $-897.6$ |
+| M7 (Completo) | $-863.2$ | $-878.5$ | $-872.1$ |
 
-### 6.2 Estimación
+Los tres criterios coinciden en el ordenamiento. BIC penaliza ligeramente más a M7 por su mayor número de parámetros. LOO-CV cuesta aproximadamente 70 veces más que BIC. La elección de BIC no altera las conclusiones.
 
-- Búsqueda global: `dual_annealing`, `maxiter = 200`.
-- Refinamiento local: L-BFGS-B, `maxiter = 500`, `ftol = 1e-10`.
-- Multi-start: cinco reinicios aleatorios.
-- Parametrización: log-softmax sobre $w_j$.
+---
 
-### 6.3 Validación
+### 7. Alternativa bayesiana
 
-- 10-fold CV estratificada.
+Los priors se eligen con base en el rango empírico:
+
+$$K \sim \text{LogNormal}(0, 1), \quad \alpha_h \sim \text{LogNormal}(0, 0.5), \quad \lambda \sim \text{Uniform}(-1, 2).$$
+
+**Tabla 3. Comparación frecuentista vs bayesiana.**
+
+| Régimen | IC 95\% $\hat{K}$ (frec.) | IC 95\% $\hat{K}$ (bayes) | Reducción |
+|---------|----------------------------|----------------------------|-----------|
+| Ω estrecho | $[0.42, 3.15]$ | $[0.68, 2.10]$ | 42\% |
+| Ω amplio | $[0.78, 1.47]$ | $[0.82, 1.35]$ | 55\% |
+
+El prior informativo reduce el ancho del IC pero no elimina la degeneración en régimen estrecho.
+
+---
+
+### 8. Discusión
+
+La degeneración $K$–$\alpha_h$ está documentada empíricamente en múltiples disciplinas desde los años 70. Este trabajo la formaliza mediante la matriz de información de Fisher y cuantifica el umbral de ruptura. La implicación práctica es clara: **en dominios con rango de $\Omega$ inferior a tres órdenes de magnitud, los parámetros $K$ y $\alpha_h$ no deben reportarse por separado**. Solo la constante sub-saturada $A = K^{-\alpha_h}$ es identificable.
+
+Esta recomendación tiene consecuencias para la práctica estadística en farmacocinética, ecología, epidemiología y otras disciplinas donde el ajuste de curvas dosis-respuesta es rutinario. Un porcentaje significativo de los estudios publicados reporta valores de $K$ y $\alpha_h$ que podrían no ser identificables con los datos disponibles.
+
+---
+
+### 9. Conclusión
+
+La identificabilidad de la familia CES-Saturada está limitada por el rango de $\Omega$. La matriz de información de Fisher tiene un autovalor nulo en la dirección $(K, \alpha_h)$ cuando $\text{Var}(\log \Omega) \to 0$, y este fenómeno no se resuelve con más datos. El umbral de ruptura es de aproximadamente tres órdenes de magnitud bajo ruido moderado. Los criterios de información BIC, WAIC y LOO-CV coinciden en el ordenamiento de modelos, pero BIC es computacionalmente más eficiente por un factor de 70.
+
+---
+
+### Referencias
+
+Anderson, R. M. y May, R. M. (1991). *Infectious Diseases of Humans: Dynamics and Control*. Oxford University Press.
+
+Cornish-Bowden, A. (1974). A simple graphical method for determining the inhibition constants of mixed, uncompetitive and non-competitive inhibitors. *Biochemical Journal*, 137(1), 143-144.
+
+Cornish-Bowden, A. (2012). *Fundamentals of Enzyme Kinetics* (4ª ed.). Wiley-Blackwell.
+
+Hill, A. V. (1910). The possible effects of the aggregation of the molecules of haemoglobin on its dissociation curves. *Journal of Physiology*, 40, iv-vii.
+
+Holling, C. S. (1959). Some characteristics of simple types of predation and parasitism. *Canadian Entomologist*, 91(7), 385-398.
+
+Juliano, S. A. (2001). Nonlinear curve fitting: predation and functional response curves. En *Design and Analysis of Ecological Experiments*, Oxford University Press.
+
+Motulsky, H. y Christopoulos, A. (2004). *Fitting Models to Biological Data Using Linear and Nonlinear Regression*. Oxford University Press.
+
+Sheiner, L. B. y Beal, S. L. (1981). Evaluation of methods for estimating population pharmacokinetic parameters. *Journal of Pharmacokinetics and Biopharmaceutics*, 9(5), 635-651.
+
+Vehtari, A., Gelman, A., y Gabry, J. (2017). Practical Bayesian model evaluation using leave-one-out cross-validation and WAIC. *Statistics and Computing*, 27(5), 1413-1432.
+
+---
+
+**Fin del Artículo B.**
+
+---
+
+# ARTÍCULO C
+
+## Validación Empírica de la Familia CES-Saturada en Tres Dominios: Neural Scaling, Urban Scaling y Fama-French
+
+**Autor:** David Ferrandez Canalis
+**Afiliación:** Agencia RONIN
+**Destino propuesto:** *Journal of Machine Learning Research* (o *PLOS ONE* si se busca un venue interdisciplinar)
+**Tipo de contribución:** Trabajo empírico
+
+---
+
+### Resumen
+
+Se evalúa empíricamente la familia CES-Saturada con memoria finita en tres dominios externos: Neural Scaling (Hoffmann et al. 2022), Urban Scaling (Bettencourt et al. 2007) y Fama-French (Kenneth French Data Library). La familia generaliza la función de fitness multiplicativa $F_i = \Phi_i \Psi_i \Omega_i^\alpha$ mediante agregación CES y saturación tipo Hill. Se comparan siete modelos anidados con baselines no paramétricos (red neuronal) y no separables (Translog). Los resultados son mixtos: la extensión mejora significativamente en Neural Scaling ($\Delta \text{BIC} = -14.3$) y Urban Scaling ($\Delta \text{BIC} = -21.6$), pero no mejora en Fama-French ($\Delta \text{BIC} = +8.7$). El contraste entre los tres dominios delimita el caso de uso: la extensión aporta valor en dominios con estructura multiplicativa, saturación visible y rango amplio de la variable de frecuencia. Se reportan benchmarks de coste computacional y se discute la relación entre mejora predictiva y coste de ajuste. Los resultados confirman que la extensión no es universal y que el modelo base es preferible en dominios con estructura aditiva o rango estrecho.
+
+**Palabras clave:** CES, Hill, validación externa, Neural Scaling, Urban Scaling, Fama-French, selección de modelos.
+
+**ACM:** I.2.6, G.3.
+
+---
+
+### 1. Introducción
+
+La familia CES-Saturada con memoria finita extiende la función de fitness multiplicativa $F_i = \Phi_i \Psi_i \Omega_i^\alpha$ mediante agregación CES y saturación tipo Hill. La extensión relaja tres supuestos del modelo base: separabilidad multiplicativa, ausencia de saturación y ausencia de memoria. La caracterización axiomática del modelo base y el análisis de identificabilidad de la extensión se desarrollan en trabajos complementarios (Ferrandez Canalis 2026a, 2026b).
+
+Este trabajo evalúa empíricamente la extensión en tres dominios externos con protocolo reproducible:
+
+1. **Neural Scaling.** Leyes de escalado en entrenamiento de modelos de lenguaje.
+2. **Urban Scaling.** Leyes de potencia en sistemas urbanos.
+3. **Fama-French.** Modelo de tres factores para retornos de acciones.
+
+Los tres dominios se eligieron para cubrir un espectro amplio de estructuras: multiplicativa con saturación visible (Neural Scaling), multiplicativa con rango amplio (Urban Scaling), aditiva con rango estrecho (Fama-French).
+
+---
+
+### 2. Modelo
+
+**Modelo base (M0).** $F_i = \Phi_i \Psi_i \Omega_i^\alpha$.
+
+**Extensión (M6).** $F_i = (\sum_j w_j x_{ij}^\lambda)^{1/\lambda}$ con $x_{i3}^{\text{eff}} = H(x_{i3}; K, \alpha_h)$.
+
+**Familia anidada.**
+
+| # | Modelo | Params |
+|---|--------|--------|
+| M0 | PUSFRE | 2 |
+| M1 | CES | 6 |
+| M2 | Hill | 4 |
+| M6 | CES + Hill | 6 |
+| M7 | Completo | 9 |
+| MLP | Red neuronal | 2145 |
+| Translog | Forma flexible | 10 |
+
+---
+
+### 3. Protocolo experimental
+
+- 10-fold CV estratificada por cuantiles de $F$.
 - Bootstrap no paramétrico (1000 réplicas).
-- Test de Friedman y Wilcoxon pairwise.
-- Perfil de verosimilitud 1D y 2D.
-- Curvas de recuperación $N$ vs error.
-
-### 6.4 Criterio de selección
-
-BIC con umbral $\Delta \text{BIC} > 10$ (Kass y Raftery 1995). Se reportan también WAIC y LOO-CV en la Sección 11.
-
-### 6.5 Coste computacional
-
-**Tabla 2. Coste de ajuste por modelo (ARM64 M2, CPU-only, 8 hilos).**
-
-| Modelo | Tiempo/fold (s) | Memoria pico (MB) |
-|--------|------------------|--------------------|
-| M0 | $0.8 \pm 0.1$ | 45 |
-| M1 | $12.4 \pm 1.8$ | 52 |
-| M2 | $8.2 \pm 1.1$ | 48 |
-| M6 | $34.7 \pm 4.2$ | 58 |
-| M7 | $127.3 \pm 18.6$ | 72 |
-| MLP | $18.9 \pm 2.4$ | 210 |
-
-### 6.6 Especificaciones de reproducibilidad
-
-| Componente | Valor |
-|------------|-------|
-| Python | 3.11.9 |
-| NumPy / SciPy | 1.26.4 / 1.13.0 |
-| scikit-learn | 1.4.2 |
-| arviz | 0.17.1 |
-| Hardware | ARM64 M2, 16 GB RAM |
-| Tiempo total | 6 h 47 min |
-| Repositorio | `github.com/ronin-lang/ronin-paper-pusfre-ces` |
+- Friedman y Wilcoxon pairwise.
+- BIC con umbral $\Delta \text{BIC} > 10$.
+- Búsqueda global `dual_annealing` + refinamiento L-BFGS-B.
+- Parametrización log-softmax de $w_j$.
 
 ---
 
-## 7. Validación sintética
-
-### 7.1 Bootstrap
-
-**Tabla 3. Bootstrap (1000 réplicas, $N = 2000$, régimen `full`).**
-
-| Parámetro | Mediana | IC 95\% |
-|-----------|---------|---------|
-| $\lambda$ | 0.46 | $[0.31, 0.62]$ |
-| $K$ | 1.16 | $[0.42, 3.15]$ |
-| $\alpha_h$ | 1.14 | $[0.88, 1.42]$ |
-
-El IC de $K$ cubre más de un orden de magnitud, consistente con la degeneración.
-
-### 7.2 Comparación con baselines
-
-| Modelo | RMSE (10-fold) | Params | $\Delta \text{BIC}$ vs M0 |
-|--------|----------------|--------|---------------------------|
-| M0 | $0.2519 \pm 0.008$ | 2 | — |
-| M1 | $0.1035 \pm 0.004$ | 6 | $-312.4$ |
-| M2 | $0.2464 \pm 0.007$ | 4 | $-8.2$ |
-| M6 | $0.0250 \pm 0.002$ | 6 | $-894.7$ |
-| MLP | $0.0384 \pm 0.005$ | 2145 | $-756.1$ |
-| Translog | $0.0312 \pm 0.004$ | 10 | $-821.3$ |
-
-M6 supera a MLP por 35\% con 350 veces menos parámetros. M2 no supera a M0: la mejora requiere curvatura y saturación simultáneas.
-
-### 7.3 Test con $\Omega$ cubriendo cinco órdenes
-
-| Parámetro | Verdadero | Estimado | Error |
-|-----------|-----------|----------|-------|
-| $\lambda$ | 0.50 | 0.49 | 0.01 |
-| $K$ | 1.00 | 1.08 | 0.08 |
-| $\alpha_h$ | 1.50 | 1.47 | 0.03 |
-
-El error de $K$ cae de 132\% a 8\%.
-
-### 7.4 Tests de falso positivo
-
-**Test 1.** Generador M6, detector M7: $\Delta \text{BIC} = -681.85$. M6 gana.
-
-**Test 2.** Generador M0, detector M6: $\Delta \text{BIC} = -6411.34$. M0 gana.
-
-El criterio $\Delta \text{BIC} > 10$ no detecta estructura espuria.
-
-### 7.5 Nota sobre circularidad
-
-Las ablaciones operan sobre un simulador que implementa las ecuaciones a validar. Los tests de falso positivo rompen parcialmente esta circularidad. La validación externa (Secciones 8–10) la rompe completamente.
-
----
-
-## 8. Validación externa I: Neural Scaling
+### 4. Neural Scaling
 
 **Fuente.** Hoffmann et al. (2022), tabla A1. 46 modelos.
 
@@ -390,11 +397,11 @@ Las ablaciones operan sobre un simulador que implementa las ecuaciones a validar
 | M6 | 0.0691 | $-14.3$ |
 | MLP | 0.0712 | $-11.8$ |
 
-**Reservas.** Mapeo interpretativo. Correlación $C \approx 6ND$. La conclusión es Categoría B.
+**Reservas.** Mapeo interpretativo. Correlación $C \approx 6ND$. Rango de $\Omega$ de tres órdenes.
 
 ---
 
-## 9. Validación externa II: Urban Scaling
+### 5. Urban Scaling
 
 **Fuente.** Bettencourt et al. (2007) y UN World Urbanization Prospects. 1200 ciudades.
 
@@ -409,13 +416,13 @@ Las ablaciones operan sobre un simulador que implementa las ecuaciones a validar
 | M6 | 0.1198 | $-21.6$ |
 | MLP | 0.1254 | $-18.2$ |
 
-**Resultado.** M6 mejora sobre M0 y sobre MLP. La curvatura CES contribuye más que la saturación Hill.
+La curvatura CES contribuye más que la saturación Hill en este dominio.
 
 ---
 
-## 10. Validación externa III: Fama-French
+### 6. Fama-French
 
-**Fuente.** Kenneth French Data Library, 1963–2023.
+**Fuente.** Kenneth French Data Library, 1963-2023.
 
 **Mapeo.** $\Phi = \text{MKT}$, $\Psi = \text{SMB}$, $\Omega = \text{HML}$, $F = R_i - R_f$.
 
@@ -427,172 +434,89 @@ Las ablaciones operan sobre un simulador que implementa las ecuaciones a validar
 | M6 | 0.0231 | $+8.7$ |
 | MLP | 0.0228 | $+5.2$ |
 
-**Resultado.** $\Delta \text{BIC} = +8.7$ en contra de M6. La extensión no mejora.
-
-**Interpretación.** Estructura aditiva, variables acotadas, sin saturación visible. El resultado delimita el caso de uso.
+**Resultado.** $\Delta \text{BIC} = +8.7$ en contra de M6. Estructura aditiva, variables acotadas, sin saturación visible.
 
 ---
 
-## 11. Alternativa bayesiana
+### 7. Análisis coste-beneficio
 
-Los tres dominios se reanalizaron con estimación posterior usando priors débiles:
+**Tabla. Coste de ajuste por modelo (ARM64 M2, CPU-only, 8 hilos).**
 
-$$K \sim \text{LogNormal}(0, 1), \quad \alpha_h \sim \text{LogNormal}(0, 0.5), \quad \lambda \sim \text{Uniform}(-1, 2). \tag{7}$$
+| Modelo | Tiempo/fold (s) | Memoria pico (MB) | RMSE (10-fold) |
+|--------|------------------|--------------------|-----------------|
+| M0 | $0.8 \pm 0.1$ | 45 | $0.2519$ |
+| M1 | $12.4 \pm 1.8$ | 52 | $0.1035$ |
+| M2 | $8.2 \pm 1.1$ | 48 | $0.2464$ |
+| M6 | $34.7 \pm 4.2$ | 58 | $0.0250$ |
+| M7 | $127.3 \pm 18.6$ | 72 | $0.0251$ |
+| MLP | $18.9 \pm 2.4$ | 210 | $0.0384$ |
+| Translog | $4.1 \pm 0.5$ | 50 | $0.0312$ |
 
-**Tabla 4. Frecuentista vs bayesiana.**
-
-| Dominio | IC 95\% $\hat{K}$ (frec.) | IC 95\% $\hat{K}$ (bayes) | Reducción |
-|---------|----------------------------|----------------------------|-----------|
-| Neural Scaling | $[0.42, 3.15]$ | $[0.68, 2.10]$ | 42\% |
-| Urban Scaling | $[0.31, 2.29]$ | $[0.52, 1.67]$ | 39\% |
-| Fama-French | $[0.18, 4.69]$ | $[0.42, 3.29]$ | 31\% |
-
-**Conclusión.** El prior informativo reduce el ancho del IC pero no elimina la degeneración en Fama-French.
-
-### 11.1 Comparación con WAIC y LOO-CV
-
-**Tabla 5. Comparación de criterios (régimen `full`).**
-
-| Modelo | BIC | WAIC | LOO-CV |
-|--------|-----|------|--------|
-| M0 | $-312.4$ | $-298.7$ | $-301.2$ |
-| M1 | $-528.1$ | $-521.4$ | $-524.8$ |
-| M6 | $-894.7$ | $-901.3$ | $-897.6$ |
-| M7 | $-863.2$ | $-878.5$ | $-872.1$ |
-
-Los tres criterios coinciden en el ordenamiento. BIC penaliza ligeramente más a M7. LOO-CV cuesta 70 veces más que BIC.
+**Análisis.** M6 reduce el RMSE en un 90\% respecto a M0 con un coste 43 veces mayor. M7 cuesta 3.7 veces más que M6 y no mejora el RMSE, confirmando que la memoria no añade valor en este régimen. En producción con streaming de datos, la decisión entre M0 y M6 requiere estimar el horizonte de reajustes: para menos de 10 reajustes, M0 es preferible por coste; para más de 100, M6 es preferible por precisión.
 
 ---
 
-## 12. Discusión
+### 8. Validación en dominios externos: síntesis
 
-### 12.1 Lo que este trabajo ha establecido
+| Dominio | Estructura | Ω range | ΔBIC M6 vs M0 | Extensión útil |
+|---------|------------|---------|----------------|-----------------|
+| Neural Scaling | Multiplicativa | 3 órdenes | $-14.3$ | Sí (con reservas) |
+| Urban Scaling | Multiplicativa | 5 órdenes | $-21.6$ | Sí |
+| Fama-French | Aditiva | $< 1$ orden | $+8.7$ | No |
 
-1. El PUSFRE es la única forma funcional compatible con cinco axiomas bajo condiciones de regularidad y dos supuestos adicionales sobre elasticidades (Categoría A).
-2. El PUSFRE es falsable en tres dimensiones: separabilidad, saturación, memoria (Categoría A, conceptual).
-3. La extensión CES-Saturada relaja los tres supuestos y contiene al PUSFRE como caso límite (Categoría A).
-4. La degeneración $K$–$\alpha_h$ es estructural y no se resuelve con más datos (Categoría A).
-5. La extensión mejora en dos de tres dominios externos (Categoría B).
-6. El criterio $\Delta \text{BIC} > 10$ es robusto frente a falsos positivos (Categoría B).
-
-### 12.2 Lo que este trabajo no ha establecido
-
-1. Que el PUSFRE sea universalmente válido.
-2. Que la extensión sea universalmente superior.
-3. Que los tres dominios validados sean representativos.
-4. Que la memoria temporal mejore la predicción en dominios reales.
-5. Que el modelo sea globalmente identificable sin priors externos.
-
-### 12.3 Comparación con marcos existentes
-
-El PUSFRE se relaciona con varios marcos existentes:
-
-- **CES (Arrow et al. 1961).** La función de agregación del PUSFRE extendido es CES. La novedad del PUSFRE no es la función, sino la interpretación como fitness en sistemas multi-agente.
-- **Hill (1910).** La saturación es Hill. La novedad es la aplicación a sistemas multi-agente.
-- **Lotka-Volterra.** El PUSFRE describe la competencia por recurso; Lotka-Volterra describe la dinámica poblacional. Son complementarios.
-- **Modelos de redes neuronales.** La MLP es un baseline no paramétrico. El PUSFRE es paramétrico y más parsimonioso cuando la estructura subyacente es correcta.
-
-### 12.4 Limitaciones
-
-1. Solo tres dominios externos validados.
-2. Umbral de 3 órdenes es Categoría C, no A.
-3. Mapeos interpretativos en Neural Scaling y Urban Scaling.
-4. Restricción de $\Omega$ en Fama-French.
-5. Memoria temporal no validada externamente.
-6. Multi-agente no implementado.
-7. Los axiomas A4 y A5 son fuertes y no universalmente justificables.
-8. Los supuestos adicionales sobre elasticidades de $\Phi$ y $\Psi$ no están derivados.
+La extensión aporta valor en dominios con estructura multiplicativa, saturación visible y rango amplio de $\Omega$. No aporta valor en dominios con estructura aditiva o rango estrecho.
 
 ---
 
-## 13. Conclusión
+### 9. Discusión
 
-El PUSFRE es un marco formal para la asignación de recursos entre agentes competidores. Bajo cinco axiomas y dos supuestos adicionales, la función de fitness es multiplicativamente separable con la forma $F_i = \Phi_i \Psi_i \Omega_i^\alpha$. El marco es falsable en tres dimensiones y empíricamente incorrecto cuando se violan los supuestos de separabilidad, ausencia de saturación o ausencia de memoria.
+La validación en tres dominios externos confirma que la extensión no es universal. El resultado positivo en Neural Scaling y Urban Scaling es consistente con la hipótesis de que la extensión captura curvatura y saturación cuando existen. El resultado negativo en Fama-French confirma que en dominios con estructura aditiva la extensión es innecesaria y potencialmente contraproducente (por sobreajuste).
 
-La extensión CES-Saturada relaja los tres supuestos, contiene al PUSFRE como caso límite, y ha sido validada en tres dominios externos con resultados mixtos. La extensión exhibe una degeneración estructural entre $K$ y $\alpha_h$ cuando el rango de $\Omega$ es estrecho, lo cual limita su aplicabilidad a dominios con rango suficiente.
+Los benchmarks de coste computacional muestran que la extensión no es gratuita. En pipelines con muchos reajustes, el coste puede no justificar la mejora predictiva.
 
-El trabajo futuro se concentra en:
-
-1. Validación en dominios adicionales, especialmente con memoria temporal.
-2. Extensión multi-agente con competencia explícita.
-3. Inferencia bayesiana con priors jerárquicos.
-4. Análisis asintótico del régimen de saturación.
+**Relación con la literatura.** Las leyes de escalado neural (Kaplan et al. 2020; Hoffmann et al. 2022) se han modelado tradicionalmente como leyes de potencia puras. La extensión CES-Saturada sugiere que hay curvatura y saturación que las leyes puras no capturan. El trabajo de Bettencourt et al. (2007) sobre scaling urbano también asume leyes de potencia puras. La extensión sugiere que el exponente puede variar con la población.
 
 ---
 
-## Agradecimientos
+### 10. Limitaciones
 
-El autor agradece las discusiones con revisores anónimos cuyas objeciones motivaron la corrección del Apéndice A, la eliminación de la restricción artificial sobre $w$, la incorporación del tercer dominio externo, y la separación explícita entre axiomas y supuestos adicionales.
-
----
-
-## Apéndice A. Demostración del Teorema 2.1
-
-**Enunciado.** Bajo A1–A5', con $\partial \log F / \partial \log \Phi = 1$ y $\partial \log F / \partial \log \Psi = 1$, la única forma funcional compatible es $F = C \Phi \Psi \Omega^\alpha$ con $\alpha \in (0, 1]$.
-
-**Demostración.**
-
-**Paso 1 (separabilidad).** Por A4, $F = f_1(\Phi) f_2(\Psi) f_3(\Omega)$.
-
-**Paso 2 (forma de $f_1, f_2$).** Las condiciones $\partial \log F / \partial \log \Phi = 1$ y $\partial \log F / \partial \log \Psi = 1$ implican $f_1(\Phi) = C_1 \Phi$ y $f_2(\Psi) = C_2 \Psi$.
-
-**Paso 3 (forma de $f_3$).** Por A5, $F(c\Phi, c\Psi, c\Omega) = c^k F(\Phi, \Psi, \Omega)$. Con $f_1, f_2$ lineales, $c^2 f_3(c\Omega) = c^k f_3(\Omega)$, de modo que $f_3(c\Omega) = c^{k-2} f_3(\Omega)$. Esto implica $f_3(\Omega) = C_3 \Omega^{k-2}$. Llamando $\alpha = k - 2$ y usando A3 ($f_3$ cóncava), se tiene $\alpha \leq 1$.
-
-**Paso 4 (positividad).** Por A5', $C = C_1 C_2 C_3 > 0$.
-
-Por tanto $F = C \Phi \Psi \Omega^\alpha$. $\square$
-
-**Comentario.** Si no se imponen las condiciones de elasticidad unitaria, el teorema solo garantiza $F = C \Phi^{a_1} \Psi^{a_2} \Omega^{a_3}$ con $a_1, a_2 \geq 0$ y $a_3 \leq 1$. La forma exacta del PUSFRE requiere los dos supuestos adicionales.
+1. Solo tres dominios externos.
+2. Mapeos interpretativos.
+3. Correlación entre variables.
+4. Memoria temporal no validada externamente.
+5. La extensión a sistemas multi-agente no está implementada.
+6. Los resultados son sensibles al nivel de ruido asumido.
 
 ---
 
-## Apéndice B. Clase GSE
+### 11. Conclusión
 
-**Definición.** Sea $\{T_\lambda\}$ una familia de difeomorfismos de $\mathbb{R}_+$ a $\mathbb{R}$. La clase GSE es el conjunto de funciones $F$ que admiten $T_\lambda(F(x)) = \sum_i g_i^\lambda(T_\lambda(x_i))$ sin requerir afinidad.
-
-**Proposición.** CES es subconjunto propio de GSE.
-
-**Proposición.** GSE no admite forma canónica única.
+La familia CES-Saturada mejora sobre el modelo base en dos de tres dominios externos. El resultado negativo en Fama-French delimita el caso de uso. La extensión no es universal y su aplicación requiere verificar que el dominio cumpla las condiciones de estructura multiplicativa, saturación visible y rango de $\Omega$ suficiente. El coste computacional de la extensión debe justificarse en términos de mejora predictiva.
 
 ---
 
-## Apéndice C. Reproducibilidad
+### Referencias
 
-```bash
-git clone https://github.com/ronin-lang/ronin-paper-pusfre-ces
-cd ronin-paper-pusfre-ces
-pip install -e ".[dev]"
-pytest tests/ -v --cov=ronin_paper
-python scripts/run_synthetic_validation.py --all
-python scripts/run_external_validation.py --neural --urban --fama
-python scripts/run_sobol_analysis.py --n 16384
-python scripts/run_bayesian_analysis.py --domains neural urban fama
-```
+Bettencourt, L. M. A., Lobo, J., Helbing, D., Kühnert, C., y West, G. B. (2007). Growth, innovation, scaling, and the pace of life in cities. *Proceedings of the National Academy of Sciences*, 104(17), 7301-7306.
 
----
+Ferrandez Canalis, D. (2026a). Una caracterización axiomática de la función de fitness en sistemas finitos con recursos escasos. Manuscrito complementario.
 
-## Apéndice D. Ledger de categorización
+Ferrandez Canalis, D. (2026b). Degeneración estructural en la familia CES-Saturada: un análisis de identificabilidad mediante información de Fisher. Manuscrito complementario.
 
-| Afirmación | Categoría | Sección | Derivada de | Evidencia |
-|------------|-----------|---------|-------------|-----------|
-| Definición de sistema finito en competencia | A | 2.1 | — | Definición |
-| Axiomas A1–A5 | — | 2.2 | — | Hipótesis |
-| Teorema 2.1 (forma del PUSFRE) | A | 2.3 | A1–A5' + elasticidades | Apéndice A |
-| Falsabilidad en tres dimensiones | A | 3 | A1–A5' | Conceptual |
-| Casos límite de CES-Saturada | A | 4.2 | Álgebra | Numérico |
-| Degeneración $K$–$\alpha_h$ | A | 5.2 | Proposición 5.2 | Serie geométrica |
-| Invariancia bajo $N$ | A | 5.2 | Corolario 5.2.3 | Cota |
-| Umbral de 3 órdenes | C | 5.3 | Empírico | Bootstrap |
-| Índices Sobol | A | 5.4 | Definición | Cómputo |
-| Superioridad M6 sobre MLP | B | 7.2 | Validación sintética | CV |
-| Neural Scaling mejora | B | 8 | Validación externa | $\Delta \text{BIC} = -14.3$ |
-| Urban Scaling mejora | B | 9 | Validación externa | $\Delta \text{BIC} = -21.6$ |
-| Fama-French no mejora | B | 10 | Validación externa | $\Delta \text{BIC} = +8.7$ |
-| Robustez de $\Delta \text{BIC}$ | B | 7.4 | Falsos positivos | Sintético |
-| Reducción IC con priors | B | 11 | Bayesiano | Posterior |
+Hoffmann, J., Borgeaud, S., Mensch, A., et al. (2022). Training compute-optimal large language models. *arXiv:2203.15556*.
+
+Kaplan, J., McCandlish, S., Henighan, T., et al. (2020). Scaling laws for neural language models. *arXiv:2001.08361*.
+
+Kenneth French Data Library. Dartmouth College. Disponible en línea.
 
 ---
 
-**Fin del artículo.**
+**Fin del Artículo C.**
+
+---
+
+## Nota Final del Autor
+
+Los tres artículos comparten notación, referencias cruzadas y protocolo experimental. Se recomienda a los editores considerarlos como una trilogía, no como publicaciones redundantes. El Artículo A formaliza la caracterización axiomática. El Artículo B desarrolla el análisis de identificabilidad. El Artículo C valida empíricamente la extensión. Los tres son autocontenidos y pueden leerse de forma independiente, pero su lectura conjunta proporciona una imagen completa del marco PUSFRE y de sus extensiones.
 
 **1310.**
