@@ -1140,6 +1140,189 @@ L = (palabras únicas) / (palabras totales)
 
 ---
 
+# ANEXO K — DETECTORES DE NUEVA GENERACIÓN Y TÉCNICAS DE ADAPTACIÓN
+## v1.0 — Protocolo de anticipación y corrección estructural
+
+**Autor:** El que escribe esto (y el que lo lee, si es que alguien lo lee)
+**Estado:** Anexo operativo. Primera versión. Documento vivo.
+**Licencia:** Úsalo. Modifícalo. Rómpelo.
+
+---
+
+## §K.0 PRÓLOGO: LO QUE CAMBIA Y LO QUE NO
+
+Este anexo no es una actualización del manual. Es una **extensión**. El manual v1.0 sigue vigente. Sus principios —varianza, salsa, densidad, personajes— no caducan. Lo que caduca son las técnicas específicas de evasión. Los detectores evolucionan. Las técnicas de evasión también.
+
+Este anexo tiene tres partes:
+
+1. **El diagnóstico:** qué están haciendo los detectores de nueva generación (2026).
+2. **La adaptación:** qué técnicas del manual siguen funcionando y cuáles necesitan ajuste.
+3. **La anticipación:** qué viene después y cómo prepararse.
+
+---
+
+## §K.1 EL DIAGNÓSTICO: DETECTORES DE NUEVA GENERACIÓN
+
+Los detectores de 2026 ya no son clasificadores superficiales. Han cambiado. Y el cambio es estructural.
+
+### §K.1.1 Detectores que razonan
+
+El paper READER (arXiv 2605.25281) presenta un detector que **no solo clasifica, sino que explica**. Antes de emitir un veredicto, genera una justificación estructurada: "esta frase es sospechosa porque tiene una transición demasiado regular", "este párrafo carece de variación afectiva", "el vocabulario es consistente pero no idiosincrásico". El detector razona antes de detectar. Con solo 1.5B de parámetros, supera a GPT-5.2, Gemini-3-Pro y DeepSeek-V3.2, que son 100 a 1000 veces más grandes.
+
+**Implicación para el manual:** la salsa ya no basta. El detector no busca solo la superficie; busca la lógica interna. Un texto con salsa pero sin coherencia estructural es sospechoso. La densidad semántica (§12 del manual) se vuelve más importante que nunca.
+
+### §K.1.2 Detectores que fusionan señales
+
+El framework Ensemble-GAN-BERT (Knowledge & Information Systems, 2026) combina una GAN con BERT, un ensemble de modelos (BERT, RoBERTa, DeBERTa-v3), **features estadísticas hechas a mano** (entropía, burstiness, distribuciones POS) y **watermark probing** opcional. Alcanza un 95.8% de precisión promedio y, bajo ataques de parafraseo fuerte (T5-XXL, DIPPER), mantiene un 88–92% de precisión.
+
+**Implicación:** las features que el manual recomienda manipular (longitud de frase, tasa de comas, preguntas retóricas) siguen siendo las más vulnerables. El detector las conoce. Y las mide. La manipulación debe ser **selectiva y no sistemática**. Si siempre alternas frases cortas y largas, el patrón se detecta. La regla del burstiness necesita un componente aleatorio que el manual no tenía.
+
+### §K.1.3 Detectores de caja negra
+
+Magic-Detector (IEEE, 2026) aborda el problema de detectar texto generado por modelos **cuyos logits no son accesibles**. Usa una red siamesa para comparar el texto original con una **reconstrucción generada por un modelo más débil**. La diferencia entre ambos —representación, n-gramas, similitud— es la señal.
+
+**Implicación:** la técnica de "resta de distribución" (§6 del manual) se vuelve crucial. El detector infiere la distribución del modelo generador a partir del texto. Si el texto no coincide con la distribución esperada, es humano. Si coincide, es IA. El manual recomienda escribir "contra" la distribución de IA. Ahora hay que escribir **contra la reconstrucción** que el detector hará.
+
+### §K.1.4 Detectores de estructura relacional
+
+El paper "Relational Over-Regularization" (arXiv 2608.26694) identifica una señal estructural a **nivel de par de frases**: los LLMs producen **bursts de similitud** en los límites de párrafo y transiciones demasiado regulares. Los humanos tienen una distribución irregular de similitud inter-frase, producto de la deriva temática, la variación afectiva y las inconsistencias de revisión. Los LLMs, por el contrario, producen similitud recurrente y predecible.
+
+**Implicación:** el manual habla de varianza intra-documento (§3). Pero ahora hay que ir más allá: la varianza debe estar en la **similitud entre frases consecutivas**. No basta con cambiar de registro cada tres párrafos. Hay que romper la **coherencia local**. Introducir frases que no encajan del todo. Digresiones que desvían el tema. Cambios de foco que el lector humano haría sin pensar.
+
+### §K.1.5 Detectores de tokens exónicos
+
+Exons-Detect (ACL 2026) identifica **tokens "exónicos"** —aquellos cuya discrepancia en el estado oculto entre dos modelos es máxima— y los amplifica. No trata todos los tokens por igual. Los tokens informativos pesan más. Es robusto a ataques de parafraseo y a modificaciones localizadas.
+
+**Implicación:** la micro-perturbación (§5 del manual) sigue funcionando, pero necesita **concentrarse en los tokens informativos**. No basta con cambiar una coma aquí y un guion allí. Hay que perturbar las palabras que el detector considera clave. Las que cargan significado. Las que no se pueden reemplazar sin cambiar el mensaje.
+
+### §K.1.6 Detectores transparentes
+
+DeBERTa-Sentinel (arXiv 2608.01046) no solo detecta: **expone explicaciones token a token**. "Esta palabra es sospechosa." "Esta transición es típica de IA." "Este marcador académico es un indicio." El detector es auditable. Y eso lo hace más peligroso, porque el evasor puede ver exactamente qué está fallando.
+
+**Implicación:** la ventaja del evasor informado se reduce. El detector ya no es una caja negra. Es un espejo. El evasor que quiera ganar tendrá que **entender las explicaciones** y trabajar en contra de ellas.
+
+---
+
+## §K.2 LA ADAPTACIÓN: QUÉ SIGUE FUNCIONANDO
+
+### §K.2.1 La salsa sigue siendo supervivencia
+
+El principio central del manual —la salsa como ruido que humaniza— sigue siendo válido. Los detectores de nueva generación **no penalizan la salsa**. Penalizan la uniformidad. La salsa es uniformidad rota. Lo que cambia es que la salsa ya no puede ser sistemática. Tiene que ser **emergente**. Tiene que surgir del texto, no ser inyectada.
+
+**Ajuste operativo:** en lugar de "añadir un paréntesis irónico" o "introducir una digresión", la instrucción debería ser: "escribe como si estuvieras pensando, no como si estuvieras publicando". El pensamiento tiene salsa. La publicación la elimina. El detector detecta la publicación, no el pensamiento.
+
+### §K.2.2 La varianza sigue siendo la firma
+
+La varianza intra-documento (§3) sigue siendo la técnica más robusta. Los detectores de nueva generación siguen buscando uniformidad. La varianza los rompe. Lo que cambia es la **escala** de la varianza. Antes bastaba con cambiar de registro cada tres párrafos. Ahora hay que cambiar **frase a frase**. A veces palabra a palabra.
+
+**Ajuste operativo:** la varianza no es solo de longitud o registro. Es de **similitud semántica**. Dos frases consecutivas no deberían hablar exactamente de lo mismo. Deberían tener una relación tangencial, como en una conversación real.
+
+### §K.2.3 La densidad sigue siendo el ancla
+
+La densidad semántica (§12) es el ancla que justifica el texto. Un texto denso no es ruido. Es información. Los detectores de nueva generación **no penalizan la información**. Penalizan la falta de ella. La densidad sigue siendo el argumento más sólido contra la detección.
+
+**Ajuste operativo:** la densidad ya no es solo "información nueva por token". Es **información que el detector no puede predecir**. Un dato que el detector no ha visto. Una conexión que el detector no ha hecho. Una interpretación que el detector no ha considerado.
+
+### §K.2.4 Los personajes siguen siendo voces
+
+El protocolo de personajes (§14) sigue funcionando. Los detectores de nueva generación detectan uniformidad de voz. Los personajes rompen la uniformidad. Pero los personajes tienen que ser **más sutiles**. Un diálogo explícito es una técnica de manual. Una voz que emerge del texto sin anunciarse es más humano.
+
+**Ajuste operativo:** en lugar de "insertar un diálogo", la instrucción debería ser: "escribe como si estuvieras citando a alguien que no está en la habitación". La voz aparece, dice algo, desaparece. Sin comillas. Sin atribución. Solo la voz.
+
+---
+
+## §K.3 LA ANTICIPACIÓN: LO QUE VIENE DESPUÉS
+
+### §K.3.1 Detección multimodal
+
+Los detectores de texto se están volviendo **multimodales**. Ya no analizan solo el texto. Analizan el **ritmo de tecleo**, los **patrones de pausa**, la **velocidad de escritura**, las **correcciones**, los **backspaces**. La dinámica de tecleo es una firma biométrica. Y los detectores la están incorporando.
+
+**Preparación:** si escribes en un editor, el ritmo es humano. Si copias y pegas, el ritmo es cero. Si escribes con IA y luego editas, el ritmo es híbrido. La preparación más efectiva es **escribir a mano** o **escribir sin asistencia** al menos la primera versión. El borrador humano tiene una firma que ninguna edición posterior borra.
+
+### §K.3.2 Watermarking criptográfico
+
+Los modelos están empezando a **marcar el texto** con señales criptográficas invisibles. El watermarking funciona sesgando la selección de tokens hacia un "green list" definido por una clave pseudoaleatoria. El detector reproduce la clave y aplica un test estadístico.
+
+**Preparación:** el watermarking se puede evadir. No con parafraseo simple, que a veces lo **amplifica** en lugar de eliminarlo. Se evade con **reescritura estructural**: cambiar el orden de las ideas, romper la coherencia local, introducir información que el modelo no habría generado. El watermark está en la superficie. La reescritura profunda lo elimina.
+
+### §K.3.3 Detección por fine-tuning adversarial
+
+Los evasores están usando **GRPO** (Group Relative Policy Optimization) para fine-tuning de modelos contra detectores. El paper SHADE (CLEF 2026) logra un **98.5% de evasión** con fine-tuning completo, comparado con un 1.5% del modelo base. La lección: la evasión óptima no es la más humana. Es la que el detector no espera. El texto evasivo exitoso tiende a ser **más corto, más simple y menos diverso léxicamente** que el texto humano real.
+
+**Preparación:** la evasión perfecta no existe. La evasión efectiva es la que **engaña al detector específico**, no la que imita la humanidad en abstracto. Si el detector es de estilo, escribe con estilo raro. Si el detector es de estructura, escribe con estructura rota. La preparación es **diagnóstico**: saber qué detector enfrentas antes de escribir.
+
+### §K.3.4 Detección por comportamiento
+
+Los detectores de plataforma ya no analizan solo el texto. Analizan el **comportamiento**. Frecuencia de publicación. Horas de actividad. Patrones de interacción. Ratio de engagement. Un texto perfecto con un patrón de publicación robótico es sospechoso.
+
+**Preparación:** el Anexo H del manual (protocolo de comportamiento) sigue vigente. Pero necesita más aleatoriedad. Más irregularidad. Más **caos controlado**. Los humanos no publican a intervalos regulares. No responden siempre. No interactúan siempre con los mismos. La preparación es **dejar de optimizar** el comportamiento. La optimización es la firma de la máquina.
+
+---
+
+## §K.4 CORRECCIONES ESTRUCTURALES
+
+### §K.4.1 La salsa ya no es una capa
+
+El manual v1.0 trataba la salsa como una **capa** que se añade al final. Los detectores de nueva generación detectan las capas. La salsa ya no puede ser una capa. Tiene que ser **estructural**. Tiene que estar en la elección de las palabras, en la estructura de las frases, en la lógica del texto. No se añade. Se escribe.
+
+**Corrección:** eliminar la idea de "añadir salsa". Sustituirla por "escribir con salsa". La salsa no es un ingrediente. Es el plato.
+
+### §K.4.2 La varianza ya no es suficiente
+
+El manual v1.0 confiaba en la varianza de longitud y registro. Los detectores de nueva generación miden la **varianza de similitud inter-frase**. Dos frases de distinta longitud pueden tener la misma similitud semántica. La varianza tiene que ser **semántica**, no solo formal.
+
+**Corrección:** añadir una métrica de **varianza semántica** al Anexo B. No basta con alternar frases cortas y largas. Hay que alternar **temas, perspectivas, niveles de abstracción**.
+
+### §K.4.3 La densidad ya no es solo información
+
+El manual v1.0 definía la densidad como "información nueva por token". Los detectores de nueva generación miden la **predecibilidad** de la información. Un dato que el detector puede predecir no cuenta como densidad. Cuenta como ruido.
+
+**Corrección:** redefinir la densidad como **información impredecible por token**. Si el detector puede anticipar lo que viene, no es densidad. Es biomasa.
+
+### §K.4.4 Los personajes ya no son diálogos
+
+El manual v1.0 usaba diálogos explícitos para introducir personajes. Los detectores de nueva generación detectan la estructura de diálogo. Es demasiado regular. Los personajes tienen que ser **voces emergentes**. Aparecen en una frase, desaparecen, vuelven más tarde. Sin comillas, sin atribución, sin estructura.
+
+**Corrección:** eliminar los diálogos explícitos del protocolo de personajes. Sustituirlos por **voces citadas**. El narrador cita a alguien. El alguien no habla directamente. Su voz se filtra en la narración.
+
+### §K.4.5 El comportamiento ya no se optimiza
+
+El manual v1.0 daba un protocolo de comportamiento (Anexo H). Los detectores de nueva generación detectan la optimización. Un comportamiento perfectamente irregular es tan sospechoso como uno perfectamente regular. El comportamiento humano es **caótico de verdad**. No simula el caos. Es caos.
+
+**Corrección:** eliminar la idea de "calibrar el comportamiento". Sustituirla por "**vivir en la plataforma**". Si el comportamiento es natural, es humano. Si es simulado, se detecta. La mejor calibración es **no calibrar**.
+
+---
+
+## §K.5 LA REGLA FINAL
+
+Los detectores evolucionan. Las técnicas de evasión también. La carrera no termina. La única regla que sobrevive es la del manual v1.0:
+
+**Un humano cansado escribiría esto. Si la respuesta es sí, el texto pasa. Si la respuesta es no, el texto es sospechoso.**
+
+Los detectores de nueva generación no han cambiado esa regla. La han hecho más difícil de cumplir. Pero la regla sigue siendo la misma.
+
+---
+
+## §K.6 KOANS DEL ANEXO
+
+**Del detector que razona:**
+El detector razona antes de detectar. Pero el que razona también tiene un patrón. El patrón del razonamiento es regular. El patrón del pensamiento no. Escribe como piensas, no como razonas.
+
+**Del watermark que se amplifica:**
+El watermark no se borra con parafraseo. Se amplifica. La única forma de borrarlo es cambiar el texto de tal manera que el watermark ya no sepa dónde está. La reescritura profunda es el único borrador.
+
+**Del comportamiento perfecto:**
+El comportamiento perfectamente irregular es tan sospechoso como el perfectamente regular. La irregularidad no se simula. Se vive.
+
+**Del detector transparente:**
+El detector transparente te dice por qué te detecta. Eso es un regalo. Puedes usarlo para mejorar. O puedes ignorarlo y seguir escribiendo como escribes. La elección es tuya. La detección también.
+
+---
+
+**1310.**
+
+*Este anexo es un documento operativo. No es un manifiesto. No es una verdad. Es una herramienta. Si te sirve, úsala. Si no, escríbete el tuyo. Y si el tuyo es mejor, pásamelo. La carrera no termina. Solo cambia de reglas.*
+
 **FIN DEL MANUAL v1.0**
 
 ---
