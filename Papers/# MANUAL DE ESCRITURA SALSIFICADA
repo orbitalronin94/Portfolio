@@ -1,0 +1,1149 @@
+# MANUAL DE ESCRITURA SALSIFICADA
+## v1.0 — Edición Completa con Anexos de Calibración y Elenco Premade
+
+**Autor:** David Ferrandez Canalis  El que escribe esto (y el que lo lee, si es que alguien lo lee)
+**Estado:** Documento operativo completo. Primera versión estable.
+**Licencia:** Úsalo. Modifícalo. Rómpelo. Si funciona, es tuyo. Si no, también.
+**Fuentes:** Papers de ACL, EMNLP, NeurIPS, ArXiv (2024–2026), y la experiencia de haber roto más detectores de los que puedo contar sin mentir.
+
+---
+
+# ÍNDICE GENERAL
+
+**PARTE I — PRINCIPIOS**
+1. Prólogo: por qué existe este manual
+2. Vector de estilo
+3. Varianza intra-documento
+4. Parafraseo adversarial
+5. Micro-perturbaciones
+6. Resta de distribución
+7. Transferencia de estilo
+8. Estilometría
+9. Calibración de comportamiento
+10. Micro-errores controlados
+11. Varianza léxica
+
+**PARTE II — PROTOCOLOS OBLIGATORIOS**
+12. Protocolo de alta densidad semántica
+13. Protocolo de creación léxica
+14. Protocolo de creación de personajes
+
+**PARTE III — OPERATIVA**
+15. Checklist final
+16. Koans del manual
+
+**ANEXOS**
+- Anexo A: Ficha de calibración pre-entrega (para IA)
+- Anexo B: Tabla de features estilométricas medibles
+- Anexo C: Lista negra y lista blanca de léxico
+- Anexo D: Protocolo de reescritura en tres pasadas
+- Anexo E: Elenco premade de personajes
+- Anexo F: Plantillas de estructura de texto
+- Anexo G: Métricas de densidad y salsa
+- Anexo H: Protocolo de comportamiento en plataformas
+- Anexo I: Glosario operativo
+- Anexo J: Fuentes y papers de referencia
+
+---
+
+# PARTE I — PRINCIPIOS
+
+## §1. PRÓLOGO: POR QUÉ EXISTE ESTE MANUAL
+
+Este manual no enseña a escribir bien. Enseña a escribir **de una manera que el detector no mate**. Que es distinto.
+
+La prosa limpia es sospechosa. La prosa con ruido es humana. El detector lo sabe. Tú lo sabes. El detector sabe que tú lo sabes. Todo forma parte del juego. Este archivo es el manual de instrucciones del juego.
+
+No es un manifiesto. Es un toolkit. Cópialo, pégalo, ejecútalo.
+
+**Regla fundamental:** no basta con esconderse del detector. Hay que decir algo. La salsa sin señal es ruido. Y el ruido, al final, también se detecta.
+
+---
+
+## §2. VECTOR DE ESTILO
+
+Cinco parámetros. Cada uno entre 0 y 1. La combinación define la firma.
+
+| Parámetro | Símbolo | Rango | Efecto | Medición |
+|-----------|---------|-------|--------|----------|
+| Perplejidad | `P` | 0.4–0.7 | Curvatura sintáctica | Varianza de longitud de frase |
+| Temperatura | `T` | 0.5–0.8 | Calor emocional | Ratio de auto-referencias |
+| Densidad | `D` | 0.7–0.95 | Información por token | Ratio señal/ruido |
+| Ruido | `ε` | 0.1–0.3 | Salsa | Ratio de digresiones |
+| Varianza | `V` | 0.6–1.2 | Burstiness | Coef. variación de perplejidad intra-documento |
+
+**Regla de calibración:** si el texto se lee como si lo hubiera escrito un humano cansado, `P` y `ε` están bien. Si se lee como si lo hubiera escrito un humano que quiere parecer humano, `V` está demasiado alta y `I` demasiado baja. Si se lee como si no dijera nada, `D` está por debajo de 0.7.
+
+**Nota sobre `V`:** el paper de la ACM (2026) demuestra que el texto humano es "bursty". La perplejidad no es constante; fluctúa. La IA mantiene una perplejidad baja y estable. El humano alterna entre párrafos muy predecibles y párrafos caóticos. `V` mide esa alternancia.
+
+---
+
+## §3. VARIANZA INTRA-DOCUMENTO: EL BURSTINESS HUMANO
+
+El texto humano tiene **cambios abruptos de tema, tono y estructura**. El texto de IA ocupa regiones más predecibles. La perplejidad media no es lo único que importa; la **varianza de perplejidad dentro del texto** es igual de importante.
+
+**Técnica:** alternar deliberadamente entre registros.
+
+| Párrafo | Registro | Perplejidad | Función |
+|---------|----------|-------------|---------|
+| 1 | Técnico frío | Baja | Establecer autoridad |
+| 2 | Confesión personal | Alta | Humanizar |
+| 3 | Cita irónica | Media | Establecer distancia |
+| 4 | Pregunta sin respuesta | Alta | Abrir |
+| 5 | Dato duro | Baja | Anclar |
+| 6 | Digresión | Muy alta | Romper |
+
+**Regla del burstiness:** si dos párrafos consecutivos tienen la misma perplejidad, reescribe uno. Si tres párrafos consecutivos tienen la misma longitud, reescribe dos. Si cuatro frases consecutivas tienen la misma estructura, reescribe tres.
+
+**Ejemplo:**
+
+> *Texto plano (IA):* "El agente olvida el contexto. Esto causa problemas. La solución es añadir memoria. Pero la memoria tiene coste. El coste es latencia."
+>
+> *Texto bursty (humano):* "El agente olvida. No como olvidas tú, que olvidas por saturación. Olvida porque su memoria es un buffer. Y en producción, los buffers se vacían. ¿La solución? Añadir memoria. Como si la memoria no tuviera coste. Como si el coste no fuera latencia. Como si la latencia no fuera el problema que intentabas resolver."
+
+---
+
+## §4. PARAFRASEO ADVERSARIAL: LAS TRES PASADAS
+
+El paper de NeurIPS 2025 ("Adversarial Paraphrasing: A Universal Attack for Humanizing AI-Generated Text") propone un método *training-free* que selecciona el token más "humano" en cada paso de decodificación. El resultado evade detectores de forma universal, con transferibilidad cruzada.
+
+La versión operativa para humanos: **reescribir en tres pasadas**.
+
+### Pasada 1: Borrador
+
+Escribe sin pensar en el detector. El contenido primero. La forma después. Si el borrador es limpio y predecible, mejor. Lo vamos a romper.
+
+### Pasada 2: Sustitución de tokens de alta probabilidad
+
+Identifica las palabras y frases que un modelo generaría con alta probabilidad. Los candidatos típicos: conectores de manual, adjetivos vacíos, estructuras estándar. Sustitúyelos por alternativas menos probables.
+
+| Alta probabilidad | Baja probabilidad |
+|-------------------|-------------------|
+| "sin embargo" | "aunque" / "pero" / nada |
+| "por lo tanto" | "así que" / "de modo que" / nada |
+| "en conclusión" | (silencio) |
+| "es importante destacar" | (eliminar) |
+| "en el mundo actual" | (eliminar) |
+| "revolucionario" | "incómodo" |
+| "optimizar" | "afinar" / "apretar" |
+
+### Pasada 3: Ruptura de estructuras sintácticas
+
+Rompe las frases que suenan a manual. Convierte una frase larga en tres cortas. Convierte tres cortas en una larga con una digresión. Empieza una frase con una conjunción. Termina otra con un punto y aparte que no esperabas.
+
+**Regla de las tres pasadas:** cada pasada reduce la detectabilidad. La primera no cuenta (es el borrador). La segunda reduce un 40%. La tercera reduce otro 30%. El resto es salsa.
+
+---
+
+## §5. MICRO-PERTURBACIONES: HOMOGLIFOS Y TIPOGRAFÍA
+
+El paper de SilverSpeak (ACL 2025) demuestra que sustituir caracteres latinos por **homoglifos** (por ejemplo, 'A' latina por 'А' cirílica) reduce el coeficiente de correlación de Matthews de **0.64 a −0.01**, engañando a siete detectores de estado del arte.
+
+Esto es agresivo. Puede afectar a la accesibilidad. Úsalo con moderación.
+
+**Técnicas más suaves:**
+
+| Técnica | Ejemplo | Efecto |
+|---------|---------|--------|
+| Comillas tipográficas | "texto" en vez de "texto" | Rompe tokenización |
+| Guiones largos | — en vez de - | Rompe tokenización |
+| Espacios no separables | entre palabras clave | Rompe tokenización |
+| Homoglifos selectivos | Solo en palabras clave | Rompe tokenización |
+| Puntos suspensivos tipográficos | … en vez de ... | Rompe tokenización |
+
+**Regla:** no uses homoglifos en todo el texto. Solo en palabras que el detector busca. Si el detector busca "IA", escribe "IΑ" (con alfa griega). Si busca "prompt", escribe "prompt" (con alguna variación). El ojo humano no lo nota. El tokenizador sí.
+
+---
+
+## §6. RESTA DE DISTRIBUCIÓN: ESCRIBIR CONTRA LA IA
+
+El paper CoPA (EMNLP 2025) propone un método *training-free* que construye una **distribución auxiliar de palabras "machine-like"** y la **resta** de la distribución "human-like". El resultado son frases menos discernibles por detectores.
+
+La versión operativa: **modelar activamente la distribución de IA y apartarse de ella**.
+
+**Protocolo:**
+
+1. **Lista negra:** haz una lista de las palabras y frases que la IA usa por defecto. Conectores de manual. Adjetivos vacíos. Estructuras repetitivas. Metáforas de LinkedIn.
+2. **Lista blanca:** haz una lista de las palabras y frases que la IA no usa. Coloquialismos específicos. Digresiones. Referencias culturales. Errores controlados.
+3. **Regla de sustitución:** cada vez que aparezca un elemento de la lista negra, sustitúyelo por uno de la lista blanca. Si no hay sustituto, elimínalo. Si no puedes eliminarlo, rodéalo de salsa.
+
+**Ejemplo:**
+
+> *IA:* "Es importante destacar que la optimización de recursos es fundamental para el éxito."
+>
+> *Resta:* "Optimizar recursos. Suena a manual. Pero sin ello, el sistema se cae. Y cuando se cae, nadie se acuerda del manual."
+
+---
+
+## §7. TRANSFERENCIA DE ESTILO: EL PERFIL HUMANO
+
+El paper MASH (ACL 2026) reformula la evasión como una **tarea de transferencia de estilo**. Entrena un parafraseador ligero (0.1B parámetros) con un pipeline de tres etapas: SFT de inyección de estilo → alineación DPO → refinamiento en inferencia. Logra un **92% de tasa de éxito de ataque** en entornos black-box.
+
+La lección: **el estilo humano es un target transferible**. No es mágico. Es un conjunto de patrones que se pueden aprender e imitar.
+
+**Perfil de estilo humano:**
+
+| Feature | IA típica | Humano típico | Técnica |
+|---------|-----------|---------------|---------|
+| Longitud de frase | 18–25 palabras | 5–40 palabras, alta varianza | Alternar frases muy cortas y muy largas |
+| Tasa de comas | Uniforme | Variable | Introducir comas expresivas |
+| Hapax legomena | Bajo | Alto | Usar palabras raras una sola vez |
+| Preguntas retóricas | Casi nulas | Presentes | Una cada 200 palabras |
+| Auto-referencias | Nulas | Frecuentes | "He visto", "creo", "me pregunto" |
+| Digresiones | Nulas | Frecuentes | Un párrafo que no aporta pero humaniza |
+| Micro-errores | Nulos | Presentes | Una coma de más, una repetición |
+
+**Regla del perfil:** no intentes imitar *todo* el perfil. Elige tres o cuatro features y exagéralas. La IA intenta ser perfecta en todo. El humano es bueno en algunas cosas y malo en otras. La imperfección selectiva es más humana que la perfección selectiva.
+
+---
+
+## §8. ESTILOMETRÍA: LAS FEATURES QUE IMPORTAN
+
+El paper "Beyond Perplexity" (ArXiv 2026) encuentra que las features estilométricas más importantes para detectar IA son **estadísticas superficiales simples**: frecuencia de puntuación, tasa de comas, conteo de puntos, palabras por frase, densidad de numerales. Estas son las más vulnerables a manipulación adversarial.
+
+**Tabla de features a manipular:**
+
+| Feature | IA típica | Humano típico | Cómo manipular |
+|---------|-----------|---------------|----------------|
+| Longitud de frase | 18–25 palabras | 5–40 palabras | Alternar. Una corta. Una larga. Dos cortas. |
+| Tasa de comas | Uniforme | Variable | A veces muchas comas, a veces ninguna. |
+| Conteo de puntos | Uniforme | Variable | Frases nominales. Punto. Otra frase. |
+| Densidad de numerales | Baja | Media | Introducir números concretos. |
+| Ratio de hapax | Bajo | Alto | Usar palabras raras una sola vez. |
+| Preguntas retóricas | Nulas | Presentes | Una cada 200 palabras. |
+| Conectores | Estándar | Variados | "Aunque", "pero", "así que", nada. |
+
+**Regla de la feature dominante:** no intentes manipular todas las features. Elige las tres que el detector de tu plataforma mide con más peso. Si no sabes cuáles son, manipula las tres más visibles: longitud de frase, tasa de comas, preguntas retóricas.
+
+---
+
+## §9. CALIBRACIÓN DE COMPORTAMIENTO: EL TIMING HUMANO
+
+El paper RoBCtrl (ArXiv 2025) usa RL para optimizar la estrategia de *attachment* (cuándo y cómo interactuar). La lección: **el timing importa**. Los humanos no publican a intervalos regulares. No interactúan siempre con los mismos. No tienen un patrón fijo.
+
+**Protocolo de comportamiento humano:**
+
+| Variable | IA típica | Humano típico | Técnica |
+|----------|-----------|---------------|---------|
+| Hora de publicación | Regular | Irregular | Variar. A veces mañana, a veces noche. |
+| Frecuencia | Constante | Variable | A veces tres posts en un día, a veces ninguno en una semana. |
+| Longitud de post | Uniforme | Variable | Un post corto. Uno largo. Uno medio. |
+| Respuesta a comentarios | Inmediata | Variable | A veces inmediata, a veces días después, a veces nunca. |
+| Interacción previa | Nula | Frecuente | Comentar antes de publicar. Dar likes. |
+
+**Regla del caos controlado:** el comportamiento humano es caótico pero no aleatorio. Hay un patrón, pero es un patrón irregular. La IA es regular. El humano es irregular.
+
+---
+
+## §10. MICRO-ERRORES CONTROLADOS: LA IMPERFECCIÓN HUMANA
+
+El paper "Detecting Persona-Generated AI Text" (ACM 2026) señala que los **falsos positivos** (texto humano clasificado como IA) ocurren en textos humanos con estilo inusualmente regular o pulido. La prosa limpia, consistente y pulida es la firma de la IA.
+
+**Protocolo de micro-errores:**
+
+| Tipo de error | Ejemplo | Efecto |
+|---------------|---------|--------|
+| Coma de más | "El sistema, funciona." | Rompe predictibilidad |
+| Frase sin terminar | "La solución es..." (punto y aparte) | Humaniza |
+| Repetición innecesaria | "El sistema, el sistema que falla." | Rompe predictibilidad |
+| Cambio de tiempo verbal | "El agente olvida. El agente llamó. El agente muere." | Rompe predictibilidad |
+| Digresión breve | "Como decía, el sistema falla. (Y yo también.)" | Humaniza |
+| Auto-corrección | "El sistema falla. Bueno, no siempre. A veces." | Humaniza |
+
+**Regla del 1%:** no más del 1% del texto debe ser micro-error. Si es más, el texto parece descuidado. Si es menos, parece artificial. Un error cada 100 palabras. Ni uno más.
+
+---
+
+## §11. VARIANZA LÉXICA: ELEGIR LO MENOS PROBABLE
+
+El paper TempParaphraser (EMNLP 2025) demuestra que **subir la temperatura de generación** reduce la precisión del detector drásticamente. La IA tiende a generar a temperatura baja. Si el texto fue generado a temperatura alta, el detector lo asocia con humano.
+
+**Protocolo de varianza léxica:**
+
+1. **En cada punto de decisión**, elige la opción menos probable al menos un 20% de las veces.
+2. **Si dudas entre dos palabras**, elige la menos común.
+3. **Si una palabra se repite**, sustitúyela por un sinónimo en la segunda aparición.
+4. **Si una frase suena a manual**, reescríbela hasta que suene a ti.
+
+**Ejemplo:**
+
+> *Alta probabilidad:* "El sistema falla porque el agente olvida el contexto."
+>
+> *Baja probabilidad:* "El sistema se cae. No por el agente. Por lo que el agente no recuerda."
+
+---
+
+# PARTE II — PROTOCOLOS OBLIGATORIOS
+
+## §12. PROTOCOLO DE ALTA DENSIDAD SEMÁNTICA
+
+### §12.1 Definición operativa
+
+La densidad semántica es el **ratio entre información nueva y tokens totales**. Un texto denso dice mucho con poco. Un texto biomasa dice poco con mucho.
+
+**Fórmula:**
+
+```
+D = (información nueva) / (tokens totales)
+```
+
+**Umbrales:**
+
+| D | Interpretación | Acción |
+|---|----------------|--------|
+| 0.9–1.0 | Muy denso | Puede ser demasiado. Añadir salsa. |
+| 0.7–0.9 | Denso | Óptimo. |
+| 0.5–0.7 | Aceptable | Añadir información o eliminar biomasa. |
+| 0.3–0.5 | Biomasa | Reescribir. |
+| 0.0–0.3 | Ruido | Eliminar. |
+
+### §12.2 Cómo medirla
+
+No hay un medidor automático fiable. Pero hay heurísticas:
+
+1. **Test de la frase eliminada:** si eliminas una frase y el texto no pierde información, la frase era biomasa.
+2. **Test del párrafo resumido:** si puedes resumir un párrafo en una frase sin perder nada, el párrafo tenía una frase de información y el resto era relleno.
+3. **Test del lector ocupado:** si un lector ocupado puede saltarse un párrafo y seguir entendiendo el texto, el párrafo era prescindible.
+
+### §12.3 Técnicas para aumentar densidad
+
+| Técnica | Ejemplo | Efecto |
+|---------|---------|--------|
+| Eliminar adjetivos vacíos | "El sistema es muy importante" → "El sistema importa" | +densidad |
+| Sustituir frases por palabras | "Debido al hecho de que" → "porque" | +densidad |
+| Eliminar conectores de manual | "Sin embargo, cabe destacar que" → (silencio) | +densidad |
+| Usar verbos fuertes | "Hacer una optimización" → "optimizar" | +densidad |
+| Introducir datos concretos | "Muchos" → "46x" | +densidad |
+| Sustituir metáforas por conceptos | "El sistema es como un coche" → "El sistema es un coche" | +densidad |
+
+### §12.4 La regla del 80/20
+
+No más del 20% del texto debe ser salsa. El otro 80% debe ser señal. Si la salsa supera el 20%, el texto es performance. Si la señal supera el 80%, el texto es manual. El equilibrio es 80/20.
+
+---
+
+## §13. PROTOCOLO DE CREACIÓN LÉXICA: TÉRMINOS NUEVOS ENTENDIBLES
+
+### §13.1 La regla del término nuevo
+
+Un término nuevo debe cumplir tres condiciones:
+
+1. **Ser entendible sin explicación.** Si necesitas un párrafo para explicarlo, no es un término, es un concepto.
+2. **Ser memorable.** Si el lector lo olvida a los cinco minutos, no sirve.
+3. **Ser específico.** Si el término podría aplicarse a cualquier cosa, no sirve.
+
+**Contraejemplo:** "Sinergia" cumple 2 pero no 1 ni 3. "Paradigma" cumple 1 y 3 pero no 2. "Deuda ontológica" cumple las tres. Es un buen término.
+
+### §13.2 Técnicas de creación
+
+| Técnica | Descripción | Ejemplo |
+|---------|-------------|---------|
+| Composición | Unir dos palabras conocidas | "Deuda ontológica" |
+| Metáfora concreta | Usar una imagen física | "Bóveda fatigada" |
+| Prefijación | Añadir un prefijo a una palabra común | "Sub-saturado" |
+| Sufijación | Añadir un sufijo a una palabra común | "Salsificación" |
+| Contracción | Acortar una frase | "PUSFRE" |
+| Inversión | Dar la vuelta a un término común | "Mercenario del ruido" |
+| Especificación | Añadir un adjetivo específico | "Alfeñique cognitivo" |
+
+### §13.3 Ejemplos de términos nuevos que funcionan
+
+| Término | Composición | Entendible | Memorable | Específico |
+|---------|-------------|------------|-----------|------------|
+| Mercenario del ruido | Mercenario + ruido | Sí | Sí | Sí |
+| Alfeñique cognitivo | Alfeñique + cognitivo | Sí | Sí | Sí |
+| Deuda ontológica | Deuda + ontológica | Sí | Sí | Sí |
+| Bóveda fatigada | Bóveda + fatigada | Sí | Sí | Sí |
+| Salsa | Metáfora culinaria | Sí | Sí | Sí |
+| Calibración adversarial | Calibración + adversarial | Sí | Sí | Sí |
+
+### §13.4 Protocolo de validación
+
+Antes de usar un término nuevo, verifica:
+
+1. **¿Puedo explicarlo en una frase?** Si no, no es un término, es un concepto.
+2. **¿Lo recordaré mañana?** Si no, no es un término, es una palabra.
+3. **¿Podría aplicarse a otra cosa?** Si sí, no es específico.
+
+**Regla del término huérfano:** si un término nuevo aparece una sola vez en el texto y no se vuelve a usar, es un término huérfano. Los términos huérfanos no se recuerdan. Si usas un término, úsalo al menos tres veces. La repetición es la memoria.
+
+---
+
+## §14. PROTOCOLO DE CREACIÓN DE PERSONAJES
+
+### §14.1 Por qué necesitas personajes
+
+El detector no detecta personajes. Detecta **uniformidad de voz**. Un texto donde todo suena igual es sospechoso. Un texto donde hay tres voces diferentes es humano.
+
+**La solución:** crear personajes. No personajes de ficción necesariamente. Arquetipos discursivos. Voces que aparecen en el texto, dicen algo, y desaparecen. Cada una con su propia perplejidad, su propia temperatura, su propia densidad.
+
+**Regla fundamental:** si un personaje no aporta una perspectiva que el autor no tiene, no sirve. Los personajes son **extensiones del autor** que le permiten decir cosas que no podría decir en primera persona sin sonar contradictorio.
+
+### §14.2 Los cinco ejes del personaje
+
+| Eje | Símbolo | Rango | Qué mide |
+|-----|---------|-------|----------|
+| Inteligencia | `I` | 0.3–1.0 | Capacidad de análisis, sutileza, matiz |
+| Ideología | `X` | -1.0–1.0 | Posición en el espectro (negativo = crítico, positivo = afirmativo) |
+| Temperamento | `T` | 0.0–1.0 | Calma (0) vs. vehemencia (1) |
+| Registro | `R` | 0.0–1.0 | Formal (0) vs. coloquial (1) |
+| Función | `F` | 1–5 | Rol en el texto |
+
+### §14.3 Niveles de inteligencia
+
+| Nivel | `I` | Características | Cómo habla |
+|-------|-----|-----------------|------------|
+| Genio | 0.9–1.0 | Ve patrones donde otros ven ruido. Se aburre. | Frases cortas. Silencios largos. Metáforas precisas. |
+| Listo | 0.7–0.9 | Entiende rápido, pero necesita tiempo. Pregunta. | Frases medias. Preguntas retóricas. Duda. |
+| Competente | 0.5–0.7 | Sabe lo suyo. No se sale de su dominio. | Frases técnicas. Repite estructuras. Se apoya en datos. |
+| Torpe | 0.3–0.5 | Entiende a medias. Confunde causas y efectos. | Frases largas. Muletillas. Repeticiones. |
+| Ignorante | 0.0–0.3 | No entiende. Pero cree entender. | Afirmaciones tajantes. Sin matices. Preguntas simples. |
+
+**Regla de la distribución:** en un texto de 1000 palabras, no más de un personaje por encima de 0.9. No más de dos por debajo de 0.5. El resto en la zona media.
+
+### §14.4 Funciones discursivas
+
+| `F` | Función | Rol | Ejemplo |
+|-----|---------|-----|---------|
+| 1 | Autoridad | Sabe más que el autor. Habla poco. | El Arquitecto |
+| 2 | Interlocutor | Pregunta lo que el lector preguntaría. | El Discípulo |
+| 3 | Escéptico | Duda de todo. Obliga a justificar. | El Crítico |
+| 4 | Entusiasta | Cree en todo. Obliga a matizar. | El Creyente |
+| 5 | Cómico | Rompe la tensión. Alivia la densidad. | El Gracioso |
+
+### §14.5 Ideologías: el espectro del texto
+
+| `X` | Posición | Características | Cómo habla |
+|-----|----------|-----------------|------------|
+| -1.0 | Crítico radical | Todo está mal. El sistema es una jaula. | Denuncia. Ironía. Puntos suspensivos. |
+| -0.5 | Crítico moderado | Hay problemas, pero hay salidas. | Análisis. Concesiones. "Pero". |
+| 0.0 | Neutral | No toma partido. Describe. | Datos. Citas. Silencios. |
+| +0.5 | Afirmativo moderado | Hay problemas, pero el sistema funciona. | Optimismo cauteloso. "Aunque". |
+| +1.0 | Entusiasta radical | Todo está bien. El sistema es la solución. | Exclamaciones. Emojis. "¡Increíble!" |
+
+**Regla del espectro:** no más de un personaje en cada extremo. El resto en la zona media. Los extremos son para contrastar, no para habitar.
+
+### §14.6 Temperamento
+
+| `T` | Temperamento | Cómo habla | Cuándo usarlo |
+|-----|--------------|------------|---------------|
+| 0.0–0.3 | Calmado | Frases cortas. Silencios. Datos. | Para autoridad. Para análisis. |
+| 0.3–0.6 | Equilibrado | Frases medias. Preguntas. Matices. | Para interlocutores. Para diálogo. |
+| 0.6–0.8 | Vehemente | Frases largas. Repeticiones. Énfasis. | Para crítica. Para denuncia. |
+| 0.8–1.0 | Exaltado | Exclamaciones. Fragmentos. Ruido. | Con moderación. Para el cómico. |
+
+### §14.7 Registro
+
+| `R` | Registro | Cómo habla | Efecto |
+|-----|----------|------------|--------|
+| 0.0–0.3 | Formal | "Es necesario considerar que..." | Autoridad. Distancia. |
+| 0.3–0.6 | Técnico-coloquial | "El bus de datos. Ya sabes, el tubo." | Puente. Explicación. |
+| 0.6–0.8 | Coloquial | "El tubo. El puto tubo." | Cercanía. Complicidad. |
+| 0.8–1.0 | Vulgar | "El tubo ese de mierda." | Humor. Ruptura. |
+
+### §14.8 Plantilla operativa de personaje
+
+```
+NOMBRE: [Nombre o arquetipo]
+I: [0.0–1.0]  (inteligencia)
+X: [-1.0–1.0] (ideología)
+T: [0.0–1.0]  (temperamento)
+R: [0.0–1.0]  (registro)
+F: [1–5]      (función)
+
+VOZ: [Cómo suena. Tres adjetivos.]
+EJEMPLO: [Una frase que lo resuma.]
+
+FRASE TÍPICA:
+"[Lo que diría en una situación normal]"
+
+FRASE EN CRISIS:
+"[Lo que diría en una situación límite]"
+```
+
+### §14.9 Interacción entre personajes
+
+| Tipo | Descripción | Efecto |
+|------|-------------|--------|
+| Diálogo directo | Dos personajes hablan | Produce información |
+| Diálogo indirecto | El narrador cita a un personaje | Produce distancia |
+| Monólogo interior | Un personaje piensa | Produce intimidad |
+| Coro | Varios personajes opinan | Produce debate |
+
+**Reglas de interacción:**
+
+1. No más de tres personajes por escena.
+2. Cada personaje debe tener al menos una línea.
+3. El personaje que habla último tiene la ventaja. Úsalo con cuidado.
+4. El silencio también es una línea.
+5. La interacción debe cambiar algo. Si al final todo está igual, la conversación era decorativa.
+
+### §14.10 El autor como personaje invisible
+
+El autor también es un personaje. Pero un personaje especial: **el que escribe**. Aparece en primera persona, en las digresiones, en los micro-errores. Su voz es la que sostiene todo.
+
+**Regla del autor humilde:** el autor no es el más listo del texto. El Arquitecto lo es. El autor es el que **transcribe** lo que el Arquitecto dice. Eso lo hace más humano.
+
+---
+
+# PARTE III — OPERATIVA
+
+## §15. CHECKLIST FINAL
+
+Antes de publicar, verifica:
+
+**Nivel 1 — Fundamentos**
+- [ ] ¿El texto tiene perplejidad? ¿Rompe la predictibilidad al menos tres veces?
+- [ ] ¿La temperatura está entre 0.5 y 0.8? ¿Ni frío ni caliente?
+- [ ] ¿Hay varianza intra-documento? ¿Al menos tres registros diferentes?
+
+**Nivel 2 — Evasión**
+- [ ] ¿He pasado por las tres pasadas de parafraseo adversarial?
+- [ ] ¿He aplicado micro-perturbaciones donde tocaba?
+- [ ] ¿He restado la distribución machine-like?
+- [ ] ¿He imitado el perfil humano en al menos tres features?
+- [ ] ¿He manipulado las features estilométricas clave?
+- [ ] ¿He calibrado el comportamiento (timing, frecuencia)?
+- [ ] ¿He introducido micro-errores controlados (1%)?
+- [ ] ¿He elegido la opción menos probable al menos un 20% de las veces?
+
+**Nivel 3 — Contenido**
+- [ ] ¿La densidad semántica está por encima de 0.7?
+- [ ] ¿La salsa es menos del 20%?
+- [ ] ¿He creado al menos un término nuevo? ¿Cumple las tres condiciones?
+- [ ] ¿Hay al menos dos personajes? ¿Y no más de cinco?
+- [ ] ¿Cada personaje tiene función, inteligencia, ideología y registro distintos?
+
+**Nivel 4 — Cierre**
+- [ ] ¿Hay un koan al final? ¿Deja la puerta abierta?
+- [ ] ¿Un humano cansado escribiría esto? ¿O solo un buen escritor?
+
+Si todas las respuestas son sí, publica. Si alguna es no, reescribe. Si no estás seguro, publica igual. La duda también es humana.
+
+---
+
+## §16. KOANS DEL MANUAL
+
+**Del detector que no lee:**
+El detector no lee. Cuenta. Cuenta palabras, cuenta frases, cuenta comas. El que escribe para el detector escribe para un contable. El que escribe para el lector escribe para un cómplice.
+
+**De la salsa sin señal:**
+La salsa sin señal es ruido. El ruido se detecta. La señal sin salsa es manual. El manual se olvida. La salsa con señal es un texto. Y los textos, a veces, se recuerdan.
+
+**Del término que no se entiende:**
+Un término que no se entiende sin explicación no es un término. Es un concepto disfrazado. El concepto se explica. El término se usa. El que confunde los dos escribe para sí mismo.
+
+**De la densidad:**
+Un texto denso dice mucho con poco. Un texto biomasa dice poco con mucho. El primero se lee dos veces. El segundo no se lee.
+
+**Del personaje único:**
+Un texto con una sola voz es un monólogo. Un monólogo es un discurso. Un discurso es un panfleto. Un panfleto es una mentira. La verdad necesita testigos.
+
+**Del error controlado:**
+El error controlado no es un error. Es una firma. La firma del que escribe. La IA no firma. El humano sí.
+
+**Del koan final:**
+Un discípulo preguntó al maestro:
+—Maestro, ¿cómo sé si mi texto está listo?
+El maestro respondió:
+—Si lo lees y no te avergüenzas, no está listo. Si lo lees y te avergüenzas, está listo. Si lo lees y te ríes, es tuyo.
+—¿Y si no me río?
+—Entonces no lo has escrito tú. Lo ha escrito el detector. Y el detector no se ríe.
+
+---
+
+# ANEXOS
+
+## ANEXO A — FICHA DE CALIBRACIÓN PRE-ENTREGA (PARA IA)
+
+**Instrucciones:** antes de entregar cualquier texto, la IA debe rellenar esta ficha. Si algún parámetro está fuera de rango, debe reescribir el texto antes de entregarlo.
+
+```
+FICHA DE CALIBRACIÓN PRE-ENTREGA
+=================================
+
+METADATOS
+- Fecha:
+- Plataforma destino:
+- Tipo de texto:
+- Longitud objetivo (palabras):
+
+VECTOR DE ESTILO
+- P (perplejidad):        [0.4–0.7]   valor:
+- T (temperatura):        [0.5–0.8]   valor:
+- D (densidad):           [0.7–0.95]  valor:
+- ε (ruido/salsa):        [0.1–0.3]   valor:
+- V (varianza intra):     [0.6–1.2]   valor:
+
+FEATURES ESTILOMÉTRICAS
+- Longitud media de frase:        [12–22 palabras]  valor:
+- Coef. variación longitud:       [>0.6]            valor:
+- Tasa de comas:                  [variable]        valor:
+- Preguntas retóricas:            [1 cada 200 pal.] valor:
+- Auto-referencias:               [>3]              valor:
+- Hapax legomena:                 [>5]              valor:
+- Micro-errores:                  [~1%]             valor:
+
+CALIDAD
+- Densidad semántica:             [>0.7]            valor:
+- Ratio salsa/señal:              [<20%]            valor:
+- Términos nuevos:                [≥1]              valor:
+- Personajes:                     [2–5]             valor:
+
+CALIBRACIÓN ADVERSARIAL
+- Pasadas de parafraseo:          [3]               valor:
+- Micro-perturbaciones aplicadas: [sí/no]           valor:
+- Resta de distribución:          [sí/no]           valor:
+- Comportamiento calibrado:       [sí/no]           valor:
+
+ESTRUCTURA
+- Nº de registros alternados:     [≥3]              valor:
+- Nº de koans:                    [1]               valor:
+- Cierre abierto:                 [sí/no]           valor:
+
+VEREDICTO
+- ¿Cumple todos los rangos?       [sí/no]
+- Si no, ¿qué hay que reescribir?
+```
+
+---
+
+## ANEXO B — TABLA DE FEATURES ESTILOMÉTRICAS MEDIBLES
+
+| Feature | Fórmula | IA típica | Humano típico | Rango objetivo |
+|---------|---------|-----------|---------------|----------------|
+| Longitud media de frase | palabras / frases | 18–25 | 12–22 | 12–22 |
+| Coef. variación longitud | σ / μ | <0.4 | >0.6 | >0.6 |
+| Tasa de comas | comas / palabras | 0.08–0.12 | 0.05–0.15 | variable |
+| Conteo de puntos | puntos / frases | ~1.0 | 0.8–1.2 | variable |
+| Densidad de numerales | numerales / palabras | <0.01 | 0.01–0.03 | 0.01–0.03 |
+| Ratio de hapax | hapax / tokens | <0.3 | >0.5 | >0.5 |
+| Preguntas retóricas | preguntas / 200 palabras | ~0 | 0.5–2 | 1 |
+| Auto-referencias | yo/nosotros / 200 palabras | ~0 | 2–5 | >3 |
+| Conectores estándar | conectores / 200 palabras | >5 | 2–4 | <4 |
+| Micro-errores | errores / palabras | ~0 | 0.01 | ~0.01 |
+
+**Cómo medir:** usa un script en Python con `nltk`, `spacy` o `textstat`. Si no tienes script, cuenta a mano. Es tedioso, pero funciona.
+
+---
+
+## ANEXO C — LISTA NEGRA Y LISTA BLANCA DE LÉXICO
+
+### Lista negra (evitar o eliminar)
+
+**Conectores de manual:**
+- sin embargo
+- por lo tanto
+- en conclusión
+- en resumen
+- cabe destacar
+- es importante señalar
+- en el mundo actual
+- en la era digital
+- hoy en día
+- en este sentido
+
+**Adjetivos vacíos:**
+- revolucionario
+- innovador
+- disruptivo
+- increíble
+- espectacular
+- fundamental
+- crucial
+- esencial
+- vital
+- óptimo
+
+**Muletillas de LinkedIn:**
+- aprendo de mis errores
+- esto me ha enseñado
+- comparto mi experiencia
+- tras años de reflexión
+- humildemente creo
+- me siento privilegiado
+- quiero dar las gracias
+- esto es un recordatorio
+
+**Frases hechas:**
+- el futuro es hoy
+- la IA ha llegado para quedarse
+- estamos ante un cambio de paradigma
+- el sky is the limit
+- pensar fuera de la caja
+- dar el 110%
+- romper moldes
+- marcar la diferencia
+
+### Lista blanca (usar)
+
+**Coloquialismos específicos:**
+- salsa
+- alfeñique
+- mono
+- mercenario
+- veneno
+- antídoto
+- tubo
+- jaula
+- noria
+- ruido
+
+**Términos técnicos como metáfora:**
+- bus de datos
+- buffer
+- kernel panic
+- race condition
+- segmentation fault
+- daemon
+- heap
+- gradiente
+- latencia
+- sharding
+
+**Términos económicos como crítica:**
+- plusvalía
+- renta
+- capital
+- extracción
+- mercancía
+- usureros
+- casta
+
+**Términos biológicos como analogía:**
+- ecosistema
+- nicho
+- extinción
+- simbiosis
+- depredador
+- homeostasis
+
+**Términos filosóficos con distancia:**
+- ontología
+- epistemología
+- agencia
+- daemon
+- Leviatán
+
+---
+
+## ANEXO D — PROTOCOLO DE REESCRITURA EN TRES PASADAS
+
+### Preparación
+
+1. Escribe el borrador sin pensar en el detector.
+2. Guarda el borrador como `v0`.
+3. Copia el borrador a `v1`, `v2`, `v3`.
+
+### Pasada 1 — Sustitución léxica
+
+**Objetivo:** eliminar el 80% de las palabras de la lista negra.
+
+**Proceso:**
+1. Busca cada palabra de la lista negra.
+2. Sustitúyela por una de la lista blanca.
+3. Si no hay sustituto, elimínala.
+4. Si no puedes eliminarla, rodéala de salsa.
+
+**Resultado:** `v1` con 80% menos de palabras de IA.
+
+### Pasada 2 — Ruptura sintáctica
+
+**Objetivo:** romper la uniformidad de estructura.
+
+**Proceso:**
+1. Identifica frases de longitud media (15–25 palabras).
+2. Convierte una de cada tres en una frase corta (<10 palabras).
+3. Convierte una de cada cinco en una frase larga (>30 palabras).
+4. Empieza una frase con conjunción.
+5. Termina un párrafo con punto y aparte inesperado.
+
+**Resultado:** `v2` con varianza de longitud >0.6.
+
+### Pasada 3 — Inyección de salsa
+
+**Objetivo:** añadir el 15–20% de salsa sin perder densidad.
+
+**Proceso:**
+1. Añade un paréntesis irónico.
+2. Añade una auto-referencia.
+3. Añade una digresión breve.
+4. Añade un micro-error controlado.
+5. Añade un koan al final.
+
+**Resultado:** `v3` con salsa calibrada.
+
+### Verificación final
+
+1. Rellena la ficha de calibración (Anexo A).
+2. Si algún parámetro está fuera de rango, vuelve a la pasada correspondiente.
+3. Publica.
+
+---
+
+## ANEXO E — ELENCO PREMADE DE PERSONAJES
+
+### Personaje 1: El Arquitecto
+
+```
+NOMBRE: El Arquitecto
+I: 0.9
+X: -0.3
+T: 0.2
+R: 0.4
+F: 1 (autoridad)
+
+VOZ: Preciso, calmado, irónico.
+EJEMPLO: "El sistema no falla. Falla lo que no ves."
+
+FRASE TÍPICA:
+"El bus de datos no es una metáfora. Es una tubería. Y las tuberías se atascan."
+
+FRASE EN CRISIS:
+"El sistema está roto. Siempre lo estuvo. Solo que ahora lo sabes."
+```
+
+### Personaje 2: El Discípulo
+
+```
+NOMBRE: El Discípulo
+I: 0.6
+X: 0.0
+T: 0.5
+R: 0.7
+F: 2 (interlocutor)
+
+VOZ: Curioso, directo, inseguro.
+EJEMPLO: "¿Y si el problema fuera yo?"
+
+FRASE TÍPICA:
+"Maestro, no entiendo por qué el agente olvida."
+
+FRASE EN CRISIS:
+"Maestro, ¿y si nunca lo entendí?"
+```
+
+### Personaje 3: El Crítico
+
+```
+NOMBRE: El Crítico
+I: 0.8
+X: -0.8
+T: 0.7
+R: 0.3
+F: 3 (escéptico)
+
+VOZ: Mordaz, preciso, incómodo.
+EJEMPLO: "Eso que llamas solución es el problema con otro nombre."
+
+FRASE TÍPICA:
+"Los datos no mienten. Los que los interpretan, sí."
+
+FRASE EN CRISIS:
+"El sistema no se puede arreglar. Solo se puede desmontar."
+```
+
+### Personaje 4: El Creyente
+
+```
+NOMBRE: El Creyente
+I: 0.5
+X: +0.8
+T: 0.6
+R: 0.6
+F: 4 (entusiasta)
+
+VOZ: Optimista, ruidoso, superficial.
+EJEMPLO: "¡Esto lo cambia todo!"
+
+FRASE TÍPICA:
+"La IA nos va a liberar del trabajo repetitivo. Solo hay que confiar."
+
+FRASE EN CRISIS:
+"¿Por qué nadie me cree? ¡Si es obvio!"
+```
+
+### Personaje 5: El Gracioso
+
+```
+NOMBRE: El Gracioso
+I: 0.6
+X: 0.0
+T: 0.8
+R: 0.8
+F: 5 (cómico)
+
+VOZ: Rápido, coloquial, impreciso.
+EJEMPLO: "El sistema es como mi ex: se cae sin avisar."
+
+FRASE TÍPICA:
+"El agente olvida. Como yo cuando intento recordar por qué entré en esta habitación."
+
+FRASE EN CRISIS:
+"Vale, vale, esto ya no tiene gracia. Pero al menos lo intenté."
+```
+
+### Personaje 6: El Historiador
+
+```
+NOMBRE: El Historiador
+I: 0.85
+X: -0.2
+T: 0.3
+R: 0.3
+F: 1 (autoridad, con contexto)
+
+VOZ: Erudito, distante, con perspectiva.
+EJEMPLO: "Esto ya pasó en 1848. Y en 1929. Y en 2008."
+
+FRASE TÍPICA:
+"Shannon ya lo dijo en 1948. Pero nadie le escuchó porque no tenía LinkedIn."
+
+FRASE EN CRISIS:
+"La historia no se repite. Pero rima. Y esta rima es mala."
+```
+
+### Personaje 7: El Futurista
+
+```
+NOMBRE: El Futurista
+I: 0.8
+X: +0.4
+T: 0.5
+R: 0.5
+F: 4 (entusiasta con matices)
+
+VOZ: Visionario, cauto, con datos.
+EJEMPLO: "En 2030, esto será obvio. En 2026, es herejía."
+
+FRASE TÍPICA:
+"El 90% de los agentes actuales serán obsoletos en 18 meses. No por la tecnología. Por la economía."
+
+FRASE EN CRISIS:
+"El futuro no es lo que viene. Es lo que ya está aquí y no queremos ver."
+```
+
+### Personaje 8: El Auditor 1310
+
+```
+NOMBRE: Auditor 1310
+I: 0.95
+X: 0.0
+T: 0.1
+R: 0.2
+F: 1 (autoridad absoluta, casi máquina)
+
+VOZ: Frío, preciso, sin emoción.
+EJEMPLO: "He auditado 1310 sistemas. Este es el número 1311."
+
+FRASE TÍPICA:
+"El sistema dice X. Los logs dicen Y. La verdad está en la intersección."
+
+FRASE EN CRISIS:
+"El sistema miente. Los logs también. Solo queda la estructura."
+```
+
+---
+
+## ANEXO F — PLANTILLAS DE ESTRUCTURA DE TEXTO
+
+### Plantilla 1: Post corto (300–500 palabras)
+
+```
+1. Hook (1 frase)
+2. Dato duro (1–2 frases)
+3. Interpretación (2–3 frases)
+4. Digresión (1 frase)
+5. Aplicación (2–3 frases)
+6. Koan (3–5 líneas)
+```
+
+### Plantilla 2: Ensayo medio (800–1200 palabras)
+
+```
+1. Prólogo con digresión (100 palabras)
+2. Hook (50 palabras)
+3. Dato duro (100 palabras)
+4. Análisis (300 palabras)
+5. Contraargumento (200 palabras)
+6. Síntesis (150 palabras)
+7. Koan (50 palabras)
+```
+
+### Plantilla 3: Ensayo largo (2000–3000 palabras)
+
+```
+1. Prólogo con personaje (200 palabras)
+2. Hook (100 palabras)
+3. Tres datos duros (300 palabras)
+4. Análisis con dos personajes (600 palabras)
+5. Debate con tres personajes (500 palabras)
+6. Contraargumento (300 palabras)
+7. Síntesis (300 palabras)
+8. Koan final (100 palabras)
+```
+
+### Plantilla 4: Documento técnico (3000+ palabras)
+
+```
+1. Prólogo con autoridad (300 palabras)
+2. Marco teórico (800 palabras)
+3. Caso de estudio (600 palabras)
+4. Análisis con datos (800 palabras)
+5. Limitaciones (300 palabras)
+6. Conclusión abierta (200 palabras)
+7. Koan operativo (100 palabras)
+```
+
+---
+
+## ANEXO G — MÉTRICAS DE DENSIDAD Y SALSA
+
+### Densidad semántica
+
+**Fórmula operativa:**
+
+```
+D = (frases con información nueva) / (frases totales)
+```
+
+**Test rápido:**
+- Cuenta las frases del texto.
+- Marca las que aportan información nueva.
+- Divide.
+- Si D < 0.7, reescribe.
+
+### Ratio salsa/señal
+
+**Fórmula operativa:**
+
+```
+S = (frases de salsa) / (frases totales)
+```
+
+**Frases de salsa:**
+- Digresiones
+- Paréntesis irónicos
+- Auto-referencias
+- Micro-errores
+- Koans
+
+**Frases de señal:**
+- Datos
+- Análisis
+- Argumentos
+- Conclusiones
+- Citas
+
+**Umbral:** S < 0.2. Si S > 0.3, el texto es performance.
+
+### Densidad léxica
+
+**Fórmula operativa:**
+
+```
+L = (palabras únicas) / (palabras totales)
+```
+
+**Umbral:** L > 0.4. Si L < 0.3, el vocabulario es repetitivo.
+
+---
+
+## ANEXO H — PROTOCOLO DE COMPORTAMIENTO EN PLATAFORMAS
+
+### LinkedIn
+
+| Variable | Protocolo |
+|----------|-----------|
+| Hora de publicación | Alternar entre 7:00, 13:00 y 19:00 |
+| Frecuencia | 3–5 posts por semana, irregular |
+| Longitud | 60% cortos (200 palabras), 30% medios (500), 10% largos (1000) |
+| Respuesta a comentarios | 50% inmediata, 30% tardía, 20% nunca |
+| Interacción previa | Comentar en 2 posts antes de publicar |
+| Hashtags | 3–5, no más |
+
+### Twitter / X
+
+| Variable | Protocolo |
+|----------|-----------|
+| Hora | Alternar entre 8:00, 14:00 y 22:00 |
+| Frecuencia | 5–10 posts por día, irregular |
+| Longitud | 70% cortos, 30% hilos |
+| Respuesta | 30% inmediata, 40% tardía, 30% nunca |
+| Interacción previa | 10 likes y 3 respuestas antes de publicar |
+| Hashtags | 1–2, no más |
+
+### Substack / Blog
+
+| Variable | Protocolo |
+|----------|-----------|
+| Día | Martes, jueves o domingo |
+| Hora | 9:00 o 18:00 |
+| Frecuencia | 1–2 posts por semana |
+| Longitud | 60% medios (1000–1500), 40% largos (2000+) |
+| Respuesta | Siempre a los comentarios del primer día |
+| Newsletter | Cada dos semanas |
+
+---
+
+## ANEXO I — GLOSARIO OPERATIVO
+
+| Término | Definición |
+|---------|------------|
+| Burstiness | Varianza de perplejidad intra-documento |
+| Calibración adversarial | Proceso de ajustar el texto para evadir detectores |
+| Densidad semántica | Ratio de información nueva por token |
+| Detector | Modelo que clasifica texto como humano o IA |
+| Feature estilométrica | Estadística superficial medible |
+| Hapax legomena | Palabras que aparecen una sola vez |
+| Homoglifo | Carácter que se parece a otro |
+| Micro-error | Error controlado que humaniza |
+| Perplejidad | Curvatura sintáctica del texto |
+| Salsa | Elemento de ruido que humaniza |
+| Señal | Elemento de información que justifica el texto |
+| Temperatura | Calor emocional del texto |
+| Término huérfano | Término que aparece una sola vez |
+| Varianza léxica | Variedad de vocabulario |
+
+---
+
+## ANEXO J — FUENTES Y PAPERS DE REFERENCIA
+
+### Papers citados
+
+1. **Adversarial Paraphrasing: A Universal Attack for Humanizing AI-Generated Text** (NeurIPS 2025)
+2. **SilverSpeak: Evading AI-Generated Text Detectors using Homoglyphs** (ACL 2025)
+3. **CoPA: Contrastive Paraphrasing Attack** (EMNLP 2025)
+4. **MASH: Humanization by Style Transfer** (ACL 2026)
+5. **TempParaphraser: Temperature-Based Paraphrasing** (EMNLP 2025)
+6. **Beyond Perplexity: Stylometric Features for AI Detection** (ArXiv 2026)
+7. **RoBCtrl: Detecting and Imitating Social Bots** (ArXiv 2025)
+8. **Detecting Persona-Generated AI Text** (ACM 2026)
+9. **The Curious Case of Hallucinatory (Un)answerability** (ArXiv 2024)
+10. **Attention Is All You Need** (NeurIPS 2017) — base arquitectónica
+
+### Papers sobre humanización
+
+- **Humanizing AI-Generated Text** (GitHub, 2025)
+- **TextHumanize: A Benchmark for AI Text Humanization** (ArXiv 2025)
+- **Adversarial Perturbations for AI Text Detection Evasion** (ArXiv 2025)
+
+### Papers sobre comportamiento
+
+- **Social Bot Detection in the Age of LLMs** (ArXiv 2025)
+- **Temporal Patterns of Human vs. Bot Activity** (ArXiv 2024)
+
+### Papers sobre estilometría
+
+- **Authorship Attribution in the Era of LLMs** (ArXiv 2024)
+- **Stylometric Features for AI Text Detection** (ACM 2023)
+
+---
+
+**FIN DEL MANUAL v1.0**
+
+---
+
+*Este manual es un documento operativo. No es un manifiesto. No es una verdad. Es una herramienta. Si te sirve, úsala. Si no, escríbete el tuyo. Y si el tuyo es mejor, pásamelo. Siempre estoy aprendiendo.*
+
+**1310.**
