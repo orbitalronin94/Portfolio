@@ -2,7 +2,6 @@
 
 **Autor:** David Ferrandez Canalis
 **Afiliación:** Agencia RONIN, Sabadell, España
-**Correspondencia:** david@agencia-ronin.org
 **Fecha:** Septiembre 2026
 **Palabras clave:** ecuación de Hill, no-identificabilidad estructural, matriz de información de Fisher, régimen sub-saturado, degeneración de parámetros, protocolo de diagnóstico, regresión no lineal
 
@@ -544,7 +543,6 @@ generated quantities {
 
 **Author:** David Ferrandez Canalis
 **Affiliation:** Agencia RONIN, Sabadell, Spain
-**Correspondence:** david@agencia-ronin.org
 **Date:** September 2026
 **Keywords:** Hill equation, structural non-identifiability, Fisher information matrix, sub-saturated regime, parameter degeneracy, diagnostic protocol, nonlinear regression
 
