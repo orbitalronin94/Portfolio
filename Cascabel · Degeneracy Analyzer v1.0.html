@@ -3,8 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  CSP — decisión final.
+
+  El núcleo matemático vive en <script type="text/plain" id="core-source">.
+  Ese contenido NO se ejecuta inline: se materializa a un Blob URL y se
+  importa con `import()` dinámico. Los Blob URLs están permitidos por
+  `script-src 'self' blob:`.
+
+  El <script type="module"> de la app SÍ es inline, así que necesita
+  autorización. En vez de 'unsafe-inline' (que además requiere unsafe-hashes
+  en navegadores modernos si se combina con hash), usamos un hash
+  explícito del script inline. El hash se regenera con:
+      node scripts/hash-inline.mjs cascabel.html
+
+  Mientras el hash no esté actualizado, el navegador bloquea el script.
+  Por eso, en este archivo de distribución, se deja 'unsafe-inline'
+  documentado: es el único punto que necesita el bootstrap. En producción
+  se sustituye por el hash y se elimina 'unsafe-inline'.
+
+  No hay 'unsafe-eval'. No hay 'new Function'. No hay 'eval'.
+-->
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self' blob:; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
+      content="default-src 'self' blob:; script-src 'self' blob: 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
 <meta name="theme-color" content="#0a0a0b">
 <meta name="description" content="Instrumento para el diagnóstico de degeneración K-α en ajustes de Hill y modelos de saturación.">
 <title>Cascabel · Degeneracy Analyzer v1.0</title>
@@ -248,46 +269,35 @@ progress-bar > i{display:block;height:100%;background:var(--accent);
 
 <cascabel-toast id="toast" role="status" aria-live="polite" aria-atomic="true"></cascabel-toast>
 
-<script type="module">
-// @ts-check
+<!--
+  ============================================================
+  CORE_SOURCE
+  ============================================================
+  Módulo ES real, encerrado en un <script type="text/plain">.
+  El navegador NO lo ejecuta porque el tipo no es javascript.
 
-/* ============================================================
-   CASCABEL v1.0
-   ============================================================
-   Fix de rendimiento:
-   - Extrapolación, perfil y jackknife se ejecutan en el worker.
-     Antes corrían en el hilo principal y congelaban la UI.
-   - fitFromStart: una sola corrida LM desde un punto bueno,
-     usada en bootstrap y re-fits. 10-50× más rápido.
-   - Multi-start reducido y con early exit.
-   - Mensajes batched: extrapolate y profile en un solo mensaje
-     en vez de uno por delta / por parámetro.
-   - Streaming de progreso desde el worker.
-   - AbortController para cancelar operaciones largas.
-   - Cache por runId.
+  En tiempo de ejecución:
+    1. Se lee su contenido.
+    2. Se materializa a un Blob URL con tipo application/javascript.
+    3. Se importa tanto desde el main como desde el worker.
 
-   Sobre el "módulo ES compartido":
-   - En un solo HTML no es posible sin partir en dos archivos.
-   - En su lugar, el core se define UNA VEZ en CORE_SOURCE
-     (string) y se evalúa en main y en el worker. Es la fuente
-     de verdad única. El worker ya no usa unsafe-inline: usa blob.
-   - El script principal sigue siendo inline y necesita
-     unsafe-inline en CSP. Es irreducible en single-file.
-   ============================================================ */
+  Consecuencia: hay una ÚNICA definición del núcleo matemático,
+  compartida por el hilo principal y el worker. Sin `new Function`,
+  sin `eval`, sin duplicación.
+  ============================================================
+-->
+<script type="text/plain" id="core-source">
+/* ============================================================================
+   CASCABEL CORE
+   Módulo ES. Exporta utilidades numéricas, álgebra lineal, fitter,
+   bootstrap, modelos, perfil likelihood y extrapolación.
+   ============================================================================ */
 
-/* ============================================================
-   §1  CORE_SOURCE — fuente única del núcleo matemático
-   ============================================================
-   Todas las funciones del core (utilidades, álgebra, fitter,
-   modelos, bootstrap, perfiles, extrapolación) viven aquí como
-   un string. Se evalúan una vez en main, y se envían al worker
-   como texto. No hay duplicación de lógica.
-   ============================================================ */
+/* ---------------------------------------------------------------------------
+   §1  PRNG y utilidades
+   --------------------------------------------------------------------------- */
 
-const CORE_SOURCE = `
-'use strict';
-
-function createPrng(seed){
+export function createPrng(seed){
   let s = seed >>> 0;
   return function(){
     s = (s + 0x6D2B79F5) >>> 0;
@@ -298,7 +308,7 @@ function createPrng(seed){
   };
 }
 
-const Stats = {
+export const Stats = {
   mean(a){ let s=0; for(const v of a) s+=v; return s/a.length; },
   stdev(a){
     const m = this.mean(a);
@@ -322,16 +332,20 @@ const Stats = {
   },
 };
 
-function gaussian(rng){
+export function gaussian(rng){
   let u=0,v=0;
   while(u===0) u=rng();
   while(v===0) v=rng();
   return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v);
 }
 
-const clamp01 = v => Math.max(1e-6, Math.min(1-1e-6, v));
+export const clamp01 = v => Math.max(1e-6, Math.min(1-1e-6, v));
 
-function solveLinear(A, b){
+/* ---------------------------------------------------------------------------
+   §2  Álgebra lineal
+   --------------------------------------------------------------------------- */
+
+export function solveLinear(A, b){
   const n = A.length;
   const M = A.map((row, i) => [...row, b[i]]);
   for(let col=0; col<n; col++){
@@ -355,7 +369,12 @@ function solveLinear(A, b){
   return x;
 }
 
-function solveQR(A, b){
+/**
+ * QR por reflexiones de Householder.
+ * Se usa para el sistema aumentado del LM: [J; √λI]·dx = [r; 0].
+ * Más estable que ecuaciones normales cuando κ(J) es grande (caso de uso).
+ */
+export function solveQR(A, b){
   const m = A.length, n = A[0].length;
   const R = A.map((row, i) => [...row, b[i]]);
   for(let k=0; k<n; k++){
@@ -387,7 +406,11 @@ function solveQR(A, b){
   return x;
 }
 
-const Fitter = {
+/* ---------------------------------------------------------------------------
+   §3  Fitter — Levenberg-Marquardt
+   --------------------------------------------------------------------------- */
+
+export const Fitter = {
   rss(xs, ys, p, ws, model){
     let s = 0;
     for(let i=0; i<xs.length; i++){
@@ -398,7 +421,8 @@ const Fitter = {
   },
 
   lmOnce(xs, ys, ws, init, model, maxIter, tol){
-    maxIter = maxIter || 300; tol = tol || 1e-11;
+    maxIter = maxIter || 300;
+    tol = tol || 1e-11;
     let p = [...init];
     let lambda = 1e-3;
     let rss = this.rss(xs, ys, p, ws, model);
@@ -430,30 +454,27 @@ const Fitter = {
         const rel = (rss - newRss) / (rss + 1e-12);
         p = newP; rss = newRss;
         lambda = Math.max(lambda/10, 1e-12);
-        if(rel < tol) return { params: p, rss: rss, converged: true, iterations: it };
+        if(rel < tol) return { params: p, rss, converged: true, iterations: it };
       } else {
         lambda *= 10;
         if(lambda > 1e14) break;
       }
     }
-    return { params: p, rss: rss, converged: false, iterations: it };
+    return { params: p, rss, converged: false, iterations: it };
   },
 
-  /* Warm start: una sola corrida LM desde p0.
-     Ahorro clave: bootstrap, extrapolación, perfil y jackknife
-     parten del óptimo y no necesitan multi-start. */
+  /** Warm start desde un punto bueno. 1 LM run en lugar de N. */
   fitFromStart(xs, ys, ws, p0, model, maxIter){
     return this.lmOnce(xs, ys, ws, p0, model, maxIter || 150, 1e-10);
   },
 
-  /* Multi-start solo cuando no hay warm start disponible. */
+  /** Multi-start con early exit. */
   fit(xs, ys, ws, model){
     const starts = model.starts(xs, ys);
     let best = null;
     for(let i=0; i<starts.length; i++){
       const r = this.lmOnce(xs, ys, ws, starts[i], model, 100, 1e-9);
       if(!best || r.rss < best.rss) best = r;
-      // Early exit si ya hemos llegado a ruido numérico.
       if(best.rss < 1e-12) break;
     }
     if(best){
@@ -485,7 +506,11 @@ const Fitter = {
   },
 };
 
-const Bootstrap = {
+/* ---------------------------------------------------------------------------
+   §4  Bootstrap
+   --------------------------------------------------------------------------- */
+
+export const Bootstrap = {
   hasReplicates(xs){
     const c = {};
     for(const x of xs) c[x] = (c[x]||0)+1;
@@ -516,14 +541,13 @@ const Bootstrap = {
         const sI = (sigmas && sigmas[i] != null && sigmas[i] > 0) ? sigmas[i] : sigmaGlobal;
         return clamp01(yHat + gaussian(rng) * sI);
       });
-      /* Warm start desde el óptimo: 50 iteraciones bastan
-         porque partimos muy cerca del mínimo. */
+      // Warm start desde el óptimo: 50 iteraciones bastan.
       const r = Fitter.lmOnce(xs, ysStar, ws, p, model, 50, 1e-8);
       samples.push(r.params);
     }
     const idxs = model.primaryParams;
     const primary = idxs.map(i => samples.map(s => s[i]));
-    return { all: samples, primary: primary, sigmaGlobal: sigmaGlobal,
+    return { all: samples, primary, sigmaGlobal,
              mode: useResidual ? 'residual' : 'parametric' };
   },
 
@@ -538,7 +562,6 @@ const Bootstrap = {
         xsJ.push(xs[i]); ysJ.push(ys[i]);
         if(wsJ) wsJ.push(ws[i]);
       }
-      /* Warm start desde el óptimo: converge rápido. */
       const r = Fitter.lmOnce(xsJ, ysJ, wsJ, p, model, 60, 1e-8);
       out.push(idxs.map(i => r.params[i]));
     }
@@ -546,7 +569,11 @@ const Bootstrap = {
   },
 };
 
-function gaussianInv(p){
+/* ---------------------------------------------------------------------------
+   §5  BCa — intervalos bootstrap corregidos por sesgo y aceleración
+   --------------------------------------------------------------------------- */
+
+export function gaussianInv(p){
   const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
              1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00];
   const b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02,
@@ -573,8 +600,8 @@ function gaussianInv(p){
   }
 }
 
-function normCdf(z){ return 0.5 * (1 + erf(z / Math.SQRT2)); }
-function erf(x){
+export function normCdf(z){ return 0.5 * (1 + erf(z / Math.SQRT2)); }
+export function erf(x){
   const s = x < 0 ? -1 : 1;
   x = Math.abs(x);
   const t = 1 / (1 + 0.3275911 * x);
@@ -582,7 +609,7 @@ function erf(x){
   return s * y;
 }
 
-function bcaCI(cloud, original, jackknifeValues, alpha){
+export function bcaCI(cloud, original, jackknifeValues, alpha){
   alpha = alpha || 0.05;
   const sorted = [...cloud].sort((a,b) => a-b);
   const B = sorted.length;
@@ -611,7 +638,11 @@ function bcaCI(cloud, original, jackknifeValues, alpha){
   return [sorted[iLo], sorted[iHi]];
 }
 
-const MODELS = {
+/* ---------------------------------------------------------------------------
+   §6  Modelos
+   --------------------------------------------------------------------------- */
+
+export const MODELS = {
   hill2: {
     id:'hill2', name:'Hill 2p · y = x^α / (K^α + x^α)',
     paramNames:['log K','α'], primaryParams:[0,1],
@@ -631,8 +662,6 @@ const MODELS = {
       const den = xn + Kn, d2 = den*den;
       return [-xn*p[1]*Kn/d2, xn*(lx*den - p[0]*Kn)/d2];
     },
-    /* Grid reducido: 48 arranques en lugar de 88.
-       Los extremos del grid colapsan al mismo óptimo. */
     starts(xs, ys){
       const out = [];
       const lx = xs.map(Math.log10);
@@ -668,7 +697,6 @@ const MODELS = {
       const dfdalpha = xn * (lx * den - p[2] * Kn) / d2;
       return [1-f, f, (p[1]-p[0])*dfdlogK, (p[1]-p[0])*dfdalpha];
     },
-    /* Grid reducido: 30 arranques en lugar de 84. */
     starts(xs, ys){
       const out = [];
       const yMinData = Math.max(0, Math.min(...ys) - 0.05);
@@ -746,7 +774,11 @@ const MODELS = {
   },
 };
 
-function profileLikelihood(xs, ys, ws, p, model, whichIdx, span, nPts){
+/* ---------------------------------------------------------------------------
+   §7  Perfil likelihood
+   --------------------------------------------------------------------------- */
+
+export function profileLikelihood(xs, ys, ws, p, model, whichIdx, span, nPts){
   const rssMin = Fitter.rss(xs, ys, p, ws, model);
   const N = xs.length, D = p.length;
   const sigmaSq = rssMin / Math.max(1, N - D);
@@ -778,11 +810,14 @@ function profileLikelihood(xs, ys, ws, p, model, whichIdx, span, nPts){
       ciLo = values[i] + t * (values[i-1] - values[i]);
     }
   }
-  return { values: values, dRSS: dRSS, threshold: threshold,
-           ciLo: ciLo, ciHi: ciHi, rssMin: rssMin };
+  return { values, dRSS, threshold, ciLo, ciHi, rssMin };
 }
 
-function extrapolationCurve(xs, ys, p, model, rng, mode){
+/* ---------------------------------------------------------------------------
+   §8  Extrapolación
+   --------------------------------------------------------------------------- */
+
+export function extrapolationCurve(xs, ys, p, model, rng, mode){
   mode = mode || 'augment';
   if(model.primaryParams.length !== 2) return null;
   const lx = xs.map(Math.log10);
@@ -818,187 +853,255 @@ function extrapolationCurve(xs, ys, p, model, rng, mode){
         evalXs.push(x); evalYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
       }
     }
-    /* Warm start desde el óptimo conocido. Una sola corrida. */
     const fit = Fitter.lmOnce(evalXs, evalYs, null, p, model, 100, 1e-9);
     const nShort = Math.max(50, Math.min(100, 1500 / Math.max(10, evalXs.length)));
     const boot = Bootstrap.run(evalXs, evalYs, null, null, fit.params, model, nShort, rng, 'parametric');
     const r = Stats.corr(boot.primary[0], boot.primary[1]);
-    results.push({ d: d, r: Math.abs(r), fit: fit.params, nPoints: evalXs.length });
+    results.push({ d, r: Math.abs(r), fit: fit.params, nPoints: evalXs.length });
   }
   return results;
 }
-`;
+</script>
 
-/* ============================================================
-   §2  CARGA DEL CORE EN MAIN
-   ============================================================
-   Evaluamos CORE_SOURCE una vez. Todas las funciones del core
-   quedan disponibles en el módulo. No hay duplicación.
-   ============================================================ */
+<!--
+  ============================================================
+  WORKER SOURCE
+  ============================================================
+  Módulo ES también. Importa el CORE_SOURCE por su Blob URL,
+  que se pasa por query param al construir el worker.
+  ============================================================
+-->
+<script type="text/plain" id="worker-source">
+/* Worker de Cascabel. Importa el core por URL (Blob URL
+   compartida con el hilo principal). */
+let corePromise = null;
 
-const core = (function(){
-  // eslint-disable-next-line no-new-func
-  const fn = new Function(CORE_SOURCE + '\nreturn {' +
-    'createPrng, Stats, gaussian, clamp01, solveLinear, solveQR, ' +
-    'Fitter, Bootstrap, MODELS, gaussianInv, normCdf, erf, bcaCI, ' +
-    'profileLikelihood, extrapolationCurve};');
-  return fn();
-})();
-
-const {
-  createPrng, Stats, gaussian, clamp01,
-  Fitter, Bootstrap, MODELS, bcaCI,
-  profileLikelihood, extrapolationCurve
-} = core;
-
-/* ============================================================
-   §3  WORKER — protocolo con progreso y abort
-   ============================================================
-   Mensajes:
-     { id, type, payload }            → petición
-     { id, ok, result }               → respuesta ok
-     { id, ok:false, error }          → respuesta error
-     { id, progress, stage }          → notificación de progreso
-   ============================================================ */
-
-function buildWorkerSource(){
-  return CORE_SOURCE + `
-let MODELS_W = null;
-function ensureModels(payload){
-  if(MODELS_W) return MODELS_W;
-  MODELS_W = {};
-  for(const mid in payload){
-    const m = payload[mid];
-    MODELS_W[mid] = {
-      id: m.id, paramNames: m.paramNames, primaryParams: m.primaryParams,
-      eval: new Function('p','x', m.evalSrc),
-      jacobian: new Function('p','x', m.jacobianSrc),
-      starts: new Function('xs','ys', m.startsSrc),
-    };
-  }
-  return MODELS_W;
+async function getCore(coreUrl){
+  if(!corePromise) corePromise = import(coreUrl);
+  return corePromise;
 }
 
-self.onmessage = function(e){
-  const { id, type, payload, models } = e.data;
+self.onmessage = async function(e){
+  const { id, type, payload, coreUrl } = e.data;
   try {
-    const M = ensureModels(models || {});
+    const core = await getCore(coreUrl);
     let result;
     if(type === 'fit'){
-      result = Fitter.fit(payload.xs, payload.ys, payload.ws, M[payload.modelId]);
+      result = core.Fitter.fit(payload.xs, payload.ys, payload.ws,
+        core.MODELS[payload.modelId]);
     }
     else if(type === 'bootstrap'){
-      const rng = createPrng(payload.seed);
-      result = Bootstrap.run(payload.xs, payload.ys, payload.sigmas, payload.ws,
-        payload.params, M[payload.modelId], payload.nSamples, rng, payload.mode);
+      const rng = core.createPrng(payload.seed);
+      result = core.Bootstrap.run(payload.xs, payload.ys, payload.sigmas,
+        payload.ws, payload.params, core.MODELS[payload.modelId],
+        payload.nSamples, rng, payload.mode);
     }
     else if(type === 'jackknife'){
-      result = Bootstrap.jackknife(payload.xs, payload.ys, payload.ws,
-        payload.params, M[payload.modelId]);
+      result = core.Bootstrap.jackknife(payload.xs, payload.ys, payload.ws,
+        payload.params, core.MODELS[payload.modelId]);
     }
     else if(type === 'profiles'){
-      const model = M[payload.modelId];
+      const model = core.MODELS[payload.modelId];
       const [iA, iB] = model.primaryParams;
-      // Enviamos progreso entre los dos perfiles.
-      self.postMessage({ id: id, progress: 0, stage: 'profile-1' });
-      const profA = profileLikelihood(payload.xs, payload.ys, payload.ws,
+      self.postMessage({ id, progress: 0, stage: 'profile-1' });
+      const profA = core.profileLikelihood(payload.xs, payload.ys, payload.ws,
         payload.params, model, iA, payload.spanA, payload.nPts);
-      self.postMessage({ id: id, progress: 0.5, stage: 'profile-2' });
-      const profB = profileLikelihood(payload.xs, payload.ys, payload.ws,
+      self.postMessage({ id, progress: 0.5, stage: 'profile-2' });
+      const profB = core.profileLikelihood(payload.xs, payload.ys, payload.ws,
         payload.params, model, iB, payload.spanB, payload.nPts);
-      self.postMessage({ id: id, progress: 1, stage: 'profile-done' });
+      self.postMessage({ id, progress: 1, stage: 'profile-done' });
       result = { k: profA, a: profB, idxK: iA, idxA: iB };
     }
     else if(type === 'extrapolate'){
-      const rng = createPrng(payload.seed);
-      self.postMessage({ id: id, progress: 0, stage: 'extrap-augment' });
-      const augment = extrapolationCurve(payload.xs, payload.ys,
-        payload.params, M[payload.modelId], rng, 'augment');
-      self.postMessage({ id: id, progress: 0.5, stage: 'extrap-replace' });
-      const replace = extrapolationCurve(payload.xs, payload.ys,
-        payload.params, M[payload.modelId], rng, 'replace');
-      self.postMessage({ id: id, progress: 1, stage: 'extrap-done' });
-      result = { augment: augment, replace: replace };
+      const rng = core.createPrng(payload.seed);
+      self.postMessage({ id, progress: 0, stage: 'extrap-augment' });
+      const augment = core.extrapolationCurve(payload.xs, payload.ys,
+        payload.params, core.MODELS[payload.modelId], rng, 'augment');
+      self.postMessage({ id, progress: 0.5, stage: 'extrap-replace' });
+      const replace = core.extrapolationCurve(payload.xs, payload.ys,
+        payload.params, core.MODELS[payload.modelId], rng, 'replace');
+      self.postMessage({ id, progress: 1, stage: 'extrap-done' });
+      result = { augment, replace };
     }
     else {
       throw new Error('Unknown message type: ' + type);
     }
-    self.postMessage({ id: id, ok: true, result: result });
+    self.postMessage({ id, ok: true, result });
   } catch(err){
-    self.postMessage({ id: id, ok: false, error: String(err && err.message || err) });
+    self.postMessage({ id, ok: false, error: String(err && err.message || err) });
   }
 };
-`;
-}
+</script>
+
+<script type="module">
+// @ts-check
+
+/* ============================================================
+   CASCABEL v1.0 — Boot
+   ============================================================
+   1. Lee CORE_SOURCE del <script type="text/plain">.
+   2. Crea un Blob URL del módulo.
+   3. Importa el core con `await import(url)`.
+   4. Construye el worker desde un Blob URL que importa el core.
+   5. Si el worker falla (Safari viejo, CSP estricta), cae a modo
+      síncrono en main usando el mismo core ya importado.
+
+   Sin `new Function`. Sin `eval`. El motor de JS evalúa el
+   módulo una vez, tanto en main como en worker.
+   ============================================================ */
+
+const CORE_SOURCE = document.getElementById('core-source').textContent;
+const WORKER_SOURCE = document.getElementById('worker-source').textContent;
+
+/* Blob URL compartida del core. Se pasa al worker como string. */
+const coreBlobUrl = URL.createObjectURL(
+  new Blob([CORE_SOURCE], { type: 'application/javascript' })
+);
+
+/* Blob URL del worker. El worker importa el core por URL. */
+const workerBlobUrl = URL.createObjectURL(
+  new Blob([WORKER_SOURCE], { type: 'application/javascript' })
+);
+
+/* ============================================================
+   Core: se importa una vez en main.
+   ============================================================ */
+const core = await import(coreBlobUrl);
+const {
+  createPrng, Stats, gaussian, clamp01,
+  Fitter, Bootstrap, MODELS, bcaCI,
+  profileLikelihood, extrapolationCurve,
+} = core;
+
+/* ============================================================
+   ComputeClient
+   ============================================================
+   Intenta lanzar un worker de tipo 'module'. Si falla (Safari
+   antiguo, CSP restrictiva), cae a modo síncrono: las mismas
+   funciones del core se ejecutan en main, envueltas en
+   `await microtask()` para no bloquear el pintado.
+   ============================================================ */
 
 class ComputeClient {
   constructor(){
-    const src = buildWorkerSource();
-    const blob = new Blob([src], { type: 'application/javascript' });
-    this.blobUrl = URL.createObjectURL(blob);
-    this.worker = new Worker(this.blobUrl);
+    this.worker = null;
     this.pending = new Map();
     this.nextId = 1;
-    // Serializamos los modelos una vez al crear el cliente.
-    this.modelsPayload = {};
-    for(const id in MODELS){
-      const m = MODELS[id];
-      this.modelsPayload[id] = {
-        id: m.id, paramNames: m.paramNames, primaryParams: m.primaryParams,
-        evalSrc: m.eval.toString(),
-        jacobianSrc: m.jacobian.toString(),
-        startsSrc: m.starts.toString(),
+    this.mode = 'sync'; // hasta que el worker confirme
+
+    try {
+      this.worker = new Worker(workerBlobUrl, {
+        type: 'module',
+        // El worker necesita saber la URL del core.
+      });
+      this.worker.onmessage = (e) => this._onMessage(e.data);
+      this.worker.onerror = (e) => {
+        console.warn('[worker] fallo, cayendo a modo síncrono:', e.message);
+        this.worker = null;
+        this.mode = 'sync';
       };
+      this.mode = 'worker';
+    } catch(e){
+      console.warn('[worker] no disponible, modo síncrono:', e.message);
+      this.worker = null;
+      this.mode = 'sync';
     }
-    this.worker.onmessage = (e) => {
-      const msg = e.data;
-      const entry = this.pending.get(msg.id);
-      if(!entry) return;
-      if(msg.progress != null){
-        if(entry.onProgress) entry.onProgress(msg.progress, msg.stage);
-        return;
-      }
-      this.pending.delete(msg.id);
-      if(msg.ok) entry.resolve(msg.result);
-      else entry.reject(new Error(msg.error));
-    };
-    this.worker.onerror = (e) => {
-      console.error('[worker error]', e);
-      for(const [, entry] of this.pending){
-        entry.reject(new Error('Worker crashed: ' + e.message));
-      }
-      this.pending.clear();
-    };
   }
 
-  call(type, payload, opts){
+  _onMessage(msg){
+    const entry = this.pending.get(msg.id);
+    if(!entry) return;
+    if(msg.progress != null){
+      if(entry.onProgress) entry.onProgress(msg.progress, msg.stage);
+      return;
+    }
+    this.pending.delete(msg.id);
+    if(msg.ok) entry.resolve(msg.result);
+    else entry.reject(new Error(msg.error));
+  }
+
+  async call(type, payload, opts){
     opts = opts || {};
-    const id = this.nextId++;
-    return new Promise((resolve, reject) => {
-      const entry = { resolve, reject, onProgress: opts.onProgress || null };
-      this.pending.set(id, entry);
-      if(opts.signal){
-        opts.signal.addEventListener('abort', () => {
-          if(this.pending.has(id)){
-            this.pending.delete(id);
-            reject(new DOMException('Aborted', 'AbortError'));
-          }
-        });
+    if(this.worker){
+      const id = this.nextId++;
+      return new Promise((resolve, reject) => {
+        this.pending.set(id, { resolve, reject, onProgress: opts.onProgress || null });
+        if(opts.signal){
+          opts.signal.addEventListener('abort', () => {
+            if(this.pending.has(id)){
+              this.pending.delete(id);
+              reject(new DOMException('Aborted', 'AbortError'));
+            }
+          });
+        }
+        this.worker.postMessage({ id, type, payload, coreUrl: coreBlobUrl });
+      });
+    }
+    // Fallback síncrono: mismos argumentos, mismas funciones.
+    if(opts.signal && opts.signal.aborted){
+      throw new DOMException('Aborted', 'AbortError');
+    }
+    await new Promise(r => queueMicrotask(r));
+    if(opts.onProgress) opts.onProgress(0, type);
+    let result;
+    switch(type){
+      case 'fit':
+        result = Fitter.fit(payload.xs, payload.ys, payload.ws,
+          MODELS[payload.modelId]);
+        break;
+      case 'bootstrap': {
+        const rng = createPrng(payload.seed);
+        result = Bootstrap.run(payload.xs, payload.ys, payload.sigmas,
+          payload.ws, payload.params, MODELS[payload.modelId],
+          payload.nSamples, rng, payload.mode);
+        break;
       }
-      this.worker.postMessage({ id, type, payload, models: this.modelsPayload });
-    });
+      case 'jackknife':
+        result = Bootstrap.jackknife(payload.xs, payload.ys, payload.ws,
+          payload.params, MODELS[payload.modelId]);
+        break;
+      case 'profiles': {
+        const model = MODELS[payload.modelId];
+        const [iA, iB] = model.primaryParams;
+        if(opts.onProgress) opts.onProgress(0, 'profile-1');
+        const profA = profileLikelihood(payload.xs, payload.ys, payload.ws,
+          payload.params, model, iA, payload.spanA, payload.nPts);
+        await new Promise(r => queueMicrotask(r));
+        if(opts.onProgress) opts.onProgress(0.5, 'profile-2');
+        const profB = profileLikelihood(payload.xs, payload.ys, payload.ws,
+          payload.params, model, iB, payload.spanB, payload.nPts);
+        if(opts.onProgress) opts.onProgress(1, 'profile-done');
+        result = { k: profA, a: profB, idxK: iA, idxA: iB };
+        break;
+      }
+      case 'extrapolate': {
+        const rng = createPrng(payload.seed);
+        if(opts.onProgress) opts.onProgress(0, 'extrap-augment');
+        const augment = extrapolationCurve(payload.xs, payload.ys,
+          payload.params, MODELS[payload.modelId], rng, 'augment');
+        await new Promise(r => queueMicrotask(r));
+        if(opts.onProgress) opts.onProgress(0.5, 'extrap-replace');
+        const replace = extrapolationCurve(payload.xs, payload.ys,
+          payload.params, MODELS[payload.modelId], rng, 'replace');
+        if(opts.onProgress) opts.onProgress(1, 'extrap-done');
+        result = { augment, replace };
+        break;
+      }
+      default:
+        throw new Error('Unknown message type: ' + type);
+    }
+    return result;
   }
 
   terminate(){
-    try { this.worker.terminate(); } catch(_) {}
-    try { URL.revokeObjectURL(this.blobUrl); } catch(_) {}
+    if(this.worker){ try { this.worker.terminate(); } catch(_){} }
     for(const [, entry] of this.pending) entry.reject(new Error('Client terminated'));
     this.pending.clear();
   }
 }
 
 /* ============================================================
-   §4  CRYPTO
+   Crypto — SHA-256 para manifest reproducible
    ============================================================ */
 
 const Crypto = {
@@ -1020,7 +1123,7 @@ const Crypto = {
 };
 
 /* ============================================================
-   §5  STORAGE
+   Storage — IndexedDB
    ============================================================ */
 
 const Storage = {
@@ -1066,7 +1169,7 @@ const Storage = {
 };
 
 /* ============================================================
-   §6  CUSTOM ELEMENTS
+   Custom elements
    ============================================================ */
 
 class CascabelPanel extends HTMLElement {
@@ -1132,7 +1235,7 @@ customElements.define('progress-bar', ProgressBar);
 });
 
 /* ============================================================
-   §7  SVG
+   SVG
    ============================================================ */
 
 const SVG = {
@@ -1299,7 +1402,7 @@ const SVG = {
 };
 
 /* ============================================================
-   §8  ESTADO Y PARSERS
+   Estado, parsers, diagnósticos locales
    ============================================================ */
 
 const DATASET_COLORS = { A:'#f5a623', B:'#7cb8ff', C:'#a8f5a6', D:'#f5a6d9' };
@@ -1312,8 +1415,8 @@ const State = {
   extrapolation: null,
   manifest: null,
   seed: 42,
-  lastRunId: null,       // Cache: si coincide con el nuevo run_id, no recalculamos
-  abortController: null, // Abort del worker
+  lastRunId: null,
+  abortController: null,
 };
 
 function active(){ return State.datasets[0] || null; }
@@ -1366,231 +1469,6 @@ function pointsToText(points){
   }).join('\n');
 }
 
-/* ============================================================
-   §9  PIPELINE
-   ============================================================ */
-
-function chooseBootstrapN(N){
-  if(N <= 20) return 400;
-  if(N <= 50) return 300;
-  if(N <= 100) return 200;
-  return 120;
-}
-function clampSpan(s, min, max){ return Math.max(min, Math.min(max, s)); }
-function microtask(){ return new Promise(r => queueMicrotask(r)); }
-
-async function fitAll(compute){
-  const text = document.getElementById('dataInput').value;
-  const { points, errors } = parseDataText(text);
-  if(errors.length) toast(`⚠ ${errors.length} línea(s) ignoradas`);
-  if(points.length < 4){ toast('Necesitas al menos 4 puntos'); return; }
-
-  const { xs, ys, sigmas, ws } = pointsToArrays(points);
-  const model = MODELS[State.model];
-  const nB = chooseBootstrapN(xs.length);
-
-  // Cache: si el run_id no ha cambiado, no recalculamos.
-  let runId = null;
-  try {
-    if(crypto.subtle){
-      const datasetHash = await Crypto.hashObject(points);
-      const configHash = await Crypto.hashObject({ nB, mode:'auto', version:'1.0' });
-      runId = await Crypto.hashObject({
-        seed: State.seed, modelId: State.model, datasetHash, configHash,
-      });
-      if(runId === State.lastRunId && State.datasets[0] && State.datasets[0].fit){
-        toast('Mismo run_id: reutilizando resultado');
-        render();
-        renderManifest();
-        return;
-      }
-      State.lastRunId = runId;
-    }
-  } catch(e){ /* sin crypto, sin cache */ }
-
-  State.datasets[0] = {
-    id:'A', points, fit:null, bootstrap:null, jackknife:null,
-    color:DATASET_COLORS.A,
-  };
-
-  // Abort controller para esta ejecución.
-  const ac = new AbortController();
-  State.abortController = ac;
-  document.getElementById('abortBtn').disabled = false;
-  document.getElementById('abortBtn').onclick = () => ac.abort();
-
-  const onProgress = (frac, stage) => {
-    const bar = document.getElementById('progressBar');
-    bar.hidden = false;
-    bar.set(frac);
-    const labels = {
-      'profile-1': 'Perfil 1…', 'profile-2': 'Perfil 2…', 'profile-done': '',
-      'extrap-augment': 'Extrapolación augment…', 'extrap-replace': 'Extrapolación replace…',
-      'extrap-done': '',
-    };
-    if(labels[stage] != null) setProgress(labels[stage]);
-  };
-
-  setProgress('Ajustando…');
-  await microtask();
-
-  let fit;
-  try {
-    fit = await compute.call('fit', { xs, ys, ws, modelId: State.model },
-      { signal: ac.signal });
-  } catch(e){
-    setProgress('');
-    if(e.name !== 'AbortError') toast('Error en ajuste: ' + e.message);
-    document.getElementById('abortBtn').disabled = true;
-    return;
-  }
-
-  setProgress('Bootstrap…');
-  await microtask();
-
-  let boot;
-  try {
-    boot = await compute.call('bootstrap', {
-      xs, ys, sigmas, ws, params: fit.params, modelId: State.model,
-      nSamples: nB, seed: State.seed, mode: 'auto'
-    }, { signal: ac.signal });
-  } catch(e){
-    setProgress('');
-    if(e.name !== 'AbortError') toast('Error en bootstrap: ' + e.message);
-    document.getElementById('abortBtn').disabled = true;
-    return;
-  }
-
-  State.datasets[0].fit = fit;
-  State.datasets[0].bootstrap = boot;
-
-  // Jackknife en worker, solo con N ≤ 40.
-  if(xs.length <= 40){
-    setProgress('Jackknife…');
-    await microtask();
-    try {
-      State.datasets[0].jackknife = await compute.call('jackknife', {
-        xs, ys, ws, params: fit.params, modelId: State.model
-      }, { signal: ac.signal });
-    } catch(e){
-      if(e.name !== 'AbortError') console.warn('[jackknife] falló:', e);
-      State.datasets[0].jackknife = null;
-    }
-  } else {
-    State.datasets[0].jackknife = null;
-  }
-
-  // Diagnósticos locales (baratos: solo Jacobiano en el óptimo).
-  const range = rangeCoverage(xs);
-  const r = model.primaryParams.length >= 2
-    ? Stats.corr(boot.primary[0], boot.primary[1]) : 0;
-  const kappa = conditionNumber(xs, fit.params, ws, model);
-  State.diagnostics = { range, r, kappa, verdict: verdict(range, r, kappa) };
-
-  // Perfiles en worker (batched: los dos en un mensaje).
-  let profiles = null;
-  if(model.primaryParams.length === 2){
-    setProgress('Perfiles…');
-    await microtask();
-    const [iA, iB] = model.primaryParams;
-    const stdA = Stats.stdev(boot.primary[0]), stdB = Stats.stdev(boot.primary[1]);
-    const spanA = clampSpan(stdA*4, 0.5, 20);
-    const spanB = clampSpan(stdB*4, 0.3, 5);
-    try {
-      profiles = await compute.call('profiles', {
-        xs, ys, ws, params: fit.params, modelId: State.model,
-        spanA, spanB, nPts: 30
-      }, { signal: ac.signal, onProgress });
-    } catch(e){
-      if(e.name !== 'AbortError') console.warn('[profiles] falló:', e);
-    }
-  }
-  if(profiles){
-    State.profile = { k: profiles.k, a: profiles.a,
-                      idxK: profiles.idxK, idxA: profiles.idxA };
-  } else {
-    State.profile = { k:null, a:null, idxK:null, idxA:null };
-  }
-
-  // Manifest reproducible.
-  State.manifest = null;
-  try {
-    if(crypto.subtle && runId){
-      const datasetHash = await Crypto.hashObject(points);
-      const configHash = await Crypto.hashObject({ nB, mode:'auto', version:'1.0' });
-      State.manifest = {
-        runId, timestamp: new Date().toISOString(),
-        seed: State.seed, modelId: State.model, datasetHash, configHash,
-      };
-    }
-  } catch(e){ console.warn('[manifest]', e); }
-
-  State.extrapolation = null;
-  document.getElementById('extrapPanel').hidden = true;
-
-  setProgress('');
-  const bar = document.getElementById('progressBar');
-  bar.hidden = true;
-  document.getElementById('abortBtn').disabled = true;
-  State.abortController = null;
-  render();
-  renderManifest();
-  document.getElementById('extrapolateBtn').disabled = false;
-}
-
-async function extrapolate(compute){
-  const d = active();
-  if(!d || !d.fit) return;
-  const model = MODELS[State.model];
-  if(model.primaryParams.length !== 2){ toast('El modelo no tiene 2 params primarios'); return; }
-
-  const ac = new AbortController();
-  State.abortController = ac;
-  document.getElementById('abortBtn').disabled = false;
-  document.getElementById('abortBtn').onclick = () => ac.abort();
-
-  setProgress('Calculando extrapolación…');
-  await microtask();
-
-  const { xs, ys } = pointsToArrays(d.points);
-  const bar = document.getElementById('progressBar');
-  bar.hidden = false;
-  bar.set(0);
-
-  const onProgress = (frac) => bar.set(frac);
-
-  let result;
-  try {
-    result = await compute.call('extrapolate', {
-      xs, ys, params: d.fit.params, modelId: State.model,
-      seed: State.seed + 101,
-    }, { signal: ac.signal, onProgress });
-  } catch(e){
-    setProgress('');
-    bar.hidden = true;
-    document.getElementById('abortBtn').disabled = true;
-    if(e.name !== 'AbortError') toast('Error: ' + e.message);
-    return;
-  }
-
-  State.extrapolation = result;
-  const extrap = document.getElementById('extrapPanel');
-  extrap.hidden = false;
-  SVG.extrapolation(document.getElementById('extrapPlot'), result.augment, result.replace);
-
-  const firstGood = result.augment.find(x => x.r < 0.9);
-  document.getElementById('extrapNote').innerHTML = firstGood
-    ? `Añadir <strong>${firstGood.d.toFixed(2)} décadas</strong> reduce |r| por debajo de 0.9.`
-    : `Ni con 3 décadas extra baja de 0.9.`;
-
-  setProgress('');
-  bar.hidden = true;
-  document.getElementById('abortBtn').disabled = true;
-  State.abortController = null;
-}
-
-/* Diagnósticos que sí quedan en main (son baratos: un solo
-   paso por punto, no requieren LM). */
 function rangeCoverage(xs){
   const lx = xs.map(Math.log10);
   const lo = Math.min(...lx), hi = Math.max(...lx);
@@ -1640,7 +1518,219 @@ function verdict(range, r, kappa){
 }
 
 /* ============================================================
-   §10  RENDER
+   Pipeline
+   ============================================================ */
+
+function chooseBootstrapN(N){
+  if(N <= 20) return 400;
+  if(N <= 50) return 300;
+  if(N <= 100) return 200;
+  return 120;
+}
+function clampSpan(s, min, max){ return Math.max(min, Math.min(max, s)); }
+function microtask(){ return new Promise(r => queueMicrotask(r)); }
+
+async function fitAll(compute){
+  const text = document.getElementById('dataInput').value;
+  const { points, errors } = parseDataText(text);
+  if(errors.length) toast(`⚠ ${errors.length} línea(s) ignoradas`);
+  if(points.length < 4){ toast('Necesitas al menos 4 puntos'); return; }
+
+  const { xs, ys, sigmas, ws } = pointsToArrays(points);
+  const model = MODELS[State.model];
+  const nB = chooseBootstrapN(xs.length);
+
+  let runId = null;
+  try {
+    if(crypto.subtle){
+      const datasetHash = await Crypto.hashObject(points);
+      const configHash = await Crypto.hashObject({ nB, mode:'auto', version:'1.0' });
+      runId = await Crypto.hashObject({
+        seed: State.seed, modelId: State.model, datasetHash, configHash,
+      });
+      if(runId === State.lastRunId && State.datasets[0] && State.datasets[0].fit){
+        toast('Mismo run_id: reutilizando resultado');
+        render();
+        renderManifest();
+        return;
+      }
+      State.lastRunId = runId;
+    }
+  } catch(e){ /* sin crypto, sin cache */ }
+
+  State.datasets[0] = {
+    id:'A', points, fit:null, bootstrap:null, jackknife:null,
+    color:DATASET_COLORS.A,
+  };
+
+  const ac = new AbortController();
+  State.abortController = ac;
+  const abortBtn = document.getElementById('abortBtn');
+  abortBtn.disabled = false;
+  abortBtn.onclick = () => ac.abort();
+
+  const onProgress = (frac, stage) => {
+    const bar = document.getElementById('progressBar');
+    bar.hidden = false;
+    bar.set(frac);
+    const labels = {
+      'profile-1': 'Perfil 1…', 'profile-2': 'Perfil 2…', 'profile-done': '',
+      'extrap-augment': 'Extrapolación augment…', 'extrap-replace': 'Extrapolación replace…',
+      'extrap-done': '',
+    };
+    if(labels[stage] != null) setProgress(labels[stage]);
+  };
+
+  setProgress('Ajustando…');
+  await microtask();
+
+  let fit;
+  try {
+    fit = await compute.call('fit', { xs, ys, ws, modelId: State.model },
+      { signal: ac.signal });
+  } catch(e){
+    setProgress('');
+    if(e.name !== 'AbortError') toast('Error en ajuste: ' + e.message);
+    abortBtn.disabled = true;
+    return;
+  }
+
+  setProgress('Bootstrap…');
+  await microtask();
+
+  let boot;
+  try {
+    boot = await compute.call('bootstrap', {
+      xs, ys, sigmas, ws, params: fit.params, modelId: State.model,
+      nSamples: nB, seed: State.seed, mode: 'auto'
+    }, { signal: ac.signal });
+  } catch(e){
+    setProgress('');
+    if(e.name !== 'AbortError') toast('Error en bootstrap: ' + e.message);
+    abortBtn.disabled = true;
+    return;
+  }
+
+  State.datasets[0].fit = fit;
+  State.datasets[0].bootstrap = boot;
+
+  if(xs.length <= 40){
+    setProgress('Jackknife…');
+    await microtask();
+    try {
+      State.datasets[0].jackknife = await compute.call('jackknife', {
+        xs, ys, ws, params: fit.params, modelId: State.model
+      }, { signal: ac.signal });
+    } catch(e){
+      if(e.name !== 'AbortError') console.warn('[jackknife]', e);
+      State.datasets[0].jackknife = null;
+    }
+  } else {
+    State.datasets[0].jackknife = null;
+  }
+
+  const range = rangeCoverage(xs);
+  const r = model.primaryParams.length >= 2
+    ? Stats.corr(boot.primary[0], boot.primary[1]) : 0;
+  const kappa = conditionNumber(xs, fit.params, ws, model);
+  State.diagnostics = { range, r, kappa, verdict: verdict(range, r, kappa) };
+
+  let profiles = null;
+  if(model.primaryParams.length === 2){
+    setProgress('Perfiles…');
+    await microtask();
+    const [iA, iB] = model.primaryParams;
+    const stdA = Stats.stdev(boot.primary[0]), stdB = Stats.stdev(boot.primary[1]);
+    const spanA = clampSpan(stdA*4, 0.5, 20);
+    const spanB = clampSpan(stdB*4, 0.3, 5);
+    try {
+      profiles = await compute.call('profiles', {
+        xs, ys, ws, params: fit.params, modelId: State.model,
+        spanA, spanB, nPts: 30
+      }, { signal: ac.signal, onProgress });
+    } catch(e){
+      if(e.name !== 'AbortError') console.warn('[profiles]', e);
+    }
+  }
+  State.profile = profiles
+    ? { k: profiles.k, a: profiles.a, idxK: profiles.idxK, idxA: profiles.idxA }
+    : { k:null, a:null, idxK:null, idxA:null };
+
+  State.manifest = null;
+  try {
+    if(crypto.subtle && runId){
+      const datasetHash = await Crypto.hashObject(points);
+      const configHash = await Crypto.hashObject({ nB, mode:'auto', version:'1.0' });
+      State.manifest = {
+        runId, timestamp: new Date().toISOString(),
+        seed: State.seed, modelId: State.model, datasetHash, configHash,
+      };
+    }
+  } catch(e){ console.warn('[manifest]', e); }
+
+  State.extrapolation = null;
+  document.getElementById('extrapPanel').hidden = true;
+
+  setProgress('');
+  document.getElementById('progressBar').hidden = true;
+  abortBtn.disabled = true;
+  State.abortController = null;
+  render();
+  renderManifest();
+  document.getElementById('extrapolateBtn').disabled = false;
+}
+
+async function extrapolate(compute){
+  const d = active();
+  if(!d || !d.fit) return;
+  const model = MODELS[State.model];
+  if(model.primaryParams.length !== 2){ toast('El modelo no tiene 2 params primarios'); return; }
+
+  const ac = new AbortController();
+  State.abortController = ac;
+  const abortBtn = document.getElementById('abortBtn');
+  abortBtn.disabled = false;
+  abortBtn.onclick = () => ac.abort();
+
+  setProgress('Calculando extrapolación…');
+  await microtask();
+
+  const { xs, ys } = pointsToArrays(d.points);
+  const bar = document.getElementById('progressBar');
+  bar.hidden = false;
+  bar.set(0);
+
+  let result;
+  try {
+    result = await compute.call('extrapolate', {
+      xs, ys, params: d.fit.params, modelId: State.model,
+      seed: State.seed + 101,
+    }, { signal: ac.signal, onProgress: (frac) => bar.set(frac) });
+  } catch(e){
+    setProgress('');
+    bar.hidden = true;
+    abortBtn.disabled = true;
+    if(e.name !== 'AbortError') toast('Error: ' + e.message);
+    return;
+  }
+
+  State.extrapolation = result;
+  document.getElementById('extrapPanel').hidden = false;
+  SVG.extrapolation(document.getElementById('extrapPlot'), result.augment, result.replace);
+
+  const firstGood = result.augment.find(x => x.r < 0.9);
+  document.getElementById('extrapNote').innerHTML = firstGood
+    ? `Añadir <strong>${firstGood.d.toFixed(2)} décadas</strong> reduce |r| por debajo de 0.9.`
+    : `Ni con 3 décadas extra baja de 0.9.`;
+
+  setProgress('');
+  bar.hidden = true;
+  abortBtn.disabled = true;
+  State.abortController = null;
+}
+
+/* ============================================================
+   Render
    ============================================================ */
 
 const $ = id => document.getElementById(id);
@@ -1775,11 +1865,7 @@ function downloadFile(name, content, type = 'application/octet-stream'){
 }
 
 /* ============================================================
-   §11  TESTS
-   ============================================================
-   Cubren: álgebra, modelos, fitter, bootstrap (paramétrico y
-   residual), perfil, extrapolación, BCa, parser y accesibilidad
-   E2E del DOM renderizado.
+   Tests
    ============================================================ */
 
 function runTests(){
@@ -1789,16 +1875,15 @@ function runTests(){
     console.log(`[test] ${pass?'✓':'✗'} ${name}`, detail || '');
   };
 
-  // --- Núcleo ---
   try {
-    const x = solveLinear([[2,1],[1,3]], [5,10]);
+    const x = core.solveLinear([[2,1],[1,3]], [5,10]);
     log('solveLinear 2×2', x && Math.abs(x[0]-1)<1e-9 && Math.abs(x[1]-3)<1e-9, x);
   } catch(e){ log('solveLinear 2×2', false, e.message); }
 
   try {
     const A = [[1,2],[3,4],[5,6]];
     const b = [1,2,3];
-    const x = solveQR(A, b);
+    const x = core.solveQR(A, b);
     const res = A.map((row,i) => row[0]*x[0] + row[1]*x[1] - b[i]);
     const norm = Math.sqrt(res.reduce((s,r)=>s+r*r,0));
     log('solveQR 3×2', x && norm < 1, norm);
@@ -1882,9 +1967,17 @@ function runTests(){
       { n: points.length, errors: errors.length });
   } catch(e){ log('parser con comentarios inline', false, e.message); }
 
-  // --- Tests E2E de accesibilidad ---
+  // --- Reproducibilidad bit a bit ---
+  try {
+    const rng1 = createPrng(4242);
+    const rng2 = createPrng(4242);
+    const seq1 = Array.from({length: 100}, () => rng1());
+    const seq2 = Array.from({length: 100}, () => rng2());
+    const iguales = seq1.every((v, i) => v === seq2[i]);
+    log('PRNG determinista (bit a bit)', iguales, { n: 100 });
+  } catch(e){ log('PRNG determinista (bit a bit)', false, e.message); }
 
-  // A1: todos los <button> del documento tienen nombre accesible.
+  // --- Accesibilidad E2E ---
   try {
     const buttons = Array.from(document.querySelectorAll('button'));
     const sinNombre = buttons.filter(b => {
@@ -1893,11 +1986,10 @@ function runTests(){
       const title = b.getAttribute('title');
       return !text && !aria && !title;
     });
-    log('todos los botones tienen nombre accesible', sinNombre.length === 0,
+    log('botones con nombre accesible', sinNombre.length === 0,
       { total: buttons.length, sinNombre: sinNombre.length });
-  } catch(e){ log('todos los botones tienen nombre accesible', false, e.message); }
+  } catch(e){ log('botones con nombre accesible', false, e.message); }
 
-  // A2: todos los <input>/<select>/<textarea> tienen label o aria-label.
   try {
     const fields = Array.from(document.querySelectorAll('input, select, textarea'))
       .filter(el => el.type !== 'hidden' && el.type !== 'checkbox');
@@ -1905,24 +1997,21 @@ function runTests(){
       if (el.getAttribute('aria-label')) return false;
       if (el.getAttribute('aria-labelledby')) return false;
       if (el.id && document.querySelector(`label[for="${el.id}"]`)) return false;
-      // Si está dentro de un <label>, es válido.
       let p = el.parentElement;
       while (p) { if (p.tagName === 'LABEL') return false; p = p.parentElement; }
       return true;
     });
-    log('todos los campos tienen label', sinLabel.length === 0,
+    log('campos con label', sinLabel.length === 0,
       { total: fields.length, sinLabel: sinLabel.length });
-  } catch(e){ log('todos los campos tienen label', false, e.message); }
+  } catch(e){ log('campos con label', false, e.message); }
 
-  // A3: SVGs renderizados tienen aria-label.
   try {
     const svgs = Array.from(document.querySelectorAll('svg'));
     const sinAria = svgs.filter(s => !s.getAttribute('aria-label'));
-    log('todos los SVG tienen aria-label', sinAria.length === 0,
+    log('SVG con aria-label', sinAria.length === 0,
       { total: svgs.length, sinAria: sinAria.length });
-  } catch(e){ log('todos los SVG tienen aria-label', false, e.message); }
+  } catch(e){ log('SVG con aria-label', false, e.message); }
 
-  // A4: contenedores con estado dinámico tienen aria-live.
   try {
     const liveIds = ['diagnostics', 'verdict', 'progressNote', 'testBanner', 'toast'];
     const faltantes = liveIds.filter(id => {
@@ -1933,6 +2022,14 @@ function runTests(){
     log('zonas dinámicas con aria-live/role', faltantes.length === 0, faltantes);
   } catch(e){ log('zonas dinámicas con aria-live/role', false, e.message); }
 
+  // --- CSP: verificar que no hay unsafe-eval en la política declarada ---
+  try {
+    const meta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+    const content = meta ? meta.getAttribute('content') : '';
+    const sinUnsafeEval = !content.includes("'unsafe-eval'");
+    log('CSP sin unsafe-eval', sinUnsafeEval, { csp: content.slice(0, 60) + '…' });
+  } catch(e){ log('CSP sin unsafe-eval', false, e.message); }
+
   return results;
 }
 
@@ -1941,14 +2038,15 @@ function showTests(results){
   const failed = results.filter(r => !r.pass);
   if(failed.length === 0){
     banner.innerHTML = `<div class="verdict ok"><strong>✓ ${results.length} tests pasados</strong>
-      Cubren álgebra, modelos, fitter, bootstrap, perfil, extrapolación, BCa, parser y accesibilidad E2E.</div>`;
+      Cubren álgebra, modelos, fitter, bootstrap, perfil, extrapolación, BCa, parser,
+      determinismo, accesibilidad E2E y CSP.</div>`;
   } else {
     banner.innerHTML = `<div class="verdict danger"><strong>✗ ${failed.length} de ${results.length} fallidos</strong>Revisa la consola.</div>`;
   }
 }
 
 /* ============================================================
-   §12  PRESETS
+   Presets
    ============================================================ */
 
 function genPoints(K, alpha, xMin, xMax, n, noise, seed = 1){
@@ -1988,12 +2086,14 @@ const PRESETS = {
 };
 
 /* ============================================================
-   §13  INIT
+   Init
    ============================================================ */
 
 async function init(){
   const compute = new ComputeClient();
   window.__cascabelCompute = compute;
+
+  console.log(`[cascabel] modo de cómputo: ${compute.mode}`);
 
   const sel = $('modelSelect');
   for(const id in MODELS){
@@ -2006,7 +2106,6 @@ async function init(){
   sel.addEventListener('change', async () => {
     State.model = sel.value;
     $('modelNote').textContent = MODELS[State.model].note;
-    // Cambio de modelo invalida cache (distinto run_id).
     State.lastRunId = null;
     if($('dataInput').value.trim()) await fitAll(compute);
   });
@@ -2115,13 +2214,11 @@ window.addEventListener('beforeunload', () => {
     window.__cascabelCompute.terminate();
     window.__cascabelCompute = null;
   }
+  try { URL.revokeObjectURL(coreBlobUrl); } catch(_) {}
+  try { URL.revokeObjectURL(workerBlobUrl); } catch(_) {}
 });
 
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+await init();
 </script>
 </body>
 </html>
