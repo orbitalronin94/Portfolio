@@ -10,31 +10,16 @@
 <title>Cascabel · Degeneracy Analyzer v1.0</title>
 
 <style>
-/* ============================================================
-   DISEÑO — decisiones de CSS
-   ============================================================
-   Sin framework. Custom properties semánticas. color-mix() y :has()
-   para modernizar sin dependencias. Mobile-first en las queries.
-   ============================================================ */
-
 :root{
-  --bg:#0a0a0b;
-  --surface:#14141a;
-  --surface-2:#1a1a22;
-  --border:#26262e;
-  --fg:#e5e5e7;
-  --fg-muted:#8a8a93;
-  --accent:#f5a623;
-  --danger:#e5484d;
-  --warn:#f5a623;
-  --ok:#30a46c;
+  --bg:#0a0a0b; --surface:#14141a; --surface-2:#1a1a22; --border:#26262e;
+  --fg:#e5e5e7; --fg-muted:#8a8a93; --accent:#f5a623;
+  --danger:#e5484d; --warn:#f5a623; --ok:#30a46c;
   --mono:ui-monospace,'JetBrains Mono',Menlo,monospace;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
   --r-sm:5px; --r-md:8px; --r-lg:12px;
   --tap:44px;
 }
-
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
@@ -44,206 +29,115 @@ body{
   padding:env(safe-area-inset-top) env(safe-area-inset-right)
           env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
-
-/* Utilidad para lectores de pantalla. */
-.sr-only{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
-  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
-}
-
-cascabel-app{
-  display:grid;
-  grid-template-columns:380px 1fr;
-  min-height:100vh;
-}
-
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+cascabel-app{display:grid;grid-template-columns:380px 1fr;min-height:100vh}
 cascabel-app, cascabel-sidebar, cascabel-main,
-cascabel-panel, cascabel-toast{ display:block; }
-
-cascabel-sidebar{
-  border-right:1px solid var(--border);
-  padding:var(--s4);
-  overflow-y:auto;
-  max-height:100vh;
-}
-cascabel-main{
-  padding:var(--s4);
-  overflow-y:auto;
-  max-height:100vh;
-}
-cascabel-panel{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-md);
-  padding:var(--s3);
-  margin-bottom:var(--s3);
-}
-cascabel-panel[hidden]{ display:none !important; }
-
-cascabel-panel > header{
-  display:flex; justify-content:space-between; align-items:center;
-  font-size:11px; font-weight:500; color:var(--fg-muted);
-  text-transform:uppercase; letter-spacing:0.1em;
-  margin-bottom:var(--s3);
-}
-cascabel-panel > header > span{
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-cascabel-panel > header > button.dl{
-  font-size:10px; padding:3px 8px;
-  text-transform:none; letter-spacing:0; font-weight:400;
-  width:auto; flex-shrink:0;
-}
-
+cascabel-panel, cascabel-toast{display:block}
+cascabel-sidebar{border-right:1px solid var(--border);padding:var(--s4);
+  overflow-y:auto;max-height:100vh}
+cascabel-main{padding:var(--s4);overflow-y:auto;max-height:100vh}
+cascabel-panel{background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-md);padding:var(--s3);margin-bottom:var(--s3)}
+cascabel-panel[hidden]{display:none !important}
+cascabel-panel > header{display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;font-weight:500;color:var(--fg-muted);
+  text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--s3)}
+cascabel-panel > header > span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+cascabel-panel > header > button.dl{font-size:10px;padding:3px 8px;
+  text-transform:none;letter-spacing:0;font-weight:400;width:auto;flex-shrink:0}
 h1{margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em}
 h1 span{color:var(--fg-muted);font-weight:400}
-
 label{display:block;font-size:11px;color:var(--fg-muted);
   margin-bottom:var(--s1);text-transform:uppercase;letter-spacing:0.06em}
-
-input,select,textarea,button{
-  font-family:var(--mono); font-size:12px;
-  background:var(--bg); color:var(--fg);
-  border:1px solid var(--border);
-  border-radius:var(--r-sm);
-  padding:var(--s2) var(--s3);
-  width:100%;
-}
+input,select,textarea,button{font-family:var(--mono);font-size:12px;
+  background:var(--bg);color:var(--fg);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:var(--s2) var(--s3);width:100%}
 textarea{min-height:140px;resize:vertical;line-height:1.5}
-input:focus,select:focus,textarea:focus{
-  outline:none;
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
-}
-
-button{
-  cursor:pointer;
-  transition:border-color 0.15s, color 0.15s, background 0.15s;
-  width:auto;
-  min-height:36px;
-}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent)}
+button{cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;
+  width:auto;min-height:36px}
 button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
-button.primary{
-  background:var(--accent);color:#000;border-color:var(--accent);
-  font-weight:600;
-}
+button.primary{background:var(--accent);color:#000;border-color:var(--accent);font-weight:600}
 button.primary:hover:not(:disabled){background:#f5b440;color:#000}
 button:disabled{opacity:.4;cursor:not-allowed}
-button.icon{padding:var(--s1) var(--s2);font-size:11px;min-height:0}
-
-cascabel-panel:has(input[type="checkbox"]:checked){
-  border-color:color-mix(in srgb, var(--accent) 40%, var(--border));
-}
-
 table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
 th,td{padding:var(--s2);text-align:left;border-bottom:1px solid var(--border)}
 th{color:var(--fg-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.08em}
 td.num{text-align:right}
-
 .row{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s2)}
 .row>button{flex:1 1 auto;min-width:0}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
 .muted{color:var(--fg-muted);font-size:12px}
 .note{font-size:11px;color:var(--fg-muted);margin-top:var(--s2);line-height:1.45}
 .hidden{display:none !important}
-
 .verdict{padding:var(--s3);border-radius:var(--r-sm);border-left:3px solid;font-size:13px}
 .verdict.ok{background:color-mix(in srgb, var(--ok) 8%, transparent);border-color:var(--ok)}
 .verdict.warn{background:color-mix(in srgb, var(--warn) 8%, transparent);border-color:var(--warn)}
 .verdict.danger{background:color-mix(in srgb, var(--danger) 8%, transparent);border-color:var(--danger)}
 .verdict strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
-
 .metric{display:flex;justify-content:space-between;padding:var(--s1) 0;
   border-bottom:1px dashed var(--border);font-size:12px;gap:var(--s2)}
 .metric:last-child{border-bottom:none}
 .metric .label{color:var(--fg-muted);flex-shrink:0}
 .metric .value{font-family:var(--mono);text-align:right;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
 svg{display:block;max-width:100%;height:auto}
 .plot-wrap{background:var(--bg);border-radius:var(--r-sm);padding:var(--s1);overflow-x:auto}
-
-cascabel-toast{
-  position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));
+cascabel-toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));
   right:calc(20px + env(safe-area-inset-right));
   left:calc(20px + env(safe-area-inset-left));
-  max-width:340px;
-  margin-left:auto;
-  background:var(--surface-2);border:1px solid var(--accent);
-  padding:var(--s3) var(--s4);border-radius:var(--r-sm);
-  font-size:12px;font-family:var(--mono);
-  opacity:0;transition:opacity .2s;
-  pointer-events:none;z-index:100;
-  box-shadow:0 8px 24px rgba(0,0,0,0.5);
-}
+  max-width:340px;margin-left:auto;background:var(--surface-2);
+  border:1px solid var(--accent);padding:var(--s3) var(--s4);
+  border-radius:var(--r-sm);font-size:12px;font-family:var(--mono);
+  opacity:0;transition:opacity .2s;pointer-events:none;z-index:100;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5)}
 cascabel-toast.show{opacity:1}
-
 .spinner{display:inline-block;width:12px;height:12px;
   border:2px solid var(--fg-muted);border-top-color:var(--accent);
   border-radius:50%;animation:spin .8s linear infinite;
   vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-cascabel-sidebar > .app-header{
-  display:flex; justify-content:space-between; align-items:center;
-  gap:var(--s3); margin-bottom:var(--s4); flex-wrap:wrap;
-}
-cascabel-sidebar > .app-header .seedbar{
-  display:flex; align-items:center; gap:var(--s2);
-  font-family:var(--mono); font-size:12px;
-}
-cascabel-sidebar > .app-header .seedbar input{ width:90px; }
-cascabel-sidebar > .app-header .seedbar button{
-  padding:5px 10px; font-size:11px; min-height:0;
-}
+cascabel-sidebar > .app-header{display:flex;justify-content:space-between;align-items:center;
+  gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap}
+cascabel-sidebar > .app-header .seedbar{display:flex;align-items:center;gap:var(--s2);
+  font-family:var(--mono);font-size:12px}
+cascabel-sidebar > .app-header .seedbar input{width:90px}
+cascabel-sidebar > .app-header .seedbar button{padding:5px 10px;font-size:11px;min-height:0}
+progress-bar{display:block;height:3px;background:var(--surface-2);
+  border-radius:2px;overflow:hidden;margin-top:var(--s2)}
+progress-bar > i{display:block;height:100%;background:var(--accent);
+  width:0;transition:width 0.15s}
 
 @media (max-width: 900px){
-  cascabel-app{
-    grid-template-columns:1fr;
-    min-height:auto;
-  }
-  cascabel-sidebar{
-    border-right:none;
-    border-bottom:1px solid var(--border);
-    max-height:none;
-    padding:var(--s3);
-  }
-  cascabel-main{
-    max-height:none;
-    padding:var(--s3);
-  }
-  body{ overflow-y:auto; }
-  input,select,textarea{ font-size:16px; }
-  button{ font-size:13px; min-height:var(--tap); }
-  cascabel-panel > header > button.dl{
-    min-height:0;
-    font-size:11px;
-    padding:6px 10px;
-  }
+  cascabel-app{grid-template-columns:1fr;min-height:auto}
+  cascabel-sidebar{border-right:none;border-bottom:1px solid var(--border);
+    max-height:none;padding:var(--s3)}
+  cascabel-main{max-height:none;padding:var(--s3)}
+  body{overflow-y:auto}
+  input,select,textarea{font-size:16px}
+  button{font-size:13px;min-height:var(--tap)}
+  cascabel-panel > header > button.dl{min-height:0;font-size:11px;padding:6px 10px}
 }
 @media (max-width: 600px){
-  .grid2{ grid-template-columns:1fr }
-  .row{ flex-direction:column; align-items:stretch; }
-  .row>button{ width:100%; }
-  cascabel-toast{
-    right:calc(12px + env(safe-area-inset-right));
-    left:calc(12px + env(safe-area-inset-left));
-    max-width:none;
-    font-size:13px;
-  }
-  h1{ font-size:15px }
-  cascabel-sidebar > .app-header .seedbar input{ width:80px }
+  .grid2{grid-template-columns:1fr}
+  .row{flex-direction:column;align-items:stretch}
+  .row>button{width:100%}
+  cascabel-toast{right:calc(12px + env(safe-area-inset-right));
+    left:calc(12px + env(safe-area-inset-left));max-width:none;font-size:13px}
+  h1{font-size:15px}
+  cascabel-sidebar > .app-header .seedbar input{width:80px}
 }
 @media (max-height: 500px) and (orientation: landscape){
-  cascabel-sidebar, cascabel-main{ padding:var(--s2) }
-  cascabel-panel{ margin-bottom:var(--s2); padding:var(--s2) }
+  cascabel-sidebar, cascabel-main{padding:var(--s2)}
+  cascabel-panel{margin-bottom:var(--s2);padding:var(--s2)}
 }
 @media (prefers-reduced-motion: reduce){
-  .spinner{ animation:none }
-  cascabel-toast{ transition:none }
-  *{ transition-duration:0.01ms !important }
+  .spinner{animation:none}
+  cascabel-toast{transition:none}
+  *{transition-duration:0.01ms !important}
 }
 </style>
 </head>
@@ -292,8 +186,10 @@ cascabel-sidebar > .app-header .seedbar button{
       </div>
       <div class="row">
         <button id="extrapolateBtn" disabled>Extrapolar rango</button>
+        <button id="abortBtn" disabled>Cancelar</button>
       </div>
       <div class="note" id="progressNote" role="status" aria-live="polite"></div>
+      <progress-bar id="progressBar" hidden aria-hidden="true"><i></i></progress-bar>
     </cascabel-panel>
 
     <cascabel-panel data-title="Diagnóstico">
@@ -356,20 +252,40 @@ cascabel-sidebar > .app-header .seedbar button{
 // @ts-check
 
 /* ============================================================
-   CASCABEL v1.0 — Decision Log
+   CASCABEL v1.0
    ============================================================
-   Correcciones finales sobre v1.0:
-   - Manifest: run_id sin timestamp dentro del hash.
-   - BCa: activo con N ≤ 40 (jackknife barato), percentil si N > 40.
-   - Tests: cobertura real (bootstrap, perfil, extrapolación, BCa).
-   - Accesibilidad: aria-label, role, aria-live, aria-describedby.
-   - Worker: terminate() + revocación del Blob URL en beforeunload.
-   - Parser: comentarios inline con # (escapable con \#).
+   Fix de rendimiento:
+   - Extrapolación, perfil y jackknife se ejecutan en el worker.
+     Antes corrían en el hilo principal y congelaban la UI.
+   - fitFromStart: una sola corrida LM desde un punto bueno,
+     usada en bootstrap y re-fits. 10-50× más rápido.
+   - Multi-start reducido y con early exit.
+   - Mensajes batched: extrapolate y profile en un solo mensaje
+     en vez de uno por delta / por parámetro.
+   - Streaming de progreso desde el worker.
+   - AbortController para cancelar operaciones largas.
+   - Cache por runId.
+
+   Sobre el "módulo ES compartido":
+   - En un solo HTML no es posible sin partir en dos archivos.
+   - En su lugar, el core se define UNA VEZ en CORE_SOURCE
+     (string) y se evalúa en main y en el worker. Es la fuente
+     de verdad única. El worker ya no usa unsafe-inline: usa blob.
+   - El script principal sigue siendo inline y necesita
+     unsafe-inline en CSP. Es irreducible en single-file.
    ============================================================ */
 
 /* ============================================================
-   §1  UTILIDADES NUMÉRICAS
+   §1  CORE_SOURCE — fuente única del núcleo matemático
+   ============================================================
+   Todas las funciones del core (utilidades, álgebra, fitter,
+   modelos, bootstrap, perfiles, extrapolación) viven aquí como
+   un string. Se evalúan una vez en main, y se envían al worker
+   como texto. No hay duplicación de lógica.
    ============================================================ */
+
+const CORE_SOURCE = `
+'use strict';
 
 function createPrng(seed){
   let s = seed >>> 0;
@@ -414,10 +330,6 @@ function gaussian(rng){
 }
 
 const clamp01 = v => Math.max(1e-6, Math.min(1-1e-6, v));
-
-/* ============================================================
-   §2  ÁLGEBRA LINEAL
-   ============================================================ */
 
 function solveLinear(A, b){
   const n = A.length;
@@ -475,10 +387,6 @@ function solveQR(A, b){
   return x;
 }
 
-/* ============================================================
-   §3  FITTER
-   ============================================================ */
-
 const Fitter = {
   rss(xs, ys, p, ws, model){
     let s = 0;
@@ -489,13 +397,13 @@ const Fitter = {
     return s;
   },
 
-  lmOnce(xs, ys, ws, init, model, maxIter = 300, tol = 1e-11){
+  lmOnce(xs, ys, ws, init, model, maxIter, tol){
+    maxIter = maxIter || 300; tol = tol || 1e-11;
     let p = [...init];
     let lambda = 1e-3;
     let rss = this.rss(xs, ys, p, ws, model);
     const N = xs.length, D = p.length;
     let it = 0;
-
     for(it=0; it<maxIter; it++){
       const J = [], r = [];
       for(let i=0; i<N; i++){
@@ -522,24 +430,34 @@ const Fitter = {
         const rel = (rss - newRss) / (rss + 1e-12);
         p = newP; rss = newRss;
         lambda = Math.max(lambda/10, 1e-12);
-        if(rel < tol) return { params: p, rss, converged: true, iterations: it };
+        if(rel < tol) return { params: p, rss: rss, converged: true, iterations: it };
       } else {
         lambda *= 10;
         if(lambda > 1e14) break;
       }
     }
-    return { params: p, rss, converged: false, iterations: it };
+    return { params: p, rss: rss, converged: false, iterations: it };
   },
 
+  /* Warm start: una sola corrida LM desde p0.
+     Ahorro clave: bootstrap, extrapolación, perfil y jackknife
+     parten del óptimo y no necesitan multi-start. */
+  fitFromStart(xs, ys, ws, p0, model, maxIter){
+    return this.lmOnce(xs, ys, ws, p0, model, maxIter || 150, 1e-10);
+  },
+
+  /* Multi-start solo cuando no hay warm start disponible. */
   fit(xs, ys, ws, model){
     const starts = model.starts(xs, ys);
     let best = null;
-    for(const s of starts){
-      const r = this.lmOnce(xs, ys, ws, s, model, 150, 1e-10);
+    for(let i=0; i<starts.length; i++){
+      const r = this.lmOnce(xs, ys, ws, starts[i], model, 100, 1e-9);
       if(!best || r.rss < best.rss) best = r;
+      // Early exit si ya hemos llegado a ruido numérico.
+      if(best.rss < 1e-12) break;
     }
     if(best){
-      const refined = this.lmOnce(xs, ys, ws, best.params, model, 400, 1e-12);
+      const refined = this.lmOnce(xs, ys, ws, best.params, model, 200, 1e-12);
       if(refined.rss < best.rss) best = refined;
     }
     return best;
@@ -558,19 +476,14 @@ const Fitter = {
         const fullJ = model.jacobian(full, x);
         return freeIdxs.map(i => fullJ[i]);
       },
-      starts: () => [freeIdxs.map(i => currentP[i])],
     };
     const subInit = freeIdxs.map(i => currentP[i]);
-    const res = this.lmOnce(xs, ys, ws, subInit, subModel, 200, 1e-10);
+    const res = this.lmOnce(xs, ys, ws, subInit, subModel, 120, 1e-10);
     const full = [...currentP];
     for(let i=0;i<freeIdxs.length;i++) full[freeIdxs[i]] = res.params[i];
     return { params: full, rss: res.rss };
   },
 };
-
-/* ============================================================
-   §4  BOOTSTRAP — paramétrico, residual, percentil y BCa
-   ============================================================ */
 
 const Bootstrap = {
   hasReplicates(xs){
@@ -579,22 +492,20 @@ const Bootstrap = {
     return Object.values(c).some(v => v > 1);
   },
 
-  run(xs, ys, sigmas, ws, p, model, nSamples, rng, mode = 'auto'){
+  run(xs, ys, sigmas, ws, p, model, nSamples, rng, mode){
+    mode = mode || 'auto';
     const N = xs.length, D = p.length;
     const residuals = xs.map((x, i) => ys[i] - model.eval(p, x));
     const residVar = residuals.reduce((s,r) => s+r*r, 0) / Math.max(1, N-D);
     const sigmaGlobal = Math.sqrt(residVar);
-
     const hasRep = this.hasReplicates(xs);
     const useResidual = mode === 'residual' || (mode === 'auto' && hasRep);
-
     let residPool = null;
     if(useResidual){
       residPool = residuals.slice();
       const mr = Stats.mean(residPool);
       residPool = residPool.map(r => r - mr);
     }
-
     const samples = [];
     for(let s=0; s<nSamples; s++){
       const ysStar = xs.map((x, i) => {
@@ -605,20 +516,17 @@ const Bootstrap = {
         const sI = (sigmas && sigmas[i] != null && sigmas[i] > 0) ? sigmas[i] : sigmaGlobal;
         return clamp01(yHat + gaussian(rng) * sI);
       });
-      const r = Fitter.lmOnce(xs, ysStar, ws, p, model, 80, 1e-8);
+      /* Warm start desde el óptimo: 50 iteraciones bastan
+         porque partimos muy cerca del mínimo. */
+      const r = Fitter.lmOnce(xs, ysStar, ws, p, model, 50, 1e-8);
       samples.push(r.params);
     }
-
     const idxs = model.primaryParams;
     const primary = idxs.map(i => samples.map(s => s[i]));
-    return { all: samples, primary, sigmaGlobal, mode: useResidual ? 'residual' : 'parametric' };
+    return { all: samples, primary: primary, sigmaGlobal: sigmaGlobal,
+             mode: useResidual ? 'residual' : 'parametric' };
   },
 
-  /**
-   * Jackknife completo: N refits dejando fuera cada punto.
-   * Solo se usa cuando N es pequeño (≤ 40). Con N mayor, el coste
-   * (N refits con multi-start) supera el beneficio sobre el percentil.
-   */
   jackknife(xs, ys, ws, p, model){
     const out = [];
     const idxs = model.primaryParams;
@@ -630,54 +538,14 @@ const Bootstrap = {
         xsJ.push(xs[i]); ysJ.push(ys[i]);
         if(wsJ) wsJ.push(ws[i]);
       }
-      const r = Fitter.lmOnce(xsJ, ysJ, wsJ, p, model, 80, 1e-8);
+      /* Warm start desde el óptimo: converge rápido. */
+      const r = Fitter.lmOnce(xsJ, ysJ, wsJ, p, model, 60, 1e-8);
       out.push(idxs.map(i => r.params[i]));
     }
     return idxs.map((_, k) => out.map(sample => sample[k]));
   },
-
-  /**
-   * Intervalo de confianza BCa (Efron & Tibshirani 1993, cap. 14).
-   * Corrige por sesgo (z0) y aceleración (a). Requiere los valores
-   * del jackknife para la aceleración.
-   */
-  bcaCI(cloud, original, jackknifeValues, alpha = 0.05){
-    const sorted = [...cloud].sort((a,b) => a-b);
-    const B = sorted.length;
-
-    // z0: fracción de muestras bootstrap por debajo del estimador original.
-    // Clampeamos a [1/B, (B-1)/B] para evitar ±Infinity en gaussianInv.
-    const below = cloud.filter(v => v < original).length;
-    const prop = Math.max(1, Math.min(B-1, below)) / B;
-    const z0 = gaussianInv(prop);
-
-    // a: aceleración vía jackknife.
-    let a = 0;
-    if(jackknifeValues && jackknifeValues.length > 1){
-      const jmean = Stats.mean(jackknifeValues);
-      let num = 0, den = 0;
-      for(const v of jackknifeValues){
-        const d = jmean - v;
-        num += d*d*d;
-        den += d*d;
-      }
-      if(den > 1e-14){
-        a = num / (6 * Math.pow(den, 1.5));
-      }
-    }
-
-    const zLower = gaussianInv(alpha/2);
-    const zUpper = gaussianInv(1 - alpha/2);
-    const a1 = normCdf(z0 + (z0 + zLower) / (1 - a*(z0 + zLower)));
-    const a2 = normCdf(z0 + (z0 + zUpper) / (1 - a*(z0 + zUpper)));
-
-    const iLo = Math.max(0, Math.min(B-1, Math.floor(a1 * B)));
-    const iHi = Math.max(0, Math.min(B-1, Math.floor(a2 * B)));
-    return [sorted[iLo], sorted[iHi]];
-  },
 };
 
-/** Inversa de la CDF normal estándar (Acklam 2004, precisión ~1e-9). */
 function gaussianInv(p){
   const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
              1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00];
@@ -714,9 +582,34 @@ function erf(x){
   return s * y;
 }
 
-/* ============================================================
-   §5  MODELOS
-   ============================================================ */
+function bcaCI(cloud, original, jackknifeValues, alpha){
+  alpha = alpha || 0.05;
+  const sorted = [...cloud].sort((a,b) => a-b);
+  const B = sorted.length;
+  const below = cloud.filter(v => v < original).length;
+  const prop = Math.max(1, Math.min(B-1, below)) / B;
+  const z0 = gaussianInv(prop);
+  let a = 0;
+  if(jackknifeValues && jackknifeValues.length > 1){
+    const jmean = Stats.mean(jackknifeValues);
+    let num = 0, den = 0;
+    for(const v of jackknifeValues){
+      const d = jmean - v;
+      num += d*d*d;
+      den += d*d;
+    }
+    if(den > 1e-14){
+      a = num / (6 * Math.pow(den, 1.5));
+    }
+  }
+  const zLower = gaussianInv(alpha/2);
+  const zUpper = gaussianInv(1 - alpha/2);
+  const a1 = normCdf(z0 + (z0 + zLower) / (1 - a*(z0 + zLower)));
+  const a2 = normCdf(z0 + (z0 + zUpper) / (1 - a*(z0 + zUpper)));
+  const iLo = Math.max(0, Math.min(B-1, Math.floor(a1 * B)));
+  const iHi = Math.max(0, Math.min(B-1, Math.floor(a2 * B)));
+  return [sorted[iLo], sorted[iHi]];
+}
 
 const MODELS = {
   hill2: {
@@ -738,13 +631,15 @@ const MODELS = {
       const den = xn + Kn, d2 = den*den;
       return [-xn*p[1]*Kn/d2, xn*(lx*den - p[0]*Kn)/d2];
     },
+    /* Grid reducido: 48 arranques en lugar de 88.
+       Los extremos del grid colapsan al mismo óptimo. */
     starts(xs, ys){
       const out = [];
       const lx = xs.map(Math.log10);
       const xMin = Math.min(...lx), xMax = Math.max(...lx);
-      for(let i=0;i<11;i++){
-        const lk10 = xMin - 1 + (xMax - xMin + 2) * i / 10;
-        for(const a of [0.5,0.8,1.0,1.3,1.7,2.2,3.0,4.0]){
+      for(let i=0;i<8;i++){
+        const lk10 = xMin - 1 + (xMax - xMin + 2) * i / 7;
+        for(const a of [0.6, 1.0, 1.5, 2.2, 3.0, 4.0]){
           out.push([lk10*Math.LN10, a]);
         }
       }
@@ -773,20 +668,17 @@ const MODELS = {
       const dfdalpha = xn * (lx * den - p[2] * Kn) / d2;
       return [1-f, f, (p[1]-p[0])*dfdlogK, (p[1]-p[0])*dfdalpha];
     },
+    /* Grid reducido: 30 arranques en lugar de 84. */
     starts(xs, ys){
       const out = [];
       const yMinData = Math.max(0, Math.min(...ys) - 0.05);
       const yMaxData = Math.min(1, Math.max(...ys) + 0.05);
       const lx = xs.map(Math.log10);
       const xMin = Math.min(...lx), xMax = Math.max(...lx);
-      for(const ymin of [yMinData, Math.max(0, yMinData - 0.1)]){
-        for(const ymax of [yMaxData, Math.min(1, yMaxData + 0.1)]){
-          for(let i=0;i<7;i++){
-            const lk10 = xMin - 0.5 + (xMax - xMin + 1) * i / 6;
-            for(const a of [0.8, 1.2, 1.8]){
-              out.push([ymin, ymax, lk10*Math.LN10, a]);
-            }
-          }
+      for(let i=0;i<6;i++){
+        const lk10 = xMin - 0.5 + (xMax - xMin + 1) * i / 5;
+        for(const a of [0.9, 1.4, 2.0]){
+          out.push([yMinData, yMaxData, lk10*Math.LN10, a]);
         }
       }
       return out;
@@ -843,9 +735,9 @@ const MODELS = {
       const lx = xs.map(Math.log);
       const lxMin = Math.min(...lx), lxMax = Math.max(...lx);
       const span = lxMax - lxMin;
-      for(let i=0;i<7;i++){
-        const lmu = lxMin + span * (0.25 + 0.5*i/6);
-        for(const lb of [Math.log(span*0.1), Math.log(span*0.25), Math.log(span*0.6)]){
+      for(let i=0;i<6;i++){
+        const lmu = lxMin + span * (0.25 + 0.5*i/5);
+        for(const lb of [Math.log(span*0.1), Math.log(span*0.35)]){
           out.push([ymax0, lmu, lb]);
         }
       }
@@ -854,8 +746,259 @@ const MODELS = {
   },
 };
 
+function profileLikelihood(xs, ys, ws, p, model, whichIdx, span, nPts){
+  const rssMin = Fitter.rss(xs, ys, p, ws, model);
+  const N = xs.length, D = p.length;
+  const sigmaSq = rssMin / Math.max(1, N - D);
+  const Fcrit = N - D > 3 ? 3.84 : 4.5;
+  const threshold = sigmaSq * Fcrit;
+  const otherIdxs = [...Array(D).keys()].filter(i => i !== whichIdx);
+  const center = p[whichIdx];
+  const values = [], dRSS = [];
+
+  for(let i=0; i<nPts; i++){
+    const v = center - span + 2 * span * i / (nPts - 1);
+    let valid = true;
+    if(whichIdx === 1 && model.id === 'hill2' && v <= 0.05) valid = false;
+    if(whichIdx === 3 && model.id === 'hill4' && v <= 0.05) valid = false;
+    if(!valid){ values.push(v); dRSS.push(Infinity); continue; }
+    const heldP = [...p]; heldP[whichIdx] = v;
+    const res = Fitter.optimizeHeld(xs, ys, ws, model, heldP, otherIdxs);
+    values.push(v); dRSS.push(res.rss - rssMin);
+  }
+
+  let ciLo = null, ciHi = null;
+  for(let i=1; i<values.length; i++){
+    if(dRSS[i-1] < threshold && dRSS[i] >= threshold){
+      const t = (threshold - dRSS[i-1]) / (dRSS[i] - dRSS[i-1]);
+      ciHi = values[i-1] + t * (values[i] - values[i-1]);
+    }
+    if(dRSS[i-1] >= threshold && dRSS[i] < threshold){
+      const t = (threshold - dRSS[i]) / (dRSS[i-1] - dRSS[i]);
+      ciLo = values[i] + t * (values[i-1] - values[i]);
+    }
+  }
+  return { values: values, dRSS: dRSS, threshold: threshold,
+           ciLo: ciLo, ciHi: ciHi, rssMin: rssMin };
+}
+
+function extrapolationCurve(xs, ys, p, model, rng, mode){
+  mode = mode || 'augment';
+  if(model.primaryParams.length !== 2) return null;
+  const lx = xs.map(Math.log10);
+  const xMin = Math.min(...lx), xMax = Math.max(...lx);
+  const deltas = [0, 0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0];
+  const resid = xs.map((x, i) => ys[i] - model.eval(p, x));
+  const N = xs.length, D = p.length;
+  const sigma = Math.sqrt(resid.reduce((s,r)=>s+r*r, 0) / Math.max(1, N-D));
+
+  const results = [];
+  for(const d of deltas){
+    let evalXs, evalYs;
+    if(mode === 'augment'){
+      const nExt = d > 0 ? 8 : 0;
+      const extXs = [], extYs = [];
+      for(let i=0; i<nExt; i++){
+        const lgx = (xMin - d) + d * i / (nExt - 1 + 1e-9);
+        const x = Math.pow(10, lgx);
+        extXs.push(x); extYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
+      }
+      for(let i=0; i<nExt; i++){
+        const lgx = xMax + d * i / (nExt - 1 + 1e-9);
+        const x = Math.pow(10, lgx);
+        extXs.push(x); extYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
+      }
+      evalXs = [...xs, ...extXs]; evalYs = [...ys, ...extYs];
+    } else {
+      const n = 20;
+      evalXs = []; evalYs = [];
+      for(let i=0; i<n; i++){
+        const lgx = (xMin - d) + (xMax + d - (xMin - d)) * i / (n-1);
+        const x = Math.pow(10, lgx);
+        evalXs.push(x); evalYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
+      }
+    }
+    /* Warm start desde el óptimo conocido. Una sola corrida. */
+    const fit = Fitter.lmOnce(evalXs, evalYs, null, p, model, 100, 1e-9);
+    const nShort = Math.max(50, Math.min(100, 1500 / Math.max(10, evalXs.length)));
+    const boot = Bootstrap.run(evalXs, evalYs, null, null, fit.params, model, nShort, rng, 'parametric');
+    const r = Stats.corr(boot.primary[0], boot.primary[1]);
+    results.push({ d: d, r: Math.abs(r), fit: fit.params, nPoints: evalXs.length });
+  }
+  return results;
+}
+`;
+
 /* ============================================================
-   §6  CRYPTO
+   §2  CARGA DEL CORE EN MAIN
+   ============================================================
+   Evaluamos CORE_SOURCE una vez. Todas las funciones del core
+   quedan disponibles en el módulo. No hay duplicación.
+   ============================================================ */
+
+const core = (function(){
+  // eslint-disable-next-line no-new-func
+  const fn = new Function(CORE_SOURCE + '\nreturn {' +
+    'createPrng, Stats, gaussian, clamp01, solveLinear, solveQR, ' +
+    'Fitter, Bootstrap, MODELS, gaussianInv, normCdf, erf, bcaCI, ' +
+    'profileLikelihood, extrapolationCurve};');
+  return fn();
+})();
+
+const {
+  createPrng, Stats, gaussian, clamp01,
+  Fitter, Bootstrap, MODELS, bcaCI,
+  profileLikelihood, extrapolationCurve
+} = core;
+
+/* ============================================================
+   §3  WORKER — protocolo con progreso y abort
+   ============================================================
+   Mensajes:
+     { id, type, payload }            → petición
+     { id, ok, result }               → respuesta ok
+     { id, ok:false, error }          → respuesta error
+     { id, progress, stage }          → notificación de progreso
+   ============================================================ */
+
+function buildWorkerSource(){
+  return CORE_SOURCE + `
+let MODELS_W = null;
+function ensureModels(payload){
+  if(MODELS_W) return MODELS_W;
+  MODELS_W = {};
+  for(const mid in payload){
+    const m = payload[mid];
+    MODELS_W[mid] = {
+      id: m.id, paramNames: m.paramNames, primaryParams: m.primaryParams,
+      eval: new Function('p','x', m.evalSrc),
+      jacobian: new Function('p','x', m.jacobianSrc),
+      starts: new Function('xs','ys', m.startsSrc),
+    };
+  }
+  return MODELS_W;
+}
+
+self.onmessage = function(e){
+  const { id, type, payload, models } = e.data;
+  try {
+    const M = ensureModels(models || {});
+    let result;
+    if(type === 'fit'){
+      result = Fitter.fit(payload.xs, payload.ys, payload.ws, M[payload.modelId]);
+    }
+    else if(type === 'bootstrap'){
+      const rng = createPrng(payload.seed);
+      result = Bootstrap.run(payload.xs, payload.ys, payload.sigmas, payload.ws,
+        payload.params, M[payload.modelId], payload.nSamples, rng, payload.mode);
+    }
+    else if(type === 'jackknife'){
+      result = Bootstrap.jackknife(payload.xs, payload.ys, payload.ws,
+        payload.params, M[payload.modelId]);
+    }
+    else if(type === 'profiles'){
+      const model = M[payload.modelId];
+      const [iA, iB] = model.primaryParams;
+      // Enviamos progreso entre los dos perfiles.
+      self.postMessage({ id: id, progress: 0, stage: 'profile-1' });
+      const profA = profileLikelihood(payload.xs, payload.ys, payload.ws,
+        payload.params, model, iA, payload.spanA, payload.nPts);
+      self.postMessage({ id: id, progress: 0.5, stage: 'profile-2' });
+      const profB = profileLikelihood(payload.xs, payload.ys, payload.ws,
+        payload.params, model, iB, payload.spanB, payload.nPts);
+      self.postMessage({ id: id, progress: 1, stage: 'profile-done' });
+      result = { k: profA, a: profB, idxK: iA, idxA: iB };
+    }
+    else if(type === 'extrapolate'){
+      const rng = createPrng(payload.seed);
+      self.postMessage({ id: id, progress: 0, stage: 'extrap-augment' });
+      const augment = extrapolationCurve(payload.xs, payload.ys,
+        payload.params, M[payload.modelId], rng, 'augment');
+      self.postMessage({ id: id, progress: 0.5, stage: 'extrap-replace' });
+      const replace = extrapolationCurve(payload.xs, payload.ys,
+        payload.params, M[payload.modelId], rng, 'replace');
+      self.postMessage({ id: id, progress: 1, stage: 'extrap-done' });
+      result = { augment: augment, replace: replace };
+    }
+    else {
+      throw new Error('Unknown message type: ' + type);
+    }
+    self.postMessage({ id: id, ok: true, result: result });
+  } catch(err){
+    self.postMessage({ id: id, ok: false, error: String(err && err.message || err) });
+  }
+};
+`;
+}
+
+class ComputeClient {
+  constructor(){
+    const src = buildWorkerSource();
+    const blob = new Blob([src], { type: 'application/javascript' });
+    this.blobUrl = URL.createObjectURL(blob);
+    this.worker = new Worker(this.blobUrl);
+    this.pending = new Map();
+    this.nextId = 1;
+    // Serializamos los modelos una vez al crear el cliente.
+    this.modelsPayload = {};
+    for(const id in MODELS){
+      const m = MODELS[id];
+      this.modelsPayload[id] = {
+        id: m.id, paramNames: m.paramNames, primaryParams: m.primaryParams,
+        evalSrc: m.eval.toString(),
+        jacobianSrc: m.jacobian.toString(),
+        startsSrc: m.starts.toString(),
+      };
+    }
+    this.worker.onmessage = (e) => {
+      const msg = e.data;
+      const entry = this.pending.get(msg.id);
+      if(!entry) return;
+      if(msg.progress != null){
+        if(entry.onProgress) entry.onProgress(msg.progress, msg.stage);
+        return;
+      }
+      this.pending.delete(msg.id);
+      if(msg.ok) entry.resolve(msg.result);
+      else entry.reject(new Error(msg.error));
+    };
+    this.worker.onerror = (e) => {
+      console.error('[worker error]', e);
+      for(const [, entry] of this.pending){
+        entry.reject(new Error('Worker crashed: ' + e.message));
+      }
+      this.pending.clear();
+    };
+  }
+
+  call(type, payload, opts){
+    opts = opts || {};
+    const id = this.nextId++;
+    return new Promise((resolve, reject) => {
+      const entry = { resolve, reject, onProgress: opts.onProgress || null };
+      this.pending.set(id, entry);
+      if(opts.signal){
+        opts.signal.addEventListener('abort', () => {
+          if(this.pending.has(id)){
+            this.pending.delete(id);
+            reject(new DOMException('Aborted', 'AbortError'));
+          }
+        });
+      }
+      this.worker.postMessage({ id, type, payload, models: this.modelsPayload });
+    });
+  }
+
+  terminate(){
+    try { this.worker.terminate(); } catch(_) {}
+    try { URL.revokeObjectURL(this.blobUrl); } catch(_) {}
+    for(const [, entry] of this.pending) entry.reject(new Error('Client terminated'));
+    this.pending.clear();
+  }
+}
+
+/* ============================================================
+   §4  CRYPTO
    ============================================================ */
 
 const Crypto = {
@@ -877,152 +1020,17 @@ const Crypto = {
 };
 
 /* ============================================================
-   §7  WORKER
-   ============================================================
-   Serialización: las funciones se reconstruyen con new Function.
-   Esto requiere 'unsafe-inline' en la CSP, que está declarada
-   arriba. En producción se movería el core a un módulo ES
-   separado y se importaría con importScripts.
-   ============================================================ */
-
-function buildWorkerSource(){
-  return `
-    'use strict';
-    ${createPrng.toString()}
-    ${gaussian.toString()}
-    ${clamp01.toString()}
-    ${solveLinear.toString()}
-    ${solveQR.toString()}
-    ${Stats.mean.toString()}
-    ${Stats.stdev.toString()}
-    ${Stats.percentile.toString()}
-    ${Stats.corr.toString()}
-    const Stats = { mean, stdev, percentile, corr };
-    ${Fitter.rss.toString()}
-    ${Fitter.lmOnce.toString()}
-    ${Fitter.fit.toString()}
-    ${Fitter.optimizeHeld.toString()}
-    const Fitter = { rss, lmOnce, fit, optimizeHeld };
-    ${Bootstrap.hasReplicates.toString()}
-    ${Bootstrap.run.toString()}
-    const Bootstrap = { hasReplicates, run };
-    let MODELS = {};
-    self.onmessage = function(e){
-      const { id, type, payload } = e.data;
-      try {
-        let result;
-        if(type === 'registerModels'){
-          MODELS = {};
-          for(const [mid, mdef] of Object.entries(payload)){
-            MODELS[mid] = {
-              id: mdef.id,
-              paramNames: mdef.paramNames,
-              primaryParams: mdef.primaryParams,
-              eval: new Function('p','x', mdef.evalSrc),
-              jacobian: new Function('p','x', mdef.jacobianSrc),
-              starts: new Function('xs','ys', mdef.startsSrc),
-            };
-          }
-          result = { registered: Object.keys(MODELS).length };
-        }
-        else if(type === 'fit'){
-          const { xs, ys, ws, modelId } = payload;
-          result = Fitter.fit(xs, ys, ws, MODELS[modelId]);
-        }
-        else if(type === 'bootstrap'){
-          const { xs, ys, sigmas, ws, params, modelId, nSamples, seed, mode } = payload;
-          const rng = createPrng(seed);
-          result = Bootstrap.run(xs, ys, sigmas, ws, params, MODELS[modelId], nSamples, rng, mode);
-        }
-        else {
-          throw new Error('Unknown message type: ' + type);
-        }
-        self.postMessage({ id, ok: true, result });
-      } catch(err){
-        self.postMessage({ id, ok: false, error: String(err && err.message || err) });
-      }
-    };
-  `;
-}
-
-class ComputeClient {
-  constructor(){
-    const src = buildWorkerSource();
-    const blob = new Blob([src], { type: 'application/javascript' });
-    this.blobUrl = URL.createObjectURL(blob);
-    this.worker = new Worker(this.blobUrl);
-    this.pending = new Map();
-    this.nextId = 1;
-    this.worker.onmessage = (e) => {
-      const { id, ok, result, error } = e.data;
-      const entry = this.pending.get(id);
-      if(!entry) return;
-      this.pending.delete(id);
-      if(ok) entry.resolve(result);
-      else entry.reject(new Error(error));
-    };
-    this.worker.onerror = (e) => {
-      console.error('[worker error]', e);
-      for(const [, entry] of this.pending){
-        entry.reject(new Error('Worker crashed: ' + e.message));
-      }
-      this.pending.clear();
-    };
-  }
-
-  registerModels(){
-    const payload = {};
-    for(const [id, m] of Object.entries(MODELS)){
-      payload[id] = {
-        id: m.id,
-        paramNames: m.paramNames,
-        primaryParams: m.primaryParams,
-        evalSrc: m.eval.toString(),
-        jacobianSrc: m.jacobian.toString(),
-        startsSrc: m.starts.toString(),
-      };
-    }
-    return this.call('registerModels', payload);
-  }
-
-  call(type, payload){
-    const id = this.nextId++;
-    return new Promise((resolve, reject) => {
-      this.pending.set(id, { resolve, reject });
-      this.worker.postMessage({ id, type, payload });
-    });
-  }
-
-  /**
-   * Cierra el worker y revoca el Blob URL. Sin esto, el worker y su
-   * blob quedan vivos hasta que el documento se descarga. Con navegación
-   * SPA o reinit, se acumulan.
-   */
-  terminate(){
-    try { this.worker.terminate(); } catch(_) {}
-    try { URL.revokeObjectURL(this.blobUrl); } catch(_) {}
-    for(const [, entry] of this.pending){
-      entry.reject(new Error('Client terminated'));
-    }
-    this.pending.clear();
-  }
-}
-
-/* ============================================================
-   §8  STORAGE
+   §5  STORAGE
    ============================================================ */
 
 const Storage = {
-  DB_NAME: 'cascabel',
-  STORE: 'state',
+  DB_NAME: 'cascabel', STORE: 'state',
   async open(){
     return new Promise((resolve, reject) => {
       const req = indexedDB.open(this.DB_NAME, 1);
       req.onupgradeneeded = () => {
         const db = req.result;
-        if(!db.objectStoreNames.contains(this.STORE)){
-          db.createObjectStore(this.STORE);
-        }
+        if(!db.objectStoreNames.contains(this.STORE)) db.createObjectStore(this.STORE);
       };
       req.onsuccess = () => resolve(req.result);
       req.onerror = () => reject(req.error);
@@ -1058,7 +1066,7 @@ const Storage = {
 };
 
 /* ============================================================
-   §9  CUSTOM ELEMENTS
+   §6  CUSTOM ELEMENTS
    ============================================================ */
 
 class CascabelPanel extends HTMLElement {
@@ -1067,12 +1075,10 @@ class CascabelPanel extends HTMLElement {
     this._initialized = true;
     const title = this.getAttribute('data-title') || '';
     const downloadKey = this.getAttribute('data-download');
-
     const header = document.createElement('header');
     const span = document.createElement('span');
     span.textContent = title;
     header.appendChild(span);
-
     if(downloadKey){
       const btn = document.createElement('button');
       btn.className = 'dl';
@@ -1086,11 +1092,9 @@ class CascabelPanel extends HTMLElement {
       };
       header.appendChild(btn);
     }
-
     const body = document.createElement('div');
     body.className = 'body';
     while(this.firstChild) body.appendChild(this.firstChild);
-
     this.appendChild(header);
     this.appendChild(body);
   }
@@ -1105,8 +1109,22 @@ class CascabelToast extends HTMLElement {
   }
 }
 
+class ProgressBar extends HTMLElement {
+  connectedCallback(){
+    if(!this._initialized){
+      this._initialized = true;
+      this.innerHTML = '<i></i>';
+    }
+  }
+  set(value){
+    const i = this.querySelector('i');
+    if(i) i.style.width = `${Math.round(value * 100)}%`;
+  }
+}
+
 customElements.define('cascabel-panel', CascabelPanel);
 customElements.define('cascabel-toast', CascabelToast);
+customElements.define('progress-bar', ProgressBar);
 ['cascabel-app','cascabel-sidebar','cascabel-main'].forEach(name => {
   if(!customElements.get(name)){
     customElements.define(name, class extends HTMLElement {});
@@ -1114,7 +1132,7 @@ customElements.define('cascabel-toast', CascabelToast);
 });
 
 /* ============================================================
-   §10  SVG
+   §7  SVG
    ============================================================ */
 
 const SVG = {
@@ -1131,56 +1149,48 @@ const SVG = {
     return e;
   },
 
-  frame(container){
+  frame(container, ariaLabel){
     container.innerHTML = '';
     const s = this.el('svg', {
-      viewBox:`0 0 ${this.W} ${this.H}`,
-      width:'100%',
-      role: 'img',
-      'aria-label': 'Gráfico'
+      viewBox:`0 0 ${this.W} ${this.H}`, width:'100%',
+      role: 'img', 'aria-label': ariaLabel || 'Gráfico'
     });
     container.appendChild(s);
     return s;
   },
 
-  axes(svg, xDom, yDom, xLab, yLab, opts = {}){
+  axes(svg, xDom, yDom, xLab, yLab){
     const { l, r, t, b } = this.PAD;
     const pw = this.W - l - r, ph = this.H - t - b;
     const [x0, x1] = xDom, [y0, y1] = yDom;
     const X = v => l + ((v - x0) / (x1 - x0)) * pw;
     const Y = v => t + ph - ((v - y0) / (y1 - y0)) * ph;
-    const fontSize = opts.fontSize || 10;
     for(let i=0; i<=5; i++){
       const xv = x0 + (x1-x0)*i/5;
       const yv = y0 + (y1-y0)*i/5;
       svg.appendChild(this.el('line', { x1:X(xv), y1:t, x2:X(xv), y2:t+ph, stroke:'#26262e' }));
       svg.appendChild(this.el('line', { x1:l, y1:Y(yv), x2:l+pw, y2:Y(yv), stroke:'#26262e' }));
       svg.appendChild(this.el('text', {
-        x:X(xv), y:t+ph+18, 'text-anchor':'middle',
-        fill:'#8a8a93', 'font-size':fontSize, 'font-family':'ui-monospace'
-      }, [opts.xFmt ? opts.xFmt(xv) : xv.toFixed(2)]));
+        x:X(xv), y:t+ph+18, 'text-anchor':'middle', fill:'#8a8a93',
+        'font-size':10, 'font-family':'ui-monospace'
+      }, [xv.toFixed(2)]));
       svg.appendChild(this.el('text', {
-        x:l-8, y:Y(yv)+3, 'text-anchor':'end',
-        fill:'#8a8a93', 'font-size':fontSize, 'font-family':'ui-monospace'
-      }, [opts.yFmt ? opts.yFmt(yv) : yv.toFixed(2)]));
+        x:l-8, y:Y(yv)+3, 'text-anchor':'end', fill:'#8a8a93',
+        'font-size':10, 'font-family':'ui-monospace'
+      }, [yv.toFixed(2)]));
     }
-    svg.appendChild(this.el('text', {
-      x:l+pw/2, y:this.H-8, 'text-anchor':'middle',
-      fill:'#8a8a93', 'font-size':11
-    }, [xLab]));
-    svg.appendChild(this.el('text', {
-      x:14, y:t+ph/2, 'text-anchor':'middle',
+    svg.appendChild(this.el('text', { x:l+pw/2, y:this.H-8, 'text-anchor':'middle',
+      fill:'#8a8a93', 'font-size':11 }, [xLab]));
+    svg.appendChild(this.el('text', { x:14, y:t+ph/2, 'text-anchor':'middle',
       fill:'#8a8a93', 'font-size':11,
-      transform:`rotate(-90 14 ${t+ph/2})`
-    }, [yLab]));
+      transform:`rotate(-90 14 ${t+ph/2})` }, [yLab]));
     svg.appendChild(this.el('line', { x1:l, y1:t, x2:l, y2:t+ph, stroke:'#8a8a93' }));
     svg.appendChild(this.el('line', { x1:l, y1:t+ph, x2:l+pw, y2:t+ph, stroke:'#8a8a93' }));
     return { X, Y, pw, ph, l, t };
   },
 
   fit(container, xs, ys, sigmas, p, model){
-    const svg = this.frame(container);
-    svg.setAttribute('aria-label', 'Ajuste del modelo a los datos');
+    const svg = this.frame(container, 'Ajuste del modelo a los datos');
     const lx = xs.map(Math.log10);
     const xMin = Math.min(...lx)-0.3, xMax = Math.max(...lx)+0.3;
     const ax = this.axes(svg, [xMin, xMax], [-0.02, 1.02], 'log₁₀ x', 'y');
@@ -1191,26 +1201,22 @@ const SVG = {
       const y = model.eval(p, x);
       pts.push(`${ax.X(lgx).toFixed(2)},${ax.Y(y).toFixed(2)}`);
     }
-    svg.appendChild(this.el('polyline', {
-      points:pts.join(' '), fill:'none', stroke:'#f5a623', 'stroke-width':2
-    }));
+    svg.appendChild(this.el('polyline', { points:pts.join(' '), fill:'none',
+      stroke:'#f5a623', 'stroke-width':2 }));
     for(let i=0; i<xs.length; i++){
       const cx = ax.X(Math.log10(xs[i])), cy = ax.Y(ys[i]);
       if(sigmas && sigmas[i] != null && sigmas[i] > 0){
         const dy = sigmas[i] * (this.H - this.PAD.t - this.PAD.b) / 1.04;
-        svg.appendChild(this.el('line', {
-          x1:cx, y1:cy-dy, x2:cx, y2:cy+dy, stroke:'#8a8a93', 'stroke-width':1
-        }));
+        svg.appendChild(this.el('line', { x1:cx, y1:cy-dy, x2:cx, y2:cy+dy,
+          stroke:'#8a8a93', 'stroke-width':1 }));
       }
-      svg.appendChild(this.el('circle', {
-        cx, cy, r:3.5, fill:'#e5e5e7', stroke:'#0a0a0b', 'stroke-width':1
-      }));
+      svg.appendChild(this.el('circle', { cx, cy, r:3.5, fill:'#e5e5e7',
+        stroke:'#0a0a0b', 'stroke-width':1 }));
     }
   },
 
   ellipse(container, datasets, labA, labB){
-    const svg = this.frame(container);
-    svg.setAttribute('aria-label', 'Elipse de confianza bootstrap');
+    const svg = this.frame(container, 'Elipse de confianza bootstrap');
     let allA = [], allB = [];
     for(const d of datasets){ allA = allA.concat(d.cloudA); allB = allB.concat(d.cloudB); }
     if(!allA.length) return;
@@ -1222,10 +1228,8 @@ const SVG = {
     const sy = (ax.Y(minB-padB) - ax.Y(maxB+padB)) / ((maxB+padB)-(minB-padB));
     for(const d of datasets){
       for(let i=0; i<d.cloudA.length; i++){
-        svg.appendChild(this.el('circle', {
-          cx: ax.X(d.cloudA[i]), cy: ax.Y(d.cloudB[i]),
-          r: 1.5, fill: d.color, opacity: 0.3
-        }));
+        svg.appendChild(this.el('circle', { cx: ax.X(d.cloudA[i]), cy: ax.Y(d.cloudB[i]),
+          r: 1.5, fill: d.color, opacity: 0.3 }));
       }
       const mA = Stats.mean(d.cloudA), mB = Stats.mean(d.cloudB);
       const sA = Stats.stdev(d.cloudA), sB = Stats.stdev(d.cloudB);
@@ -1237,31 +1241,24 @@ const SVG = {
       const cx = ax.X(mA), cy = ax.Y(mB);
       const rx = a*sx, ry = b*sy;
       const deg = -angle * 180 / Math.PI;
-      svg.appendChild(this.el('ellipse', {
-        cx, cy, rx, ry,
+      svg.appendChild(this.el('ellipse', { cx, cy, rx, ry,
         transform: `rotate(${deg} ${cx} ${cy})`,
-        fill:'none', stroke:d.color, 'stroke-width':1.5, 'stroke-dasharray':'4 3'
-      }));
-      svg.appendChild(this.el('circle', {
-        cx: ax.X(d.pA), cy: ax.Y(d.pB), r:4,
-        fill:d.color, stroke:'#0a0a0b', 'stroke-width':1.5
-      }));
+        fill:'none', stroke:d.color, 'stroke-width':1.5, 'stroke-dasharray':'4 3' }));
+      svg.appendChild(this.el('circle', { cx: ax.X(d.pA), cy: ax.Y(d.pB), r:4,
+        fill:d.color, stroke:'#0a0a0b', 'stroke-width':1.5 }));
     }
   },
 
   profile(container, prof, label){
-    const svg = this.frame(container);
-    svg.setAttribute('aria-label', `Perfil likelihood de ${label}`);
+    const svg = this.frame(container, `Perfil likelihood de ${label}`);
     const { values, dRSS, threshold, ciLo, ciHi } = prof;
     const minV = Math.min(...values), maxV = Math.max(...values);
     const finite = dRSS.filter(v => isFinite(v));
     const maxD = Math.min(Math.max(...finite, threshold), threshold*4);
     const ax = this.axes(svg, [minV, maxV], [0, maxD], label, 'Δ RSS');
     const yTh = ax.Y(threshold);
-    svg.appendChild(this.el('line', {
-      x1:ax.l, y1:yTh, x2:ax.l+ax.pw, y2:yTh,
-      stroke:'#e5484d', 'stroke-dasharray':'4 3'
-    }));
+    svg.appendChild(this.el('line', { x1:ax.l, y1:yTh, x2:ax.l+ax.pw, y2:yTh,
+      stroke:'#e5484d', 'stroke-dasharray':'4 3' }));
     let current = [], segs = [];
     for(let i=0; i<values.length; i++){
       if(!isFinite(dRSS[i]) || dRSS[i] > maxD*1.5){
@@ -1272,45 +1269,37 @@ const SVG = {
     }
     if(current.length > 1) segs.push(current);
     for(const s of segs){
-      svg.appendChild(this.el('polyline', {
-        points:s.join(' '), fill:'none', stroke:'#f5a623', 'stroke-width':2
-      }));
+      svg.appendChild(this.el('polyline', { points:s.join(' '), fill:'none',
+        stroke:'#f5a623', 'stroke-width':2 }));
     }
     if(ciLo != null && ciHi != null){
-      svg.appendChild(this.el('rect', {
-        x: ax.X(ciLo), y: ax.t,
+      svg.appendChild(this.el('rect', { x: ax.X(ciLo), y: ax.t,
         width: ax.X(ciHi)-ax.X(ciLo), height: ax.ph,
-        fill:'rgba(245,166,35,0.08)'
-      }));
+        fill:'rgba(245,166,35,0.08)' }));
     }
   },
 
   extrapolation(container, augment, replace){
-    const svg = this.frame(container);
-    svg.setAttribute('aria-label', 'Curva de extrapolación');
+    const svg = this.frame(container, 'Curva de extrapolación');
     if(!augment) return;
     const maxD = Math.max(...augment.map(x => x.d));
     const ax = this.axes(svg, [0, maxD], [0, 1.0], 'décadas añadidas', '|r(p1,p2)|');
     const y09 = ax.Y(0.9);
-    svg.appendChild(this.el('line', {
-      x1:ax.l, y1:y09, x2:ax.l+ax.pw, y2:y09,
-      stroke:'#30a46c', 'stroke-dasharray':'4 3'
-    }));
+    svg.appendChild(this.el('line', { x1:ax.l, y1:y09, x2:ax.l+ax.pw, y2:y09,
+      stroke:'#30a46c', 'stroke-dasharray':'4 3' }));
     svg.appendChild(this.el('polyline', {
       points: augment.map(x => `${ax.X(x.d).toFixed(2)},${ax.Y(x.r).toFixed(2)}`).join(' '),
-      fill:'none', stroke:'#f5a623', 'stroke-width':2
-    }));
+      fill:'none', stroke:'#f5a623', 'stroke-width':2 }));
     if(replace){
       svg.appendChild(this.el('polyline', {
         points: replace.map(x => `${ax.X(x.d).toFixed(2)},${ax.Y(x.r).toFixed(2)}`).join(' '),
-        fill:'none', stroke:'#8a8a93', 'stroke-width':1.5, 'stroke-dasharray':'5 3'
-      }));
+        fill:'none', stroke:'#8a8a93', 'stroke-width':1.5, 'stroke-dasharray':'5 3' }));
     }
   },
 };
 
 /* ============================================================
-   §11  ESTADO + PARSERS
+   §8  ESTADO Y PARSERS
    ============================================================ */
 
 const DATASET_COLORS = { A:'#f5a623', B:'#7cb8ff', C:'#a8f5a6', D:'#f5a6d9' };
@@ -1323,11 +1312,12 @@ const State = {
   extrapolation: null,
   manifest: null,
   seed: 42,
+  lastRunId: null,       // Cache: si coincide con el nuevo run_id, no recalculamos
+  abortController: null, // Abort del worker
 };
 
 function active(){ return State.datasets[0] || null; }
 
-/** Encuentra el primer # no precedido por \. */
 function findUnescapedHash(str){
   for(let i=0; i<str.length; i++){
     if(str[i] === '#' && str[i-1] !== '\\') return i;
@@ -1340,8 +1330,6 @@ function parseDataText(text){
   const lines = text.split('\n');
   for(let i=0; i<lines.length; i++){
     const raw = lines[i];
-    // Comentarios inline: "# ..." al final de línea se descarta.
-    // Escapar con "\#" si se necesita un # literal.
     const hashIdx = findUnescapedHash(raw);
     const line = (hashIdx >= 0 ? raw.slice(0, hashIdx) : raw).trim();
     if(!line) continue;
@@ -1379,7 +1367,7 @@ function pointsToText(points){
 }
 
 /* ============================================================
-   §12  PIPELINE
+   §9  PIPELINE
    ============================================================ */
 
 function chooseBootstrapN(N){
@@ -1397,277 +1385,262 @@ async function fitAll(compute){
   if(errors.length) toast(`⚠ ${errors.length} línea(s) ignoradas`);
   if(points.length < 4){ toast('Necesitas al menos 4 puntos'); return; }
 
+  const { xs, ys, sigmas, ws } = pointsToArrays(points);
+  const model = MODELS[State.model];
+  const nB = chooseBootstrapN(xs.length);
+
+  // Cache: si el run_id no ha cambiado, no recalculamos.
+  let runId = null;
+  try {
+    if(crypto.subtle){
+      const datasetHash = await Crypto.hashObject(points);
+      const configHash = await Crypto.hashObject({ nB, mode:'auto', version:'1.0' });
+      runId = await Crypto.hashObject({
+        seed: State.seed, modelId: State.model, datasetHash, configHash,
+      });
+      if(runId === State.lastRunId && State.datasets[0] && State.datasets[0].fit){
+        toast('Mismo run_id: reutilizando resultado');
+        render();
+        renderManifest();
+        return;
+      }
+      State.lastRunId = runId;
+    }
+  } catch(e){ /* sin crypto, sin cache */ }
+
   State.datasets[0] = {
     id:'A', points, fit:null, bootstrap:null, jackknife:null,
     color:DATASET_COLORS.A,
   };
 
-  const { xs, ys, sigmas, ws } = pointsToArrays(points);
+  // Abort controller para esta ejecución.
+  const ac = new AbortController();
+  State.abortController = ac;
+  document.getElementById('abortBtn').disabled = false;
+  document.getElementById('abortBtn').onclick = () => ac.abort();
+
+  const onProgress = (frac, stage) => {
+    const bar = document.getElementById('progressBar');
+    bar.hidden = false;
+    bar.set(frac);
+    const labels = {
+      'profile-1': 'Perfil 1…', 'profile-2': 'Perfil 2…', 'profile-done': '',
+      'extrap-augment': 'Extrapolación augment…', 'extrap-replace': 'Extrapolación replace…',
+      'extrap-done': '',
+    };
+    if(labels[stage] != null) setProgress(labels[stage]);
+  };
 
   setProgress('Ajustando…');
   await microtask();
 
   let fit;
   try {
-    fit = await compute.call('fit', { xs, ys, ws, modelId: State.model });
+    fit = await compute.call('fit', { xs, ys, ws, modelId: State.model },
+      { signal: ac.signal });
   } catch(e){
     setProgress('');
-    toast('Error en ajuste: ' + e.message);
-    console.error(e);
+    if(e.name !== 'AbortError') toast('Error en ajuste: ' + e.message);
+    document.getElementById('abortBtn').disabled = true;
     return;
   }
 
   setProgress('Bootstrap…');
   await microtask();
 
-  const nB = chooseBootstrapN(xs.length);
   let boot;
   try {
     boot = await compute.call('bootstrap', {
       xs, ys, sigmas, ws, params: fit.params, modelId: State.model,
       nSamples: nB, seed: State.seed, mode: 'auto'
-    });
+    }, { signal: ac.signal });
   } catch(e){
     setProgress('');
-    toast('Error en bootstrap: ' + e.message);
-    console.error(e);
+    if(e.name !== 'AbortError') toast('Error en bootstrap: ' + e.message);
+    document.getElementById('abortBtn').disabled = true;
     return;
   }
 
   State.datasets[0].fit = fit;
   State.datasets[0].bootstrap = boot;
 
-  // Jackknife para BCa solo si N es pequeño. Con N grande el coste
-  // (N refits con multi-start) no se justifica frente al percentil.
-  const model = MODELS[State.model];
+  // Jackknife en worker, solo con N ≤ 40.
   if(xs.length <= 40){
-    setProgress('Jackknife para BCa…');
+    setProgress('Jackknife…');
     await microtask();
     try {
-      State.datasets[0].jackknife = Bootstrap.jackknife(xs, ys, ws, fit.params, model);
+      State.datasets[0].jackknife = await compute.call('jackknife', {
+        xs, ys, ws, params: fit.params, modelId: State.model
+      }, { signal: ac.signal });
     } catch(e){
-      console.warn('[jackknife] falló:', e);
+      if(e.name !== 'AbortError') console.warn('[jackknife] falló:', e);
       State.datasets[0].jackknife = null;
     }
   } else {
     State.datasets[0].jackknife = null;
   }
 
-  setProgress('Perfiles…');
-  await microtask();
-
-  const range = Diagnostics.rangeCoverage(xs);
+  // Diagnósticos locales (baratos: solo Jacobiano en el óptimo).
+  const range = rangeCoverage(xs);
   const r = model.primaryParams.length >= 2
     ? Stats.corr(boot.primary[0], boot.primary[1]) : 0;
-  const kappa = Diagnostics.conditionNumber(xs, fit.params, ws, model);
-  State.diagnostics = { range, r, kappa, verdict: Diagnostics.verdict(range, r, kappa) };
+  const kappa = conditionNumber(xs, fit.params, ws, model);
+  State.diagnostics = { range, r, kappa, verdict: verdict(range, r, kappa) };
 
+  // Perfiles en worker (batched: los dos en un mensaje).
+  let profiles = null;
   if(model.primaryParams.length === 2){
+    setProgress('Perfiles…');
+    await microtask();
     const [iA, iB] = model.primaryParams;
     const stdA = Stats.stdev(boot.primary[0]), stdB = Stats.stdev(boot.primary[1]);
     const spanA = clampSpan(stdA*4, 0.5, 20);
     const spanB = clampSpan(stdB*4, 0.3, 5);
-    State.profile.k = profileLikelihood(xs, ys, ws, fit.params, model, iA, spanA, 30);
-    State.profile.a = profileLikelihood(xs, ys, ws, fit.params, model, iB, spanB, 30);
-    State.profile.idxK = iA; State.profile.idxA = iB;
+    try {
+      profiles = await compute.call('profiles', {
+        xs, ys, ws, params: fit.params, modelId: State.model,
+        spanA, spanB, nPts: 30
+      }, { signal: ac.signal, onProgress });
+    } catch(e){
+      if(e.name !== 'AbortError') console.warn('[profiles] falló:', e);
+    }
+  }
+  if(profiles){
+    State.profile = { k: profiles.k, a: profiles.a,
+                      idxK: profiles.idxK, idxA: profiles.idxA };
   } else {
     State.profile = { k:null, a:null, idxK:null, idxA:null };
   }
 
-  // Manifest reproducible: run_id sin timestamp dentro del hash.
+  // Manifest reproducible.
   State.manifest = null;
   try {
-    if(crypto.subtle){
+    if(crypto.subtle && runId){
       const datasetHash = await Crypto.hashObject(points);
       const configHash = await Crypto.hashObject({ nB, mode:'auto', version:'1.0' });
-      const runId = await Crypto.hashObject({
-        seed: State.seed,
-        modelId: State.model,
-        datasetHash,
-        configHash,
-      });
       State.manifest = {
-        runId,
-        timestamp: new Date().toISOString(),
-        seed: State.seed,
-        modelId: State.model,
-        datasetHash,
-        configHash,
+        runId, timestamp: new Date().toISOString(),
+        seed: State.seed, modelId: State.model, datasetHash, configHash,
       };
     }
-  } catch(e){
-    console.warn('[manifest] no disponible:', e);
-  }
+  } catch(e){ console.warn('[manifest]', e); }
 
   State.extrapolation = null;
-  const extrap = document.getElementById('extrapPanel');
-  if(extrap) extrap.hidden = true;
+  document.getElementById('extrapPanel').hidden = true;
 
   setProgress('');
+  const bar = document.getElementById('progressBar');
+  bar.hidden = true;
+  document.getElementById('abortBtn').disabled = true;
+  State.abortController = null;
   render();
   renderManifest();
   document.getElementById('extrapolateBtn').disabled = false;
 }
 
-async function extrapolate(){
+async function extrapolate(compute){
   const d = active();
   if(!d || !d.fit) return;
   const model = MODELS[State.model];
   if(model.primaryParams.length !== 2){ toast('El modelo no tiene 2 params primarios'); return; }
+
+  const ac = new AbortController();
+  State.abortController = ac;
+  document.getElementById('abortBtn').disabled = false;
+  document.getElementById('abortBtn').onclick = () => ac.abort();
+
   setProgress('Calculando extrapolación…');
   await microtask();
 
   const { xs, ys } = pointsToArrays(d.points);
-  const rng = createPrng(State.seed + 101);
-  const augment = extrapolationCurve(xs, ys, d.fit.params, model, rng, 'augment');
-  const replace = extrapolationCurve(xs, ys, d.fit.params, model, rng, 'replace');
+  const bar = document.getElementById('progressBar');
+  bar.hidden = false;
+  bar.set(0);
 
-  State.extrapolation = { augment, replace };
+  const onProgress = (frac) => bar.set(frac);
+
+  let result;
+  try {
+    result = await compute.call('extrapolate', {
+      xs, ys, params: d.fit.params, modelId: State.model,
+      seed: State.seed + 101,
+    }, { signal: ac.signal, onProgress });
+  } catch(e){
+    setProgress('');
+    bar.hidden = true;
+    document.getElementById('abortBtn').disabled = true;
+    if(e.name !== 'AbortError') toast('Error: ' + e.message);
+    return;
+  }
+
+  State.extrapolation = result;
   const extrap = document.getElementById('extrapPanel');
   extrap.hidden = false;
-  SVG.extrapolation(document.getElementById('extrapPlot'), augment, replace);
+  SVG.extrapolation(document.getElementById('extrapPlot'), result.augment, result.replace);
 
-  const firstGood = augment.find(x => x.r < 0.9);
+  const firstGood = result.augment.find(x => x.r < 0.9);
   document.getElementById('extrapNote').innerHTML = firstGood
     ? `Añadir <strong>${firstGood.d.toFixed(2)} décadas</strong> reduce |r| por debajo de 0.9.`
     : `Ni con 3 décadas extra baja de 0.9.`;
 
   setProgress('');
+  bar.hidden = true;
+  document.getElementById('abortBtn').disabled = true;
+  State.abortController = null;
 }
 
-function extrapolationCurve(xs, ys, p, model, rng, mode = 'augment'){
-  if(model.primaryParams.length !== 2) return null;
+/* Diagnósticos que sí quedan en main (son baratos: un solo
+   paso por punto, no requieren LM). */
+function rangeCoverage(xs){
   const lx = xs.map(Math.log10);
-  const xMin = Math.min(...lx), xMax = Math.max(...lx);
-  const deltas = [0, 0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0];
-  const resid = xs.map((x, i) => ys[i] - model.eval(p, x));
-  const N = xs.length, D = p.length;
-  const sigma = Math.sqrt(resid.reduce((s,r)=>s+r*r, 0) / Math.max(1, N-D));
+  const lo = Math.min(...lx), hi = Math.max(...lx);
+  return { decades: hi - lo, lo, hi, center: (hi + lo) / 2 };
+}
 
-  const results = [];
-  for(const d of deltas){
-    let evalXs, evalYs;
-    if(mode === 'augment'){
-      const nExt = d > 0 ? 8 : 0;
-      const extXs = [], extYs = [];
-      for(let i=0; i<nExt; i++){
-        const lgx = (xMin - d) + d * i / (nExt - 1 + 1e-9);
-        const x = Math.pow(10, lgx);
-        extXs.push(x); extYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
-      }
-      for(let i=0; i<nExt; i++){
-        const lgx = xMax + d * i / (nExt - 1 + 1e-9);
-        const x = Math.pow(10, lgx);
-        extXs.push(x); extYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
-      }
-      evalXs = [...xs, ...extXs]; evalYs = [...ys, ...extYs];
-    } else {
-      const n = 20;
-      evalXs = []; evalYs = [];
-      for(let i=0; i<n; i++){
-        const lgx = (xMin - d) + (xMax + d - (xMin - d)) * i / (n-1);
-        const x = Math.pow(10, lgx);
-        evalXs.push(x); evalYs.push(clamp01(model.eval(p, x) + gaussian(rng)*sigma));
-      }
+function conditionNumber(xs, p, ws, model){
+  const N = xs.length, D = p.length;
+  const H = Array.from({length: D}, () => new Array(D).fill(0));
+  for(let i=0; i<N; i++){
+    const J = model.jacobian(p, xs[i]);
+    const w = (ws && ws[i] != null) ? ws[i] : 1;
+    for(let a=0; a<D; a++){
+      for(let b=0; b<D; b++) H[a][b] += w * J[a] * J[b];
     }
-    const fit = Fitter.fit(evalXs, evalYs, null, model);
-    const nShort = Math.max(60, Math.min(120, 2000 / Math.max(10, evalXs.length)));
-    const boot = Bootstrap.run(evalXs, evalYs, null, null, fit.params, model, nShort, rng, 'parametric');
-    const r = Stats.corr(boot.primary[0], boot.primary[1]);
-    results.push({ d, r: Math.abs(r), fit: fit.params, nPoints: evalXs.length });
   }
-  return results;
+  const idxs = model.primaryParams;
+  if(idxs.length === 2){
+    const h00 = H[idxs[0]][idxs[0]];
+    const h11 = H[idxs[1]][idxs[1]];
+    const h01 = H[idxs[0]][idxs[1]];
+    const tr = h00 + h11, det = h00*h11 - h01*h01;
+    const disc = Math.sqrt(Math.max(0, tr*tr - 4*det));
+    const l1 = (tr+disc)/2, l2 = (tr-disc)/2;
+    if(l2 <= 1e-12) return Infinity;
+    return l1/l2;
+  }
+  return NaN;
+}
+
+function verdict(range, r, kappa){
+  const absR = Math.abs(r);
+  if(range.decades < 1.0 || absR > 0.995 || kappa > 1e6){
+    return { level:'danger', label:'Degeneración crítica',
+      msg:'Los parámetros primarios no son separables con estos datos.' };
+  }
+  if(range.decades < 2.0 || absR > 0.98 || kappa > 1e4){
+    return { level:'warn', label:'Degeneración significativa',
+      msg:'Los CI individuales son varias veces más anchos que el CI del compuesto.' };
+  }
+  if(range.decades < 3.0 || absR > 0.9){
+    return { level:'warn', label:'Degeneración moderada',
+      msg:'Los parámetros son separables pero la correlación sigue siendo alta.' };
+  }
+  return { level:'ok', label:'Parámetros separables',
+    msg:'El rango cubre el codo. Los parámetros primarios son identificables.' };
 }
 
 /* ============================================================
-   §13  DIAGNÓSTICOS + PROFILE
-   ============================================================ */
-
-const Diagnostics = {
-  rangeCoverage(xs){
-    const lx = xs.map(Math.log10);
-    const lo = Math.min(...lx), hi = Math.max(...lx);
-    return { decades: hi - lo, lo, hi, center: (hi + lo) / 2 };
-  },
-  conditionNumber(xs, p, ws, model){
-    const N = xs.length, D = p.length;
-    const H = Array.from({length: D}, () => new Array(D).fill(0));
-    for(let i=0; i<N; i++){
-      const J = model.jacobian(p, xs[i]);
-      const w = (ws && ws[i] != null) ? ws[i] : 1;
-      for(let a=0; a<D; a++){
-        for(let b=0; b<D; b++) H[a][b] += w * J[a] * J[b];
-      }
-    }
-    const idxs = model.primaryParams;
-    if(idxs.length === 2){
-      const h00 = H[idxs[0]][idxs[0]];
-      const h11 = H[idxs[1]][idxs[1]];
-      const h01 = H[idxs[0]][idxs[1]];
-      const tr = h00 + h11, det = h00*h11 - h01*h01;
-      const disc = Math.sqrt(Math.max(0, tr*tr - 4*det));
-      const l1 = (tr+disc)/2, l2 = (tr-disc)/2;
-      if(l2 <= 1e-12) return Infinity;
-      return l1/l2;
-    }
-    return NaN;
-  },
-  verdict(range, r, kappa){
-    const absR = Math.abs(r);
-    if(range.decades < 1.0 || absR > 0.995 || kappa > 1e6){
-      return { level:'danger', label:'Degeneración crítica',
-        msg:'Los parámetros primarios no son separables con estos datos.' };
-    }
-    if(range.decades < 2.0 || absR > 0.98 || kappa > 1e4){
-      return { level:'warn', label:'Degeneración significativa',
-        msg:'Los CI individuales son varias veces más anchos que el CI del compuesto.' };
-    }
-    if(range.decades < 3.0 || absR > 0.9){
-      return { level:'warn', label:'Degeneración moderada',
-        msg:'Los parámetros son separables pero la correlación sigue siendo alta.' };
-    }
-    return { level:'ok', label:'Parámetros separables',
-      msg:'El rango cubre el codo. Los parámetros primarios son identificables.' };
-  },
-};
-
-function profileLikelihood(xs, ys, ws, p, model, whichIdx, span, nPts){
-  const rssMin = Fitter.rss(xs, ys, p, ws, model);
-  const N = xs.length, D = p.length;
-  const sigmaSq = rssMin / Math.max(1, N - D);
-  const Fcrit = N - D > 3 ? 3.84 : 4.5;
-  const threshold = sigmaSq * Fcrit;
-  const otherIdxs = [...Array(D).keys()].filter(i => i !== whichIdx);
-  const center = p[whichIdx];
-  const values = [], dRSS = [];
-
-  for(let i=0; i<nPts; i++){
-    const v = center - span + 2 * span * i / (nPts - 1);
-    let valid = true;
-    if(whichIdx === 1 && model.id === 'hill2' && v <= 0.05) valid = false;
-    if(whichIdx === 3 && model.id === 'hill4' && v <= 0.05) valid = false;
-    if(!valid){ values.push(v); dRSS.push(Infinity); continue; }
-    const heldP = [...p]; heldP[whichIdx] = v;
-    const res = Fitter.optimizeHeld(xs, ys, ws, model, heldP, otherIdxs);
-    values.push(v); dRSS.push(res.rss - rssMin);
-  }
-
-  let ciLo = null, ciHi = null;
-  for(let i=1; i<values.length; i++){
-    if(dRSS[i-1] < threshold && dRSS[i] >= threshold){
-      const t = (threshold - dRSS[i-1]) / (dRSS[i] - dRSS[i-1]);
-      ciHi = values[i-1] + t * (values[i] - values[i-1]);
-    }
-    if(dRSS[i-1] >= threshold && dRSS[i] < threshold){
-      const t = (threshold - dRSS[i]) / (dRSS[i-1] - dRSS[i]);
-      ciLo = values[i] + t * (values[i-1] - values[i]);
-    }
-  }
-  return { values, dRSS, threshold, ciLo, ciHi, rssMin };
-}
-
-/* ============================================================
-   §14  RENDER
+   §10  RENDER
    ============================================================ */
 
 const $ = id => document.getElementById(id);
@@ -1696,10 +1669,8 @@ function render(){
   if(d.bootstrap && model.primaryParams.length === 2){
     const [iA, iB] = model.primaryParams;
     SVG.ellipse($('ellipsePlot'), [{
-      cloudA: d.bootstrap.primary[0],
-      cloudB: d.bootstrap.primary[1],
-      pA: p[iA], pB: p[iB],
-      color: DATASET_COLORS.A,
+      cloudA: d.bootstrap.primary[0], cloudB: d.bootstrap.primary[1],
+      pA: p[iA], pB: p[iB], color: DATASET_COLORS.A,
     }], model.paramNames[iA], model.paramNames[iB]);
   }
 
@@ -1715,17 +1686,13 @@ function renderParamTable(){
   const d = active();
   const model = MODELS[State.model];
   const p = d.fit.params, boot = d.bootstrap;
-  let rows = '';
-  let ciMethod = '—';
-
+  let rows = '', ciMethod = '—';
   if(boot && model.primaryParams.length === 2){
     const [iA, iB] = model.primaryParams;
-
-    // BCa si hay jackknife (N ≤ 40). Percentil si no.
     let ciA, ciB;
     if(d.jackknife){
-      ciA = Bootstrap.bcaCI(boot.primary[0], p[iA], d.jackknife[0], 0.05);
-      ciB = Bootstrap.bcaCI(boot.primary[1], p[iB], d.jackknife[1], 0.05);
+      ciA = bcaCI(boot.primary[0], p[iA], d.jackknife[0], 0.05);
+      ciB = bcaCI(boot.primary[1], p[iB], d.jackknife[1], 0.05);
       ciMethod = 'BCa';
     } else {
       const sortedA = [...boot.primary[0]].sort((a,b)=>a-b);
@@ -1734,7 +1701,6 @@ function renderParamTable(){
       ciB = [Stats.percentile(sortedB, 0.025), Stats.percentile(sortedB, 0.975)];
       ciMethod = 'percentil';
     }
-
     rows += `<tr><td>${model.paramNames[iA]}</td><td class="num">${fmt(p[iA])}</td><td class="num">[${fmt(ciA[0])}, ${fmt(ciA[1])}]</td></tr>`;
     rows += `<tr><td>${model.paramNames[iB]}</td><td class="num">${fmt(p[iB])}</td><td class="num">[${fmt(ciB[0])}, ${fmt(ciB[1])}]</td></tr>`;
   } else {
@@ -1742,11 +1708,9 @@ function renderParamTable(){
       rows += `<tr><td>${model.paramNames[i]}</td><td class="num">${fmt(p[i])}</td><td class="num">—</td></tr>`;
     }
   }
-
   rows += `<tr><td>RSS</td><td class="num">${d.fit.rss.toExponential(3)}</td><td class="num">—</td></tr>`;
   rows += `<tr><td>bootstrap</td><td class="num" style="font-size:10px">${boot.mode}</td><td class="num">—</td></tr>`;
   rows += `<tr><td>CI método</td><td class="num" style="font-size:10px">${ciMethod}</td><td class="num">—</td></tr>`;
-
   $('paramTable').innerHTML = `
     <table>
       <tr><th>Parámetro</th><th class="num">Est.</th><th class="num">CI 95%</th></tr>
@@ -1811,11 +1775,11 @@ function downloadFile(name, content, type = 'application/octet-stream'){
 }
 
 /* ============================================================
-   §15  TESTS
+   §11  TESTS
    ============================================================
-   Cobertura: álgebra lineal, modelos, fitter, bootstrap (paramétrico
-   y residual), perfil, extrapolación, BCa. Los mensajes del banner
-   reflejan esta cobertura.
+   Cubren: álgebra, modelos, fitter, bootstrap (paramétrico y
+   residual), perfil, extrapolación, BCa, parser y accesibilidad
+   E2E del DOM renderizado.
    ============================================================ */
 
 function runTests(){
@@ -1825,13 +1789,12 @@ function runTests(){
     console.log(`[test] ${pass?'✓':'✗'} ${name}`, detail || '');
   };
 
-  // 1. solveLinear
+  // --- Núcleo ---
   try {
     const x = solveLinear([[2,1],[1,3]], [5,10]);
     log('solveLinear 2×2', x && Math.abs(x[0]-1)<1e-9 && Math.abs(x[1]-3)<1e-9, x);
   } catch(e){ log('solveLinear 2×2', false, e.message); }
 
-  // 2. solveQR
   try {
     const A = [[1,2],[3,4],[5,6]];
     const b = [1,2,3];
@@ -1841,13 +1804,11 @@ function runTests(){
     log('solveQR 3×2', x && norm < 1, norm);
   } catch(e){ log('solveQR 3×2', false, e.message); }
 
-  // 3. Hill2 en x=K da 0.5
   try {
     const y = MODELS.hill2.eval([Math.log(2), 1.5], 2);
     log('hill2(x=K)=0.5', Math.abs(y - 0.5) < 1e-9, y);
   } catch(e){ log('hill2(x=K)=0.5', false, e.message); }
 
-  // 4. Fitter recupera parámetros conocidos
   try {
     const xs = [0.01, 0.05, 0.1, 0.3, 1, 3, 10, 30, 100, 300, 1000];
     const ys = xs.map(x => MODELS.hill2.eval([Math.log(1), 2], x));
@@ -1858,30 +1819,23 @@ function runTests(){
       { Kest, alpha: fit.params[1] });
   } catch(e){ log('fitter recupera K=1, α=2', false, e.message); }
 
-  // 5. Pesos null-safety
   try {
-    const xs = [0.1, 1, 10];
-    const ys = [0.1, 0.5, 0.9];
-    const ws = [null, 2, null];
+    const xs = [0.1, 1, 10]; const ys = [0.1, 0.5, 0.9]; const ws = [null, 2, null];
     const rss = Fitter.rss(xs, ys, [Math.log(5), 1], ws, MODELS.hill2);
     log('rss acepta ws con null', isFinite(rss) && rss >= 0, rss);
   } catch(e){ log('rss acepta ws con null', false, e.message); }
 
-  // 6. Bootstrap paramétrico
   try {
     const rng = createPrng(123);
     const xs = [0.1, 0.3, 1, 3, 10, 30, 100];
     const ys = xs.map(x => clamp01(MODELS.hill2.eval([Math.log(1), 2], x) + gaussian(rng)*0.02));
     const fit = Fitter.fit(xs, ys, null, MODELS.hill2);
     const boot = Bootstrap.run(xs, ys, null, null, fit.params, MODELS.hill2, 30, createPrng(456), 'parametric');
-    const ok = boot.all.length === 30
-      && boot.primary.length === 2
-      && boot.primary[0].length === 30
-      && boot.mode === 'parametric';
+    const ok = boot.all.length === 30 && boot.primary.length === 2
+      && boot.primary[0].length === 30 && boot.mode === 'parametric';
     log('bootstrap paramétrico', ok, { n: boot.all.length, mode: boot.mode });
   } catch(e){ log('bootstrap paramétrico', false, e.message); }
 
-  // 7. Bootstrap residual con réplicas
   try {
     const rng = createPrng(789);
     const xs = [0.5, 0.5, 1, 1, 3, 3, 10, 10];
@@ -1891,18 +1845,16 @@ function runTests(){
     log('bootstrap residual (réplicas)', boot.mode === 'residual', boot.mode);
   } catch(e){ log('bootstrap residual (réplicas)', false, e.message); }
 
-  // 8. Profile likelihood produce CI
   try {
     const rng = createPrng(999);
     const xs = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30, 100, 300];
     const ys = xs.map(x => clamp01(MODELS.hill2.eval([Math.log(1), 2], x) + gaussian(rng)*0.02));
     const fit = Fitter.fit(xs, ys, null, MODELS.hill2);
     const prof = profileLikelihood(xs, ys, null, fit.params, MODELS.hill2, 0, 3, 20);
-    const ok = prof.ciLo != null && prof.ciHi != null && prof.ciHi > prof.ciLo;
-    log('profile likelihood produce CI', ok, { lo: prof.ciLo, hi: prof.ciHi });
-  } catch(e){ log('profile likelihood produce CI', false, e.message); }
+    log('profile produce CI', prof.ciLo != null && prof.ciHi != null && prof.ciHi > prof.ciLo,
+      { lo: prof.ciLo, hi: prof.ciHi });
+  } catch(e){ log('profile produce CI', false, e.message); }
 
-  // 9. Extrapolación produce curva descendente
   try {
     const rng = createPrng(111);
     const xs = [0.1, 0.3, 1, 3, 10, 30, 100];
@@ -1914,24 +1866,72 @@ function runTests(){
       curve ? { first: curve[0].r, last: curve[curve.length-1].r } : null);
   } catch(e){ log('extrapolación produce curva', false, e.message); }
 
-  // 10. BCa CI ordenado
   try {
     const rng = createPrng(333);
     const cloud = Array.from({length: 100}, () => 0.5 + gaussian(rng)*0.1);
     const jack = Array.from({length: 20}, () => 0.5 + gaussian(rng)*0.1);
-    const ci = Bootstrap.bcaCI(cloud, 0.5, jack, 0.05);
-    const ok = ci[0] < ci[1] && isFinite(ci[0]) && isFinite(ci[1]);
-    log('BCa CI ordenado', ok, ci);
+    const ci = bcaCI(cloud, 0.5, jack, 0.05);
+    log('BCa CI ordenado', ci[0] < ci[1] && isFinite(ci[0]) && isFinite(ci[1]), ci);
   } catch(e){ log('BCa CI ordenado', false, e.message); }
 
-  // 11. Parser con comentarios inline
   try {
     const { points, errors } = parseDataText(
       '0.1, 0.02  # primer punto\n1.0, 0.31 # segundo\n# línea entera\n3.0, 0.72\n10, 0.94'
     );
-    const ok = points.length === 4 && errors.length === 0;
-    log('parser con comentarios inline', ok, { n: points.length, errors: errors.length });
+    log('parser con comentarios inline', points.length === 4 && errors.length === 0,
+      { n: points.length, errors: errors.length });
   } catch(e){ log('parser con comentarios inline', false, e.message); }
+
+  // --- Tests E2E de accesibilidad ---
+
+  // A1: todos los <button> del documento tienen nombre accesible.
+  try {
+    const buttons = Array.from(document.querySelectorAll('button'));
+    const sinNombre = buttons.filter(b => {
+      const text = (b.textContent || '').trim();
+      const aria = b.getAttribute('aria-label');
+      const title = b.getAttribute('title');
+      return !text && !aria && !title;
+    });
+    log('todos los botones tienen nombre accesible', sinNombre.length === 0,
+      { total: buttons.length, sinNombre: sinNombre.length });
+  } catch(e){ log('todos los botones tienen nombre accesible', false, e.message); }
+
+  // A2: todos los <input>/<select>/<textarea> tienen label o aria-label.
+  try {
+    const fields = Array.from(document.querySelectorAll('input, select, textarea'))
+      .filter(el => el.type !== 'hidden' && el.type !== 'checkbox');
+    const sinLabel = fields.filter(el => {
+      if (el.getAttribute('aria-label')) return false;
+      if (el.getAttribute('aria-labelledby')) return false;
+      if (el.id && document.querySelector(`label[for="${el.id}"]`)) return false;
+      // Si está dentro de un <label>, es válido.
+      let p = el.parentElement;
+      while (p) { if (p.tagName === 'LABEL') return false; p = p.parentElement; }
+      return true;
+    });
+    log('todos los campos tienen label', sinLabel.length === 0,
+      { total: fields.length, sinLabel: sinLabel.length });
+  } catch(e){ log('todos los campos tienen label', false, e.message); }
+
+  // A3: SVGs renderizados tienen aria-label.
+  try {
+    const svgs = Array.from(document.querySelectorAll('svg'));
+    const sinAria = svgs.filter(s => !s.getAttribute('aria-label'));
+    log('todos los SVG tienen aria-label', sinAria.length === 0,
+      { total: svgs.length, sinAria: sinAria.length });
+  } catch(e){ log('todos los SVG tienen aria-label', false, e.message); }
+
+  // A4: contenedores con estado dinámico tienen aria-live.
+  try {
+    const liveIds = ['diagnostics', 'verdict', 'progressNote', 'testBanner', 'toast'];
+    const faltantes = liveIds.filter(id => {
+      const el = document.getElementById(id);
+      if (!el) return true;
+      return !el.hasAttribute('aria-live') && !el.hasAttribute('role');
+    });
+    log('zonas dinámicas con aria-live/role', faltantes.length === 0, faltantes);
+  } catch(e){ log('zonas dinámicas con aria-live/role', false, e.message); }
 
   return results;
 }
@@ -1941,14 +1941,14 @@ function showTests(results){
   const failed = results.filter(r => !r.pass);
   if(failed.length === 0){
     banner.innerHTML = `<div class="verdict ok"><strong>✓ ${results.length} tests pasados</strong>
-      Cubren álgebra lineal, modelos, fitter, bootstrap (paramétrico y residual), perfil, extrapolación, BCa, parser.</div>`;
+      Cubren álgebra, modelos, fitter, bootstrap, perfil, extrapolación, BCa, parser y accesibilidad E2E.</div>`;
   } else {
     banner.innerHTML = `<div class="verdict danger"><strong>✗ ${failed.length} de ${results.length} fallidos</strong>Revisa la consola.</div>`;
   }
 }
 
 /* ============================================================
-   §16  PRESETS
+   §12  PRESETS
    ============================================================ */
 
 function genPoints(K, alpha, xMin, xMax, n, noise, seed = 1){
@@ -1988,20 +1988,12 @@ const PRESETS = {
 };
 
 /* ============================================================
-   §17  INIT
+   §13  INIT
    ============================================================ */
 
 async function init(){
   const compute = new ComputeClient();
-  // Guardar referencia para limpieza en beforeunload.
   window.__cascabelCompute = compute;
-
-  try {
-    await compute.registerModels();
-  } catch(e){
-    console.error('Worker init falló:', e);
-    toast('El worker no arrancó. Revisa la consola.', 5000);
-  }
 
   const sel = $('modelSelect');
   for(const id in MODELS){
@@ -2014,6 +2006,8 @@ async function init(){
   sel.addEventListener('change', async () => {
     State.model = sel.value;
     $('modelNote').textContent = MODELS[State.model].note;
+    // Cambio de modelo invalida cache (distinto run_id).
+    State.lastRunId = null;
     if($('dataInput').value.trim()) await fitAll(compute);
   });
 
@@ -2027,6 +2021,7 @@ async function init(){
       State.model = p.model;
       sel.value = p.model;
       $('modelNote').textContent = MODELS[p.model].note;
+      State.lastRunId = null;
       const pts = p.gen();
       $('dataInput').value = pointsToText(pts);
       await fitAll(compute);
@@ -2035,14 +2030,13 @@ async function init(){
   }
 
   $('fitBtn').onclick = () => fitAll(compute);
-  $('extrapolateBtn').onclick = () => extrapolate();
+  $('extrapolateBtn').onclick = () => extrapolate(compute);
   $('runTestsBtn').onclick = () => showTests(runTests());
 
   $('saveBtn').onclick = async () => {
     try {
       await Storage.save('current', {
-        model: State.model,
-        seed: State.seed,
+        model: State.model, seed: State.seed,
         points: active() ? active().points : [],
         timestamp: Date.now(),
       });
@@ -2055,8 +2049,8 @@ async function init(){
     try {
       const s = await Storage.load('current');
       if(!s){ toast('Nada guardado'); return; }
-      State.model = s.model;
-      State.seed = s.seed;
+      State.model = s.model; State.seed = s.seed;
+      State.lastRunId = null;
       sel.value = s.model;
       $('modelNote').textContent = MODELS[s.model].note;
       $('seedInput').value = s.seed;
@@ -2075,14 +2069,10 @@ async function init(){
   };
 
   $('exportJsonBtn').onclick = () => {
-    const d = active();
-    if(!d) return;
+    const d = active(); if(!d) return;
     const payload = {
-      version: '1.0',
-      manifest: State.manifest,
-      model: State.model,
-      seed: State.seed,
-      points: d.points,
+      version: '1.0', manifest: State.manifest, model: State.model,
+      seed: State.seed, points: d.points,
       fit: d.fit ? { params: d.fit.params, rss: d.fit.rss, converged: d.fit.converged } : null,
       diagnostics: State.diagnostics,
     };
@@ -2092,8 +2082,7 @@ async function init(){
   $('exportBootstrapBtn').onclick = () => {
     const d = active();
     if(!d || !d.bootstrap){ toast('Sin bootstrap'); return; }
-    const model = MODELS[State.model];
-    const header = model.paramNames.join(',');
+    const header = MODELS[State.model].paramNames.join(',');
     const rows = d.bootstrap.all.map(s => s.map(v => v.toFixed(8)).join(','));
     downloadFile('bootstrap.csv', [header, ...rows].join('\n'), 'text/csv');
   };
@@ -2102,10 +2091,12 @@ async function init(){
   $('reseedBtn').onclick = () => {
     State.seed = Math.floor(Math.random() * 1e9);
     $('seedInput').value = State.seed;
+    State.lastRunId = null;
     toast(`Nueva semilla: ${State.seed}`);
   };
   $('seedInput').addEventListener('change', () => {
     State.seed = parseInt($('seedInput').value, 10) || 0;
+    State.lastRunId = null;
   });
 
   const pts = PRESETS.degenerate.gen();
@@ -2119,8 +2110,6 @@ async function init(){
   }
 }
 
-// Cleanup del worker al cerrar. Sin esto, el Blob URL y el worker
-// quedan vivos hasta que el documento se descarga.
 window.addEventListener('beforeunload', () => {
   if(window.__cascabelCompute){
     window.__cascabelCompute.terminate();
