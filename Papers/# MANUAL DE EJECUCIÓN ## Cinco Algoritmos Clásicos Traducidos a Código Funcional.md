@@ -1,7 +1,3 @@
-Tienes razón. Omití los 10 capítulos completos. Aquí va el manual íntegro, sin omisiones.
-
----
-
 # MANUAL DE EJECUCIÓN
 ## Diez Algoritmos Clásicos Traducidos a Código Funcional
 
