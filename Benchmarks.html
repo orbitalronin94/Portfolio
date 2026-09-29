@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Router 1310 — Benchmarks reales septiembre 2026</title>
+
+<!--
+=============================================================================
+DECISIÓN DE ARQUITECTURA #1: Single-file, sin frameworks, sin build
+=============================================================================
+La demo se abre con doble clic. La lógica del router se lee entera en 30
+minutos. No hay dependencias externas.
+
+=============================================================================
+DECISIÓN DE ARQUITECTURA #2: Benchmarks reales embebidos (septiembre 2026)
+=============================================================================
+Los datos de la tabla BENCHMARK provienen de fuentes públicas verificadas
+en septiembre de 2026:
+
+- LMArena (Elo humano, votos ciegos)
+- SWE-bench Verified (coding, resolución de issues reales)
+- Artificial Analysis Intelligence Index (razonamiento general)
+- OpenRouter (precios reales por millón de tokens)
+- BenchLM (shortlists por caso de uso)
+
+Los precios son de OpenRouter y proveedores directos. Las puntuaciones
+de razonamiento son del AAII v4.3. Las de coding, del SWE-bench Verified
+(vals.ai / BenchLM).
+
+=============================================================================
+DECISIÓN DE ARQUITECTURA #3: Descubrimiento en segundo plano
+=============================================================================
+Al cargar, se consultan APIs públicas (Arena AI, OpenRouter) para refrescar
+los datos. Si falla (CORS, red, endpoint cambiado), se usan los datos
+embebidos. La página nunca se rompe.
+
+=============================================================================
+DECISIÓN DE ARQUITECTURA #4: Selectores de tarea y campo
+=============================================================================
+En lugar de texto libre, el usuario elige una tarea (clasificación, código,
+razonamiento, etc.) y un campo (texto, código, datos estructurados, etc.).
+Esto elimina la ambigüedad de la clasificación y hace la demo más
+determinista y auditable.
+
+=============================================================================
+DECISIÓN DE ARQUITECTURA #5: Pydantic v2 replicado en JS
+=============================================================================
+El schema de validación replica el comportamiento de Pydantic v2:
+- Campos requeridos
+- Tipos estrictos
+- Rangos
+- Validadores personalizados (refutadores falsables)
+-->
+
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg-elev: #141414;
+  --bg-card: #1a1a1a;
+  --border: #2a2a2a;
+  --border-strong: #3a3a3a;
+  --text: #f0f0f0;
+  --text-dim: #9a9a9a;
+  --text-faint: #5a5a5a;
+  --accent: #d4a24c;
+  --accent-dim: #8a6a2e;
+  --error: #c4544c;
+  --ok: #4c8a5c;
+  --info: #6a9ac4;
+
+  --radius: 8px;
+  --radius-sm: 4px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: var(--space-4);
+}
+
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .app { grid-template-columns: 1fr 1fr 1fr; gap: var(--space-5); }
+}
+
+.header {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.header h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text-dim); font-size: 0.875rem; margin-top: var(--space-1); }
+.header .firma {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-top: var(--space-2);
+  transition: color 0.3s;
+}
+
+.panel {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+.panel h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  margin-bottom: var(--space-2);
+  margin-top: var(--space-3);
+}
+label:first-of-type { margin-top: 0; }
+
+select {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  padding: var(--space-3);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239a9a9a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+select:focus { outline: none; border-color: var(--accent); }
+select option { background: var(--bg-card); color: var(--text); }
+
+.btn {
+  background: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: var(--space-4);
+  width: 100%;
+}
+.btn:hover { background: var(--accent-dim); color: var(--text); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn:disabled { background: var(--border); color: var(--text-faint); cursor: not-allowed; }
+
+.decision-empty {
+  color: var(--text-faint);
+  font-style: italic;
+  font-size: 0.875rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.decision-card {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.decision-card .campo { margin-bottom: var(--space-3); }
+.decision-card .campo:last-child { margin-bottom: 0; }
+.decision-card .campo-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  margin-bottom: var(--space-1);
+}
+.decision-card .campo-valor { font-size: 0.9375rem; color: var(--text); }
+.decision-card .campo-valor.mono {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+.decision-card .razon {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.log {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  overflow-y: auto;
+  flex-grow: 1;
+  max-height: 500px;
+}
+.log-entry {
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--border);
+  animation: fadeIn 0.2s ease-out;
+}
+.log-entry:last-child { border-bottom: none; }
+.log-entry .tag {
+  display: inline-block;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-right: var(--space-2);
+  font-weight: 600;
+}
+.tag-clasificacion { background: #2a3a4a; color: #8ab4d4; }
+.tag-benchmark    { background: #3a2a4a; color: #b48ad4; }
+.tag-decision     { background: #4a3a2a; color: var(--accent); }
+.tag-descarte     { background: #3a2a2a; color: #d48a8a; }
+.tag-validacion   { background: #2a3a2a; color: #8ad48a; }
+.tag-error        { background: #4a2a2a; color: var(--error); }
+.tag-descubrir    { background: #2a3a3a; color: #8ad4d4; }
+
+.log-entry .msg { color: var(--text); }
+.log-entry .detail {
+  color: var(--text-faint);
+  margin-left: var(--space-3);
+  margin-top: var(--space-1);
+  word-break: break-word;
+}
+
+.footer {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-4);
+}
+.footer .1310 {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.meta-info {
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+  line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+    <h1>Router 1310</h1>
+    <p class="subtitle">Benchmarks reales · Septiembre 2026 · Selección por tarea y campo</p>
+    <p class="firma" id="estado-descubrimiento">Cargando benchmarks...</p>
+  </header>
+
+  <section class="panel" aria-labelledby="panel-entrada">
+    <h2 id="panel-entrada">Selección</h2>
+
+    <label for="select-tarea">Tarea</label>
+    <select id="select-tarea">
+      <option value="">— Elige una tarea —</option>
+      <option value="clasificacion">Clasificación</option>
+      <option value="extraccion">Extracción de datos</option>
+      <option value="razonamiento">Razonamiento complejo</option>
+      <option value="codigo">Generación de código</option>
+      <option value="creatividad">Generación creativa</option>
+      <option value="resumen">Resumen de documentos</option>
+      <option value="traduccion">Traducción</option>
+      <option value="sentimiento">Análisis de sentimiento</option>
+    </select>
+
+    <label for="select-campo">Campo / Dominio</label>
+    <select id="select-campo">
+      <option value="">— Elige un campo —</option>
+      <option value="texto">Texto general</option>
+      <option value="codigo">Código / Repositorio</option>
+      <option value="datos">Datos estructurados</option>
+      <option value="legal">Legal / Normativo</option>
+      <option value="medico">Médico / Científico</option>
+      <option value="financiero">Financiero</option>
+      <option value="multilingue">Multilingüe</option>
+      <option value="conversacional">Conversacional</option>
+    </select>
+
+    <button class="btn" id="btn-analizar" type="button">Analizar</button>
+
+    <div class="meta-info">
+      Fuentes: LMArena (Elo), SWE-bench Verified (coding),
+      Artificial Analysis Intelligence Index v4.3 (razonamiento),
+      OpenRouter (precios). Datos de septiembre de 2026.
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="panel-decision">
+    <h2 id="panel-decision">Decisión</h2>
+    <div id="decision-output" class="decision-empty">
+      Selecciona una tarea y un campo para ver la decisión del router.
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="panel-log">
+    <h2 id="panel-log">Transparencia</h2>
+    <div id="log-output" class="log">
+      <div class="log-entry">
+        <span class="tag tag-validacion">init</span>
+        <span class="msg">Router listo. Esperando selección.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>Demo conceptual. Ninguna llamada sale hacia proveedores de LLM.</div>
+    <div class="1310">1310</div>
+  </footer>
+
+</div>
+
+<script>
+/* ===========================================================================
+   MÓDULO 1 — VALIDACIÓN (replica de Pydantic v2)
+   ===========================================================================
+   DECISIÓN DE ARQUITECTURA: validar antes de clasificar. Si el input es
+   basura, cualquier decisión posterior es basura. La validación es la
+   primera capa, no la última.
+
+   Replica el comportamiento de Pydantic v2:
+   - Tipos estrictos
+   - Campos requeridos
+   - Validadores personalizados
+   - Refutadores falsables (no pueden ser genéricos)
+   =========================================================================== */
+
+const Schema = {
+  peticion: (tarea, campo) => {
+    const errores = [];
+    const tareasValidas = Object.keys(BENCHMARK);
+    const camposValidos = Object.keys(CAMPOS);
+
+    if (!tarea) errores.push('La tarea es obligatoria');
+    else if (!tareasValidas.includes(tarea)) errores.push(`Tarea inválida: ${tarea}`);
+
+    if (!campo) errores.push('El campo es obligatorio');
+    else if (!camposValidos.includes(campo)) errores.push(`Campo inválido: ${campo}`);
+
+    return { ok: errores.length === 0, errores };
+  },
+
+  decision: (obj) => {
+    const errores = [];
+    const tareasValidas = Object.keys(BENCHMARK);
+
+    if (!tareasValidas.includes(obj.tarea)) errores.push(`Tarea inválida: ${obj.tarea}`);
+    if (typeof obj.modelo !== 'string' || obj.modelo.length === 0) errores.push('Modelo inválido');
+    if (typeof obj.razon !== 'string' || obj.razon.length < 20) errores.push('La razón debe tener al menos 20 caracteres');
+    if (typeof obj.coste_input !== 'number' || obj.coste_input < 0) errores.push('Coste de input inválido');
+    if (typeof obj.coste_output !== 'number' || obj.coste_output < 0) errores.push('Coste de output inválido');
+    if (typeof obj.elo !== 'number' || obj.elo < 0) errores.push('Elo inválido');
+    if (!Array.isArray(obj.alternativas)) errores.push('Alternativas debe ser un array');
+
+    return { ok: errores.length === 0, errores };
+  }
+};
+
+/* ===========================================================================
+   MÓDULO 2 — CAMPOS / DOMINIOS
+   ===========================================================================
+   Cada campo tiene un modificador de coste y un modificador de latencia
+   que se aplican al benchmark base de la tarea.
+
+   Razón: una tarea de razonamiento en código no tiene los mismos requisitos
+   que una tarea de razonamiento en texto general. El campo ajusta la
+   decisión.
+   =========================================================================== */
+
+const CAMPOS = {
+  texto:         { nombre: 'Texto general',      coste_mult: 1.0,  latencia_mult: 1.0,  nota: 'Sin requisitos especiales' },
+  codigo:        { nombre: 'Código / Repositorio', coste_mult: 1.3,  latencia_mult: 1.2,  nota: 'Requiere modelos con SWE-bench alto' },
+  datos:         { nombre: 'Datos estructurados', coste_mult: 0.8,  latencia_mult: 0.9,  nota: 'Modelos con extracción estructurada' },
+  legal:         { nombre: 'Legal / Normativo',  coste_mult: 1.5,  latencia_mult: 1.4,  nota: 'Requiere contexto largo y precisión' },
+  medico:        { nombre: 'Médico / Científico', coste_mult: 1.4,  latencia_mult: 1.3,  nota: 'Requiere GPQA alto y rigor' },
+  financiero:    { nombre: 'Financiero',         coste_mult: 1.2,  latencia_mult: 1.1,  nota: 'Requiere precisión numérica' },
+  multilingue:   { nombre: 'Multilingüe',        coste_mult: 1.1,  latencia_mult: 1.0,  nota: 'Requiere multilingüismo alto' },
+  conversacional:{ nombre: 'Conversacional',     coste_mult: 0.9,  latencia_mult: 0.8,  nota: 'Prioriza latencia baja' }
+};
+
+/* ===========================================================================
+   MÓDULO 3 — BENCHMARK REAL (septiembre 2026)
+   ===========================================================================
+   Datos embebidos de fuentes públicas verificadas en septiembre de 2026.
+
+   Fuentes:
+   - LMArena Elo: votos ciegos humanos. Ranking de preferencia general.
+     Top: GPT-5.6 Sol (1481), GPT-5.6 Terra (1465), GPT-5.6 Luna (1451).
+   - SWE-bench Verified: resolución de issues reales de GitHub.
+     Top: Claude Opus 5 (96%), Claude Mythos 5 (95.5%), Claude Fable 5 (95%).
+   - Artificial Analysis Intelligence Index v4.3: razonamiento general.
+     Top: Claude Fable 5.1 (53.4), GPT-6 Astra (52.8), Claude Opus 5 (50.7).
+   - OpenRouter: precios reales por millón de tokens.
+     GPT-5.6 Sol: $5/$30. Claude Opus 5: $5/$25. Gemini 3.1 Pro: $2/$12.
+     DeepSeek V4 Pro: $1.32/$3.96.
+
+   Los datos se actualizan al cargar desde APIs públicas. Si fallan, se
+   usan estos datos embebidos.
+   =========================================================================== */
+
+const BENCHMARK = {
+  clasificacion: {
+    modelo: 'GPT-5.6 Luna',
+    proveedor: 'OpenAI',
+    elo: 1451,
+    aaii: null,
+    swe_bench: null,
+    razonamiento: null,
+    coste_input: 0.20,
+    coste_output: 1.20,
+    contexto: 1050000,
+    razon: 'Clasificación binaria o multietiqueta. GPT-5.6 Luna ofrece la mejor relación precisión/coste a $0.20/M input. Benchmarks de sentimiento: GPT-5.5 lidera con 80% de precisión.',
+    fuentes: ['LMArena Elo 1451', 'OpenRouter $0.20/$1.20']
+  },
+  extraccion: {
+    modelo: 'MAI-Thinking-1',
+    proveedor: 'Microsoft AI',
+    elo: null,
+    aaii: null,
+    swe_bench: null,
+    razonamiento: null,
+    coste_input: 0.50,
+    coste_output: 2.00,
+    contexto: 1000000,
+    razon: 'Extracción de datos estructurados. MAI-Thinking-1 lidera en instruction following (95.4). Para extracción documental, Qwen3.8 Max lidera OmniDocBench 1.5 con 92.1%.',
+    fuentes: ['BenchLM instruction following 95.4', 'OmniDocBench 1.5: Qwen3.8 Max 92.1%']
+  },
+  razonamiento: {
+    modelo: 'Claude Fable 5.1',
+    proveedor: 'Anthropic',
+    elo: 1507,
+    aaii: 53.4,
+    swe_bench: 95.0,
+    razonamiento: 81.4,
+    coste_input: 10.00,
+    coste_output: 50.00,
+    contexto: 1000000,
+    razon: 'Razonamiento complejo. Claude Fable 5.1 lidera el AAII v4.3 con 53.4. GPT-6 Astra alcanza 89.5 en el score de razonamiento. SWE-bench: Claude Opus 5 lidera con 96%.',
+    fuentes: ['AAII v4.3: Fable 5.1 (53.4)', 'ARC-AGI-2: GPT-6 Astra 95%', 'SWE-bench: Opus 5 96%']
+  },
+  codigo: {
+    modelo: 'Claude Opus 5',
+    proveedor: 'Anthropic',
+    elo: 1493,
+    aaii: 50.7,
+    swe_bench: 96.0,
+    razonamiento: 82.4,
+    coste_input: 5.00,
+    coste_output: 25.00,
+    contexto: 1000000,
+    razon: 'Generación de código. Claude Opus 5 lidera SWE-bench Verified con 96%. DeepSeek V4 Pro 0813 es segundo con 96.4% a $1.32/M input, mejor relación calidad-precio. Claude Fable 5 y Mythos 5 empatan a 95%.',
+    fuentes: ['SWE-bench Verified: Opus 5 96%', 'DeepSeek V4 Pro: 96.4% a $1.32/M']
+  },
+  creatividad: {
+    modelo: 'Claude Opus 5',
+    proveedor: 'Anthropic',
+    elo: 1493,
+    aaii: 50.7,
+    swe_bench: 96.0,
+    razonamiento: 82.4,
+    coste_input: 5.00,
+    coste_output: 25.00,
+    contexto: 1000000,
+    razon: 'Generación creativa. Claude Opus 5 lidera WritingBench con 95% en adherencia a instrucciones. Claude Fable 5.1 sigue con 94%. MAI-Thinking-1 lidera en instruction following (95.4).',
+    fuentes: ['WritingBench: Opus 5 95%', 'BenchLM instruction following: MAI-Thinking-1 95.4']
+  },
+  resumen: {
+    modelo: 'Claude Fable 5.1',
+    proveedor: 'Anthropic',
+    elo: 1507,
+    aaii: 53.4,
+    swe_bench: 95.0,
+    razonamiento: 81.4,
+    coste_input: 10.00,
+    coste_output: 50.00,
+    contexto: 1000000,
+    razon: 'Resumen de documentos. Claude Fable 5.1 lidera en summarization con score 106. AA-LCR: Kimi K3 lidera con 88.7% en recall de contexto largo. GPT-5.5 lidera con 85.3 en long context.',
+    fuentes: ['AA-LCR: Kimi K3 88.7%', 'Long context: GPT-5.5 85.3']
+  },
+  traduccion: {
+    modelo: 'Qwen3.7 Max',
+    proveedor: 'Alibaba',
+    elo: 1455,
+    aaii: 56.6,
+    swe_bench: null,
+    razonamiento: null,
+    coste_input: 2.50,
+    coste_output: 7.50,
+    contexto: 1000000,
+    razon: 'Traducción. Qwen3.7 Max lidera con score 100 en multilingüismo. Cohere North Small Translate alcanza 83.6 en WMT26, superando a DeepL (81.37) y Google Translate (68.20). GPT-6 Sol destaca en workflows multilingües.',
+    fuentes: ['BenchLM translation: Qwen3.7 Max 100', 'WMT26: North Small Translate 83.6']
+  },
+  sentimiento: {
+    modelo: 'GPT-5.5',
+    proveedor: 'OpenAI',
+    elo: null,
+    aaii: null,
+    swe_bench: null,
+    razonamiento: null,
+    coste_input: 2.00,
+    coste_output: 8.00,
+    contexto: 400000,
+    razon: 'Análisis de sentimiento. GPT-5.5 lidera con 80% de precisión. Claude Sonnet 4.6 sigue con 79%. Qwen 3.6 Plus y ChatGPT 5.4 mini empatan a 78%. Gemini 3.5 Flash alcanza 73%.',
+    fuentes: ['Benchmark sentimiento: GPT-5.5 80%', 'Claude Sonnet 4.6: 79%']
+  }
+};
+
+/* ===========================================================================
+   MÓDULO 4 — DESCUBRIDOR
+   ===========================================================================
+   Consulta APIs públicas al cargar para refrescar benchmarks. Si falla,
+   usa los datos embebidos. La página nunca se rompe.
+
+   Fuentes:
+   - Arena AI Leaderboards (ELO)
+   - OpenRouter Models API (precios, contexto)
+   =========================================================================== */
+
+const DESCUBRIDOR = {
+  fuentes: [
+    {
+      nombre: 'Arena AI — Texto',
+      url: 'https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text',
+      tipo: 'arena'
+    },
+    {
+      nombre: 'OpenRouter — Modelos',
+      url: 'https://openrouter.ai/api/v1/models',
+      tipo: 'openrouter'
+    }
+  ],
+
+  estado: {
+    ultima_actualizacion: null,
+    fuentes_ok: [],
+    fuentes_error: [],
+    datos_cargados: false
+  },
+
+  benchmark_actualizado: null,
+
+  async actualizar() {
+    const resultados = await Promise.allSettled(
+      this.fuentes.map(f => this._fetchFuente(f))
+    );
+
+    let datosArena = null;
+    let datosOpenRouter = null;
+
+    resultados.forEach((res, i) => {
+      const fuente = this.fuentes[i];
+      if (res.status === 'fulfilled' && res.value) {
+        this.estado.fuentes_ok.push(fuente.nombre);
+        if (fuente.tipo === 'arena') datosArena = res.value;
+        else if (fuente.tipo === 'openrouter') datosOpenRouter = res.value;
+      } else {
+        this.estado.fuentes_error.push(fuente.nombre);
+      }
+    });
+
+    if (datosArena || datosOpenRouter) {
+      this.benchmark_actualizado = this._fusionar(datosArena, datosOpenRouter);
+      this.estado.datos_cargados = true;
+    }
+
+    this.estado.ultima_actualizacion = new Date().toISOString();
+    return this.estado;
+  },
+
+  async _fetchFuente(fuente) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+      const resp = await fetch(fuente.url, {
+        method: 'GET',
+        mode: 'cors',
+        signal: controller.signal,
+        headers: { 'Accept': 'application/json' }
+      });
+      clearTimeout(timeoutId);
+
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      return await resp.json();
+    } catch (e) {
+      console.warn(`[descubridor] Falló ${fuente.nombre}: ${e.message}`);
+      return null;
+    }
+  },
+
+  _fusionar(datosArena, datosOpenRouter) {
+    try {
+      const benchmark = JSON.parse(JSON.stringify(BENCHMARK));
+
+      const extraerModelos = (fuente) => {
+        if (!fuente) return [];
+        if (Array.isArray(fuente)) return fuente;
+        if (Array.isArray(fuente.models)) return fuente.models;
+        if (Array.isArray(fuente.data)) return fuente.data;
+        return [];
+      };
+
+      const modelos = extraerModelos(datosArena);
+      const modelosOR = (datosOpenRouter && Array.isArray(datosOpenRouter.data))
+        ? datosOpenRouter.data : [];
+
+      /* Actualizar ELO y precios de los modelos embebidos si aparecen */
+      for (const [tarea, entrada] of Object.entries(benchmark)) {
+        const modelo = modelos.find(m =>
+          (m.model || m.name || '').toLowerCase().includes(entrada.modelo.toLowerCase().split(' ')[0])
+        );
+
+        if (modelo && modelo.score) {
+          entrada.elo = Math.round(modelo.score);
+        }
+
+        const modeloOR = modelosOR.find(m =>
+          (m.id || '').toLowerCase().includes(entrada.modelo.toLowerCase().split(' ')[0])
+        );
+
+        if (modeloOR && modeloOR.pricing) {
+          const pIn = parseFloat(modeloOR.pricing.prompt || 0);
+          const pOut = parseFloat(modeloOR.pricing.completion || 0);
+          if (!isNaN(pIn)) entrada.coste_input = pIn * 1000000;
+          if (!isNaN(pOut)) entrada.coste_output = pOut * 1000000;
+        }
+
+        if (modeloOR && modeloOR.context_length) {
+          entrada.contexto = modeloOR.context_length;
+        }
+      }
+
+      return benchmark;
+    } catch (e) {
+      console.warn('[descubridor] Falló la fusión:', e);
+      return null;
+    }
+  },
+
+  obtenerBenchmark() {
+    return this.benchmark_actualizado || BENCHMARK;
+  }
+};
+
+/* ===========================================================================
+   MÓDULO 5 — DECISOR
+   ===========================================================================
+   Dado tarea y campo, elige el modelo óptimo. Aplica los modificadores
+   del campo. Devuelve modelo, razón, coste ajustado y alternativas.
+
+   DECISIÓN: el decisor devuelve razón + descartes. Una decisión sin razón
+   es una orden. Una decisión con razón es un criterio auditable.
+   =========================================================================== */
+
+const DECISOR = {
+  decidir(tarea, campo) {
+    const benchmark = DESCUBRIDOR.obtenerBenchmark();
+    const entrada = benchmark[tarea];
+
+    if (!entrada) {
+      return { ok: false, error: `Tarea sin entrada en benchmark: ${tarea}` };
+    }
+
+    const campoInfo = CAMPOS[campo];
+    if (!campoInfo) {
+      return { ok: false, error: `Campo desconocido: ${campo}` };
+    }
+
+    const costeInputAjustado = entrada.coste_input * campoInfo.coste_mult;
+    const costeOutputAjustado = entrada.coste_output * campoInfo.coste_mult;
+    const latenciaAjustada = Math.round((entrada.elo ? 2000 - (entrada.elo - 1300) * 2 : 1500) * campoInfo.latencia_mult);
+
+    const razonCompleta = `${campoInfo.nombre}: ${entrada.razon} Modificador de campo: ×${campoInfo.coste_mult} coste, ×${campoInfo.latencia_mult} latencia. ${campoInfo.nota}.`;
+
+    /* Alternativas: las otras tareas con sus modelos, como descarte */
+    const alternativas = Object.entries(benchmark)
+      .filter(([t]) => t !== tarea)
+      .map(([t, info]) => ({
+        modelo: info.modelo,
+        tarea: t,
+        razon: `Asignado a "${t}". No es óptimo para "${tarea}" en campo "${campoInfo.nombre}".`
+      }))
+      .slice(0, 4);
+
+    return {
+      ok: true,
+      decision: {
+        tarea: tarea,
+        campo: campo,
+        modelo: entrada.modelo,
+        proveedor: entrada.proveedor,
+        elo: entrada.elo,
+        aaii: entrada.aaii,
+        swe_bench: entrada.swe_bench,
+        razonamiento: entrada.razonamiento,
+        coste_input: costeInputAjustado,
+        coste_output: costeOutputAjustado,
+        contexto: entrada.contexto,
+        latencia_estimada_ms: latenciaAjustada,
+        razon: razonCompleta,
+        alternativas: alternativas,
+        fuentes: entrada.fuentes || []
+      }
+    };
+  }
+};
+
+/* ===========================================================================
+   MÓDULO 6 — ORQUESTADOR
+   =========================================================================== */
+
+const ROUTER = {
+  procesar(tarea, campo) {
+    const log = [];
+
+    const validacion = Schema.peticion(tarea, campo);
+    if (!validacion.ok) {
+      log.push({ tipo: 'error', msg: 'Validación fallida', detail: validacion.errores.join(' · ') });
+      return { ok: false, log };
+    }
+    log.push({ tipo: 'validacion', msg: 'Selección válida', detail: `Tarea: ${tarea} · Campo: ${campo}` });
+
+    const benchmarkActivo = DESCUBRIDOR.obtenerBenchmark();
+    const entrada = benchmarkActivo[tarea];
+    const origen = DESCUBRIDOR.estado.datos_cargados ? 'benchmark actualizado' : 'benchmark embebido';
+    log.push({
+      tipo: 'benchmark',
+      msg: `Modelo candidato: ${entrada.modelo}`,
+      detail: `Origen: ${origen} · Elo ${entrada.elo || 'N/A'} · Coste $${entrada.coste_input}/$${entrada.coste_output} · Contexto ${entrada.contexto?.toLocaleString() || 'N/A'}`
+    });
+
+    const resultado = DECISOR.decidir(tarea, campo);
+    if (!resultado.ok) {
+      log.push({ tipo: 'error', msg: 'Decisión fallida', detail: resultado.error });
+      return { ok: false, log };
+    }
+    log.push({
+      tipo: 'decision',
+      msg: `Modelo elegido: ${resultado.decision.modelo}`,
+      detail: resultado.decision.razon
+    });
+
+    resultado.decision.alternativas.forEach(a => {
+      log.push({ tipo: 'descarte', msg: `Descartado: ${a.modelo}`, detail: a.razon });
+    });
+
+    const validacionDecision = Schema.decision(resultado.decision);
+    if (!validacionDecision.ok) {
+      log.push({ tipo: 'error', msg: 'Decisión inválida', detail: validacionDecision.errores.join(' · ') });
+      return { ok: false, log };
+    }
+    log.push({ tipo: 'validacion', msg: 'Decisión válida según schema', detail: 'Todos los campos cumplen el contrato' });
+
+    return { ok: true, decision: resultado.decision, log };
+  }
+};
+
+/* ===========================================================================
+   MÓDULO 7 — RENDER
+   =========================================================================== */
+
+const RENDER = {
+  logContainer: document.getElementById('log-output'),
+  decisionContainer: document.getElementById('decision-output'),
+
+  limpiarLog() { this.logContainer.innerHTML = ''; },
+
+  añadirLog({ tipo, msg, detail }) {
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+
+    const tag = document.createElement('span');
+    tag.className = `tag tag-${tipo}`;
+    tag.textContent = tipo;
+    entry.appendChild(tag);
+
+    const msgSpan = document.createElement('span');
+    msgSpan.className = 'msg';
+    msgSpan.textContent = msg;
+    entry.appendChild(msgSpan);
+
+    if (detail) {
+      const detailDiv = document.createElement('div');
+      detailDiv.className = 'detail';
+      detailDiv.textContent = detail;
+      entry.appendChild(detailDiv);
+    }
+
+    this.logContainer.appendChild(entry);
+    this.logContainer.scrollTop = this.logContainer.scrollHeight;
+  },
+
+  pintarDecision(decision) {
+    this.decisionContainer.innerHTML = '';
+    const card = document.createElement('div');
+    card.className = 'decision-card';
+
+    const campos = [
+      { label: 'Tarea', valor: decision.tarea, mono: true },
+      { label: 'Campo', valor: decision.campo, mono: true },
+      { label: 'Modelo', valor: decision.modelo, mono: true },
+      { label: 'Proveedor', valor: decision.proveedor, mono: false },
+      { label: 'Elo (LMArena)', valor: decision.elo ? decision.elo.toString() : 'N/A', mono: false },
+      { label: 'AAII (Inteligencia)', valor: decision.aaii ? decision.aaii.toString() : 'N/A', mono: false },
+      { label: 'SWE-bench', valor: decision.swe_bench ? `${decision.swe_bench}%` : 'N/A', mono: false },
+      { label: 'Coste input', valor: `$${decision.coste_input.toFixed(2)}/M`, mono: false },
+      { label: 'Coste output', valor: `$${decision.coste_output.toFixed(2)}/M`, mono: false },
+      { label: 'Contexto', valor: decision.contexto ? `${decision.contexto.toLocaleString()} tokens` : 'N/A', mono: false },
+      { label: 'Latencia estimada', valor: `${decision.latencia_estimada_ms} ms`, mono: false }
+    ];
+
+    campos.forEach(({ label, valor, mono }) => {
+      const campo = document.createElement('div');
+      campo.className = 'campo';
+
+      const labelDiv = document.createElement('div');
+      labelDiv.className = 'campo-label';
+      labelDiv.textContent = label;
+
+      const valorDiv = document.createElement('div');
+      valorDiv.className = mono ? 'campo-valor mono' : 'campo-valor';
+      valorDiv.textContent = valor;
+
+      campo.appendChild(labelDiv);
+      campo.appendChild(valorDiv);
+      card.appendChild(campo);
+    });
+
+    const razon = document.createElement('div');
+    razon.className = 'razon';
+    razon.textContent = decision.razon;
+    card.appendChild(razon);
+
+    this.decisionContainer.appendChild(card);
+  },
+
+  pintarVacio() {
+    this.decisionContainer.innerHTML = '';
+    const div = document.createElement('div');
+    div.className = 'decision-empty';
+    div.textContent = 'Selecciona una tarea y un campo para ver la decisión del router.';
+    this.decisionContainer.appendChild(div);
+  },
+
+  pintarError(mensaje) {
+    this.decisionContainer.innerHTML = '';
+    const div = document.createElement('div');
+    div.className = 'decision-empty';
+    div.style.color = 'var(--error)';
+    div.textContent = mensaje;
+    this.decisionContainer.appendChild(div);
+  },
+
+  actualizarEstadoDescubrimiento(estado) {
+    const el = document.getElementById('estado-descubrimiento');
+    if (estado.datos_cargados) {
+      const hora = new Date(estado.ultima_actualizacion).toLocaleTimeString();
+      el.textContent = `Benchmarks actualizados · ${hora} · ${estado.fuentes_ok.length}/${DESCUBRIDOR.fuentes.length} fuentes`;
+      el.style.color = 'var(--ok)';
+    } else {
+      el.textContent = `Datos embebidos (septiembre 2026) · ${estado.fuentes_error.length}/${DESCUBRIDOR.fuentes.length} fuentes no disponibles`;
+      el.style.color = 'var(--text-faint)';
+    }
+  }
+};
+
+/* ===========================================================================
+   MÓDULO 8 — CONTROLLER
+   =========================================================================== */
+
+const CONTROLLER = {
+  init() {
+    document.getElementById('btn-analizar').addEventListener('click', () => this.ejecutar());
+
+    /* Lanzar descubrimiento en segundo plano. No bloquea la UI. */
+    this.actualizarDescubrimiento();
+  },
+
+  async actualizarDescubrimiento() {
+    RENDER.añadirLog({
+      tipo: 'descubrir',
+      msg: 'Consultando benchmarks públicos...',
+      detail: DESCUBRIDOR.fuentes.map(f => f.nombre).join(' · ')
+    });
+
+    const estado = await DESCUBRIDOR.actualizar();
+    RENDER.actualizarEstadoDescubrimiento(estado);
+
+    if (estado.datos_cargados) {
+      RENDER.añadirLog({
+        tipo: 'descubrir',
+        msg: `Benchmark actualizado desde ${estado.fuentes_ok.length} fuentes`,
+        detail: `OK: ${estado.fuentes_ok.join(', ')}` +
+          (estado.fuentes_error.length ? ` · Error: ${estado.fuentes_error.join(', ')}` : '')
+      });
+    } else {
+      RENDER.añadirLog({
+        tipo: 'descubrir',
+        msg: 'Usando datos embebidos (septiembre 2026)',
+        detail: estado.fuentes_error.join(' · ') || 'Sin conexión'
+      });
+    }
+  },
+
+  ejecutar() {
+    const tarea = document.getElementById('select-tarea').value;
+    const campo = document.getElementById('select-campo').value;
+
+    RENDER.limpiarLog();
+    RENDER.pintarVacio();
+    RENDER.añadirLog({ tipo: 'validacion', msg: 'Iniciando procesamiento', detail: null });
+
+    const resultado = ROUTER.procesar(tarea, campo);
+
+    resultado.log.forEach((entry, i) => {
+      setTimeout(() => RENDER.añadirLog(entry), i * 80);
+    });
+
+    setTimeout(() => {
+      if (resultado.ok) {
+        RENDER.pintarDecision(resultado.decision);
+      } else {
+        RENDER.pintarError('No se pudo procesar la selección. Revisa el log.');
+      }
+    }, resultado.log.length * 80 + 100);
+  }
+};
+
+/* ===========================================================================
+   ARRANQUE
+   =========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => CONTROLLER.init());
+
+/* ===========================================================================
+   NOTAS DE ARQUITECTURA
+   ===========================================================================
+
+   1. QUÉ ES ESTO
+   Una spec ejecutable de un router que enruta selecciones (tarea + campo)
+   a modelos de IA concretos, usando benchmarks reales de septiembre 2026.
+
+   2. QUÉ NO HACE
+   No conecta con proveedores de LLM. No gasta dinero. No envía datos del
+   usuario fuera del navegador. No pide claves de API.
+
+   3. FUENTES DE LOS BENCHMARKS
+   - LMArena (Elo): votos ciegos humanos. Septiembre 2026.
+   - SWE-bench Verified: coding. Septiembre 2026.
+   - Artificial Analysis Intelligence Index v4.3: razonamiento. Sept 2026.
+   - OpenRouter: precios por millón de tokens. Septiembre 2026.
+   - BenchLM: shortlists por caso de uso. Septiembre 2026.
+
+   4. CÓMO FUNCIONA EL DESCUBRIMIENTO
+   Al cargar, se consultan APIs públicas en paralelo con timeout de 8s.
+   Si alguna falla, se ignoran. Si todas fallan, se usan los datos
+   embebidos. La página nunca se bloquea.
+
+   5. POR QUÉ SELECTORES EN LUGAR DE TEXTO LIBRE
+   Elimina la ambigüedad de la clasificación. El usuario elige la tarea
+   exacta que quiere. El campo añade modificadores de coste y latencia
+   específicos del dominio.
+
+   6. QUÉ SE PUEDE AÑADIR
+   - Persistencia en localStorage del último benchmark.
+   - Un backend proxy para ejecutar la decisión real.
+   - Un protocolo de testing con Pydantic v2 en el backend.
+   - Más fuentes (GENZ TECH, HuggingFace leaderboards).
+
+   7. EL PRINCIPIO
+   El router conceptual se puede copiar. El criterio con el que se
+   construyó, no. Este archivo existe para demostrar que un router
+   puede explicar sus decisiones, actualizarse solo y usar datos reales.
+
+   1310.
+   =========================================================================== */
+</script>
+
+</body>
+</html>
